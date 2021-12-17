@@ -13,26 +13,66 @@
  * limitations under the License.
  */
 
+/**
+ * @addtogroup Sensor
+ * @{
+ *
+ * @brief Provides unified APIs for sensor services to access sensor drivers.
+ *
+ * A sensor service can obtain a sensor driver object or agent and then call APIs provided by this object or agent to
+ * access different types of sensor devices based on the sensor IDs, thereby obtaining sensor information,
+ * subscribing to or unsubscribing from sensor data, enabling or disabling a sensor,
+ * setting the sensor data reporting mode, and setting sensor options such as the accuracy and measurement range.
+ *
+ * @version 1.0
+ */
+
+/**
+ * @file SensorTypes.idl
+ *
+ * @brief Defines the data used by the sensor module, including the sensor information,
+ * and reported sensor data.
+ *
+ * @since 2.2
+ * @version 1.0
+ */
+
 package sensor.v1_0;
 
+/**
+ * @brief Defines basic sensor information.
+ *
+ * Information about a sensor includes the sensor name, vendor, firmware version, hardware version, sensor type ID,
+ * sensor ID, maximum measurement range, accuracy, and power.
+ *
+ * @since 2.2
+ */
 struct HdfSensorInformation {
-    String sensorName;
-    String vendorName;
-    String firmwareVersion;
-    String hardwareVersion;
-    int sensorTypeId;
-    int sensorId;
-    float maxRange;
-    float accuracy;
-    float power;
+    String sensorName; /**< Sensor name */
+    String vendorName; /**< Sensor vendor */
+    String firmwareVersion; /**< Sensor firmware version */
+    String hardwareVersion; /**< Sensor hardware version */
+    int sensorTypeId; /**< Sensor type ID (described in {@link SensorTypeTag}) */
+    int sensorId;     /**< Sensor ID, defined by the sensor driver developer */
+    float maxRange;   /**< Maximum measurement range of the sensor */
+    float accuracy;   /**< Sensor accuracy */
+    float power;      /**< Sensor power */
 };
 
+/**
+ * @brief Defines the data reported by the sensor.
+ *
+ * The reported sensor data includes the sensor ID, sensor algorithm version, data generation time,
+ * data options (such as the measurement range and accuracy), data reporting mode, data address, and data length.
+ *
+ * @since 2.2
+ */
 struct HdfSensorEvents {
-    int sensorId;
-    int version;
-    int timestamp;
-    unsigned int option;
-    int mode;
-    unsigned char[] data;
-    unsigned int dataLen;
+    int sensorId;            /**< Sensor ID */
+    int version;             /**< Sensor algorithm version */
+    int timestamp;           /**< Time when sensor data was generated */
+    unsigned int option;     /**< Sensor data options, including the measurement range and accuracy */
+    int mode;                /**< Sensor data reporting mode */
+    unsigned char[] data;    /**< Sensor data vector */
+    unsigned int dataLen;    /**< Sensor data length */
 };

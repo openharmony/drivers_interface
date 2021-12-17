@@ -13,10 +13,36 @@
  * limitations under the License.
  */
 
+/**
+ * @addtogroup Sensor
+ * @{
+ *
+ * @brief Provides unified APIs for sensor services to access sensor drivers.
+ *
+ * A sensor service can obtain a sensor driver object or agent and then call APIs provided by this object or agent to
+ * access different types of sensor devices based on the sensor IDs, thereby obtaining sensor information,
+ * subscribing to or unsubscribing from sensor data, enabling or disabling a sensor,
+ * setting the sensor data reporting mode, and setting sensor options such as the accuracy and measurement range.
+ *
+ * @version 1.0
+ */
+
 package sensor.v1_0;
 
 import sensor.v1_0.SensorTypes;
 
+/**
+ * @brief Defines the callback for reporting sensor data. This callback needs to be registered when
+ * a sensor user subscribes to sensor data. Only after the sensor is enabled, the sensor data subscriber can receive
+ * sensor data. For details, see {@link ISensorInterface}.
+ *
+ * @since 2.2
+ */
 [callback] interface ISensorCallback {
+    /**
+    * @brief Defines the function for reporting sensor data. 
+    *
+    * @since 2.2
+    */
     OnDataEvent([in] struct HdfSensorEvents event);
 }
