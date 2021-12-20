@@ -14,7 +14,7 @@
  */
 
 /**
- * @addtogroup Sensor
+ * @addtogroup HdiSensor
  * @{
  *
  * @brief Provides unified APIs for sensor services to access sensor drivers.
