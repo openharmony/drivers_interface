@@ -2,7 +2,7 @@
 
 ## 简介
 
-该仓库用于管理各模块HDI接口定义，接口定义使用IDL语言描述并以`·idl`文件形式保存。
+该仓库用于管理各模块HDI(Hardward Driver Interface)接口定义，接口定义使用IDL语言描述并以`·idl`文件形式保存。
 
 IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/doc-references/idl-file-structure-0000001050722806)
 
@@ -11,7 +11,7 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
 
 ![](figures/hdi-schematic.png)
 
-使用IDL语法描述HDI接口并保存为`.idl`文件后，hdi-gen工具可以将idl文件转换为C/C++语言的函数接口声明、客户端与服务端IPC相关过程代码，开发者只需要基于生成的ifoo.h函数接口实现具体服务功能即可。代码生成与编译功能已经集成在`//drivers/adapter/uhdf2/hdi.gni`编译模板，基于该编译模板编写idl文件的BUILD.gn就可以简单的生成客户端、服务代码并编译为共享库。
+使用IDL语法描述HDI接口并保存为`.idl`文件，`.idl`文件在编译过程中转换为C/C++语言的函数接口声明、客户端与服务端IPC相关过程代码，开发者只需要基于生成的`ifoo.h`函数接口实现具体服务功能即可。代码生成与编译功能已经集成在`//drivers/adapter/uhdf2/hdi.gni`编译模板，基于该编译模板编写`idl`文件的`BUILD.gn`就可以简单的生成客户端、服务代码并编译为共享库。
 
 ## 目录
 
@@ -38,11 +38,11 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
 
 ## 使用说明
 
-1. 使用HDI语法编写 .idl 文件
+1. 使用HDI语法编写 `.idl` 文件
 
-    - 参考上节目录结构创建对应模块/版本接口目录，初始版本定义为v1_0, 如 `drivers/interface/foo/v1.0/`
+    - 参考上节目录结构创建对应模块/版本接口目录，初始版本定义为`v1_0`，如 `drivers/interface/foo/v1.0/`
 
-    - 定义接口 IFoo.idl,
+    - 定义接口 `IFoo.idl`
         ```
         package Hdi.Foo.V1_0;
 
@@ -57,7 +57,7 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
             SendCallbackObj([in] IFooCallback cbObj);
         }
         ```
-    - 如果interface中用到了自定义数据类型，将自定义类型定义到MyTypes.idl
+    - 如果`interface`中用到了自定义数据类型，将自定义类型定义到`MyTypes.idl`
         ```
         package Hdi.Foo.V1_0;
 
@@ -72,7 +72,7 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
             enum FooType type;
         };
         ```
-    - 如果需要从服务端回调可以端，可以定义callback接口类IFooCallback.idl
+    - 如果需要从服务端回调，可以定义`callback`接口类`IFooCallback.idl`
         ```
         package Foo.V1_0;
 
@@ -81,8 +81,8 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
         }
         ```
 
-1. 编写 idl BUILD.gn
-    - 在上述`drivers/interface/foo/v1.0/`目录中添加BUILD.gn文件，内容参考如下
+1. 编写 `idl`文件的`BUILD.gn`
+    - 在上述`drivers/interface/foo/v1.0/`目录中添加`BUILD.gn`文件，内容参考如下：
         ```
         import("//drivers/adapter/uhdf2/hdi.gni")   # 编译idl必须要导入的模板
         hdi("foo") {                                # 目标名称，会生成两个so，分别对应 libfoo_client_v1.0.z.so 和 libfoo_stub_v1.0.z.so
@@ -97,9 +97,9 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
         }
         ```
 
-1. 实现 HDI服务
+1. 实现 HDI 服务
 
-    在上述步骤中idl编译后将在out目录`out/[product_name]/gen/drivers/interfaces/foo/v1_0`生成中间代码，
+    在上述步骤中idl编译后将在out目录`out/[product_name]/gen/drivers/interfaces/foo/v1_0`生成中间代码。
 
     - 实现HDI服务接口
 
@@ -146,7 +146,7 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
 
 1. 发布服务
 
-    在产品hcs配置中声明HDI服务，以标准系统Hi3516DV300单板为例，HDF设备配置路径为`vendor/hisilicon/Hi3516DV300/hdf_config/uhdf/device_info.hcs`,在其中新增以下配置：
+    在产品hcs配置中声明HDI服务，以标准系统Hi3516DV300单板为例，HDF设备配置路径为`vendor/hisilicon/Hi3516DV300/hdf_config/uhdf/device_info.hcs`，在其中新增以下配置：
     ```
     fooHost :: host {
             hostName = "fooHost";
@@ -165,7 +165,8 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
 
 1. 调用HDI服务
 
-    - 客户端在BUILD.gn中增加依赖`//drivers/interface/foo/v1.0:libfoo_client_v1.0"`
+    - 客户端在BUILD.gn中增加依赖：
+    `//drivers/interface/foo/v1.0:libfoo_client_v1.0"`
 
     - 在代码中调用HDI接口（以CPP为例）
         ```
@@ -193,14 +194,16 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
 
     | 类型   | 命名风格  |
     | -----  | ------- |
-    | 类类型，结构体类型，枚举类型，联合体类型等类型定义，包名 | 大驼峰 |
+    | 类、结构体、枚举、联合体等类型名，包名 | 大驼峰 |
     | 方法 | 大驼峰 |
     | 函数参数，类、结构体和联合体中的成员变量 | 小驼峰 |
     | 宏，常量(const)，枚举值 | 全大写，下划线分割 |
 
 1. 接口版本号命名规则
 
-    HDI接口版本号使用语义化版本号定义，即[major].[minor]。major版本号不同表示接口间不兼容；major版本号相同，但是minor版本不同的接口表示相互兼容，这种情况下不允许修改以前接口的接口名称、参数类型/个数、返回值类型/个数。
+    HDI接口版本号使用语义化版本号定义，即[major].[minor]。
+    - major版本号不同表示接口间不兼容；
+    - minor版本不同但是major版本号相同表示接口相互兼容，这种情况下不允许修改以前接口的接口名称、参数类型/个数、返回值类型/个数。
 
 ## 相关仓
 
