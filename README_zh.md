@@ -1,4 +1,4 @@
-# drivers_interface
+# 外设驱动HDI接口定义
 
 ## 简介
 
