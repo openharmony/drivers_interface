@@ -11,7 +11,7 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
 
 ![](figures/hdi-schematic.png)
 
-使用IDL语法描述HDI接口并保存为`.idl`文件，`.idl`文件在编译过程中转换为C/C++语言的函数接口声明、客户端与服务端IPC相关过程代码，开发者只需要基于生成的`ifoo.h`函数接口实现具体服务功能即可。代码生成与编译功能已经集成在`//drivers/adapter/uhdf2/hdi.gni`编译模板，基于该编译模板编写`idl`文件的`BUILD.gn`就可以简单的生成客户端、服务代码并编译为共享库。
+使用IDL语法描述HDI接口并保存为`.idl`文件，`.idl`文件在编译过程中转换为C/C++语言的函数接口声明、客户端与服务端IPC相关过程代码，开发者只需要基于生成的`ifoo.h`函数接口实现具体服务功能即可。代码生成与编译功能已经集成在`//drivers/adapter/uhdf2/hdi.gni`编译模板，基于该编译模板编写`idl`文件的`BUILD.gn`就可以简单的生成客户端、服务端代码并编译为共享库。
 
 ## 目录
 
@@ -103,7 +103,7 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
 
     - 实现HDI服务接口
 
-        基于自动成的`foo_interface_service.h`，实现其中的服务接口，相关源码编译为FooService.z.so。
+        基于工具自动生成的`foo_interface_service.h`，实现其中的服务接口，并将相关源码编译为FooService.z.so。
 
         实现服务业务接口：
         ```
