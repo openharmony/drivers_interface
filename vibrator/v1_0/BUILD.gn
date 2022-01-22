@@ -12,18 +12,24 @@
 # limitations under the License.
 
 import("//drivers/adapter/uhdf2/hdi.gni")
+if (defined(ohos_lite)) {
+  group("vibrator") {
+    deps = []
+    public_configs = []
+  }
+} else {
+  hdi("vibrator") {
+    package = "vibrator.v1_0"
 
-hdi("vibrator") {
-  package = "vibrator.v1_0"
+    module_name = "vibrator_service"
 
-  module_name = "vibrator_service"
+    sources = [
+      "IVibratorInterface.idl",
+      "VibratorTypes.idl",
+    ]
 
-  sources = [
-    "IVibratorInterface.idl",
-    "VibratorTypes.idl",
-  ]
-
-  language = "cpp"
-  subsystem_name = "hdf"
-  part_name = "vibrator_device_driver"
+    language = "cpp"
+    subsystem_name = "hdf"
+    part_name = "vibrator_device_driver"
+  }
 }
