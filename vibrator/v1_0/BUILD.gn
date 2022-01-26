@@ -13,7 +13,7 @@
 
 import("//drivers/adapter/uhdf2/hdi.gni")
 if (defined(ohos_lite)) {
-  group("vibrator") {
+  group("libvibrator_proxy_1.0") {
     deps = []
     public_configs = []
   }
