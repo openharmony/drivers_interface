@@ -146,5 +146,5 @@ interface ISensorInterface {
      * @since 2.2
      * @version 1.0
      */
-    Unregister([in] int sensorId);
+    Unregister([in] int sensorId, [in] ISensorCallback callbackObj);
 }
