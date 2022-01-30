@@ -2,7 +2,7 @@
 
 ## 简介
 
-该仓库用于管理各模块HDI(Hardward Driver Interface)接口定义，接口定义使用IDL语言描述并以`·idl`文件形式保存。
+该仓库用于管理各模块HDI(Hardware Device Interface)接口定义，接口定义使用IDL语言描述并以`·idl`文件形式保存。
 
 IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/doc-references/idl-file-structure-0000001050722806)
 
