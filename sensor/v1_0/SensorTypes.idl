@@ -70,7 +70,7 @@ struct HdfSensorInformation {
 struct HdfSensorEvents {
     int sensorId;            /**< Sensor ID */
     int version;             /**< Sensor algorithm version */
-    int timestamp;           /**< Time when sensor data was generated */
+    long timestamp;           /**< Time when sensor data was generated */
     unsigned int option;     /**< Sensor data options, including the measurement range and accuracy */
     int mode;                /**< Sensor data reporting mode */
     unsigned char[] data;    /**< Sensor data vector */
