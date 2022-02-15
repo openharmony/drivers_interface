@@ -20,7 +20,7 @@ if (defined(ohos_lite)) {
   }
 } else {
   hdi("light") {
-    package = "light.v1_0"
+    package = "OHOS.HDI.light.v1_0"
 
     module_name = "light_service"
 

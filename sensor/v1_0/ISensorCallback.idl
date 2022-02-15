@@ -27,9 +27,9 @@
  * @version 1.0
  */
 
-package sensor.v1_0;
+package OHOS.HDI.sensor.v1_0;
 
-import sensor.v1_0.SensorTypes;
+import OHOS.HDI.sensor.v1_0.SensorTypes;
 
 /**
  * @brief Defines the callback for reporting sensor data. This callback needs to be registered when

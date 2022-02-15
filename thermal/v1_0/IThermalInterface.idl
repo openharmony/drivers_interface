@@ -13,11 +13,16 @@
  * limitations under the License.
  */
 
-package OHOS.HDI.light.v1_0;
-import OHOS.HDI.light.v1_0.LightTypes;
+package OHOS.HDI.thermal.v1_0;
 
-interface ILightInterface {
-    GetLightInfo([out] struct HdfLightInfo[] info);
-    TurnOnLight([in] int lightId, [in] struct HdfLightEffect effect);
-    TurnOffLight([in] int LightId);
+import OHOS.HDI.thermal.v1_0.ThermalTypes;
+import OHOS.HDI.thermal.v1_0.IThermalCallback;
+
+interface IThermalInterface {
+    SetCpuFreq([in] int freq);
+    SetGpuFreq([in] int freq);
+    SetBatteryCurrent([in] int current);
+    GetThermalZoneInfo([out] struct HdfThermalCallbackInfo event);
+    Register([in] IThermalCallback callbackObj);
+    Unregister();
 }

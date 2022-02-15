@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package light.v1_0;
+package OHOS.HDI.light.v1_0;
 
 enum HdfLighType {
     HDF_LIGHT_TYPE_BATTERY = 1,
