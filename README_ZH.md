@@ -38,7 +38,7 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
 
 ## 使用说明
 
-1. 使用HDI语法编写 `.idl` 文件
+1. 使用IDL语法编写 `.idl` 文件
 
     - 参考上节目录结构创建对应模块/版本接口目录，初始版本定义为`v1_0`，如 `drivers/interface/foo/v1.0/`
 
@@ -142,7 +142,7 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
     - 实现驱动入口
 
         HDI服务发布是基于用户态HDF驱动框架，所以需要实现一个驱动入口。驱动实现代码参考已经在out目录中生成，如`out/gen/xxx/foo_interface_driver.cpp`，可以根据业务需要直接使用该文件或参考该文件按业务需要重新实现。
-        然后将驱动入口源码编译为`foo_driver.z.so`（该名称无强制规定，与hcs配置中配套即可）。
+        然后将驱动入口源码编译为`libfoo_driver.z.so`（该名称无强制规定，与hcs配置中配套即可）。
 
 1. 发布服务
 
