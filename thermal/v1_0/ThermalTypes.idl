@@ -13,11 +13,13 @@
  * limitations under the License.
  */
 
-package OHOS.HDI.light.v1_0;
-import OHOS.HDI.light.v1_0.LightTypes;
+package OHOS.HDI.thermal.v1_0;
 
-interface ILightInterface {
-    GetLightInfo([out] struct HdfLightInfo[] info);
-    TurnOnLight([in] int lightId, [in] struct HdfLightEffect effect);
-    TurnOffLight([in] int LightId);
-}
+struct ThermalZoneInfo {
+    String type;
+    int temp;
+};
+
+struct HdfThermalCallbackInfo {
+    List<struct ThermalZoneInfo> info;
+};

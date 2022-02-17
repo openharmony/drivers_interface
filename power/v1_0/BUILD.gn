@@ -13,24 +13,24 @@
 
 import("//drivers/adapter/uhdf2/hdi.gni")
 if (defined(ohos_lite)) {
-  group("libsensor_proxy_1.0") {
+  group("libpower_proxy_1.0") {
     deps = []
     public_configs = []
   }
 } else {
-  hdi("sensor") {
-    package = "OHOS.HDI.sensor.v1_0"
+  hdi("power") {
+    package = "OHOS.HDI.power.v1_0"
 
-    module_name = "sensor_service"
+    module_name = "power_interface_service"
 
     sources = [
-      "ISensorCallback.idl",
-      "ISensorInterface.idl",
-      "SensorTypes.idl",
+      "IPowerHdiCallback.idl",
+      "IPowerInterface.idl",
+      "PowerTypes.idl",
     ]
 
     language = "cpp"
     subsystem_name = "hdf"
-    part_name = "sensor_device_driver"
+    part_name = "power_device_driver"
   }
 }

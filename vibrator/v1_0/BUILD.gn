@@ -19,7 +19,7 @@ if (defined(ohos_lite)) {
   }
 } else {
   hdi("vibrator") {
-    package = "vibrator.v1_0"
+    package = "OHOS.HDI.vibrator.v1_0"
 
     module_name = "vibrator_service"
 
