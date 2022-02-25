@@ -4,8 +4,6 @@
 
 该仓库用于管理各模块HDI(Hardware Device Interface)接口定义，接口定义使用IDL语言描述并以`·idl`文件形式保存。
 
-IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/doc-references/idl-file-structure-0000001050722806)
-
 
 **图 1**  HDI原理图
 
@@ -44,10 +42,10 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
 
     - 定义接口 `IFoo.idl`
         ```
-        package Hdi.Foo.V1_0;
+        package ohos.hdi.foo.v1_0;
 
-        import Foo.V1_0.IFooCallback;
-        import Foo.v1_0.MyTypes;
+        import ohos.hdi.foo.v1_0.IFooCallback;
+        import ohos.hdi.foo.v1_0.MyTypes;
 
         interface IFoo {
             Ping([in] String sendMsg, [out] String recvMsg);
@@ -59,7 +57,7 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
         ```
     - 如果`interface`中用到了自定义数据类型，将自定义类型定义到`MyTypes.idl`
         ```
-        package Hdi.Foo.V1_0;
+        package ohos.hdi.foo.v1_0;
 
         enum FooType {
             FOO_TYPE_ONE = 1,
@@ -74,7 +72,7 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
         ```
     - 如果需要从服务端回调，可以定义`callback`接口类`IFooCallback.idl`
         ```
-        package Foo.V1_0;
+        package ohos.hdi.foo.v1_0;
 
         [callback] interface IFooCallback {
             PushData([in] String message);
@@ -86,7 +84,7 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
         ```
         import("//drivers/adapter/uhdf2/hdi.gni")   # 编译idl必须要导入的模板
         hdi("foo") {                                # 目标名称，会生成两个so，分别对应 libfoo_client_v1.0.z.so 和 libfoo_stub_v1.0.z.so
-            package = "Foo.V1_0"                    # 包名，必须与idl路径匹配
+            package = "ohos.hdi.foo.v1_0"           # 包名，必须与idl路径匹配
             module_name = "foo"                     # module_name控制dirver文件中驱动描 述符(struct HdfDriverEntry)的moduleName
             sources = [                             # 参与编译的idl文件
                 "IFoo.idl",                         # 接口idl
@@ -97,7 +95,7 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
         }
         ```
 
-1. 实现 HDI 服务
+2. 实现 HDI 服务
 
     在上述步骤中idl编译后将在out目录`out/[product_name]/gen/drivers/interfaces/foo/v1_0`生成中间代码。
 
@@ -107,7 +105,8 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
 
         实现服务业务接口：
         ```
-        namespace Hdi {
+        namespace OHOS {
+        namespace HDI {
         namespace Foo {
         namespace V1_0 {
 
@@ -120,23 +119,10 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
             int32_t FooService::SendCallbackObj(const sptr<IFooCallback>& cbObj) override;
         };
 
-        } // V1_0
-        } // Foo
-        } // Hdi
-        ```
-        除了服务本身的接口，还需要实现对应的服务实例化接口：
-        ```
-        #ifdef __cplusplus
-        extern "C" {
-        #endif /* __cplusplus */
-
-        Hdi::Foo::V1_0::IFooInterface *FooInterfaceServiceConstruct();
-
-        void FooInterfaceServiceRelease(Hdi::Foo::V1_0::IFooInterface *obj);
-
-        #ifdef __cplusplus
-        }
-        #endif /* __cplusplus */
+        } // namespace V1_0
+        } // namespace Foo
+        } // namespace Hdi
+        } // namespace OHOS
         ```
 
     - 实现驱动入口
@@ -144,7 +130,7 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
         HDI服务发布是基于用户态HDF驱动框架，所以需要实现一个驱动入口。驱动实现代码参考已经在out目录中生成，如`out/gen/xxx/foo_interface_driver.cpp`，可以根据业务需要直接使用该文件或参考该文件按业务需要重新实现。
         然后将驱动入口源码编译为`libfoo_driver.z.so`（该名称无强制规定，与hcs配置中配套即可）。
 
-1. 发布服务
+3. 发布服务
 
     在产品hcs配置中声明HDI服务，以标准系统Hi3516DV300单板为例，HDF设备配置路径为`vendor/hisilicon/Hi3516DV300/hdf_config/uhdf/device_info.hcs`，在其中新增以下配置：
     ```
@@ -163,17 +149,17 @@ IDL语法参考： [LINK](https://developer.harmonyos.com/cn/docs/documentation/
         }
     ```
 
-1. 调用HDI服务
+4. 调用HDI服务
 
     - 客户端在BUILD.gn中增加依赖：
-    `//drivers/interface/foo/v1.0:libfoo_client_v1.0"`
+    `//drivers/interface/foo/v1.0:libfoo_proxy_1.0"`
 
     - 在代码中调用HDI接口（以CPP为例）
         ```
-        #include <ifoo_interface.h>
+        #include <v1_0/ifoo_interface.h>
 
         int WorkFunc(void) {
-            sptr<IFoo> foo = Hdi::Foo::V1_0::Foo::Get(); // 使用Foo对象的内置静态方法获取该服务客户端实例
+            sptr<IFoo> foo = OHOS::HDI::Foo::V1_0::Foo::Get(); // 使用Foo对象的内置静态方法获取该服务客户端实例
             if (foo == nullptr) {
                 // hdi service not exist, handle error
             }
