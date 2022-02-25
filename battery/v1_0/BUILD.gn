@@ -19,8 +19,6 @@ if (defined(ohos_lite)) {
   }
 } else {
   hdi("battery") {
-    package = "OHOS.HDI.battery.v1_0"
-
     module_name = "battery_interface_service"
 
     sources = [

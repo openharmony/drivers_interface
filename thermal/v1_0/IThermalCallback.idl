@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-package OHOS.HDI.thermal.v1_0;
+package ohos.hdi.thermal.v1_0;
 
-import OHOS.HDI.thermal.v1_0.ThermalTypes;
+import ohos.hdi.thermal.v1_0.ThermalTypes;
 
 [callback] interface IThermalCallback {
     OnThermalDataEvent([in] struct HdfThermalCallbackInfo event);

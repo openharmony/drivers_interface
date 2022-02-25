@@ -19,8 +19,6 @@ if (defined(ohos_lite)) {
   }
 } else {
   hdi("power") {
-    package = "OHOS.HDI.power.v1_0"
-
     module_name = "power_interface_service"
 
     sources = [

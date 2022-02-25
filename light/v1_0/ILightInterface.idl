@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-package OHOS.HDI.light.v1_0;
-import OHOS.HDI.light.v1_0.LightTypes;
+package ohos.hdi.light.v1_0;
+import ohos.hdi.light.v1_0.LightTypes;
 
 interface ILightInterface {
     GetLightInfo([out] struct HdfLightInfo[] info);

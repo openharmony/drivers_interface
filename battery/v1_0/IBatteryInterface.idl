@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 
-package OHOS.HDI.battery.v1_0;
+package ohos.hdi.battery.v1_0;
 
-import OHOS.HDI.battery.v1_0.Types;
-import OHOS.HDI.battery.v1_0.IBatteryCallback;
+import ohos.hdi.battery.v1_0.Types;
+import ohos.hdi.battery.v1_0.IBatteryCallback;
 
 interface IBatteryInterface {
     Register([in] IBatteryCallback event);

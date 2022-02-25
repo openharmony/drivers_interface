@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-package OHOS.HDI.power.v1_0;
-import OHOS.HDI.power.v1_0.IPowerHdiCallback;
-import OHOS.HDI.power.v1_0.PowerTypes;
+package ohos.hdi.power.v1_0;
+import ohos.hdi.power.v1_0.IPowerHdiCallback;
+import ohos.hdi.power.v1_0.PowerTypes;
 
 interface IPowerInterface {
     RegisterCallback([in] IPowerHdiCallback ipowerHdiCallback);

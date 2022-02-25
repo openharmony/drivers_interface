@@ -19,8 +19,6 @@ if (defined(ohos_lite)) {
   }
 } else {
   hdi("thermal") {
-    package = "OHOS.HDI.thermal.v1_0"
-
     module_name = "thermal_interface_service"
 
     sources = [

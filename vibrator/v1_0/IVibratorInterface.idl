@@ -35,9 +35,9 @@
  * @version 1.0
  */
 
-package OHOS.HDI.vibrator.v1_0;
+package ohos.hdi.vibrator.v1_0;
 
-import OHOS.HDI.vibrator.v1_0.VibratorTypes;
+import ohos.hdi.vibrator.v1_0.VibratorTypes;
 
 interface IVibratorInterface {
     /**
