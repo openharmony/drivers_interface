@@ -37,7 +37,7 @@
  * @version 1.0
  */
 
-package OHOS.HDI.sensor.v1_0;
+package ohos.hdi.sensor.v1_0;
 
 /**
  * @brief Defines basic sensor information.

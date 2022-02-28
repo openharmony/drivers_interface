@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-package OHOS.HDI.battery.v1_0;
+package ohos.hdi.battery.v1_0;
 
-import OHOS.HDI.battery.v1_0.Types;
+import ohos.hdi.battery.v1_0.Types;
 
 [callback] interface IBatteryCallback {
     Update([in] struct CallbackInfo event);

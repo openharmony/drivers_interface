@@ -19,8 +19,6 @@ if (defined(ohos_lite)) {
   }
 } else {
   hdi("vibrator") {
-    package = "OHOS.HDI.vibrator.v1_0"
-
     module_name = "vibrator_service"
 
     sources = [

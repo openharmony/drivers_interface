@@ -38,10 +38,10 @@
  * @version 1.0
  */
 
-package OHOS.HDI.sensor.v1_0;
+package ohos.hdi.sensor.v1_0;
 
-import OHOS.HDI.sensor.v1_0.SensorTypes;
-import OHOS.HDI.sensor.v1_0.ISensorCallback;
+import ohos.hdi.sensor.v1_0.SensorTypes;
+import ohos.hdi.sensor.v1_0.ISensorCallback;
 
 /**
  * @brief Defines the functions for performing basic operations on sensors.

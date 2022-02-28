@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package OHOS.HDI.vibrator.v1_0;
+package ohos.hdi.vibrator.v1_0;
 
 /**
  * @brief Enumerates the vibration modes of this vibrator.

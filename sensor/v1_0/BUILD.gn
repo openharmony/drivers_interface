@@ -19,8 +19,6 @@ if (defined(ohos_lite)) {
   }
 } else {
   hdi("sensor") {
-    package = "OHOS.HDI.sensor.v1_0"
-
     module_name = "sensor_service"
 
     sources = [
