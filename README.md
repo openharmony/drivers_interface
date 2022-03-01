@@ -4,8 +4,6 @@
 
 This repository is used to manage the hardware device interface (HDI) definition of each module. The HDIs are defined in the interface definition language (IDL) and saved in the `.idl` format.
 
-For details about the IDL, see [IDL File Structure](https://developer.harmonyos.com/en/docs/documentation/doc-references/idl-file-structure-0000001050722806).
-
 
 **Figure 1** HDI definition process
 
@@ -44,10 +42,10 @@ Define an HDI in the IDL and saved it in the `.idl` format. Then, the `.idl` fil
 
     - Define the interface `IFoo.idl`.
         ```
-        package Hdi.Foo.V1_0;
+        package ohos.hdi.foo.v1_0;
 
-        import Foo.V1_0.IFooCallback;
-        import Foo.v1_0.MyTypes;
+        import ohos.hdi.foo.v1_0.IFooCallback;
+        import ohos.hdi.foo.v1_0.MyTypes;
 
         interface IFoo {
             Ping([in] String sendMsg, [out] String recvMsg);
@@ -59,7 +57,7 @@ Define an HDI in the IDL and saved it in the `.idl` format. Then, the `.idl` fil
         ```
     - If customized data types are used in `interface`, define the data types in `MyTypes.idl`.
         ```
-        package Hdi.Foo.V1_0;
+        package ohos.hdi.foo.v1_0;
 
         enum FooType {
             FOO_TYPE_ONE = 1,
@@ -74,20 +72,20 @@ Define an HDI in the IDL and saved it in the `.idl` format. Then, the `.idl` fil
         ```
     - If a callback from the server is required, define the callback class `IFooCallback.idl`.
         ```
-        package Foo.V1_0;
+        package ohos.hdi.foo.v1_0;
 
         [callback] interface IFooCallback {
             PushData([in] String message);
         }
         ```
 
-1. Write `BUILD.gn` for the `idl` file.
+2. Write `BUILD.gn` for the `idl` file.
     - Add the `BUILD.gn` file to the `drivers/interface/foo/v1.0/` directory. The file content is as follows:
         ```
         import("//drivers/adapter/uhdf2/hdi.gni")   # Template to be imported for compiling the .idl file.
         hdi("foo") {                                # Target .so files (libfoo_client_v1.0.z.so and libfoo_stub_v1.0.z.so) to be generated.
-            package = "Foo.V1_0"                    # Package name, which must match the .idl path.
-            module_name = "foo"                    # moduleName that determines the driver descriptor (struct HdfDriverEntry) in the driver file.
+            package = "ohos.hdi.foo.v1_0"                    # Package name, which must match the .idl path.
+            module_name = "foo"                     # moduleName that determines the driver descriptor (struct HdfDriverEntry) in the driver file.
             sources = [                             # .idl files to compile.
                 "IFoo.idl",                         # Interface .idl file.
                 "IFooCallback.idl",                 # .idl file for callbacks.
@@ -97,7 +95,7 @@ Define an HDI in the IDL and saved it in the `.idl` format. Then, the `.idl` fil
         }
         ```
 
-1. Implement the HDI service.
+3. Implement the HDI service.
 
     After the .idl files are compiled, intermediate code is generated in the `out/[product_name]/gen/drivers/interfaces/foo/v1_0` directory.
 
@@ -107,7 +105,8 @@ Define an HDI in the IDL and saved it in the `.idl` format. Then, the `.idl` fil
 
         Implement the service interface.
         ```
-        namespace Hdi {
+        namespace OHOS {
+        namespace HDI {
         namespace Foo {
         namespace V1_0 {
 
@@ -120,9 +119,10 @@ Define an HDI in the IDL and saved it in the `.idl` format. Then, the `.idl` fil
             int32_t FooService::SendCallbackObj(const sptr<IFooCallback>& cbObj) override;
         };
 
-        } // V1_0
-        } // Foo
-        } // Hdi
+        } // namespace V1_0
+        } // namespace Foo
+        } // namespace Hdi
+        } // namespace OHOS
         ```
         Implement the service instantiation interface.
         ```
@@ -144,7 +144,7 @@ Define an HDI in the IDL and saved it in the `.idl` format. Then, the `.idl` fil
         The HDI services are published based on the user-mode Hardware Driver Foundation (HDF). Therefore, a driver entry needs to be implemented. The reference driver implementation code is generated in the **out** directory, for example, `out/gen/xxx/foo_interface_driver.cpp`. You can use this file or modify the file based on service requirements.
         Then, compile the driver entry source code as `libfoo_driver.z.so`. (The .so file name must match that in the HDF configuration source.)
 
-1. Publish the HDI service.
+4. Publish the HDI service.
 
     Declare the HDI service in the HDF configuration source (HCS). The following uses the Hi3516D V300 board as an example. The HCS path is `vendor/hisilicon/Hi3516DV300/hdf_config/uhdf/device_info.hcs`. Add the following configuration:
     ```
@@ -163,17 +163,17 @@ Define an HDI in the IDL and saved it in the `.idl` format. Then, the `.idl` fil
         }
     ```
 
-1. Invoke the HDI service.
+5. Invoke the HDI service.
 
     - Add the following dependency to **BUILD.gn** on the client:
-    `//drivers/interface/foo/v1.0:libfoo_client_v1.0"`
+    `//drivers/interface/foo/v1.0:libfoo_proxy_1.0"`
 
     - Invoke the HDI interface in the code (CPP is used as an example.)
         ```
-        #include <ifoo_interface.h>
+        #include <v1_0/ifoo_interface.h>
 
         int WorkFunc(void) {
-            sptr<IFoo> foo = Hdi::Foo::V1_0::Foo::Get(); // Use the built-in static method of the Foo object to obtain the client instance of the service.
+            sptr<IFoo> foo = OHOS::HDI::Foo::V1_0::Foo::Get(); // Use the built-in static method of the Foo object to obtain the client instance of the service.
             if (foo == nullptr) {
                 // If the HDI service does not exist, handle the error.
             }
