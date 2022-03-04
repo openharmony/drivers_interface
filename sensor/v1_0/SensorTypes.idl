@@ -118,3 +118,14 @@ enum HdfSensorTypeTag {
     HDF_SENSOR_TYPE_ACCELEROMETER_UNCALIBRATED  = 281,   /**< Uncalibrated acceleration sensor */
     HDF_SENSOR_TYPE_MAX,                                 /**< Maximum number of sensor types */
 };
+
+/**
+ * @brief Enumerates hardware service group for sensors
+ *
+ * @since 2.2
+ */
+enum HdfSensorGroupType {
+    HDF_TRADITIONAL_SENSOR_TYPE = 0, /**< traditional sensor type, the sensorId enumeration value range is 128-160 */
+    HDF_MEDICAL_SENSOR_TYPE = 1,  /**< medical sensor type, the sensorId enumeration value range is not within 128-160 */
+    HDF_SENSOR_GROUP_TYPE_MAX,          /**< Maximum sensor group type*/
+};
