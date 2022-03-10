@@ -129,22 +129,22 @@ interface ISensorInterface {
     /**
      * @brief Registers the callback for reporting sensor data to the subscriber.
      *
-     * @param sensorId Indicates the sensor ID. For details, see {@link SensorTypeTag}.
+     * @param groupId Indicates the sensor group ID.
      * @param callbackObj Indicates the callback to register. For details, see {@link ISensorCallback}.
      * @return Returns <b>0</b> if the callback is successfully registered; returns a negative value otherwise.
      *
      * @since 2.2
      * @version 1.0
      */
-    Register([in] int sensorId, [in] ISensorCallback callbackObj);
+    Register([in] int groupId, [in] ISensorCallback callbackObj);
 
     /**
      * @brief Deregisters the callback for reporting sensor data.
-     * @param sensorId Indicates the sensor ID. For details, see {@link SensorTypeTag}.
+     * @param groupId Indicates the sensor group ID.
      * @return Returns <b>0</b> if the callback is successfully deregistered; returns a negative value otherwise.
      *
      * @since 2.2
      * @version 1.0
      */
-    Unregister([in] int sensorId, [in] ISensorCallback callbackObj);
+    Unregister([in] int groupId, [in] ISensorCallback callbackObj);
 }
