@@ -18,5 +18,5 @@ package ohos.hdi.battery.v1_0;
 import ohos.hdi.battery.v1_0.Types;
 
 [callback] interface IBatteryCallback {
-    Update([in] struct CallbackInfo event);
+    Update([in] struct BatteryInfo event);
 }
