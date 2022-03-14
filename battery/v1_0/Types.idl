@@ -44,7 +44,7 @@ enum BatteryPluggedType
     PLUGGED_TYPE_BUTT
 };
 
-struct CallbackInfo {
+struct BatteryInfo {
     int capacity;
     int voltage;
     int temperature;
@@ -54,6 +54,10 @@ struct CallbackInfo {
     int pluggedMaxVoltage;
     int chargeState;
     int chargeCounter;
+    int totalEnergy;
+    int curAverage;
+    int curNow;
+    int remainEnergy;
     byte present;
     String technology;
 };

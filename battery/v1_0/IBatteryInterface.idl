@@ -30,4 +30,9 @@ interface IBatteryInterface {
     GetChargeState([out] enum BatteryChargeState chargeState);
     GetPresent([out] boolean present);
     GetTechnology([out] String technology);
+    GetTotalEnergy([out] int totalEnergy);
+    GetCurrentAverage([out] int curAverage);
+    GetCurrentNow([out] int curNow);
+    GetRemainEnergy([out] int remainEnergy);
+    GetBatteryInfo([out] struct BatteryInfo info);
 }
