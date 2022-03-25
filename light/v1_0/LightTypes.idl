@@ -13,8 +13,33 @@
  * limitations under the License.
  */
 
+/**
+ * @addtogroup HdfLight
+ * @{
+ *
+ * @brief Provides APIs for the light service.
+ *
+ * The light module provides a unified interface for the light service to access the light driver.
+ * After obtaining the light driver object or proxy, the service can call related APIs to obtain light information,
+ * turn on or off a light, and set the light blinking mode based on the light type.
+ * @since 3.1
+ */
+
+/**
+ * @file LightTypes.idl
+ *
+ * @brief Defines the light data structure, including the light type, lighting mode,
+ * blinking mode and duration, return values, and lighting effect.
+ * @since 3.1
+ */
+
 package ohos.hdi.light.v1_0;
 
+/**
+ * @brief Enumerates the light types.
+ *
+ * @since 3.1
+ */
 enum HdfLighType {
     HDF_LIGHT_TYPE_BATTERY = 1,
     HDF_LIGHT_TYPE_NOTIFICATIONS = 2,
@@ -22,24 +47,51 @@ enum HdfLighType {
     HDF_LIGHT_ID_BUTT = 4,
 };
 
+/**
+ * @brief Defines the basic light information.
+ *
+ * Basic light information includes the light type and custom extended information.
+ *
+ * @since 3.1
+ */
 struct HdfLightInfo {
-    int lightId;
-    int reserved;
+    int lightId;     /** Light type. For details, see {@link HdfLighType}. */
+    int reserved;    /** Custom extended information. */
 };
 
+/**
+ * @brief Enumerates the lighting modes.
+ *
+ * @since 3.1
+ */
 enum HdfLightFlashMode {
     HDF_LIGHT_FLASH_NONE = 0,
     HDF_LIGHT_FLASH_TIMED = 1,
     HDF_LIGHT_FLASH_BUTT = 2,
 };
 
+/**
+ * @brief Defines the blinking parameters.
+ *
+ * The parameters include the blinking mode and the on and off time for the light in a blinking period.
+ *
+ * @since 3.1
+ */
 struct HdfLightFlashEffect {
-   int flashMode;
-   int onTime;
-   int offTime;
+   int flashMode;     /** Blinking mode. For details, see {@link HdfLightFlashMode}. */
+   int onTime;        /** Duration (in ms) for which the light is on in a blinking period. */
+   int offTime;       /** Duration (in ms) for which the light is off in a blinking period. */
 };
 
+/**
+ * @brief Defines the lighting effect parameters.
+ *
+ * The parameters include the brightness and blinking mode.
+ *
+ * @since 3.1
+ */
 struct HdfLightEffect {
-    int lightBrightness;
-    struct HdfLightFlashEffect flashEffect;
+    int lightBrightness;    /** Brightness value. The value 1 of the most significant bit indicates a color.
+                                Bits 16–31 for red, bits 8–15 for green, and bits 0–7 for blue. */
+    struct HdfLightFlashEffect flashEffect;    /** Blinking mode. For details, see {@link LightFlashEffect}. */
 };
