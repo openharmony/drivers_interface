@@ -20,7 +20,7 @@
  * @brief Provides APIs for the light service.
  *
  * The light module provides a unified interface for the light service to access the light driver.
- * After obtaining the driver object or proxy, the light service distinguishes light devices by type
+ * After obtaining the driver object or proxy, the light service distinguishes light devices by id
  * and call related APIs to obtain light information, turn on or off a light, or set the blinking mode.
  * @since 3.1
  */
@@ -28,7 +28,7 @@
 /**
  * @file ILightInterface.idl
  *
- * @brief Declares common APIs of the light module. These APIs can be used to obtain the light type,
+ * @brief Declares common APIs of the light module. These APIs can be used to obtain the light id,
  * turn on or off a light, and set the light brightness and blinking mode.
  * @since 3.1
  */
@@ -57,14 +57,14 @@ interface ILightInterface {
     GetLightInfo([out] struct HdfLightInfo[] info);
 
     /**
-     * @brief Turns on available lights in the list based on the specified light type.
+     * @brief Turns on available lights in the list based on the specified light id.
      *
-     * @param lightId Indicates the light type. For details, see {@link HdfLightType}.
+     * @param lightId Indicates the light id. For details, see {@link HdfLightId}.
      *
      * @param effect Indicates the pointer to the lighting effect. For details, see {@link HdfLightEffect}.
      *
      * @return Returns <b>0</b> if the operation is successful.
-     * @return Returns <b>-1</b> if the light type is not supported.
+     * @return Returns <b>-1</b> if the light id is not supported.
      * @return Returns <b>-2</b> if the blinking setting is not supported.
      * @return Returns <b>-3</b> if the brightness setting is not supported.
      *
@@ -73,9 +73,9 @@ interface ILightInterface {
     TurnOnLight([in] int lightId, [in] struct HdfLightEffect effect);
 
     /**
-     * @brief Turns off available lights in the list based on the specified light type.
+     * @brief Turns off available lights in the list based on the specified light id.
      *
-     * @param lightId Indicates the light type. For details, see {@link HdfLightType}.
+     * @param lightId Indicates the light id. For details, see {@link HdfLightId}.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a negative value if the operation fails.
