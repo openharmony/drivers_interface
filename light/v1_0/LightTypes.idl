@@ -40,7 +40,7 @@ package ohos.hdi.light.v1_0;
  *
  * @since 3.1
  */
-enum HdfLighId {
+enum HdfLightId {
     HDF_LIGHT_ID_BATTERY = 1,
     HDF_LIGHT_ID_NOTIFICATIONS = 2,
     HDF_LIGHT_ID_ATTENTION = 3,
@@ -55,7 +55,7 @@ enum HdfLighId {
  * @since 3.1
  */
 struct HdfLightInfo {
-    int lightId;     /** Light id. For details, see {@link HdfLighId}. */
+    int lightId;     /** Light id. For details, see {@link HdfLightId}. */
     int reserved;    /** Custom extended information. */
 };
 
