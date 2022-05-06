@@ -37,7 +37,7 @@ import ohos.hdi.nfc.nfc_core.v1_0.INfcCallback;
  * disabling an nfc controller, initializing an nfc core, writing NCI data to an nfc driver, starting 
  * configuration for RF discovery of nfc remote endpoints, sending nfc commands to an nfc driver for IO control.
  *
- * @since 4.0
+ * @since 3.2
  * @version 1.0
  */
 
@@ -49,10 +49,10 @@ interface INfcInterface {
      * @return Returns <b>0</b> if the operation is succeed, otherwise marks the reason of failure.
      * For details, see {@link NfcTypes}.
      *
-     * @since 4.0
+     * @since 3.2
      * @version 1.0
      */
-    open([in] INfcCallback callbackObj, [out] enum NfcStatus status);
+    Open([in] INfcCallback callbackObj, [out] enum NfcStatus status);
 
     /**
      * @brief Configures the nfc chip after initializing the nfc core.
@@ -61,10 +61,10 @@ interface INfcInterface {
      * @return Returns <b>0</b> if the operation is succeed, otherwise marks the reason of failure.
      * For details, see {@link NfcTypes}.
      *
-     * @since 4.0
+     * @since 3.2
      * @version 1.0
      */
-    coreInitialized([in] INfcCallback callbackObj, [out] enum NfcStatus status);
+    CoreInitialized([in] INfcCallback callbackObj, [out] enum NfcStatus status);
 
     /**
      * @brief Specifically configures the nfc chip before starting RF discovering.
@@ -72,10 +72,10 @@ interface INfcInterface {
      * @return Returns <b>0</b> if the operation is succeed, otherwise marks the reason of failure.
      * For details, see {@link NfcTypes}.
      *
-     * @since 4.0
+     * @since 3.2
      * @version 1.0
      */
-    prediscover([out] enum NfcStatus status);
+    Prediscover([out] enum NfcStatus status);
 
     /**
      * @brief Writes NCI data to the nfc core.
@@ -84,10 +84,10 @@ interface INfcInterface {
      * @return Returns <b>0</b> if the operation is succeed, otherwise marks the reason of failure.
      * For details, see {@link NfcTypes}.
      *
-     * @since 4.0
+     * @since 3.2
      * @version 1.0
      */
-    write([in] List<unsigned char> data, [out] enum NfcStatus status);
+    Write([in] List<unsigned char> data, [out] enum NfcStatus status);
 
     /**
      * @brief Sets the HDF to allow to send NCI data.
@@ -95,10 +95,10 @@ interface INfcInterface {
      * @return Returns <b>0</b> if the operation is succeed, otherwise marks the reason of failure.
      * For details, see {@link NfcTypes}.
      *
-     * @since 4.0
+     * @since 3.2
      * @version 1.0
      */
-    controlGranted([out] enum NfcStatus status);
+    ControlGranted([out] enum NfcStatus status);
 
     /**
      * @brief Restarts the nfc controller according to each power cycle.
@@ -106,10 +106,10 @@ interface INfcInterface {
      * @return Returns <b>0</b>if the operation is succeed, otherwise marks the reason of failure.
      * For details, see {@link NfcTypes}.
      *
-     * @since 4.0
+     * @since 3.2
      * @version 1.0
      */
-    powerCycle([out] enum NfcStatus status);
+    PowerCycle([out] enum NfcStatus status);
 
     /**
      * @brief Disables the nfc controller and releases the resource.
@@ -117,10 +117,10 @@ interface INfcInterface {
      * @return Returns <b>0</b> if the operation is succeed, otherwise marks the reason of failure.
      * For details, see {@link NfcTypes}.
      *
-     * @since 4.0
+     * @since 3.2
      * @version 1.0
      */
-    close([out] enum NfcStatus status);
+    Close([out] enum NfcStatus status);
 
     /**
      * @brief Sends I/O control commands and data from the nfc stack to HDI.
@@ -130,8 +130,8 @@ interface INfcInterface {
      * @return Returns <b>0</b> if the operation is succeed, otherwise marks the reason of failure.
      * For details, see {@link NfcTypes}.
      *
-     * @since 4.0
+     * @since 3.2
      * @version 1.0
      */
-    ioctl([in] enum NfcCommand cmd, [in] List<unsigned char> data, [out] enum NfcStatus status);
+    Ioctl([in] enum NfcCommand cmd, [in] List<unsigned char> data, [out] enum NfcStatus status);
 }

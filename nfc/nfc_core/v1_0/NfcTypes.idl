@@ -34,7 +34,7 @@
  * unsubscribing from sensor data, enabling or disabling a sensor, setting the sensor data reporting mode,
  * and setting sensor options such as the accuracy and measurement range.
  *
- * @since 4.0
+ * @since 3.2
  * @version 1.0
  */
 
@@ -43,7 +43,7 @@ package ohos.hdi.nfc.nfc_core.v1_0;
 /**
  * @brief Enumerates return values of the Nfc Event.
  *
- * @since 4.0
+ * @since 3.2
  */
 enum NfcEvent {
     OPEN_CPLT           = 0,
@@ -59,7 +59,7 @@ enum NfcEvent {
 /**
  * @brief Enumerates return values of the Nfc status.
  *
- * @since 4.0
+ * @since 3.2
  */
 enum NfcStatus {
     OK               = 0,
@@ -72,7 +72,7 @@ enum NfcStatus {
 /**
  * @brief Enumerates return values of the Nfc command.
  *
- * @since 4.0
+ * @since 3.2
  */
 enum NfcCommand {
     CMD_INVALID = 0,

@@ -35,7 +35,7 @@ import ohos.hdi.nfc.nfc_core.v1_0.NfcTypes;
 /**
  * @brief Declares callbacks for reporting data and events from the nfc chip to the nfc stack.
  *
- * @since 4.0
+ * @since 3.2
  * @version 1.0
  */
 [callback] interface INfcCallback {
@@ -44,9 +44,9 @@ import ohos.hdi.nfc.nfc_core.v1_0.NfcTypes;
     * 
     * @param data Indicates the reporting data from nfc chip.
     * 
-    * @since 4.0
+    * @since 3.2
     */
-    onData([in] List<unsigned char> data);
+    OnData([in] List<unsigned char> data);
 
     /**
     * @brief Defines the function for reporting nfc events from the nfc chip.
@@ -55,7 +55,7 @@ import ohos.hdi.nfc.nfc_core.v1_0.NfcTypes;
     * @param status Indicates the reporting nfc status defined in NfcStatus. For details,
     * see {@link NfcTypes}.
     *
-    * @since 4.0
+    * @since 3.2
     */
-    onEvent([in] enum NfcEvent event, [in] enum NfcStatus status);
+    OnEvent([in] enum NfcEvent event, [in] enum NfcStatus status);
 }
