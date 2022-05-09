@@ -27,6 +27,7 @@
 ├── camera                          #camera HDI接口定义
 ├── codec                           #codec HDI接口定义
 ├── display                         #display HDI接口定义
+├── face_auth                       #faceauth HDI接口定义
 ├── format                          #format HDI接口定义
 ├── input                           #input HDI接口定义
 ├── misc                            #misc HDI接口定义
