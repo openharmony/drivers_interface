@@ -31,6 +31,7 @@
 ├── format                          #format HDI接口定义
 ├── input                           #input HDI接口定义
 ├── misc                            #misc HDI接口定义
+├── pinauth                         #pinauth HDI接口定义
 ├── usb                             #usb HDI接口定义
 └── wlan                            #wlan HDI接口定义
 ```
