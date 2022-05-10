@@ -33,7 +33,7 @@
             "header": {
               "header_files": [
               ],
-              "header_base": "//drivers/interfaces/face_auth"
+              "header_base": "//drivers/interface/face_auth/v1_0"
             }
           }
         ]
