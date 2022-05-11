@@ -1,10 +1,10 @@
 {
-    "name": "faceauth_device_driver_interface",
-    "description": "faceauth device driver",
+    "name": "nfc_device_driver_interface",
+    "description": "nfc device driver interface",
     "version": "3.2",
     "license": "Apache License 2.0",
     "component": {
-      "name": "faceauth_device_driver_interface",
+      "name": "nfc_device_driver_interface",
       "subsystem": "hdf",
       "syscap": [""],
       "adapter_system_type": ["standard"],
@@ -23,17 +23,17 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/face_auth/v1_0:libfaceauth_proxy_1.0"
+          "//drivers/interface/nfc/nfc_core/v1_0:libnfc_proxy_1.0"
         ],
         "test": [
         ],
         "inner_kits": [
           {
-            "name": "//drivers/interface/face_auth/v1_0:libfaceauth_proxy_1.0",
+            "name": "//drivers/interface/nfc/nfc_core/v1_0:libnfc_proxy_1.0",
             "header": {
               "header_files": [
               ],
-              "header_base": "//drivers/interface/face_auth"
+              "header_base": "//drivers/interface/nfc/nfc_core"
             }
           }
         ]
