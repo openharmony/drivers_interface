@@ -64,7 +64,7 @@ interface INfcInterface {
      * @since 3.2
      * @version 1.0
      */
-    CoreInitialized([in] INfcCallback callbackObj, [out] enum NfcStatus status);
+    CoreInitialized([in] List<unsigned char> data, [out] enum NfcStatus status);
 
     /**
      * @brief Specifically configures the nfc chip before starting RF discovering.
