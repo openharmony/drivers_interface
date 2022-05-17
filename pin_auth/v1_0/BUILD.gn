@@ -12,8 +12,8 @@
 # limitations under the License.
 
 import("//drivers/adapter/uhdf2/hdi.gni")
-hdi("pinauth") {
-  module_name = "pinauth"
+hdi("pin_auth") {
+  module_name = "pin_auth"
   sources = [
     "IExecutor.idl",
     "IExecutorCallback.idl",
@@ -22,5 +22,5 @@ hdi("pinauth") {
   ]
   language = "cpp"
   subsystem_name = "hdf"
-  part_name = "pinauth_device_driver"
+  part_name = "pin_auth_device_driver"
 }

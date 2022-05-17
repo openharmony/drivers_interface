@@ -12,8 +12,8 @@
 # limitations under the License.
 
 import("//drivers/adapter/uhdf2/hdi.gni")
-hdi("faceauth") {
-  module_name = "faceauth"
+hdi("face_auth") {
+  module_name = "face_auth"
   sources = [
     "FaceAuthTypes.idl",
     "IExecutor.idl",
@@ -22,5 +22,5 @@ hdi("faceauth") {
   ]
   language = "cpp"
   subsystem_name = "hdf"
-  part_name = "faceauth_device_driver"
+  part_name = "face_auth_device_driver"
 }
