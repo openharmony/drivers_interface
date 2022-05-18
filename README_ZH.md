@@ -33,6 +33,7 @@
 ├── misc                            #misc HDI接口定义
 ├── pinauth                         #pinauth HDI接口定义
 ├── usb                             #usb HDI接口定义
+├── fingerprint_auth                #fingerprintauth HDI接口定义
 └── wlan                            #wlan HDI接口定义
 ```
 
