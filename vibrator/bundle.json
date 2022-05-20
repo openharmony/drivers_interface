@@ -23,13 +23,13 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/vibrator/v1_0:libvibrator_proxy_1.0"
+          "//drivers/interface/vibrator/v1_1:libvibrator_proxy_1.1"
         ],
         "test": [
         ],
         "inner_kits": [
           {
-            "name": "//drivers/interface/vibrator/v1_0:libvibrator_proxy_1.0",
+            "name": "//drivers/interface/vibrator/v1_1:libvibrator_proxy_1.1",
             "header": {
               "header_files": [
               ],
