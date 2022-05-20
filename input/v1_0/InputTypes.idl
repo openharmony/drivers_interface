@@ -1,0 +1,97 @@
+/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package ohos.hdi.input.v1_0;
+
+struct DevDesc {
+    unsigned int devIndex;
+    unsigned int devType;
+};
+
+struct DevIdentify {
+    unsigned short busType;
+    unsigned short vendor;
+    unsigned short product;
+    unsigned short version;
+};
+
+struct DimensionInfo {
+    int axis;
+    int min;
+    int max;
+    int fuzz;
+    int flat;
+    int range;
+};
+
+struct DevAttr {
+    String devName;
+    struct DevIdentify id;
+    struct DimensionInfo[] axisInfo;
+};
+
+struct DevAbility {
+    unsigned long[] devProp;
+    unsigned long[] eventType;
+    unsigned long[] absCode;
+    unsigned long[] relCode;
+    unsigned long[] keyCode;
+    unsigned long[] ledCode;
+    unsigned long[] miscCode;
+    unsigned long[] soundCode;
+    unsigned long[] forceCode;
+    unsigned long[] switchCode;
+    unsigned long[] keyType;
+    unsigned long[] ledType;
+    unsigned long[] soundType;
+    unsigned long[] switchType;
+};
+
+/**
+ * @brief Describes basic device information of the input device.
+ */
+struct DeviceInfo {
+    unsigned int devIndex;                   /**< Device index */
+    unsigned int devType;                    /**< Device type */
+    String chipInfo;                         /**< Driver chip information */
+    String vendorName;                       /**< Module vendor name */
+    String chipName;                         /**< Driver chip name */
+    struct DevAttr attrSet;
+    struct DevAbility abilitySet;
+};
+
+/**
+ * @brief Describes the extra commands.
+ */
+struct ExtraCmd {
+    String cmdCode;     /**< Command code */
+    String cmdValue;    /**< Data transmitted in the command */
+};
+
+struct HotPlugEvent {
+    unsigned int devIndex;
+    unsigned int devType;
+    unsigned int status;
+};
+
+/**
+ * @brief Describes the input event data package.
+ */
+struct EventPackage {
+    unsigned int type;          /**< Type of the input event */
+    unsigned int code;          /**< Specific code item of the input event */
+    int value;                  /**< Value of the input event code item */
+    unsigned long timestamp;    /**< Timestamp of the input event */
+};

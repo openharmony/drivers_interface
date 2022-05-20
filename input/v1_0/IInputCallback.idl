@@ -1,0 +1,52 @@
+/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+ /**
+ * @addtogroup HdiInput
+ * @{
+ *
+ * @brief Provides driver interfaces for the input service.
+ *
+ * These driver interfaces can be used to open and close input device files, get input events, query device information,
+ * register callback functions, and control the feature status.
+ *
+ * @version 1.0
+ */
+
+package ohos.hdi.input.v1_0;
+
+import ohos.hdi.input.v1_0.InputTypes;
+
+[callback] interface IInputCallback {
+    /**
+     * @brief Reports input event data by the registered callback.
+     *
+     * @param pkgs describes the input event data package.
+     * @param count Indicates the number of input event data packets.
+     * @param devIndex Indicates the index of an input device.
+     * @since 3.2
+     * @version 1.0
+     */
+    EventPkgCallback([in] struct EventPackage[] pkgs, [in] unsigned int count, [in] unsigned int devIndex);
+
+    /**
+     * @brief Reports hot plug event data by the registered callback.
+     *
+     * @param event Indicates the pointer to the hot plug event data reported by the input driver.
+     * @since 3.2
+     * @version 1.0
+     */
+    HotPlugCallback([in] struct HotPlugEvent event);
+}
