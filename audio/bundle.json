@@ -1,0 +1,50 @@
+{
+    "name": "drivers_interface_audio",
+    "description": "audio driver interface",
+    "version": "3.2",
+    "license": "Apache License 2.0",
+    "component": {
+      "name": "drivers_interface_audio",
+      "subsystem": "hdf",
+      "syscap": [""],
+      "adapter_system_type": ["standard"],
+      "rom": "675KB",
+      "ram": "1024KB",
+      "deps": {
+        "components": [
+          "ipc",
+          "device_driver_framework",
+          "hiviewdfx_hilog_native",
+          "utils_base"
+        ],
+        "third_part": [
+          "bounds_checking_function"
+        ]
+      },
+      "build": {
+        "sub_component": [
+          "//drivers/interface/audio/v1_0:libaudio_proxy_1.0"
+        ],
+        "test": [
+        ],
+        "inner_kits": [
+          {
+            "name": "//drivers/interface/audio/v1_0:libaudio_proxy_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/audio"
+            }
+          },
+          {
+            "name": "//drivers/interface/audio/v1_0:audio_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/audio"
+            }
+          }
+        ]
+      }
+    }
+  }

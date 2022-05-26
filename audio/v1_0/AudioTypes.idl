@@ -1,0 +1,237 @@
+/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package ohos.hdi.audio.v1_0;
+
+enum AudioPortDirection {
+    PORT_OUT    = 1, /**< Output port */
+    PORT_IN     = 2, /**< Input port */
+    PORT_OUT_IN = 3, /**< Input/output port, supporting both audio input and output */
+};
+enum AudioPortPin {
+    PIN_NONE        = 0,         /**< Invalid pin */
+    PIN_OUT_SPEAKER = 1,         /**< Speaker output pin */
+    PIN_OUT_HEADSET = 2,         /**< Wired headset pin for output */
+    PIN_OUT_LINEOUT = 4,         /**< Line-out pin */
+    PIN_OUT_HDMI    = 8,         /**< HDMI output pin */
+    PIN_IN_MIC      = 134217729, /**< Microphone input pin */
+    PIN_IN_HS_MIC   = 134217730, /**< Wired headset microphone pin for input */
+    PIN_IN_LINEIN   = 134217732, /**< Line-in pin */
+    PIN_IN_USB_EXT  = 134217736,
+};
+enum AudioCategory {
+    AUDIO_IN_MEDIA = 0,
+    AUDIO_IN_COMMUNICATION = 1,
+    AUDIO_IN_RINGTONE = 2,
+    AUDIO_IN_CALL = 3,
+};
+enum AudioFormat {
+    AUDIO_FORMAT_PCM_8_BIT  = 1,        /**< 8-bit PCM */
+    AUDIO_FORMAT_PCM_16_BIT = 2,        /**< 16-bit PCM */
+    AUDIO_FORMAT_PCM_24_BIT = 3,        /**< 24-bit PCM */
+    AUDIO_FORMAT_PCM_32_BIT = 4,        /**< 32-bit PCM */
+    AUDIO_FORMAT_AAC_MAIN   = 16777217, /**< AAC main */
+    AUDIO_FORMAT_AAC_LC     = 16777218, /**< AAC LC */
+    AUDIO_FORMAT_AAC_LD     = 16777219, /**< AAC LD */
+    AUDIO_FORMAT_AAC_ELD    = 16777220, /**< AAC ELD */
+    AUDIO_FORMAT_AAC_HE_V1  = 16777221, /**< AAC HE_V1 */
+    AUDIO_FORMAT_AAC_HE_V2  = 16777222, /**< AAC HE_V2 */
+    AUDIO_FORMAT_G711A      = 33554433, /**< G711A */
+    AUDIO_FORMAT_G711U      = 33554434, /**< G711u */
+    AUDIO_FORMAT_G726       = 33554435, /**< G726 */
+};
+enum AudioChannelMask {
+    AUDIO_CHANNEL_FRONT_LEFT  = 1,  /**< Front left channel */
+    AUDIO_CHANNEL_FRONT_RIGHT = 2,  /**< Front right channel */
+    AUDIO_CHANNEL_MONO        = 1,  /**< Mono channel */
+    AUDIO_CHANNEL_STEREO      = 3,  /**< Stereo channel, consisting of front left and front right channels */
+};
+enum AudioSampleRatesMask {
+    AUDIO_SAMPLE_RATE_MASK_8000    = 1,          /**< 8 kHz */
+    AUDIO_SAMPLE_RATE_MASK_12000   = 2,          /**< 12 kHz */
+    AUDIO_SAMPLE_RATE_MASK_11025   = 4,          /**< 11.025 kHz */
+    AUDIO_SAMPLE_RATE_MASK_16000   = 8,          /**< 16 kHz */
+    AUDIO_SAMPLE_RATE_MASK_22050   = 16,         /**< 22.050 kHz */
+    AUDIO_SAMPLE_RATE_MASK_24000   = 32,         /**< 24 kHz */
+    AUDIO_SAMPLE_RATE_MASK_32000   = 64,         /**< 32 kHz */
+    AUDIO_SAMPLE_RATE_MASK_44100   = 128,        /**< 44.1 kHz */
+    AUDIO_SAMPLE_RATE_MASK_48000   = 256,        /**< 48 kHz */
+    AUDIO_SAMPLE_RATE_MASK_64000   = 512,        /**< 64 kHz */
+    AUDIO_SAMPLE_RATE_MASK_96000   = 1024,       /**< 96 kHz */
+    AUDIO_SAMPLE_RATE_MASK_INVALID = 4294967295, /**< Invalid sampling rate */
+};
+enum AudioPortPassthroughMode {
+    PORT_PASSTHROUGH_LPCM = 1,
+    PORT_PASSTHROUGH_RAW = 2,
+    PORT_PASSTHROUGH_HBR2LBR = 4,
+    PORT_PASSTHROUGH_AUTO = 8,
+};
+enum AudioSampleFormat {
+    AUDIO_SAMPLE_FORMAT_S8 = 0,
+    AUDIO_SAMPLE_FORMAT_S8P = 1,
+    AUDIO_SAMPLE_FORMAT_U8 = 2,
+    AUDIO_SAMPLE_FORMAT_U8P = 3,
+    AUDIO_SAMPLE_FORMAT_S16 = 4,
+    AUDIO_SAMPLE_FORMAT_S16P = 5,
+    AUDIO_SAMPLE_FORMAT_U16 = 6,
+    AUDIO_SAMPLE_FORMAT_U16P = 7,
+    AUDIO_SAMPLE_FORMAT_S24 = 8,
+    AUDIO_SAMPLE_FORMAT_S24P = 9,
+    AUDIO_SAMPLE_FORMAT_U24 = 10,
+    AUDIO_SAMPLE_FORMAT_U24P = 11,
+    AUDIO_SAMPLE_FORMAT_S32 = 12,
+    AUDIO_SAMPLE_FORMAT_S32P = 13,
+    AUDIO_SAMPLE_FORMAT_U32 = 14,
+    AUDIO_SAMPLE_FORMAT_U32P = 15,
+    AUDIO_SAMPLE_FORMAT_S64 = 16,
+    AUDIO_SAMPLE_FORMAT_S64P = 17,
+    AUDIO_SAMPLE_FORMAT_U64 = 18,
+    AUDIO_SAMPLE_FORMAT_U64P = 19,
+    AUDIO_SAMPLE_FORMAT_F32 = 20,
+    AUDIO_SAMPLE_FORMAT_F32P = 21,
+    AUDIO_SAMPLE_FORMAT_F64 = 22,
+    AUDIO_SAMPLE_FORMAT_F64P = 23,
+};
+enum AudioChannelMode {
+    AUDIO_CHANNEL_NORMAL = 0,
+    AUDIO_CHANNEL_BOTH_LEFT = 1,
+    AUDIO_CHANNEL_BOTH_RIGHT = 2,
+    AUDIO_CHANNEL_EXCHANGE = 3,
+    AUDIO_CHANNEL_MIX = 4,
+    AUDIO_CHANNEL_LEFT_MUTE = 5,
+    AUDIO_CHANNEL_RIGHT_MUTE = 6,
+    AUDIO_CHANNEL_BOTH_MUTE = 7,
+};
+enum AudioDrainNotifyType {
+    AUDIO_DRAIN_NORMAL_MODE = 0,
+    AUDIO_DRAIN_EARLY_MODE = 1,
+};
+enum AudioCallbackType {
+    AUDIO_NONBLOCK_WRITE_COMPELETED = 0,
+    AUDIO_DRAIN_COMPELETED = 1,
+    AUDIO_FLUSH_COMPLETED = 2,
+    AUDIO_RENDER_FULL = 3,
+    AUDIO_ERROR_OCCUR = 4,
+};
+enum AudioPortRole {
+    AUDIO_PORT_UNASSIGNED_ROLE = 0,
+    AUDIO_PORT_SOURCE_ROLE = 1,
+    AUDIO_PORT_SINK_ROLE = 2,
+};
+enum AudioPortType {
+    AUDIO_PORT_UNASSIGNED_TYPE = 0,
+    AUDIO_PORT_DEVICE_TYPE = 1,
+    AUDIO_PORT_MIX_TYPE = 2,
+    AUDIO_PORT_SESSION_TYPE = 3,
+};
+enum AudioSessionType {
+    AUDIO_OUTPUT_STAGE_SESSION = 0,
+    AUDIO_OUTPUT_MIX_SESSION = 1,
+    AUDIO_ALLOCATE_SESSION = 2,
+    AUDIO_INVALID_SESSION = 3,
+};
+union SceneDesc {
+    unsigned int id;
+};
+struct AudioPort {
+    enum AudioPortDirection dir;
+    unsigned int portId;
+    String portName;
+};
+struct AudioAdapterDescriptor {
+    String adapterName;
+    struct AudioPort[] ports;
+};
+struct AudioDeviceDescriptor {
+    unsigned int portId;
+    enum AudioPortPin pins;
+    String desc;
+};
+struct AudioSceneDescriptor {
+    union SceneDesc scene;
+    struct AudioDeviceDescriptor desc;
+};
+struct AudioSampleAttributes {
+    enum AudioCategory type;
+    boolean interleaved;
+    enum AudioFormat format;
+    unsigned int sampleRate;
+    unsigned int channelCount;
+    unsigned int period;
+    unsigned int frameSize;
+    boolean isBigEndian;
+    boolean isSignedData;
+    unsigned int startThreshold;
+    unsigned int stopThreshold;
+    unsigned int silenceThreshold;
+    int streamId;
+};
+struct AudioTimeStamp {
+    long tvSec;
+    long tvNSec;
+};
+struct AudioSubPortCapability {
+    unsigned int portId;
+    String desc;
+    enum AudioPortPassthroughMode mask;
+};
+struct AudioPortCapability {
+    unsigned int deviceType;
+    unsigned int deviceId;
+    boolean hardwareMode;
+    unsigned int formatNum;
+    enum AudioFormat[] formats;
+    unsigned int sampleRateMasks;
+    enum AudioChannelMask channelMasks;
+    unsigned int channelCount;
+    struct AudioSubPortCapability[] subPorts;
+    enum AudioSampleFormat[] supportSampleFormats;
+};
+struct AudioMmapBufferDescripter {
+    byte[] memoryAddress;
+    int memoryFd;
+    int totalBufferFrames;
+    int transferFrameSize;
+    int isShareable;
+    unsigned int offset;
+    String filePath;
+};
+struct AudioDevExtInfo {
+    int moduleId;
+    enum AudioPortPin type;
+    String desc;
+};
+struct AudioMixExtInfo {
+    int moduleId;
+    int streamId;
+};
+struct AudioSessionExtInfo {
+    enum AudioSessionType sessionType;
+};
+struct AudioInfo {
+    struct AudioDevExtInfo device;
+    struct AudioMixExtInfo mix;
+    struct AudioSessionExtInfo session;
+};
+struct AudioRouteNode {
+    int portId;
+    enum AudioPortRole role;
+    enum AudioPortType type;
+    struct AudioInfo ext;
+};
+struct AudioRoute {
+    struct AudioRouteNode[] sources;
+    struct AudioRouteNode[] sinks;
+};
