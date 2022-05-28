@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package ohos.hdi.vibrator.v1_0;
+package ohos.hdi.vibrator.v1_1;
 
 /**
  * @brief Enumerates the vibration modes of this vibrator.
@@ -27,4 +27,26 @@ enum HdfVibratorMode {
     HDF_VIBRATOR_MODE_PRESET,
     /**< Indicates invalid the effect mode. */
     HDF_VIBRATOR_MODE_BUTT,
+};
+
+/**
+ * @brief Defines the vibration parameters.
+ *
+ * The parameters include the setting intensity and frequency capability the on and intensity and frequency range.
+ *
+ * @since 3.2
+ */
+struct HdfVibratorInfo {
+    /**< setting intensity capability. 1 indicates support, 0 indicates not support. */
+    int isSupportIntensity;
+    /**< setting frequency capability. 1 indicates support, 0 indicates not support. */
+    int isSupportFrequency;
+    /**< Max intensity */
+    int intensityMaxValue;
+    /**< Min intensity */
+    int intensityMinValue;
+    /**< Max frequency */
+    int frequencyMaxValue;
+    /**< Min frequency */
+    int frequencyMinValue;
 };
