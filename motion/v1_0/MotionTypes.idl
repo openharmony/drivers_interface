@@ -1,0 +1,37 @@
+/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ 
+package ohos.hdi.motion.v1_0;
+
+enum HdfMotionTypeTag {
+    HDF_MOTION_TYPE_PICKUP = 1,
+    HDF_MOTION_TYPE_FLIP,
+    HDF_MOTION_CLOSE_TO_EAR,
+    HDF_MOTION_TYPE_LEAVE_EAR,
+    HDF_MOTION_TYPE_SHAKE,
+    HDF_MOTION_TYPE_ROTATION,
+    HDF_MOTION_TYPE_POCKET_MODE,
+    HDF_MOTION_TYPE_WRIST_UP,
+    HDF_MOTION_TYPE_WRIST_DOWN,
+    HDF_MOTION_TYPE_MAX,
+};
+
+struct HdfMotionEvent {
+    int motion;
+    int result;
+    int status;
+    int datalen;
+    int [] data;
+};
