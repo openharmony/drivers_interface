@@ -13,25 +13,68 @@
  * limitations under the License.
  */
 
+/**
+ * @addtogroup power
+ * @{
+ *
+ * @brief 提供休眠唤醒操作、订阅休眠唤醒状态、运行锁管理的接口。
+ *
+ * @since 3.1
+ * @version 1.0
+ */
+
+/**
+ * @file PowerTypes.idl
+ *
+ * @brief 电源相关的数据类型。
+ *
+ * 电源管理中使用的数据类型, 包括命令参数、回调参数和系统状态。
+ *
+ * @since 3.1
+ * @version 1.0
+ */
+
 package ohos.hdi.power.v1_0;
 
+/**
+ * @brief 电源的枚举命令参数。
+ */
 enum PowerHdfCmd {
+    /** 订阅状态的命令参数 */
     CMD_REGISTER_CALLBCK = 0,
+    /** 休眠的命令参数 */
     CMD_START_SUSPEND,
+    /** 唤醒的命令参数 */
     CMD_STOP_SUSPEND,
+    /** 强制休眠的命令参数 */
     CMD_FORCE_SUSPEND,
+    /** 打开运行锁的命令参数 */
     CMD_SUSPEND_BLOCK,
+    /** 关闭运行锁的命令参数 */
     CMD_SUSPEND_UNBLOCK,
+    /** Dump的命令参数 */
     CMD_DUMP,
 };
 
+/**
+ * @brief 电源状态回调的枚举参数。
+ */
 enum PowerHdfCallbackCmd {
+    /** 休眠回调的命令参数 */
     CMD_ON_SUSPEND = 0,
+    /** 唤醒回调的命令参数 */
     CMD_ON_WAKEUP,
 };
 
+/**
+ * @brief 电源的状态。
+ */
 enum PowerHdfState {
+    /** 唤醒状态 */
     AWAKE = 0,
+    /** 非活动状态 */
     INACTIVE,
+    /** 休眠状态 */
     SLEEP,
 };
+/** @} */

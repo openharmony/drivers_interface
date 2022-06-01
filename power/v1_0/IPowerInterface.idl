@@ -13,16 +13,90 @@
  * limitations under the License.
  */
 
+/**
+ * @addtogroup power
+ * @{
+ *
+ * @brief 提供休眠唤醒操作、订阅休眠唤醒状态、运行锁管理的接口。
+ *
+ * @since 3.1
+ * @version 1.0
+ */
+
+ /**
+ * @file IPowerInterface.idl
+ *
+ * @brief 休眠唤醒操作、订阅休眠唤醒状态、运行锁管理的接口。
+ *
+ * @since 3.1
+ * @version 1.0
+ */
+
 package ohos.hdi.power.v1_0;
+
 import ohos.hdi.power.v1_0.IPowerHdiCallback;
 import ohos.hdi.power.v1_0.PowerTypes;
 
+/**
+ * @brief 休眠唤醒操作、订阅休眠唤醒状态、运行锁管理的接口。
+ */
 interface IPowerInterface {
+    /**
+     * @brief 订阅休眠唤醒状态。
+     *
+     * @param ipowerHdiCallback 输入参数, 注册的回调。
+     *
+     * @return HDF_SUCCESS 表示注册成功。
+     * @see IPowerHdiCallback
+     */
     RegisterCallback([in] IPowerHdiCallback ipowerHdiCallback);
+
+    /**
+     * @brief 执行设备休眠操作。
+     *
+     * @return HDF_SUCCESS 表示操作成功。
+     */
     StartSuspend();
+
+    /**
+     * @brief 执行设备唤醒操作。
+     *
+     * @return HDF_SUCCESS 表示操作成功。
+     */
     StopSuspend();
+
+    /**
+     * @brief 执行设备强制休眠操作。
+     *
+     * @return HDF_SUCCESS 表示操作成功。
+     */
     ForceSuspend();
+
+    /**
+     * @brief 打开运行锁，阻止休眠。
+     *
+     * @param name 输入参数, 运行锁的名称。
+     *
+     * @return HDF_SUCCESS 表示操作成功。
+     */
     SuspendBlock([in] String name);
+
+    /**
+     * @brief 关闭运行锁，取消阻止休眠。
+     *
+     * @param name 输入参数, 运行锁的名称。
+     *
+     * @return HDF_SUCCESS 表示操作成功。
+     */
     SuspendUnblock([in] String name);
+
+    /**
+     * @brief 获取电源的Dump信息。
+     *
+     * @param info 输出参数, 电源的Dump信息。
+     *
+     * @return HDF_SUCCESS 表示操作成功。
+     */
     PowerDump([out] String info);
 }
+/** @} */
