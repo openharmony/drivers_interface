@@ -13,10 +13,40 @@
  * limitations under the License.
  */
 
+/**
+ * @addtogroup battery
+ * @{
+ *
+ * @brief 提供获取、订阅电池信息的接口。
+ *
+ * @since 3.1
+ * @version 1.0
+ */
+
+/**
+ * @file IBatteryCallback.idl
+ *
+ * @brief 订阅电池信息的回调接口。
+ *
+ * @since 3.1
+ * @version 1.0
+ */
+
 package ohos.hdi.battery.v1_0;
 
 import ohos.hdi.battery.v1_0.Types;
 
+/**
+ * @brief 订阅电池信息的回调。
+ */
 [callback] interface IBatteryCallback {
+
+    /**
+     * @brief 订阅电池信息回调方法。
+     *
+     * @param event 电池信息，如电量，电压，健康状态等。
+     * @see BatteryInfo
+     */
     Update([in] struct BatteryInfo event);
 }
+/** @} */

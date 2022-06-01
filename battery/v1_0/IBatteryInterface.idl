@@ -13,26 +13,176 @@
  * limitations under the License.
  */
 
+/**
+ * @addtogroup battery
+ * @{
+ *
+ * @brief 提供获取、订阅电池信息的接口。
+ *
+ * @since 3.1
+ * @version 1.0
+ */
+
+/**
+ * @file IBatteryInterface.idl
+ *
+ * @brief 获取、订阅电池信息的接口。
+ *
+ * @since 3.1
+ * @version 1.0
+ */
 package ohos.hdi.battery.v1_0;
 
 import ohos.hdi.battery.v1_0.Types;
 import ohos.hdi.battery.v1_0.IBatteryCallback;
 
+/**
+ * @brief 获取、订阅电池信息的接口。
+ */
 interface IBatteryInterface {
+    /**
+     * @brief 订阅电池信息变化。
+     *
+     * @param event 输入参数, 注册回调类型{@link IBatteryCallback}。
+     *
+     * @return HDF_SUCCESS 表示注册成功。
+     */
     Register([in] IBatteryCallback event);
+
+    /**
+     * @brief 取消订阅电池信息变化。
+     *
+     * @return HDF_SUCCESS 表示取消订阅成功。
+     */
     UnRegister();
+
+    /**
+     * @brief 设置电池信息节点的路径。
+     *
+     * @param path 输入参数, 电池信息节点的路径。
+     *
+     * @return HDF_SUCCESS 表示路径设置成功。
+     */
     ChangePath([in] String path);
+
+    /**
+     * @brief 获取电池的电量百分比。
+     *
+     * @param capacity 输出参数, 表示电量的百分比值。
+     *
+     * @return HDF_SUCCESS 表示获取成功。
+     */
     GetCapacity([out] int capacity);
+
+    /**
+     * @brief 获取电池的电压，单位微伏。
+     *
+     * @param voltage 输出参数, 表示电池的电压。
+     *
+     * @return HDF_SUCCESS 表示获取成功。
+     */
     GetVoltage([out] int voltage);
+
+    /**
+     * @brief 获取电池的充电温度，单位0.1摄氏度。
+     *
+     * @param temperature 输出参数, 表示电池温度。
+     *
+     * @return HDF_SUCCESS 表示获取成功。
+     */
     GetTemperature([out] int temperature);
+
+    /**
+     * @brief 获取电池的健康状态。
+     *
+     * @param healthState 输出参数, 表示电池健康状态。
+     *
+     * @return HDF_SUCCESS 表示获取成功。
+     * @see BatteryHealthState
+     */
     GetHealthState([out] enum BatteryHealthState healthState);
+
+    /**
+     * @brief 获取充电设备类型。
+     *
+     * @param pluggedType 输出参数, 表示充电设备类型。
+     *
+     * @return HDF_SUCCESS 表示获取成功。
+     * @see BatteryPluggedType
+     */
     GetPluggedType([out] enum BatteryPluggedType pluggedType);
+
+    /**
+     * @brief 获取充电状态。
+     *
+     * @param chargeState 输出参数, 表示充电状态。
+     *
+     * @return HDF_SUCCESS 表示获取成功。
+     * @see BatteryChargeState
+     */
     GetChargeState([out] enum BatteryChargeState chargeState);
+
+    /**
+     * @brief 获取是否支持电池或者电池是否在位。
+     *
+     * @param present 输出参数, 表示是否支持电池或者电池是否在位。true表示支持或在位，false表示不支持或不在位。
+     *
+     * @return HDF_SUCCESS 表示获取成功。
+     */
     GetPresent([out] boolean present);
+
+    /**
+     * @brief 获取当前电池的技术型号。
+     *
+     * @param technology 输出参数, 当前电池技术型号。
+     *
+     * @return HDF_SUCCESS 表示获取成功。
+     */
     GetTechnology([out] String technology);
+
+    /**
+     * @brief 获取当前电池的总容量，单位毫安时。
+     *
+     * @param totalEnergy 输出参数，表示电池的总容量。
+     *
+     * @return HDF_SUCCESS 表示获取成功。
+     */
     GetTotalEnergy([out] int totalEnergy);
+
+    /**
+     * @brief 获取当前电池的平均电流，单位毫安。
+     *
+     * @param totalEnergy 输出参数，表示电池的平均电流。
+     *
+     * @return HDF_SUCCESS 表示获取成功。
+     */
     GetCurrentAverage([out] int curAverage);
+
+    /**
+     * @brief 获取当前电池的电流，单位毫安。
+     *
+     * @param curNow 输出参数，表示电池的实时电流。
+     *
+     * @return HDF_SUCCESS 表示获取成功。
+     */
     GetCurrentNow([out] int curNow);
+
+    /**
+     * @brief 获取当前电池的剩余容量，单位毫安时。
+     *
+     * @param remainEnergy 输出参数，表示电池的剩余容量。
+     *
+     * @return HDF_SUCCESS 表示获取成功。
+     */
     GetRemainEnergy([out] int remainEnergy);
+
+    /**
+     * @brief 获取当前电池的全部信息。
+     *
+     * @param info 输出参数，电池的全部信息。
+     *
+     * @return HDF_SUCCESS 表示获取成功。
+     */
     GetBatteryInfo([out] struct BatteryInfo info);
 }
+/** @} */
