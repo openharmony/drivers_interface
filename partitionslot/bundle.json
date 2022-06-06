@@ -1,0 +1,50 @@
+{
+  "name": "drivers_interface_partitionslot",
+  "description": "partitionslot device driver interface",
+  "version": "3.2",
+  "license": "Apache License 2.0",
+  "component": {
+    "name": "drivers_interface_partitionslot",
+    "subsystem": "hdf",
+    "syscap": [""],
+    "adapter_system_type": ["standard"],
+    "rom": "675KB",
+    "ram": "1024KB",
+    "deps": {
+      "components": [
+        "ipc",
+        "hdf_core",
+        "hiviewdfx_hilog_native",
+        "utils_base"
+      ],
+      "third_part": [
+        "bounds_checking_function"
+      ]
+    },
+    "build": {
+      "sub_component": [
+        "//drivers/interface/partitionslot/v1_0:partitionslot_idl_target"
+      ],
+      "test": [
+      ],
+      "inner_kits": [
+        {
+          "name": "//drivers/interface/partitionslot/v1_0:libpartitionslot_proxy_1.0",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/partitionslot"
+          }
+        },
+        {
+          "name": "//drivers/interface/partitionslot/v1_0:partitionslot_idl_headers",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/partitionslot"
+          }
+        }
+      ]
+    }
+  }
+}
