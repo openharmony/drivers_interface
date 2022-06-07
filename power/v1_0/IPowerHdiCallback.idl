@@ -13,9 +13,39 @@
  * limitations under the License.
  */
 
+/**
+ * @addtogroup power
+ * @{
+ *
+ * @brief 提供休眠唤醒操作、订阅休眠唤醒状态、运行锁管理的接口。
+ *
+ * @since 3.1
+ * @version 1.0
+ */
+
+ /**
+ * @file IPowerHdiCallback.idl
+ *
+ * @brief 订阅休眠唤醒状态的回调。
+ *
+ * @since 3.1
+ * @version 1.0
+ */
+
 package ohos.hdi.power.v1_0;
 
+/**
+ * @brief 订阅休眠唤醒状态的回调。
+ */
 [callback] interface IPowerHdiCallback {
+    /**
+     * @brief 休眠状态的回调接口。
+     */
     OnSuspend();
+
+    /**
+     * @brief 唤醒状态的回调接口。
+     */
     OnWakeup();
 }
+/** @} */

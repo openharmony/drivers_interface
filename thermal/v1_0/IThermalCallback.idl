@@ -13,10 +13,39 @@
  * limitations under the License.
  */
 
+/**
+ * @addtogroup thermal
+ * @{
+ *
+ * @brief 提供设备温度管理、控制及订阅接口。
+ *
+ * @since 3.1
+ * @version 1.0
+ */
+
+ /**
+ * @file IThermalCallback.idl
+ *
+ * @brief 订阅设备发热状态的回调。
+ *
+ * @since 3.1
+ * @version 1.0
+ */
+
 package ohos.hdi.thermal.v1_0;
 
 import ohos.hdi.thermal.v1_0.ThermalTypes;
 
+/**
+ * @brief 订阅设备发热状态的回调。
+ */
 [callback] interface IThermalCallback {
+    /**
+    * @brief 设备发热状态变化的回调接口。
+    *
+    * @param event 输入参数, 设备发热信息。
+    * @see HdfThermalCallbackInfo
+    */
     OnThermalDataEvent([in] struct HdfThermalCallbackInfo event);
 }
+/** @} */

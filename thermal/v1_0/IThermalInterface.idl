@@ -13,16 +13,86 @@
  * limitations under the License.
  */
 
+/**
+ * @addtogroup thermal
+ * @{
+ *
+ * @brief 提供设备温度管理、控制及订阅接口。
+ *
+ * @since 3.1
+ * @version 1.0
+ */
+
+/**
+ * @file IThermalInterface.idl
+ *
+ * @brief 温度管理、控制及订阅接口。
+ *
+ * @since 3.1
+ * @version 1.0
+ */
+
 package ohos.hdi.thermal.v1_0;
 
 import ohos.hdi.thermal.v1_0.ThermalTypes;
 import ohos.hdi.thermal.v1_0.IThermalCallback;
 
+/**
+ * @brief 温度管理、控制及订阅接口。
+ */
 interface IThermalInterface {
+    /**
+     * @brief 设置CPU频率。
+     *
+     * @param freq 输入参数，设置CPU频率的值。
+     *
+     * @return HDF_SUCCESS 表示设置成功。
+     */
     SetCpuFreq([in] int freq);
+
+    /**
+     * @brief 设置GPU频率。
+     *
+     * @param freq 输入参数，设置GPU频率的值。
+     *
+     * @return HDF_SUCCESS 表示设置成功。
+     */
     SetGpuFreq([in] int freq);
+
+    /**
+     * @brief 设置充电电流，单位毫安。
+     *
+     * @param current 输入参数，充电电流。
+     *
+     * @return HDF_SUCCESS 表示设置成功
+     */
     SetBatteryCurrent([in] int current);
+
+    /**
+     * @brief 获取设备发热的信息。
+     *
+     * @param event 输出参数, 设备发热信息。
+     *
+     * @return HDF_SUCCESS 表示获取成功。
+     * @see HdfThermalCallbackInfo
+     */
     GetThermalZoneInfo([out] struct HdfThermalCallbackInfo event);
+
+    /**
+     * @brief 订阅设备发热状态。
+     *
+     * @param callbackObj 输入参数, 发热状态回调。
+     *
+     * @return HDF_SUCCESS 表示注册成功。
+     * @see IThermalCallback
+     */
     Register([in] IThermalCallback callbackObj);
+
+    /**
+     * @brief 取消订阅设备发热状态。
+     *
+     * @return HDF_SUCCESS 表示取消成功
+     */
     Unregister();
 }
+/** @} */
