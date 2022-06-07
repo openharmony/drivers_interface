@@ -68,3 +68,14 @@ struct HdfWifiInfo {
     int band;
     unsigned int size;
 };
+
+struct MeasChannelParam {
+    int channelId;
+    int measTime;
+};
+
+struct MeasChannelResult {
+    int channelId;
+    int chload;
+    int noise;
+};
