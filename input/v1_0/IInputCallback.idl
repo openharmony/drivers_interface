@@ -39,7 +39,7 @@ import ohos.hdi.input.v1_0.InputTypes;
      * @since 3.2
      * @version 1.0
      */
-    EventPkgCallback([in] struct EventPackage[] pkgs, [in] unsigned int count, [in] unsigned int devIndex);
+    EventPkgCallback([in] struct EventPackage[] pkgs, [in] unsigned int devIndex);
 
     /**
      * @brief Reports hot plug event data by the registered callback.
