@@ -57,10 +57,10 @@ package ohos.hdi.pin_auth.v1_0;
      */
     OnResult([in] int result, [in] unsigned char[] extraInfo);
     /**
-     * @brief defines the function for reporting info in process. 
+     * @brief defines the function for getting pin data. 
      *
-     * @param salt Indicates acquire info code, see {@link FaceTipsCode}.
-     * @param authSubType Indicates extra info to report.
+     * @param salt Indicates the value used to compute pin data.
+     * @param authSubType Indicates pin sub type.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
