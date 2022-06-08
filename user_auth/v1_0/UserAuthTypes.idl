@@ -49,7 +49,7 @@ enum AuthType : int {
 enum ExecutorRole : int {
     COLLECTOR = 1,  /**< Indicates executor role is collector. */
     VERIFIER = 2,   /**< Indicates executor role is verifier. */
-    ALL_IN_ONE = 3, /**< Indicates executor role is collector and verifier. */
+    ALL_IN_ONE = 3, /**< Indicates executor role is combination of collector and verifier. */
 };
 
 /**
@@ -85,7 +85,7 @@ struct ScheduleInfo {
     enum AuthType authType; /**< Indicates authentication type, see @{AuthType}. */
     unsigned int executorType; /**< Indicates executor type. */
     unsigned int scheduleMode; /**< Indicates authentication or identification. */
-    struct ExecutorInfo[] executors; /**< Indicates executor info of identification, see @{ExecutorInfo}. */
+    struct ExecutorInfo[] executors; /**< Indicates executor information, see @{ExecutorInfo}. */
 };
 
 struct AuthSolution {
@@ -104,7 +104,7 @@ struct ExecutorSendMsg {
 struct AuthResultInfo {
     unsigned int result; /**< Indicates result. */
     int freezingTime; /**< Indicates freezing time in seconds. */
-    int remainTimes; /**< Indicates freezing time in seconds. */
+    int remainTimes; /**< Indicates remaining authentication times before a lockout. */
     struct ExecutorSendMsg[] msgs; /**< Indicates executor msgs, see @{ExecutorSendMsg}. */
     unsigned char[] token; /**< Indicates authentication token. */
 };

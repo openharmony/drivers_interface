@@ -19,8 +19,8 @@
  *
  * @brief Provides APIs for the user auth driver.
  *
- * The user auth driver provides a unified interface for the pin auth service to access the user auth driver.
- * After obtaining the pin auth driver proxy, the service can call related APIs to register executor, 
+ * The user auth driver provides a unified interface for the user auth service to access the user auth driver.
+ * After obtaining the user auth driver proxy, the service can call related APIs to register executor, 
  * manage credentials, and complete password and biometric authentication.
  * @since 3.2
  */
@@ -146,7 +146,7 @@ interface IUserAuthInterface {
     /**
      * @brief Query credential information.
      *
-     * @param userId Indicates Indicates user id.
+     * @param userId Indicates user id.
      * @param authType Indicates authentication type, see {@link AuthType}.
      * @param infos Indicates credential information, see {@link CredentialInfo}.
      *
@@ -158,7 +158,7 @@ interface IUserAuthInterface {
      * @brief Query secure information.
      *
      * @param userId Indicates user id.
-     * @param secureUid Indicates secure user id, see {@link AuthType}.
+     * @param secureUid Indicates secure user id.
      * @param infos Indicates enrolled Info, see {@link EnrolledInfo}.
      *
      * @return Returns <b>0</b> if the operation is successful.
@@ -169,7 +169,7 @@ interface IUserAuthInterface {
      * @brief Delete pin, delete user in Iam subsystem.
      *
      * @param userId Indicates user id.
-     * @param authToken Indicates Indicates user password authentication token.
+     * @param authToken Indicates user password authentication token.
      * @param deletedInfos Indicates deleted credential information, see {@link CredentialInfo}.
      *
      * @return Returns <b>0</b> if the operation is successful.
