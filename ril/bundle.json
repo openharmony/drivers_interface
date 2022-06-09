@@ -1,0 +1,62 @@
+{
+    "name": "ril_device_driver_interface",
+    "version": "3.1.0",
+    "description": "telephony ril device driver interface",
+    "homePage": "https://gitee.com/openharmony",
+    "license": "Apache License 2.0",
+    "language": "",
+    "private": false,
+    "scripts": {},
+    "envs": [],
+    "dirs": [],
+    "author": {},
+    "contributors": [],
+    "component": {
+        "name": "ril_device_driver_interface",
+        "subsystem": "hdf",
+        "features": [],
+        "adapted_system_type": [
+            "standard"
+        ],
+        "rom": "700KB",
+        "ram": "1MB",
+        "deps": {
+            "components": [
+            ],
+            "third_party": [
+            ]
+        },
+        "build": {
+            "sub_component": [
+                "//base/telephony/ril_adapter/interfaces/innerkits:hril_innerkits"
+            ],
+            "inner_kits": [
+                {
+                    "type": "so",
+                    "name": "//base/telephony/ril_adapter/interfaces/innerkits:hril_innerkits",
+                    "header": {
+                        "header_files": [
+                            "hril_types.h",
+                            "hril_sms_parcel.h",
+                            "hril_sim_parcel.h",
+                            "hril_request.h",
+                            "hril_notification.h",
+                            "hril_network_parcel.h",
+                            "hril_modem_parcel.h",
+                            "hril_data_parcel.h",
+                            "hril_call_parcel.h",
+                            "hril.h",
+                            "hril_vendor_call_defs.h",
+                            "hril_vendor_data_defs.h",
+                            "hril_vendor_modem_defs.h",
+                            "hril_vendor_network_defs.h",
+                            "hril_vendor_sim_defs.h",
+                            "hril_vendor_sms_defs.h"
+                        ],
+                        "header_base": "//base/telephony/ril_adapter/interfaces/innerkits/include"
+                    }
+                }
+            ]
+        }
+    }
+}

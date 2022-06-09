@@ -1,0 +1,47 @@
+{
+    "name": "display_device_driver_interface",
+    "version": "3.1.0",
+    "description": "display device driver interface",
+    "homePage": "https://gitee.com/openharmony",
+    "license": "Apache License 2.0",
+    "language": "",
+    "private": false,
+    "scripts": {},
+    "envs": [],
+    "dirs": [],
+    "author": {},
+    "contributors": [],
+    "component": {
+        "name": "display_device_driver_adapter",
+        "subsystem": "hdf",
+        "features": [],
+        "adapted_system_type": [
+            "standard"
+        ],
+        "rom": "700KB",
+        "ram": "1MB",
+        "deps": {
+            "components": [
+            ],
+            "third_party": [
+            ]
+        },
+        "build": {
+            "sub_component": [
+                "//drivers/peripheral/display/hdi_service/gralloc/client:hdi_gralloc_client"
+            ],
+            "inner_kits": [
+                {
+                    "name": "//drivers/peripheral/display/hdi_service/gralloc/client:hdi_gralloc_client",
+                    "header": {
+                      "header_files": [
+                        "idisplay_gralloc.h",
+                        "parcel_utils.h"
+                      ],
+                      "header_base": "//drivers/peripheral/display/hdi_service/gralloc/include"
+                    }
+                }
+            ]
+        }
+    }
+}
