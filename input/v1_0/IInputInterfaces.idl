@@ -93,7 +93,7 @@ interface IInputInterfaces {
      * @since 3.2
      * @version 1.0
      */
-    GetInputDeviceList([in] unsigned int devNum, [out] struct DeviceInfo[] devList, [in]unsigned int size);
+    GetInputDeviceList([out] unsigned int devNum, [out] struct DeviceInfo[] devList, [in]unsigned int size);
 
     /**
      * @brief Sets the power status.
