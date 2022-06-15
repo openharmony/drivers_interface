@@ -37,7 +37,7 @@ enum AuthType : int {
     ALL = 0, /**< Indicates authentication type is ALL. */
     PIN = 1, /**< Indicates authentication type is PIN. */
     FACE = 2, /**< Indicates authentication type is face. */
-    FINGERPRINT = 3, /**< Indicates authentication type is fingerprint. */
+    FINGERPRINT = 4, /**< Indicates authentication type is fingerprint. */
 };
 
 /**
