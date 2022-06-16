@@ -155,16 +155,18 @@ interface IUserAuthInterface {
      */
     GetCredential([in] int userId, [in] enum AuthType authType, [out] struct CredentialInfo[] infos);
     /**
-     * @brief Query secure information.
+     * @brief Query user information.
      *
      * @param userId Indicates user id.
      * @param secureUid Indicates secure user id.
+     * @param pinSubType Indicates pin auth's subtype, see {@link PinSubType}.
      * @param infos Indicates enrolled Info, see {@link EnrolledInfo}.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
      */
-    GetSecureInfo([in] int userId, [out] unsigned long secureUid, [out] struct EnrolledInfo[] infos);
+    GetUserInfo([in] int userId, [out] unsigned long secureUid, [out] enum PinSubType pinSubType,
+        [out] struct EnrolledInfo[] infos);
     /**
      * @brief Delete pin, delete user in Iam subsystem.
      *
@@ -224,13 +226,14 @@ interface IUserAuthInterface {
      *
      * @param contextId Indicates context id.
      * @param authType Indicates identification type, see @{AuthType}.
+     * @param executorSensorHint Indicates executor sensor hint, 0 indicates that no value is specified.
      * @param scheduleInfo Indicates scheduling information, see {@link ScheduleInfo}.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
      */
-    BeginIdentification([in] unsigned long contextId, [in] enum AuthType authType, [in] byte[] challenge,
-        [in] unsigned int executorId, [out] struct ScheduleInfo scheduleInfo);
+    BeginIdentification([in] unsigned long contextId, [in] enum AuthType authType, [in] unsigned char[] challenge,
+        [in] unsigned int executorSensorHint, [out] struct ScheduleInfo scheduleInfo);
     /**
      * @brief Update identification result, and evaluate the results of this identification scheme.
      *
