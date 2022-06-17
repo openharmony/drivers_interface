@@ -65,17 +65,41 @@ enum ExecutorSecureLevel : int {
     ESL3 = 3, /**< Indicates executor secure level is ESL3. */
 };
 
+/**
+ * Pin auth's subtype.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
+enum PinSubType : int {
+    PIN_SIX = 10000, /**< Indicates 6 digit pin. */
+    PIN_NUMBER = 10001, /**< Indicates digit pin. */
+    PIN_MIX = 10002, /**< Indicates mixing pin. */
+};
+
+/**
+ * Schedule mode.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
+enum ScheduleMode : int {
+    ENROLL = 0, /**< Indicates schedule mode is enrollment. */
+    AUTH = 1, /**< Indicates schedule mode is authentication. */
+    IDENTIFY = 2, /**< Indicates schedule mode is identification. */
+};
+
 struct ExecutorRegisterInfo {
     enum AuthType authType; /**< Indicates authentication type, see @{AuthType}. */
     enum ExecutorRole executorRole; /**< Indicates executor role, see @{ExecutorRole}. */
-    unsigned int executorId; /**< Indicates executor id under the same authentication type. */
-    unsigned int executorType; /**< Indicates executor type. */
+    unsigned int executorSensorHint; /**< Indicates executor sensor hint under the same authentication type, 0 is not allowed. */
+    unsigned int executorMatcher; /**< Indicates executor matcher. */
     enum ExecutorSecureLevel esl; /**< Indicates executor secure level, see @{ExecutorSecureLevel}. */
     unsigned char[] publicKey; /**< Indicates publicKey. */
 };
 
 struct ExecutorInfo {
-    unsigned long index; /**< Indicates executor index under the authentication frameworks. */
+    unsigned long executorIndex; /**< Indicates executor index under the authentication frameworks. */
     struct ExecutorRegisterInfo info; /**< Indicates executor registration information, see @{ExecutorRegisterInfo}. */
 };
 
@@ -83,8 +107,8 @@ struct ScheduleInfo {
     unsigned long scheduleId; /**< Indicates schedule id of authentication. */
     unsigned long[] templateIds; /**< Indicates the templates to authenticate. */
     enum AuthType authType; /**< Indicates authentication type, see @{AuthType}. */
-    unsigned int executorType; /**< Indicates executor type. */
-    unsigned int scheduleMode; /**< Indicates authentication or identification. */
+    unsigned int executorMatcher; /**< Indicates executor matcher. */
+    enum ScheduleMode scheduleMode; /**< Indicates schedule mode, see @{ScheduleMode}. */
     struct ExecutorInfo[] executors; /**< Indicates executor information, see @{ExecutorInfo}. */
 };
 
@@ -92,12 +116,12 @@ struct AuthSolution {
     int userId; /**< Indicates user id. */
     unsigned int authTrustLevel; /**< Indicates authentication trust level of authentication. */
     enum AuthType authType; /**< Indicates authentication type, see @{AuthType}. */
-    unsigned int executorId; /**< Indicates executor index under the same authentication type. */
+    unsigned int executorSensorHint; /**< Indicates executor sensor hint, 0 indicates that no value is specified. */
     unsigned char[] challenge; /**< Indicates challenge of authentication. */
 };
 
 struct ExecutorSendMsg {
-    unsigned int index; /**< Indicates executor index under the authentication frameworks. */
+    unsigned long executorIndex; /**< Indicates executor index under the authentication frameworks. */
     unsigned char[] msg; /**< Indicates executor msg to send. */
 };
 
@@ -117,17 +141,16 @@ struct IdentifyResultInfo {
 
 struct EnrollParam {
     enum AuthType authType; /**< Indicates authentication type, see @{AuthType}. */
-    unsigned int executorType; /**< Indicates executor type. */
-    unsigned int executorId; /**< Indicates executor id under the same authentication type. */
+    unsigned int executorSensorHint; /**< Indicates executor sensor hint, 0 indicates that no value is specified. */
 };
 
 struct CredentialInfo {
     unsigned long credentialId; /**< Indicates credential Id. */
-    unsigned long index; /**< Indicates executor index under the authentication frameworks. */
+    unsigned long executorIndex; /**< Indicates executor index under the authentication frameworks. */
     unsigned long templateId; /**< Indicates template Id. */
     enum AuthType authType; /**< Indicates authentication type, see @{AuthType}. */
-    unsigned int executorType; /**< Indicates executor type. */
-    unsigned int executorId; /**< Indicates executor id under the same authentication type. */
+    unsigned int executorMatcher; /**< Indicates executor matcher. */
+    unsigned int executorSensorHint; /**< Indicates executor sensor hint under the same authentication type. */
 };
 
 struct EnrolledInfo {
