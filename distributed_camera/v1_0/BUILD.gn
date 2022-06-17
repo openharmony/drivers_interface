@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//drivers/adapter/uhdf2/hdi.gni")
+import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
 hdi("distributed_camera_provider") {
   module_name = "distributed_camera_provider_service"
   sources = [
@@ -20,7 +20,7 @@ hdi("distributed_camera_provider") {
     "IDCameraProviderCallback.idl",
   ]
 
-  sequenceable = [ "//drivers/adapter/uhdf2/model/display/sequenceable/buffer_handle:libbuffer_handle_sequenceable_1.0" ]
+  sequenceable = [ "//drivers/hdf_core/adapter/uhdf2/model/display/sequenceable/buffer_handle:libbuffer_handle_sequenceable_1.0" ]
 
   language = "cpp"
   subsystem_name = "hdf"

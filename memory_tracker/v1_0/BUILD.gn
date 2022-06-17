@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//drivers/adapter/uhdf2/hdi.gni")
+import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
 hdi("memorytracker") {
   module_name = "memory_tracker_interface_service"
   sources = [
