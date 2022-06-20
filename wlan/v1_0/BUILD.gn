@@ -29,6 +29,6 @@ if (defined(ohos_lite)) {
 
     language = "c"
     subsystem_name = "hdf"
-    part_name = "wlan_device_driver"
+    part_name = "drivers_interface_wlan"
   }
 }
