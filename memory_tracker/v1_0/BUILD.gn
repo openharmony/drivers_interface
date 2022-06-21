@@ -20,5 +20,5 @@ hdi("memorytracker") {
   ]
   language = "cpp"
   subsystem_name = "hdf"
-  part_name = "memorytracker_device_driver"
+  part_name = "drivers_interface_memorytracker"
 }
