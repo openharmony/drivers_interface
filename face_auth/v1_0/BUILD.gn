@@ -13,7 +13,7 @@
 
 import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
 hdi("face_auth") {
-  module_name = "face_auth"
+  module_name = "drivers_peripheral_face_auth"
   sources = [
     "FaceAuthTypes.idl",
     "IExecutor.idl",
@@ -22,5 +22,5 @@ hdi("face_auth") {
   ]
   language = "cpp"
   subsystem_name = "hdf"
-  part_name = "face_auth_device_driver"
+  part_name = "drivers_interface_face_auth"
 }

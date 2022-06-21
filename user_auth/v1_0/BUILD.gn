@@ -13,12 +13,12 @@
 
 import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
 hdi("user_auth") {
-  module_name = "user_auth_device_driver"
+  module_name = "drivers_peripheral_user_auth"
   sources = [
     "IUserAuthInterface.idl",
     "UserAuthTypes.idl",
   ]
   language = "cpp"
   subsystem_name = "hdf"
-  part_name = "user_auth_device_driver"
+  part_name = "drivers_interface_user_auth"
 }

@@ -13,7 +13,7 @@
 
 import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
 hdi("fingerprint_auth") {
-  module_name = "fingerprint_auth"
+  module_name = "drivers_peripheral_fingerprint_auth"
   sources = [
     "FingerprintAuthTypes.idl",
     "IExecutor.idl",
@@ -22,5 +22,5 @@ hdi("fingerprint_auth") {
   ]
   language = "cpp"
   subsystem_name = "hdf"
-  part_name = "fingerprint_auth_device_driver"
+  part_name = "drivers_interface_fingerprint_auth"
 }
