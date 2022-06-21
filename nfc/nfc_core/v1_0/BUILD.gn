@@ -23,5 +23,5 @@ hdi("nfc") {
 
   language = "cpp"
   subsystem_name = "hdf"
-  part_name = "nfc_device_driver"
+  part_name = "drivers_interface_nfc"
 }
