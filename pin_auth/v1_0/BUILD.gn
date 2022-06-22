@@ -13,7 +13,7 @@
 
 import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
 hdi("pin_auth") {
-  module_name = "pin_auth"
+  module_name = "drivers_peripheral_pin_auth"
   sources = [
     "IExecutor.idl",
     "IExecutorCallback.idl",
@@ -22,5 +22,5 @@ hdi("pin_auth") {
   ]
   language = "cpp"
   subsystem_name = "hdf"
-  part_name = "pin_auth_device_driver"
+  part_name = "drivers_interface_pin_auth"
 }
