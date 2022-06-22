@@ -1,10 +1,10 @@
 {
-    "name": "battery_device_driver_interface",
+    "name": "drivers_interface_battery",
     "description": "battery device driver interface",
     "version": "3.2",
     "license": "Apache License 2.0",
     "component": {
-      "name": "battery_device_driver_interface",
+      "name": "drivers_interface_battery",
       "subsystem": "hdf",
       "syscap": [""],
       "adapter_system_type": ["standard"],

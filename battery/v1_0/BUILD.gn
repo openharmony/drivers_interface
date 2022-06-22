@@ -29,6 +29,6 @@ if (defined(ohos_lite)) {
 
     language = "cpp"
     subsystem_name = "hdf"
-    part_name = "battery_device_driver"
+    part_name = "drivers_interface_battery"
   }
 }
