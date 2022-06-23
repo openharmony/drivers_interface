@@ -96,7 +96,7 @@ interface IVibratorInterface {
     /**
      * @brief Start the vibrator according to the incoming vibration effect.
      *
-     * @param vibrationPeriod Indicates vibration period (in ms).
+     * @param duration Indicates the duration that the vibration lasts, in milliseconds.
      *
      * @param intensity Indicates vibrator intensity  in a vibration period.
      *
@@ -110,5 +110,5 @@ interface IVibratorInterface {
      * @since 3.2
      * @version 1.1
      */
-    SetModulationParameter([in] unsigned int vibrationPeriod, [in] int intensity, [in] int frequency);
+    EnableVibratorModulation([in] unsigned int duration, [in] int intensity, [in] int frequency);
 }
