@@ -44,4 +44,6 @@ interface IWlanInterface {
     StartScan([in] struct HdfFeatureInfo ifeature, [in] struct HdfWifiScan scan);
     GetPowerMode([in] struct HdfFeatureInfo ifeature, [out] unsigned char mode);
     SetPowerMode([in] struct HdfFeatureInfo ifeature, [in] unsigned char mode);
+    [oneway] StartChannelMeas([in] String ifName, [in] struct MeasChannelParam measChannelParam);
+    GetChannelMeasResult([in] String ifName, [out] struct MeasChannelResult measChannelResult);
 }
