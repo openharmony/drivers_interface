@@ -1,5 +1,5 @@
 {
-    "name": "display_device_driver_interface",
+    "name": "drivers_interface_display",
     "version": "3.1.0",
     "description": "display device driver interface",
     "homePage": "https://gitee.com/openharmony",
@@ -12,7 +12,7 @@
     "author": {},
     "contributors": [],
     "component": {
-        "name": "display_device_driver_adapter",
+        "name": "drivers_interface_display",
         "subsystem": "hdf",
         "features": [],
         "adapted_system_type": [
