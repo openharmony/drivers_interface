@@ -1,10 +1,10 @@
 {
-    "name": "distributed_camera_device_driver_interface",
-    "description": "distributed camera device driver interface",
+    "name": "drivers_interface_distributed_camera",
+    "description": "drivers interface distributed camera",
     "version": "3.2",
     "license": "Apache License 2.0",
     "component": {
-      "name": "distributed_camera_device_driver_interface",
+      "name": "drivers_interface_distributed_camera",
       "subsystem": "hdf",
       "syscap": [""],
       "adapter_system_type": ["standard"],
