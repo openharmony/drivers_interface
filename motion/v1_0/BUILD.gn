@@ -23,5 +23,5 @@ hdi("motion") {
 
   language = "cpp"
   subsystem_name = "hdf"
-  part_name = "motion_device_driver"
+  part_name = "drivers_interface_motion"
 }

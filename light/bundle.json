@@ -1,10 +1,10 @@
 {
-    "name": "light_device_driver_interface",
+    "name": "drivers_interface_light",
     "description": "light device driver interface",
     "version": "3.2",
     "license": "Apache License 2.0",
     "component": {
-      "name": "light_device_driver_interface",
+      "name": "drivers_interface_light",
       "subsystem": "hdf",
       "syscap": [""],
       "adapter_system_type": ["standard"],
