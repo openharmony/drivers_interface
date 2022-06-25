@@ -46,4 +46,5 @@ interface IWlanInterface {
     SetPowerMode([in] struct HdfFeatureInfo ifeature, [in] unsigned char mode);
     [oneway] StartChannelMeas([in] String ifName, [in] struct MeasChannelParam measChannelParam);
     GetChannelMeasResult([in] String ifName, [out] struct MeasChannelResult measChannelResult);
+    SetProjectionScreenParam([in] String ifName, [in] struct ProjectionScreenCmdParam param);
 }
