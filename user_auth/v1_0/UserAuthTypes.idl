@@ -122,15 +122,17 @@ struct AuthSolution {
 
 struct ExecutorSendMsg {
     unsigned long executorIndex; /**< Indicates executor index under the authentication frameworks. */
+    int commandId; /**< Indicates command id. */
     unsigned char[] msg; /**< Indicates executor msg to send. */
 };
 
 struct AuthResultInfo {
-    unsigned int result; /**< Indicates result. */
+    int result; /**< Indicates result. */
     int freezingTime; /**< Indicates freezing time in seconds. */
     int remainTimes; /**< Indicates remaining authentication times before a lockout. */
     struct ExecutorSendMsg[] msgs; /**< Indicates executor msgs, see @{ExecutorSendMsg}. */
     unsigned char[] token; /**< Indicates authentication token. */
+    unsigned char[] rootSecret; /**< Indicates protection key for user file key. */
 };
 
 struct IdentifyResultInfo {
@@ -156,4 +158,10 @@ struct CredentialInfo {
 struct EnrolledInfo {
     unsigned long enrolledId; /**< Indicates enrolled id. */
     enum AuthType authType; /**< Indicates authentication type, see @{AuthType}. */
+};
+
+struct EnrollResultInfo {
+    unsigned long credentialId; /**< Indicates credential id. */
+    struct CredentialInfo oldInfo; /**< Indicates old credential information, see {@link CredentialInfo}. */
+    unsigned char[] rootSecret; /**< Indicates protection key for user file key. */
 };
