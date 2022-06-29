@@ -23,7 +23,7 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/input/v1_0:libinput_proxy_1.0"
+          "//drivers/interface/input/v1_0:input_idl_target"
         ],
         "test": [
         ],

@@ -23,7 +23,7 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/light/v1_0:liblight_proxy_1.0"
+          "//drivers/interface/light/v1_0:light_idl_target"
         ],
         "test": [
         ],

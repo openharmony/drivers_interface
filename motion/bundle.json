@@ -23,7 +23,7 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/motion/v1_0:libmotion_proxy_1.0"
+          "//drivers/interface/motion/v1_0:motion_idl_target"
         ],
         "test": [
         ],

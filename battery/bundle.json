@@ -23,7 +23,7 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/battery/v1_0:libbattery_proxy_1.0"
+          "//drivers/interface/battery/v1_0:battery_idl_target"
         ],
         "test": [
         ],

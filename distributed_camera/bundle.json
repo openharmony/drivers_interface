@@ -23,7 +23,7 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/distributed_camera/v1_0:libdistributed_camera_provider_proxy_1.0"
+          "//drivers/interface/distributed_camera/v1_0:distributed_camera_provider_idl_target"
         ],
         "test": [
         ],

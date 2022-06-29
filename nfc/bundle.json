@@ -23,7 +23,7 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/nfc/nfc_core/v1_0:libnfc_proxy_1.0"
+          "//drivers/interface/nfc/nfc_core/v1_0:nfc_idl_target"
         ],
         "test": [
         ],

@@ -21,7 +21,7 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/memory_tracker/v1_0:libmemorytracker_proxy_1.0"
+          "//drivers/interface/memory_tracker/v1_0:memorytracker_idl_target"
         ],
         "test": [],
         "inner_kits": [

@@ -23,7 +23,7 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/thermal/v1_0:libthermal_proxy_1.0"
+          "//drivers/interface/thermal/v1_0:thermal_idl_target"
         ],
         "test": [
         ],
