@@ -17,7 +17,11 @@
  * @addtogroup battery
  * @{
  *
- * @brief 提供获取、订阅电池信息的接口。
+ * @brief Provides APIs for obtaining and subscribing to battery information.
+ *
+ * The battery module provides APIs for the battery service to obtain and subscribe to battery information.
+ * After obtaining an object or proxy of this module, the battery service can invoke related APIs to obtain and
+ * subscribe to battery information.
  *
  * @since 3.1
  * @version 1.0
@@ -26,7 +30,9 @@
 /**
  * @file IBatteryCallback.idl
  *
- * @brief 订阅电池信息的回调接口。
+ * @brief Provides the callback of battery information.
+ *
+ * The battery module provides a callback for the battery service to subscribe to battery information changes.
  *
  * @since 3.1
  * @version 1.0
@@ -37,15 +43,24 @@ package ohos.hdi.battery.v1_0;
 import ohos.hdi.battery.v1_0.Types;
 
 /**
- * @brief 订阅电池信息的回调。
+ * @brief Represents the callback of battery information.
+ *
+ * After creating a callback object, the battery service can call {@link IBatteryInterface} to register a callback to
+ * subscribe to battery information changes.
+ *
+ * @since 3.1
  */
 [callback] interface IBatteryCallback {
 
     /**
-     * @brief 订阅电池信息回调方法。
+     * @brief Callback of battery information changes.
      *
-     * @param event 电池信息，如电量，电压，健康状态等。
+     *  
+     *
+     * @param event Battery information, such as the battery level, voltage, and health status.
      * @see BatteryInfo
+     *
+     * @since 3.1
      */
     Update([in] struct BatteryInfo event);
 }

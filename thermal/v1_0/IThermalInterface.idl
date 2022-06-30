@@ -17,7 +17,10 @@
  * @addtogroup thermal
  * @{
  *
- * @brief 提供设备温度管理、控制及订阅接口。
+ * @brief Provides APIs for managing, controlling, and subscribing to the device temperature.
+ * 
+ * After obtaining an object or proxy of this module, the thermal service can invoke related APIs to manage, control,
+ * and subscribe to the device temperature.
  *
  * @since 3.1
  * @version 1.0
@@ -26,7 +29,9 @@
 /**
  * @file IThermalInterface.idl
  *
- * @brief 温度管理、控制及订阅接口。
+ * @brief Provides APIs for managing, controlling, and subscribing to the device temperature.
+ *
+ * 
  *
  * @since 3.1
  * @version 1.0
@@ -38,60 +43,76 @@ import ohos.hdi.thermal.v1_0.ThermalTypes;
 import ohos.hdi.thermal.v1_0.IThermalCallback;
 
 /**
- * @brief 温度管理、控制及订阅接口。
+ * @brief Represents APIs for managing, controlling, and subscribing to the device temperature.
+ *
+ * 
+ *
+ * @since 3.1
  */
 interface IThermalInterface {
     /**
-     * @brief 设置CPU频率。
+     * @brief Sets the CPU frequency.
      *
-     * @param freq 输入参数，设置CPU频率的值。
+     * @param freq CPU frequency to set.
      *
-     * @return HDF_SUCCESS 表示设置成功。
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 3.1
      */
     SetCpuFreq([in] int freq);
 
     /**
-     * @brief 设置GPU频率。
+     * @brief Sets the GPU frequency.
      *
-     * @param freq 输入参数，设置GPU频率的值。
+     * @param freq GPU frequency to set.
      *
-     * @return HDF_SUCCESS 表示设置成功。
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 3.1
      */
     SetGpuFreq([in] int freq);
 
     /**
-     * @brief 设置充电电流，单位毫安。
+     * @brief Sets the charging current.
      *
-     * @param current 输入参数，充电电流。
+     * @param current Charging current, in mA.
      *
-     * @return HDF_SUCCESS 表示设置成功
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 3.1
      */
     SetBatteryCurrent([in] int current);
 
     /**
-     * @brief 获取设备发热的信息。
+     * @brief Obtains the thermal information of the device.
      *
-     * @param event 输出参数, 设备发热信息。
+     * @param event Thermal information of the device, including the device type and temperature.
      *
-     * @return HDF_SUCCESS 表示获取成功。
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      * @see HdfThermalCallbackInfo
+     *
+     * @since 3.1
      */
     GetThermalZoneInfo([out] struct HdfThermalCallbackInfo event);
 
     /**
-     * @brief 订阅设备发热状态。
+     * @brief Registers the callback of the device thermal status.
      *
-     * @param callbackObj 输入参数, 发热状态回调。
+     * @param callbackObj Callback to register.
      *
-     * @return HDF_SUCCESS 表示注册成功。
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      * @see IThermalCallback
+     *
+     * @since 3.1
      */
     Register([in] IThermalCallback callbackObj);
 
     /**
-     * @brief 取消订阅设备发热状态。
+     * @brief Registers the callback of the device thermal status.
      *
-     * @return HDF_SUCCESS 表示取消成功
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 3.1
      */
     Unregister();
 }

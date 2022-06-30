@@ -17,16 +17,23 @@
  * @addtogroup power
  * @{
  *
- * @brief 提供休眠唤醒操作、订阅休眠唤醒状态、运行锁管理的接口。
+ * @brief Provides APIs for performing hibernation/wakeup operations, subscribing to the hibernation/wakeup status,
+ * and managing running locks.
+ * 
+ * After obtaining an object or proxy of this module, the power service can invoke related APIs to perform
+ * hibernation/wakeup operations, subscribe to the hibernation/wakeup status, and manage running locks.
  *
  * @since 3.1
  * @version 1.0
  */
 
- /**
+/**
  * @file IPowerInterface.idl
  *
- * @brief 休眠唤醒操作、订阅休眠唤醒状态、运行锁管理的接口。
+ * @brief Provides APIs for performing hibernation/wakeup operations, subscribing to the hibernation/wakeup status,
+ * and managing running locks.
+ *
+ * 
  *
  * @since 3.1
  * @version 1.0
@@ -38,64 +45,83 @@ import ohos.hdi.power.v1_0.IPowerHdiCallback;
 import ohos.hdi.power.v1_0.PowerTypes;
 
 /**
- * @brief 休眠唤醒操作、订阅休眠唤醒状态、运行锁管理的接口。
+ * @brief Represents APIs for performing hibernation/wakeup operations, subscribing to the hibernation/wakeup status,
+ * and managing running locks.
+ *
+ * 
+ *
+ * @since 3.1
  */
 interface IPowerInterface {
     /**
-     * @brief 订阅休眠唤醒状态。
+     * @brief Registers the callback of the hibernation/wakeup status.
      *
-     * @param ipowerHdiCallback 输入参数, 注册的回调。
+     * @param ipowerHdiCallback Callback to register.
      *
-     * @return HDF_SUCCESS 表示注册成功。
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      * @see IPowerHdiCallback
+     *
+     * @since 3.1
      */
     RegisterCallback([in] IPowerHdiCallback ipowerHdiCallback);
 
     /**
-     * @brief 执行设备休眠操作。
+     * @brief Hibernates a device.
      *
-     * @return HDF_SUCCESS 表示操作成功。
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 3.1
      */
     StartSuspend();
 
     /**
-     * @brief 执行设备唤醒操作。
+     * @brief Wakes up a device.
      *
-     * @return HDF_SUCCESS 表示操作成功。
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 3.1
      */
     StopSuspend();
 
     /**
-     * @brief 执行设备强制休眠操作。
+     * @brief Forcibly hibernates a device.
      *
-     * @return HDF_SUCCESS 表示操作成功。
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 3.1
      */
     ForceSuspend();
 
     /**
-     * @brief 打开运行锁，阻止休眠。
+     * @brief Enables the running lock to block device hibernation.
      *
-     * @param name 输入参数, 运行锁的名称。
+     * @param name Name of the running lock.
      *
-     * @return HDF_SUCCESS 表示操作成功。
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 3.1
      */
     SuspendBlock([in] String name);
 
     /**
-     * @brief 关闭运行锁，取消阻止休眠。
+     * @brief Disables the running lock to unblock device hibernation.
      *
-     * @param name 输入参数, 运行锁的名称。
+     * @param name Name of the running lock.
      *
-     * @return HDF_SUCCESS 表示操作成功。
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 3.1
      */
     SuspendUnblock([in] String name);
 
     /**
-     * @brief 获取电源的Dump信息。
+     * @brief Obtains the power dump information.
      *
-     * @param info 输出参数, 电源的Dump信息。
+     * @param info Power dump information.
      *
-     * @return HDF_SUCCESS 表示操作成功。
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 3.1
      */
     PowerDump([out] String info);
 }

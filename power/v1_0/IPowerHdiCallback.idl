@@ -17,7 +17,11 @@
  * @addtogroup power
  * @{
  *
- * @brief 提供休眠唤醒操作、订阅休眠唤醒状态、运行锁管理的接口。
+ * @brief Provides APIs for performing hibernation/wakeup operations, subscribing to the hibernation/wakeup status,
+ * and managing running locks.
+ * 
+ * After obtaining an object or proxy of this module, the power service can invoke related APIs to perform
+ * hibernation/wakeup operations, subscribe to the hibernation/wakeup status, and manage running locks.
  *
  * @since 3.1
  * @version 1.0
@@ -26,7 +30,9 @@
  /**
  * @file IPowerHdiCallback.idl
  *
- * @brief 订阅休眠唤醒状态的回调。
+ * @brief Provides the callbacks of the hibernation/wakeup status.
+ *
+ * The power module provides callbacks for the power service to obtain the hibernation/wakeup status.
  *
  * @since 3.1
  * @version 1.0
@@ -35,16 +41,29 @@
 package ohos.hdi.power.v1_0;
 
 /**
- * @brief 订阅休眠唤醒状态的回调。
+ * @brief Represents the callbacks of the hibernation/wakeup status.
+ *
+ * After creating a callback object, the power service can call {@link IPowerInterface} to register a callback to
+ * subscribe to hibernation/wakeup status changes.
+ *
+ * @since 3.1
  */
 [callback] interface IPowerHdiCallback {
     /**
-     * @brief 休眠状态的回调接口。
+     * @brief Callback of the hibernation state.
+     *
+     * This callback is used to notify the power service when the device enters the hibernation state.
+     *
+     * @since 3.1
      */
     OnSuspend();
 
     /**
-     * @brief 唤醒状态的回调接口。
+     * @brief Callback of the wakeup state.
+     *
+     * This callback is used to notify the power service when the device enters the wakeup state.
+     *
+     * @since 3.1
      */
     OnWakeup();
 }
