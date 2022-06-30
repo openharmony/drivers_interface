@@ -23,7 +23,7 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/location/gnss/v1_0:liblocation_gnss_proxy_1.0"
+          "//drivers/interface/location/gnss/v1_0:location_gnss_idl_target"
         ],
         "test": [
         ],

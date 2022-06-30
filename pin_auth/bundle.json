@@ -23,7 +23,7 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/pin_auth/v1_0:libpin_auth_proxy_1.0"
+          "//drivers/interface/pin_auth/v1_0:pin_auth_idl_target"
         ],
         "test": [
         ],

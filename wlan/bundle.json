@@ -23,7 +23,7 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/wlan/v1_0:libwlan_proxy_1.0"
+          "//drivers/interface/wlan/v1_0:wlan_idl_target"
         ],
         "test": [
         ],

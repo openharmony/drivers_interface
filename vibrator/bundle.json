@@ -23,7 +23,7 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/vibrator/v1_1:libvibrator_proxy_1.1"
+          "//drivers/interface/vibrator/v1_1:vibrator_idl_target"
         ],
         "test": [
         ],

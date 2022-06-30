@@ -23,7 +23,7 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/power/v1_0:libpower_proxy_1.0"
+          "//drivers/interface/power/v1_0:power_idl_target"
         ],
         "test": [
         ],
