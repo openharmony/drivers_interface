@@ -113,14 +113,12 @@ interface IUserAuthInterface {
      *
      * @param userId Indicates user id.
      * @param scheduleResult Indicates enrollment result issued by executor.
-     * @param credentialId Indicates credential id.
-     * @param oldInfo Indicates old credential information, see {@link CredentialInfo}.
+     * @param info Indicates enrollment result, see {@link EnrollResultInfo}.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
      */
-    UpdateEnrollmentResult([in] int userId, [in] unsigned char[] scheduleResult, [out] unsigned long credentialId,
-        [out] struct CredentialInfo oldInfo);
+    UpdateEnrollmentResult([in] int userId, [in] unsigned char[] scheduleResult, [out] struct EnrollResultInfo info);
     /**
      * @brief Cancel enrollment.
      *
