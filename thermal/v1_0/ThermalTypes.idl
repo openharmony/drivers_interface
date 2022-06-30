@@ -17,16 +17,21 @@
  * @addtogroup thermal
  * @{
  *
- * @brief 提供设备温度管理、控制及订阅接口。
+ * @brief Provides APIs for managing, controlling, and subscribing to the device temperature.
+ * 
+ * After obtaining an object or proxy of this module, the thermal service can invoke related APIs to manage, control,
+ * and subscribe to the device temperature.
  *
  * @since 3.1
  * @version 1.0
  */
 
- /**
+/**
  * @file ThermalTypes.idl
  *
- * @brief 设备发热状态相关的数据类型。
+ * @brief Enumerates data types related to thermal management.
+ *
+ * Such data types include thermal information and thermal information list.
  *
  * @since 3.1
  * @version 1.0
@@ -35,20 +40,24 @@
 package ohos.hdi.thermal.v1_0;
 
 /**
- * @brief 设备发热的信息。
+ * @brief Defines the device thermal information.
+ *
+ * @since 3.1
  */
 struct ThermalZoneInfo {
-    /** 发热器件的类型 */
+    /** Device type */
     String type;
-    /** 期间的温度值 */
+    /** Device temperature */
     int temp;
 };
 
 /**
- * @brief 设备发热的信息列表。
+ * @brief Defines the device thermal information list.
+ *
+ * @since 3.1
  */
 struct HdfThermalCallbackInfo {
-    /** 设备发热的信息列表 */
+    /** Device thermal information list */
     List<struct ThermalZoneInfo> info;
 };
 /** @} */

@@ -17,7 +17,10 @@
  * @addtogroup battery
  * @{
  *
- * @brief 提供获取、订阅电池信息的接口。
+ * @brief Provides APIs for obtaining and subscribing to battery information.
+ * 
+ * After obtaining an object or proxy of this module, the battery service can invoke related APIs to obtain and
+ * subscribe to battery information.
  *
  * @since 3.1
  * @version 1.0
@@ -26,9 +29,9 @@
 /**
  * @file Types.idl
  *
- * @brief 电池信息相关数据类型。
+ * @brief Enumerates data types related to battery information.
  *
- * 电池信息中使用的数据类型, 包括健康状态，充电状态，充电设备类型和电池信息结构。
+ * Such data types include the health status, charging status, charging device type, and battery information structure.
  *
  * @since 3.1
  * @version 1.0
@@ -37,93 +40,101 @@ package ohos.hdi.battery.v1_0;
 
 
 /**
- * @brief 电池的健康状态
+ * @brief Enumerates the battery health status.
+ *
+ * @since 3.1
  */
 enum BatteryHealthState
 {
-    /** 表示电池健康状态未知 */
+    /** Unknown state */
     BATTERY_HEALTH_UNKNOWN = 0,
-    /** 表示电池健康状态为正常 */
+    /** Normal state */
     BATTERY_HEALTH_GOOD,
-    /** 表示电池健康状态为过热 */
+    /** Overheated state */
     BATTERY_HEALTH_OVERHEAT,
-    /** 表示电池健康状态为过压 */
+    /** Overvoltage state */
     BATTERY_HEALTH_OVERVOLTAGE,
-    /** 表示电池健康状态为低温 */
+    /** Cool state */
     BATTERY_HEALTH_COLD,
-    /** 表示电池健康状态为僵死 */
+    /** Exhausted state */
     BATTERY_HEALTH_DEAD,
-    /** 保留位 */
+    /** Reserved */
     BATTERY_HEALTH_RESERVED,
 };
 
 /**
- * @brief 电池的充电状态
+ * @brief Enumerates the battery charging status.
+ *
+ * @since 3.1
  */
 enum BatteryChargeState
 {
-    /** 表示电池充电状态未知 */
+    /** Unknown state */
     CHARGE_STATE_NONE = 0,
-    /** 表示电池充电状态为使能状态 */
+    /** Charging enabled state */
     CHARGE_STATE_ENABLE,
-    /** 表示电池充电状态为停止状态 */
+    /** Charging disabled state */
     CHARGE_STATE_DISABLE,
-    /** 表示电池充电状态为已充满状态 */
+    /** Battery full state */
     CHARGE_STATE_FULL,
-    /** 保留位 */
+    /** Reserved */
     CHARGE_STATE_RESERVED,
 };
 
 /**
- * @brief 电池的充电设备类型
+ * @brief Enumerates the charging device type.
+ *
+ * @since 3.1
  */
 enum BatteryPluggedType
 {
-    /** 表示连接充电器类型未知 */
+    /** Unknown type */
     PLUGGED_TYPE_NONE = 0,
-    /** 表示连接的充电器类型为交流充电器 */
+    /** AC charger */
     PLUGGED_TYPE_AC,
-    /** 表示连接的充电器类型为USB */
+    /** USB charger */
     PLUGGED_TYPE_USB,
-    /** 表示连接的充电器类型为无线充电器 */
+    /** Wireless charger */
     PLUGGED_TYPE_WIRELESS,
-    /** 截止位 */
+    /** Reserved */
     PLUGGED_TYPE_BUTT
 };
 
 /**
- * @brief 电池相关信息
+ * @brief Defines the battery information.
+ *
+ * @since 3.1
  */
 struct BatteryInfo {
-    /** 表示电池的电量百分比 */
+    /** Battery percentage */
     int capacity;
-    /** 表示电池的电压 */
+    /** Battery voltage */
     int voltage;
-    /** 表示电池的温度 */
+    /** Battery temperature */
     int temperature;
-    /** 表示电池的健康状态 */
+    /** Battery health status */
     int healthState;
-    /** 表示电池的充电设备类型 */
+    /** Charging device type */
     int pluggedType;
-    /** 表示电池的最大充电电流 */
+    /** Maximum charging current */
     int pluggedMaxCurrent;
-    /** 表示电池的最大充电电压 */
+    /** Maximum charging voltage */
     int pluggedMaxVoltage;
-    /** 表示电池的充电状态 */
+    /** Charging status */
     int chargeState;
-    /** 表示电池的充电次数 */
+    /** Number of battery charging times */
     int chargeCounter;
-    /** 表示电池的总容量 */
+    /** Total battery capacity */
     int totalEnergy;
-    /** 表示电池的平均电流 */
+    /** Average battery current */
     int curAverage;
-    /** 表示电池的实时电流 */
+    /** Real-time battery current */
     int curNow;
-    /** 表示电池的剩余容量 */
+    /** Remaining battery capacity */
     int remainEnergy;
-    /** 表示是否支持电池或者电池是否在位 */
+    /** Whether the battery is supported or whether the battery is present */
     byte present;
-    /** 表示电池的技术型号 */
+    /** Battery technology */
     String technology;
 };
 /** @} */
