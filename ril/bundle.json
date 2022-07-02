@@ -1,5 +1,5 @@
 {
-    "name": "ril_device_driver_interface",
+    "name": "drivers_interface_ril",
     "version": "3.1.0",
     "description": "telephony ril device driver interface",
     "homePage": "https://gitee.com/openharmony",
@@ -12,7 +12,7 @@
     "author": {},
     "contributors": [],
     "component": {
-        "name": "ril_device_driver_interface",
+        "name": "drivers_interface_ril",
         "subsystem": "hdf",
         "features": [],
         "adapted_system_type": [
