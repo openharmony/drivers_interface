@@ -35,6 +35,14 @@
               ],
               "header_base": "//drivers/interface/battery"
             }
+          },
+          {
+            "name": "//drivers/interface/battery/v1_0:battery_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/battery"
+            }
           }
         ]
       }

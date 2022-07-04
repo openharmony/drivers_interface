@@ -35,6 +35,14 @@
               ],
               "header_base": "//drivers/interface/sensor"
             }
+          },
+          {
+            "name": "//drivers/interface/sensor/v1_0:sensor_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/sensor"
+            }
           }
         ]
       }

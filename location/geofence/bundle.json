@@ -35,6 +35,14 @@
               ],
               "header_base": "//drivers/interface/location/geofence"
             }
+          },
+          {
+            "name": "//drivers/interface/location/geofence/v1_0:location_geofence_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/location/geofence"
+            }
           }
         ]
       }
