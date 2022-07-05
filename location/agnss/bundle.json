@@ -35,6 +35,14 @@
               ],
               "header_base": "//drivers/interface/location/agnss"
             }
+          },
+          {
+            "name": "//drivers/interface/location/agnss/v1_0:location_agnss_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/location/agnss"
+            }
           }
         ]
       }

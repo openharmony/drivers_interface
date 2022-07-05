@@ -35,6 +35,14 @@
               ],
               "header_base": "//drivers/interface/light"
             }
+          },
+          {
+            "name": "//drivers/interface/light/v1_0:light_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/light"
+            }
           }
         ]
       }

@@ -35,6 +35,14 @@
               ],
               "header_base": "//drivers/interface/power"
             }
+          },
+          {
+            "name": "//drivers/interface/power/v1_0:power_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/power"
+            }
           }
         ]
       }

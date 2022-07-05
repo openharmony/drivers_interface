@@ -35,6 +35,14 @@
               ],
               "header_base": "//drivers/interface/nfc/nfc_core"
             }
+          },
+          {
+            "name": "//drivers/interface/nfc/nfc_core/v1_0:nfc_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/nfc/nfc_core"
+            }
           }
         ]
       }

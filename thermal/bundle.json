@@ -35,6 +35,14 @@
               ],
               "header_base": "//drivers/interface/thermal"
             }
+          },
+          {
+            "name": "//drivers/interface/thermal/v1_0:thermal_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/thermal"
+            }
           }
         ]
       }

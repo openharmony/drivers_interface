@@ -35,6 +35,14 @@
               ],
               "header_base": "//drivers/interface/location/gnss"
             }
+          },
+          {
+            "name": "//drivers/interface/location/gnss/v1_0:location_gnss_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/location/gnss"
+            }
           }
         ]
       }

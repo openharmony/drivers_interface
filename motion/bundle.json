@@ -35,6 +35,14 @@
               ],
               "header_base": "//drivers/interface/motion"
             }
+          },
+          {
+            "name": "//drivers/interface/motion/v1_0:motion_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/motion"
+            }
           }
         ]
       }

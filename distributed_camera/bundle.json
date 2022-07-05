@@ -35,6 +35,14 @@
               ],
               "header_base": "//drivers/interface/distributed_camera"
             }
+          },
+          {
+            "name": "//drivers/interface/distributed_camera/v1_0:distributed_camera_provider_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/distributed_camera"
+            }
           }
         ]
       }

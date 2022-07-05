@@ -35,6 +35,14 @@
               ],
               "header_base": "//drivers/interface/wlan"
             }
+          },
+          {
+            "name": "//drivers/interface/wlan/v1_0:wlan_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/wlan"
+            }
           }
         ]
       }

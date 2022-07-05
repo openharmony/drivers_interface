@@ -32,6 +32,14 @@
               ],
               "header_base": "//drivers/interface/memory_tracker"
             }
+          },
+          {
+            "name": "//drivers/interface/memory_tracker/v1_0:memorytracker_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/memory_tracker"
+            }
           }
         ]
       }
