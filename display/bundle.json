@@ -28,7 +28,8 @@
         },
         "build": {
             "sub_component": [
-                "//drivers/peripheral/display/hdi_service/gralloc/client:hdi_gralloc_client"
+                "//drivers/peripheral/display/hdi_service/gralloc/client:hdi_gralloc_client",
+                "//drivers/interface/display/v1_0:display_device_client"
             ],
             "inner_kits": [
                 {
@@ -39,6 +40,14 @@
                         "parcel_utils.h"
                       ],
                       "header_base": "//drivers/peripheral/display/hdi_service/gralloc/include"
+                    }
+                },
+                {
+                    "name": "//drivers/interface/display/v1_0:display_device_client",
+                    "header": {
+                      "header_files": [
+                      ],
+                      "header_base": "//drivers/peripheral/display/interfaces/include"
                     }
                 }
             ]

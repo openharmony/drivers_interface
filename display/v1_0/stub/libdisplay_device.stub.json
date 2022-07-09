@@ -1,0 +1,4 @@
+[
+    { "name": "DeviceInitialize" },
+    { "name": "DeviceUninitialize" }
+]
