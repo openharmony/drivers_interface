@@ -79,3 +79,8 @@ struct MeasChannelResult {
     int chload;
     int noise;
 };
+
+struct ProjectionScreenCmdParam {
+    int cmdId;
+    byte[] buf;
+};
