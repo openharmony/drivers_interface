@@ -64,7 +64,6 @@ if (defined(ohos_lite)) {
   group("display_device_client") {
     deps = [
       ":libdisplay_device",
-      ":libdisplay_gfx",
       ":libdisplay_layer",
     ]
     public_configs = [ ":libdisplay_exported_config" ]
