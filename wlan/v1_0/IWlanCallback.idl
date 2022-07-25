@@ -20,4 +20,5 @@ import ohos.hdi.wlan.v1_0.WlanTypes;
 [callback] interface IWlanCallback {
     ResetDriverResult([in] unsigned int event, [in] int code, [in] String ifName);
     ScanResult([in] unsigned int event, [in] struct HdfWifiScanResult scanResult, [in] String ifName);
+    WifiNetlinkMessage([in] unsigned char[] recvMsg);
 }
