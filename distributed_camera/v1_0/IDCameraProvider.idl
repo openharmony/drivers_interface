@@ -84,7 +84,7 @@ interface IDCameraProvider {
      *
      * @param streamId [in] Indicates the ID of the stream to which the frame buffer is to be attached.
      *
-     * @param buffer [out] output frame buffer
+     * @param buffer [in] output frame buffer
      *
      * @return Returns <b>NO_ERROR</b> if the operation is successful,
      * returns an error code defined in {@link DCamRetCode} otherwise.
