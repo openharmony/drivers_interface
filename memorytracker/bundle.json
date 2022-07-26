@@ -21,24 +21,24 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/memory_tracker/v1_0:memorytracker_idl_target"
+          "//drivers/interface/memorytracker/v1_0:memorytracker_idl_target"
         ],
         "test": [],
         "inner_kits": [
           {
-            "name": "//drivers/interface/memory_tracker/v1_0:libmemorytracker_proxy_1.0",
+            "name": "//drivers/interface/memorytracker/v1_0:libmemorytracker_proxy_1.0",
             "header": {
               "header_files": [
               ],
-              "header_base": "//drivers/interface/memory_tracker"
+              "header_base": "//drivers/interface/memorytracker"
             }
           },
           {
-            "name": "//drivers/interface/memory_tracker/v1_0:memorytracker_idl_headers",
+            "name": "//drivers/interface/memorytracker/v1_0:memorytracker_idl_headers",
             "header": {
               "header_files": [
               ],
-              "header_base": "//drivers/interface/memory_tracker"
+              "header_base": "//drivers/interface/memorytracker"
             }
           }
         ]
