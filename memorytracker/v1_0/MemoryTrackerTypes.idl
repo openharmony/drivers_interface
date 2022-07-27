@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package ohos.hdi.memory_tracker.v1_0;
+package ohos.hdi.memorytracker.v1_0;
 
 enum MemoryTrackerType {
     /* muti-media related */
