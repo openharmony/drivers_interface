@@ -1,0 +1,50 @@
+{
+    "name": "drivers_interface_camera",
+    "description": "camera device driver interface",
+    "version": "3.2",
+    "license": "Apache License 2.0",
+    "component": {
+      "name": "drivers_interface_camera",
+      "subsystem": "hdf",
+      "syscap": [""],
+      "adapter_system_type": ["standard"],
+      "rom": "675KB",
+      "ram": "1024KB",
+      "deps": {
+        "components": [
+          "ipc",
+          "hdf_core",
+          "hiviewdfx_hilog_native",
+          "utils_base"
+        ],
+        "third_part": [
+          "bounds_checking_function"
+        ]
+      },
+      "build": {
+        "sub_component": [
+          "//drivers/interface/camera/v1_0:camera_idl_target"
+        ],
+        "test": [
+        ],
+        "inner_kits": [
+          {
+            "name": "//drivers/interface/camera/v1_0:libcamera_proxy_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/camera"
+            }
+          },
+          {
+            "name": "//drivers/interface/camera/v1_0:camera_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/camera"
+            }
+          }
+        ]
+      }
+    }
+  }
