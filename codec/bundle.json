@@ -1,0 +1,49 @@
+{
+  "name": "drivers_interface_codec",
+  "description": "codec device driver interface",
+  "version": "3.2",
+  "license": "Apache License 2.0",
+  "component": {
+    "name": "drivers_interface_codec",
+    "subsystem": "hdf",
+    "syscap": [ "" ],
+    "adapter_system_type": ["standard"],
+    "rom": "675KB",
+    "ram": "7400KB",
+    "deps": {
+      "components": [
+        "ipc",
+        "hdf_core",
+        "hiviewdfx_hilog_native",
+        "utils_base"
+      ],
+      "third_part": [
+      ]
+    },
+    "build": {
+      "sub_component": [
+        "//drivers/interface/codec/v1_0:codec_idl_target"
+      ],
+      "test": [
+      ],
+      "inner_kits": [
+        {
+          "name": "//drivers/interface/codec/v1_0:libcodec_proxy_1.0",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/codec"
+          }
+        },
+        {
+          "name": "//drivers/interface/codec/v1_0:codec_idl_headers",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/codec"
+          }
+        }
+      ]
+    }
+  }
+}
