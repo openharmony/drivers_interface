@@ -23,7 +23,8 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/camera/v1_0:camera_idl_target"
+          "//drivers/interface/camera/v1_0:camera_idl_target",
+          "//drivers/hdf_core/adapter/uhdf2/model/camera/sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0"
         ],
         "test": [
         ],
