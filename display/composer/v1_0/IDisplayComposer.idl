@@ -39,20 +39,16 @@ interface IDisplayComposer {
     SetDisplayClientDestRect([in] unsigned int devId, [in] struct IRect rect);
     SetDisplayVsyncEnabled([in] unsigned int devId, [in] boolean enabled);
     RegDisplayVBlankCallback([in] unsigned int devId, [in] IVBlankCallback cb);
-    GetDisplayReleaseFence([in] unsigned int devId, [out] unsigned int[] layers,
-        [out] HdifdParcelable[] fences);
-    CreateVirtualDisplay([in] unsigned int width, [in] unsigned int height,
-        [out] int format, [out] unsigned int devId);
+    GetDisplayReleaseFence([in] unsigned int devId, [out] unsigned int[] layers, [out] HdifdParcelable[] fences);
+    CreateVirtualDisplay([in] unsigned int width, [in] unsigned int height, [out] int format, [out] unsigned int devId);
     DestroyVirtualDisplay([in] unsigned int devId);
-    SetVirtualDisplayBuffer([in] unsigned int devId, [in] BufferHandleParcelable buffer,
-        [in] HdifdParcelable fence);
+    SetVirtualDisplayBuffer([in] unsigned int devId, [in] BufferHandleParcelable buffer, [in] HdifdParcelable fence);
     SetDisplayProperty([in] unsigned int devId, [in] unsigned int id, [in] unsigned long value);
-    CreateLayer([in] unsigned int devId, [in] struct LayerInfo layerInfo,
-        [out] unsigned int layerId);
+    CreateLayer([in] unsigned int devId, [in] struct LayerInfo layerInfo, [out] unsigned int layerId);
     DestroyLayer([in] unsigned int devId, [in] unsigned int layerId);
-    // func for smq transfer
+    /* func for smq transfer */
     InitCmdRequest([in] SharedMemQueue<int> request);
-    CmdRequest([in] unsigned int inEleCnt, [in] struct HdifdInfo[] inFds,
-        [out] unsigned int outEleCnt, [out] struct HdifdInfo[] outFds);
+    CmdRequest([in] unsigned int inEleCnt, [in] struct HdifdInfo[] inFds, [out] unsigned int outEleCnt,
+        [out] struct HdifdInfo[] outFds);
     GetCmdReply([out] SharedMemQueue<int> reply);
 }

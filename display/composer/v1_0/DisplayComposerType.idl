@@ -14,12 +14,11 @@
  */
 
 package ohos.hdi.display.composer.v1_0;
-
 sequenceable OHOS.HDI.Display.BufferHandleParcelable;
 sequenceable OHOS.HDI.Display.HdifdParcelable;
 
 enum DispCmd {
-    // request cmd
+    /* request cmd */
     REQUEST_CMD_PREPAREDISPLAYLAYERS = 256,
     REQUEST_CMD_SETDISPLAYCLIENTBUFFER = 257,
     REQUEST_CMD_SETDISPLAYCLIENTDAMAGE = 258,
@@ -36,11 +35,11 @@ enum DispCmd {
     REQUEST_CMD_SETLAYERCOMPOSITIONTYPE = 269,
     REQUEST_CMD_SETLAYERBLENDTYPE = 270,
     REQUEST_CMD_SETLAYERVISIBLE = 271,
-    // reply cmd
+    /* reply cmd */
     REPLY_CMD_SETERROR = 1024,
     REPLY_CMD_PREPAREDISPLAYLAYERS = 1025,
     REPLY_CMD_COMMIT = 1026,
-    // Pack control cmd
+    /* Pack control cmd */
     CONTROL_CMD_REQUEST_BEGIN = 8192,
     CONTROL_CMD_REPLY_BEGIN = 8193,
     CONTROL_CMD_REQUEST_END = 8194,
@@ -48,7 +47,7 @@ enum DispCmd {
 };
 
 enum InterfaceType {
-    DISP_INTF_HDMI = 0, // -1,
+    DISP_INTF_HDMI = 0,
     DISP_INTF_LCD = 1,
     DISP_INTF_BT1120 = 2,
     DISP_INTF_BT656 = 3,
@@ -61,6 +60,7 @@ enum InterfaceType {
     DISP_INTF_PANEL = 10,
     DISP_INTF_BUTT = 11,
 };
+
 enum DispErrCode {
     DISPLAY_SUCCESS = 0,
     DISPLAY_FAILURE = -1,
@@ -72,6 +72,7 @@ enum DispErrCode {
     DISPLAY_SYS_BUSY = -7,
     DISPLAY_NOT_PERM = -8,
 };
+
 enum LayerType {
     LAYER_TYPE_GRAPHIC = 0,
     LAYER_TYPE_OVERLAY = 1,
@@ -79,7 +80,8 @@ enum LayerType {
     LAYER_TYPE_CURSOR = 3,
     LAYER_TYPE_BUTT = 4,
 };
-enum LostName_0 {
+
+enum BufferUsage {
     HBM_USE_CPU_READ = ( 1 << 0 ),
     HBM_USE_CPU_WRITE = ( 1 << 1 ),
     HBM_USE_MEM_MMZ = ( 1 << 2 ),
@@ -89,6 +91,7 @@ enum LostName_0 {
     HBM_USE_MEM_FB = ( 1 << 6 ),
     HBM_USE_ASSIGN_SIZE = ( 1 << 7 ),
 };
+
 enum PixelFormat {
     PIXEL_FMT_CLUT8 = 0,
     PIXEL_FMT_CLUT1 = 1,
@@ -126,6 +129,7 @@ enum PixelFormat {
     PIXEL_FMT_VYUY_422_PKG = 33,
     PIXEL_FMT_BUTT = 34,
 };
+
 enum TransformType {
     ROTATE_NONE = 0,
     ROTATE_90 = 1,
@@ -133,6 +137,7 @@ enum TransformType {
     ROTATE_270 = 3,
     ROTATE_BUTT = 4,
 };
+
 enum BlendType {
     BLEND_NONE = 0,
     BLEND_CLEAR = 1,
@@ -152,6 +157,7 @@ enum BlendType {
     BLEND_AKD = 15,
     BLEND_BUTT = 16,
 };
+
 enum RopType {
     ROP_BLACK = 0,
     ROP_NOTMERGEPEN = 1,
@@ -171,23 +177,27 @@ enum RopType {
     ROP_WHITE = 15,
     ROP_BUTT = 16,
 };
+
 enum ColorKey {
     CKEY_NONE = 0,
     CKEY_SRC = 1,
     CKEY_DST = 2,
     CKEY_BUTT = 3,
 };
+
 enum MirrorType {
     MIRROR_NONE = 0,
     MIRROR_LR = 1,
     MIRROR_TB = 2,
     MIRROR_BUTT = 3,
 };
+
 enum Connection {
     CON_INVALID = 0,
     CONNECTED = 1,
     DISCONNECTED = 2,
 };
+
 enum DispPowerStatus {
     POWER_STATUS_ON = 0,
     POWER_STATUS_STANDBY = 1,
@@ -195,6 +205,7 @@ enum DispPowerStatus {
     POWER_STATUS_OFF = 3,
     POWER_STATUS_BUTT = 4,
 };
+
 enum CompositionType {
     COMPOSITION_CLIENT = 0,
     COMPOSITION_DEVICE = 1,
@@ -202,6 +213,7 @@ enum CompositionType {
     COMPOSITION_VIDEO = 3,
     COMPOSITION_BUTT = 4,
 };
+
 enum ColorGamut {
     COLOR_GAMUT_INVALID = -1,
     COLOR_GAMUT_NATIVE = 0,
@@ -216,13 +228,14 @@ enum ColorGamut {
     COLOR_GAMUT_BT2100_HLG = 9,
     COLOR_GAMUT_DISPLAY_BT2020 = 10,
 };
+
 enum GamutMap {
     GAMUT_MAP_CONSTANT = 0,
     GAMUT_MAP_EXPANSION = 1,
     GAMUT_MAP_HDR_CONSTANT = 2,
     GAMUT_MAP_HDR_EXPANSION = 3,
 };
-/*
+
 enum ColorDataSpace {
     COLOR_DATA_SPACE_UNKNOWN = 0,
     GAMUT_BT601 = 1,
@@ -267,7 +280,7 @@ enum ColorDataSpace {
     BT2020_HLG_FULL = GAMUT_BT2020 | TRANSFORM_FUNC_HLG | PRECISION_FULL,
     BT2020_ST2084_LIMITED = GAMUT_BT2020 | TRANSFORM_FUNC_ST2084 | PRESION_LIMITED,
 };
-*/
+
 enum HDRFormat {
     NOT_SUPPORT_HDR = 0,
     DOLBY_VISION = 1,
@@ -276,6 +289,7 @@ enum HDRFormat {
     HDR10_PLUS = 4,
     HDR_VIVID = 5,
 };
+
 enum HDRMetadataKey {
     MATAKEY_RED_PRIMARY_X = 0,
     MATAKEY_RED_PRIMARY_Y = 1,
@@ -308,6 +322,7 @@ struct PropertyObject {
     unsigned int propId;
     unsigned long value;
 };
+
 struct DisplayCapability {
     String name;
     enum InterfaceType type;
@@ -319,11 +334,13 @@ struct DisplayCapability {
     unsigned int propertyCount;
     struct PropertyObject[] props;
 };
+
 struct DisplayInfo {
     unsigned int width;
     unsigned int height;
     int rotAngle;
 };
+
 struct LayerInfo {
     int width;
     int height;
@@ -331,6 +348,7 @@ struct LayerInfo {
     int bpp;
     enum PixelFormat pixFormat;
 };
+
 struct LayerAlpha {
     boolean enGlobalAlpha;
     boolean enPixelAlpha;
@@ -338,10 +356,12 @@ struct LayerAlpha {
     unsigned char alpha1;
     unsigned char gAlpha;
 };
+
 struct BufferData {
     unsigned long phyAddr;
-    //void[] virAddr;
+    unsigned long long virAddr;
 };
+
 struct LayerBuffer {
     FileDescriptor fenceId;
     int width;
@@ -351,12 +371,14 @@ struct LayerBuffer {
     struct BufferData data;
     BufferHandleParcelable hdl;
 };
+
 struct IRect {
     int x;
     int y;
     int w;
     int h;
 };
+
 struct ISurface {
     unsigned long phyAddr;
     int height;
@@ -372,6 +394,7 @@ struct ISurface {
     int cbcrStride;
     unsigned long clutPhyAddr;
 };
+
 struct ILine {
     int x0;
     int y0;
@@ -379,16 +402,19 @@ struct ILine {
     int y1;
     unsigned int color;
 };
+
 struct ICircle {
     int x;
     int y;
     int r;
     unsigned int color;
 };
+
 struct Rectangle {
     struct IRect rect;
     unsigned int color;
 };
+
 struct GfxOpt {
     boolean enGlobalAlpha;
     unsigned int globalAlpha;
@@ -402,12 +428,14 @@ struct GfxOpt {
     enum TransformType rotateType;
     enum MirrorType mirrorType;
 };
+
 struct DisplayModeInfo {
     int width;
     int height;
     unsigned int freshRate;
     int id;
 };
+
 struct HDRCapability {
     unsigned int formatCount;
     enum HDRFormat[] formats;
@@ -415,24 +443,29 @@ struct HDRCapability {
     float maxAverageLum;
     float minLum;
 };
+
 struct HDRMetaData {
     enum HDRMetadataKey key;
     float value;
 };
+
 enum PresentTimestampType {
     HARDWARE_DISPLAY_PTS_UNSUPPORTED = 0,
     HARDWARE_DISPLAY_PTS_DELAY = 1 << 0,
     HARDWARE_DISPLAY_PTS_TIMESTAMP = 1 << 1,
 };
+
 struct PresentTimestamp {
     enum PresentTimestampType type;
     long time;
 };
+
 struct ExtDataHandle {
     int fd;
     unsigned int reserveInts;
     int[] reserve;
 };
+
 struct YUVDescInfo {
     unsigned long baseAddr;
     unsigned int yOffset;
@@ -441,5 +474,4 @@ struct YUVDescInfo {
     unsigned int yStride;
     unsigned int uvStride;
     unsigned int uvStep;
-}; //  __attribute__((__packed__)) YUVDescInfo;
-
+};
