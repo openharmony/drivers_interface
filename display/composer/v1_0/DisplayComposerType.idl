@@ -1,0 +1,477 @@
+/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package ohos.hdi.display.composer.v1_0;
+sequenceable OHOS.HDI.Display.BufferHandleParcelable;
+sequenceable OHOS.HDI.Display.HdifdParcelable;
+
+enum DispCmd {
+    /* request cmd */
+    REQUEST_CMD_PREPAREDISPLAYLAYERS = 256,
+    REQUEST_CMD_SETDISPLAYCLIENTBUFFER = 257,
+    REQUEST_CMD_SETDISPLAYCLIENTDAMAGE = 258,
+    REQUEST_CMD_COMMIT = 259,
+    REQUEST_CMD_SETLAYERALPHA = 260,
+    REQUEST_CMD_SETLAYERPOSITION = 261,
+    REQUEST_CMD_SETLAYERCROP = 262,
+    REQUEST_CMD_SETLAYERZORDER = 263,
+    REQUEST_CMD_SETLAYERPREMULTI = 264,
+    REQUEST_CMD_SETTRANSFORMMODE = 265,
+    REQUEST_CMD_SETLAYERDIRTYREGION = 266,
+    REQUEST_CMD_SETLAYERVISIBLEREGION = 267,
+    REQUEST_CMD_SETLAYERBUFFER = 268,
+    REQUEST_CMD_SETLAYERCOMPOSITIONTYPE = 269,
+    REQUEST_CMD_SETLAYERBLENDTYPE = 270,
+    REQUEST_CMD_SETLAYERVISIBLE = 271,
+    /* reply cmd */
+    REPLY_CMD_SETERROR = 1024,
+    REPLY_CMD_PREPAREDISPLAYLAYERS = 1025,
+    REPLY_CMD_COMMIT = 1026,
+    /* Pack control cmd */
+    CONTROL_CMD_REQUEST_BEGIN = 8192,
+    CONTROL_CMD_REPLY_BEGIN = 8193,
+    CONTROL_CMD_REQUEST_END = 8194,
+    CONTROL_CMD_REPLY_END = 8195,
+};
+
+enum InterfaceType {
+    DISP_INTF_HDMI = 0,
+    DISP_INTF_LCD = 1,
+    DISP_INTF_BT1120 = 2,
+    DISP_INTF_BT656 = 3,
+    DISP_INTF_YPBPR = 4,
+    DISP_INTF_RGB = 5,
+    DISP_INTF_CVBS = 6,
+    DISP_INTF_SVIDEO = 7,
+    DISP_INTF_VGA = 8,
+    DISP_INTF_MIPI = 9,
+    DISP_INTF_PANEL = 10,
+    DISP_INTF_BUTT = 11,
+};
+
+enum DispErrCode {
+    DISPLAY_SUCCESS = 0,
+    DISPLAY_FAILURE = -1,
+    DISPLAY_FD_ERR = -2,
+    DISPLAY_PARAM_ERR = -3,
+    DISPLAY_NULL_PTR = -4,
+    DISPLAY_NOT_SUPPORT = -5,
+    DISPLAY_NOMEM = -6,
+    DISPLAY_SYS_BUSY = -7,
+    DISPLAY_NOT_PERM = -8,
+};
+
+enum LayerType {
+    LAYER_TYPE_GRAPHIC = 0,
+    LAYER_TYPE_OVERLAY = 1,
+    LAYER_TYPE_SDIEBAND = 2,
+    LAYER_TYPE_CURSOR = 3,
+    LAYER_TYPE_BUTT = 4,
+};
+
+enum BufferUsage {
+    HBM_USE_CPU_READ = ( 1 << 0 ),
+    HBM_USE_CPU_WRITE = ( 1 << 1 ),
+    HBM_USE_MEM_MMZ = ( 1 << 2 ),
+    HBM_USE_MEM_DMA = ( 1 << 3 ),
+    HBM_USE_MEM_SHARE = ( 1 << 4 ),
+    HBM_USE_MEM_MMZ_CACHE = ( 1 << 5 ),
+    HBM_USE_MEM_FB = ( 1 << 6 ),
+    HBM_USE_ASSIGN_SIZE = ( 1 << 7 ),
+};
+
+enum PixelFormat {
+    PIXEL_FMT_CLUT8 = 0,
+    PIXEL_FMT_CLUT1 = 1,
+    PIXEL_FMT_CLUT4 = 2,
+    PIXEL_FMT_RGB_565 = 3,
+    PIXEL_FMT_RGBA_5658 = 4,
+    PIXEL_FMT_RGBX_4444 = 5,
+    PIXEL_FMT_RGBA_4444 = 6,
+    PIXEL_FMT_RGB_444 = 7,
+    PIXEL_FMT_RGBX_5551 = 8,
+    PIXEL_FMT_RGBA_5551 = 9,
+    PIXEL_FMT_RGB_555 = 10,
+    PIXEL_FMT_RGBX_8888 = 11,
+    PIXEL_FMT_RGBA_8888 = 12,
+    PIXEL_FMT_RGB_888 = 13,
+    PIXEL_FMT_BGR_565 = 14,
+    PIXEL_FMT_BGRX_4444 = 15,
+    PIXEL_FMT_BGRA_4444 = 16,
+    PIXEL_FMT_BGRX_5551 = 17,
+    PIXEL_FMT_BGRA_5551 = 18,
+    PIXEL_FMT_BGRX_8888 = 19,
+    PIXEL_FMT_BGRA_8888 = 20,
+    PIXEL_FMT_YUV_422_I = 21,
+    PIXEL_FMT_YCBCR_422_SP = 22,
+    PIXEL_FMT_YCRCB_422_SP = 23,
+    PIXEL_FMT_YCBCR_420_SP = 24,
+    PIXEL_FMT_YCRCB_420_SP = 25,
+    PIXEL_FMT_YCBCR_422_P = 26,
+    PIXEL_FMT_YCRCB_422_P = 27,
+    PIXEL_FMT_YCBCR_420_P = 28,
+    PIXEL_FMT_YCRCB_420_P = 29,
+    PIXEL_FMT_YUYV_422_PKG = 30,
+    PIXEL_FMT_UYVY_422_PKG = 31,
+    PIXEL_FMT_YVYU_422_PKG = 32,
+    PIXEL_FMT_VYUY_422_PKG = 33,
+    PIXEL_FMT_BUTT = 34,
+};
+
+enum TransformType {
+    ROTATE_NONE = 0,
+    ROTATE_90 = 1,
+    ROTATE_180 = 2,
+    ROTATE_270 = 3,
+    ROTATE_BUTT = 4,
+};
+
+enum BlendType {
+    BLEND_NONE = 0,
+    BLEND_CLEAR = 1,
+    BLEND_SRC = 2,
+    BLEND_SRCOVER = 3,
+    BLEND_DSTOVER = 4,
+    BLEND_SRCIN = 5,
+    BLEND_DSTIN = 6,
+    BLEND_SRCOUT = 7,
+    BLEND_DSTOUT = 8,
+    BLEND_SRCATOP = 9,
+    BLEND_DSTATOP = 10,
+    BLEND_ADD = 11,
+    BLEND_XOR = 12,
+    BLEND_DST = 13,
+    BLEND_AKS = 14,
+    BLEND_AKD = 15,
+    BLEND_BUTT = 16,
+};
+
+enum RopType {
+    ROP_BLACK = 0,
+    ROP_NOTMERGEPEN = 1,
+    ROP_MASKNOTPEN = 2,
+    ROP_NOTCOPYPEN = 3,
+    ROP_MASKPENNOT = 4,
+    ROP_NOT = 5,
+    ROP_XORPEN = 6,
+    ROP_NOTMASKPEN = 7,
+    ROP_MASKPEN = 8,
+    ROP_NOTXORPEN = 9,
+    ROP_NOP = 10,
+    ROP_MERGENOTPEN = 11,
+    ROP_COPYPE = 12,
+    ROP_MERGEPENNOT = 13,
+    ROP_MERGEPEN = 14,
+    ROP_WHITE = 15,
+    ROP_BUTT = 16,
+};
+
+enum ColorKey {
+    CKEY_NONE = 0,
+    CKEY_SRC = 1,
+    CKEY_DST = 2,
+    CKEY_BUTT = 3,
+};
+
+enum MirrorType {
+    MIRROR_NONE = 0,
+    MIRROR_LR = 1,
+    MIRROR_TB = 2,
+    MIRROR_BUTT = 3,
+};
+
+enum Connection {
+    CON_INVALID = 0,
+    CONNECTED = 1,
+    DISCONNECTED = 2,
+};
+
+enum DispPowerStatus {
+    POWER_STATUS_ON = 0,
+    POWER_STATUS_STANDBY = 1,
+    POWER_STATUS_SUSPEND = 2,
+    POWER_STATUS_OFF = 3,
+    POWER_STATUS_BUTT = 4,
+};
+
+enum CompositionType {
+    COMPOSITION_CLIENT = 0,
+    COMPOSITION_DEVICE = 1,
+    COMPOSITION_CURSOR = 2,
+    COMPOSITION_VIDEO = 3,
+    COMPOSITION_BUTT = 4,
+};
+
+enum ColorGamut {
+    COLOR_GAMUT_INVALID = -1,
+    COLOR_GAMUT_NATIVE = 0,
+    COLOR_GAMUT_SATNDARD_BT601 = 1,
+    COLOR_GAMUT_STANDARD_BT709 = 2,
+    COLOR_GAMUT_DCI_P3 = 3,
+    COLOR_GAMUT_SRGB = 4,
+    COLOR_GAMUT_ADOBE_RGB = 5,
+    COLOR_GAMUT_DISPLAY_P3 = 6,
+    COLOR_GAMUT_BT2020 = 7,
+    COLOR_GAMUT_BT2100_PQ = 8,
+    COLOR_GAMUT_BT2100_HLG = 9,
+    COLOR_GAMUT_DISPLAY_BT2020 = 10,
+};
+
+enum GamutMap {
+    GAMUT_MAP_CONSTANT = 0,
+    GAMUT_MAP_EXPANSION = 1,
+    GAMUT_MAP_HDR_CONSTANT = 2,
+    GAMUT_MAP_HDR_EXPANSION = 3,
+};
+
+enum ColorDataSpace {
+    COLOR_DATA_SPACE_UNKNOWN = 0,
+    GAMUT_BT601 = 1,
+    GAMUT_BT709 = 2,
+    GAMUT_DCI_P3 = 3,
+    GAMUT_SRGB = 4,
+    GAMUT_ADOBE_RGB = 5,
+    GAMUT_DISPLAY_P3 = 6,
+    GAMUT_BT2020 = 7,
+    GAMUT_BT2100_PQ = 8,
+    GAMUT_BT2100_HLG = 9,
+    GAMUT_DISPLAY_BT2020 = 10,
+    TRANSFORM_FUNC_UNSPECIFIED = 256,
+    TRANSFORM_FUNC_LINEAR = 512,
+    TRANSFORM_FUNC_SRGB = 768,
+    TRANSFORM_FUNC_SMPTE_170M = 1024,
+    TRANSFORM_FUNC_GM2_2 = 1280,
+    TRANSFORM_FUNC_GM2_6 = 1536,
+    TRANSFORM_FUNC_GM2_8 = 1792,
+    TRANSFORM_FUNC_ST2084 = 2048,
+    TRANSFORM_FUNC_HLG = 2304,
+    PRECISION_UNSPECIFIED = 65536,
+    PRECISION_FULL = 131072,
+    PRESION_LIMITED = 196608,
+    PRESION_EXTENDED = 262144,
+    BT601_SMPTE170M_FULL = GAMUT_BT601 | TRANSFORM_FUNC_SMPTE_170M | PRECISION_FULL,
+    BT601_SMPTE170M_LIMITED = GAMUT_BT601 | TRANSFORM_FUNC_SMPTE_170M | PRESION_LIMITED,
+    BT709_LINEAR_FULL = GAMUT_BT709 | TRANSFORM_FUNC_LINEAR | PRECISION_FULL,
+    BT709_LINEAR_EXTENDED = GAMUT_BT709 | TRANSFORM_FUNC_LINEAR | PRESION_EXTENDED,
+    BT709_SRGB_FULL = GAMUT_BT709 | TRANSFORM_FUNC_SRGB | PRECISION_FULL,
+    BT709_SRGB_EXTENDED = GAMUT_BT709 | TRANSFORM_FUNC_SRGB | PRESION_EXTENDED,
+    BT709_SMPTE170M_LIMITED = GAMUT_BT709 | TRANSFORM_FUNC_SMPTE_170M | PRESION_LIMITED,
+    DCI_P3_LINEAR_FULL = GAMUT_DCI_P3 | TRANSFORM_FUNC_LINEAR | PRECISION_FULL,
+    DCI_P3_GAMMA26_FULL = GAMUT_DCI_P3 | TRANSFORM_FUNC_GM2_6 | PRECISION_FULL,
+    DISPLAY_P3_LINEAR_FULL = GAMUT_DISPLAY_P3 | TRANSFORM_FUNC_LINEAR | PRECISION_FULL,
+    DCI_P3_SRGB_FULL = GAMUT_DCI_P3 | TRANSFORM_FUNC_SRGB | PRECISION_FULL,
+    ADOBE_RGB_GAMMA22_FULL = GAMUT_ADOBE_RGB | TRANSFORM_FUNC_GM2_2 | PRECISION_FULL,
+    BT2020_LINEAR_FULL = GAMUT_BT2020 | TRANSFORM_FUNC_LINEAR | PRECISION_FULL,
+    BT2020_SRGB_FULL = GAMUT_BT2020 | TRANSFORM_FUNC_SRGB | PRECISION_FULL,
+    BT2020_SMPTE170M_FULL = GAMUT_BT2020 | TRANSFORM_FUNC_SMPTE_170M | PRECISION_FULL,
+    BT2020_ST2084_FULL = GAMUT_BT2020 | TRANSFORM_FUNC_ST2084 | PRECISION_FULL,
+    BT2020_HLG_FULL = GAMUT_BT2020 | TRANSFORM_FUNC_HLG | PRECISION_FULL,
+    BT2020_ST2084_LIMITED = GAMUT_BT2020 | TRANSFORM_FUNC_ST2084 | PRESION_LIMITED,
+};
+
+enum HDRFormat {
+    NOT_SUPPORT_HDR = 0,
+    DOLBY_VISION = 1,
+    HDR10 = 2,
+    HLG = 3,
+    HDR10_PLUS = 4,
+    HDR_VIVID = 5,
+};
+
+enum HDRMetadataKey {
+    MATAKEY_RED_PRIMARY_X = 0,
+    MATAKEY_RED_PRIMARY_Y = 1,
+    MATAKEY_GREEN_PRIMARY_X = 2,
+    MATAKEY_GREEN_PRIMARY_Y = 3,
+    MATAKEY_BLUE_PRIMARY_X = 4,
+    MATAKEY_BLUE_PRIMARY_Y = 5,
+    MATAKEY_WHITE_PRIMARY_X = 6,
+    MATAKEY_WHITE_PRIMARY_Y = 7,
+    MATAKEY_MAX_LUMINANCE = 8,
+    MATAKEY_MIN_LUMINANCE = 9,
+    MATAKEY_MAX_CONTENT_LIGHT_LEVEL = 10,
+    MATAKEY_MAX_FRAME_AVERAGE_LIGHT_LEVEL = 11,
+    MATAKEY_HDR10_PLUS = 12,
+    MATAKEY_HDR_VIVID = 13,
+};
+
+struct HdiBufferHandleInfo {
+    unsigned int seqId;
+    BufferHandleParcelable hdl;
+};
+
+struct HdifdInfo {
+    int id;
+    HdifdParcelable hdiFd;
+};
+
+struct PropertyObject {
+    String name;
+    unsigned int propId;
+    unsigned long value;
+};
+
+struct DisplayCapability {
+    String name;
+    enum InterfaceType type;
+    unsigned int phyWidth;
+    unsigned int phyHeight;
+    unsigned int supportLayers;
+    unsigned int virtualDispCount;
+    boolean supportWriteBack;
+    unsigned int propertyCount;
+    struct PropertyObject[] props;
+};
+
+struct DisplayInfo {
+    unsigned int width;
+    unsigned int height;
+    int rotAngle;
+};
+
+struct LayerInfo {
+    int width;
+    int height;
+    enum LayerType type;
+    int bpp;
+    enum PixelFormat pixFormat;
+};
+
+struct LayerAlpha {
+    boolean enGlobalAlpha;
+    boolean enPixelAlpha;
+    unsigned char alpha0;
+    unsigned char alpha1;
+    unsigned char gAlpha;
+};
+
+struct BufferData {
+    unsigned long phyAddr;
+    unsigned long long virAddr;
+};
+
+struct LayerBuffer {
+    FileDescriptor fenceId;
+    int width;
+    int height;
+    int pitch;
+    enum PixelFormat pixFormat;
+    struct BufferData data;
+    BufferHandleParcelable hdl;
+};
+
+struct IRect {
+    int x;
+    int y;
+    int w;
+    int h;
+};
+
+struct ISurface {
+    unsigned long phyAddr;
+    int height;
+    int width;
+    int stride;
+    enum PixelFormat enColorFmt;
+    boolean bYCbCrClut;
+    boolean bAlphaMax255;
+    boolean bAlphaExt1555;
+    unsigned char alpha0;
+    unsigned char alpha1;
+    unsigned long cbcrPhyAddr;
+    int cbcrStride;
+    unsigned long clutPhyAddr;
+};
+
+struct ILine {
+    int x0;
+    int y0;
+    int x1;
+    int y1;
+    unsigned int color;
+};
+
+struct ICircle {
+    int x;
+    int y;
+    int r;
+    unsigned int color;
+};
+
+struct Rectangle {
+    struct IRect rect;
+    unsigned int color;
+};
+
+struct GfxOpt {
+    boolean enGlobalAlpha;
+    unsigned int globalAlpha;
+    boolean enPixelAlpha;
+    enum BlendType blendType;
+    enum ColorKey colorKeyFrom;
+    boolean enableRop;
+    enum RopType colorRopType;
+    enum RopType alphaRopType;
+    boolean enableScale;
+    enum TransformType rotateType;
+    enum MirrorType mirrorType;
+};
+
+struct DisplayModeInfo {
+    int width;
+    int height;
+    unsigned int freshRate;
+    int id;
+};
+
+struct HDRCapability {
+    unsigned int formatCount;
+    enum HDRFormat[] formats;
+    float maxLum;
+    float maxAverageLum;
+    float minLum;
+};
+
+struct HDRMetaData {
+    enum HDRMetadataKey key;
+    float value;
+};
+
+enum PresentTimestampType {
+    HARDWARE_DISPLAY_PTS_UNSUPPORTED = 0,
+    HARDWARE_DISPLAY_PTS_DELAY = 1 << 0,
+    HARDWARE_DISPLAY_PTS_TIMESTAMP = 1 << 1,
+};
+
+struct PresentTimestamp {
+    enum PresentTimestampType type;
+    long time;
+};
+
+struct ExtDataHandle {
+    int fd;
+    unsigned int reserveInts;
+    int[] reserve;
+};
+
+struct YUVDescInfo {
+    unsigned long baseAddr;
+    unsigned int yOffset;
+    unsigned int uOffset;
+    unsigned int vOffset;
+    unsigned int yStride;
+    unsigned int uvStride;
+    unsigned int uvStep;
+};

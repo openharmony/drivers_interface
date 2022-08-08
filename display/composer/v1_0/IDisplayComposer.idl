@@ -1,0 +1,54 @@
+/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package ohos.hdi.display.composer.v1_0;
+
+import ohos.hdi.display.composer.v1_0.DisplayComposerType;
+import ohos.hdi.display.composer.v1_0.IHotPlugCallback;
+import ohos.hdi.display.composer.v1_0.IVBlankCallback;
+import ohos.hdi.display.composer.v1_0.IRefreshCallback;
+
+sequenceable OHOS.HDI.Display.HdifdParcelable;
+sequenceable OHOS.HDI.Display.BufferHandleParcelable;
+
+interface IDisplayComposer {
+    RegHotPlugCallback([in] IHotPlugCallback cb);
+    GetDisplayCapability([in] unsigned int devId, [out] struct DisplayCapability info);
+    GetDisplaySupportedModes([in] unsigned int devId, [out] struct DisplayModeInfo[] modes);
+    GetDisplayMode([in] unsigned int devId, [out] unsigned int modeId);
+    SetDisplayMode([in] unsigned int devId, [in] unsigned int modeId);
+    GetDisplayPowerStatus([in] unsigned int devId, [out] enum DispPowerStatus status);
+    SetDisplayPowerStatus([in] unsigned int devId, [in] enum DispPowerStatus status);
+    GetDisplayBacklight([in] unsigned int devId, [out] unsigned int level);
+    SetDisplayBacklight([in] unsigned int devId, [in] unsigned int level);
+    GetDisplayProperty([in] unsigned int devId, [in] unsigned int id, [out] unsigned long value);
+    GetDisplayCompChange([in] unsigned int devId, [out] unsigned int[] layers, [out] int[] type);
+    SetDisplayClientCrop([in] unsigned int devId, [in] struct IRect rect);
+    SetDisplayClientDestRect([in] unsigned int devId, [in] struct IRect rect);
+    SetDisplayVsyncEnabled([in] unsigned int devId, [in] boolean enabled);
+    RegDisplayVBlankCallback([in] unsigned int devId, [in] IVBlankCallback cb);
+    GetDisplayReleaseFence([in] unsigned int devId, [out] unsigned int[] layers, [out] HdifdParcelable[] fences);
+    CreateVirtualDisplay([in] unsigned int width, [in] unsigned int height, [out] int format, [out] unsigned int devId);
+    DestroyVirtualDisplay([in] unsigned int devId);
+    SetVirtualDisplayBuffer([in] unsigned int devId, [in] BufferHandleParcelable buffer, [in] HdifdParcelable fence);
+    SetDisplayProperty([in] unsigned int devId, [in] unsigned int id, [in] unsigned long value);
+    CreateLayer([in] unsigned int devId, [in] struct LayerInfo layerInfo, [out] unsigned int layerId);
+    DestroyLayer([in] unsigned int devId, [in] unsigned int layerId);
+    /* func for smq transfer */
+    InitCmdRequest([in] SharedMemQueue<int> request);
+    CmdRequest([in] unsigned int inEleCnt, [in] struct HdifdInfo[] inFds, [out] unsigned int outEleCnt,
+        [out] struct HdifdInfo[] outFds);
+    GetCmdReply([out] SharedMemQueue<int> reply);
+}
