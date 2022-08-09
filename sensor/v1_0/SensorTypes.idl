@@ -57,6 +57,8 @@ struct HdfSensorInformation {
     float maxRange;   /**< Maximum measurement range of the sensor */
     float accuracy;   /**< Sensor accuracy */
     float power;      /**< Sensor power */
+    long minDelay; /**< Minimum sample period allowed in microseconds */
+    long maxDelay; /**< Maxmum sample period allowed in microseconds */
 };
 
 /**
