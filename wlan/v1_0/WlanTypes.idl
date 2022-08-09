@@ -84,3 +84,15 @@ struct ProjectionScreenCmdParam {
     int cmdId;
     byte[] buf;
 };
+
+struct WifiStationInfo {
+    unsigned int rxRate;
+    unsigned int txRate;
+    unsigned int flags;
+    unsigned char rxVhtmcs;
+    unsigned char txVhtmcs;
+    unsigned char rxMcs;
+    unsigned char txMcs;
+    unsigned char rxVhtNss;
+    unsigned char txVhtNss;
+};
