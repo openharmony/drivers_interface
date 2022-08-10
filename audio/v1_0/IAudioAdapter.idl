@@ -16,14 +16,14 @@
 package ohos.hdi.audio.v1_0;
 
 import ohos.hdi.audio.v1_0.AudioTypes;
-import ohos.hdi.audio.v1_0.AudioRender;
-import ohos.hdi.audio.v1_0.AudioCapture;
+import ohos.hdi.audio.v1_0.IAudioRender;
+import ohos.hdi.audio.v1_0.IAudioCapture;
 
-interface AudioAdapter {
+interface IAudioAdapter {
     InitAllPorts();
-    CreateRender([in] struct AudioDeviceDescriptor desc, [in] struct AudioSampleAttributes attrs, [out] AudioRender render);
+    CreateRender([in] struct AudioDeviceDescriptor desc, [in] struct AudioSampleAttributes attrs, [out] IAudioRender render);
     DestroyRender();
-    CreateCapture([in] struct AudioDeviceDescriptor desc, [in] struct AudioSampleAttributes attrs, [out] AudioCapture capture);
+    CreateCapture([in] struct AudioDeviceDescriptor desc, [in] struct AudioSampleAttributes attrs, [out] IAudioCapture capture);
     DestroyCapture();
     GetPortCapability([in] struct AudioPort port, [out] struct AudioPortCapability capability);
     SetPassthroughMode([in] struct AudioPort port, [in] enum AudioPortPassthroughMode mode);

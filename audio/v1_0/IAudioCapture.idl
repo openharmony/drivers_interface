@@ -17,7 +17,7 @@ package ohos.hdi.audio.v1_0;
 
 import ohos.hdi.audio.v1_0.AudioTypes;
 
-interface AudioCapture {
+interface IAudioCapture {
     CaptureFrame([out] byte[] frame, [in] unsigned long requestBytes);
     GetCapturePosition([out] unsigned long frames, [out] struct AudioTimeStamp time);
     CheckSceneCapability([in] struct AudioSceneDescriptor scene, [out] boolean supported);

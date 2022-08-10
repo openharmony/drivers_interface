@@ -16,11 +16,11 @@
 package ohos.hdi.audio.v1_0;
 
 import ohos.hdi.audio.v1_0.AudioTypes;
-import ohos.hdi.audio.v1_0.AudioAdapter;
+import ohos.hdi.audio.v1_0.IAudioAdapter;
 
-interface AudioManager {
+interface IAudioManager {
     GetAllAdapters([out] struct AudioAdapterDescriptor[] descs);
-    LoadAdapter([in] struct AudioAdapterDescriptor desc, [out] AudioAdapter adapter);
+    LoadAdapter([in] struct AudioAdapterDescriptor desc, [out] IAudioAdapter adapter);
     UnloadAdapter([in] String adapterName);
     ReleaseAudioManagerObject();
 }

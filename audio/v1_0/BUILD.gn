@@ -23,12 +23,12 @@ if (defined(ohos_lite)) {
     module_name = "audio_service"
 
     sources = [
-      "AudioAdapter.idl",
-      "AudioCallback.idl",
-      "AudioCapture.idl",
-      "AudioManager.idl",
-      "AudioRender.idl",
       "AudioTypes.idl",
+      "IAudioAdapter.idl",
+      "IAudioCallback.idl",
+      "IAudioCapture.idl",
+      "IAudioManager.idl",
+      "IAudioRender.idl",
     ]
 
     language = "c"
