@@ -29,7 +29,9 @@
         "build": {
             "sub_component": [
                 "//drivers/peripheral/display/hdi_service/gralloc/client:hdi_gralloc_client",
-                "//drivers/interface/display/v1_0:display_device_client"
+                "//drivers/interface/display/v1_0:display_device_client",
+                "//drivers/interface/display/buffer/v1_0:display_buffer_idl_target",
+                "//drivers/interface/display/composer/v1_0:display_composer_idl_target"
             ],
             "inner_kits": [
                 {
@@ -48,6 +50,38 @@
                       "header_files": [
                       ],
                       "header_base": "//drivers/peripheral/display/interfaces/include"
+                    }
+                },
+                {
+                    "name": "//drivers/interface/display/buffer/v1_0:libdisplay_buffer_proxy_1.0",
+                    "header": {
+                        "header_files": [
+                        ],
+                        "header_base": "//drivers/interface/display/buffer"
+                    }
+                },
+                {
+                    "name": "//drivers/interface/display/buffer/v1_0:display_buffer_idl_headers",
+                    "header": {
+                        "header_files": [
+                        ],
+                        "header_base": "//drivers/interface/display/buffer"
+                    }
+                },
+                {
+                    "name": "//drivers/interface/display/composer/v1_0:libdisplay_composer_proxy_1.0",
+                    "header": {
+                        "header_files": [
+                        ],
+                        "header_base": "//drivers/interface/display/composer"
+                    }
+                },
+                {
+                    "name": "//drivers/interface/display/composer/v1_0:display_composer_idl_headers",
+                    "header": {
+                        "header_files": [
+                        ],
+                        "header_base": "//drivers/interface/display/composer"
                     }
                 }
             ]

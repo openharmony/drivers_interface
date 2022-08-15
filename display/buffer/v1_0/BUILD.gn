@@ -31,6 +31,6 @@ if (defined(ohos_lite)) {
 
     language = "cpp"
     subsystem_name = "hdf"
-    part_name = "drivers_interface_display_buffer"
+    part_name = "drivers_interface_display"
   }
 }
