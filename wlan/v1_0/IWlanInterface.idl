@@ -48,4 +48,5 @@ interface IWlanInterface {
     GetChannelMeasResult([in] String ifName, [out] struct MeasChannelResult measChannelResult);
     SetProjectionScreenParam([in] String ifName, [in] struct ProjectionScreenCmdParam param);
     WifiSendCmdIoctl([in] String ifName, [in] int cmdId, [in] byte[] paramBuf);
+    GetStaInfo([in] String ifName, [out] struct WifiStationInfo info, [in] unsigned char[] mac);
 }
