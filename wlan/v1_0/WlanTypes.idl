@@ -51,11 +51,11 @@ struct HdfNetDeviceInfoResult {
 };
 
 struct HdfWifiScanResult {
-    int flags;
+    unsigned int flags;
     unsigned char[] bssid;
-    short caps;
-    int freq;
-    short beaconInt;
+    unsigned short caps;
+    unsigned int freq;
+    unsigned short beaconInt;
     int qual;
     int level;
     unsigned int age;
