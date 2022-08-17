@@ -31,7 +31,7 @@ if (defined(ohos_lite)) {
     ]
 
     sequenceable = [
-      "//drivers/hdf_core/adapter/uhdf2/model/display/base/buffer_parcelable:libbufferhandle_parcelable",
+      "//drivers/hdf_core/adapter/uhdf2/model/display/base/bufferhandle_parcelable:libbufferhandle_parcelable",
       "//drivers/hdf_core/adapter/uhdf2/model/display/base/hdifd_parcelable:libhdifd_parcelable",
     ]
 
