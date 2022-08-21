@@ -1,0 +1,41 @@
+/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package ohos.hdi.ril.v1_0;
+
+import ohos.hdi.ril.v1_0.IRilCallback;
+import ohos.hdi.ril.v1_0.Types;
+
+interface IRilInterface {
+    [oneway] SetEmergencyCallList([in] int slotId, [in] int serialId,
+                                  [in] struct IEmergencyInfoList emergencyInfoList);
+    [oneway] SetCallback([in] IRilCallback rilCallback);
+    [oneway] GetEmergencyCallList([in] int slotId, [in] int serialId);
+
+    [oneway] ActivatePdpContext([in] int slotId, [in] int serialId,
+                                [in] struct IDataCallInfo dataCallInfo);
+    [oneway] DeactivatePdpContext([in] int slotId, [in] int serialId,
+                                  [in] struct IUniInfo uniInfo);
+    [oneway] GetPdpContextList([in] int slotId, [in] int serialId,
+                               [in] struct IUniInfo uniInfo);
+    [oneway] SetInitApnInfo([in] int slotId, [in] int serialId,
+                            [in] struct IDataProfileDataInfo dataProfileDataInfo);
+    [oneway] GetLinkBandwidthInfo([in] int slotId, [in] int serialId, [in] int cid);
+    [oneway] SetLinkBandwidthReportingRule([in] int slotId, [in] int serialId,
+                                           [in] struct IDataLinkBandwidthReportingRule dataLinkBandwidthReportingRule);
+    [oneway] SetDataPermitted([in] int slotId, [in] int serialId, [in] int dataPermitted);
+    [oneway] SetDataProfileInfo([in] int slotId, [in] int serialId,
+                                [in] struct IDataProfilesInfo dataProfilesInfo);
+}
