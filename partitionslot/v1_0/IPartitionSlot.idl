@@ -54,7 +54,7 @@ interface IPartitionSlot {
      *
      * @since 3.1
      */
-    GetCurrentSlot([out] int numOfSlots);
+    GetCurrentSlot([out] int currentSlot, [out] int numOfSlots);
 
     /**
      * @brief Obtains slot suffix string from slot id
