@@ -1,0 +1,158 @@
+/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package ohos.hdi.ril.v1_0;
+
+enum IEccType {
+    TYPE_CATEGORY = 0,
+    TYPE_POLICE = 1,
+    TYPE_AMBULANCE = 2,
+    TYPE_FIRE = 4,
+    TYPE_SEA = 8,
+    TYPE_MOUNTAIN = 16,
+};
+enum ISimpresentType {
+    TYPE_NO_CARD = 0,
+    TYPE_HAS_CARD = 1,
+};
+enum IAbnormalServiceType {
+    TYPE_ALL = 0,
+    TYPE_ONLY_CS = 1,
+};
+enum IHRilErrType {
+    HRIL_ERR_NULL_POINT = 0,
+    NONE = 1,
+    HRIL_ERR_GENERIC_FAILURE = 2,
+    HRIL_ERR_INVALID_PARAMETER = 3,
+    HRIL_ERR_MEMORY_FULL = 4,
+    HRIL_ERR_CMD_SEND_FAILURE = 5,
+    HRIL_ERR_CMD_NO_CARRIER = 6,
+    HRIL_ERR_INVALID_RESPONSE = 7,
+    HRIL_ERR_REPEAT_STATUS = 8,
+    HRIL_ERR_NETWORK_SEARCHING = 9,
+    HRIL_ERR_NETWORK_SEARCHING_INTERRUPTED = 10,
+    HRIL_ERR_MODEM_DEVICE_CLOSE = 11,
+    HRIL_ERR_NO_SIMCARD_INSERTED = 10,
+    HRIL_ERR_NEED_PIN_CODE = 11,
+    HRIL_ERR_NEED_PUK_CODE = 12,
+    HRIL_ERR_NETWORK_SEARCH_TIMEOUT = 13,
+    HRIL_ERR_PINPUK_PASSWORD_NOCORRECT = 14,
+    HRIL_ERR_INVALID_MODEM_PARAMETER = 50,
+    HRIL_ERR_HDF_IPC_FAILURE = 65535,
+};
+enum IHRilResponseTypes {
+    HRIL_RESPONSE_REQUEST = 0,
+    HRIL_RESPONSE_NOTICE = 1,
+    HRIL_RESPONSE_REQUEST_ACK = 2,
+    HRIL_RESPONSE_REQUEST_MUST_ACK = 3,
+    HRIL_RESPONSE_NOTICE_MUST_ACK = 4,
+};
+struct IEmergencyCall {
+    int index;
+    int total;
+    String eccNum;
+    String mcc;
+    enum IEccType eccType;
+    enum ISimpresentType simpresent;
+    enum IAbnormalServiceType abnormalService;
+};
+struct IEmergencyInfoList {
+    int callSize;
+    int flag;
+    List<struct IEmergencyCall> calls;
+};
+struct IHRilRadioResponseInfo {
+    int slotId;
+    int flag;
+    int serial;
+    enum IHRilErrType error;
+    enum IHRilResponseTypes type;
+};
+struct ISetupDataCallResultInfo {
+    int flag;
+    int reason;
+    int retryTime;
+    int cid;
+    int active;
+    String type;
+    String netPortName;
+    String address;
+    String dns;
+    String dnsSec;
+    String gateway;
+    int maxTransferUnit;
+    String pCscfPrimAddr;
+    String pCscfSecAddr;
+    int pduSessionId;
+};
+struct IDataCallResultList {
+    int size;
+    List<struct ISetupDataCallResultInfo> dcList;
+};
+struct IDataProfileDataInfo {
+    int serial;
+    int profileId;
+    String apn;
+    String protocol;
+    String roamingProtocol;
+    int verType;
+    String userName;
+    String password;
+};
+struct IDataProfilesInfo {
+    int serial;
+    int profilesSize;
+    List<struct IDataProfileDataInfo> profiles;
+    boolean isRoaming;
+};
+struct IDataCallInfo {
+    int serial;
+    int radioTechnology;
+    struct IDataProfileDataInfo dataProfileInfo;
+    boolean modemCognitive;
+    boolean roamingAllowed;
+    boolean isRoaming;
+};
+struct IDataLinkBandwidthInfo {
+    int serial;
+    int cid;
+    int qi;
+    int dlGfbr;
+    int ulGfbr;
+    int dlMfbr;
+    int ulMfbr;
+    int ulSambr;
+    int dlSambr;
+    int averagingWindow;
+};
+struct IDataLinkBandwidthReportingRule {
+    int serial;
+    int rat;
+    int delayMs;
+    int delayUplinkKbps;
+    int delayDownlinkKbps;
+    int maximumUplinkKbpsSize;
+    int maximumDownlinkKbpsSize;
+    List<int> maximumUplinkKbps;
+    List<int> maximumDownlinkKbps;
+};
+struct IUniInfo {
+    int serial;
+    int gsmIndex;
+    boolean flag;
+    int arg1;
+    int arg2;
+    String strTmp;
+};
