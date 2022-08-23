@@ -142,6 +142,22 @@ enum AudioSessionType {
     AUDIO_ALLOCATE_SESSION = 2,
     AUDIO_INVALID_SESSION = 3,
 };
+enum AudioDeviceType {
+    AUDIO_LINEOUT        = 0x1,
+    AUDIO_HEADPHONE      = 0x2,
+    AUDIO_HEADSET        = 0x4,
+    AUDIO_USB_HEADSET    = 0x8,
+    AUDIO_USB_HEADPHONE  = 0x10,
+    AUDIO_USBA_HEADSET   = 0x20,
+    AUDIO_USBA_HEADPHONE = 0x40,
+    AUDIO_PRIMARY_DEVICE = 0x80,
+    AUDIO_USB_DEVICE     = 0x100,
+    AUDIO_A2DP_DEVICE    = 0x200,
+    AUDIO_DEVICE_UNKOWN,
+};
+struct AudioStatus {
+    unsigned int deviceStatus;
+};
 union SceneDesc {
     unsigned int id;
 };
