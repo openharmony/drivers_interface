@@ -155,8 +155,8 @@ enum AudioDeviceType {
     AUDIO_A2DP_DEVICE    = 0x200,
     AUDIO_DEVICE_UNKOWN,
 };
-struct AudioStatus {
-    unsigned int deviceStatus;
+struct AudioDeviceStatus {
+    unsigned int pnpStatus;
 };
 union SceneDesc {
     unsigned int id;

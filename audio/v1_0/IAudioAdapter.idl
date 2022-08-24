@@ -28,5 +28,5 @@ interface IAudioAdapter {
     GetPortCapability([in] struct AudioPort port, [out] struct AudioPortCapability capability);
     SetPassthroughMode([in] struct AudioPort port, [in] enum AudioPortPassthroughMode mode);
     GetPassthroughMode([in] struct AudioPort port, [out] enum AudioPortPassthroughMode mode);
-    GetStatus([out] struct AudioStatus status);
+    GetDeviceStatus([out] struct AudioDeviceStatus status);
 }
