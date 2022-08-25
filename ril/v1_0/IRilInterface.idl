@@ -19,23 +19,86 @@ import ohos.hdi.ril.v1_0.IRilCallback;
 import ohos.hdi.ril.v1_0.Types;
 
 interface IRilInterface {
-    [oneway] SetEmergencyCallList([in] int slotId, [in] int serialId,
-                                  [in] struct IEmergencyInfoList emergencyInfoList);
     [oneway] SetCallback([in] IRilCallback rilCallback);
+    [oneway] SetEmergencyCallList([in] int slotId, [in] int serialId,
+        [in] struct IEmergencyInfoList emergencyInfoList);
     [oneway] GetEmergencyCallList([in] int slotId, [in] int serialId);
+    [oneway] GetCallList([in] int slotId, [in] int serialId);
+    [oneway] Dial([in] int slotId, [in] int serialId, [in] struct IDialInfo dialInfo);
+    [oneway] Reject([in] int slotId, [in] int serialId);
+    [oneway] Hangup([in] int slotId, [in] int serialId, [in] int gsmIndex);
+    [oneway] Answer([in] int slotId, [in] int serialId);
+    [oneway] HoldCall([in] int slotId, [in] int serialId);
+    [oneway] UnHoldCall([in] int slotId, [in] int serialId);
+    [oneway] SwitchCall([in] int slotId, [in] int serialId);
+    [oneway] CombineConference([in] int slotId, [in] int serialId, [in] int callType);
+    [oneway] SeparateConference([in] int slotId, [in] int serialId, [in] int callIndex, [in] int callType);
+    [oneway] GetCallWaiting([in] int slotId, [in] int serialId);
+    [oneway] SetCallWaiting([in] int slotId, [in] int serialId, [in] int activate);
+    [oneway] GetCallTransferInfo([in] int slotId, [in] int serialId, [in] int reason);
+    [oneway] SetCallTransferInfo([in] int slotId, [in] int serialId,
+        [in] struct ICallForwardSetInfo callForwardSetInfo);
+    [oneway] GetCallRestriction([in] int slotId, [in] int serialId, [in] String fac);
+    [oneway] SetCallRestriction([in] int slotId, [in] int serialId,
+        [in] struct ICallRestrictionInfo callRestrictionInfo);
+    [oneway] GetClip([in] int slotId, [in] int serialId);
+    [oneway] SetClip([in] int slotId, [in] int serialId, [in] int action);
+    [oneway] GetClir([in] int slotId, [in] int serialId);
+    [oneway] SetClir([in] int slotId, [in] int serialId, [in] int action);
+    [oneway] SetCallPreferenceMode([in] int slotId, [in] int serialId, [in] int mode);
+    [oneway] GetCallPreferenceMode([in] int slotId, [in] int serialId);
+    [oneway] SetUssd([in] int slotId, [in] int serialId, [in] String str);
+    [oneway] GetUssd([in] int slotId, [in] int serialId);
+    [oneway] SetMute([in] int slotId, [in] int serialId, [in] int mute);
+    [oneway] GetMute([in] int slotId, [in] int serialId);
+    [oneway] GetCallFailReason([in] int slotId, [in] int serialId);
+    [oneway] CallSupplement([in] int slotId, [in] int serialId, [in] int type);
+    [oneway] SendDtmf([in] int slotId, [in] int serialId, [in] struct IDtmfInfo dtmfInfo);
+    [oneway] StartDtmf([in] int slotId, [in] int serialId, [in] struct IDtmfInfo dtmfInfo);
+    [oneway] StopDtmf([in] int slotId, [in] int serialId, [in] struct IDtmfInfo dtmfInfo);
+    [oneway] SetBarringPassword([in] int slotId, [in] int serialId, [in] struct ISetBarringInfo setBarringInfo);
 
-    [oneway] ActivatePdpContext([in] int slotId, [in] int serialId,
-                                [in] struct IDataCallInfo dataCallInfo);
-    [oneway] DeactivatePdpContext([in] int slotId, [in] int serialId,
-                                  [in] struct IUniInfo uniInfo);
-    [oneway] GetPdpContextList([in] int slotId, [in] int serialId,
-                               [in] struct IUniInfo uniInfo);
-    [oneway] SetInitApnInfo([in] int slotId, [in] int serialId,
-                            [in] struct IDataProfileDataInfo dataProfileDataInfo);
+    [oneway] ActivatePdpContext([in] int slotId, [in] int serialId, [in] struct IDataCallInfo dataCallInfo);
+    [oneway] DeactivatePdpContext([in] int slotId, [in] int serialId, [in] struct IUniInfo uniInfo);
+    [oneway] GetPdpContextList([in] int slotId, [in] int serialId, [in] struct IUniInfo uniInfo);
+    [oneway] SetInitApnInfo([in] int slotId, [in] int serialId, [in] struct IDataProfileDataInfo dataProfileDataInfo);
     [oneway] GetLinkBandwidthInfo([in] int slotId, [in] int serialId, [in] int cid);
     [oneway] SetLinkBandwidthReportingRule([in] int slotId, [in] int serialId,
-                                           [in] struct IDataLinkBandwidthReportingRule dataLinkBandwidthReportingRule);
+        [in] struct IDataLinkBandwidthReportingRule dataLinkBandwidthReportingRule);
     [oneway] SetDataPermitted([in] int slotId, [in] int serialId, [in] int dataPermitted);
-    [oneway] SetDataProfileInfo([in] int slotId, [in] int serialId,
-                                [in] struct IDataProfilesInfo dataProfilesInfo);
+    [oneway] SetDataProfileInfo([in] int slotId, [in] int serialId, [in] struct IDataProfilesInfo dataProfilesInfo);
+
+    [oneway] SetRadioState([in] int slotId, [in] int serialId, [in] int fun, [in] int rst);
+    [oneway] GetRadioState([in] int slotId, [in] int serialId);
+    [oneway] GetImei([in] int slotId, [in] int serialId);
+    [oneway] GetMeid([in] int slotId, [in] int serialId);
+    [oneway] GetVoiceRadioTechnology([in] int slotId, [in] int serialId);
+    [oneway] GetBasebandVersion([in] int slotId, [in] int serialId);
+    [oneway] ShutDown([in] int slotId, [in] int serialId);
+
+    [oneway] GetSimIO([in] int slotId, [in] int serialId, [in] struct ISimIoRequestInfo simIO);
+    [oneway] GetSimStatus([in] int slotId, [in] int serialId);
+    [oneway] GetImsi([in] int slotId, [in] int serialId);
+    [oneway] GetSimLockStatus([in] int slotId, [in] int serialId, [in] struct ISimLockInfo simLockInfo);
+    [oneway] SetSimLock([in] int slotId, [in] int serialId, [in] struct ISimLockInfo simLockInfo);
+    [oneway] ChangeSimPassword([in] int slotId, [in] int serialId, [in] struct ISimPasswordInfo simPassword);
+    [oneway] UnlockPin([in] int slotId, [in] int serialId, [in] String pin);
+    [oneway] UnlockPuk([in] int slotId, [in] int serialId, [in] String puk, [in] String pin);
+    [oneway] UnlockPin2([in] int slotId, [in] int serialId, [in] String pin2);
+    [oneway] UnlockPuk2([in] int slotId, [in] int serialId, [in] String puk2, [in] String pin2);
+    [oneway] SetActiveSim([in] int slotId, [in] int serialId, [in] int index, [in] int enable);
+    [oneway] SimStkSendTerminalResponse([in] int slotId, [in] int serialId, [in] String strCmd);
+    [oneway] SimStkSendEnvelope([in] int slotId, [in] int serialId, [in] String strCmd);
+    [oneway] SimStkSendCallSetupRequestResult([in] int slotId, [in] int serialId, [in] int accept);
+    [oneway] SimStkIsReady([in] int slotId, [in] int serialId);
+    [oneway] SetRadioProtocol([in] int slotId, [in] int serialId, [in] struct ISimProtocolRequest protocol);
+    [oneway] SimOpenLogicalChannel([in] int slotId, [in] int serialId, [in] String appID, [in] int p2);
+    [oneway] SimCloseLogicalChannel([in] int slotId, [in] int serialId, [in] int channelId);
+    [oneway] SimTransmitApduLogicalChannel([in] int slotId, [in] int serialId,
+        [in] struct IApduSimIORequestInfo apduSimIO);
+    [oneway] SimTransmitApduBasicChannel([in] int slotId, [in] int serialId,
+        [in] struct IApduSimIORequestInfo apduSimIO);
+    [oneway] SimAuthentication([in] int slotId, [in] int serialId,
+        [in] struct ISimAuthenticationRequestInfo simAuthInfo);
+    [oneway] UnlockSimLock([in] int slotId, [in] int serialId, [in] int lockType, [in] String key);
 }
