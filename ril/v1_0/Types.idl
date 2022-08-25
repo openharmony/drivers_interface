@@ -32,25 +32,25 @@ enum IAbnormalServiceType {
     TYPE_ONLY_CS = 1,
 };
 enum IHRilErrType {
-    HRIL_ERR_NULL_POINT = 0,
-    NONE = 1,
-    HRIL_ERR_GENERIC_FAILURE = 2,
-    HRIL_ERR_INVALID_PARAMETER = 3,
-    HRIL_ERR_MEMORY_FULL = 4,
-    HRIL_ERR_CMD_SEND_FAILURE = 5,
-    HRIL_ERR_CMD_NO_CARRIER = 6,
-    HRIL_ERR_INVALID_RESPONSE = 7,
-    HRIL_ERR_REPEAT_STATUS = 8,
-    HRIL_ERR_NETWORK_SEARCHING = 9,
-    HRIL_ERR_NETWORK_SEARCHING_INTERRUPTED = 10,
-    HRIL_ERR_MODEM_DEVICE_CLOSE = 11,
-    HRIL_ERR_NO_SIMCARD_INSERTED = 10,
-    HRIL_ERR_NEED_PIN_CODE = 11,
-    HRIL_ERR_NEED_PUK_CODE = 12,
-    HRIL_ERR_NETWORK_SEARCH_TIMEOUT = 13,
-    HRIL_ERR_PINPUK_PASSWORD_NOCORRECT = 14,
+    NONE = 0,
+    HRIL_ERR_GENERIC_FAILURE = 1,
+    HRIL_ERR_INVALID_PARAMETER = 2,
+    HRIL_ERR_MEMORY_FULL = 3,
+    HRIL_ERR_CMD_SEND_FAILURE = 4,
+    HRIL_ERR_CMD_NO_CARRIER = 5,
+    HRIL_ERR_INVALID_RESPONSE = 6,
+    HRIL_ERR_REPEAT_STATUS = 7,
+    HRIL_ERR_NETWORK_SEARCHING = 8,
+    HRIL_ERR_NETWORK_SEARCHING_INTERRUPTED = 9,
+    HRIL_ERR_MODEM_DEVICE_CLOSE = 10,
+    HRIL_ERR_NO_SIMCARD_INSERTED = 11,
+    HRIL_ERR_NEED_PIN_CODE = 12,
+    HRIL_ERR_NEED_PUK_CODE = 13,
+    HRIL_ERR_NETWORK_SEARCH_TIMEOUT = 14,
+    HRIL_ERR_PINPUK_PASSWORD_NOCORRECT = 15,
     HRIL_ERR_INVALID_MODEM_PARAMETER = 50,
     HRIL_ERR_HDF_IPC_FAILURE = 65535,
+    HRIL_ERR_NULL_POINT = 65536,
 };
 enum IHRilResponseTypes {
     HRIL_RESPONSE_REQUEST = 0,
@@ -58,6 +58,66 @@ enum IHRilResponseTypes {
     HRIL_RESPONSE_REQUEST_ACK = 2,
     HRIL_RESPONSE_REQUEST_MUST_ACK = 3,
     HRIL_RESPONSE_NOTICE_MUST_ACK = 4,
+};
+enum IHRilSrvStatus {
+  HRIL_NO_SRV_SERVICE = 0,
+  HRIL_RESTRICTED_SERVICE = 1,
+  HRIL_SERVICE_VALID = 2,
+  HRIL_REGIONAL_SERVICE = 3,
+  HRIL_ENERGY_SAVING_SERVICE = 4,
+};
+enum IHRilSrvDomain {
+  HRIL_NO_DOMAIN_SERVICE = 0,
+  HRIL_CS_SERVICE = 1,
+  HRIL_PS_SERVICE = 2,
+  HRIL_CS_PS_SERVICE = 3,
+  HRIL_CS_PS_SEARCHING = 4,
+  HRIL_CDMA_NOT_SUPPORT = 255,
+};
+enum IHRilRoamStatus {
+  HRIL_NO_ROAM = 0,
+  HRIL_ROAMING = 1,
+  HRIL_ROAM_UNKNOWN = 2,
+};
+enum IHRilSimLockStatus {
+  HRIL_SIM_CARD_UNLOCK = 0,
+  HRIL_SIM_CARD_LOCK = 1,
+};
+enum IHRilSysMode {
+  HRIL_NO_SYSMODE_SERVICE = 0,
+  HRIL_GSM_MODE = 1,
+  HRIL_CDMA_MODE = 2,
+  HRIL_WCDMA_MODE = 3,
+  HRIL_TDSCDMA_MODE = 4,
+  HRIL_WIMAX_MODE = 5,
+  HRIL_LTE_MODE = 6,
+  HRIL_LTE_CA_MODE = 7,
+  HRIL_NR_MODE = 8,
+};
+enum IHRilRadioTech {
+  RADIO_TECHNOLOGY_INVALID = 65535,
+  RADIO_TECHNOLOGY_UNKNOWN = 0,
+  RADIO_TECHNOLOGY_GSM = 1,
+  RADIO_TECHNOLOGY_1XRTT = 2,
+  RADIO_TECHNOLOGY_WCDMA = 3,
+  RADIO_TECHNOLOGY_HSPA = 4,
+  RADIO_TECHNOLOGY_HSPAP = 5,
+  RADIO_TECHNOLOGY_TD_SCDMA = 6,
+  RADIO_TECHNOLOGY_EVDO = 7,
+  RADIO_TECHNOLOGY_EHRPD = 8,
+  RADIO_TECHNOLOGY_LTE = 9,
+  RADIO_TECHNOLOGY_LTE_CA = 10,
+  RADIO_TECHNOLOGY_IWLAN = 11,
+  RADIO_TECHNOLOGY_NR = 12,
+};
+enum IHRilSimStatus {
+  HRIL_USIM_INVALID = 0,
+  HRIL_USIM_VALID = 1,
+  HRIL_USIM_CS_INVALID = 2,
+  HRIL_USIM_PS_INVALID = 3,
+  HRIL_USIM_CS_PS_INVALID = 4,
+  HRIL_ROM_SIM = 240,
+  HRIL_NO_USIM = 255,
 };
 struct IEmergencyCall {
     int index;
@@ -155,4 +215,204 @@ struct IUniInfo {
     int arg1;
     int arg2;
     String strTmp;
+};
+struct IVoiceRadioTechnology {
+  enum IHRilSrvStatus srvStatus;
+  enum IHRilSrvDomain srvDomain;
+  enum IHRilRoamStatus roamStatus;
+  enum IHRilSimStatus simStatus;
+  enum IHRilSimLockStatus lockStatus;
+  enum IHRilSysMode sysMode;
+  String sysModeName;
+  enum IHRilRadioTech actType;
+  String actName;
+  int flag;
+};
+struct IDialInfo {
+    int serial;
+    String address;
+    int clir;
+};
+struct ICallInfo {
+    int index;
+    int dir;
+    int state;
+    int mode;
+    int mpty;
+    int voiceDomain;
+    int callType;
+    String number;
+    int type;
+    String alpha;
+};
+struct ICallInfoList {
+    int callSize;
+    int flag;
+    List<struct ICallInfo> calls;
+};
+struct IGetClipResult {
+    int result;
+    int action;
+    int clipStat;
+};
+struct IGetClirResult {
+    int result;
+    int action;
+    int clirStat;
+};
+struct ICallWaitResult {
+    int result;
+    int status;
+    int classCw;
+};
+struct ICallRestrictionInfo {
+    String fac;
+    int mode;
+    String password;
+};
+struct ICallRestrictionResult {
+    int result;
+    int status;
+    int classCw;
+};
+struct ICallForwardSetInfo {
+    int reason;
+    int mode;
+    String number;
+    int classx;
+};
+struct ICallForwardQueryResult {
+    int serial;
+    int result;
+    int status;
+    int classx;
+    String number;
+    int type;
+    int reason;
+    int time;
+};
+struct ICallForwardQueryInfoList {
+    int callSize;
+    int flag;
+    List<struct ICallForwardQueryResult> calls;
+};
+struct ICallImsServiceStatus {
+    int smsSrvStatus;
+    int smsSrvRat;
+    int voipSrvStatus;
+    int voipSrvRat;
+    int vtSrvStatus;
+    int vtSrvRat;
+    int vsSrvStatus;
+    int vsSrvRat;
+};
+struct IUssdNoticeInfo {
+    int m;
+    String str;
+};
+struct ISsNoticeInfo {
+    int serviceType;
+    int requestType;
+    int serviceClass;
+    int result;
+};
+struct ISrvccStatus {
+    int status;
+};
+struct IRingbackVoice {
+    int status;
+};
+struct IDtmfInfo {
+    int callId;
+    String dtmfKey;
+    int onLength;
+    int offLength;
+    int stringLength;
+};
+struct ISetBarringInfo {
+    String fac;
+    String oldPassword;
+    String newPassword;
+};
+struct ICardStatusInfo {
+    int index;
+    int simType;
+    int simState;
+};
+struct ISimIoRequestInfo {
+    int command;
+    int fileId;
+    int p1;
+    int p2;
+    int p3;
+    String data;
+    String path;
+    int serial;
+    String pin2;
+    String aid;
+};
+struct IIccIoResultInfo {
+    int sw1;
+    int sw2;
+    String response;
+};
+struct ISimLockInfo {
+    int serial;
+    String fac;
+    int mode;
+    int status;
+    String passwd;
+    int classx;
+};
+struct ISimPasswordInfo {
+    int serial;
+    String fac;
+    String oldPassword;
+    String newPassword;
+    int passwordLength;
+};
+struct ISimPinInputTimes {
+    int serial;
+    String code;
+    int times;
+    int pukTimes;
+    int pinTimes;
+    int puk2Times;
+    int pin2Times;
+};
+struct ISimProtocolRequest {
+    int serial;
+    int phase;
+    int protocol;
+    int slotId;
+};
+struct ISimProtocolResponse {
+    int phase;
+    int result;
+    int slotId;
+};
+struct IApduSimIORequestInfo {
+    int serial;
+    int channelId;
+    int type;
+    int instruction;
+    int p1;
+    int p2;
+    int p3;
+    String data;
+};
+struct ISimAuthenticationRequestInfo {
+    int serial;
+    String aid;
+    String authData;
+};
+struct IOpenLogicalChannelResponse {
+    int sw1;
+    int sw2;
+    int channelId;
+    String response;
+};
+struct ILockStatusResp {
+    int result;
+    int remain;
 };
