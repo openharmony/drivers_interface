@@ -20,8 +20,7 @@ import ohos.hdi.ril.v1_0.Types;
 
 interface IRilInterface {
     [oneway] SetCallback([in] IRilCallback rilCallback);
-    [oneway] SetEmergencyCallList([in] int slotId, [in] int serialId,
-        [in] struct IEmergencyInfoList emergencyInfoList);
+    [oneway] SetEmergencyCallList([in] int slotId, [in] int serialId, [in] struct IEmergencyInfoList emergencyInfoList);
     [oneway] GetEmergencyCallList([in] int slotId, [in] int serialId);
     [oneway] GetCallList([in] int slotId, [in] int serialId);
     [oneway] Dial([in] int slotId, [in] int serialId, [in] struct IDialInfo dialInfo);
@@ -101,4 +100,40 @@ interface IRilInterface {
     [oneway] SimAuthentication([in] int slotId, [in] int serialId,
         [in] struct ISimAuthenticationRequestInfo simAuthInfo);
     [oneway] UnlockSimLock([in] int slotId, [in] int serialId, [in] int lockType, [in] String key);
+
+    [oneway] GetSignalStrength([in] int slotId, [in] int serialId);
+    [oneway] GetCsRegStatus([in] int slotId, [in] int serialId);
+    [oneway] GetPsRegStatus([in] int slotId, [in] int serialId);
+    [oneway] GetOperatorInfo([in] int slotId, [in] int serialId);
+    [oneway] GetNetworkSearchInformation([in] int slotId, [in] int serialId);
+    [oneway] GetNetworkSelectionMode([in] int slotId, [in] int serialId);
+    [oneway] SetNetworkSelectionMode([in] int slotId, [in] int serialId,
+        [in] struct ISetNetworkModeInfo networkModeInfo);
+    [oneway] GetNeighboringCellInfoList([in] int slotId, [in] int serialId);
+    [oneway] GetCurrentCellInfo([in] int slotId, [in] int serialId);
+    [oneway] SetPreferredNetwork([in] int slotId, [in] int serialId, [in] int preferredNetworkType);
+    [oneway] GetPreferredNetwork([in] int slotId, [in] int serialId);
+    [oneway] GetRadioCapability([in] int slotId, [in] int serialId);
+    [oneway] GetPhysicalChannelConfig([in] int slotId, [in] int serialId);
+    [oneway] SetLocateUpdates([in] int slotId, [in] int serialId, [in] enum IHRilRegNotifyMode mode);
+    [oneway] SetNotificationFilter([in] int slotId, [in] int serialId, [in] int newFilter);
+    [oneway] SetDeviceState([in] int slotId, [in] int serialId, [in] int deviceStateType, [in] int deviceStateOn);
+
+    [oneway] SendGsmSms([in] int slotId, [in] int serialId, [in] struct IGsmSmsMessageInfo gsmSmsMessageInfo);
+    [oneway] SendCdmaSms([in] int slotId, [in] int serialId, [in] struct ISendCdmaSmsMessageInfo cdmaSmsMessageInfo);
+    [oneway] AddSimMessage([in] int slotId, [in] int serialId, [in] struct ISmsMessageIOInfo gsmSmsMessageInfo);
+    [oneway] DelSimMessage([in] int slotId, [in] int serialId, [in] int index);
+    [oneway] UpdateSimMessage([in] int slotId, [in] int serialId, [in] struct ISmsMessageIOInfo gsmSmsMessageInfo);
+    [oneway] AddCdmaSimMessage([in] int slotId, [in] int serialId, [in] struct ISmsMessageIOInfo gsmSmsMessageInfo);
+    [oneway] DelCdmaSimMessage([in] int slotId, [in] int serialId, [in] int index);
+    [oneway] UpdateCdmaSimMessage([in] int slotId, [in] int serialId, [in] struct ISmsMessageIOInfo gsmSmsMessageInfo);
+    [oneway] SetSmscAddr([in] int slotId, [in] int serialId, [in] struct IServiceCenterAddress serviceCenterAddress);
+    [oneway] GetSmscAddr([in] int slotId, [in] int serialId);
+    [oneway] SetCBConfig([in] int slotId, [in] int serialId, [in] struct ICBConfigInfo cellBroadcastInfo);
+    [oneway] GetCBConfig([in] int slotId, [in] int serialId);
+    [oneway] SetCdmaCBConfig([in] int slotId, [in] int serialId,
+        [in] struct ICdmaCBConfigInfoList cdmaCBConfigInfoList);
+    [oneway] GetCdmaCBConfig([in] int slotId, [in] int serialId);
+    [oneway] SendSmsMoreMode([in] int slotId, [in] int serialId, [in] struct IGsmSmsMessageInfo gsmSmsMessageInfo);
+    [oneway] SendSmsAck([in] int slotId, [in] int serialId, [in] struct IModeData modeData);
 }
