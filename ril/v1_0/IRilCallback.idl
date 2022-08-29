@@ -120,4 +120,64 @@ import ohos.hdi.ril.v1_0.Types;
         [in] struct IIccIoResultInfo result);
     SimAuthenticationResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct IIccIoResultInfo result);
     UnlockSimLockResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct ILockStatusResp lockStatus);
+
+    NetworkCsRegStatusUpdated([in] int slotId, [in] struct ICsRegStatusInfo csRegStatusInfo);
+    NetworkPsRegStatusUpdated([in] int slotId, [in] struct IPsRegStatusInfo psRegStatusInfo);
+    SignalStrengthUpdated([in] int slotId, [in] struct IRssi rssi);
+    NetworkTimeZoneUpdated([in] int slotId, [in] String timeZoneStr);
+    NetworkTimeUpdated([in] int slotId, [in] String timeStr);
+    NetworkPhyChnlCfgUpdated([in] int slotId, [in] struct IChannelConfigInfoList channelConfigInfoList);
+    NetworkCurrentCellUpdated([in] int slotId, [in] struct ICellListCurrentInfo cellListCurrentInfo);
+    GetSignalStrengthResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct IRssi rssi);
+    GetCsRegStatusResponse([in] struct IHRilRadioResponseInfo responseInfo,
+        [in] struct ICsRegStatusInfo csRegStatusInfo);
+    GetPsRegStatusResponse([in] struct IHRilRadioResponseInfo responseInfo,
+        [in] struct IPsRegStatusInfo psRegStatusInfo);
+    GetOperatorInfoResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct IOperatorInfo psRegStatusInfo);
+    GetNetworkSearchInformationResponse([in] struct IHRilRadioResponseInfo responseInfo,
+        [in] struct IAvailableNetworkList availableNetworkList);
+    GetNetworkSelectionModeResponse([in] struct IHRilRadioResponseInfo responseInfo,
+        [in] struct ISetNetworkModeInfo setNetworkModeInfo);
+    SetNetworkSelectionModeResponse([in] struct IHRilRadioResponseInfo responseInfo);
+    GetNeighboringCellInfoListResponse([in] struct IHRilRadioResponseInfo responseInfo,
+        [in] struct ICellListNearbyInfo cellListNearbyInfo);
+    GetCurrentCellInfoResponse([in] struct IHRilRadioResponseInfo responseInfo,
+        [in] struct ICellListCurrentInfo cellListCurrentInfo);
+    SetPreferredNetworkResponse([in] struct IHRilRadioResponseInfo responseInfo);
+    GetPreferredNetworkResponse([in] struct IHRilRadioResponseInfo responseInfo,
+        [in] struct IPreferredNetworkTypeInfo preferredNetworkTypeInfo);
+    GetRadioCapabilityResponse([in] struct IHRilRadioResponseInfo responseInfo,
+        [in] struct IRadioCapabilityInfo radioCapabilityInfo);
+    GetPhysicalChannelConfigResponse([in] struct IHRilRadioResponseInfo responseInfo,
+        [in] struct IChannelConfigInfoList channelConfigInfoList);
+    SetLocateUpdatesResponse([in] struct IHRilRadioResponseInfo responseInfo);
+    SetNotificationFilterResponse([in] struct IHRilRadioResponseInfo responseInfo);
+    SetDeviceStateResponse([in] struct IHRilRadioResponseInfo responseInfo);
+
+    NewSmsNotify([in] int slotId, [in] struct ISmsMessageInfo smsMessageInfo);
+    NewCdmaSmsNotify([in] int slotId, [in] struct ISmsMessageInfo smsMessageInfo);
+    SmsStatusReportNotify([in] int slotId, [in] struct ISmsMessageInfo smsMessageInfo);
+    NewSmsStoredOnSimNotify([in] int slotId, [in] int recordNumber, [in] int indicationType);
+    CBConfigNotify([in] int slotId, [in] struct ICBConfigReportInfo cellBroadConfigReportInfo);
+    SendGsmSmsResponse([in] struct IHRilRadioResponseInfo responseInfo,
+        [in] struct ISendSmsResultInfo sendSmsResultInfo);
+    SendCdmaSmsResponse([in] struct IHRilRadioResponseInfo responseInfo,
+        [in] struct ISendSmsResultInfo sendSmsResultInfo);
+    AddSimMessageResponse([in] struct IHRilRadioResponseInfo responseInfo);
+    DelSimMessageResponse([in] struct IHRilRadioResponseInfo responseInfo);
+    UpdateSimMessageResponse([in] struct IHRilRadioResponseInfo responseInfo);
+    AddCdmaSimMessageResponse([in] struct IHRilRadioResponseInfo responseInfo);
+    DelCdmaSimMessageResponse([in] struct IHRilRadioResponseInfo responseInfo);
+    UpdateCdmaSimMessageResponse([in] struct IHRilRadioResponseInfo responseInfo);
+    SetSmscAddrResponse([in] struct IHRilRadioResponseInfo responseInfo);
+    GetSmscAddrResponse([in] struct IHRilRadioResponseInfo responseInfo,
+        [in] struct IServiceCenterAddress serviceCenterAddress);
+    SetCBConfigResponse([in] struct IHRilRadioResponseInfo responseInfo);
+    GetCBConfigResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct ICBConfigInfo cellBroadcastInfo);
+    SetCdmaCBConfigResponse([in] struct IHRilRadioResponseInfo responseInfo);
+    GetCdmaCBConfigResponse([in] struct IHRilRadioResponseInfo responseInfo,
+        [in] struct ICdmaCBConfigInfo cdmaCBConfigInfo);
+    SendSmsMoreModeResponse([in] struct IHRilRadioResponseInfo responseInfo,
+        [in] struct ISendSmsResultInfo sendSmsResultInfo);
+    SendSmsAckResponse([in] struct IHRilRadioResponseInfo responseInfo);
 }

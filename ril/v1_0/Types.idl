@@ -119,6 +119,25 @@ enum IHRilSimStatus {
   HRIL_ROM_SIM = 240,
   HRIL_NO_USIM = 255,
 };
+enum IHRilRegStatus {
+    NO_REG_MT_NO_SEARCH = 0,
+    REG_MT_HOME = 1,
+    NO_REG_MT_SEARCHING = 2,
+    REG_MT_REJECTED = 3,
+    REG_MT_UNKNOWN = 4,
+    REG_MT_ROAMING = 5,
+    REG_MT_EMERGENCY = 6,
+};
+enum IHRilCellConnectionStatus {
+    HRIL_SERVING_CELL_UNKNOWN = 0,
+    HRIL_SERVING_CELL_PRIMARY = 1,
+    HRIL_SERVING_CELL_SECONDARY = 2,
+};
+enum IHRilRegNotifyMode {
+    REG_NOT_NOTIFY = 0,
+    REG_NOTIFY_STAT_ONLY = 1,
+    REG_NOTIFY_STAT_LAC_CELLID = 2,
+};
 struct IEmergencyCall {
     int index;
     int total;
@@ -296,16 +315,6 @@ struct ICallForwardQueryInfoList {
     int flag;
     List<struct ICallForwardQueryResult> calls;
 };
-struct ICallImsServiceStatus {
-    int smsSrvStatus;
-    int smsSrvRat;
-    int voipSrvStatus;
-    int voipSrvRat;
-    int vtSrvStatus;
-    int vtSrvRat;
-    int vsSrvStatus;
-    int vsSrvRat;
-};
 struct IUssdNoticeInfo {
     int m;
     String str;
@@ -415,4 +424,314 @@ struct IOpenLogicalChannelResponse {
 struct ILockStatusResp {
     int result;
     int remain;
+};
+struct IGsmRssi {
+    int rxlev;
+    int ber;
+};
+struct ICdmaRssi {
+    int absoluteRssi;
+    int ecno;
+};
+struct IWcdmaRssi {
+    int rxlev;
+    int ecio;
+    int rscp;
+    int ber;
+};
+struct ILteRssi {
+    int rxlev;
+    int rsrq;
+    int rsrp;
+    int snr;
+};
+struct ITdScdmaRssi {
+    int rscp;
+};
+struct INrRssi {
+    int rsrp;
+    int rsrq;
+    int sinr;
+};
+struct IRssi {
+    struct IGsmRssi gw;
+    struct ICdmaRssi cdma;
+    struct IWcdmaRssi wcdma;
+    struct ILteRssi lte;
+    struct ITdScdmaRssi tdScdma;
+    struct INrRssi nr;
+};
+struct ICsRegStatusInfo {
+    int notifyType;
+    enum IHRilRegStatus regStatus;
+    int lacCode;
+    int cellId;
+    enum IHRilRadioTech radioTechnology;
+    int flag;
+};
+struct IPsRegStatusInfo {
+    int notifyType;
+    enum IHRilRegStatus regStatus;
+    int lacCode;
+    int cellId;
+    enum IHRilRadioTech radioTechnology;
+    boolean isNrAvailable;
+    boolean isEnDcAvailable;
+    boolean isDcNrRestricted;
+};
+struct IOperatorInfo {
+    String longName;
+    String shortName;
+    String numeric;
+};
+struct IAvailableNetworkInfo {
+    String longName;
+    String shortName;
+    String numeric;
+    int status;
+    int rat;
+};
+struct IAvailableNetworkList {
+    int itemNum;
+    List<struct IAvailableNetworkInfo> availableNetworkInfo;
+    int flag;
+};
+struct ISetNetworkModeInfo {
+    int selectMode;
+    String oper;
+    int flag;
+};
+struct ICellListRatGsm {
+    int band;
+    int arfcn;
+    int bsic;
+    int cellId;
+    int lac;
+    int rxlev;
+};
+struct ICellListRatLte {
+    int arfcn;
+    int pci;
+    int rsrp;
+    int rsrq;
+    int rxlev;
+};
+struct ICellListRatWcdma {
+    int arfcn;
+    int psc;
+    int rscp;
+    int ecno;
+};
+struct ICellListRatCdma {
+    int systemId;
+    int networkId;
+    int baseId;
+    int zoneId;
+    int pilotPn;
+    int pilotStrength;
+    int channel;
+    int longitude;
+    int latitude;
+};
+struct ICellListRatTdscdma {
+    int arfcn;
+    int syncId;
+    int sc;
+    int cellId;
+    int lac;
+    int rscp;
+    int drx;
+    int rac;
+    int cpid;
+};
+struct ICellListRatNr {
+    int nrArfcn;
+    int pci;
+    int tac;
+    int nci;
+};
+union IServiceCellParas {
+    struct ICellListRatGsm gsm;
+    struct ICellListRatLte lte;
+    struct ICellListRatWcdma wcdma;
+    struct ICellListRatCdma cdma;
+    struct ICellListRatTdscdma tdscdma;
+    struct ICellListRatNr nr;
+};
+struct ICellNearbyInfo {
+    int ratType;
+    union IServiceCellParas serviceCells;
+};
+struct ICellListNearbyInfo {
+    int itemNum;
+    List<struct ICellNearbyInfo> cellNearbyInfo;
+};
+struct ICellRatGsm {
+    int band;
+    int arfcn;
+    int bsic;
+    int cellId;
+    int lac;
+    int rxlev;
+    int rxQuality;
+    int ta;
+};
+struct ICellRatLte {
+    int arfcn;
+    int cellId;
+    int pci;
+    int tac;
+    int rsrp;
+    int rsrq;
+    int rssi;
+};
+struct ICellRatWcdma {
+    int arfcn;
+    int psc;
+    int cellId;
+    int lac;
+    int rscp;
+    int rxlev;
+    int ecno;
+    int drx;
+    int ura;
+};
+struct ICellRatCdma {
+    int systemId;
+    int networkId;
+    int baseId;
+    int zoneId;
+    int pilotPn;
+    int pilotStrength;
+    int channel;
+    int longitude;
+    int latitude;
+};
+struct ICellRatTdscdma {
+    int arfcn;
+    int syncId;
+    int sc;
+    int cellId;
+    int lac;
+    int rscp;
+    int drx;
+    int rac;
+    int cpid;
+};
+struct ICellRatNr {
+    int nrArfcn;
+    int pci;
+    int tac;
+    int nci;
+};
+union ICurrentServiceCellParas {
+    struct ICellRatGsm gsm;
+    struct ICellRatLte lte;
+    struct ICellRatWcdma wcdma;
+    struct ICellRatCdma cdma;
+    struct ICellRatTdscdma tdscdma;
+    struct ICellRatNr nr;
+};
+struct ICurrentCellInfo {
+    int ratType;
+    int mcc;
+    int mnc;
+    union ICurrentServiceCellParas serviceCells;
+};
+struct ICellListCurrentInfo {
+    int itemNum;
+    List<struct ICurrentCellInfo> cellCurrentInfo;
+};
+struct IPreferredNetworkTypeInfo {
+    int preferredNetworkType;
+    int flag;
+};
+struct IRadioCapabilityInfo {
+    int ratFamily;
+    String modemId;
+};
+struct IPhysicalChannelConfig {
+    enum IHRilCellConnectionStatus cellConnStatus;
+    enum IHRilRadioTech ratType;
+    int cellBandwidthDownlinkKhz;
+    int cellBandwidthUplinkKhz;
+    int freqRange;
+    int downlinkChannelNum;
+    int uplinkChannelNum;
+    int physicalCellId;
+    int contextIdNum;
+    List<int> contextIds;
+};
+struct IChannelConfigInfoList {
+    int itemNum;
+    List<struct IPhysicalChannelConfig> channelConfigInfos;
+    int flag;
+};
+struct IGsmSmsMessageInfo {
+    int serial;
+    String smscPdu;
+    String pdu;
+    int state;
+};
+struct ISendCdmaSmsMessageInfo {
+    int serial;
+    String smscPdu;
+    int state;
+};
+struct ISmsMessageIOInfo {
+    int serial;
+    String smscPdu;
+    String pdu;
+    int state;
+    int index;
+};
+struct IServiceCenterAddress {
+    int serial;
+    int tosca;
+    String address;
+};
+struct ICBConfigInfo {
+    int serial;
+    int mode;
+    int indicationType;
+    String mids;
+    String dcss;
+};
+struct ICdmaCBConfigInfo {
+    int service;
+    int language;
+    int checked;
+};
+struct ICdmaCBConfigInfoList {
+    int serial;
+    int size;
+    List<struct ICdmaCBConfigInfo> list;
+};
+struct ICBConfigReportInfo {
+    int indicationType;
+    int sn;
+    int mid;
+    int page;
+    int pages;
+    String dcs;
+    String data;
+    int length;
+    String pdu;
+};
+struct ISmsMessageInfo {
+    int indicationType;
+    int size;
+    List<unsigned char> pdu;
+};
+struct IModeData {
+    int serial;
+    boolean result;
+    int mode;
+    String pdu;
+};
+struct ISendSmsResultInfo {
+    int msgRef;
+    String pdu;
+    int errCode;
+    int flag;
 };
