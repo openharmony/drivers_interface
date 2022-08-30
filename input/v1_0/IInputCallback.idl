@@ -17,36 +17,65 @@
  * @addtogroup HdiInput
  * @{
  *
- * @brief Provides driver interfaces for the input service.
+ * @brief Provides APIs for the upper-layer input service.
  *
- * These driver interfaces can be used to open and close input device files, get input events, query device information,
- * register callback functions, and control the feature status.
+ * Using the APIs provided by the Input module, input service developers can implement the following
+ * functions: enabling or disabling input devices, obtaining input events, querying device information,
+ * registering callback functions, and managing the feature status.
  *
+ * @since 3.2
  * @version 1.0
  */
 
+/**
+ * @file IInputCallback.idl
+ *
+ * @brief Provides data reporting and hot swap event reporting callbacks for the input service.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
+
+/**
+ * @brief Defines the package path of the Input module APIs.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
 package ohos.hdi.input.v1_0;
 
 import ohos.hdi.input.v1_0.InputTypes;
 
+/**
+ * @brief Defines the callbacks of the Input module.
+ *
+ * When an input device performs operations such as data reporting, insertion, or removal, the input service
+ * can call the respective callback for data processing.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
 [callback] interface IInputCallback {
     /**
-     * @brief Reports input event data by the registered callback.
+     * @brief Called to report input event data.
      *
-     * @param pkgs describes the input event data package.
-     * @param count Indicates the number of input event data packets.
-     * @param devIndex Indicates the index of an input device.
+     * @param pkgs Input event data reported by the driver. For details, see {@link EventPackage}.
+     * @param devIndex Index of the input device. The value ranges from <b>0</b> to <b>31</b>.
+     * A maximum of 32 input devices are supported.
+     *
      * @since 3.2
      * @version 1.0
      */
     EventPkgCallback([in] struct EventPackage[] pkgs, [in] unsigned int devIndex);
 
     /**
-     * @brief Reports hot plug event data by the registered callback.
+     * @brief Called to report hot plug events.
      *
-     * @param event Indicates the pointer to the hot plug event data reported by the input driver.
+     * @param event Hot swap event data. For details, see {@link HotPlugEvent}.
+     *
      * @since 3.2
      * @version 1.0
      */
     HotPlugCallback([in] struct HotPlugEvent event);
 }
+/** @} */
