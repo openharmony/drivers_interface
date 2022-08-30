@@ -1,8 +1,14 @@
 {
-    "name": "drivers_interface_memorytracker",
+    "name": "@ohos/drivers_interface_memorytracker",
     "description": "memorytracker_hdf",
     "version": "3.1",
     "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+      "destPath": "drivers/interface/memorytracker"
+    },
+    "dirs": {},
+    "scripts": {},
     "component": {
       "name": "drivers_interface_memorytracker",
       "subsystem": "hdf",
@@ -17,7 +23,7 @@
           "hiviewdfx_hilog_native",
           "utils_base"
         ],
-        "third_part": []
+        "third_party": []
       },
       "build": {
         "sub_component": [

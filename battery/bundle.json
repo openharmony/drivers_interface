@@ -1,8 +1,14 @@
 {
-    "name": "drivers_interface_battery",
+    "name": "@ohos/drivers_interface_battery",
     "description": "battery device driver interface",
     "version": "3.2",
     "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+      "destPath": "drivers/interface/battery"
+    },
+    "dirs": {},
+    "scripts": {},
     "component": {
       "name": "drivers_interface_battery",
       "subsystem": "hdf",
@@ -17,7 +23,7 @@
           "hiviewdfx_hilog_native",
           "utils_base"
         ],
-        "third_part": [
+        "third_party": [
           "bounds_checking_function"
         ]
       },
