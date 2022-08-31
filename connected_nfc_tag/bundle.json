@@ -1,10 +1,10 @@
 {
-    "name": "drivers_interface_nfc",
-    "description": "drivers interface nfc",
+    "name": "@ohos/drivers_interface_connected_nfc_tag",
+    "description": "drivers interface connected nfc tag",
     "version": "3.2",
     "license": "Apache License 2.0",
     "component": {
-      "name": "drivers_interface_nfc",
+      "name": "drivers_interface_connected_nfc_tag",
       "subsystem": "hdf",
       "syscap": [""],
       "adapter_system_type": ["standard"],
@@ -23,28 +23,28 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/nfc/v1_0:nfc_idl_target"
+          "//drivers/interface/connected_nfc_tag/v1_0:connected_nfc_tag_idl_target"
         ],
         "test": [
         ],
         "inner_kits": [
           {
-            "name": "//drivers/interface/nfc/v1_0:libnfc_proxy_1.0",
+            "name": "//drivers/interface/connected_nfc_tag/v1_0:libconnected_nfc_tag_proxy_1.0",
             "header": {
               "header_files": [
               ],
-              "header_base": "//drivers/interface/nfc"
+              "header_base": "//drivers/interface/connected_nfc_tag"
             }
           },
           {
-            "name": "//drivers/interface/nfc/v1_0:nfc_idl_headers",
+            "name": "//drivers/interface/connected_nfc_tag/v1_0:connected_nfc_tag_idl_headers",
             "header": {
               "header_files": [
               ],
-              "header_base": "//drivers/interface/nfc"
+              "header_base": "//drivers/interface/connected_nfc_tag"
             }
           }
         ]
       }
     }
-  }
+}

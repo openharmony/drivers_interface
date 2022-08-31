@@ -27,10 +27,10 @@
  * @version 1.0
  */
 
-package ohos.hdi.nfc.nfc_core.v1_0;
+package ohos.hdi.nfc.v1_0;
 
-import ohos.hdi.nfc.nfc_core.v1_0.NfcTypes;
-import ohos.hdi.nfc.nfc_core.v1_0.INfcCallback;
+import ohos.hdi.nfc.v1_0.NfcTypes;
+import ohos.hdi.nfc.v1_0.INfcCallback;
 
 /**
  * @brief Declares the APIs provided by the nfc module for obtaining nfc controller operations, enabling or 

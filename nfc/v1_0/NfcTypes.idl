@@ -38,7 +38,7 @@
  * @version 1.0
  */
 
-package ohos.hdi.nfc.nfc_core.v1_0;
+package ohos.hdi.nfc.v1_0;
 
 /**
  * @brief Enumerates return values of the Nfc Event.
