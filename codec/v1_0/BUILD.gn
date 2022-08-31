@@ -27,9 +27,7 @@ if (defined(ohos_lite)) {
       "ICodecComponent.idl",
       "ICodecComponentManager.idl",
     ]
-
-    sequenceable = [ "//drivers/peripheral/codec/hal/buffersequence:libbufferhandle_parcelable" ]
-
+    sequenceable = [ "//drivers/hdf_core/adapter/uhdf2/model/display/base/bufferhandle_parcelable:libbufferhandle_parcelable" ]
     language = "cpp"
     subsystem_name = "hdf"
     part_name = "drivers_interface_codec"

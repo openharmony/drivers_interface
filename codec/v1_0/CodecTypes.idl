@@ -14,7 +14,7 @@
  */
 
 package ohos.hdi.codec.v1_0;
-sequenceable OHOS.HDI.CODEC.BufferHandleParcelable;
+sequenceable OHOS.HDI.Display.BufferHandleParcelable;
 
 enum CodecType {
     VIDEO_DECODER,
