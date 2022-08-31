@@ -1,8 +1,14 @@
 {
-    "name": "drivers_interface_location_agnss",
+    "name": "@ohos/drivers_interface_location_agnss",
     "description": "agnss device driver interface",
     "version": "3.2",
     "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+      "destPath": "drivers/interface/location/agnss"
+    },
+    "dirs": {},
+    "scripts": {},
     "component": {
       "name": "drivers_interface_location_agnss",
       "subsystem": "hdf",
@@ -17,7 +23,7 @@
           "hiviewdfx_hilog_native",
           "utils_base"
         ],
-        "third_part": [
+        "third_party": [
           "bounds_checking_function"
         ]
       },

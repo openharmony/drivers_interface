@@ -1,9 +1,13 @@
 {
-    "name": "drivers_interface_display",
+    "name": "@ohos/drivers_interface_display",
     "version": "3.1.0",
     "description": "display device driver interface",
     "homePage": "https://gitee.com/openharmony",
     "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+      "destPath": "drivers/interface/display"
+    },
     "language": "",
     "private": false,
     "scripts": {},
