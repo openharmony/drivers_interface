@@ -28,4 +28,13 @@ interface AudioAdapter {
     GetPortCapability([in] struct AudioPort port, [out] struct AudioPortCapability capability);
     SetPassthroughMode([in] struct AudioPort port, [in] enum AudioPortPassthroughMode mode);
     GetPassthroughMode([in] struct AudioPort port, [out] enum AudioPortPassthroughMode mode);
+    GetDeviceStatus([out] struct AudioDeviceStatus status);
+    UpdateAudioRoute([in] struct AudioRoute route, [out] int routeHandle);
+    ReleaseAudioRoute([in] int routeHandle);
+    SetMicMute([in] boolean mute);
+    GetMicMute([out] boolean mute);
+    SetVoiceVolume([in] float volume);
+    SetExtraParams([in] enum AudioExtParamKey key, [in] String condition, [in] String value);
+    GetExtraParams([in] enum AudioExtParamKey key, [in] String condition, [out] String value);
+    RegExtraParamObserver([in] AudioCallback audioCallback, [in] byte cookie);
 }

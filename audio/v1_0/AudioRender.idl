@@ -28,6 +28,7 @@ interface AudioRender {
     GetChannelMode([out] enum AudioChannelMode mode);
     RegCallback([in] AudioCallback audioCallback, [in] byte cookie);
     DrainBuffer([out] enum AudioDrainNotifyType type);
+    IsSupportsDrain([out] boolean support);
     CheckSceneCapability([in] struct AudioSceneDescriptor scene, [out] boolean supported);
     SelectScene([in] struct AudioSceneDescriptor scene);
     SetMute([in] boolean mute);
@@ -46,6 +47,9 @@ interface AudioRender {
     GetExtraParams([out] String keyValueList);
     ReqMmapBuffer([in] int reqSize, [in] struct AudioMmapBufferDescripter desc);
     GetMmapPosition([out] unsigned long frames, [out] struct AudioTimeStamp time);
+    AddAudioEffect([in] unsigned long effectid);
+    RemoveAudioEffect([in] unsigned long effectid);
+    GetFrameBufferSize([out] unsigned long bufferSize);
     Start();
     Stop();
     Pause();
@@ -53,4 +57,5 @@ interface AudioRender {
     Flush();
     TurnStandbyMode();
     AudioDevDump([in] int range, [in] int fd);
+    IsSupportsPauseAndResume([out] boolean supportPause, [out] boolean supportResume);
 }
