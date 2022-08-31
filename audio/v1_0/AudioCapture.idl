@@ -38,6 +38,9 @@ interface AudioCapture {
     GetExtraParams([out] String keyValueList);
     ReqMmapBuffer([in] int reqSize, [in] struct AudioMmapBufferDescripter desc);
     GetMmapPosition([out] unsigned long frames, [out] struct AudioTimeStamp time);
+    AddAudioEffect([in] unsigned long effectid);
+    RemoveAudioEffect([in] unsigned long effectid);
+    GetFrameBufferSize([out] unsigned long bufferSize);
     Start();
     Stop();
     Pause();
@@ -45,4 +48,5 @@ interface AudioCapture {
     Flush();
     TurnStandbyMode();
     AudioDevDump([in] int range, [in] int fd);
+    IsSupportsPauseAndResume([out] boolean supportPause, [out] boolean supportResume);
 }
