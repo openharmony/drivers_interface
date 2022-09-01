@@ -40,7 +40,7 @@ import ohos.hdi.audio.v1_0.AudioTypes;
  * @return Returns <b>0</b> if the callback is successfully executed; returns a negative value otherwise.
  * @see RegCallback
  */
-[callback] interface AudioCallback {
+[callback] interface IAudioCallback {
     RenderCallback([in] enum AudioCallbackType type, [out] byte reserved, [out] byte cookie);
     ParamCallback([in] enum AudioExtParamKey key, [in] byte condition, [in] byte value, [out] byte reserved, [out] byte cookie);
 }

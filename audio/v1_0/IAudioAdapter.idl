@@ -16,14 +16,14 @@
 package ohos.hdi.audio.v1_0;
 
 import ohos.hdi.audio.v1_0.AudioTypes;
-import ohos.hdi.audio.v1_0.AudioRender;
-import ohos.hdi.audio.v1_0.AudioCapture;
+import ohos.hdi.audio.v1_0.IAudioRender;
+import ohos.hdi.audio.v1_0.IAudioCapture;
 
-interface AudioAdapter {
+interface IAudioAdapter {
     InitAllPorts();
-    CreateRender([in] struct AudioDeviceDescriptor desc, [in] struct AudioSampleAttributes attrs, [out] AudioRender render);
+    CreateRender([in] struct AudioDeviceDescriptor desc, [in] struct AudioSampleAttributes attrs, [out] IAudioRender render);
     DestroyRender();
-    CreateCapture([in] struct AudioDeviceDescriptor desc, [in] struct AudioSampleAttributes attrs, [out] AudioCapture capture);
+    CreateCapture([in] struct AudioDeviceDescriptor desc, [in] struct AudioSampleAttributes attrs, [out] IAudioCapture capture);
     DestroyCapture();
     GetPortCapability([in] struct AudioPort port, [out] struct AudioPortCapability capability);
     SetPassthroughMode([in] struct AudioPort port, [in] enum AudioPortPassthroughMode mode);
@@ -36,5 +36,5 @@ interface AudioAdapter {
     SetVoiceVolume([in] float volume);
     SetExtraParams([in] enum AudioExtParamKey key, [in] String condition, [in] String value);
     GetExtraParams([in] enum AudioExtParamKey key, [in] String condition, [out] String value);
-    RegExtraParamObserver([in] AudioCallback audioCallback, [in] byte cookie);
+    RegExtraParamObserver([in] IAudioCallback audioCallback, [in] byte cookie);
 }
