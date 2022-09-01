@@ -16,10 +16,19 @@
 package ohos.hdi.audio.v1_0;
 
 import ohos.hdi.audio.v1_0.AudioTypes;
+import ohos.hdi.audio.v1_0.IAudioCallback;
 
-interface AudioCapture {
-    CaptureFrame([out] byte[] frame, [in] unsigned long requestBytes);
-    GetCapturePosition([out] unsigned long frames, [out] struct AudioTimeStamp time);
+interface IAudioRender {
+    GetLatency([out] unsigned int ms);
+    RenderFrame([in] byte[] frame, [out] unsigned long replyBytes);
+    GetRenderPosition([out] unsigned long frames, [out] struct AudioTimeStamp time);
+    SetRenderSpeed([in] float speed);
+    GetRenderSpeed([out] float speed);
+    SetChannelMode([in] enum AudioChannelMode mode);
+    GetChannelMode([out] enum AudioChannelMode mode);
+    RegCallback([in] IAudioCallback audioCallback, [in] byte cookie);
+    DrainBuffer([out] enum AudioDrainNotifyType type);
+    IsSupportsDrain([out] boolean support);
     CheckSceneCapability([in] struct AudioSceneDescriptor scene, [out] boolean supported);
     SelectScene([in] struct AudioSceneDescriptor scene);
     SetMute([in] boolean mute);
