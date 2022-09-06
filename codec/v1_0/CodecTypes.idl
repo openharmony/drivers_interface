@@ -14,7 +14,6 @@
  */
 
 package ohos.hdi.codec.v1_0;
-sequenceable OHOS.HDI.Display.BufferHandleParcelable;
 
 enum CodecType {
     VIDEO_DECODER,
@@ -220,7 +219,7 @@ struct OmxCodecBuffer {
     unsigned int size;
     union OMX_VERSIONTYPE version;
     unsigned int bufferType;
-    BufferHandleParcelable bufferhandle;
+    BufferHandle bufferhandle;
     FileDescriptor fd;
     unsigned int allocLen;
     unsigned int filledLen;
