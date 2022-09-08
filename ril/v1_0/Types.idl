@@ -429,9 +429,9 @@ struct ILockStatusResp {
 struct IRadioProtocol {
     int slotId;
     int sessionId;
-    enum IRadioProtocolPhase phase;
     int technology;
     int modemId;
+    enum IRadioProtocolPhase phase;
     enum IRadioProtocolStatus status;
 };
 struct IGsmRssi {
