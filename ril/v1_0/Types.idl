@@ -138,6 +138,18 @@ enum IHRilRegNotifyMode {
     REG_NOTIFY_STAT_ONLY = 1,
     REG_NOTIFY_STAT_LAC_CELLID = 2,
 };
+enum IRadioProtocolPhase {
+    RADIO_PROTOCOL_PHASE_INITIAL,
+    RADIO_PROTOCOL_PHASE_CHECK,
+    RADIO_PROTOCOL_PHASE_UPDATE,
+    RADIO_PROTOCOL_PHASE_NOTIFY,
+    RADIO_PROTOCOL_PHASE_COMPLETE,
+};
+enum IRadioProtocolStatus {
+    RADIO_PROTOCOL_STATUS_NONE,
+    RADIO_PROTOCOL_STATUS_SUCCESS,
+    RADIO_PROTOCOL_STATUS_FAIL,
+};
 struct IEmergencyCall {
     int index;
     int total;
@@ -389,17 +401,6 @@ struct ISimPinInputTimes {
     int puk2Times;
     int pin2Times;
 };
-struct ISimProtocolRequest {
-    int serial;
-    int phase;
-    int protocol;
-    int slotId;
-};
-struct ISimProtocolResponse {
-    int phase;
-    int result;
-    int slotId;
-};
 struct IApduSimIORequestInfo {
     int serial;
     int channelId;
@@ -424,6 +425,14 @@ struct IOpenLogicalChannelResponse {
 struct ILockStatusResp {
     int result;
     int remain;
+};
+struct IRadioProtocol {
+    int slotId;
+    int sessionId;
+    int technology;
+    int modemId;
+    enum IRadioProtocolPhase phase;
+    enum IRadioProtocolStatus status;
 };
 struct IGsmRssi {
     int rxlev;
@@ -645,10 +654,6 @@ struct ICellListCurrentInfo {
 struct IPreferredNetworkTypeInfo {
     int preferredNetworkType;
     int flag;
-};
-struct IRadioCapabilityInfo {
-    int ratFamily;
-    String modemId;
 };
 struct IPhysicalChannelConfig {
     enum IHRilCellConnectionStatus cellConnStatus;

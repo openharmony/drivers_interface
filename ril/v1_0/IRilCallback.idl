@@ -94,6 +94,7 @@ import ohos.hdi.ril.v1_0.Types;
     SimStkEventNotify([in] int slotId, [in] String response);
     SimStkCallSetupNotify([in] int slotId);
     SimRefreshNotify([in] int slotId);
+    SimRadioProtocolUpdated([in] int slotId, [in] struct IRadioProtocol radioProtocol);
     GetSimIOResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct IIccIoResultInfo result);
     GetSimStatusResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct ICardStatusInfo result);
     GetImsiResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] String response);
@@ -109,8 +110,8 @@ import ohos.hdi.ril.v1_0.Types;
     SimStkSendEnvelopeResponse([in] struct IHRilRadioResponseInfo responseInfo);
     SimStkSendCallSetupRequestResultResponse([in] struct IHRilRadioResponseInfo responseInfo);
     SimStkIsReadyResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    SetRadioProtocolResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct ISimProtocolResponse pSimProtocol);
+    GetRadioProtocolResponse([in] struct IHRilRadioResponseInfo responseInfo,[in] struct IRadioProtocol radioProtocol);
+    SetRadioProtocolResponse([in] struct IHRilRadioResponseInfo responseInfo,[in] struct IRadioProtocol radioProtocol);
     SimOpenLogicalChannelResponse([in] struct IHRilRadioResponseInfo responseInfo,
         [in] struct IOpenLogicalChannelResponse pOpenLogicalChannelResponse);
     SimCloseLogicalChannelResponse([in] struct IHRilRadioResponseInfo responseInfo);
@@ -146,8 +147,6 @@ import ohos.hdi.ril.v1_0.Types;
     SetPreferredNetworkResponse([in] struct IHRilRadioResponseInfo responseInfo);
     GetPreferredNetworkResponse([in] struct IHRilRadioResponseInfo responseInfo,
         [in] struct IPreferredNetworkTypeInfo preferredNetworkTypeInfo);
-    GetRadioCapabilityResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct IRadioCapabilityInfo radioCapabilityInfo);
     GetPhysicalChannelConfigResponse([in] struct IHRilRadioResponseInfo responseInfo,
         [in] struct IChannelConfigInfoList channelConfigInfoList);
     SetLocateUpdatesResponse([in] struct IHRilRadioResponseInfo responseInfo);
