@@ -56,7 +56,6 @@ enum AudioFormat {
     AUDIO_FORMAT_G711A      = 1 << 25 | 1 << 0,            /**< G711A */
     AUDIO_FORMAT_G711U      = 1 << 25 | 1 << 1,            /**< G711u */
     AUDIO_FORMAT_G726       = 1 << 25 | 1 << 1 | 1 << 0,   /**< G726 */
-    
 };
 enum AudioChannelMask {
     AUDIO_CHANNEL_FRONT_LEFT  = 1,  /**< Front left channel */
