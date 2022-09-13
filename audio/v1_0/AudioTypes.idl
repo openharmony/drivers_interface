@@ -43,19 +43,19 @@ enum AudioCategory {
     AUDIO_IN_CALL = 3,
 };
 enum AudioFormat {
-    AUDIO_FORMAT_PCM_8_BIT  = 1,        /**< 8-bit PCM */
-    AUDIO_FORMAT_PCM_16_BIT = 2,        /**< 16-bit PCM */
-    AUDIO_FORMAT_PCM_24_BIT = 3,        /**< 24-bit PCM */
-    AUDIO_FORMAT_PCM_32_BIT = 4,        /**< 32-bit PCM */
-    AUDIO_FORMAT_AAC_MAIN   = 16777217, /**< AAC main */
-    AUDIO_FORMAT_AAC_LC     = 16777218, /**< AAC LC */
-    AUDIO_FORMAT_AAC_LD     = 16777219, /**< AAC LD */
-    AUDIO_FORMAT_AAC_ELD    = 16777220, /**< AAC ELD */
-    AUDIO_FORMAT_AAC_HE_V1  = 16777221, /**< AAC HE_V1 */
-    AUDIO_FORMAT_AAC_HE_V2  = 16777222, /**< AAC HE_V2 */
-    AUDIO_FORMAT_G711A      = 33554433, /**< G711A */
-    AUDIO_FORMAT_G711U      = 33554434, /**< G711u */
-    AUDIO_FORMAT_G726       = 33554435, /**< G726 */
+    AUDIO_FORMAT_PCM_8_BIT  = 0x1,        /**< 8-bit PCM */
+    AUDIO_FORMAT_PCM_16_BIT = 0x2,        /**< 16-bit PCM */
+    AUDIO_FORMAT_PCM_24_BIT = 0x3,        /**< 24-bit PCM */
+    AUDIO_FORMAT_PCM_32_BIT = 0x4,        /**< 32-bit PCM */
+    AUDIO_FORMAT_AAC_MAIN   = 0x1000001, /**< AAC main */
+    AUDIO_FORMAT_AAC_LC     = 0x1000002, /**< AAC LC */
+    AUDIO_FORMAT_AAC_LD     = 0x1000003, /**< AAC LD */
+    AUDIO_FORMAT_AAC_ELD    = 0x1000004, /**< AAC ELD */
+    AUDIO_FORMAT_AAC_HE_V1  = 0x1000005, /**< AAC HE_V1 */
+    AUDIO_FORMAT_AAC_HE_V2  = 0x1000006, /**< AAC HE_V2 */
+    AUDIO_FORMAT_G711A      = 0x2000001, /**< G711A */
+    AUDIO_FORMAT_G711U      = 0x2000002, /**< G711u */
+    AUDIO_FORMAT_G726       = 0x2000003, /**< G726 */
 };
 enum AudioChannelMask {
     AUDIO_CHANNEL_FRONT_LEFT  = 1,  /**< Front left channel */
