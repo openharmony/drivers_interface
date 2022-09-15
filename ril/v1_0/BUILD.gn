@@ -19,10 +19,10 @@ if (defined(ohos_lite)) {
   }
 } else {
   hdi("ril") {
-    module_name = "ril_interface_service"
+    module_name = "ril_service"
     sources = [
+      "IRil.idl",
       "IRilCallback.idl",
-      "IRilInterface.idl",
       "Types.idl",
     ]
     language = "cpp"

@@ -18,165 +18,181 @@ package ohos.hdi.ril.v1_0;
 import ohos.hdi.ril.v1_0.Types;
 
 [callback] interface IRilCallback {
-    CallEmergencyNotice([in] int slotId, [in] struct IEmergencyInfoList emergencyInfoList);
-    CallStateUpdated([in] int slotId, [in] int type);
-    CallRingbackVoiceNotice([in] int slotId, [in] struct IRingbackVoice ringbackVoice);
-    CallSrvccStatusNotice([in] int slotId, [in] struct ISrvccStatus srvccStatus);
-    CallUssdNotice([in] int slotId, [in] struct IUssdNoticeInfo ussdNoticeInfo);
-    CallSsNotice([in] int slotId, [in] struct ISsNoticeInfo ssNoticeInfo);
+    CallEmergencyNotice([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct EmergencyInfoList emergencyInfoList);
+    CallStateUpdated([in] struct RilRadioResponseInfo responseInfo);
+    CallRingbackVoiceNotice([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct RingbackVoice ringbackVoice);
+    CallSrvccStatusNotice([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct SrvccStatus srvccStatus);
+    CallUssdNotice([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct UssdNoticeInfo ussdNoticeInfo);
+    CallSsNotice([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct SsNoticeInfo ssNoticeInfo);
 
-    SetEmergencyCallListResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    GetEmergencyCallListResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct IEmergencyInfoList emergencyInfoList);
-    GetCallListResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct ICallInfoList callList);
-    DialResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    HangupResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    RejectResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    AnswerResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    HoldCallResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    UnHoldCallResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    SwitchCallResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    GetClipResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct IGetClipResult getClipResult);
-    SetClipResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    CombineConferenceResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    SeparateConferenceResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    CallSupplementResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    GetCallWaitingResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct ICallWaitResult callWaitResult);
-    SetCallWaitingResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    GetCallTransferInfoResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct ICallForwardQueryInfoList cFQueryList);
-    SetCallTransferInfoResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    GetCallRestrictionResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct ICallRestrictionResult result);
-    SetCallRestrictionResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    GetClirResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct IGetClirResult getClirResult);
-    SetClirResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    StartDtmfResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    SendDtmfResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    StopDtmfResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    GetCallPreferenceModeResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] int mode);
-    SetCallPreferenceModeResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    SetUssdResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    GetUssdResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] int cusd);
-    SetMuteResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    GetMuteResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] int mute);
-    GetCallFailReasonResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] int callFail);
-    SetBarringPasswordResponse([in] struct IHRilRadioResponseInfo responseInfo);
+    SetEmergencyCallListResponse([in] struct RilRadioResponseInfo responseInfo);
+    GetEmergencyCallListResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct EmergencyInfoList emergencyInfoList);
+    GetCallListResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct CallInfoList callList);
+    DialResponse([in] struct RilRadioResponseInfo responseInfo);
+    HangupResponse([in] struct RilRadioResponseInfo responseInfo);
+    RejectResponse([in] struct RilRadioResponseInfo responseInfo);
+    AnswerResponse([in] struct RilRadioResponseInfo responseInfo);
+    HoldCallResponse([in] struct RilRadioResponseInfo responseInfo);
+    UnHoldCallResponse([in] struct RilRadioResponseInfo responseInfo);
+    SwitchCallResponse([in] struct RilRadioResponseInfo responseInfo);
+    GetClipResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct GetClipResult getClipResult);
+    SetClipResponse([in] struct RilRadioResponseInfo responseInfo);
+    CombineConferenceResponse([in] struct RilRadioResponseInfo responseInfo);
+    SeparateConferenceResponse([in] struct RilRadioResponseInfo responseInfo);
+    CallSupplementResponse([in] struct RilRadioResponseInfo responseInfo);
+    GetCallWaitingResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct CallWaitResult callWaitResult);
+    SetCallWaitingResponse([in] struct RilRadioResponseInfo responseInfo);
+    GetCallTransferInfoResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct CallForwardQueryInfoList cFQueryList);
+    SetCallTransferInfoResponse([in] struct RilRadioResponseInfo responseInfo);
+    GetCallRestrictionResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct CallRestrictionResult result);
+    SetCallRestrictionResponse([in] struct RilRadioResponseInfo responseInfo);
+    GetClirResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct GetClirResult getClirResult);
+    SetClirResponse([in] struct RilRadioResponseInfo responseInfo);
+    StartDtmfResponse([in] struct RilRadioResponseInfo responseInfo);
+    SendDtmfResponse([in] struct RilRadioResponseInfo responseInfo);
+    StopDtmfResponse([in] struct RilRadioResponseInfo responseInfo);
+    GetCallPreferenceModeResponse([in] struct RilRadioResponseInfo responseInfo, [in] int mode);
+    SetCallPreferenceModeResponse([in] struct RilRadioResponseInfo responseInfo);
+    SetUssdResponse([in] struct RilRadioResponseInfo responseInfo);
+    GetUssdResponse([in] struct RilRadioResponseInfo responseInfo, [in] int cusd);
+    SetMuteResponse([in] struct RilRadioResponseInfo responseInfo);
+    GetMuteResponse([in] struct RilRadioResponseInfo responseInfo, [in] int mute);
+    GetCallFailReasonResponse([in] struct RilRadioResponseInfo responseInfo, [in] int callFail);
+    SetBarringPasswordResponse([in] struct RilRadioResponseInfo responseInfo);
 
-    PdpContextListUpdated([in] int slotId, [in] struct IDataCallResultList dataCallResultList);
-    ActivatePdpContextResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct ISetupDataCallResultInfo setupDataCallResultInfo);
-    DeactivatePdpContextResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    GetPdpContextListResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct IDataCallResultList dataCallResultList);
-    SetInitApnInfoResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    GetLinkBandwidthInfoResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct IDataLinkBandwidthInfo dataLinkBandwidthInfo);
-    SetLinkBandwidthReportingRuleResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    SetDataPermittedResponse([in] struct IHRilRadioResponseInfo responseInfo);
+    PdpContextListUpdated([in] struct RilRadioResponseInfo responseInfo, [in] struct DataCallResultList dataCallResultList);
+    ActivatePdpContextResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct SetupDataCallResultInfo setupDataCallResultInfo);
+    DeactivatePdpContextResponse([in] struct RilRadioResponseInfo responseInfo);
+    GetPdpContextListResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct DataCallResultList dataCallResultList);
+    SetInitApnInfoResponse([in] struct RilRadioResponseInfo responseInfo);
+    GetLinkBandwidthInfoResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct DataLinkBandwidthInfo dataLinkBandwidthInfo);
+    SetLinkBandwidthReportingRuleResponse([in] struct RilRadioResponseInfo responseInfo);
+    SetDataPermittedResponse([in] struct RilRadioResponseInfo responseInfo);
 
-    RadioStateUpdated([in] int slotId, [in] int state);
-    VoiceRadioTechUpdated([in] int slotId, [in] struct IVoiceRadioTechnology voiceRadioTechnology);
-    ShutDownResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    SetRadioStateResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    GetRadioStateResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] int state);
-    GetImeiResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] String imei);
-    GetMeidResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] String meid);
-    GetVoiceRadioTechnologyResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct IVoiceRadioTechnology voiceRadioTechnology);
-    GetBasebandVersionResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] String basebandVersion);
+    RadioStateUpdated([in] struct RilRadioResponseInfo responseInfo, [in] int state);
+    VoiceRadioTechUpdated([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct VoiceRadioTechnology voiceRadioTechnology);
+    ShutDownResponse([in] struct RilRadioResponseInfo responseInfo);
+    SetRadioStateResponse([in] struct RilRadioResponseInfo responseInfo);
+    GetRadioStateResponse([in] struct RilRadioResponseInfo responseInfo,[in] int state);
+    GetImeiResponse([in] struct RilRadioResponseInfo responseInfo, [in] String imei);
+    GetMeidResponse([in] struct RilRadioResponseInfo responseInfo, [in] String meid);
+    GetVoiceRadioTechnologyResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct VoiceRadioTechnology voiceRadioTechnology);
+    GetBasebandVersionResponse([in] struct RilRadioResponseInfo responseInfo, [in] String basebandVersion);
 
-    SimStateUpdated([in] int slotId);
-    SimStkSessionEndNotify([in] int slotId);
-    SimStkProactiveNotify([in] int slotId, [in] String response);
-    SimStkAlphaNotify([in] int slotId, [in] String response);
-    SimStkEventNotify([in] int slotId, [in] String response);
-    SimStkCallSetupNotify([in] int slotId);
-    SimRefreshNotify([in] int slotId);
-    SimRadioProtocolUpdated([in] int slotId, [in] struct IRadioProtocol radioProtocol);
-    GetSimIOResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct IIccIoResultInfo result);
-    GetSimStatusResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct ICardStatusInfo result);
-    GetImsiResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] String response);
-    GetSimLockStatusResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] int simLockStatus);
-    SetSimLockResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct ILockStatusResp lockStatus);
-    ChangeSimPasswordResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct ILockStatusResp lockStatus);
-    UnlockPinResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct ILockStatusResp lockStatus);
-    UnlockPukResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct ILockStatusResp lockStatus);
-    UnlockPin2Response([in] struct IHRilRadioResponseInfo responseInfo, [in] struct ILockStatusResp lockStatus);
-    UnlockPuk2Response([in] struct IHRilRadioResponseInfo responseInfo, [in] struct ILockStatusResp lockStatus);
-    SetActiveSimResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    SimStkSendTerminalResponseResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    SimStkSendEnvelopeResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    SimStkSendCallSetupRequestResultResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    SimStkIsReadyResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    GetRadioProtocolResponse([in] struct IHRilRadioResponseInfo responseInfo,[in] struct IRadioProtocol radioProtocol);
-    SetRadioProtocolResponse([in] struct IHRilRadioResponseInfo responseInfo,[in] struct IRadioProtocol radioProtocol);
-    SimOpenLogicalChannelResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct IOpenLogicalChannelResponse pOpenLogicalChannelResponse);
-    SimCloseLogicalChannelResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    SimTransmitApduLogicalChannelResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct IIccIoResultInfo result);
-    SimTransmitApduBasicChannelResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct IIccIoResultInfo result);
-    SimAuthenticationResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct IIccIoResultInfo result);
-    UnlockSimLockResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct ILockStatusResp lockStatus);
+    SimStateUpdated([in] struct RilRadioResponseInfo responseInfo);
+    SimStkSessionEndNotify([in] struct RilRadioResponseInfo responseInfo);
+    SimStkProactiveNotify([in] struct RilRadioResponseInfo responseInfo, [in] String response);
+    SimStkAlphaNotify([in] struct RilRadioResponseInfo responseInfo, [in] String response);
+    SimStkEventNotify([in] struct RilRadioResponseInfo responseInfo, [in] String response);
+    SimStkCallSetupNotify([in] struct RilRadioResponseInfo responseInfo);
+    SimRefreshNotify([in] struct RilRadioResponseInfo responseInfo);
+    SimRadioProtocolUpdated([in] struct RilRadioResponseInfo responseInfo, [in] struct RadioProtocol radioProtocol);
+    GetSimIOResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct IccIoResultInfo result);
+    GetSimStatusResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct CardStatusInfo result);
+    GetImsiResponse([in] struct RilRadioResponseInfo responseInfo, [in] String response);
+    GetSimLockStatusResponse([in] struct RilRadioResponseInfo responseInfo, [in] int simLockStatus);
+    SetSimLockResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
+    ChangeSimPasswordResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
+    UnlockPinResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
+    UnlockPukResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
+    UnlockPin2Response([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
+    UnlockPuk2Response([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
+    SetActiveSimResponse([in] struct RilRadioResponseInfo responseInfo);
+    SimStkSendTerminalResponseResponse([in] struct RilRadioResponseInfo responseInfo);
+    SimStkSendEnvelopeResponse([in] struct RilRadioResponseInfo responseInfo);
+    SimStkSendCallSetupRequestResultResponse([in] struct RilRadioResponseInfo responseInfo);
+    SimStkIsReadyResponse([in] struct RilRadioResponseInfo responseInfo);
+    GetRadioProtocolResponse([in] struct RilRadioResponseInfo responseInfo,[in] struct RadioProtocol radioProtocol);
+    SetRadioProtocolResponse([in] struct RilRadioResponseInfo responseInfo,[in] struct RadioProtocol radioProtocol);
+    SimOpenLogicalChannelResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct OpenLogicalChannelResponse pOpenLogicalChannelResponse);
+    SimCloseLogicalChannelResponse([in] struct RilRadioResponseInfo responseInfo);
+    SimTransmitApduLogicalChannelResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct IccIoResultInfo result);
+    SimTransmitApduBasicChannelResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct IccIoResultInfo result);
+    SimAuthenticationResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct IccIoResultInfo result);
+    UnlockSimLockResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
 
-    NetworkCsRegStatusUpdated([in] int slotId, [in] struct ICsRegStatusInfo csRegStatusInfo);
-    NetworkPsRegStatusUpdated([in] int slotId, [in] struct IPsRegStatusInfo psRegStatusInfo);
-    SignalStrengthUpdated([in] int slotId, [in] struct IRssi rssi);
-    NetworkTimeZoneUpdated([in] int slotId, [in] String timeZoneStr);
-    NetworkTimeUpdated([in] int slotId, [in] String timeStr);
-    NetworkPhyChnlCfgUpdated([in] int slotId, [in] struct IChannelConfigInfoList channelConfigInfoList);
-    NetworkCurrentCellUpdated([in] int slotId, [in] struct ICellListCurrentInfo cellListCurrentInfo);
-    GetSignalStrengthResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct IRssi rssi);
-    GetCsRegStatusResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct ICsRegStatusInfo csRegStatusInfo);
-    GetPsRegStatusResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct IPsRegStatusInfo psRegStatusInfo);
-    GetOperatorInfoResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct IOperatorInfo psRegStatusInfo);
-    GetNetworkSearchInformationResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct IAvailableNetworkList availableNetworkList);
-    GetNetworkSelectionModeResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct ISetNetworkModeInfo setNetworkModeInfo);
-    SetNetworkSelectionModeResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    GetNeighboringCellInfoListResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct ICellListNearbyInfo cellListNearbyInfo);
-    GetCurrentCellInfoResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct ICellListCurrentInfo cellListCurrentInfo);
-    SetPreferredNetworkResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    GetPreferredNetworkResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct IPreferredNetworkTypeInfo preferredNetworkTypeInfo);
-    GetPhysicalChannelConfigResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct IChannelConfigInfoList channelConfigInfoList);
-    SetLocateUpdatesResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    SetNotificationFilterResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    SetDeviceStateResponse([in] struct IHRilRadioResponseInfo responseInfo);
+    NetworkCsRegStatusUpdated([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct CsRegStatusInfo csRegStatusInfo);
+    NetworkPsRegStatusUpdated([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct PsRegStatusInfo psRegStatusInfo);
+    SignalStrengthUpdated([in] struct RilRadioResponseInfo responseInfo, [in] struct Rssi rssi);
+    NetworkTimeZoneUpdated([in] struct RilRadioResponseInfo responseInfo, [in] String timeZoneStr);
+    NetworkTimeUpdated([in] struct RilRadioResponseInfo responseInfo, [in] String timeStr);
+    NetworkPhyChnlCfgUpdated([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct ChannelConfigInfoList channelConfigInfoList);
+    NetworkCurrentCellUpdated([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct CellListCurrentInfo cellListCurrentInfo);
+    GetSignalStrengthResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct Rssi rssi);
+    GetCsRegStatusResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct CsRegStatusInfo csRegStatusInfo);
+    GetPsRegStatusResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct PsRegStatusInfo psRegStatusInfo);
+    GetOperatorInfoResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct OperatorInfo psRegStatusInfo);
+    GetNetworkSearchInformationResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct AvailableNetworkList availableNetworkList);
+    GetNetworkSelectionModeResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct SetNetworkModeInfo setNetworkModeInfo);
+    SetNetworkSelectionModeResponse([in] struct RilRadioResponseInfo responseInfo);
+    GetNeighboringCellInfoListResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct CellListNearbyInfo cellListNearbyInfo);
+    GetCurrentCellInfoResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct CellListCurrentInfo cellListCurrentInfo);
+    SetPreferredNetworkResponse([in] struct RilRadioResponseInfo responseInfo);
+    GetPreferredNetworkResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct PreferredNetworkTypeInfo preferredNetworkTypeInfo);
+    GetPhysicalChannelConfigResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct ChannelConfigInfoList channelConfigInfoList);
+    SetLocateUpdatesResponse([in] struct RilRadioResponseInfo responseInfo);
+    SetNotificationFilterResponse([in] struct RilRadioResponseInfo responseInfo);
+    SetDeviceStateResponse([in] struct RilRadioResponseInfo responseInfo);
 
-    NewSmsNotify([in] int slotId, [in] struct ISmsMessageInfo smsMessageInfo);
-    NewCdmaSmsNotify([in] int slotId, [in] struct ISmsMessageInfo smsMessageInfo);
-    SmsStatusReportNotify([in] int slotId, [in] struct ISmsMessageInfo smsMessageInfo);
-    NewSmsStoredOnSimNotify([in] int slotId, [in] int recordNumber, [in] int indicationType);
-    CBConfigNotify([in] int slotId, [in] struct ICBConfigReportInfo cellBroadConfigReportInfo);
-    SendGsmSmsResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct ISendSmsResultInfo sendSmsResultInfo);
-    SendCdmaSmsResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct ISendSmsResultInfo sendSmsResultInfo);
-    AddSimMessageResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    DelSimMessageResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    UpdateSimMessageResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    AddCdmaSimMessageResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    DelCdmaSimMessageResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    UpdateCdmaSimMessageResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    SetSmscAddrResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    GetSmscAddrResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct IServiceCenterAddress serviceCenterAddress);
-    SetCBConfigResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    GetCBConfigResponse([in] struct IHRilRadioResponseInfo responseInfo, [in] struct ICBConfigInfo cellBroadcastInfo);
-    SetCdmaCBConfigResponse([in] struct IHRilRadioResponseInfo responseInfo);
-    GetCdmaCBConfigResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct ICdmaCBConfigInfo cdmaCBConfigInfo);
-    SendSmsMoreModeResponse([in] struct IHRilRadioResponseInfo responseInfo,
-        [in] struct ISendSmsResultInfo sendSmsResultInfo);
-    SendSmsAckResponse([in] struct IHRilRadioResponseInfo responseInfo);
+    NewSmsNotify([in] struct RilRadioResponseInfo responseInfo, [in] struct SmsMessageInfo smsMessageInfo);
+    NewCdmaSmsNotify([in] struct RilRadioResponseInfo responseInfo, [in] struct SmsMessageInfo smsMessageInfo);
+    SmsStatusReportNotify([in] struct RilRadioResponseInfo responseInfo, [in] struct SmsMessageInfo smsMessageInfo);
+    NewSmsStoredOnSimNotify([in] struct RilRadioResponseInfo responseInfo, [in] int recordNumber,
+        [in] int indicationType);
+    CBConfigNotify([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct CBConfigReportInfo cellBroadConfigReportInfo);
+    SendGsmSmsResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct SendSmsResultInfo sendSmsResultInfo);
+    SendCdmaSmsResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct SendSmsResultInfo sendSmsResultInfo);
+    AddSimMessageResponse([in] struct RilRadioResponseInfo responseInfo);
+    DelSimMessageResponse([in] struct RilRadioResponseInfo responseInfo);
+    UpdateSimMessageResponse([in] struct RilRadioResponseInfo responseInfo);
+    AddCdmaSimMessageResponse([in] struct RilRadioResponseInfo responseInfo);
+    DelCdmaSimMessageResponse([in] struct RilRadioResponseInfo responseInfo);
+    UpdateCdmaSimMessageResponse([in] struct RilRadioResponseInfo responseInfo);
+    SetSmscAddrResponse([in] struct RilRadioResponseInfo responseInfo);
+    GetSmscAddrResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct ServiceCenterAddress serviceCenterAddress);
+    SetCBConfigResponse([in] struct RilRadioResponseInfo responseInfo);
+    GetCBConfigResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct CBConfigInfo cellBroadcastInfo);
+    SetCdmaCBConfigResponse([in] struct RilRadioResponseInfo responseInfo);
+    GetCdmaCBConfigResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct CdmaCBConfigInfo cdmaCBConfigInfo);
+    SendSmsMoreModeResponse([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct SendSmsResultInfo sendSmsResultInfo);
+    SendSmsAckResponse([in] struct RilRadioResponseInfo responseInfo);
+
+    CommonErrorResponse([in] struct RilRadioResponseInfo responseInfo);
 }

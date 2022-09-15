@@ -18,12 +18,12 @@ package ohos.hdi.ril.v1_0;
 import ohos.hdi.ril.v1_0.IRilCallback;
 import ohos.hdi.ril.v1_0.Types;
 
-interface IRilInterface {
+interface IRil {
     [oneway] SetCallback([in] IRilCallback rilCallback);
-    [oneway] SetEmergencyCallList([in] int slotId, [in] int serialId, [in] struct IEmergencyInfoList emergencyInfoList);
+    [oneway] SetEmergencyCallList([in] int slotId, [in] int serialId, [in] struct EmergencyInfoList emergencyInfoList);
     [oneway] GetEmergencyCallList([in] int slotId, [in] int serialId);
     [oneway] GetCallList([in] int slotId, [in] int serialId);
-    [oneway] Dial([in] int slotId, [in] int serialId, [in] struct IDialInfo dialInfo);
+    [oneway] Dial([in] int slotId, [in] int serialId, [in] struct DialInfo dialInfo);
     [oneway] Reject([in] int slotId, [in] int serialId);
     [oneway] Hangup([in] int slotId, [in] int serialId, [in] int gsmIndex);
     [oneway] Answer([in] int slotId, [in] int serialId);
@@ -36,10 +36,10 @@ interface IRilInterface {
     [oneway] SetCallWaiting([in] int slotId, [in] int serialId, [in] int activate);
     [oneway] GetCallTransferInfo([in] int slotId, [in] int serialId, [in] int reason);
     [oneway] SetCallTransferInfo([in] int slotId, [in] int serialId,
-        [in] struct ICallForwardSetInfo callForwardSetInfo);
+        [in] struct CallForwardSetInfo callForwardSetInfo);
     [oneway] GetCallRestriction([in] int slotId, [in] int serialId, [in] String fac);
     [oneway] SetCallRestriction([in] int slotId, [in] int serialId,
-        [in] struct ICallRestrictionInfo callRestrictionInfo);
+        [in] struct CallRestrictionInfo callRestrictionInfo);
     [oneway] GetClip([in] int slotId, [in] int serialId);
     [oneway] SetClip([in] int slotId, [in] int serialId, [in] int action);
     [oneway] GetClir([in] int slotId, [in] int serialId);
@@ -52,20 +52,22 @@ interface IRilInterface {
     [oneway] GetMute([in] int slotId, [in] int serialId);
     [oneway] GetCallFailReason([in] int slotId, [in] int serialId);
     [oneway] CallSupplement([in] int slotId, [in] int serialId, [in] int type);
-    [oneway] SendDtmf([in] int slotId, [in] int serialId, [in] struct IDtmfInfo dtmfInfo);
-    [oneway] StartDtmf([in] int slotId, [in] int serialId, [in] struct IDtmfInfo dtmfInfo);
-    [oneway] StopDtmf([in] int slotId, [in] int serialId, [in] struct IDtmfInfo dtmfInfo);
-    [oneway] SetBarringPassword([in] int slotId, [in] int serialId, [in] struct ISetBarringInfo setBarringInfo);
+    [oneway] SendDtmf([in] int slotId, [in] int serialId, [in] struct DtmfInfo dtmfInfo);
+    [oneway] StartDtmf([in] int slotId, [in] int serialId, [in] struct DtmfInfo dtmfInfo);
+    [oneway] StopDtmf([in] int slotId, [in] int serialId, [in] struct DtmfInfo dtmfInfo);
+    [oneway] SetBarringPassword([in] int slotId, [in] int serialId, [in] struct SetBarringInfo setBarringInfo);
 
-    [oneway] ActivatePdpContext([in] int slotId, [in] int serialId, [in] struct IDataCallInfo dataCallInfo);
-    [oneway] DeactivatePdpContext([in] int slotId, [in] int serialId, [in] struct IUniInfo uniInfo);
-    [oneway] GetPdpContextList([in] int slotId, [in] int serialId, [in] struct IUniInfo uniInfo);
-    [oneway] SetInitApnInfo([in] int slotId, [in] int serialId, [in] struct IDataProfileDataInfo dataProfileDataInfo);
+    [oneway] ActivatePdpContext([in] int slotId, [in] int serialId, [in] struct DataCallInfo dataCallInfo);
+    [oneway] DeactivatePdpContext([in] int slotId, [in] int serialId, [in] struct UniInfo uniInfo);
+    [oneway] GetPdpContextList([in] int slotId, [in] int serialId, [in] struct UniInfo uniInfo);
+    [oneway] SetInitApnInfo([in] int slotId, [in] int serialId, [in] struct DataProfileDataInfo dataProfileDataInfo);
     [oneway] GetLinkBandwidthInfo([in] int slotId, [in] int serialId, [in] int cid);
     [oneway] SetLinkBandwidthReportingRule([in] int slotId, [in] int serialId,
-        [in] struct IDataLinkBandwidthReportingRule dataLinkBandwidthReportingRule);
+        [in] struct DataLinkBandwidthReportingRule dataLinkBandwidthReportingRule);
     [oneway] SetDataPermitted([in] int slotId, [in] int serialId, [in] int dataPermitted);
-    [oneway] SetDataProfileInfo([in] int slotId, [in] int serialId, [in] struct IDataProfilesInfo dataProfilesInfo);
+    [oneway] SetDataProfileInfo([in] int slotId, [in] int serialId, [in] struct DataProfilesInfo dataProfilesInfo);
+    [oneway] SendDataPerformanceMode([in] int slotId, [in] int serialId, [in] struct DataPerformanceInfo dataPerformanceInfo);
+    [oneway] SendDataSleepMode([in] int slotId, [in] int serialId, [in] struct DataSleepInfo dataSleepInfo);
 
     [oneway] SetRadioState([in] int slotId, [in] int serialId, [in] int fun, [in] int rst);
     [oneway] GetRadioState([in] int slotId, [in] int serialId);
@@ -75,12 +77,12 @@ interface IRilInterface {
     [oneway] GetBasebandVersion([in] int slotId, [in] int serialId);
     [oneway] ShutDown([in] int slotId, [in] int serialId);
 
-    [oneway] GetSimIO([in] int slotId, [in] int serialId, [in] struct ISimIoRequestInfo simIO);
+    [oneway] GetSimIO([in] int slotId, [in] int serialId, [in] struct SimIoRequestInfo simIO);
     [oneway] GetSimStatus([in] int slotId, [in] int serialId);
     [oneway] GetImsi([in] int slotId, [in] int serialId);
-    [oneway] GetSimLockStatus([in] int slotId, [in] int serialId, [in] struct ISimLockInfo simLockInfo);
-    [oneway] SetSimLock([in] int slotId, [in] int serialId, [in] struct ISimLockInfo simLockInfo);
-    [oneway] ChangeSimPassword([in] int slotId, [in] int serialId, [in] struct ISimPasswordInfo simPassword);
+    [oneway] GetSimLockStatus([in] int slotId, [in] int serialId, [in] struct SimLockInfo simLockInfo);
+    [oneway] SetSimLock([in] int slotId, [in] int serialId, [in] struct SimLockInfo simLockInfo);
+    [oneway] ChangeSimPassword([in] int slotId, [in] int serialId, [in] struct SimPasswordInfo simPassword);
     [oneway] UnlockPin([in] int slotId, [in] int serialId, [in] String pin);
     [oneway] UnlockPuk([in] int slotId, [in] int serialId, [in] String puk, [in] String pin);
     [oneway] UnlockPin2([in] int slotId, [in] int serialId, [in] String pin2);
@@ -91,15 +93,15 @@ interface IRilInterface {
     [oneway] SimStkSendCallSetupRequestResult([in] int slotId, [in] int serialId, [in] int accept);
     [oneway] SimStkIsReady([in] int slotId, [in] int serialId);
     [oneway] GetRadioProtocol([in] int slotId,[in] int serialId);
-    [oneway] SetRadioProtocol([in] int slotId,[in] int serialId,[in] struct IRadioProtocol radioProtocol);
+    [oneway] SetRadioProtocol([in] int slotId,[in] int serialId,[in] struct RadioProtocol radioProtocol);
     [oneway] SimOpenLogicalChannel([in] int slotId, [in] int serialId, [in] String appID, [in] int p2);
     [oneway] SimCloseLogicalChannel([in] int slotId, [in] int serialId, [in] int channelId);
     [oneway] SimTransmitApduLogicalChannel([in] int slotId, [in] int serialId,
-        [in] struct IApduSimIORequestInfo apduSimIO);
+        [in] struct ApduSimIORequestInfo apduSimIO);
     [oneway] SimTransmitApduBasicChannel([in] int slotId, [in] int serialId,
-        [in] struct IApduSimIORequestInfo apduSimIO);
+        [in] struct ApduSimIORequestInfo apduSimIO);
     [oneway] SimAuthentication([in] int slotId, [in] int serialId,
-        [in] struct ISimAuthenticationRequestInfo simAuthInfo);
+        [in] struct SimAuthenticationRequestInfo simAuthInfo);
     [oneway] UnlockSimLock([in] int slotId, [in] int serialId, [in] int lockType, [in] String key);
 
     [oneway] GetSignalStrength([in] int slotId, [in] int serialId);
@@ -109,31 +111,32 @@ interface IRilInterface {
     [oneway] GetNetworkSearchInformation([in] int slotId, [in] int serialId);
     [oneway] GetNetworkSelectionMode([in] int slotId, [in] int serialId);
     [oneway] SetNetworkSelectionMode([in] int slotId, [in] int serialId,
-        [in] struct ISetNetworkModeInfo networkModeInfo);
+        [in] struct SetNetworkModeInfo networkModeInfo);
     [oneway] GetNeighboringCellInfoList([in] int slotId, [in] int serialId);
     [oneway] GetCurrentCellInfo([in] int slotId, [in] int serialId);
     [oneway] SetPreferredNetwork([in] int slotId, [in] int serialId, [in] int preferredNetworkType);
     [oneway] GetPreferredNetwork([in] int slotId, [in] int serialId);
     [oneway] GetPhysicalChannelConfig([in] int slotId, [in] int serialId);
-    [oneway] SetLocateUpdates([in] int slotId, [in] int serialId, [in] enum IHRilRegNotifyMode mode);
+    [oneway] SetLocateUpdates([in] int slotId, [in] int serialId, [in] enum RilRegNotifyMode mode);
     [oneway] SetNotificationFilter([in] int slotId, [in] int serialId, [in] int newFilter);
     [oneway] SetDeviceState([in] int slotId, [in] int serialId, [in] int deviceStateType, [in] int deviceStateOn);
 
-    [oneway] SendGsmSms([in] int slotId, [in] int serialId, [in] struct IGsmSmsMessageInfo gsmSmsMessageInfo);
-    [oneway] SendCdmaSms([in] int slotId, [in] int serialId, [in] struct ISendCdmaSmsMessageInfo cdmaSmsMessageInfo);
-    [oneway] AddSimMessage([in] int slotId, [in] int serialId, [in] struct ISmsMessageIOInfo gsmSmsMessageInfo);
+    [oneway] SendGsmSms([in] int slotId, [in] int serialId, [in] struct GsmSmsMessageInfo gsmSmsMessageInfo);
+    [oneway] SendCdmaSms([in] int slotId, [in] int serialId, [in] struct SendCdmaSmsMessageInfo cdmaSmsMessageInfo);
+    [oneway] AddSimMessage([in] int slotId, [in] int serialId, [in] struct SmsMessageIOInfo gsmSmsMessageInfo);
     [oneway] DelSimMessage([in] int slotId, [in] int serialId, [in] int index);
-    [oneway] UpdateSimMessage([in] int slotId, [in] int serialId, [in] struct ISmsMessageIOInfo gsmSmsMessageInfo);
-    [oneway] AddCdmaSimMessage([in] int slotId, [in] int serialId, [in] struct ISmsMessageIOInfo gsmSmsMessageInfo);
+    [oneway] UpdateSimMessage([in] int slotId, [in] int serialId, [in] struct SmsMessageIOInfo gsmSmsMessageInfo);
+    [oneway] AddCdmaSimMessage([in] int slotId, [in] int serialId, [in] struct SmsMessageIOInfo gsmSmsMessageInfo);
     [oneway] DelCdmaSimMessage([in] int slotId, [in] int serialId, [in] int index);
-    [oneway] UpdateCdmaSimMessage([in] int slotId, [in] int serialId, [in] struct ISmsMessageIOInfo gsmSmsMessageInfo);
-    [oneway] SetSmscAddr([in] int slotId, [in] int serialId, [in] struct IServiceCenterAddress serviceCenterAddress);
+    [oneway] UpdateCdmaSimMessage([in] int slotId, [in] int serialId, [in] struct SmsMessageIOInfo gsmSmsMessageInfo);
+    [oneway] SetSmscAddr([in] int slotId, [in] int serialId, [in] struct ServiceCenterAddress serviceCenterAddress);
     [oneway] GetSmscAddr([in] int slotId, [in] int serialId);
-    [oneway] SetCBConfig([in] int slotId, [in] int serialId, [in] struct ICBConfigInfo cellBroadcastInfo);
+    [oneway] SetCBConfig([in] int slotId, [in] int serialId, [in] struct CBConfigInfo cellBroadcastInfo);
     [oneway] GetCBConfig([in] int slotId, [in] int serialId);
-    [oneway] SetCdmaCBConfig([in] int slotId, [in] int serialId,
-        [in] struct ICdmaCBConfigInfoList cdmaCBConfigInfoList);
+    [oneway] SetCdmaCBConfig([in] int slotId, [in] int serialId, [in] struct CdmaCBConfigInfoList cdmaCBConfigInfoList);
     [oneway] GetCdmaCBConfig([in] int slotId, [in] int serialId);
-    [oneway] SendSmsMoreMode([in] int slotId, [in] int serialId, [in] struct IGsmSmsMessageInfo gsmSmsMessageInfo);
-    [oneway] SendSmsAck([in] int slotId, [in] int serialId, [in] struct IModeData modeData);
+    [oneway] SendSmsMoreMode([in] int slotId, [in] int serialId, [in] struct GsmSmsMessageInfo gsmSmsMessageInfo);
+    [oneway] SendSmsAck([in] int slotId, [in] int serialId, [in] struct ModeData modeData);
+
+    [oneway] SendRilAck();
 }
