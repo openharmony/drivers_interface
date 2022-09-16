@@ -18,6 +18,7 @@ package ohos.hdi.audio.v1_0;
 import ohos.hdi.audio.v1_0.AudioTypes;
 import ohos.hdi.audio.v1_0.IAudioRender;
 import ohos.hdi.audio.v1_0.IAudioCapture;
+import ohos.hdi.audio.v1_0.IAudioCallback;
 
 interface IAudioAdapter {
     InitAllPorts();
