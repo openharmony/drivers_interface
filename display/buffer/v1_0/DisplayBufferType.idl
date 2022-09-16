@@ -15,18 +15,25 @@
 
 package ohos.hdi.display.buffer.v1_0;
 
+/**
+ * @brief Defines information about the memory to allocate.
+ *
+ */
 struct AllocInfo {
-    unsigned int width;
-    unsigned int height;
-    unsigned long usage;
-    unsigned int format;
-    unsigned int expectedSize;
+    unsigned int width;             /**< Width of the requested memory */
+    unsigned int height;            /**< Height of the requested memory */
+    unsigned long usage;            /**< Usage of the requested memory */
+    unsigned int format;            /**< Format of the requested memory */
+    unsigned int expectedSize;      /**< Size assigned by memory requester */
 };
 
+/**
+ * @brief Defines information for verifying the memory to allocate.
+ *
+ */
 struct VerifyAllocInfo {
-    unsigned int width;
-    unsigned int height;
-    unsigned long usage;
-    unsigned int format;
+    unsigned int width;             /**< Width of the memory to allocate */
+    unsigned int height;            /**< Height of the memory to allocate */
+    unsigned long usage;            /**< Usage of the memory */
+    unsigned int format;            /**< Format of the memory to allocate */
 };
-
