@@ -43,6 +43,7 @@ enum AudioCategory {
     AUDIO_IN_COMMUNICATION = 1,
     AUDIO_IN_RINGTONE = 2,
     AUDIO_IN_CALL = 3,
+    AUDIO_MMAP_NOIRQ = 4,
 };
 enum AudioFormat {
     AUDIO_FORMAT_PCM_8_BIT  = 1 << 0,                      /**< 8-bit PCM */
@@ -60,10 +61,25 @@ enum AudioFormat {
     AUDIO_FORMAT_G726       = 1 << 25 | 1 << 1 | 1 << 0,   /**< G726 */
 };
 enum AudioChannelMask {
-    AUDIO_CHANNEL_FRONT_LEFT  = 1,  /**< Front left channel */
-    AUDIO_CHANNEL_FRONT_RIGHT = 2,  /**< Front right channel */
-    AUDIO_CHANNEL_MONO        = 1,  /**< Mono channel */
-    AUDIO_CHANNEL_STEREO      = 3,  /**< Stereo channel, consisting of front left and front right channels */
+    AUDIO_CHANNEL_MONO           = 1,      /**< Mono channel */
+    AUDIO_CHANNEL_FRONT_LEFT     = 1,      /**< Front left channel */
+    AUDIO_CHANNEL_FRONT_RIGHT    = 2,      /**< Front right channel */
+    AUDIO_CHANNEL_FRONT_CENTER   = 4,      /**< Front right channel */
+    AUDIO_CHANNEL_LOW_FREQUENCY  = 8,      /**< 0x8 */
+    AUDIO_CHANNEL_BACK_LEFT      = 16,     /**< 0x10 */
+    AUDIO_CHANNEL_BACK_RIGHT     = 32,     /**< 0x20 */
+    AUDIO_CHANNEL_BACK_CENTER    = 256,    /**< 0x100 */
+    AUDIO_CHANNEL_SIDE_LEFT      = 512,    /**< 0x200 */
+    AUDIO_CHANNEL_SIDE_RIGHT     = 1024,   /**< 0x400 */
+    AUDIO_CHANNEL_TOP_SIDE_LEFT  = 262144, /**< 0x40000 */
+    AUDIO_CHANNEL_TOP_SIDE_RIGHT = 524288, /**< 0x80000 */
+    AUDIO_CHANNEL_STEREO         = 3,      /**< FRONT_LEFT | FRONT_RIGHT */
+    AUDIO_CHANNEL_2POINT1        = 11,     /**< STEREO | LOW_FREQUENCY */
+    AUDIO_CHANNEL_QUAD           = 51,     /**< STEREO | BACK_LEFT | BACK_RIGHT */
+    AUDIO_CHANNEL_3POINT0POINT2  = 786439, /**< STEREO | FRONT_CENTER | TOP_SIDE_LEFT | TOP_SIDE_RIGHT */
+    AUDIO_CHANNEL_5POINT1        = 63,     /**< QUAD | FRONT_CENTER | LOW_FREQUENCY */
+    AUDIO_CHANNEL_6POINT1        = 319,    /**< AUDIO_CHANNEL_5POINT1 | BACK_CENTER */
+    AUDIO_CHANNEL_7POINT1        = 1599,   /**< AUDIO_CHANNEL_5POINT1 | SIDE_LEFT | SIDE_RIGHT */
 };
 enum AudioSampleRatesMask {
     AUDIO_SAMPLE_RATE_MASK_8000    = 1 << 0,        /**< 8 kHz */
@@ -195,6 +211,7 @@ struct AudioPort {
 };
 struct AudioAdapterDescriptor {
     String adapterName;
+    unsigned int portNum;
     struct AudioPort[] ports;
 };
 struct AudioDeviceDescriptor {
@@ -239,7 +256,9 @@ struct AudioPortCapability {
     unsigned int sampleRateMasks;
     enum AudioChannelMask channelMasks;
     unsigned int channelCount;
+    unsigned int subPortsNum;
     struct AudioSubPortCapability[] subPorts;
+    unsigned int supportSampleFormatNum;
     enum AudioSampleFormat[] supportSampleFormats;
 };
 struct AudioMmapBufferDescripter {
@@ -275,7 +294,9 @@ struct AudioRouteNode {
     struct AudioInfo ext;
 };
 struct AudioRoute {
+    unsigned int sourcesNum;
     struct AudioRouteNode[] sources;
+    unsigned int sinksNum;
     struct AudioRouteNode[] sinks;
 };
 struct AudioEvent {
