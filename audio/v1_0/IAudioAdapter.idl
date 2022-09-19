@@ -18,6 +18,7 @@ package ohos.hdi.audio.v1_0;
 import ohos.hdi.audio.v1_0.AudioTypes;
 import ohos.hdi.audio.v1_0.IAudioRender;
 import ohos.hdi.audio.v1_0.IAudioCapture;
+import ohos.hdi.audio.v1_0.IAudioCallback;
 
 interface IAudioAdapter {
     InitAllPorts();
@@ -29,4 +30,12 @@ interface IAudioAdapter {
     SetPassthroughMode([in] struct AudioPort port, [in] enum AudioPortPassthroughMode mode);
     GetPassthroughMode([in] struct AudioPort port, [out] enum AudioPortPassthroughMode mode);
     GetDeviceStatus([out] struct AudioDeviceStatus status);
+    UpdateAudioRoute([in] struct AudioRoute route, [out] int routeHandle);
+    ReleaseAudioRoute([in] int routeHandle);
+    SetMicMute([in] boolean mute);
+    GetMicMute([out] boolean mute);
+    SetVoiceVolume([in] float volume);
+    SetExtraParams([in] enum AudioExtParamKey key, [in] String condition, [in] String value);
+    GetExtraParams([in] enum AudioExtParamKey key, [in] String condition, [out] String value);
+    RegExtraParamObserver([in] IAudioCallback audioCallback, [in] byte cookie);
 }
