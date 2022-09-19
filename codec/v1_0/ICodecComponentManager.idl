@@ -22,5 +22,5 @@ interface ICodecComponentManager {
     GetComponentNum([out] int count);
     GetComponentCapabilityList([out] struct CodecCompCapability[] capList, [in] int count);
     CreateComponent([out] ICodecComponent component, [out] unsigned int componentId, [in] String compName, [in] long appData, [in] ICodecCallback callbacks);
-    DestoryComponent([in] unsigned int componentId);
+    DestroyComponent([in] unsigned int componentId);
 }
