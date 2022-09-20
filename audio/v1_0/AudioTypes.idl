@@ -255,9 +255,7 @@ struct AudioPortCapability {
     unsigned int sampleRateMasks;
     enum AudioChannelMask channelMasks;
     unsigned int channelCount;
-    unsigned int subPortsNum;
     struct AudioSubPortCapability[] subPorts;
-    unsigned int supportSampleFormatNum;
     enum AudioSampleFormat[] supportSampleFormats;
 };
 struct AudioMmapBufferDescripter {
@@ -293,9 +291,7 @@ struct AudioRouteNode {
     struct AudioInfo ext;
 };
 struct AudioRoute {
-    unsigned int sourcesNum;
     struct AudioRouteNode[] sources;
-    unsigned int sinksNum;
     struct AudioRouteNode[] sinks;
 };
 struct AudioEvent {
