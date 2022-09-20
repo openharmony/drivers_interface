@@ -128,8 +128,8 @@ struct ExecutorSendMsg {
 
 struct AuthResultInfo {
     int result; /**< Indicates result. */
-    int freezingTime; /**< Indicates freezing time in seconds. */
-    int remainTimes; /**< Indicates remaining authentication times before a lockout. */
+    int lockoutDuration; /**< Indicates lockout duration in seconds. */
+    int remainAttempts; /**< Indicates remaining authentication times before a lockout. */
     struct ExecutorSendMsg[] msgs; /**< Indicates executor msgs, see @{ExecutorSendMsg}. */
     unsigned char[] token; /**< Indicates authentication token. */
     unsigned char[] rootSecret; /**< Indicates protection key for user file key. */
