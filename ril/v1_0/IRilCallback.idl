@@ -25,11 +25,11 @@ import ohos.hdi.ril.v1_0.Types;
         [in] struct RingbackVoice ringbackVoice);
     CallSrvccStatusNotice([in] struct RilRadioResponseInfo responseInfo,
         [in] struct SrvccStatus srvccStatus);
+    CallRsrvccStatusNotify([in] struct RilRadioResponseInfo responseInfo);
     CallUssdNotice([in] struct RilRadioResponseInfo responseInfo,
         [in] struct UssdNoticeInfo ussdNoticeInfo);
     CallSsNotice([in] struct RilRadioResponseInfo responseInfo,
         [in] struct SsNoticeInfo ssNoticeInfo);
-
     SetEmergencyCallListResponse([in] struct RilRadioResponseInfo responseInfo);
     GetEmergencyCallListResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct EmergencyInfoList emergencyInfoList);
