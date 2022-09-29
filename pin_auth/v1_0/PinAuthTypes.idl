@@ -109,7 +109,7 @@ struct ExecutorInfo {
  */
 struct TemplateInfo {
     unsigned int executorType; /**< Indicates executor type. */
-    int freezingTime; /**< Indicates freezing time in seconds. */
-    int remainTimes; /**< Indicates remain times before a lockout. */
+    int lockoutDuration; /**< Indicates lockout duration in seconds. */
+    int remainAttempts; /**< Indicates remain attempts before a lockout. */
     unsigned char[] extraInfo; /**< Indicates extra info. */
 };
