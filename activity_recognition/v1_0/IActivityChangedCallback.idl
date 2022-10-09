@@ -13,10 +13,64 @@
  * limitations under the License.
  */
 
+/**
+ * @addtogroup HdiActivityRecognition
+ * @{
+ *
+ * @brief Provides APIs for subscribing to and obtaining user activities.
+ *
+ * The Multimodal Sensor Data Platform (MSDP) can obtain the object or proxy of the activity recognition driver,
+ * and call the APIs provided by the object or proxy to obtain activities supported by the device,
+ * the current activity event of the device, and activity events cached on the device,
+ * and subscribe to or unsubscribe from activity events.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
+
+/**
+ * @file IActivityChangedCallback.idl
+ *
+ * @brief Declares the callback for reporting activity recognition data.
+ *
+ * To subscribe to activity data, an instance of this callback must be registered.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
+
+/**
+ * @brief Defines the package path of the activity recognition module APIs.
+ *
+ * @since 3.2
+ */
 package ohos.hdi.activity_recognition.v1_0;
 
 import ohos.hdi.activity_recognition.v1_0.ActivityRecognitionTypes;
 
+/**
+ * @brief Defines the callback for reporting activity events.
+ *
+ * Before obtaining the current activity event or the activity events cached on the device, you must register this
+ * callback.The activity data is reported through the callback when the specified activity event occurs.
+ * For details, see {@link IActivityInterface}.
+ *
+ * @since 3.2
+ */
+
 [callback] interface IActivityChangedCallback {
+    /**
+     * @brief Called when an activity event occurs.
+     *
+     * 
+     *
+     * @param event Indicates the data to report. For details, see {@link ActRecognitionEvent}.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 3.2
+     */
     OnActivityChanged([in] struct ActRecognitionEvent[] event);
 }
+/** @} */
