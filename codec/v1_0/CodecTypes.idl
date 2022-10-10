@@ -219,7 +219,7 @@ struct OmxCodecBuffer {
     unsigned int size;
     union OMX_VERSIONTYPE version;
     unsigned int bufferType;
-    BufferHandle bufferhandle;
+    NativeBuffer bufferhandle;
     FileDescriptor fd;
     unsigned int allocLen;
     unsigned int filledLen;
