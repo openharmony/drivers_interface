@@ -14,7 +14,6 @@
  */
 
 package ohos.hdi.display.composer.v1_0;
-sequenceable OHOS.HDI.Display.BufferHandleParcelable;
 sequenceable OHOS.HDI.Display.HdifdParcelable;
 
 enum DispCmd {
@@ -286,7 +285,7 @@ struct LayerBuffer {
     int pitch;                      /**< Number of bytes from one row of pixels in memory to the next */
     enum PixelFormat pixFormat;     /**< Pixel format of the buffer */
     struct BufferData data;         /**< Layer buffer data */
-    BufferHandleParcelable hdl;     /**< Layer buffer handle */
+    NativeBuffer hdl;     /**< Layer buffer handle */
 };
 
 /**
@@ -616,15 +615,6 @@ struct YUVDescInfo {
     unsigned int yStride;           /**< Stride of Y */
     unsigned int uvStride;          /**< Stride of UV */
     unsigned int uvStep;            /**< Step of UV */
-};
-
-/**
- * @brief Defines hdi buffer handle info.
- *
- */
-struct HdiBufferHandleInfo {
-    unsigned int seqId;
-    BufferHandleParcelable hdl;
 };
 
 /**

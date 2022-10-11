@@ -17,14 +17,12 @@ package ohos.hdi.display.buffer.v1_0;
 
 import ohos.hdi.display.buffer.v1_0.DisplayBufferType;
 
-sequenceable OHOS.HDI.Display.BufferHandleParcelable;
-
 interface IMapperInterface {
-    FreeMem([in] BufferHandleParcelable handle);
-    Mmap([in] BufferHandleParcelable handle);
-    MmapCache([in] BufferHandleParcelable buffer);
-    Unmap([in] BufferHandleParcelable handle);
-    FlushCache([in] BufferHandleParcelable handle);
-    FlushMCache([in] BufferHandleParcelable buffer);
-    InvalidateCache([in] BufferHandleParcelable handle);
+    FreeMem([in] NativeBuffer handle);
+    Mmap([in] NativeBuffer handle);
+    MmapCache([in] NativeBuffer buffer);
+    Unmap([in] NativeBuffer handle);
+    FlushCache([in] NativeBuffer handle);
+    FlushMCache([in] NativeBuffer buffer);
+    InvalidateCache([in] NativeBuffer handle);
 }

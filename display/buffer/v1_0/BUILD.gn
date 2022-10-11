@@ -27,8 +27,6 @@ if (defined(ohos_lite)) {
       "IMapperInterface.idl",
     ]
 
-    sequenceable = [ "//drivers/hdf_core/adapter/uhdf2/model/display/base/bufferhandle_parcelable:libbufferhandle_parcelable" ]
-
     language = "cpp"
     subsystem_name = "hdf"
     part_name = "drivers_interface_display"
