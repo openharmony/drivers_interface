@@ -3,6 +3,9 @@
     "description": "drivers interface connected nfc tag",
     "version": "3.2",
     "license": "Apache License 2.0",
+    "segment": {
+      "destPath": "drivers/interface/connected_nfc_tag"
+    },
     "component": {
       "name": "drivers_interface_connected_nfc_tag",
       "subsystem": "hdf",
