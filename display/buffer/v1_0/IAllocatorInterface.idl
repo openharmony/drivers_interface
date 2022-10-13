@@ -17,8 +17,6 @@ package ohos.hdi.display.buffer.v1_0;
 
 import ohos.hdi.display.buffer.v1_0.DisplayBufferType;
 
-sequenceable OHOS.HDI.Display.BufferHandleParcelable;
-
 interface IAllocatorInterface {
-    AllocMem([in] struct AllocInfo info, [out] BufferHandleParcelable handle);
+    AllocMem([in] struct AllocInfo info, [out] NativeBuffer handle);
 }
