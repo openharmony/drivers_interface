@@ -17,6 +17,6 @@ package ohos.hdi.display.buffer.v1_0;
 
 import ohos.hdi.display.buffer.v1_0.DisplayBufferType;
 
-interface IAllocatorInterface {
+interface IAllocator {
     AllocMem([in] struct AllocInfo info, [out] NativeBuffer handle);
 }
