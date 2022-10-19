@@ -18,7 +18,7 @@ package ohos.hdi.codec.v1_0;
 import ohos.hdi.codec.v1_0.CodecTypes;
 
 [callback] interface ICodecCallback {
-    EventHandler([in] enum OMX_EVENTTYPE event, [in] struct EventInfo info);
+    EventHandler([in] unsigned int omxEventType, [in] struct EventInfo info);
     EmptyBufferDone([in] long appData, [in] struct OmxCodecBuffer buffer);
     FillBufferDone([in] long appData, [in] struct OmxCodecBuffer buffer);
 }
