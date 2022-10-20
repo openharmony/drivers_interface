@@ -102,47 +102,6 @@ enum BitRateMode {
     BIT_RATE_MODE_VCBR,
     BIT_RATE_MODE_ABR,
 };
-
-enum OMX_EVENTTYPE {
-    OMX_EventCmdComplete,
-    OMX_EventError,
-    OMX_EventMark,
-    OMX_EventPortSettingsChanged,
-    OMX_EventBufferFlag,
-    OMX_EventResourcesAcquired,
-    OMX_EventComponentResumed,
-    OMX_EventDynamicResourcesAvailable,
-    OMX_EventPortFormatDetected,
-    OMX_EventKhronosExtensions = 0x6F000000,
-    OMX_EventVendorStartUnused = 0x7F000000,
-    OMX_EventMax = 0x7FFFFFFF,
-};
-
-enum OMX_COMMANDTYPE
-{
-    OMX_CommandStateSet,
-    OMX_CommandFlush,
-    OMX_CommandPortDisable,
-    OMX_CommandPortEnable,
-    OMX_CommandMarkBuffer,
-    OMX_CommandKhronosExtensions = 0x6F000000,
-    OMX_CommandVendorStartUnused = 0x7F000000,
-    OMX_CommandMax = 0x7FFFFFFF,
-};
-
-enum OMX_STATETYPE
-{
-    OMX_StateInvalid,
-    OMX_StateLoaded,
-    OMX_StateIdle,
-    OMX_StateExecuting,
-    OMX_StatePause,
-    OMX_StateWaitForResources,
-    OMX_StateKhronosExtensions = 0x6F000000,
-    OMX_StateVendorStartUnused = 0x7F000000,
-    OMX_StateMax = 0x7FFFFFFF,
-};
-
 enum OMX_BUFFERSUPPLIERTYPE
 {
     OMX_BufferSupplyUnspecified = 0,

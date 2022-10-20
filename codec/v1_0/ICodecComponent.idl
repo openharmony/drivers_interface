@@ -20,13 +20,13 @@ import ohos.hdi.codec.v1_0.ICodecCallback;
 
 interface ICodecComponent {
     GetComponentVersion([out] struct CompVerInfo verInfo);
-    SendCommand([in] enum OMX_COMMANDTYPE cmd, [in] unsigned int param, [in] byte[] cmdData);
+    SendCommand([in] unsigned int omxCommandType, [in] unsigned int param, [in] byte[] cmdData);
     GetParameter([in] unsigned int index, [in] byte[] inParamStruct, [out] byte[] outParamStruct);
     SetParameter([in] unsigned int index, [in] byte[] paramStruct);
     GetConfig([in] unsigned int index, [in] byte[] inCfgStruct, [out] byte[] outCfgStruct);
     SetConfig([in] unsigned int index, [in] byte[] cfgStruct);
     GetExtensionIndex([in] String paramName, [out] unsigned int indexType);
-    GetState([out] enum OMX_STATETYPE state);
+    GetState([out] unsigned int omxStateType);
     ComponentTunnelRequest([in] unsigned int port, [in] int tunneledComp, [in] unsigned int tunneledPort, [in] struct OMX_TUNNELSETUPTYPE inTunnelSetup, [out] struct OMX_TUNNELSETUPTYPE outTunnelSetup);
     UseBuffer([in] unsigned int portIndex, [in] struct OmxCodecBuffer inBuffer, [out] struct OmxCodecBuffer outBuffer);
     AllocateBuffer([in] unsigned int portIndex, [in] struct OmxCodecBuffer inBuffer, [out] struct OmxCodecBuffer outBuffer);
