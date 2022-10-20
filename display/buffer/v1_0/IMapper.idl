@@ -17,7 +17,7 @@ package ohos.hdi.display.buffer.v1_0;
 
 import ohos.hdi.display.buffer.v1_0.DisplayBufferType;
 
-interface IMapperInterface {
+interface IMapper {
     FreeMem([in] NativeBuffer handle);
     Mmap([in] NativeBuffer handle);
     MmapCache([in] NativeBuffer buffer);
