@@ -119,7 +119,7 @@ interface IWlanInterface {
      * @since 3.2
      * @version 1.0
      */
-    GetAsscociatedStas([in] struct HdfFeatureInfo ifeature, [out] struct HdfStaInfo[] staInfo, [out] unsigned int num);
+    GetAssociatedStas([in] struct HdfFeatureInfo ifeature, [out] struct HdfStaInfo[] staInfo, [out] unsigned int num);
 
     /**
      * @brief Obtains the chip ID of the current driver.
