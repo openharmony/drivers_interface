@@ -1,0 +1,50 @@
+{
+    "name": "drivers_interface_nnrt",
+    "description": "driver interface for neural network runtime.",
+    "version": "3.2",
+    "license": "Apache License 2.0",
+    "component": {
+      "name": "drivers_interface_nnrt",
+      "subsystem": "hdf",
+      "syscap": [""],
+      "adapter_system_type": ["standard"],
+      "rom": "150KB",
+      "ram": "200KB",
+      "deps": {
+        "components": [
+          "ipc",
+          "hdf_core",
+          "hiviewdfx_hilog_native",
+          "utils_base"
+        ],
+        "third_part": [
+          "bounds_checking_function"
+        ]
+      },
+      "build": {
+        "sub_component": [
+          "//drivers/interface/nnrt/v1_0:nnrt_idl_target"
+        ],
+        "test": [
+        ],
+        "inner_kits": [
+          {
+            "name": "//drivers/interface/nnrt/v1_0:libnnrt_proxy_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/nnrt"
+            }
+          },
+          {
+            "name": "//drivers/interface/nnrt/v1_0:nnrt_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/nnrt"
+            }
+          }
+        ]
+      }
+    }
+}
