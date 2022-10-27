@@ -19,7 +19,8 @@
  *
  * @brief Defines APIs of the Codec module.
  *
- * The Codec module provides APIs for initializing the custom data and audio and video codecs, setting codec parameters, and controlling and transferring data.
+ * The Codec module provides APIs for initializing the custom data and audio and video codecs,
+ * setting codec parameters, and controlling and transferring data.
  *
  * @since 3.2
  * @version 1.0
@@ -80,8 +81,10 @@ enum Profile {
     INVALID_PROFILE = 0,             /**< Invalid profile. */
     AAC_LC_PROFILE = 0x1000,         /**< AAC low complexity profile. */
     AAC_MAIN_PROFILE,                /**< AAC main profile. */
-    AAC_HE_V1_PROFILE,               /**< Profile combining AAC high efficiency and spectral band replication (SBR), also known as HE-AAC, AAC+, or aacPlus v1. */
-    AAC_HE_V2_PROFILE,               /**< HE-AAC combined with SBR and Parametric Stereo (PS), also known as AAC++ or aacPlus v2. */
+    AAC_HE_V1_PROFILE,               /**< Profile combining AAC high efficiency and spectral band replication (SBR),
+                                          also known as HE-AAC, AAC+, or aacPlus v1. */
+    AAC_HE_V2_PROFILE,               /**< HE-AAC combined with SBR and Parametric Stereo (PS),
+                                          also known as AAC++ or aacPlus v2. */
     AAC_LD_PROFILE,                  /**< AAC low delay profile. */
     AAC_ELD_PROFILE,                 /**< AAC enhanced low delay profile. */
     AVC_BASELINE_PROFILE = 0x2000,   /**< H.264 baseline profile. */
@@ -175,16 +178,19 @@ enum BitRateMode {
  * @brief Enumerates the component states.
  */
 enum OMX_EVENTTYPE {
-    OMX_EventCmdComplete,                    /**< The component has completed a command. */ 
-    OMX_EventError,                          /**< The component has detected an error. */ 
-    OMX_EventMark,                           /**< The component has detected the buffer mark. */ 
-    OMX_EventPortSettingsChanged,            /**< The component has reported port setting changes. */ 
-    OMX_EventBufferFlag,                     /**< The component has detected an EOS. */ 
-    OMX_EventResourcesAcquired,              /**< The component has been granted resources and is automatically starting the state change from OMX_StateWaitForResources to OMX_StateIdle. */
-    OMX_EventComponentResumed,               /**< The component is resumed due to reacquisition of resources. */ 
-    OMX_EventDynamicResourcesAvailable,      /**< The component has acquired previously unavailable dynamic resources. */ 
+    OMX_EventCmdComplete,                    /**< The component has completed a command. */
+    OMX_EventError,                          /**< The component has detected an error. */
+    OMX_EventMark,                           /**< The component has detected the buffer mark. */
+    OMX_EventPortSettingsChanged,            /**< The component has reported port setting changes. */
+    OMX_EventBufferFlag,                     /**< The component has detected an EOS. */
+    OMX_EventResourcesAcquired,              /**< The component has been granted resources and is automatically
+                                                  starting the state change from OMX_StateWaitForResources
+                                                  to OMX_StateIdle. */
+    OMX_EventComponentResumed,               /**< The component is resumed due to reacquisition of resources. */
+    OMX_EventDynamicResourcesAvailable,      /**< The component has acquired previously unavailable
+                                                  dynamic resources. */ 
     OMX_EventPortFormatDetected,             /**< The component has detected a supported format. */ 
-    OMX_EventKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos standard extensions. */ 
+    OMX_EventKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos standard extensions. */
     OMX_EventVendorStartUnused = 0x7F000000, /**< Reserved region for introducing vendor extensions. */
     OMX_EventMax = 0x7FFFFFFF,               /**< Maximum value. */
 };
@@ -209,14 +215,20 @@ enum OMX_COMMANDTYPE
  */
 enum OMX_STATETYPE
 {
-    OMX_StateInvalid,                           /**< The component has detected that its internal data structures are corrupted so that the state cannot be correctly determined. */
-    OMX_StateLoaded,                            /**< The component has been loaded but has not completed initialization. Only <b>ICodecComponent.SetParameter</b>
-                                                     and <b>ICodecComponent.GetParameter</b> can be called for a component in this state. */
-    OMX_StateIdle,                              /**< The component initialization is complete, and the component is ready to start. */
-    OMX_StateExecuting,                         /**< The component has accepted the start command and is processing data (if the data is available). */
+    OMX_StateInvalid,                           /**< The component has detected that its internal data structures are
+                                                     corrupted so that the state cannot be correctly determined. */
+    OMX_StateLoaded,                            /**< The component has been loaded but has not completed
+                                                     initialization. Only <b>ICodecComponent.SetParameter</b>
+                                                     and <b>ICodecComponent.GetParameter</b> can be called for a
+                                                     component in this state. */
+    OMX_StateIdle,                              /**< The component initialization is complete, and the component is
+                                                     ready to start. */
+    OMX_StateExecuting,                         /**< The component has accepted the start command and is processing
+                                                     data (if the data is available). */
     OMX_StatePause,                             /**< The component has received the pause command. */
-    OMX_StateWaitForResources,                  /**< The component is waiting for resources, either after preemption or before it acquires the requested resources. */                 
-    OMX_StateKhronosExtensions = 0x6F000000,    /**< Reserved region for introducing Khronos standard extensions. */ 
+    OMX_StateWaitForResources,                  /**< The component is waiting for resources, either after preemption
+                                                     or before it acquires the requested resources. */                 
+    OMX_StateKhronosExtensions = 0x6F000000,    /**< Reserved region for introducing Khronos standard extensions. */
     OMX_StateVendorStartUnused = 0x7F000000,    /**< Reserved region for introducing vendor extensions. */
     OMX_StateMax = 0x7FFFFFFF,                  /**< Maximum value. */
 };
@@ -225,10 +237,10 @@ enum OMX_STATETYPE
  */
 enum OMX_BUFFERSUPPLIERTYPE
 {
-    OMX_BufferSupplyUnspecified = 0,                 /**< The port that provides the buffers is not specified. */     
+    OMX_BufferSupplyUnspecified = 0,                 /**< The port that provides the buffers is not specified. */
     OMX_BufferSupplyInput,                           /**< The input port provides the buffers. */
-    OMX_BufferSupplyOutput,                          /**< The output port provides the buffers.  */
-    OMX_BufferSupplyKhronosExtensions = 0x6F000000,  /**< Reserved region for introducing Khronos standard extensions.
+    OMX_BufferSupplyOutput,                          /**< The output port provides the buffers. */
+    OMX_BufferSupplyKhronosExtensions = 0x6F000000,  /**< Reserved region for introducing Khronos standard extensions. */
     OMX_BufferSupplyVendorStartUnused = 0x7F000000,  /**< Reserved region for introducing vendor extensions. */
     OMX_BufferSupplyMax = 0x7FFFFFFF,                /**< Maximum value. */
 };
@@ -267,8 +279,10 @@ struct CodecVideoPortCap {
     struct RangeValue blockCount;          /**< Value range for the number of blocks supported. */
     struct RangeValue blocksPerSecond;     /**< Value range for the number of blocks processed per second. */
     struct Rect blockSize;                 /**< Block size supported. */
-    int[] supportPixFmts;                  /**< Supported pixel formats. For details, see <b>PixeFormat</b> defined by <b>display_type.h</b> in {@link Display}. */
-    enum BitRateMode[] bitRatemode;        /**< Transmission rate modes, which can be constant or variable. For details, see {@link BitRateMode}. */
+    int[] supportPixFmts;                  /**< Supported pixel formats. For details, see <b>PixeFormat</b> defined by
+                                                <b>display_type.h</b> in {@link Display}. */
+    enum BitRateMode[] bitRatemode;        /**< Transmission rate modes, which can be constant or variable.
+                                                For details, see {@link BitRateMode}. */
     struct RangeValue frameRate;           /**< Frame rate range. */
     int[] measuredFrameRate;               /**< Frame rate measured. */
 };
@@ -278,7 +292,8 @@ struct CodecVideoPortCap {
 struct CodecAudioPortCap {
     int[] sampleFormats;  /**< Supported audio sampling formats. For details, see {@link AudioSampleFormat}. */
     int[] sampleRate;     /**< Supported audio sampling rates. For details, see {@link AudioSampleRate}. */
-    int[] channelLayouts; /**< Supported channel layouts, which include single channel, balanced channel, and 3D stereo channel. */
+    int[] channelLayouts; /**< Supported channel layouts, which include single channel, balanced channel,
+                               and 3D stereo channel. */
     int[] channelCount;   /**< Supported number of audio channels. */
 };
 
@@ -305,7 +320,8 @@ struct OmxVerType {
  */
 union OMX_VERSIONTYPE {
     struct OmxVerType s;          /**< Component version. */
-    unsigned int nVersion;        /**< 32-bit value to make accessing the version easily done in a single word size copy or compare operation. */
+    unsigned int nVersion;        /**< 32-bit value to make accessing the version easily done in a single
+                                       word size copy or compare operation. */
 };
 
 /**
@@ -318,8 +334,10 @@ struct CodecCompCapability {
     int[] supportProfiles;                     /**< Supported profiles. For details, see {@link Profile}. */
     int maxInst;                               /**< Maximum instance. */
     boolean isSoftwareCodec;                   /**< Whether it is a software codec. */
-    int processModeMask;                       /**< Codec processing mode mask. For details, see {@link CodecProcessMode}. */
-    unsigned int capsMask;                     /**< Mask of the codec playback capabilities. For details, see {@link CodecCapsMask}. */
+    int processModeMask;                       /**< Codec processing mode mask. For details,
+                                                    see {@link CodecProcessMode}. */
+    unsigned int capsMask;                     /**< Mask of the codec playback capabilities. For details,
+                                                    see {@link CodecCapsMask}. */
     struct RangeValue bitRate;                 /**< Supported bit rate range. */
     struct PortCap port;                       /**< Supported audio and video encoding/decoding capabilities. */
 };
@@ -332,7 +350,8 @@ struct OmxCodecBuffer {
     unsigned int size;                   /**< Size of the structure. */
     union OMX_VERSIONTYPE version;       /**< Component version. */
     unsigned int bufferType;             /**< Buffer type. For details, see {@link CodecBufferType}. */
-    BufferHandleParcelable bufferhandle; /**< Buffer handle used for encoding or decoding. For details, see {@link BufferHandleParcelable}. */
+    BufferHandleParcelable bufferhandle; /**< Buffer handle used for encoding or decoding. For details,
+                                              see {@link BufferHandleParcelable}. */
     FileDescriptor fd;                   /**< Anonymous shared memory file descriptor. */
     unsigned int allocLen;               /**< Size of the buffer allocated. */
     unsigned int filledLen;              /**< Size of the buffer filled. */
