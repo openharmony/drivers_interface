@@ -19,7 +19,8 @@
  *
  * @brief Defines APIs of the Codec module.
  *
- * The Codec module provides APIs for initializing the custom data and audio and video codecs, setting codec parameters, and controlling and transferring data.
+ * The Codec module provides APIs for initializing the custom data and audio and video codecs,
+ * setting codec parameters, and controlling and transferring data.
  *
  * @since 3.2
  * @version 1.0
@@ -67,7 +68,8 @@ interface ICodecComponentManager {
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      * @return Returns <b>HDF_ERR_INVALID_PARAM</b> if the operation fails due to invalid parameters.
      * @return Returns <b>HDF_FAILURE</b> if the execution fails.
-     * @return Returns other values if the underlying layer returns a failure. For details about the error codes, see <b>OMX_ERRORTYPE</b> defined by OpenMAX IL.
+     * @return Returns other values if the underlying layer returns a failure. For details about the
+     * error codes, see <b>OMX_ERRORTYPE</b> defined by OpenMAX IL.
      *
      * @since 3.2
      */
@@ -76,7 +78,8 @@ interface ICodecComponentManager {
     /**
      * @brief Obtains codec capabilities.
      *
-     * You can use this API to obtain the encoding and decoding capabilities provided by the Codec module. For details, see {@link CodecCompCapability}.
+     * You can use this API to obtain the encoding and decoding capabilities provided by the Codec module.
+     * For details, see {@link CodecCompCapability}.
      *
      * @param capList Indicates the codec capabilities {@link CodecCompCapability} obtained.
      * @param count Indicates the number of codec components, which is obtained by {@link GetComponentNum}.
@@ -84,7 +87,8 @@ interface ICodecComponentManager {
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      * @return Returns <b>HDF_ERR_INVALID_PARAM</b> if the operation fails due to invalid parameters.
      * @return Returns <b>HDF_FAILURE</b> if the execution fails.
-     * @return Returns other values if the underlying layer returns a failure. For details about the error codes, see <b>OMX_ERRORTYPE</b> defined by OpenMAX IL.
+     * @return Returns other values if the underlying layer returns a failure. For details about the error codes,
+     * see <b>OMX_ERRORTYPE</b> defined by OpenMAX IL.
      *
      * @since 3.2
      */
@@ -99,16 +103,19 @@ interface ICodecComponentManager {
      * @param componentId Indicates the ID of the component created.
      * @param compName Indicates the component name.
      * @param appData Indicates the pointer to an application-defined value that will be returned by the callback.
-     * @param callbacks Indicates the pointer to the OMX_CALLBACKTYPE structure. For details, see {@link ICodecCallback}.
+     * @param callbacks Indicates the pointer to the OMX_CALLBACKTYPE structure. For details,
+     * see {@link ICodecCallback}.
      *
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      * @return Returns <b>HDF_ERR_INVALID_PARAM</b> if the operation fails due to invalid parameters.
      * @return Returns <b>HDF_FAILURE</b> if the execution fails.
-     * @return Returns other values if the underlying layer returns a failure. For details about the error codes, see <b>OMX_ERRORTYPE</b> defined by OpenMAX IL.
+     * @return Returns other values if the underlying layer returns a failure. For details about the error codes,
+     * see <b>OMX_ERRORTYPE</b> defined by OpenMAX IL.
      *
      * @since 3.2
      */
-    CreateComponent([out] ICodecComponent component, [out] unsigned int componentId, [in] String compName, [in] long appData, [in] ICodecCallback callbacks);
+    CreateComponent([out] ICodecComponent component, [out] unsigned int componentId, [in] String compName,
+        [in] long appData, [in] ICodecCallback callbacks);
 	
 	/**
      * @brief Destroys a codec component instance.
@@ -120,7 +127,8 @@ interface ICodecComponentManager {
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      * @return Returns <b>HDF_ERR_INVALID_PARAM</b> if the operation fails due to invalid parameters.
      * @return Returns <b>HDF_FAILURE</b> if the execution fails.
-     * @return Returns other values if the underlying layer returns a failure. For details about the error codes, see <b>OMX_ERRORTYPE</b> defined by OpenMAX IL.
+     * @return Returns other values if the underlying layer returns a failure. For details about the
+     * error codes, see <b>OMX_ERRORTYPE</b> defined by OpenMAX IL.
      *
      * @since 3.2
      */
