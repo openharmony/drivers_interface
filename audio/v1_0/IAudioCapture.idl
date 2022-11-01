@@ -36,7 +36,7 @@ interface IAudioCapture {
     GetCurrentChannelId([out] unsigned int channelId);
     SetExtraParams([in] String keyValueList);
     GetExtraParams([out] String keyValueList);
-    ReqMmapBuffer([in] int reqSize, [in] struct AudioMmapBufferDescripter desc);
+    ReqMmapBuffer([in] int reqSize, [in] struct AudioMmapBufferDescriptor desc);
     GetMmapPosition([out] unsigned long frames, [out] struct AudioTimeStamp time);
     AddAudioEffect([in] unsigned long effectid);
     RemoveAudioEffect([in] unsigned long effectid);

@@ -160,7 +160,7 @@ enum AudioDeviceType {
     AUDIO_PRIMARY_DEVICE = 1 << 7,
     AUDIO_USB_DEVICE     = 1 << 8,
     AUDIO_A2DP_DEVICE    = 1 << 9,
-    AUDIO_DEVICE_UNKOWN,
+    AUDIO_DEVICE_UNKNOWN,
 };
 enum AudioEventType {
     AUDIO_DEVICE_ADD = 1,
@@ -171,7 +171,7 @@ enum AudioEventType {
     AUDIO_SERVICE_VALID = 7,
     AUDIO_SERVICE_INVALID = 8,
     AUDIO_CAPTURE_THRESHOLD = 9,
-    AUDIO_EVENT_UNKOWN = 10,
+    AUDIO_EVENT_UNKNOWN = 10,
 };
 enum AudioExtParamKey {
     AUDIO_EXT_PARAM_KEY_NONE = 0,     /**< Distributed audio extra param key none */
@@ -242,7 +242,7 @@ struct AudioPortCapability {
     struct AudioSubPortCapability[] subPorts;
     enum AudioSampleFormat[] supportSampleFormats;
 };
-struct AudioMmapBufferDescripter {
+struct AudioMmapBufferDescriptor {
     byte[] memoryAddress;
     int memoryFd;
     int totalBufferFrames;
