@@ -206,11 +206,6 @@ enum ReduceMode : byte {
     REDUCE_MODE_ALL = 7
 };
 
-enum PoolMode : byte {
-    POOL_MODE_MAX_POOLING = 0,
-    POOL_MODE_MEAN_POOLING = 1,
-};
-
 enum EltwiseMode : byte {
     ELTWISE_MODE_PROD = 0,
     ELTWISE_MODE_SUM = 1,
@@ -234,21 +229,4 @@ enum PaddingMode : byte {
     PADDING_MODE_REFLECT = 1,
     PADDING_MODE_SYMMETRIC = 2,
     PADDING_MODE_RESERVED = 3
-};
-
-enum LshProjectionType : byte {
-    LSH_PROJECTION_TYPE_UNKNOWN = 0,
-    LSH_PROJECTION_TYPE_SPARSE = 1,
-    LSH_PROJECTION_TYPE_DENSE = 2
-};
-
-enum Reduction : byte {
-    REDUCTION_SUM = 0,
-    REDUCTION_MEAN = 1,
-    REDUCTION_NONE = 2
-};
-
-struct Attribute {
-    String name;
-    unsigned int data;
 };
