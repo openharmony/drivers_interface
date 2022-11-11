@@ -60,20 +60,6 @@ interface ICameraDevice {
     UpdateSettings([in] unsigned char[] settings);
 
     /**
-     * @brief Get camera device control parameters.
-     *
-     * @param settings Indicates the camera parameters, including the sensor frame rate and 3A parameters.
-     * 3A stands for automatic focus (AF), automatic exposure (AE), and automatic white-balance (?AWB).
-     *
-     * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
-     * in {@link CamRetCode} otherwise.
-     *
-     * @since 1.0
-     * @version 1.0
-     */
-    GetSettings([out] unsigned char[] settings);
-
-    /**
      * @brief Sets the metadata reporting mode.
      *
      * @param mode Indicates the metadata reporting mode to set, which can be frame-by-frame reporting or reporting
