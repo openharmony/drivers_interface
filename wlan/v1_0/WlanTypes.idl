@@ -245,4 +245,12 @@ struct WifiStationInfo {
     /** TX VHT-NSS configuration. */
     unsigned char txVhtNss;
 };
+
+struct AdjustChannelInfo {
+    int msgId;
+    unsigned char chanNumber;
+    unsigned char bandwidth;
+    unsigned char switchType;
+    unsigned char statusCode;
+};
 /** @} */
