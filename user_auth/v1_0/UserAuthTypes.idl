@@ -17,64 +17,83 @@
  * @addtogroup HdfUserAuth
  * @{
  *
- * @brief Provides APIs for the user auth driver.
+ * @brief Provides APIs for the user_auth driver.
  *
- * The user auth driver provides a unified interface for the user auth service to access the user auth driver.
+ * The user_auth driver provides a unified interface for the user_auth service to access the user_auth driver.
 
  *
  * @since 3.2
  */
 
- package ohos.hdi.user_auth.v1_0;
+ /**
+ * @file UserAuthTypes.idl
+ *
+ * @brief Defines the enumeration values and data structures of the user_auth driver.
+ *
+ * @since 3.2
+ */
+
+package ohos.hdi.user_auth.v1_0;
 
  /**
- * Enumerates credential type for authentication.
+ * @brief Enumerates the credential types for authentication.
  *
  * @since 3.2
  * @version 1.0
  */
 enum AuthType : int {
-    ALL = 0, /**< Indicates authentication type is ALL. */
-    PIN = 1, /**< Indicates authentication type is PIN. */
-    FACE = 2, /**< Indicates authentication type is face. */
-    FINGERPRINT = 4, /**< Indicates authentication type is fingerprint. */
+    /**< All types. */
+    ALL = 0,
+    /**< PIN authentication. */
+    PIN = 1,
+    /**< Facial authentication. */
+    FACE = 2,
+    /**< Fingerprint authentication. */
+    FINGERPRINT = 4,
 };
 
 /**
- * Enumerates executor role.
+ * @brief Enumerates executor roles.
  *
  * @since 3.2
  * @version 1.0
  */
 enum ExecutorRole : int {
-    COLLECTOR = 1,  /**< Indicates executor role is collector. */
-    VERIFIER = 2,   /**< Indicates executor role is verifier. */
-    ALL_IN_ONE = 3, /**< Indicates executor role is combination of collector and verifier. */
+    /**< The executor acts as a collector. */
+    COLLECTOR = 1,
+    /**< The executor acts as a verifier. */
+    VERIFIER = 2,
+    /**< The executor acts as a collector and verifier. */
+    ALL_IN_ONE = 3,
 };
 
 /**
- * Enumerates executor secure level.
+ * @brief Enumerates executor security levels.
  *
  * @since 3.2
  * @version 1.0
  */
 enum ExecutorSecureLevel : int {
-    ESL0 = 0, /**< Indicates executor secure level is ESL0. */
-    ESL1 = 1, /**< Indicates executor secure level is ESL1. */
-    ESL2 = 2, /**< Indicates executor secure level is ESL2. */
-    ESL3 = 3, /**< Indicates executor secure level is ESL3. */
+    /**< ESL0. */
+    ESL0 = 0,
+    /**< ESL1. */
+    ESL1 = 1,
+    /**< ESL2. */
+    ESL2 = 2,
+    /**< ESL3. */
+    ESL3 = 3,
 };
 
 /**
- * Pin auth's subtype.
+ * @brief Defines pin auth's subtype.
  *
  * @since 3.2
  * @version 1.0
  */
 enum PinSubType : int {
-    PIN_SIX = 10000, /**< Indicates 6 digit pin. */
-    PIN_NUMBER = 10001, /**< Indicates digit pin. */
-    PIN_MIX = 10002, /**< Indicates mixing pin. */
+    PIN_SIX = 10000, /**< Six digit pin. */
+    PIN_NUMBER = 10001, /**< Digit pin. */
+    PIN_MIX = 10002, /**< Mixing pin. */
 };
 
 /**
@@ -84,84 +103,198 @@ enum PinSubType : int {
  * @version 1.0
  */
 enum ScheduleMode : int {
-    ENROLL = 0, /**< Indicates schedule mode is enrollment. */
-    AUTH = 1, /**< Indicates schedule mode is authentication. */
-    IDENTIFY = 2, /**< Indicates schedule mode is identification. */
+    /**< The schedule mode is enrollment. */
+    ENROLL = 0,
+    /**< The schedule mode is authentication. */
+    AUTH = 1,
+    /**< The schedule mode is identification. */
+    IDENTIFY = 2,
 };
 
+/**
+ * @brief Defines executor registration information.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
 struct ExecutorRegisterInfo {
-    enum AuthType authType; /**< Indicates authentication type, see @{AuthType}. */
-    enum ExecutorRole executorRole; /**< Indicates executor role, see @{ExecutorRole}. */
-    unsigned int executorSensorHint; /**< Indicates executor sensor hint under the same authentication type, 0 is not allowed. */
-    unsigned int executorMatcher; /**< Indicates executor matcher. */
-    enum ExecutorSecureLevel esl; /**< Indicates executor secure level, see @{ExecutorSecureLevel}. */
-    unsigned char[] publicKey; /**< Indicates publicKey. */
+    /**< Authentication type. See @{AuthType}. */
+    enum AuthType authType;
+    /**< Executor role. See @{ExecutorRole}. */
+    enum ExecutorRole executorRole;
+    /**< Executor sensor hint under the same authentication type, 0 is not allowed. */
+    unsigned int executorSensorHint;
+    /**< Executor matcher. */
+    unsigned int executorMatcher;
+    /**< Executor secure level. See @{ExecutorSecureLevel}. */
+    enum ExecutorSecureLevel esl;
+    /**< Public key of the executor. */
+    unsigned char[] publicKey;
 };
 
+/**
+ * @brief Defines executor information.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
 struct ExecutorInfo {
-    unsigned long executorIndex; /**< Indicates executor index under the authentication frameworks. */
-    struct ExecutorRegisterInfo info; /**< Indicates executor registration information, see @{ExecutorRegisterInfo}. */
+    /**< Executor index under the authentication framework. */
+    unsigned long executorIndex;
+    /**< Executor registration information. See @{ExecutorRegisterInfo}. */
+    struct ExecutorRegisterInfo info;
 };
 
+/**
+ * @brief Defines scheduling information.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
 struct ScheduleInfo {
-    unsigned long scheduleId; /**< Indicates schedule id of authentication. */
-    unsigned long[] templateIds; /**< Indicates the templates to authenticate. */
-    enum AuthType authType; /**< Indicates authentication type, see @{AuthType}. */
-    unsigned int executorMatcher; /**< Indicates executor matcher. */
-    enum ScheduleMode scheduleMode; /**< Indicates schedule mode, see @{ScheduleMode}. */
-    struct ExecutorInfo[] executors; /**< Indicates executor information, see @{ExecutorInfo}. */
+    /**< Schedule index of authentication. */
+    unsigned long scheduleId;
+    /**< Templates to authenticate. */
+    unsigned long[] templateIds;
+    /**< Authentication type. See @{AuthType}. */
+    enum AuthType authType;
+    /**< Executor matcher. */
+    unsigned int executorMatcher;
+    /**< Operation to perform. See @{scheduleMode}*/
+    unsigned int scheduleMode;
+    /**< Executor information. See @{ExecutorInfo}. */
+    struct ExecutorInfo[] executors;
 };
 
+/**
+ * @brief Defines the authentication solution.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
 struct AuthSolution {
-    int userId; /**< Indicates user id. */
-    unsigned int authTrustLevel; /**< Indicates authentication trust level of authentication. */
-    enum AuthType authType; /**< Indicates authentication type, see @{AuthType}. */
-    unsigned int executorSensorHint; /**< Indicates executor sensor hint, 0 indicates that no value is specified. */
-    unsigned char[] challenge; /**< Indicates challenge of authentication. */
+    /**< User ID. */
+    int userId;
+    /**< Authentication trust level. */
+    unsigned int authTrustLevel;
+    /**< Authentication type. See @{AuthType}. */
+    enum AuthType authType;
+    /**< Executor sensor hint under the same authentication type, 0 is not allowed. */
+    unsigned int executorSensorHint;
+    /**< Challenge of the authentication. */
+    unsigned char[] challenge;
 };
 
+/**
+ * @brief Defines executor messages.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
 struct ExecutorSendMsg {
-    unsigned long executorIndex; /**< Indicates executor index under the authentication frameworks. */
-    int commandId; /**< Indicates command id. */
-    unsigned char[] msg; /**< Indicates executor msg to send. */
+    /**< Executor index under the authentication framework. */
+    unsigned long executorIndex;
+    /**< Indicates command ID. */
+    int commandId;
+    /**< Executor message to send. */
+    unsigned char[] msg;
 };
 
+/**
+ * @brief Defines authentication result information.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
 struct AuthResultInfo {
-    int result; /**< Indicates result. */
-    int lockoutDuration; /**< Indicates lockout duration in seconds. */
-    int remainAttempts; /**< Indicates remaining authentication times before a lockout. */
-    struct ExecutorSendMsg[] msgs; /**< Indicates executor msgs, see @{ExecutorSendMsg}. */
-    unsigned char[] token; /**< Indicates authentication token. */
-    unsigned char[] rootSecret; /**< Indicates protection key for user file key. */
+    /**< Authentication result. */
+    unsigned int result;
+    /**< Lockout duration, in seconds. */
+    int lockoutDuration;
+    /**< Remaining authentication attempts before a lockout. */
+    int remainAttempts;
+    /**< Executor messages. See @{ExecutorSendMsg}. */
+    struct ExecutorSendMsg[] msgs;
+    /**< Authentication token. */
+    unsigned char[] token;
+    /**< Protection key for the user file key. */
+    unsigned char[] rootSecret;
 };
 
+/**
+ * @brief Defines identification result information.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
 struct IdentifyResultInfo {
-    int result; /**< Indicates result. */
-    int userId; /**< Indicates user id. */
-    unsigned char[] token; /**< Indicates identification token. */
+    /**< iIdentification result. */
+    int result;
+    /**< User ID. */
+    int userId;
+    /**< Identification token. */
+    unsigned char[] token;
 };
 
+/**
+ * @brief Defines credential enrollment parameters.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
 struct EnrollParam {
-    enum AuthType authType; /**< Indicates authentication type, see @{AuthType}. */
-    unsigned int executorSensorHint; /**< Indicates executor sensor hint, 0 indicates that no value is specified. */
+    /**< Authentication type. See @{AuthType}. */
+    enum AuthType authType;
+    /**< Executor sensor hint under the same authentication type. 0 is not allowed. */
+    unsigned int executorSensorHint;
 };
 
+/**
+ * @brief Defines credential information.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
 struct CredentialInfo {
-    unsigned long credentialId; /**< Indicates credential Id. */
-    unsigned long executorIndex; /**< Indicates executor index under the authentication frameworks. */
-    unsigned long templateId; /**< Indicates template Id. */
-    enum AuthType authType; /**< Indicates authentication type, see @{AuthType}. */
-    unsigned int executorMatcher; /**< Indicates executor matcher. */
-    unsigned int executorSensorHint; /**< Indicates executor sensor hint under the same authentication type. */
+    /**< Credential ID. */
+    unsigned long credentialId;
+    /**< Executor index under the authentication framework. */
+    unsigned long executorIndex;
+    /**< Template ID. */
+    unsigned long templateId;
+    /**< Authentication type. See @{AuthType}. */
+    enum AuthType authType;
+    /**< Executor matcher. */
+    unsigned int executorMatcher;
+    /**< Executor sensor hint under the same authentication type. 0 is not allowed. */
+    unsigned int executorSensorHint;
 };
 
+/**
+ * @brief Defines credential enrollment information.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
 struct EnrolledInfo {
-    unsigned long enrolledId; /**< Indicates enrolled id. */
-    enum AuthType authType; /**< Indicates authentication type, see @{AuthType}. */
+    /**< Enrollment ID. */
+    unsigned long enrolledId;
+    /**< Authentication type. See @{AuthType}. */
+    enum AuthType authType;
 };
 
+/**
+ * @brief Defines enrollment result information.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
 struct EnrollResultInfo {
-    unsigned long credentialId; /**< Indicates credential id. */
-    struct CredentialInfo oldInfo; /**< Indicates old credential information, see {@link CredentialInfo}. */
-    unsigned char[] rootSecret; /**< Indicates protection key for user file key. */
+    /**< Credential ID. */
+    unsigned long credentialId;
+    /**< Old credential information. See {@link CredentialInfo}. */
+    struct CredentialInfo oldInfo;
+    /**< Protection key for the user file key. */
+    unsigned char[] rootSecret;
 };
+/** @} */
