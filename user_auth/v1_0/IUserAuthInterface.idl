@@ -17,10 +17,10 @@
  * @addtogroup HdfUserAuth
  * @{
  *
- * @brief Provides APIs for the user auth driver.
+ * @brief Provides APIs for the user_auth driver.
  *
- * The user auth driver provides a unified interface for the user auth service to access the user auth driver.
- * After obtaining the user auth driver proxy, the service can call related APIs to register executor, 
+ * The user_auth driver provides a unified interface for the user_auth service to access the user_auth driver.
+ * After obtaining the user_auth driver proxy, the service can call related APIs to register executors, 
  * manage credentials, and complete password and biometric authentication.
  * @since 3.2
  */
@@ -28,7 +28,7 @@
 /**
  * @file IUserAuthInterface.idl
  *
- * @brief Declare the APIs of userauth driver. These APIs can be used to register executor, 
+ * @brief Declares the user_auth driver APIs, which can be used to register executors, 
  * manage credentials, and complete password and biometric authentication.
  *
  * @since 3.2
@@ -39,26 +39,26 @@ package ohos.hdi.user_auth.v1_0;
 import ohos.hdi.user_auth.v1_0.UserAuthTypes;
 
 /**
- * @brief Declare the APIs of userauth driver.
+ * @brief Declares the APIs of the user_auth driver.
  *
  * @since 3.2
  * @version 1.0
  */
 interface IUserAuthInterface {
     /**
-     * @brief Initialize cache information of user auth driver.
+     * @brief Initializes the cache information of the user_auth driver.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
      */
     Init();
     /**
-     * @brief Add an authentication executor to obtain this authentication capability.
+     * @brief Adds an authentication executor to obtain the authentication capability.
      *
-     * @param info Indicates executor registration information, see {@link ExecutorRegisterInfo}.
-     * @param index Indicates executor index under the authentication frameworks.
-     * @param publicKey Indicates public key of authentication frameworks.
-     * @param templateIds Indicates templateIds enrolled by executor.
+     * @param info Indicates executor registration information. See {@link ExecutorRegisterInfo}.
+     * @param index Indicates the executor index under the authentication framework.
+     * @param publicKey Indicates the public key of the authentication framework.
+     * @param templateIds Indicates template IDs enrolled by the executors.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
@@ -66,42 +66,41 @@ interface IUserAuthInterface {
     AddExecutor([in] struct ExecutorRegisterInfo info, [out] unsigned long index,
         [out] unsigned char[] publicKey, [out] unsigned long[] templateIds);
     /**
-     * @brief Delete executor.
+     * @brief Deletes an executor.
      *
-     * @param index Indicates executor index under the authentication frameworks.
+     * @param index Indicates the executor index under the authentication framework.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
      */
     DeleteExecutor([in] unsigned long index);
     /**
-     * @brief Open authentication credential management session.
+     * @brief Opens a session for authentication credential management.
      *
-     * @param userId Indicates user id.
-     * @param challenge Indicates random number, used to generate authentication token.
+     * @param userId Indicates the user ID.
+     * @param challenge Indicates the random number, which is used to generate an authentication token.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
      */
     OpenSession([in] int userId, [out] unsigned char[] challenge);
     /**
-     * @brief Close authentication credential management session.
+     * @brief Closes the authentication credential management session.
      *
-     * @param userId Indicates user id.
+     * @param userId Indicates the user ID.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
      */
     CloseSession([in] int userId);
     /**
-     * @brief Begin the enrollment of authentication credential. 
-     * When the authentication type is pin and the current user has enrolled PIN credential,
-     * the pin credential will be updated.
+     * @brief Begins the enrollment of authentication credentials. 
+     * If the authentication type is PIN, this method updates the existing PIN credential.
      *
-     * @param userId Indicates user id.
-     * @param authToken Indicates user password authentication token.
-     * @param param Indicates input parameters, see {@link EnrollParam}.
-     * @param info Indicates scheduling information, see {@link ScheduleInfo}.
+     * @param userId Indicates the user ID.
+     * @param authToken Indicates the authentication token of the user password.
+     * @param param Indicates input parameters. See {@link EnrollParam}.
+     * @param info Indicates scheduling information. See {@link ScheduleInfo}.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
@@ -109,32 +108,32 @@ interface IUserAuthInterface {
     BeginEnrollment([in] int userId, [in] unsigned char[] authToken, [in] struct EnrollParam param, 
         [out] struct ScheduleInfo info);
     /**
-     * @brief Update the enrollment result and complete this enrollment.
+     * @brief Updates the enrollment result and completes the enrollment.
      *
-     * @param userId Indicates user id.
-     * @param scheduleResult Indicates enrollment result issued by executor.
-     * @param info Indicates enrollment result, see {@link EnrollResultInfo}.
+     * @param userId Indicates the user ID.
+     * @param scheduleResult Indicates the enrollment result issued by the executor.
+     * @param info Indicates the enrollment result. See {@link EnrollResultInfo}.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
      */
     UpdateEnrollmentResult([in] int userId, [in] unsigned char[] scheduleResult, [out] struct EnrollResultInfo info);
     /**
-     * @brief Cancel enrollment.
+     * @brief Cancels an enrollment.
      *
-     * @param userId Indicates user id.
+     * @param userId Indicates the user ID.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
      */
     CancelEnrollment([in] int userId);
     /**
-     * @brief Delete credential information.
+     * @brief Deletes credential information.
      *
-     * @param userId Indicates user id.
-     * @param credentialId Indicates credential id.
-     * @param authToken Indicates user password authentication token.
-     * @param info Indicates deleted credential information, see {@link CredentialInfo}.
+     * @param userId Indicates the user ID.
+     * @param credentialId Indicates the credential index.
+     * @param authToken Indicates the authentication token of the user password.
+     * @param info Indicates the credential information to delete. See {@link CredentialInfo}.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
@@ -142,23 +141,23 @@ interface IUserAuthInterface {
     DeleteCredential([in] int userId, [in] unsigned long credentialId, [in] unsigned char[] authToken, 
         [out] struct CredentialInfo info);
     /**
-     * @brief Query credential information.
+     * @brief Obtains credential information.
      *
-     * @param userId Indicates user id.
-     * @param authType Indicates authentication type, see {@link AuthType}.
-     * @param infos Indicates credential information, see {@link CredentialInfo}.
+     * @param userId Indicates the user ID.
+     * @param authType Indicates the authentication type. See {@link AuthType}.
+     * @param infos Indicates credential information. See {@link CredentialInfo}.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
      */
     GetCredential([in] int userId, [in] enum AuthType authType, [out] struct CredentialInfo[] infos);
     /**
-     * @brief Query user information.
+     * @brief Obtains user information.
      *
-     * @param userId Indicates user id.
-     * @param secureUid Indicates secure user id.
-     * @param pinSubType Indicates pin auth's subtype, see {@link PinSubType}.
-     * @param infos Indicates enrolled Info, see {@link EnrolledInfo}.
+     * @param userId Indicates the user ID.
+     * @param secureUid Indicates the secure user ID.
+     * @param pinSubType Indicates the sub type of PIN authentication. See {@link PinSubType}.
+     * @param infos Indicates enrolled information. See {@link EnrolledInfo}.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
@@ -166,32 +165,32 @@ interface IUserAuthInterface {
     GetUserInfo([in] int userId, [out] unsigned long secureUid, [out] enum PinSubType pinSubType,
         [out] struct EnrolledInfo[] infos);
     /**
-     * @brief Delete pin, delete user in Iam subsystem.
+     * @brief Deletes a pin and a user from the IAM subsystem.
      *
-     * @param userId Indicates user id.
-     * @param authToken Indicates user password authentication token.
-     * @param deletedInfos Indicates deleted credential information, see {@link CredentialInfo}.
+     * @param userId Indicates the user ID.
+     * @param authToken Indicates the authentication token of the user password.
+     * @param deletedInfos Indicates the credential information to delete. See {@link CredentialInfo}.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
      */
     DeleteUser([in] int userId, [in] unsigned char[] authToken, [out] struct CredentialInfo[] deletedInfos);
     /**
-     * @brief Forcibly delete user.
+     * @brief Forcibly deletes a user.
      *
-     * @param userId Indicates user id.
-     * @param deletedInfos Indicates deleted credential information, see {@link CredentialInfo}.
+     * @param userId Indicates the user ID.
+     * @param deletedInfos Indicates the credential information to delete. See {@link CredentialInfo}.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
      */
     EnforceDeleteUser([in] int userId, [out] struct CredentialInfo[] deletedInfos);
     /**
-     * @brief Begin authentication, and generate authentication scheme.
+     * @brief Begins authentication, and generates the authentication solution.
      *
-     * @param contextId Indicates context id.
-     * @param param Indicates input parameters, see {@link AuthSolution}.
-     * @param scheduleInfos Indicates scheduling information, see {@link ScheduleInfo}.
+     * @param contextId Indicates the context index.
+     * @param param Indicates input parameters. See {@link AuthSolution}.
+     * @param scheduleInfos Indicates scheduling information. See {@link ScheduleInfo}.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
@@ -199,11 +198,11 @@ interface IUserAuthInterface {
     BeginAuthentication([in] unsigned long contextId, [in] struct AuthSolution param,
         [out] struct ScheduleInfo[] scheduleInfos);
     /**
-     * @brief Update authentication result, and evaluate the results of this authentication scheme.
+     * @brief Updates the authentication result, and evaluates the result of the authentication solution.
      *
-     * @param contextId Indicates context id.
-     * @param scheduleResult Indicates authentication result issued by executor.
-     * @param info Indicates authentication result information, see {@link AuthResultInfo}.
+     * @param contextId Indicates the context index.
+     * @param scheduleResult Indicates the authentication result issued by the executor.
+     * @param info Indicates authentication result information. See {@link AuthResultInfo}.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
@@ -211,21 +210,23 @@ interface IUserAuthInterface {
     UpdateAuthenticationResult([in] unsigned long contextId, [in] unsigned char[] scheduleResult,
         [out] struct AuthResultInfo info);
     /**
-     * @brief Cancel authentication.
+     * @brief Cancels authentication.
      *
-     * @param contextId Indicates context id.
+     * @param contextId Indicates the context index.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
      */
     CancelAuthentication([in] unsigned long contextId);
     /**
-     * @brief Begin identification, and generate identification scheme.
+     * @brief Begins identification, and generates the identification solution.
      *
-     * @param contextId Indicates context id.
-     * @param authType Indicates identification type, see @{AuthType}.
-     * @param executorSensorHint Indicates executor sensor hint, 0 indicates that no value is specified.
-     * @param scheduleInfo Indicates scheduling information, see {@link ScheduleInfo}.
+     * @param contextId Indicates the context index.
+     * @param authType Indicates the identification type. See @{AuthType}.
+     * @param challenge Indicates the identification challenge.
+     * @param executorSensorHint Indicates the executor sensor hint.
+     * The value <b>0</b> indicates that no value is specified.
+     * @param scheduleInfo Indicates scheduling information. See {@link ScheduleInfo}.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
@@ -233,11 +234,11 @@ interface IUserAuthInterface {
     BeginIdentification([in] unsigned long contextId, [in] enum AuthType authType, [in] unsigned char[] challenge,
         [in] unsigned int executorSensorHint, [out] struct ScheduleInfo scheduleInfo);
     /**
-     * @brief Update identification result, and evaluate the results of this identification scheme.
+     * @brief Updates the identification result, and evaluates the result of the identification solution.
      *
-     * @param contextId Indicates context id.
-     * @param scheduleResult Indicates identification result issued by executor.
-     * @param info Indicates identification result information, see {@link IdentifyResultInfo}.
+     * @param contextId Indicates the context index.
+     * @param scheduleResult Indicates the identification result issued by the executor.
+     * @param info Indicates identification result information. See {@link IdentifyResultInfo}.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
@@ -245,32 +246,32 @@ interface IUserAuthInterface {
     UpdateIdentificationResult([in] unsigned long contextId, [in] unsigned char[] scheduleResult,
         [out] struct IdentifyResultInfo info);
     /**
-     * @brief Cancel identification.
+     * @brief Cancels identification.
      *
-     * @param contextId Indicates context id.
+     * @param contextId Indicates the context index.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
      */
     CancelIdentification([in] unsigned long contextId);
     /**
-     * @brief Get the authentication trust level of the current authentication type.
+     * @brief Obtains the trust level of the current authentication type.
      *
-     * @param userId Indicates user id.
-     * @param authType Indicates authentication type, see {@link AuthType}.
-     * @param authTrustLevel Indicates authentication trust level.
+     * @param userId Indicates the user ID.
+     * @param authType Indicates the authentication type. See {@link AuthType}.
+     * @param authTrustLevel Indicates the authentication trust level.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
      */
     GetAuthTrustLevel([in] int userId, [in] enum AuthType authType, [out] unsigned int authTrustLevel);
     /**
-     * @brief Get the valid authentication methods under the current authentication trust level.
+     * @brief Obtains the valid authentication methods under the current authentication trust level.
      *
-     * @param userId Indicates user id.
-     * @param authTypes Indicates authentication type of the to be filtered, see {@link AuthType}.
-     * @param authTrustLevel Indicates authentication trust level.
-     * @param validTypes Indicates valid authentication type, see {@link AuthType}.
+     * @param userId Indicates the user ID.
+     * @param authTypes Indicates the authentication types to be filtered. See {@link AuthType}.
+     * @param authTrustLevel Indicates the authentication trust level.
+     * @param validTypes Indicates the valid authentication types. See {@link AuthType}.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
@@ -278,3 +279,4 @@ interface IUserAuthInterface {
     GetValidSolution([in] int userId, [in] enum AuthType[] authTypes, [in] unsigned int authTrustLevel,
         [out] enum AuthType[] validTypes);
 }
+/** @} */
