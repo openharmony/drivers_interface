@@ -232,7 +232,7 @@ enum OMX_STATETYPE
     OMX_StateVendorStartUnused = 0x7F000000,    /**< Reserved region for introducing vendor extensions. */
     OMX_StateMax = 0x7FFFFFFF,                  /**< Maximum value. */
 };
-
+/**
  * @brief Enuerates the port supplier preferences when establishing a tunnel between two ports.
  */
 enum OMX_BUFFERSUPPLIERTYPE
@@ -246,7 +246,7 @@ enum OMX_BUFFERSUPPLIERTYPE
 };
 
 /**
-* @brief Defines the alignment structure.
+ * @brief Defines the alignment structure.
  */
 struct Alignment {
     int widthAlignment;   /**< Alignment value of the width. */
@@ -286,7 +286,7 @@ struct CodecVideoPortCap {
     struct RangeValue frameRate;           /**< Frame rate range. */
     int[] measuredFrameRate;               /**< Frame rate measured. */
 };
-
+/**
  * @brief Defines the audio encoding and decoding capabilities.
  */
 struct CodecAudioPortCap {
