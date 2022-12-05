@@ -44,6 +44,7 @@ enum AudioCategory {
     AUDIO_IN_COMMUNICATION = 1,
     AUDIO_IN_RINGTONE = 2,
     AUDIO_IN_CALL = 3,
+    AUDIO_MMAP_NOIRQ = 4,
 };
 enum AudioFormat {
     AUDIO_FORMAT_TYPE_PCM_8_BIT  = 1 << 0,                      /**< 8-bit PCM */
