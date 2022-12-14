@@ -22,7 +22,7 @@
  * The Host can use the interface provided by the module to create an audio session,
  * and exchange data with the audio subsystem.
  *
- * @since 3.2
+ * @since 4.0
  */
 
 /**
@@ -30,7 +30,7 @@
  *
  * @brief Defines the callback function, including the start, suspend, stop operations from audio.
  *
- * @since 3.2
+ * @since 4.0
  * @version 1.0
  */
 
@@ -39,7 +39,7 @@ package ohos.hdi.bluetooth.a2dp.v1_0;
 /**
  * @brief Defines the callback function to start, suspend, stop audio render.
  *
- * @since 3.2
+ * @since 4.0
  */
 [callback] interface IBluetoothAudioCallback {
     /**
@@ -47,7 +47,7 @@ package ohos.hdi.bluetooth.a2dp.v1_0;
      *
      * @return Returns <b>0</b> if the result is returned successfully; returns a negative value otherwise.
      *
-     * @since 3.2
+     * @since 4.0
      * @version 1.0
      */
     StartRender();
@@ -57,7 +57,7 @@ package ohos.hdi.bluetooth.a2dp.v1_0;
      *
      * @return Returns <b>0</b> if the result is returned successfully; returns a negative value otherwise.
      *
-     * @since 3.2
+     * @since 4.0
      * @version 1.0
      */
     SuspendRender();
@@ -67,7 +67,7 @@ package ohos.hdi.bluetooth.a2dp.v1_0;
      *
      * @return Returns <b>0</b> if the result is returned successfully; returns a negative value otherwise.
      *
-     * @since 3.2
+     * @since 4.0
      * @version 1.0
      */
     StopRender();

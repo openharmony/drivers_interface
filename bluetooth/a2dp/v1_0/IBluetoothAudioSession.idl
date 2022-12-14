@@ -22,7 +22,7 @@
  * The Host can use the interface provided by the module to create an audio session,
  * and exchange data with the audio.
  *
- * @since 3.2
+ * @since 4.0
  */
 
 /**
@@ -31,7 +31,7 @@
  * @brief Defines the interfaces to start audio session, send render operation result,
  * and stop the audio session.
  *
- * @since 3.2
+ * @since 4.0
  * @version 1.0
  */
 
@@ -44,7 +44,7 @@ import ohos.hdi.bluetooth.a2dp.v1_0.BluetoothAudioTypes;
  * @brief Defines the interfaces to start audio session, send render operation result,
  * and stop the audio session.
  *
- * @since 3.2
+ * @since 4.0
  */
 interface IBluetoothAudioSession {
     /**
@@ -55,7 +55,7 @@ interface IBluetoothAudioSession {
      * @param queue Returns sharedMemQueue for audio data.
      * @return Returns <b>0</b> if the operation is successfully; returns a negative value otherwise.
      *
-     * @since 3.2
+     * @since 4.0
      * @version 1.0
      */
     StartSession([in] enum SessionType sessionType, [in] IBluetoothAudioCallback callbackObj,
@@ -67,7 +67,7 @@ interface IBluetoothAudioSession {
      * @param sessionType Indicates the session type.
      * @return Returns <b>0</b> if the operation is successfully; returns a negative value otherwise.
      *
-     * @since 3.2
+     * @since 4.0
      * @version 1.0
      */
     StopSession([in] enum SessionType sessionType);
@@ -79,7 +79,7 @@ interface IBluetoothAudioSession {
      * @param Status SUCCESS or FAILURE for operation.
      * @return Returns <b>0</b> if the operation is successfully; returns a negative value otherwise.
      *
-     * @since 3.2
+     * @since 4.0
      * @version 1.0
      */
     RenderOperationResult([in] enum Operation operation, [in] enum Status status);
