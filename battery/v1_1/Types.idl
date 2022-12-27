@@ -139,20 +139,20 @@ struct BatteryInfo {
 };
 
 /**
- * @brief 电池的充电限制类型
+ * @brief Defines the battery charging limit type.
  *
  * @since 3.2
  */
 enum ChargingLimitType
 {
-    /** 限制类型为电流 */
+    /** Limit type: charging current */
     TYPE_CURRENT = 0,
-    /** 限制类型为电压 */
+    /** Limit type: charging voltage */
     TYPE_VOLTAGE,
 };
 
 /**
- * @brief 电池限流或限压结构
+ * @brief Defines the limit on the battery charging current or voltage.
  *
  * @since 3.2
  */
