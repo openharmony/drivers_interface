@@ -208,7 +208,7 @@ struct ExecutorSendMsg {
  */
 struct AuthResultInfo {
     /**< Authentication result. */
-    unsigned int result;
+    int result;
     /**< Lockout duration, in seconds. */
     int lockoutDuration;
     /**< Remaining authentication attempts before a lockout. */
