@@ -230,11 +230,11 @@ interface IBatteryInterface {
     GetBatteryInfo([out] struct BatteryInfo info);
 
     /**
-     * @brief 限制当前电池的充电电流或电压。
+     * @brief Sets a limit on the battery charging current or voltage.
      *
-     * @param ChargingLimit 输入参数，电流或电压限制值。
+     * @param ChargingLimit Limit on the battery charging current or voltage.
      *
-     * @return HDF_SUCCESS 表示设置成功。
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      *
      * @since 3.2
      */
