@@ -12,6 +12,7 @@
     "component": {
       "name": "drivers_interface_input",
       "subsystem": "hdf",
+      "features": ["drivers_interface_input_feature_passthrough"],
       "syscap": [""],
       "adapter_system_type": ["standard"],
       "rom": "675KB",
