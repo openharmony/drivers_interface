@@ -340,6 +340,7 @@ struct CodecCompCapability {
                                                     see {@link CodecCapsMask}. */
     struct RangeValue bitRate;                 /**< Supported bit rate range. */
     struct PortCap port;                       /**< Supported audio and video encoding/decoding capabilities. */
+    boolean canSwapWidthHeight;                /**< Whether width and height verification is supported. */
 };
 
 /**
