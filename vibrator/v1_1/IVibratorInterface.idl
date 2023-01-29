@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -28,7 +28,7 @@
 /**
  * @file VibratorTypes.idl
  *
- * @brief Declares common APIs in the vibrator module.  The APIs canObtains information about all the vibrator
+ * @brief Declares common APIs in the vibrator module. The APIs canObtains information about all the vibrator
  * that support setting intensity and Start the vibrator according to the incoming vibration effect.
  *
  * @since 3.2
@@ -98,9 +98,9 @@ interface IVibratorInterface {
      *
      * @param duration Indicates the duration that the vibration lasts, in milliseconds.
      *
-     * @param intensity Indicates vibrator intensity  in a vibration period.
+     * @param intensity Indicates vibrator intensity in a vibration period.
      *
-     * @param frequency Indicates vibrator frequency  in a vibration period.
+     * @param frequency Indicates vibrator frequency in a vibration period.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns <b>-1</b> if the vibrationPeriod setting is not supported.
@@ -110,5 +110,45 @@ interface IVibratorInterface {
      * @since 3.2
      * @version 1.1
      */
-    EnableVibratorModulation([in] unsigned int duration, [in] int intensity, [in] int frequency);
+    EnableVibratorModulation([in] unsigned int duration, [in] unsigned short intensity, [in] short frequency);
+    /**
+     * @brief Controls the vibrator to perform a periodic vibration with the custom composite effect.
+     *
+     * @param effect Indicates the pointer to the custom composite effect type. For details,
+     * see {@link HdfCompositeEffect}.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
+     *
+     * @since 3.2
+     * @version 1.1
+     */
+    EnableCompositeEffect([in] struct HdfCompositeEffect effect);
+    /**
+     * @brief Obtains the vibration effect information with the specified effect type.
+     *
+     * @param effectType Indicates the pointer to the preset effect type. It is recommended that the
+     * maximum length be 64 bytes.
+     *
+     * @param effectInfo Indicates the pointer to the vibration effect information. For details,
+     * see {@link HdfEffectInfo}.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns negative value if the get failed.
+     *
+     * @since 3.2
+     * @version 1.1
+     */
+    GetEffectInfo([in] String effectType, [out] struct HdfEffectInfo effectInfo);
+    /**
+     * @brief Obtains whether the vibrator is currently vibrating.
+     *
+     * @param state Indicates current vibration state of the vibrator.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns negative value if the get failed.
+     *
+     * @since 3.2
+     * @version 1.1
+     */
+    IsVibratorRunning([out] boolean state);
 }
