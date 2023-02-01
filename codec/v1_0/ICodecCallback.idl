@@ -66,21 +66,21 @@ import ohos.hdi.codec.v1_0.CodecTypes;
     /**
      * @brief Reports an event, such as an error, a command completion event, and port setting changes.
      *
-     * - When <b>event</b> is <b>OMX_EventCmdComplete</b> and <b>eventData</b> is null,
-     * <b>data2</b> indicates a state if <b>data1</b> is <b>OMX_CommandStateSet</b> and indicates a port if
-     * <b>data1</b> is any <b>OMX_COMMANDTYPE</b> other than <b>OMX_CommandStateSet</b>.
-     * - When <b>event</b> is <b>OMX_EventError</b>, <b>data1</b> indicates an error code and <b>data2</b>
+     * - When <b>event</b> is <b>CODEC_EVENT_CMD_COMPLETE</b> and <b>eventData</b> is null,
+     * <b>data2</b> indicates a state if <b>data1</b> is <b>CODEC_COMMAND_STATE_SET</b> and indicates a port if
+     * <b>data1</b> is any <b>CodecCommandType</b> other than <b>CODEC_COMMAND_STATE_SET</b>.
+     * - When <b>event</b> is <b>CODEC_EVENT_ERROR</b>, <b>data1</b> indicates an error code and <b>data2</b>
      * and <b>eventData</b> are both <b>0</b>.
-     * - When <b>event</b> is <b>OMX_EventMark</b>, <b>data1</b> and <b>data2</b> are both <b>0</b> and
+     * - When <b>event</b> is <b>CODEC_EVENT_MARK</b>, <b>data1</b> and <b>data2</b> are both <b>0</b> and
      * <b>eventData</b> points to the mark.
-     * - When <b>event</b> is <b>OMX_EventPortSettingsChanged</b>, <b>data1</b> indicates a port and <b>data2</b>
+     * - When <b>event</b> is <b>CODEC_EVENT_PORT_SETTINGS_CHANGED</b>, <b>data1</b> indicates a port and <b>data2</b>
      * and <b>eventData</b> are <b>0</b>.
-     * - When <b>event</b> is <b>OMX_EventBufferFlag</b>, <b>data1</b> indicates a port, <b>data2</b> indicates a
+     * - When <b>event</b> is <b>CODEC_EVENT_BUFFER_FLAG</b>, <b>data1</b> indicates a port, <b>data2</b> indicates a
      * flag, and <b>eventData</b> is <b>0</b>.
-     * - When <b>event</b> is <b>OMX_EventResourcesAcquired</b> or <b>OMX_EventDynamicResourcesAvailable</b>,
+     * - When <b>event</b> is <b>CODEC_EVENT_RESOURCES_ACQUIRED</b> or <b>CODEC_EVENT_DYNAMIC_RESOURCES_AVAILABLE</b>,
      * <b>data1</b>, <b>data2</b>, and <b>eventData</b> are <b>0</b>.
      *
-     * @param event Indicates the type of the event to report. For details, see {@link OMX_EVENTTYPE}.
+     * @param event Indicates the type of the event to report. For details, see {@link CodecEventType}.
      * @param info Indicates the pointer to the information to report. For details, see {@link EventInfo}.
      *
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
@@ -91,7 +91,7 @@ import ohos.hdi.codec.v1_0.CodecTypes;
      *
      * @since 3.2
      */
-    EventHandler([in] enum OMX_EVENTTYPE event, [in] struct EventInfo info);
+    EventHandler([in] enum CodecEventType event, [in] struct EventInfo info);
 	
     /**
      * @brief Reports an event indicating that the encoding or decoding in the input buffer is complete.
