@@ -44,7 +44,6 @@
  * @version 1.0
  */
 package ohos.hdi.codec.v1_0;
-sequenceable OHOS.HDI.DISPLAY.BufferHandleParcelable;
 
 /**
  * @brief Enumerates the codec types.
@@ -177,60 +176,60 @@ enum BitRateMode {
 /**
  * @brief Enumerates the component states.
  */
-enum OMX_EVENTTYPE {
-    OMX_EventCmdComplete,                    /**< The component has completed a command. */
-    OMX_EventError,                          /**< The component has detected an error. */
-    OMX_EventMark,                           /**< The component has detected the buffer mark. */
-    OMX_EventPortSettingsChanged,            /**< The component has reported port setting changes. */
-    OMX_EventBufferFlag,                     /**< The component has detected an EOS. */
-    OMX_EventResourcesAcquired,              /**< The component has been granted resources and is automatically
-                                                  starting the state change from OMX_StateWaitForResources
-                                                  to OMX_StateIdle. */
-    OMX_EventComponentResumed,               /**< The component is resumed due to reacquisition of resources. */
-    OMX_EventDynamicResourcesAvailable,      /**< The component has acquired previously unavailable
-                                                  dynamic resources. */ 
-    OMX_EventPortFormatDetected,             /**< The component has detected a supported format. */ 
-    OMX_EventKhronosExtensions = 0x6F000000, /**< Reserved region for introducing Khronos standard extensions. */
-    OMX_EventVendorStartUnused = 0x7F000000, /**< Reserved region for introducing vendor extensions. */
-    OMX_EventMax = 0x7FFFFFFF,               /**< Maximum value. */
+enum CodecEventType {
+    CODEC_EVENT_CMD_COMPLETE,                     /**< The component has completed a command. */
+    CODEC_EVENT_ERROR,                            /**< The component has detected an error. */
+    CODEC_EVENT_MARK,                             /**< The component has detected the buffer mark. */
+    CODEC_EVENT_PORT_SETTINGS_CHANGED,            /**< The component has reported port setting changes. */
+    CODEC_EVENT_BUFFER_FLAG,                      /**< The component has detected an EOS. */
+    CODEC_EVENT_RESOURCES_ACQUIRED,               /**< The component has been granted resources and is automatically
+                                                       starting the state change from CODEC_STATE_WAIT_FOR_RESOURCES
+                                                       to CODEC_STATE_IDLE. */
+    CODEC_EVENT_COMPONENT_RESUMED,                /**< The component is resumed due to reacquisition of resources. */
+    CODEC_EVENT_DYNAMIC_RESOURCES_AVAILABLE,      /**< The component has acquired previously unavailable
+                                                       dynamic resources. */
+    CODEC_EVENT_PORT_FORMAT_DETECTED,             /**< The component has detected a supported format. */
+    CODEC_EVENT_KHRONOS_EXTENSIONS = 0x6F000000,  /**< Reserved region for introducing Khronos standard extensions. */
+    CODEC_EVENT_VENDOR_START_UNUSED = 0x7F000000, /**< Reserved region for introducing vendor extensions. */
+    CODEC_EVENT_MAX = 0x7FFFFFFF,                 /**< Maximum value. */
 };
 
 /**
  * @brief Enumerates the cmd parameters of the <b>SendCommand</b> API in <b>ICodecComponent</b>.
  */
-enum OMX_COMMANDTYPE
+enum CodecCommandType
 {
-    OMX_CommandStateSet,                        /**< Change the component state. */
-    OMX_CommandFlush,                           /**< Flush the data queue of a component. */
-    OMX_CommandPortDisable,                     /**< Disable a port on a component. */
-    OMX_CommandPortEnable,                      /**< Enable a port on a component. */
-    OMX_CommandMarkBuffer,                      /**< Mark a component/buffer for observation. */
-    OMX_CommandKhronosExtensions = 0x6F000000,  /**< Reserved region for introducing Khronos standard extensions. */
-    OMX_CommandVendorStartUnused = 0x7F000000,  /**< Reserved region for introducing vendor extensions. */
-    OMX_CommandMax = 0x7FFFFFFF,                /**< Maximum value. */
+    CODEC_COMMAND_STATE_SET,                         /**< Change the component state. */
+    CODEC_COMMAND_FLUSH,                             /**< Flush the data queue of a component. */
+    CODEC_COMMAND_PORT_DISABLE,                      /**< Disable a port on a component. */
+    CODEC_COMMAND_PORT_ENABLE,                       /**< Enable a port on a component. */
+    CODEC_COMMAND_MARK_BUFFER,                       /**< Mark a component/buffer for observation. */
+    CODEC_COMMAND_KHRONOS_EXTENSIONS = 0x6F000000,   /**< Reserved region for introducing Khronos standard extensions. */
+    CODEC_COMMAND_VENDOR_START_UNUSED = 0x7F000000,  /**< Reserved region for introducing vendor extensions. */
+    CODEC_COMMAND_MAX = 0x7FFFFFFF,                  /**< Maximum value. */
 };
 
 /**
  * @brief Enuerates the component states.
  */
-enum OMX_STATETYPE
+enum CodecStateType
 {
-    OMX_StateInvalid,                           /**< The component has detected that its internal data structures are
-                                                     corrupted so that the state cannot be correctly determined. */
-    OMX_StateLoaded,                            /**< The component has been loaded but has not completed
-                                                     initialization. Only <b>ICodecComponent.SetParameter</b>
-                                                     and <b>ICodecComponent.GetParameter</b> can be called for a
-                                                     component in this state. */
-    OMX_StateIdle,                              /**< The component initialization is complete, and the component is
-                                                     ready to start. */
-    OMX_StateExecuting,                         /**< The component has accepted the start command and is processing
-                                                     data (if the data is available). */
-    OMX_StatePause,                             /**< The component has received the pause command. */
-    OMX_StateWaitForResources,                  /**< The component is waiting for resources, either after preemption
-                                                     or before it acquires the requested resources. */                 
-    OMX_StateKhronosExtensions = 0x6F000000,    /**< Reserved region for introducing Khronos standard extensions. */
-    OMX_StateVendorStartUnused = 0x7F000000,    /**< Reserved region for introducing vendor extensions. */
-    OMX_StateMax = 0x7FFFFFFF,                  /**< Maximum value. */
+    CODEC_STATE_INVALID,                             /**< The component has detected that its internal data structures are
+                                                          corrupted so that the state cannot be correctly determined. */
+    CODEC_STATE_LOADED,                              /**< The component has been loaded but has not completed
+                                                          initialization. Only <b>ICodecComponent.SetParameter</b>
+                                                          and <b>ICodecComponent.GetParameter</b> can be called for a
+                                                          component in this state. */
+    CODEC_STATE_IDLE,                                /**< The component initialization is complete, and the component is
+                                                          ready to start. */
+    CODEC_STATE_EXECUTING,                           /**< The component has accepted the start command and is processing
+                                                          data (if the data is available). */
+    CODEC_STATE_PAUSE,                               /**< The component has received the pause command. */
+    CODEC_STATE_WAIT_FOR_RESOURCES,                  /**< The component is waiting for resources, either after preemption
+                                                          or before it acquires the requested resources. */
+    CODEC_STATE_KHRONOS_EXTENSIONS = 0x6F000000,     /**< Reserved region for introducing Khronos standard extensions. */
+    CODEC_STATE_VENDOR_START_UNUSED = 0x7F000000,    /**< Reserved region for introducing vendor extensions. */
+    CODEC_STATE_MAX = 0x7FFFFFFF,                    /**< Maximum value. */
 };
 /**
  * @brief Enuerates the port supplier preferences when establishing a tunnel between two ports.
@@ -351,8 +350,8 @@ struct OmxCodecBuffer {
     unsigned int size;                   /**< Size of the structure. */
     union OMX_VERSIONTYPE version;       /**< Component version. */
     unsigned int bufferType;             /**< Buffer type. For details, see {@link CodecBufferType}. */
-    BufferHandleParcelable bufferhandle; /**< Buffer handle used for encoding or decoding. For details,
-                                              see {@link BufferHandleParcelable}. */
+    NativeBuffer bufferhandle;           /**< Buffer handle used for encoding or decoding. For details,
+                                              see {@link NativeBuffer}. */
     FileDescriptor fd;                   /**< Anonymous shared memory file descriptor. */
     unsigned int allocLen;               /**< Size of the buffer allocated. */
     unsigned int filledLen;              /**< Size of the buffer filled. */

@@ -87,13 +87,13 @@ interface ICodecComponent {
      * If the command is used to set the component state, a callback will be invoked to return the result.
      * There is no callback invoked for other commands.
      *
-     * @param cmd Indicates the command to send. For details, see {@link OMX_COMMANDTYPE}.
+     * @param cmd Indicates the command to send. For details, see {@link CodecCommandType}.
      * @param param Indicates the parameter carried in the command.
-     * - If <b>cmd</b> is <b>OMX_CommandStateSet</b>, <b>param</b> can be set to any value of {@link OMX_STATETYPE}.
-     * - If <b>cmd</b> is <b>OMX_CommandFlush</b>, <b>OMX_CommandPortDisable</b>, <b>OMX_CommandPortEnable</b>,
-     * or <b>OMX_CommandMarkBuffer</b>, <b>param</b> is the target port.
+     * - If <b>cmd</b> is <b>CODEC_COMMAND_STATE_SET</b>, <b>param</b> can be set to any value of {@link CodecStateType}.
+     * - If <b>cmd</b> is <b>CODEC_COMMAND_FLUSH</b>, <b>CODEC_COMMAND_PORT_DISABLE</b>, <b>CODEC_COMMAND_PORT_ENABLE</b>,
+     * or <b>CODEC_COMMAND_MARK_BUFFER</b>, <b>param</b> is the target port.
      * @param cmdData Indicates the pointer to the <b>OMX_MARKTYPE</b> structure when <b>cmd</b>
-     * is <b>OMX_CommandMarkBuffer</b>.
+     * is <b>CODEC_COMMAND_MARK_BUFFER</b>.
      *
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      * @return Returns <b>HDF_ERR_INVALID_PARAM</b> if the operation fails due to invalid parameters.
@@ -103,7 +103,7 @@ interface ICodecComponent {
      *
      * @since 3.2
      */
-    SendCommand([in] enum OMX_COMMANDTYPE cmd, [in] unsigned int param, [in] byte[] cmdData);
+    SendCommand([in] enum CodecCommandType cmd, [in] unsigned int param, [in] byte[] cmdData);
 	
     /**
      * @brief Obtains the parameter settings of this component.
@@ -212,7 +212,7 @@ interface ICodecComponent {
      * 
      *
      * @param state Indicates the pointer to the state obtained. For details about the component
-     * states, see {@link OMX_STATETYPE}.
+     * states, see {@link CodecStateType}.
      *
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      * @return Returns <b>HDF_ERR_INVALID_PARAM</b> if the operation fails due to invalid parameters.
@@ -222,7 +222,7 @@ interface ICodecComponent {
      *
      * @since 3.2
      */
-    GetState([out] enum OMX_STATETYPE state);
+    GetState([out] enum CodecStateType state);
 	
     /**
      * @brief Sets up tunneling for this component.
