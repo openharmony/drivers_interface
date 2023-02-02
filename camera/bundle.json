@@ -30,7 +30,8 @@
       "build": {
         "sub_component": [
           "//drivers/interface/camera/v1_0:camera_idl_target",
-          "//drivers/hdf_core/adapter/uhdf2/model/camera/sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0"
+          "//drivers/hdf_core/adapter/uhdf2/model/camera/sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0",
+          "//drivers/hdf_core/adapter/uhdf2/model/camera/metadata:metadata"
         ],
         "test": [
         ],
@@ -49,6 +50,20 @@
               "header_files": [
               ],
               "header_base": "//drivers/interface/camera"
+            }
+          },
+          {
+            "name": "//drivers/hdf_core/adapter/uhdf2/model/camera/metadata:metadata",
+            "header": {
+              "header_files": [
+                "camera_device_ability_items.h",
+                "camera_metadata_info.h",
+                "camera_metadata_item_info.h",
+                "camera_metadata_operator.h",
+                "metadata_log.h",
+                "metadata_utils.h"
+              ],
+              "header_base": "//drivers/hdf_core/adapter/uhdf2/model/camera/metadata/include"
             }
           }
         ]
