@@ -19,7 +19,7 @@
  * @brief Declares data types.
  * used by the Hardware Driver Interfaces (HDIs) of this module.
  *
- * @since 1.0
+ * @since 3.2
  * @version 1.0
  */
 
@@ -119,6 +119,10 @@ enum DCEncodeType {
      * JPEG encode type
      */
     ENCODE_TYPE_JPEG = 3,
+    /**
+     * mpeg4-es encode type
+     */
+    ENCODE_TYPE_MPEG4_ES = 4,
 };
 
 /**
