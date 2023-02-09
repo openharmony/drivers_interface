@@ -18,7 +18,7 @@
  *
  * @brief Management class of the camera service that provides Hardware Driver Interfaces (HDIs) for the upper layer.
  *
- * @since 1.0
+ * @since 3.2
  * @version 1.0
  */
 
@@ -37,7 +37,7 @@ interface ICameraHost {
      * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
      * in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     SetCallback([in] ICameraHostCallback callbackObj);
@@ -50,7 +50,7 @@ interface ICameraHost {
      * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
      * in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     GetCameraIds([out] String[] cameraIds);
@@ -65,7 +65,7 @@ interface ICameraHost {
      * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
      * in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     GetCameraAbility([in] String cameraId, [out] unsigned char[] cameraAbility);
@@ -83,7 +83,7 @@ interface ICameraHost {
      * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
      * in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     OpenCamera([in] String cameraId, [in] ICameraDeviceCallback callbackObj, [out] ICameraDevice device);
@@ -100,7 +100,7 @@ interface ICameraHost {
      * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
      * in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     SetFlashlight([in] String cameraId, [in] boolean isEnable);
