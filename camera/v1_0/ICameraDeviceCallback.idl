@@ -19,7 +19,7 @@
  *
  * @brief Declares callbacks for reporting camera device errors and metadata.
  *
- * @since 1.0
+ * @since 3.2
  * @version 1.0
  */
 
@@ -34,7 +34,7 @@ import ohos.hdi.camera.v1_0.Types;
      * @param type Indicates the error type. For details, see {@link ErrorType}.
      * @param errorCode Indicates the error code. This parameter is not used currently.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     OnError([in] enum ErrorType type, [in] int errorCode);
@@ -48,7 +48,7 @@ import ohos.hdi.camera.v1_0.Types;
      * You can call {@link GetEnabledResults} to obtain enabled metadata and
      * call {@link DisableResult} to disable metadata reporting.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     OnResult([in] unsigned long timestamp, [in] unsigned char[] result);

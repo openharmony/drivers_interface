@@ -18,7 +18,7 @@
  *
  * @brief Declares callbacks related to {@link IStreamOperator}. The caller needs to implement these callbacks.
  *
- * @since 1.0
+ * @since 3.2
  * @version 1.0
  */
 
@@ -33,7 +33,7 @@ import ohos.hdi.camera.v1_0.Types;
      * @param captureId Indicates the ID of the capture request corresponding to the callback.
      * @param streamIds Indicates the IDs of the streams corresponding to the callback.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     OnCaptureStarted([in] int captureId, [in] int[] streamIds);
@@ -44,7 +44,7 @@ import ohos.hdi.camera.v1_0.Types;
      * @param captureId Indicates the ID of the capture request corresponding to the callback.
      * @param infos Indicates information related to the capture when it ends.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     OnCaptureEnded([in] int captureId, [in] struct CaptureEndedInfo[] infos);
@@ -55,7 +55,7 @@ import ohos.hdi.camera.v1_0.Types;
      * @param captureId Indicates the ID of the capture request corresponding to the callback.
      * @param infos Indicates a list of capture error messages.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     OnCaptureError([in] int captureId, [in] struct CaptureErrorInfo[] infos);
@@ -71,7 +71,7 @@ import ohos.hdi.camera.v1_0.Types;
      * @param streamIds Indicates the IDs of the streams corresponding to the callback.
      * @param timestamp Indicates the timestamp when the callback is invoked.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     OnFrameShutter([in] int captureId, [in] int[] streamIds, [in] unsigned long timestamp);
