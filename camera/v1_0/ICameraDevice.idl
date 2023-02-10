@@ -18,7 +18,7 @@
  *
  * @brief Declares APIs for camera device operations.
  *
- * @since 1.0
+ * @since 3.2
  * @version 1.0
  */
 
@@ -40,7 +40,7 @@ interface ICameraDevice {
      * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
      * in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     GetStreamOperator([in] IStreamOperatorCallback callbackObj, [out] IStreamOperator streamOperator);
@@ -54,7 +54,7 @@ interface ICameraDevice {
      * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
      * in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     UpdateSettings([in] unsigned char[] settings);
@@ -68,7 +68,7 @@ interface ICameraDevice {
      * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
      * in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     SetResultMode([in] enum ResultCallbackMode mode);
@@ -83,7 +83,7 @@ interface ICameraDevice {
      * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
      * in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     GetEnabledResults([out] int[] results);
@@ -98,7 +98,7 @@ interface ICameraDevice {
      * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
      * in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     EnableResult([in] int[] results);
@@ -114,7 +114,7 @@ interface ICameraDevice {
      * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
      * in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     DisableResult([in] int[] results);
@@ -122,7 +122,7 @@ interface ICameraDevice {
     /**
      * @brief Closes the camera device.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     Close();

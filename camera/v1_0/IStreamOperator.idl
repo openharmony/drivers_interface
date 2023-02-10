@@ -18,7 +18,7 @@
  *
  * @brief Declares APIs for stream operations.
  *
- * @since 1.0
+ * @since 3.2
  * @version 1.0
  */
 
@@ -61,7 +61,7 @@ interface IStreamOperator {
      * @return Returns <b>NO_ERROR</b> if the operation is successful;
      * returns an error code defined in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     IsStreamsSupported([in] enum OperationMode mode, [in] unsigned char[] modeSetting,
@@ -80,7 +80,7 @@ interface IStreamOperator {
      * @return Returns <b>NO_ERROR</b> if the operation is successful;
      * returns an error code defined in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     CreateStreams([in] struct StreamInfo[] streamInfos);
@@ -93,7 +93,7 @@ interface IStreamOperator {
      * @return Returns <b>NO_ERROR</b> if the operation is successful;
      * returns an error code defined in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     ReleaseStreams([in] int[] streamIds);
@@ -108,7 +108,7 @@ interface IStreamOperator {
      * @return Returns <b>NO_ERROR</b> if the operation is successful;
      * returns an error code defined in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     CommitStreams([in] enum OperationMode mode, [in] unsigned char[] modeSetting);
@@ -124,7 +124,7 @@ interface IStreamOperator {
      * @return Returns <b>NO_ERROR</b> if the operation is successful;
      * returns an error code defined in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     GetStreamAttributes([out] struct StreamAttribute[] attributes);
@@ -148,7 +148,7 @@ interface IStreamOperator {
      * @return Returns <b>NO_ERROR</b> if the operation is successful;
      * returns an error code defined in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     AttachBufferQueue([in] int streamId, [in] BufferProducerSequenceable bufferProducer);
@@ -161,7 +161,7 @@ interface IStreamOperator {
      * @return Returns <b>NO_ERROR</b> if the operation is successful;
      * returns an error code defined in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     DetachBufferQueue([in] int streamId);
@@ -196,7 +196,7 @@ interface IStreamOperator {
      * @return Returns <b>NO_ERROR</b> if the operation is successful;
      * returns an error code defined in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     Capture([in] int captureId, [in] struct CaptureInfo info, [in] boolean isStreaming);
@@ -211,7 +211,7 @@ interface IStreamOperator {
      * @return Returns <b>NO_ERROR</b> if the operation is successful;
      * returns an error code defined in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     CancelCapture([in] int captureId);
@@ -232,7 +232,7 @@ interface IStreamOperator {
      * @return Returns <b>NO_ERROR</b> if the operation is successful;
      * returns an error code defined in {@link CamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     ChangeToOfflineStream([in] int[] streamIds, [in] IStreamOperatorCallback callbackObj,

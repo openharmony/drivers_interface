@@ -18,7 +18,7 @@
  *
  * @brief Declares callbacks for status changes of cameras and flashes. The caller needs to implement the callbacks.
  *
- * @since 1.0
+ * @since 3.2
  * @version 1.0
  */
 
@@ -33,7 +33,7 @@ import ohos.hdi.camera.v1_0.Types;
      * @param cameraId Indicates the ID of the camera whose status changes.
      * @param status Indicates the latest status of the camera.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     OnCameraStatus([in] String cameraId, [in] enum CameraStatus status);
@@ -44,7 +44,7 @@ import ohos.hdi.camera.v1_0.Types;
      * @param cameraId Indicates the ID of the camera to which the flash whose status changes is bound.
      * @param status Indicates the latest status of the flash.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     OnFlashlightStatus([in] String cameraId, [in] enum FlashlightStatus status);
@@ -55,7 +55,7 @@ import ohos.hdi.camera.v1_0.Types;
      * @param cameraId Indicates the ID of the camera to which the camera event is bound.
      * @param event Indicates the camera event type.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     OnCameraEvent([in] String cameraId, [in] enum CameraEvent event);
