@@ -18,7 +18,7 @@
  *
  * @brief Declares callbacks for distributed camera SA service. The caller needs to implement the callbacks.
  *
- * @since 1.0
+ * @since 3.2
  * @version 1.0
  */
 
@@ -36,7 +36,7 @@ import ohos.hdi.distributed_camera.v1_0.DCameraTypes;
      * @return Returns <b>NO_ERROR</b> if the operation is successful,
      * returns an error code defined in {@link DCamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     OpenSession([in] struct DHBase dhBase);
@@ -50,7 +50,7 @@ import ohos.hdi.distributed_camera.v1_0.DCameraTypes;
      * @return Returns <b>NO_ERROR</b> if the operation is successful,
      * returns an error code defined in {@link DCamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     CloseSession([in] struct DHBase dhBase);
@@ -65,7 +65,7 @@ import ohos.hdi.distributed_camera.v1_0.DCameraTypes;
      * @return Returns <b>NO_ERROR</b> if the operation is successful,
      * returns an error code defined in {@link DCamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     ConfigureStreams([in] struct DHBase dhBase,[in] struct DCStreamInfo[] streamInfos);
@@ -80,7 +80,7 @@ import ohos.hdi.distributed_camera.v1_0.DCameraTypes;
      * @return Returns <b>NO_ERROR</b> if the operation is successful,
      * returns an error code defined in {@link DCamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     ReleaseStreams([in] struct DHBase dhBase,[in] int[] streamIds);
@@ -98,7 +98,7 @@ import ohos.hdi.distributed_camera.v1_0.DCameraTypes;
      * @return Returns <b>NO_ERROR</b> if the operation is successful,
      * returns an error code defined in {@link DCamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     StartCapture([in] struct DHBase dhBase,[in] struct DCCaptureInfo[] captureInfos);
@@ -111,7 +111,7 @@ import ohos.hdi.distributed_camera.v1_0.DCameraTypes;
      * @return Returns <b>NO_ERROR</b> if the operation is successful,
      * returns an error code defined in {@link DCamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     StopCapture([in] struct DHBase dhBase,[in] int[] streamIds);
@@ -127,7 +127,7 @@ import ohos.hdi.distributed_camera.v1_0.DCameraTypes;
      * @return Returns <b>NO_ERROR</b> if the operation is successful,
      * returns an error code defined in {@link DCamRetCode} otherwise.
      *
-     * @since 1.0
+     * @since 3.2
      * @version 1.0
      */
     UpdateSettings([in] struct DHBase dhBase,[in] struct DCameraSettings[] settings);
