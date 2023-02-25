@@ -25,8 +25,6 @@
 
 package ohos.hdi.distributed_camera.v1_0;
 
-sequenceable ohos.hdi.sequenceable.v1_0.BufferHandleSequenceable;
-
 /**
  * @brief Enumerates distributed camera metadata updating types.
  */
@@ -266,9 +264,9 @@ struct DCameraBuffer {
      */
     unsigned int size_;
     /**
-     * Buffer handle sequenceable, see {@link BufferHandleSequenceable}.
+     * Native buffer, see {@link NativeBuffer}.
      */
-    BufferHandleSequenceable bufferHandle_;
+    NativeBuffer bufferHandle_;
 };
 
 /**
