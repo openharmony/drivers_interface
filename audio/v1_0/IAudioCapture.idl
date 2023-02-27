@@ -18,7 +18,7 @@ package ohos.hdi.audio.v1_0;
 import ohos.hdi.audio.v1_0.AudioTypes;
 
 interface IAudioCapture {
-    CaptureFrame([out] byte[] frame, [in] unsigned long requestBytes);
+    CaptureFrame([out] byte[] frame, [out] unsigned long replyBytes);
     GetCapturePosition([out] unsigned long frames, [out] struct AudioTimeStamp time);
     CheckSceneCapability([in] struct AudioSceneDescriptor scene, [out] boolean supported);
     SelectScene([in] struct AudioSceneDescriptor scene);
@@ -36,7 +36,7 @@ interface IAudioCapture {
     GetCurrentChannelId([out] unsigned int channelId);
     SetExtraParams([in] String keyValueList);
     GetExtraParams([out] String keyValueList);
-    ReqMmapBuffer([in] int reqSize, [in] struct AudioMmapBufferDescriptor desc);
+    ReqMmapBuffer([in] int reqSize, [out] struct AudioMmapBufferDescriptor desc);
     GetMmapPosition([out] unsigned long frames, [out] struct AudioTimeStamp time);
     AddAudioEffect([in] unsigned long effectid);
     RemoveAudioEffect([in] unsigned long effectid);
