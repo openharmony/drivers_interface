@@ -20,8 +20,6 @@ hdi("distributed_camera_provider") {
     "IDCameraProviderCallback.idl",
   ]
 
-  sequenceable = [ "//drivers/hdf_core/adapter/uhdf2/model/display/sequenceable/buffer_handle:libbuffer_handle_sequenceable_1.0" ]
-
   language = "cpp"
   subsystem_name = "hdf"
   part_name = "drivers_interface_distributed_camera"
