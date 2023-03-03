@@ -29,7 +29,7 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/power/v1_1:power_idl_target",
+          "//drivers/interface/power/v1_0:power_idl_target",
           "//drivers/interface/power/v1_1:power_idl_target"
         ],
         "test": [
