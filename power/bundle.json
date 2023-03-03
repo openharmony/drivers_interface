@@ -29,11 +29,28 @@
       },
       "build": {
         "sub_component": [
+          "//drivers/interface/power/v1_1:power_idl_target",
           "//drivers/interface/power/v1_1:power_idl_target"
         ],
         "test": [
         ],
         "inner_kits": [
+          {
+            "name": "//drivers/interface/power/v1_0:libpower_proxy_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/power"
+            }
+          },
+          {
+            "name": "//drivers/interface/power/v1_0:power_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/power"
+            }
+          },
           {
             "name": "//drivers/interface/power/v1_1:libpower_proxy_1.1",
             "header": {
