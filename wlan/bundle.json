@@ -29,13 +29,13 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/wlan/v1_0:wlan_idl_target"
+          "//drivers/interface/wlan/v1_1:wlan_idl_target"
         ],
         "test": [
         ],
         "inner_kits": [
           {
-            "name": "//drivers/interface/wlan/v1_0:libwlan_proxy_1.0",
+            "name": "//drivers/interface/wlan/v1_1:libwlan_proxy_1.1",
             "header": {
               "header_files": [
               ],
@@ -43,7 +43,7 @@
             }
           },
           {
-            "name": "//drivers/interface/wlan/v1_0:wlan_idl_headers",
+            "name": "//drivers/interface/wlan/v1_1:wlan_idl_headers",
             "header": {
               "header_files": [
               ],
