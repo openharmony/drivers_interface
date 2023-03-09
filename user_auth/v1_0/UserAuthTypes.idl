@@ -209,7 +209,7 @@ struct ExecutorSendMsg {
 struct AuthResultInfo {
     /**< Authentication result. */
     int result;
-    /**< Lockout duration, in seconds. */
+    /**< Lockout duration, in millisecond. */
     int lockoutDuration;
     /**< Remaining authentication attempts before a lockout. */
     int remainAttempts;
