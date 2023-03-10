@@ -57,7 +57,6 @@ public:
             SWITCHCASE(REQUEST_CMD_SET_LAYER_BUFFER);
             SWITCHCASE(REQUEST_CMD_SET_LAYER_COMPOSITION_TYPE);
             SWITCHCASE(REQUEST_CMD_SET_LAYER_BLEND_TYPE);
-            SWITCHCASE(REQUEST_CMD_SET_LAYER_VISIBLE);
             /* reply cmd */
             SWITCHCASE(REPLY_CMD_SET_ERROR);
             SWITCHCASE(REPLY_CMD_PREPARE_DISPLAY_LAYERS);
@@ -281,11 +280,11 @@ public:
             for (uint32_t j = 0; j < handle->reserveInts; j++) {
                 DISPLAY_CHK_CONDITION(retVal, true, unpacker->ReadInt32(handle->reserve[i++]),
                     HDF_LOGE("%{public}s, read handle->reserve error", __func__));
-		if (!retVal) {
+                if (!retVal) {
                     HDF_LOGE("%{public}s, get reserve date error, i:%{public}u, j:%{public}u",
-		        __func__, i, j);
-		    break;
-		}
+                    __func__, i, j);
+                    break;
+                }
             }
         }
         if (!retVal) {

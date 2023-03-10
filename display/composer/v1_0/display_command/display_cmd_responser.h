@@ -143,9 +143,6 @@ public:
             case REQUEST_CMD_SET_LAYER_BLEND_TYPE:
                 OnSetLayerBlendType(unpacker);
                 break;
-            case REQUEST_CMD_SET_LAYER_VISIBLE:
-                OnSetLayerVisible(unpacker);
-                break;
             case CONTROL_CMD_REQUEST_END:
                 ret = OnRequestEnd(unpacker);
                 break;
@@ -432,7 +429,7 @@ EXIT:
         ret = CmdUtils::RectUnpack(unpacker, rect);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = impl_->SetLayerPosition(devId, layerId, rect);
+        ret = impl_->SetLayerRegion(devId, layerId, rect);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 EXIT:
         if (ret != HDF_SUCCESS) {
@@ -516,7 +513,7 @@ EXIT:
         ret = unpacker->ReadInt32(type) ? HDF_SUCCESS : HDF_FAILURE;
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = impl_->SetTransformMode(devId, layerId, static_cast<TransformType>(type));
+        ret = impl_->SetLayerTransformMode(devId, layerId, static_cast<TransformType>(type));
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 EXIT:
         if (ret != HDF_SUCCESS) {
@@ -653,26 +650,6 @@ EXIT:
 EXIT:
         if (ret != HDF_SUCCESS) {
             errMaps_.emplace(REQUEST_CMD_SET_LAYER_BLEND_TYPE, ret);
-        }
-        return;
-    }
-
-    void OnSetLayerVisible(std::shared_ptr<CommandDataUnpacker> unpacker)
-    {
-        uint32_t devId = -1;
-        uint32_t layerId = -1;
-        bool visible = false;
-        int32_t ret = CmdUtils::SetupDeviceUnpack(unpacker, devId, layerId);
-        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
-
-        ret = unpacker->ReadBool(visible) ? HDF_SUCCESS : HDF_FAILURE;
-        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
-
-        ret = impl_->SetLayerVisible(devId, layerId, visible);
-        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
-EXIT:
-        if (ret != HDF_SUCCESS) {
-            errMaps_.emplace(REQUEST_CMD_SET_LAYER_PREMULTI, ret);
         }
         return;
     }

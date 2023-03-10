@@ -33,7 +33,7 @@ namespace V1_0 {
 using namespace OHOS::HDI::Display::Composer::V1_0;
 
 #define COMPOSER_CHECK_NULLPTR(ptr)                                                         \
-    if ((ptr) == nullptr) {                                                                   \
+    if ((ptr) == nullptr) {                                                                 \
         HDF_LOGE("%{public}d@%{public}s nullptr error", __LINE__, __func__);                \
         return DISPLAY_NULL_PTR;                                                            \
     }
@@ -181,12 +181,6 @@ public:
     {
         COMPOSER_CHECK_NULLPTR(hdi_);
         return ToDispErrCode(hdi_->SetDisplayClientCrop(devId, rect));
-    }
-
-    virtual int32_t SetDisplayClientDestRect(uint32_t devId, const IRect& rect) override
-    {
-        COMPOSER_CHECK_NULLPTR(hdi_);
-        return ToDispErrCode(hdi_->SetDisplayClientDestRect(devId, rect));
     }
 
     virtual int32_t SetDisplayClientBuffer(uint32_t devId, const BufferHandle& buffer, int32_t fence) override
@@ -394,12 +388,6 @@ public:
     {
         COMPOSER_CHECK_NULLPTR(req_);
         return ToDispErrCode(req_->SetLayerBlendType(devId, layerId, type));
-    }
-
-    virtual int32_t SetLayerVisible(uint32_t devId, uint32_t layerId, bool visible) override
-    {
-        COMPOSER_CHECK_NULLPTR(req_);
-        return ToDispErrCode(req_->SetLayerVisible(devId, layerId, visible));
     }
 
     virtual int32_t SetLayerColorTransform(uint32_t devId, uint32_t layerId, const std::vector<float>& matrix) override
