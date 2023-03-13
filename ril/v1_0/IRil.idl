@@ -444,20 +444,6 @@ interface IRil {
     [oneway] SetUssd([in] int slotId, [in] int serialId, [in] String str);
 
     /**
-     * @brief close unfinished unstructured supplementary service data (USSD).
-     *
-     * @param slotId Card slot ID.
-     * @param serialId Serial ID of a request.
-     *
-     * @return Returns <b>0</b> if the operation is successful.
-     * @return Returns a non-0 value if the operation fails.
-     *
-     * @since 4.0
-     * @version 1.0
-     */
-    [oneway] CloseUnFinishedUssd([in] int slotId, [in] int serialId);
-
-    /**
      * @brief Obtains the USSD information.
      *
      * @param slotId Card slot ID.

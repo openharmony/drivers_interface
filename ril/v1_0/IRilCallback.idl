@@ -478,17 +478,6 @@ import ohos.hdi.ril.v1_0.Types;
     SetUssdResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
-     * @brief Callback for the response of close unfinished USSD.
-     *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
-     * For details, see {@link RilRadioResponseInfo}.
-     *
-     * @since 4.0
-     * @version 1.0
-     */
-    CloseUnFinishedUssdResponse([in] struct RilRadioResponseInfo responseInfo);
-
-    /**
      * @brief Callback for the response of querying the USSD service.
      *
      * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
