@@ -165,7 +165,7 @@ struct ExecutorInfo {
 struct TemplateInfo {
     /**< Indicates the executor type. */
     unsigned int executorType;
-    /**< Indicates lockout duration in seconds. */
+    /**< Indicates lockout duration in millisecond. */
     int lockoutDuration;
     /**< Indicates remaining authentication attempts before a lockout. */
     int remainAttempts;
