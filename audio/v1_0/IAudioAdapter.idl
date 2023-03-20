@@ -22,10 +22,12 @@ import ohos.hdi.audio.v1_0.IAudioCallback;
 
 interface IAudioAdapter {
     InitAllPorts();
-    CreateRender([in] struct AudioDeviceDescriptor desc, [in] struct AudioSampleAttributes attrs, [out] IAudioRender render);
-    DestroyRender([in] struct AudioDeviceDescriptor desc);
-    CreateCapture([in] struct AudioDeviceDescriptor desc, [in] struct AudioSampleAttributes attrs, [out] IAudioCapture capture);
-    DestroyCapture([in] struct AudioDeviceDescriptor desc);
+    CreateRender([in] struct AudioDeviceDescriptor desc, [in] struct AudioSampleAttributes attrs,
+                [out] IAudioRender render, [out] unsigned int renderId);
+    DestroyRender([in] unsigned int renderId);
+    CreateCapture([in] struct AudioDeviceDescriptor desc, [in] struct AudioSampleAttributes attrs,
+                  [out] IAudioCapture capture, [out] unsigned int captureId);
+    DestroyCapture([in] unsigned int captureId);
     GetPortCapability([in] struct AudioPort port, [out] struct AudioPortCapability capability);
     SetPassthroughMode([in] struct AudioPort port, [in] enum AudioPortPassthroughMode mode);
     GetPassthroughMode([in] struct AudioPort port, [out] enum AudioPortPassthroughMode mode);
