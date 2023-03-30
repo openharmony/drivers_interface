@@ -46,7 +46,7 @@ interface IEffectControl {
      */
     SendCommand([in] unsigned int cmdId, [in] byte[] cmdData, [out] byte[] replyData);
 
-     /**
+    /**
      * @brief Get the descriptor of the effect.
      *
      * @param desc Indicates the specified effect descriptor.

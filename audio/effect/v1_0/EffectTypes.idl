@@ -46,11 +46,11 @@ struct EffectControllerDescriptor {
  * @brief data point type tag, the type is using on demand.
  */
 enum AudioEffectBufferTag {
-    EFFECT_BUFFER_VOID_TYPE       = 0x0, /**< raw audio data point to the start of the buffer */
-    EFFECT_BUFFER_FLOAT_SIGNED_32 = 0x1, /**< 32bit float type audio data point to the start of the buffer */
-    EFFECT_BUFFER_SINGED_32       = 0x2, /**< 32bit signed type audio data point to the start of the buffer */
-    EFFECT_BUFFER_SIGNED_16       = 0x4, /**< 16bit signed type audio data point to the start of the buffer */
-    EFFECT_BUFFER_UNSIGNED_8      = 0x8, /**< 8bit unsigned type audio data point to the start of the buffer */
+    EFFECT_BUFFER_VOID_TYPE       = 0, /**< raw audio data point to the start of the buffer */
+    EFFECT_BUFFER_FLOAT_SIGNED_32 = 1 << 0, /**< 32bit float type audio data point to the start of the buffer */
+    EFFECT_BUFFER_SINGED_32       = 1 << 1, /**< 32bit signed type audio data point to the start of the buffer */
+    EFFECT_BUFFER_SIGNED_16       = 1 << 2, /**< 16bit signed type audio data point to the start of the buffer */
+    EFFECT_BUFFER_UNSIGNED_8      = 1 << 3, /**< 8bit unsigned type audio data point to the start of the buffer */
 };
 
 /**
