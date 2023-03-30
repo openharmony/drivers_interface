@@ -246,7 +246,7 @@ struct AudioPortCapability {
 };
 struct AudioMmapBufferDescriptor {
     byte[] memoryAddress;
-    int memoryFd;
+    FileDescriptor memoryFd;
     int totalBufferFrames;
     int transferFrameSize;
     int isShareable;

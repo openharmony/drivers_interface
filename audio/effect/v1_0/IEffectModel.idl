@@ -18,8 +18,7 @@ import ohos.hdi.audio.effect.v1_0.EffectTypes;
 import ohos.hdi.audio.effect.v1_0.IEffectControl;
 
 interface IEffectModel {
-     /**
-     * 
+    /**
      * @brief Query whether the vendor/OEM supplies effect libraries. If supplies, use the supplied effect libraries.
      * If not, use the system service software effect.
      *
@@ -30,9 +29,9 @@ interface IEffectModel {
      * @since 4.0
      * @version 1.0
      */
-     IsSupplyEffectLibs([out] boolean supply);
+    IsSupplyEffectLibs([out] boolean supply);
 
-     /**
+    /**
      * @brief Get descriptors of all supported audio effects.
      *
      * @param descs Indicates the effect list.
@@ -42,10 +41,9 @@ interface IEffectModel {
      * @since 4.0
      * @version 1.0
      */
-     GetAllEffectDescriptors([out] struct EffectControllerDescriptor[] descs);
+    GetAllEffectDescriptors([out] struct EffectControllerDescriptor[] descs);
 
-     /**
-     * 
+    /**
      * @brief Create an effect controller which is used to operate the effect instance.
      *
      * @param contoller Indicates the <b>IEffectControl</b> object.
@@ -56,11 +54,10 @@ interface IEffectModel {
      * @since 4.0
      * @version 1.0
      */
-     CreateEffectController([in]struct EffectInfo info, [out] IEffectControl contoller, 
-                            [out] struct ControllerId id);
+    CreateEffectController([in]struct EffectInfo info, [out] IEffectControl contoller,
+                           [out] struct ControllerId id);
 
-     /**
-     * 
+    /**
      * @brief Destroy the effect controller specified by the controllerId.
      *
      * @param contollerId Indicates the contoller to the <b>EffectControl</b> object.
@@ -70,9 +67,9 @@ interface IEffectModel {
      * @since 4.0
      * @version 1.0
      */
-     DestroyEffectController([in] struct ControllerId id);
+    DestroyEffectController([in] struct ControllerId id);
 
-     /**
+    /**
      * @brief Get a descriptor of specified effect.
      *
      * @param effectId Indicates the effectId of the effect.
@@ -83,5 +80,5 @@ interface IEffectModel {
      * @since 4.0
      * @version 1.0
      */
-     GetEffectDescriptor([in] String effectId, [out] struct EffectControllerDescriptor desc);
+    GetEffectDescriptor([in] String effectId, [out] struct EffectControllerDescriptor desc);
 }
