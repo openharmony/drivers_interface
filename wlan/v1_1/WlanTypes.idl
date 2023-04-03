@@ -79,7 +79,7 @@ struct HdfStaInfo {
 struct HdfWifiDriverScanSsid {
     /** SSID to scan. */
     String ssid;
-    /** Length of the SSID. */ 
+    /** Length of the SSID. */
     int ssidLen;
 };
 
