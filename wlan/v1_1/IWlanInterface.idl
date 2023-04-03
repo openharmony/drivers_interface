@@ -132,7 +132,7 @@ interface IWlanInterface {
      *
      * @since 3.2
      * @version 1.1
-     */    
+     */
     GetChipId([in] struct HdfFeatureInfo ifeature, [out] unsigned char chipId);
 
     /**
@@ -264,7 +264,7 @@ interface IWlanInterface {
 
     /**
      * @brief Unregisters a callback.
-    
+     *
      * @param cbFunc Indicates the callback to unregister.
      * @param ifName Indicates the NIC name.
      *
@@ -291,12 +291,12 @@ interface IWlanInterface {
     ResetDriver([in] unsigned char chipId, [in] String ifName);
 
     /**
-     * @brief Sets a country code. 
+     * @brief Sets a country code.
      *
      * The country code indicates the country where the AP radio is located. It specifies the AP radio features,
-     * including the transmit power and supported channels of the AP, ensuring that radio attributes of APs comply 
+     * including the transmit power and supported channels of the AP, ensuring that radio attributes of APs comply
      * with local laws and regulations.
-     * 
+     *
      * @param ifeature Indicates the <b>Feature</b> object.
      * @param code Indicates the country code to set.
      * @param len Indicates the length of the country code.
