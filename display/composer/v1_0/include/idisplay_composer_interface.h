@@ -17,6 +17,7 @@
 #define OHOS_HDI_DISPLAY_V1_0_IDISPLAY_COMPOSER_INTERFACE_H
 
 #include <vector>
+#include "buffer_handle.h"
 #include "common/include/display_common.h"
 #include "iproxy_broker.h"
 #include "v1_0/display_composer_type.h"
@@ -77,7 +78,7 @@ public:
     virtual int32_t SetLayerZorder(uint32_t devId, uint32_t layerId, uint32_t zorder) = 0;
     virtual int32_t SetLayerPreMulti(uint32_t devId, uint32_t layerId, bool preMul) = 0;
     virtual int32_t SetLayerTransformMode(uint32_t devId, uint32_t layerId, TransformType type) = 0;
-    virtual int32_t SetLayerDirtyRegion(uint32_t devId, uint32_t layerId, const IRect& region) = 0;
+    virtual int32_t SetLayerDirtyRegion(uint32_t devId, uint32_t layerId, std::vector<IRect>& regions) = 0;
     virtual int32_t SetLayerVisibleRegion(uint32_t devId, uint32_t layerId, std::vector<IRect>& rects) = 0;
     virtual int32_t SetLayerBuffer(uint32_t devId, uint32_t layerId, const BufferHandle& buffer, int32_t fence) = 0;
     virtual int32_t SetLayerCompositionType(uint32_t devId, uint32_t layerId, CompositionType type) = 0;
