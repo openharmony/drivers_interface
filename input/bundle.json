@@ -1,7 +1,7 @@
 {
     "name": "@ohos/drivers_interface_input",
     "description": "input device driver interface",
-    "version": "3.2",
+    "version": "4.0",
     "license": "Apache License 2.0",
     "publishAs": "code-segment",
     "segment": {
@@ -13,8 +13,7 @@
       "name": "drivers_interface_input",
       "subsystem": "hdf",
       "features": ["drivers_interface_input_feature_passthrough"],
-      "syscap": [""],
-      "adapter_system_type": ["standard"],
+      "adapted_system_type": ["standard"],
       "rom": "675KB",
       "ram": "1024KB",
       "deps": {
