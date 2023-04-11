@@ -32,7 +32,8 @@ public:
         curSecOffset_(0),
         settingSecLen_(0),
         curSecLenPos_(0),
-        data_(nullptr)
+        data_(nullptr),
+        isAdaptiveGrowth_(false)
     {
     }
 
@@ -43,7 +44,7 @@ public:
         }
     }
 
-    bool Init(size_t size = INIT_DATA_SIZE)
+    bool Init(size_t size = INIT_DATA_SIZE, bool isAdaptiveGrowth = false)
     {
         packSize_ = size;
         uint32_t alignedSize = (packSize_ + ALLOC_PAGE_SIZE - 1) & (~(ALLOC_PAGE_SIZE - 1));
@@ -51,6 +52,7 @@ public:
         DISPLAY_CHK_RETURN(data_ == nullptr, false,
             HDF_LOGE("%{public}s, alloc memory failed", __func__));
         packSize_ = alignedSize;
+        isAdaptiveGrowth_ = isAdaptiveGrowth;
         return true;
     }
 
@@ -132,7 +134,13 @@ public:
         // Write cmd len before data related is updated.
         uint32_t actualLen = writePos_ - curSecOffset_;
         uint32_t updatedLen = actualLen > settingSecLen_ ? actualLen : settingSecLen_;
-        *reinterpret_cast<uint32_t *>(data_ + curSecLenPos_) = updatedLen;
+        // We must check "writePos" < packSize_ Before write
+        if ((curSecLenPos_ + sizeof(updatedLen)) > packSize_) {
+            HDF_LOGE("%{public}s, error: current pos > packSize", __func__);
+            return false;
+        } else {
+            *reinterpret_cast<uint32_t *>(data_ + curSecLenPos_) = updatedLen;
+        }
         writePos_ = curSecOffset_ + updatedLen;
 
         DISPLAY_CHK_RETURN(writePos_  >= packSize_, false,
@@ -181,17 +189,19 @@ private:
         size_t writeSize = sizeof(T);
         size_t newSize = writePos_ + writeSize;
         if (newSize > packSize_) {
+            if (!isAdaptiveGrowth_) {
+                HDF_LOGE("%{public}s: command packer is overflow", __func__);
+                return false;
+            }
             newSize = (newSize + ALLOC_PAGE_SIZE - 1) & (~(ALLOC_PAGE_SIZE - 1));
-
             char *newData = new char[newSize];
             if (memcpy_s(newData, newSize, data_, packSize_) != EOK) {
                 HDF_LOGE("%{public}s: memcpy_s failed", __func__);
                 return false;
             }
+            delete data_;
             data_ = newData;
             packSize_ = newSize;
-            delete data_;
-            data_ = nullptr;
         }
         *reinterpret_cast<T *>(data_ + writePos_) = value;
         writePos_ += writeSize;
@@ -214,6 +224,7 @@ private:
     uint32_t settingSecLen_;
     size_t curSecLenPos_;
     char *data_;
+    bool isAdaptiveGrowth_;
 };
 } // namespace Display
 } // namespace HDI

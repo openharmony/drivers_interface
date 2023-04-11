@@ -22,6 +22,9 @@
 #include "command_pack/command_data_unpacker.h"
 #include "v1_0/display_composer_type.h"
 
+#undef HDF_LOG_TAG
+#define HDF_LOG_TAG DISP_HDI_CMD
+
 namespace OHOS {
 namespace HDI {
 namespace Display {
@@ -32,7 +35,6 @@ using namespace OHOS::HDI::Display::Composer::V1_0;
 class DisplayCmdUtils {
 public:
     static constexpr int32_t MAX_INT = 0x7fffffff;
-    static constexpr int32_t MIN_INT = 0x80000000;
     static constexpr uint32_t ELEMENT_SIZE = sizeof(int32_t);
     static constexpr uint32_t TRANSFER_WAIT_TIME = 100000000; // ms
     static constexpr uint32_t INIT_ELEMENT_COUNT = 32 * 1024;

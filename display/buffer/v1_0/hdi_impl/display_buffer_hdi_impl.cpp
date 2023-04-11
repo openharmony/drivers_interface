@@ -20,6 +20,9 @@
 #include "hdf_log.h"
 #include "hilog/log.h"
 
+#undef HDF_LOG_TAG
+#define HDF_LOG_TAG DISP_HDI_BUFF
+
 namespace OHOS {
 namespace HDI {
 namespace Display {
@@ -127,10 +130,12 @@ int32_t DisplayBufferHdiImpl::AllocMem(const AllocInfo& info, BufferHandle*& han
     CHECK_NULLPOINTER_RETURN_VALUE(allocator_, HDF_FAILURE);
     sptr<NativeBuffer> hdiBuffer;
     int32_t ret = allocator_->AllocMem(info, hdiBuffer);
-    if (ret == HDF_SUCCESS) {
+    if ((ret == HDF_SUCCESS) && (hdiBuffer != nullptr)) {
         handle = hdiBuffer->Move();
     } else {
         handle = nullptr;
+        ret = HDF_FAILURE;
+        HDF_LOGE("%{public}s: AllocMem error", __func__);
     }
     return ret;
 }

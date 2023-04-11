@@ -25,6 +25,9 @@
 #include "v1_0/idisplay_composer.h"
 #include "v1_0/include/idisplay_composer_interface.h"
 
+#undef HDF_LOG_TAG
+#define HDF_LOG_TAG DISP_HDI_COMP
+
 namespace OHOS {
 namespace HDI {
 namespace Display {
