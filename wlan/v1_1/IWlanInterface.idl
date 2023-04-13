@@ -481,5 +481,32 @@ interface IWlanInterface {
      * @version 1.1
      */
     GetStaInfo([in] String ifName, [out] struct WifiStationInfo info, [in] unsigned char[] mac);
+
+    /**
+     * @brief Start Pno scan.
+     *
+     * @param interfaceName Indicates the NIC name.
+     * @param pnoSettings Indicates the pno scan parameters.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    StartPnoScan([in] String interfaceName, [in] struct PnoSettings pnoSettings);
+
+    /**
+     * @brief Stop Pno scan.
+     *
+     * @param interfaceName Indicates the NIC name.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    StopPnoScan([in] String interfaceName);
 }
 /** @} */

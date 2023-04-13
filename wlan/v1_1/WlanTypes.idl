@@ -296,4 +296,38 @@ struct AdjustChannelInfo {
     unsigned char switchType;
     unsigned char statusCode;
 };
+
+/**
+ * @brief Defines Pno scan network information.
+ *
+ * @since 4.0
+ * @version 1.1
+ */
+struct PnoNetwork {
+    /** whether to scan hidden network. */
+    boolean isHidden;
+    /** Frequencies to scan. */
+    int[] freqs;
+    /** Ssid to scan. */
+    struct HdfWifiDriverScanSsid ssid;
+};
+
+/**
+ * @brief Defines Pno scan parameters.
+ *
+ * @since 4.0
+ * @version 1.1
+ */
+struct PnoSettings {
+    /** Minimum 2G Rssi to scan. */
+    int min2gRssi;
+    /** Minimum 5G Rssi to scan. */
+    int min5gRssi;
+    /** Scan interval. */
+    int scanIntervalMs;
+    /** Scan iteration. */
+    int scanIterations;
+    /** Scan network list. */
+    struct PnoNetwork[] pnoNetworks;
+};
 /** @} */
