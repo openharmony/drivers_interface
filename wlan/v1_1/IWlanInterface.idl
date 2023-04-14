@@ -508,5 +508,19 @@ interface IWlanInterface {
      * @version 1.1
      */
     StopPnoScan([in] String interfaceName);
+
+    /**
+     * @brief Obtain signal information of the associated link. This function must be called in STA mode.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param signalResult Indicates the signal infornation.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    GetSignalPollInfo([in] String ifName, [out] struct SignalPollResult signalResult);
 }
 /** @} */

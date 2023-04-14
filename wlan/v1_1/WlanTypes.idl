@@ -330,4 +330,39 @@ struct PnoSettings {
     /** Scan network list. */
     struct PnoNetwork[] pnoNetworks;
 };
+
+/**
+ * @brief Defines signal poll information.
+ *
+ * @since 4.0
+ * @version 1.1
+ */
+struct SignalPollResult {
+    /** Rssi value in dBM. */
+    int currentRssi;
+    /** Association frequency in MHz. */
+    int associatedFreq;
+    /** Transmission bit rate in Mbps. */
+    int txBitrate;
+    /** Received bit rate in Mbps. */
+    int rxBitrate;
+    /** Noise value in dBM. */
+    int currentNoise;
+    /** Snr value in dB. */
+    int currentSnr;
+    /** Current channel load. */
+    int currentChload;
+    /** Uldelay value in ms. */
+    int currentUlDelay;
+    /** TxBytes value. */
+    int currentTxBytes;
+    /** RxBytes value. */
+    int currentRxBytes;
+    /** TxFailed value. */
+    int currentTxFailed;
+    /** TxPackets value. */
+    int currentTxPackets;
+    /** RxPackets value. */
+    int currentRxPackets;
+};
 /** @} */
