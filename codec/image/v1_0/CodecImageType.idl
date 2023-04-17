@@ -43,12 +43,12 @@
  * @since 4.0
  * @version 1.0
  */
-package ohos.hdi.codec.v1_0;
+package ohos.hdi.codec.image.v1_0;
 
 /**
  * @brief Defines the image region information.
  */
-struct CodecRegionInfo {
+struct CodecImageRegion {
     unsigned int left;      /**< Distance to the left of the image. */
     unsigned int right;     /**< Distance to the right of the image. */
     unsigned int top;       /**< Distance to the top of the image. */
@@ -71,17 +71,19 @@ struct CodecImageBuffer {
 /**
  * @brief Enumerates the types of image that can be encoded or decoded
  */
-enum ImageCodecRole {
-    CODEC_IMAGE_JPEG = 0;       /**< Jpeg image. */
-    CODEC_IMAGE_HEIF;           /**< Heif image. */
+enum CodecImageRole {
+    CODEC_IMAGE_JPEG = 0,       /**< Jpeg image. */
+    CODEC_IMAGE_HEIF,           /**< Heif image. */
+    CODEC_IMAGE_INVALID,        /**< Invalid image type. */
 };
 
 /**
  * @brief Defines the image codec type.
  */
-enum ImageCodecType {
-    CODEC_IMAGE_TYPE_DECODER = 0;     /**< Image decoder. */
-    CODEC_IMAGE_TYPE_ENCODER;         /**< Image encoder. */
+enum CodecImageType {
+    CODEC_IMAGE_TYPE_DECODER = 0,     /**< Image decoder. */
+    CODEC_IMAGE_TYPE_ENCODER,         /**< Image encoder. */
+    CODEC_IMAGE_TYPE_INVALID,         /**< Invalid type. */
 };
 
 /**
@@ -89,8 +91,8 @@ enum ImageCodecType {
  */
 struct CodecImageCapability {
     String name;                        /**< Name of the image codec. */
-    enum ImageCodecRole role;           /**< Role of the image codec. */
-    enum ImageCodecType type;           /**< Type of the image codec. */
+    enum CodecImageRole role;           /**< Role of the image codec. */
+    enum CodecImageType type;           /**< Type of the image codec. */
     unsigned int widthAlignment;        /**< Alignment value of the width. */
     unsigned int heightAlignment;       /**< Alignment value of the height. */
     unsigned int maxSample;             /**< Maximum sample. */
@@ -115,7 +117,7 @@ struct CodecJpegQuantTable {
  * @brief Defines the jpeg image huff table information.
  */
 struct CodecJpegHuffTable {
-    unsigned char[] bits;
+    unsigned char[] bits;               /**< Bits value, bits[0] is unused. */
     unsigned char[] huffVal;            /**< Huff table value. */
     boolean tableFlag;                  /**< True when huff table valid. */
 };
@@ -137,7 +139,7 @@ struct CodecJpegCompInfo {
 /**
  * @brief Defines the jpeg image decode information.
  */
-struct JpegDecInfo {
+struct CodecJpegDecInfo {
     unsigned int imageWidth;                        /**< Image width. */
     unsigned int imageHeight;                       /**< Image height. */
     unsigned int dataPrecision;                     /**< Bit height. */
@@ -150,7 +152,7 @@ struct JpegDecInfo {
     struct CodecJpegHuffTable[] dcHuffTbl;          /**< Dc huffman table information. */
     struct CodecJpegHuffTable[] acHuffTbl;          /**< Ac huffman table information. */
     struct CodecJpegQuantTable[] quantTbl;          /**< Quant table information. */
-    struct CodecRegionInfo region;                  /**< Image region information. */
+    struct CodecImageRegion region;                 /**< Image region information. */
     unsigned int sampleSize;                        /**< Image sample size. */
     unsigned int compressPos;                       /**< The offset of Jpeg compressed data. */
 };

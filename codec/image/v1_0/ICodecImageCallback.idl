@@ -42,9 +42,9 @@
  * @since 4.0
  * @version 1.0
  */
-package ohos.hdi.codec.v1_0;
+package ohos.hdi.codec.image.v1_0;
 
-import ohos.hdi.codec.v1_0.CodecImageType;
+import ohos.hdi.codec.image.v1_0.CodecImageType;
 
 
 /**
@@ -62,13 +62,13 @@ import ohos.hdi.codec.v1_0.CodecImageType;
     /**
      * @brief Reports image codec result, such as an error.
      *
-     * @param error Indicates the result of the image codec. For details, see {@link HDF_STATUS}.
+     * @param status Indicates the result of the image codec. For details, see {@link HDF_STATUS}.
      *
-     * @error is <b>HDF_SUCCESS</b> if the image codec successfully.
-     * @error is other values if the image codec failed. For details about the error codes,
+     * @status is <b>HDF_SUCCESS</b> if the image codec successfully.
+     * @status is other values if the image codec failed. For details about the status codes,
      * see <b>HDF_STATUS</b> defined by HDF.
      *
      * @since 4.0
      */
-    OnImageEvent([in] int error);
+    OnImageEvent([in] int status);
 }

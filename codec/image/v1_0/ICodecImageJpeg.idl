@@ -43,10 +43,10 @@
  * @since 4.0
  * @version 1.0
  */
-package ohos.hdi.codec.v1_0;
+package ohos.hdi.codec.image.v1_0;
 
-import ohos.hdi.codec.v1_0.CodecImageType;
-import ohos.hdi.codec.v1_0.ICodecImageCallback;
+import ohos.hdi.codec.image.v1_0.CodecImageType;
+import ohos.hdi.codec.image.v1_0.ICodecImageCallback;
 
 interface ICodecImageJpeg {
 
@@ -113,7 +113,7 @@ interface ICodecImageJpeg {
      * @since 4.0
      */
     DoJpegDecode([in] struct CodecImageBuffer inBuffer, [in] struct CodecImageBuffer outBuffer,
-                 [in] ICodecImageCallback callbacks, [in] struct JpegDecInfo decInfo);
+                 [in] ICodecImageCallback callbacks, [in] struct CodecJpegDecInfo decInfo);
 
     /**
      * @brief Allocate input buffer.
