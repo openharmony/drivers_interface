@@ -18,9 +18,9 @@
 
 #include <unordered_map>
 #include "base/hdi_smq.h"
-#include "command_pack/command_data_utils.h"
 #include "command_pack/command_data_packer.h"
 #include "command_pack/command_data_unpacker.h"
+#include "common/include/display_interface_utils.h"
 #include "display_cmd_utils.h"
 #include "hdifd_parcelable.h"
 #include "hdf_log.h"
@@ -126,7 +126,8 @@ EXIT:
         return PeriodDataReset() == HDF_SUCCESS ? ret : HDF_FAILURE;
     }
 
-    int32_t SetDisplayClientBuffer(uint32_t devId, const BufferHandle &buffer, int32_t fence)
+    int32_t SetDisplayClientBuffer(uint32_t devId, const BufferHandle* buffer, uint32_t seqNo,
+        int32_t fence)
     {
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
@@ -139,6 +140,10 @@ EXIT:
         ret = CmdUtils::BufferHandlePack(buffer, requestPacker_, requestHdiFds_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: BufferHandlePack failed", __func__));
+
+        retBool = requestPacker_->WriteUint32(seqNo);
+        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s: write seqNo failed", __func__));
 
         ret = CmdUtils::FileDescriptorPack(fence, requestPacker_, requestHdiFds_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
@@ -408,7 +413,8 @@ EXIT:
         return HDF_SUCCESS;
     }
 
-    int32_t SetLayerBuffer(uint32_t devId, uint32_t layerId, const BufferHandle &buffer, int32_t fence)
+    int32_t SetLayerBuffer(uint32_t devId, uint32_t layerId, const BufferHandle* buffer, uint32_t seqNo,
+        int32_t fence, const std::vector<uint32_t>& deletingList)
     {
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_BUFFER, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
@@ -422,9 +428,24 @@ EXIT:
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: BufferHandlePack failed", __func__));
 
+        bool result = requestPacker_->WriteUint32(seqNo);
+        DISPLAY_CHK_RETURN(result == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s: write seqNo failed", __func__));
+
         ret = CmdUtils::FileDescriptorPack(fence, requestPacker_, requestHdiFds_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: FileDescriptorPack failed", __func__));
+        // write deletingList
+        uint32_t vectSize = static_cast<uint32_t>(deletingList.size());
+        bool retBool = requestPacker_->WriteUint32(vectSize);
+        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s: write vector size failed", __func__));
+
+        for (uint32_t i = 0; i < vectSize; i++) {
+            bool result = requestPacker_->WriteUint32(deletingList[i]);
+            DISPLAY_CHK_RETURN(result == false, HDF_FAILURE,
+                HDF_LOGE("%{public}s: write deletingList failed", __func__));
+        }
 
         ret = CmdUtils::EndSection(requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,

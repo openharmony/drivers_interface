@@ -64,8 +64,8 @@ public:
      * @version 1.0
      */
     virtual bool RemoveDeathRecipient() = 0;
+
     /* device func */
-    
     /**
      * @brief Registers the callback to be invoked when a hot plug event occurs.
      *
@@ -79,6 +79,19 @@ public:
      * @version 1.0
      */
     virtual int32_t RegHotPlugCallback(HotPlugCallback cb, void* data) = 0;
+
+    /**
+     * @brief Sets the client buffer cache count of a display device.
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param count client buffer cache count.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.0
+     * @version 1.0
+     */
+    virtual int32_t SetClientBufferCacheCount(uint32_t devId, uint32_t count) = 0;
 
     /**
      * @brief Obtains the capabilities of a display device.
@@ -245,6 +258,7 @@ public:
      *
      * @param devId Indicates the ID of the display device.
      * @param buffer Indicates the pointer to the display buffer.
+     * @param seqNo Indicates the sequence number of buffer cache.
      * @param fence Indicates the sync fence that specifies whether the display buffer can be accessed. The display
      * buffer is created and released by the graphics service. It can be accessed only when the sync fence is in the
      * signaled state.
@@ -254,7 +268,8 @@ public:
      * @since 4.0
      * @version 1.0
      */
-    virtual int32_t SetDisplayClientBuffer(uint32_t devId, const BufferHandle& buffer, int32_t fence) = 0;
+    virtual int32_t SetDisplayClientBuffer(uint32_t devId, const BufferHandle* buffer, uint32_t seqNo,
+        int32_t fence) = 0;
 
     /**
      * @brief Sets the dirty region for a display device.
@@ -506,7 +521,6 @@ public:
     virtual int32_t GetSupportedMetadataKey(uint32_t devId, std::vector<HDRMetadataKey>& keys) = 0;
 
     /* layer func */
-
     /**
      * @brief Opens a layer on a specified display device.
      *
@@ -517,6 +531,7 @@ public:
      * display device, and 4 indicates the last display device.
      * @param layerInfo Indicates the pointer to the layer information passed to open a layer, including the layer
      * type, layer size, and pixel format.
+     * @param cacheCount Indicates the count of buffer cache.
      * @param layerId Indicates the pointer to the layer ID, which uniquely identifies a layer. The layer ID is returned
      * to the GUI after the layer is successfully opened.
      *
@@ -526,7 +541,7 @@ public:
      * @since 4.0
      * @version 1.0
      */
-    virtual int32_t CreateLayer(uint32_t devId, const LayerInfo& layerInfo, uint32_t& layerId) = 0;
+    virtual int32_t CreateLayer(uint32_t devId, const LayerInfo& layerInfo, uint32_t cacheCount, uint32_t& layerId) = 0;
 
     /**
      * @brief Closes a layer that is no longer required on a specified display device.
@@ -711,14 +726,17 @@ public:
      * with the specified layer ID.
      * @param buffer Indicates the pointer of the buffer handle. The buffer handle should contain all information of the
      * buffer which will be used for composition.
+     * @param seqNo Indicates the sequence number of buffer cache.
      * @param fence Indicates the fd of a sync file.
+     * @param deletingList Indicates the list of buffer cache to delete.
      *
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined in {@link DispErrCode}
      * otherwise.
      * @since 2.0
      * @version 2.0
      */
-    virtual int32_t SetLayerBuffer(uint32_t devId, uint32_t layerId, const BufferHandle& buffer, int32_t fence) = 0;
+    virtual int32_t SetLayerBuffer(uint32_t devId, uint32_t layerId, const BufferHandle* buffer, uint32_t seqNo,
+        int32_t fence, const std::vector<uint32_t>& deletingList) = 0;
 
     /**
      * @brief set the composition type which the client expect

@@ -18,8 +18,8 @@
 
 #include <memory>
 #include <securec.h>
+#include "common/include/display_interface_utils.h"
 #include "hilog/log.h"
-#include "command_data_utils.h"
 
 namespace OHOS {
 namespace HDI {

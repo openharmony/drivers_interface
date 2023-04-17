@@ -35,6 +35,19 @@ interface IDisplayComposer {
      */
     RegHotPlugCallback([in] IHotPlugCallback cb);
 
+    /**
+     * @brief Sets the client buffer cache count of a display device.
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param count client buffer cache count.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.0
+     * @version 1.0
+     */
+    SetClientBufferCacheCount([in] unsigned int devId, [in] unsigned int count);
+
     /* *
      * @brief Registers the callback to be invoked when a VBLANK event occurs.
      *
@@ -189,28 +202,36 @@ interface IDisplayComposer {
      * display device, and 4 indicates the last display device.
      * @param layerInfo Indicates the pointer to the layer information passed to open a layer, including the layer
      * type, layer size, and pixel format.
+     * @param cacheCount Indicates the count of buffer cache.
      * @param layerId Indicates the pointer to the layer ID, which uniquely identifies a layer. The layer ID is returned
      * to the GUI after the layer is successfully opened.
      *
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined in {@link DispErrCode}
      * otherwise.
-     * @see CloseLayer
+     * @see DestroyLayer
      * @since 4.0
      * @version 1.0
      */
-    CreateLayer([in] unsigned int devId, [in] struct LayerInfo layerInfo, [out] unsigned int layerId);
+    CreateLayer([in] unsigned int devId, [in] struct LayerInfo layerInfo, [in] unsigned int cacheCount,
+        [out] unsigned int layerId);
 
     /**
-     * @brief Closes a layer that is no longer required on a specified display device.
+     * @brief Opens a layer on a specified display device.
+     *
+     * Before using a layer on the GUI, you must open the layer based on the layer information. After the layer is
+     * opened, you can obtain the layer ID and then use other functions based on the layer ID.
      *
      * @param devId Indicates the ID of the display device. The value ranges from 0 to 4, where 0 indicates the first
      * display device, and 4 indicates the last display device.
-     * @param layerId Indicates the layer ID, which uniquely identifies a layer. You can perform operations on the layer
-     * with the specified layer ID.
+     * @param layerInfo Indicates the pointer to the layer information passed to open a layer, including the layer
+     * type, layer size, and pixel format.
+     * @param cacheCount Indicates the count of buffer cache.
+     * @param layerId Indicates the pointer to the layer ID, which uniquely identifies a layer. The layer ID is returned
+     * to the GUI after the layer is successfully opened.
      *
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined in {@link DispErrCode}
      * otherwise.
-     * @see OpenLayer
+     * @see DestroyLayer
      * @since 4.0
      * @version 1.0
      */

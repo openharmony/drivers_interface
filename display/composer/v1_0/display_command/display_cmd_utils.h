@@ -17,9 +17,9 @@
 #define OHOS_HDI_DISPLAY_V1_0_DISPLAY_CMD_UTILS_H
 
 #include "buffer_handle_utils.h"
-#include "command_pack/command_data_utils.h"
 #include "command_pack/command_data_packer.h"
 #include "command_pack/command_data_unpacker.h"
+#include "common/include/display_interface_utils.h"
 #include "v1_0/display_composer_type.h"
 
 #undef LOG_TAG
@@ -177,43 +177,51 @@ public:
         return HDF_SUCCESS;
     }
 
-    static int32_t BufferHandlePack(const BufferHandle& buffer, std::shared_ptr<CommandDataPacker> packer,
+    static int32_t BufferHandlePack(const BufferHandle* buffer, std::shared_ptr<CommandDataPacker> packer,
         std::vector<HdifdInfo>& hdiFds)
     {
-        DISPLAY_CHK_RETURN(packer->WriteUint32(buffer.reserveFds) == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s, write buffer.reserveFds error", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteUint32(buffer.reserveInts) == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s, write buffer.reserveInts error", __func__));
-        int32_t ret = FileDescriptorPack(buffer.fd, packer, hdiFds);
+        if (buffer == nullptr) {
+            DISPLAY_CHK_RETURN(packer->WriteUint32(UINT32_MAX) == false, HDF_FAILURE,
+                HDF_LOGE("%{public}s, write null buffer reserveFds error", __func__));
+            DISPLAY_CHK_RETURN(packer->WriteUint32(UINT32_MAX) == false, HDF_FAILURE,
+                HDF_LOGE("%{public}s, write null buffer reservceInts error", __func__));
+            return HDF_SUCCESS;
+        } else {
+            DISPLAY_CHK_RETURN(packer->WriteUint32(buffer->reserveFds) == false, HDF_FAILURE,
+                HDF_LOGE("%{public}s, write buffer->reserveFds error", __func__));
+            DISPLAY_CHK_RETURN(packer->WriteUint32(buffer->reserveInts) == false, HDF_FAILURE,
+                HDF_LOGE("%{public}s, write buffer->reserveInts error", __func__));
+        }
+        int32_t ret = FileDescriptorPack(buffer->fd, packer, hdiFds);
         if (ret != HDF_SUCCESS) {
             return ret;
         }
-        DISPLAY_CHK_RETURN(packer->WriteInt32(buffer.width) == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s, write buffer.width failed", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteInt32(buffer.stride) == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s, write buffer.stride failed", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteInt32(buffer.height) == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s, write buffer.height failed", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteInt32(buffer.size) == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s, write buffer.size failed", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteInt32(buffer.format) == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s, write buffer.format failed", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteUint64(buffer.usage) == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s, write buffer.usage failed", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteUint64(buffer.phyAddr) == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s, write buffer.phyAddr failed", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteInt32(buffer.key) == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s, write buffer.key failed", __func__));
+        DISPLAY_CHK_RETURN(packer->WriteInt32(buffer->width) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, write buffer->width failed", __func__));
+        DISPLAY_CHK_RETURN(packer->WriteInt32(buffer->stride) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, write buffer->stride failed", __func__));
+        DISPLAY_CHK_RETURN(packer->WriteInt32(buffer->height) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, write buffer->height failed", __func__));
+        DISPLAY_CHK_RETURN(packer->WriteInt32(buffer->size) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, write buffer->size failed", __func__));
+        DISPLAY_CHK_RETURN(packer->WriteInt32(buffer->format) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, write buffer->format failed", __func__));
+        DISPLAY_CHK_RETURN(packer->WriteUint64(buffer->usage) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, write buffer->usage failed", __func__));
+        DISPLAY_CHK_RETURN(packer->WriteUint64(buffer->phyAddr) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, write buffer->phyAddr failed", __func__));
+        DISPLAY_CHK_RETURN(packer->WriteInt32(buffer->key) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, write buffer->key failed", __func__));
         uint32_t i = 0;
-        for (i = 0; i < buffer.reserveFds; i++) {
-            ret = FileDescriptorPack(buffer.reserve[i], packer, hdiFds);
+        for (i = 0; i < buffer->reserveFds; i++) {
+            ret = FileDescriptorPack(buffer->reserve[i], packer, hdiFds);
             if (ret != HDF_SUCCESS) {
                 return ret;
             }
         }
-        for (uint32_t j = 0; j < buffer.reserveInts; j++) {
-            DISPLAY_CHK_RETURN(packer->WriteInt32(buffer.reserve[i++]) == false, HDF_FAILURE,
-                HDF_LOGE("%{public}s, write buffer.reserve failed", __func__));
+        for (uint32_t j = 0; j < buffer->reserveInts; j++) {
+            DISPLAY_CHK_RETURN(packer->WriteInt32(buffer->reserve[i++]) == false, HDF_FAILURE,
+                HDF_LOGE("%{public}s, write buffer->reserve failed", __func__));
         }
         return HDF_SUCCESS;
     }
@@ -254,7 +262,7 @@ public:
     }
 
     static int32_t BufferHandleUnpack(std::shared_ptr<CommandDataUnpacker> unpacker,
-        const std::vector<HdifdInfo>& hdiFds, BufferHandle *&buffer)
+        const std::vector<HdifdInfo>& hdiFds, BufferHandle*& buffer)
     {
         uint32_t fdsNum = 0;
         uint32_t intsNum = 0;
@@ -262,6 +270,10 @@ public:
             HDF_LOGE("%{public}s, read fdsNum error", __func__));
         DISPLAY_CHK_RETURN(unpacker->ReadUint32(intsNum) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write intsNum error", __func__));
+        if (fdsNum == UINT32_MAX && intsNum == UINT32_MAX) {
+            buffer = nullptr;
+            return HDF_SUCCESS;
+        }
         BufferHandle *handle = AllocateBufferHandle(fdsNum, intsNum);
         if (handle == nullptr) {
             return HDF_FAILURE;
