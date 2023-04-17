@@ -56,6 +56,30 @@
             ],
             "header_base": "//drivers/interface/codec"
           }
+        },
+        {
+          "name": "//drivers/interface/codec/v1_0:libimage_proxy_1.0",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/codec"
+          }
+        },
+        {
+          "name": "//drivers/interface/codec/v1_0:image_idl_headers",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/codec"
+          }
+        },
+        {
+          "name": "//drivers/interface/codec/v1_0:libimage_proxy_1.0",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/codec"
+          }
         }
       ]
     }

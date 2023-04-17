@@ -1,0 +1,74 @@
+/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+ /**
+ * @addtogroup Codec
+ * @{
+ *
+ * @brief Defines APIs of the image Codec module.
+ *
+ * The Codec module provides APIs for image codec, setting codec parameters,
+ * and controlling and transferring image data.
+ *
+ * @since 4.0
+ * @version 1.0
+ */
+
+/**
+ * @file ICodecImageCallback.idl
+ *
+ * @brief Defines the callbacks used to report image codec result.
+ *
+ *
+ * @since 4.0
+ * @version 1.0
+ */
+
+/**
+ * @brief Defines the path for the package of the image Codec module APIs.
+ *
+ * @since 4.0
+ * @version 1.0
+ */
+package ohos.hdi.codec.v1_0;
+
+import ohos.hdi.codec.v1_0.CodecImageType;
+
+
+/**
+ * @brief Defines the callbacks of the Image Codec module.
+ *
+ * The following callbacks are provided:
+ * - Callback used to report image codec result,For details, see {@link OnImageEvent}.
+ * The callbacks are registered by using:
+ * - {@link DoJpegDecode} when decode jpeg image.
+ */
+
+
+[callback] interface ICodecImageCallback {
+    
+    /**
+     * @brief Reports image codec result, such as an error.
+     *
+     * @param error Indicates the result of the image codec. For details, see {@link HDF_STATUS}.
+     *
+     * @error is <b>HDF_SUCCESS</b> if the image codec successfully.
+     * @error is other values if the image codec failed. For details about the error codes,
+     * see <b>HDF_STATUS</b> defined by HDF.
+     *
+     * @since 4.0
+     */
+    OnImageEvent([in] int error);
+}
