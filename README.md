@@ -207,7 +207,7 @@ Define an HDI in the IDL and saved it in the `.idl` format. Then, the `.idl` fil
 
 ## Repositories Involved
 
-[Drive Subsystem](https://gitee.com/openharmony/docs/blob/master/en/readme/driver-subsystem.md)
+[Drive Subsystem](https://gitee.com/openharmony/docs/blob/master/en/readme/driver.md)
 
 
 [HDF adapter](https://gitee.com/openharmony/drivers_adapter/blob/master/README.md)
