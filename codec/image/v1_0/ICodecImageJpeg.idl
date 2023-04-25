@@ -1,0 +1,152 @@
+/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+ /**
+ * @addtogroup Codec
+ * @{
+ *
+ * @brief Defines APIs of the image Codec module.
+ *
+ * The Codec module provides APIs for image codec, setting codec parameters,
+ * and controlling and transferring image data.
+ *
+ * @since 4.0
+ * @version 1.0
+ */
+
+/**
+ * @file ICodecImageJpeg.idl
+ *
+ * @brief Declares the APIs for jpeg image codec.
+ *
+ *You can use these APIs to allocate input buffer, and decode jpeg image
+ *
+ * @since 4.0
+ * @version 1.0
+ */
+
+/**
+ * @brief Defines the path for the package of the image Codec module APIs.
+ *
+ * @since 4.0
+ * @version 1.0
+ */
+package ohos.hdi.codec.image.v1_0;
+
+import ohos.hdi.codec.image.v1_0.CodecImageType;
+import ohos.hdi.codec.image.v1_0.ICodecImageCallback;
+
+interface ICodecImageJpeg {
+
+    /**
+     * @brief Obtains image codec capabilities.
+     *
+     * You can use this API to obtain the encoding and decoding capabilities provided by the image Codec module.
+     * For details, see {@link CodecImageCapability}.
+     *
+     * @param capList Indicates the image codec capabilities {@link CodecImageCapability} obtained.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 4.0
+     */
+    GetImageCapability([out] struct CodecImageCapability[] capList);
+
+    /**
+     * @brief Jpeg image codec module init.
+     *
+     * You can use this API to init the jpeg image Codec module.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     * @return Returns other values if the underlying layer returns a failure. For details about the error codes,
+     * see <b>HDF_STATUS</b> defined by HDF.
+     *
+     * @since 4.0
+     */
+    JpegInit();
+
+    /**
+     * @brief Jpeg image codec module deinit.
+     *
+     * You can use this API to deinit the jpeg image Codec module.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     * @return Returns other values if the underlying layer returns a failure. For details about the error codes,
+     * see <b>HDF_STATUS</b> defined by HDF.
+     *
+     * @since 4.0
+     */
+    JpegDeInit();
+
+    /**
+     * @brief Start jpeg image decode.
+     *
+     * You can use this API to start jpeg image decode, if return Returns <b>HDF_SUCCESS</b>,
+     * the image is decoding, you should receive the decode result by <b>callbacks</b>.
+     *
+     * @param inBuffer Indicates input buffer of the jpeg image decode {@link CodecImageBuffer} obtained.
+     * @param outBuffer Indicates output buffer of the jpeg image decode {@link CodecImageBuffer} obtained.
+     * @param callbacks Indicates callback of the image decode {@link ICodecImageCallback} obtained.
+     * @param decInfo Indicates decode information of the image decode {@link JpegDecInfo} obtained.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_ERR_INVALID_PARAM</b> if the operation fails due to invalid parameters.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     * @return Returns other values if the underlying layer returns a failure. For details about the error codes,
+     * see <b>HDF_STATUS</b> defined by HDF.
+     *
+     * @since 4.0
+     */
+    DoJpegDecode([in] struct CodecImageBuffer inBuffer, [in] struct CodecImageBuffer outBuffer,
+                 [in] ICodecImageCallback callbacks, [in] struct CodecJpegDecInfo decInfo);
+
+    /**
+     * @brief Allocate input buffer.
+     *
+     * You can use this API to allocate input buffer for jpeg image decode.
+     *
+     * @param inBuffer Indicates input buffer of the jpeg image decode {@link CodecImageBuffer} obtained.
+     * @param size Indicates size of input buffer {@link CodecImageBuffer} obtained.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_ERR_INVALID_PARAM</b> if the operation fails due to invalid parameters.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     * @return Returns other values if the underlying layer returns a failure. For details about the error codes,
+     * see <b>HDF_STATUS</b> defined by HDF.
+     *
+     * @since 4.0
+     */
+    AllocateInBuffer([out] struct CodecImageBuffer inBuffer, [in] unsigned int size);
+
+    /**
+     * @brief Free input buffer.
+     *
+     * You can use this API to free input buffer for jpeg image decode.
+     *
+     * @param buffer Indicates input buffer of the jpeg image decode {@link CodecImageBuffer} obtained.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     * @return Returns other values if the underlying layer returns a failure. For details about the error codes,
+     * see <b>HDF_STATUS</b> defined by HDF.
+     *
+     * @since 4.0
+     */
+    FreeInBuffer([in] struct CodecImageBuffer inBuffer);
+
+}

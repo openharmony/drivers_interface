@@ -28,7 +28,8 @@
     },
     "build": {
       "sub_component": [
-        "//drivers/interface/codec/v1_0:codec_idl_target"
+        "//drivers/interface/codec/v1_0:codec_idl_target",
+        "//drivers/interface/codec/image/v1_0:image_idl_target"
       ],
       "test": [
       ],
@@ -51,6 +52,30 @@
         },
         {
           "name": "//drivers/interface/codec/v1_0:libcodec_stub_1.0",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/codec"
+          }
+        },
+        {
+          "name": "//drivers/interface/codec/image/v1_0:libimage_proxy_1.0",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/codec"
+          }
+        },
+        {
+          "name": "//drivers/interface/codec/image/v1_0:image_idl_headers",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/codec"
+          }
+        },
+        {
+          "name": "//drivers/interface/codec/image/v1_0:libimage_stub_1.0",
           "header": {
             "header_files": [
             ],
