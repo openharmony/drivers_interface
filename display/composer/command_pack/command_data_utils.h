@@ -18,8 +18,10 @@
 
 #include "hilog/log.h"
 
-#undef HDF_LOG_TAG
-#define HDF_LOG_TAG DISP_PACK
+#undef LOG_TAG
+#define LOG_TAG "DISP_PACK"
+#undef LOG_DOMAIN
+#define LOG_DOMAIN 0xD002500
 
 #define DISPLAY_CHECK(val, ...)           \
     do {                                  \

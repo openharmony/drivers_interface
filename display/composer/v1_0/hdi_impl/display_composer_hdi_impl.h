@@ -25,8 +25,10 @@
 #include "v1_0/idisplay_composer.h"
 #include "v1_0/include/idisplay_composer_interface.h"
 
-#undef HDF_LOG_TAG
-#define HDF_LOG_TAG DISP_HDI_COMP
+#undef LOG_TAG
+#define LOG_TAG "DISP_HDI_COMP"
+#undef LOG_DOMAIN
+#define LOG_DOMAIN 0xD002500
 
 namespace OHOS {
 namespace HDI {

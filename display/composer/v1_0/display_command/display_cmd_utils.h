@@ -22,8 +22,10 @@
 #include "command_pack/command_data_unpacker.h"
 #include "v1_0/display_composer_type.h"
 
-#undef HDF_LOG_TAG
-#define HDF_LOG_TAG DISP_HDI_CMD
+#undef LOG_TAG
+#define LOG_TAG "DISP_CMD"
+#undef LOG_DOMAIN
+#define LOG_DOMAIN 0xD002500
 
 namespace OHOS {
 namespace HDI {

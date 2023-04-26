@@ -21,8 +21,10 @@
 #include "hilog/log.h"
 #include "ipc_file_descriptor.h"
 
-#undef HDF_LOG_TAG
-#define HDF_LOG_TAG DISP_HDIFD
+#undef LOG_TAG
+#define LOG_TAG "DISP_HDIFD"
+#undef LOG_DOMAIN
+#define LOG_DOMAIN 0xD002500
 
 namespace OHOS {
 namespace HDI {
