@@ -1,0 +1,56 @@
+{
+    "name": "@ohos/drivers_interface_lpfence_geofence",
+    "description": "low power fence geofence device driver interface",
+    "version": "4.0",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+      "destPath": "drivers/interface/location/lpfence/geofence"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+      "name": "drivers_interface_lpfence_geofence",
+      "subsystem": "hdf",
+      "syscap": [""],
+      "adapter_system_type": ["standard"],
+      "rom": "1024KB",
+      "ram": "2048KB",
+      "deps": {
+        "components": [
+          "ipc",
+          "hdf_core",
+          "hiviewdfx_hilog_native",
+          "utils_base"
+        ],
+        "third_party": [
+          "bounds_checking_function"
+        ]
+      },
+      "build": {
+        "sub_component": [
+          "//drivers/interface/location/lpfence/geofence/v1_0:lpfence_geofence_idl_target"
+        ],
+        "test": [
+        ],
+        "inner_kits": [
+          {
+            "name": "//drivers/interface/location/lpfence/geofence/v1_0:liblpfence_geofence_proxy_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/location/lpfence/geofence"
+            }
+          },
+          {
+            "name": "//drivers/interface/location/lpfence/geofence/v1_0:lpfence_geofence_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/location/lpfence/geofence"
+            }
+          }
+        ]
+      }
+    }
+  }
