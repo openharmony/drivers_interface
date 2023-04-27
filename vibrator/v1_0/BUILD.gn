@@ -11,7 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
+HDF_CORE_PATH = "../../../hdf_core"
+import("$HDF_CORE_PATH/adapter/uhdf2/hdi.gni")
 if (defined(ohos_lite)) {
   group("libvibrator_proxy_1.0") {
     deps = []
