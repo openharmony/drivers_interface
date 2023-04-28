@@ -18,6 +18,9 @@
 
 #include "hilog/log.h"
 
+#undef HDF_LOG_TAG
+#define HDF_LOG_TAG DISP_PACK
+
 #define DISPLAY_CHECK(val, ...)           \
     do {                                  \
         if (val) {                        \

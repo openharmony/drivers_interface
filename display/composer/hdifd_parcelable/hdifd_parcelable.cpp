@@ -21,6 +21,9 @@
 #include "hilog/log.h"
 #include "ipc_file_descriptor.h"
 
+#undef HDF_LOG_TAG
+#define HDF_LOG_TAG DISP_HDIFD
+
 namespace OHOS {
 namespace HDI {
 namespace Display {

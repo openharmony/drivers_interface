@@ -236,20 +236,22 @@ private:
             DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
                 HDF_LOGE("%{public}s: StartSection failed", __func__));
 
-            bool retBool = replyPacker_->WriteUint32(errCnt);
-            DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
+            bool result = replyPacker_->WriteUint32(errCnt);
+            DISPLAY_CHK_RETURN(result == false, HDF_FAILURE,
                 HDF_LOGE("%{public}s: write errCnt failed", __func__));
             for (auto it = errMaps_.begin(); it != errMaps_.end(); ++it) {
-                retBool = replyPacker_->WriteInt32(it->first);
-                DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
+                result = replyPacker_->WriteInt32(it->first);
+                DISPLAY_CHK_RETURN(result == false, HDF_FAILURE,
                     HDF_LOGE("%{public}s: write err-cmd failed, cmdId:%{public}s",
                     __func__, CmdUtils::CommandToString(it->first)));
 
-                retBool = replyPacker_->WriteInt32(it->second);
-                DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
+                result = replyPacker_->WriteInt32(it->second);
+                DISPLAY_CHK_RETURN(result == false, HDF_FAILURE,
                     HDF_LOGE("%{public}s: write errNo failed, errNo:%{public}d", __func__, it->second));
             }
-            CmdUtils::EndSection(replyPacker_);
+            result = CmdUtils::EndSection(replyPacker_);
+            DISPLAY_CHK_RETURN(result == false, HDF_FAILURE,
+                HDF_LOGE("%{public}s: write replyPacker_ EndSection failed", __func__));
             replyCommandCnt_++;
         }
         return HDF_SUCCESS;
@@ -257,7 +259,7 @@ private:
 
     void OnPrepareDisplayLayers(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
-        uint32_t devId = -1;
+        uint32_t devId = 0;
         bool needFlush = false;
         int32_t ret = unpacker->ReadUint32(devId) ? HDF_SUCCESS : HDF_FAILURE;
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
@@ -283,7 +285,7 @@ EXIT:
 
     void OnSetDisplayClientBuffer(std::shared_ptr<CommandDataUnpacker> unpacker, const std::vector<HdifdInfo>& inFds)
     {
-        uint32_t devId;
+        uint32_t devId = 0;
         int32_t ret = unpacker->ReadUint32(devId) ? HDF_SUCCESS : HDF_FAILURE;
 
         BufferHandle *buffer = nullptr;
@@ -320,7 +322,7 @@ EXIT:
 
     void OnSetDisplayClientDamage(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
-        uint32_t devId = -1;
+        uint32_t devId = 0;
         uint32_t vectSize = 0;
         bool retBool = true;
         DISPLAY_CHK_CONDITION(retBool, true, unpacker->ReadUint32(devId),
@@ -348,7 +350,7 @@ EXIT:
 
     void OnCommit(std::shared_ptr<CommandDataUnpacker> unpacker, std::vector<HdifdInfo>& outFds)
     {
-        uint32_t devId = -1;
+        uint32_t devId = 0;
         int32_t fence = -1;
 
         bool retBool = true;
@@ -384,8 +386,8 @@ EXIT:
 
     void OnSetLayerAlpha(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
-        uint32_t devId = -1;
-        uint32_t layerId = -1;
+        uint32_t devId = 0;
+        uint32_t layerId = 0;
         LayerAlpha alpha = {0};
         bool retBool = true;
 
@@ -419,8 +421,8 @@ EXIT:
 
     void OnSetLayerRegion(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
-        uint32_t devId = -1;
-        uint32_t layerId = -1;
+        uint32_t devId = 0;
+        uint32_t layerId = 0;
         IRect rect = {0};
 
         int32_t ret = CmdUtils::SetupDeviceUnpack(unpacker, devId, layerId);
@@ -440,8 +442,8 @@ EXIT:
 
     void OnSetLayerCrop(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
-        uint32_t devId = -1;
-        uint32_t layerId = -1;
+        uint32_t devId = 0;
+        uint32_t layerId = 0;
         IRect rect = {0};
 
         int32_t ret = CmdUtils::SetupDeviceUnpack(unpacker, devId, layerId);
@@ -461,8 +463,8 @@ EXIT:
 
     void OnSetLayerZorder(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
-        uint32_t devId = -1;
-        uint32_t layerId = -1;
+        uint32_t devId = 0;
+        uint32_t layerId = 0;
         uint32_t zorder = 0;
 
         int32_t ret = CmdUtils::SetupDeviceUnpack(unpacker, devId, layerId);
@@ -482,8 +484,8 @@ EXIT:
 
     void OnSetLayerPreMulti(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
-        uint32_t devId = -1;
-        uint32_t layerId = -1;
+        uint32_t devId = 0;
+        uint32_t layerId = 0;
         bool preMulti = false;
 
         int32_t ret = CmdUtils::SetupDeviceUnpack(unpacker, devId, layerId);
@@ -503,8 +505,8 @@ EXIT:
 
     void OnSetLayerTransformMode(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
-        uint32_t devId = -1;
-        uint32_t layerId = -1;
+        uint32_t devId = 0;
+        uint32_t layerId = 0;
         int32_t type = 0;
 
         int32_t ret = CmdUtils::SetupDeviceUnpack(unpacker, devId, layerId);
@@ -524,8 +526,8 @@ EXIT:
 
     void OnSetLayerDirtyRegion(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
-        uint32_t devId = -1;
-        uint32_t layerId = -1;
+        uint32_t devId = 0;
+        uint32_t layerId = 0;
         uint32_t vectSize = 0;
         int32_t ret = HDF_SUCCESS;
 
@@ -554,8 +556,8 @@ EXIT:
 
     void OnSetLayerVisibleRegion(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
-        uint32_t devId = -1;
-        uint32_t layerId = -1;
+        uint32_t devId = 0;
+        uint32_t layerId = 0;
         uint32_t vectSize = 0;
         int32_t ret = HDF_SUCCESS;
 
@@ -584,8 +586,8 @@ EXIT:
 
     void OnSetLayerBuffer(std::shared_ptr<CommandDataUnpacker> unpacker, const std::vector<HdifdInfo>& inFds)
     {
-        uint32_t devId = -1;
-        uint32_t layerId = -1;
+        uint32_t devId = 0;
+        uint32_t layerId = 0;
         BufferHandle *buffer = nullptr;
         int32_t ret = HDF_SUCCESS;
 
@@ -616,8 +618,8 @@ EXIT:
 
     void OnSetLayerCompositionType(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
-        uint32_t devId = -1;
-        uint32_t layerId = -1;
+        uint32_t devId = 0;
+        uint32_t layerId = 0;
         int32_t type;
         int32_t ret = CmdUtils::SetupDeviceUnpack(unpacker, devId, layerId);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
@@ -636,8 +638,8 @@ EXIT:
 
     void OnSetLayerBlendType(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
-        uint32_t devId = -1;
-        uint32_t layerId = -1;
+        uint32_t devId = 0;
+        uint32_t layerId = 0;
         int32_t type;
         int32_t ret = CmdUtils::SetupDeviceUnpack(unpacker, devId, layerId);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);

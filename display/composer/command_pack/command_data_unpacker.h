@@ -106,8 +106,9 @@ public:
     bool NextSection()
     {
         readPos_ = curSecOffset_ + curSecLen_;
-        DISPLAY_CHK_RETURN((readPos_ >= (packSize_ - COMMAND_ID_SIZE)), false,
-            HDF_LOGE("%{public}s, section overflow", __func__));
+        if (readPos_ >= (packSize_ - COMMAND_ID_SIZE)) {
+            return false;
+        }
         return true;
     }
 
