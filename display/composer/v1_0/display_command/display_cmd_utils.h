@@ -59,6 +59,7 @@ public:
             SWITCHCASE(REQUEST_CMD_SET_LAYER_BUFFER);
             SWITCHCASE(REQUEST_CMD_SET_LAYER_COMPOSITION_TYPE);
             SWITCHCASE(REQUEST_CMD_SET_LAYER_BLEND_TYPE);
+            SWITCHCASE(REQUEST_CMD_SET_LAYER_COLOR);
             /* reply cmd */
             SWITCHCASE(REPLY_CMD_SET_ERROR);
             SWITCHCASE(REPLY_CMD_PREPARE_DISPLAY_LAYERS);
@@ -135,6 +136,19 @@ public:
             HDF_LOGE("%{public}s, write rect.w error", __func__));
         DISPLAY_CHK_RETURN(packer->WriteInt32(rect.h) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write rect.h error", __func__));
+        return HDF_SUCCESS;
+    }
+
+    static int32_t LayerColorPack(const LayerColor& layerColor, std::shared_ptr<CommandDataPacker> packer)
+    {
+        DISPLAY_CHK_RETURN(packer->WriteUint8(layerColor.r) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, write layerColor.r error", __func__));
+        DISPLAY_CHK_RETURN(packer->WriteUint8(layerColor.g) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, write layerColor.g error", __func__));
+        DISPLAY_CHK_RETURN(packer->WriteUint8(layerColor.b) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, write layerColor.b error", __func__));
+        DISPLAY_CHK_RETURN(packer->WriteUint8(layerColor.a) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, write layerColor.a error", __func__));
         return HDF_SUCCESS;
     }
 
@@ -298,6 +312,19 @@ public:
         }
         buffer = handle;
         return retVal ? HDF_SUCCESS : HDF_FAILURE;
+    }
+
+    static int32_t LayerColorUnpack(std::shared_ptr<CommandDataUnpacker> unpacker, LayerColor& layerColor)
+    {
+        DISPLAY_CHK_RETURN(unpacker->ReadUint8(layerColor.r) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, read layerColor.r failed", __func__));
+        DISPLAY_CHK_RETURN(unpacker->ReadUint8(layerColor.g) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, read layerColor.g failed", __func__));
+        DISPLAY_CHK_RETURN(unpacker->ReadUint8(layerColor.b) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, read layerColor.b failed", __func__));
+        DISPLAY_CHK_RETURN(unpacker->ReadUint8(layerColor.a) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, read layerColor.a failed", __func__));
+        return HDF_SUCCESS;
     }
 };
 using CmdUtils = DisplayCmdUtils;

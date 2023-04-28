@@ -29,7 +29,7 @@ namespace Composer {
 namespace V1_0 {
 using namespace OHOS::HDI::Display::Composer::V1_0;
 
-class IDisplayComposerInterface {
+class IDisplayComposerInterface : public virtual RefBase {
 public:
     virtual ~IDisplayComposerInterface() = default;
     static IDisplayComposerInterface* Get();
@@ -93,6 +93,7 @@ public:
     virtual int32_t GetHwPresentTimestamp(uint32_t devId, uint32_t layerId, PresentTimestamp& pts) = 0;
     virtual int32_t SetLayerTunnelHandle(uint32_t devId, uint32_t layerId, const ExtDataHandle& handle) = 0;
     virtual int32_t SetLayerMaskInfo(uint32_t devId, uint32_t layerId, const MaskInfo maskInfo) = 0;
+    virtual int32_t SetLayerColor(uint32_t devId, uint32_t layerId, const LayerColor& layerColor) = 0;
 };
 } // V1_0
 } // Composer

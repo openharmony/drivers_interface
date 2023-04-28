@@ -149,6 +149,9 @@ public:
             case CONTROL_CMD_REQUEST_END:
                 ret = OnRequestEnd(unpacker);
                 break;
+            case REQUEST_CMD_SET_LAYER_COLOR:
+                OnSetLayerColor(unpacker);
+                break;
             default:
                 HDF_LOGE("%{public}s: not support this cmd, unpacked cmd = %{public}d", __func__, cmd);
                 ret = HDF_FAILURE;
@@ -676,6 +679,27 @@ EXIT:
 EXIT:
         if (ret != HDF_SUCCESS) {
             errMaps_.emplace(REQUEST_CMD_SET_LAYER_MASK_INFO, ret);
+        }
+        return;
+    }
+
+    void OnSetLayerColor(std::shared_ptr<CommandDataUnpacker> unpacker)
+    {
+        uint32_t devId = 0;
+        uint32_t layerId = 0;
+        LayerColor layerColor = {0};
+
+        int32_t ret = CmdUtils::SetupDeviceUnpack(unpacker, devId, layerId);
+        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+
+        ret = CmdUtils::LayerColorUnpack(unpacker, layerColor);
+        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+
+        ret = HDF_SUCCESS;
+        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+EXIT:
+        if (ret != HDF_SUCCESS) {
+            errMaps_.emplace(REQUEST_CMD_SET_LAYER_COLOR, ret);
         }
         return;
     }
