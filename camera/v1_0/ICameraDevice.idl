@@ -26,6 +26,7 @@ package ohos.hdi.camera.v1_0;
 
 import ohos.hdi.camera.v1_0.IStreamOperatorCallback;
 import ohos.hdi.camera.v1_0.IStreamOperator;
+import ohos.hdi.camera.v1_0.Types;
 
 interface ICameraDevice {
     /**

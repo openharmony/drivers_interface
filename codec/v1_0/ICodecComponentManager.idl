@@ -47,6 +47,7 @@ package ohos.hdi.codec.v1_0;
 
 import ohos.hdi.codec.v1_0.CodecTypes;
 import ohos.hdi.codec.v1_0.ICodecComponent;
+import ohos.hdi.codec.v1_0.ICodecCallback;
 
 /**
  * @brief Defines the APIs for managing the codec components.
