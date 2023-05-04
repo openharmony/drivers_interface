@@ -67,6 +67,8 @@ interface IExecutor {
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
+     *
+     * @deprecated
      */
     GetTemplateInfo([in] unsigned long templateId, [out] struct TemplateInfo templateInfo);
     /**
