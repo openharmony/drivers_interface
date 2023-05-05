@@ -34,6 +34,7 @@ enum DispCmd {
     REQUEST_CMD_SET_LAYER_COMPOSITION_TYPE = 77,
     REQUEST_CMD_SET_LAYER_BLEND_TYPE = 78,
     REQUEST_CMD_SET_LAYER_VISIBLE = 79,
+    REQUEST_CMD_SET_LAYER_MASK_INFO = 80,
     REQUEST_CMD_BUTT,
     /* reply cmd */
     REPLY_CMD_SET_ERROR = 512,
@@ -103,6 +104,7 @@ enum PixelFormat {
     PIXEL_FMT_UYVY_422_PKG,              /**< UYVY422 packed format */
     PIXEL_FMT_YVYU_422_PKG,              /**< YVYU422 packed format */
     PIXEL_FMT_VYUY_422_PKG,              /**< VYUY422 packed format */
+    PIXEL_FMT_RGBA_1010102,              /**< RGBA_1010102 vendor format*/
     PIXEL_FMT_VENDER_MASK = 0X7FFF0000,  /**< vendor mask format */
     PIXEL_FMT_BUTT = 0X7FFFFFFF          /**< Invalid pixel format */
 };
@@ -128,6 +130,7 @@ enum BufferUsage : unsigned long {
     HBM_USE_CAMERA_WRITE = (1ULL << 13),   /**< For camera write case */
     HBM_USE_VIDEO_ENCODER = (1ULL << 14),  /**< For encode case */
     HBM_USE_VIDEO_DECODER = (1ULL << 15),  /**< For decode case */
+    HBM_USE_CPU_READ_OFTEN = (1ULL << 16), /**< For read often */
     HBM_USE_VENDOR_PRI0 = (1ULL << 44),    /**< Reserverd for vendor */
     HBM_USE_VENDOR_PRI1 = (1ULL << 45),    /**< Reserverd for vendor */
     HBM_USE_VENDOR_PRI2 = (1ULL << 46),    /**< Reserverd for vendor */
@@ -588,6 +591,15 @@ enum PresentTimestampType {
     HARDWARE_DISPLAY_PTS_UNSUPPORTED = 0,       /**< Unsupported */
     HARDWARE_DISPLAY_PTS_DELAY = 1 << 0,        /**< Delay */
     HARDWARE_DISPLAY_PTS_TIMESTAMP = 1 << 1,    /**< Timestamp */
+};
+
+/**
+ * @brief Enumerates the layer mask info.
+ *
+ */
+enum MaskInfo {
+    LAYER_NORAML = 0,
+    LAYER_HBM_SYNC = 1,
 };
 
 /**
