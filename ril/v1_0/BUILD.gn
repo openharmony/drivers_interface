@@ -11,7 +11,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
+DRIVERS_DIR = "../../.."
+import("$DRIVERS_DIR/hdf_core/adapter/uhdf2/hdi.gni")
 if (defined(ohos_lite)) {
   group("libril_proxy_1.0") {
     deps = []
