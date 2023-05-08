@@ -399,6 +399,12 @@ public:
         return ToDispErrCode(req_->SetLayerBlendType(devId, layerId, type));
     }
 
+    virtual int32_t SetLayerMaskInfo(uint32_t devId, uint32_t layerId, const MaskInfo maskInfo) override
+    {
+        COMPOSER_CHECK_NULLPTR(hdi_);
+        return ToDispErrCode(req_->SetLayerMaskInfo(devId, layerId, maskInfo));
+    }
+
     virtual int32_t SetLayerColorTransform(uint32_t devId, uint32_t layerId, const std::vector<float>& matrix) override
     {
         HDF_LOGE("%s is not supported", __func__);

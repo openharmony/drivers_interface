@@ -475,6 +475,27 @@ EXIT:
         return HDF_SUCCESS;
     }
 
+    int32_t SetLayerMaskInfo(uint32_t devId, uint32_t layerId, const MaskInfo maskInfo)
+    {
+        int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_MASK_INFO, requestPacker_);
+        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
+            HDF_LOGE("%{public}s: StartSection failed", __func__));
+
+        ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
+        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
+            HDF_LOGE("%{public}s: SetupDevice failed", __func__));
+
+        bool retBool = requestPacker_->WriteUint32(maskInfo);
+        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s: write maskInfo failed", __func__));
+
+        ret = CmdUtils::EndSection(requestPacker_);
+        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
+            HDF_LOGE("%{public}s: EndSection failed", __func__));
+
+        return HDF_SUCCESS;
+    }
+
 private:
     int32_t OnReplySetError(
         std::shared_ptr<CommandDataUnpacker> replyUnpacker, std::unordered_map<int32_t, int32_t> &errMaps)

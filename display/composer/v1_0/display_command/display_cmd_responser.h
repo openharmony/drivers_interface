@@ -143,6 +143,9 @@ public:
             case REQUEST_CMD_SET_LAYER_BLEND_TYPE:
                 OnSetLayerBlendType(unpacker);
                 break;
+            case REQUEST_CMD_SET_LAYER_MASK_INFO:
+                OnSetLayerMaskInfo(unpacker);
+                break;
             case CONTROL_CMD_REQUEST_END:
                 ret = OnRequestEnd(unpacker);
                 break;
@@ -652,6 +655,27 @@ EXIT:
 EXIT:
         if (ret != HDF_SUCCESS) {
             errMaps_.emplace(REQUEST_CMD_SET_LAYER_BLEND_TYPE, ret);
+        }
+        return;
+    }
+
+    void OnSetLayerMaskInfo(std::shared_ptr<CommandDataUnpacker> unpacker)
+    {
+        uint32_t devId = 0;
+        uint32_t layerId = 0;
+        uint32_t maskInfo = 0;
+
+        int32_t ret = CmdUtils::SetupDeviceUnpack(unpacker, devId, layerId);
+        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+
+        ret = unpacker->ReadUint32(maskInfo) ? HDF_SUCCESS : HDF_FAILURE;
+        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+
+        ret = HDF_SUCCESS;
+        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+EXIT:
+        if (ret != HDF_SUCCESS) {
+            errMaps_.emplace(REQUEST_CMD_SET_LAYER_MASK_INFO, ret);
         }
         return;
     }
