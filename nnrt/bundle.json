@@ -1,8 +1,11 @@
 {
-  "name": "drivers_interface_nnrt",
+  "name": "@ohos/drivers_interface_nnrt",
   "description": "driver interface for neural network runtime.",
   "version": "4.0",
   "license": "Apache License 2.0",
+  "segment": {
+    "destPath": "drivers/interface/nnrt"
+  },
   "component": {
     "name": "drivers_interface_nnrt",
     "subsystem": "hdf",
