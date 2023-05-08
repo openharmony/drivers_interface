@@ -208,6 +208,13 @@ struct AudioSceneDescriptor {
     union SceneDesc scene;
     struct AudioDeviceDescriptor desc;
 };
+enum AudioInputType {
+    AUDIO_INPUT_DEFAULT_TYPE             = 0,
+    AUDIO_INPUT_MIC_TYPE                 = 1 << 0,
+    AUDIO_INPUT_SPEECH_WAKEUP_TYPE       = 1 << 1,
+    AUDIO_INPUT_VOICE_COMMUNICATION_TYPE = 1 << 2,
+    AUDIO_INPUT_VOICE_RECOGNITION_TYPE   = 1 << 3,
+};
 struct AudioSampleAttributes {
     enum AudioCategory type;
     boolean interleaved;
@@ -222,6 +229,7 @@ struct AudioSampleAttributes {
     unsigned int stopThreshold;
     unsigned int silenceThreshold;
     int streamId;
+    int sourceType;
 };
 struct AudioTimeStamp {
     long tvSec;
