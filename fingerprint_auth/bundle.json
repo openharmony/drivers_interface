@@ -1,7 +1,7 @@
 {
     "name": "@ohos/drivers_interface_fingerprint_auth",
     "description": "fingerprint_auth device driver interface",
-    "version": "3.2",
+    "version": "4.0",
     "license": "Apache License 2.0",
     "publishAs": "code-segment",
     "segment": {
@@ -12,10 +12,9 @@
     "component": {
       "name": "drivers_interface_fingerprint_auth",
       "subsystem": "hdf",
-      "syscap": [""],
-      "adapter_system_type": ["standard"],
-      "rom": "675KB",
-      "ram": "1024KB",
+      "adapted_system_type": ["standard"],
+      "rom": "1000KB",
+      "ram": "1000KB",
       "deps": {
         "components": [
           "ipc",
