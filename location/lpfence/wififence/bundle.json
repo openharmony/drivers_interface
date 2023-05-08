@@ -12,8 +12,7 @@
     "component": {
       "name": "drivers_interface_lpfence_wififence",
       "subsystem": "hdf",
-      "syscap": [""],
-      "adapter_system_type": ["standard"],
+      "adapted_system_type": ["standard"],
       "rom": "256KB",
       "ram": "512KB",
       "deps": {
