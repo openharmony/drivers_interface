@@ -20,8 +20,10 @@
 #include "hdf_log.h"
 #include "hilog/log.h"
 
-#undef HDF_LOG_TAG
-#define HDF_LOG_TAG DISP_HDI_BUFF
+#undef LOG_TAG
+#define LOG_TAG "DISP_HDI_BUFF"
+#undef LOG_DOMAIN
+#define LOG_DOMAIN 0xD002500
 
 namespace OHOS {
 namespace HDI {
