@@ -195,8 +195,14 @@ private:
             }
             newSize = (newSize + ALLOC_PAGE_SIZE - 1) & (~(ALLOC_PAGE_SIZE - 1));
             char *newData = new char[newSize];
+            if (newData == nullptr) {
+                HDF_LOGE("%{public}s: mem alloc failed", __func__);
+                return false;
+            }
             if (memcpy_s(newData, newSize, data_, packSize_) != EOK) {
                 HDF_LOGE("%{public}s: memcpy_s failed", __func__);
+                delete[] newData;
+                newData = nullptr;
                 return false;
             }
             delete data_;
