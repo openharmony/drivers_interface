@@ -125,6 +125,8 @@ struct ExecutorInfo {
  *
  * @since 3.2
  * @version 1.0
+ *
+ * @deprecated
  */
 struct TemplateInfo {
     /**< Indicates the executor type. */

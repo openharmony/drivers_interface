@@ -92,6 +92,8 @@ enum CommandId : int {
  *
  * @since 3.2
  * @version 1.0
+ *
+ * @deprecated
  */
 enum FingerprintTipsCode : int {
     FINGERPRINT_AUTH_TIP_GOOD = 0, /**< Indicates that the image acquired is good. */
@@ -124,6 +126,8 @@ struct ExecutorInfo {
  *
  * @since 3.2
  * @version 1.0
+ *
+ * @deprecated
  */
 struct TemplateInfo {
     unsigned int executorType; /**< Indicates executor type. */

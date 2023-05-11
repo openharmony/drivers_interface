@@ -150,6 +150,8 @@ struct ExecutorInfo {
  *
  * @since 3.2
  * @version 1.0
+ *
+ * @deprecated
  */
 struct ScheduleInfo {
     /**< Schedule index of authentication. */

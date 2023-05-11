@@ -104,6 +104,8 @@ interface IUserAuthInterface {
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
+     *
+     * @deprecated
      */
     BeginEnrollment([in] int userId, [in] unsigned char[] authToken, [in] struct EnrollParam param, 
         [out] struct ScheduleInfo info);
@@ -194,6 +196,8 @@ interface IUserAuthInterface {
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
+     *
+     * @deprecated
      */
     BeginAuthentication([in] unsigned long contextId, [in] struct AuthSolution param,
         [out] struct ScheduleInfo[] scheduleInfos);
@@ -230,6 +234,8 @@ interface IUserAuthInterface {
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
+     *
+     * @deprecated
      */
     BeginIdentification([in] unsigned long contextId, [in] enum AuthType authType, [in] unsigned char[] challenge,
         [in] unsigned int executorSensorHint, [out] struct ScheduleInfo scheduleInfo);
