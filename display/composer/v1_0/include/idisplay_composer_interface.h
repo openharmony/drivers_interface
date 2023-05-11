@@ -29,7 +29,7 @@ namespace Composer {
 namespace V1_0 {
 using namespace OHOS::HDI::Display::Composer::V1_0;
 
-class IDisplayComposerInterface {
+class IDisplayComposerInterface : public virtual RefBase {
 public:
     virtual ~IDisplayComposerInterface() = default;
     static IDisplayComposerInterface* Get();
