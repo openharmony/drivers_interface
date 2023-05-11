@@ -16,6 +16,13 @@
 #ifndef OHOS_HDI_DISPLAY_V1_0_DISPLAY_CMD_REQUESTER_H
 #define OHOS_HDI_DISPLAY_V1_0_DISPLAY_CMD_REQUESTER_H
 
+#include <fstream>
+#include <poll.h>
+#include <securec.h>
+#include <sstream>
+#include <string>
+#include <sys/time.h>
+#include <unistd.h>
 #include <unordered_map>
 
 #include "base/hdi_smq.h"
@@ -27,7 +34,9 @@
 #include "hdifd_parcelable.h"
 #include "hilog/log.h"
 #include "idisplay_composer_vdi.h"
+#include "parameter.h"
 #include "v1_0/display_composer_type.h"
+#include "v1_0/mapper_stub.h"
 
 namespace OHOS {
 namespace HDI {
@@ -36,7 +45,12 @@ namespace Composer {
 namespace V1_0 {
 using namespace OHOS::HDI::Base;
 using namespace OHOS::HDI::Display::Composer::V1_0;
+using namespace OHOS::HDI::Display::Buffer::V1_0;
 using HdifdSet = std::vector<std::shared_ptr<HdifdParcelable>>;
+
+static constexpr uint32_t TIME_BUFFER_MAX_LEN = 15;
+
+static sptr<IMapper> g_bufferServiceImpl = nullptr;
 
 template <typename Transfer, typename VdiImpl>
 class DisplayCmdResponser {
@@ -604,6 +618,20 @@ EXIT:
         DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::FileDescriptorUnpack(unpacker, inFds, fence),
             HDF_LOGE("%{public}s, FileDescriptorUnpack error", __func__));
 
+        const std::string SWITCH_ON = "on";
+        const uint32_t DUMP_BUFFER_SWITCH_LEN = 4;
+        char dumpSwitch[DUMP_BUFFER_SWITCH_LEN] = {0};
+        GetParameter("hdi.composer.dumpbuffer", "off", dumpSwitch, DUMP_BUFFER_SWITCH_LEN);
+
+        if (SWITCH_ON.compare(dumpSwitch) == 0) {
+            const uint32_t FENCE_TIMEOUT = 3000;
+            int32_t retCode = WaitFence(fence, FENCE_TIMEOUT);
+            if (retCode == HDF_SUCCESS) {
+                DISPLAY_CHK_CONDITION(retCode, HDF_SUCCESS, DumpLayerBuffer(devId, layerId, *buffer),
+                    HDF_LOGE("%{public}s, DumpLayerBuffer error", __func__));
+            }
+        }
+
         HdifdParcelable fdParcel(fence);
         DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, impl_->SetLayerBuffer(devId, layerId, *buffer, fdParcel.GetFd()),
             HDF_LOGE("%{public}s, SetLayerBuffer error", __func__));
@@ -690,6 +718,94 @@ EXIT:
             HDF_LOGE("PackBegin failure, ret=%{public}d", ret);
         }
         return ret;
+    }
+
+    static std::string GetFileName(uint32_t devId, uint32_t layerId, const BufferHandle& buffer)
+    {
+        struct timeval tv;
+        char nowStr[TIME_BUFFER_MAX_LEN] = {0};
+
+        gettimeofday(&tv, nullptr);
+        if (strftime(nowStr, sizeof(nowStr), "%m-%d-%H-%M-%S", localtime(&tv.tv_sec)) == 0) {
+            HDF_LOGE("strftime failed");
+            return "";
+        };
+
+        std::ostringstream strStream;
+        strStream << "hdi_layer_" << devId << "_" << layerId << "_" << buffer.width << "x" << buffer.height << "_" <<
+            nowStr << "-" << tv.tv_usec;
+        return strStream.str();
+    }
+
+    static int32_t DumpLayerBuffer(uint32_t devId, uint32_t layerId, BufferHandle& buffer)
+    {
+        if (g_bufferServiceImpl == nullptr) {
+            g_bufferServiceImpl = IMapper::Get(true);
+            DISPLAY_CHK_RETURN((g_bufferServiceImpl == nullptr), HDF_FAILURE, HDF_LOGE("get IMapper failed"));
+        }
+
+        std::string fileName = GetFileName(devId, layerId, buffer);
+        DISPLAY_CHK_RETURN((fileName == ""), HDF_FAILURE, HDF_LOGE("GetFileName failed"));
+        HDF_LOGI("fileName = %{public}s", fileName.c_str());
+
+        const std::string PATH_PREFIX = "/data/local/traces/";
+        std::stringstream filePath;
+        filePath << PATH_PREFIX << fileName;
+        std::ofstream rawDataFile(filePath.str(), std::ofstream::binary);
+        DISPLAY_CHK_RETURN((!rawDataFile.good()), HDF_FAILURE, HDF_LOGE("open file failed, %{public}s",
+            std::strerror(errno)));
+
+        sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
+        hdiBuffer->SetBufferHandle(const_cast<BufferHandle*>(&buffer));
+
+        int32_t ret = 0;
+        ret = g_bufferServiceImpl->Mmap(hdiBuffer);
+        DISPLAY_CHK_RETURN((ret != HDF_SUCCESS), HDF_FAILURE, HDF_LOGE("Mmap buffer failed"));
+
+        std::chrono::milliseconds time_before = std::chrono::duration_cast<std::chrono::milliseconds> (
+            std::chrono::system_clock::now().time_since_epoch()
+        );
+        rawDataFile.write(static_cast<const char *>(buffer.virAddr), buffer.size);
+        std::chrono::milliseconds time_after = std::chrono::duration_cast<std::chrono::milliseconds> (
+            std::chrono::system_clock::now().time_since_epoch()
+        );
+        HDF_LOGI("wirte file take time %{public}lld", time_after.count() - time_before.count());
+        rawDataFile.close();
+
+        ret = g_bufferServiceImpl->Unmap(hdiBuffer);
+        DISPLAY_CHK_RETURN((ret != HDF_SUCCESS), HDF_FAILURE, HDF_LOGE("Unmap buffer failed"));
+
+        return HDF_SUCCESS;
+    }
+
+    static int32_t WaitFence(int32_t fence, uint32_t timeout)
+    {
+        int retCode = -1;
+        if (fence < 0) {
+            HDF_LOGE("The fence id is invalid.");
+            return retCode;
+        }
+
+        struct pollfd pollfds = {0};
+        pollfds.fd = fence;
+        pollfds.events = POLLIN;
+
+        do {
+            retCode = poll(&pollfds, 1, timeout);
+        } while (retCode == -1 && (errno == EINTR || errno == EAGAIN));
+
+        if (retCode == 0) {
+            retCode = -1;
+            errno = ETIME;
+        } else if (retCode > 0) {
+            retCode = 0;
+            if (pollfds.revents & (POLLERR | POLLNVAL)) {
+                retCode = -1;
+                errno = EINVAL;
+            }
+        }
+
+        return retCode < 0 ? -errno : HDF_SUCCESS;
     }
 
 private:
