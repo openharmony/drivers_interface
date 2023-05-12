@@ -457,6 +457,12 @@ public:
         return DISPLAY_NOT_SUPPORT;
     }
 
+    virtual int32_t SetLayerColor(uint32_t devId, uint32_t layerId, const LayerColor& layerColor) override
+    {
+        COMPOSER_CHECK_NULLPTR(req_);
+        return ToDispErrCode(req_->SetLayerColor(devId, layerId, layerColor));
+    }
+
     // Callback implement
     virtual int32_t OnHotPlug(uint32_t outputId, bool connected) override
     {
