@@ -2,6 +2,7 @@
     "name": "@ohos/drivers_interface_distributed_camera",
     "description": "drivers interface distributed camera",
     "version": "3.2",
+    "repository":"https://gitee.com/openharmony/drivers_interface",
     "license": "Apache License 2.0",
     "publishAs": "code-segment",
     "segment": {
@@ -13,8 +14,8 @@
       "name": "drivers_interface_distributed_camera",
       "subsystem": "hdf",
       "adapted_system_type": ["standard"],
-      "rom": "675KB",
-      "ram": "1024KB",
+      "rom": "1024KB",
+      "ram": "2048KB",
       "deps": {
         "components": [
           "ipc",
