@@ -12,6 +12,7 @@
     "component": {
       "name": "drivers_interface_lpfence_geofence",
       "subsystem": "hdf",
+      "syscap": [ "SystemCapability.Location.Location.Geofence" ],
       "adapted_system_type": ["standard"],
       "rom": "1024KB",
       "ram": "2048KB",
