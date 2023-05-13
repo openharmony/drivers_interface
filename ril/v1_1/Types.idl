@@ -826,6 +826,46 @@ struct DataCallResultList {
 };
 
 /**
+ * @brief Defines the data link capability.
+ *
+ * @since 4.0
+ * @version 1.1
+ */
+struct DataLinkCapability {
+    /**
+     * Primary serving downlink capability.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    int primaryDownlinkKbps;
+
+    /**
+     * Primary serving uplink capability.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    int primaryUplinkKbps;
+
+    /**
+     * Secondary serving downlink capability.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    int secondaryDownlinkKbps;
+
+    /**
+     * Secondary serving uplink capability.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    int secondaryUplinkKbps;
+};
+
+/**
  * @brief Defines PDP context information.
  */
 struct DataProfileDataInfo {

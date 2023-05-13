@@ -669,6 +669,20 @@ interface IRil {
     [oneway] GetLinkBandwidthInfo([in] int slotId, [in] int serialId, [in] int cid);
 
     /**
+     * @brief Get link capability.
+     *
+     * @param slotId Card slot ID.
+     * @param serialId Serial ID of a request.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-0 value if the operation fails.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    [oneway] GetLinkCapability([in] int slotId, [in] int serialId);
+
+    /**
      * @brief Sets the rule for reporting the data link bandwidth information.
      *
      * @param slotId Card slot ID.
