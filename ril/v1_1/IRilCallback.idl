@@ -560,6 +560,18 @@ import ohos.hdi.ril.v1_1.Types;
     PdpContextListUpdated([in] struct RilRadioResponseInfo responseInfo, [in] struct DataCallResultList dataCallResultList);
 
     /**
+     * @brief Reporting the data link capability.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. For details,
+     * see {@link RilRadioResponseInfo}.
+     * @param capability Data link capability.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    DataLinkCapabilityUpdated([in] struct RilRadioResponseInfo responseInfo, [in] struct DataLinkCapability capability);
+
+    /**
      * @brief Callback for the response of activating the data service.
      *
      * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
@@ -621,6 +633,18 @@ import ohos.hdi.ril.v1_1.Types;
         [in] struct DataLinkBandwidthInfo dataLinkBandwidthInfo);
 
     /**
+     * @brief Callback for the response of get link capability.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. For details,
+     * see {@link RilRadioResponseInfo}.
+     * @param capability Data link capability.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    GetLinkCapabilityResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct DataLinkCapability capability);
+
+    /**
      * @brief Callback for the response of setting the rule for reporting the data link bandwidth information.
      *
      * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
@@ -667,6 +691,18 @@ import ohos.hdi.ril.v1_1.Types;
       */
     VoiceRadioTechUpdated([in] struct RilRadioResponseInfo responseInfo,
         [in] struct VoiceRadioTechnology voiceRadioTechnology);
+
+    /**
+     * @brief Reporting the dsds mode.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. For details,
+     * see {@link RilRadioResponseInfo}.
+     * @param state Dsds mode.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    DsdsModeUpdated([in] struct RilRadioResponseInfo responseInfo, [in] int state);
 
      /**
       * @brief Callback for the response indicating that the mobile phone is powering off.
