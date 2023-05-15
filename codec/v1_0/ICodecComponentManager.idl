@@ -133,5 +133,5 @@ interface ICodecComponentManager {
      *
      * @since 3.2
      */
-    DestoryComponent([in] unsigned int componentId);
+    DestroyComponent([in] unsigned int componentId);
 }

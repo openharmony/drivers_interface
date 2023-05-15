@@ -234,14 +234,15 @@ enum CodecStateType
 /**
  * @brief Enuerates the port supplier preferences when establishing a tunnel between two ports.
  */
-enum OMX_BUFFERSUPPLIERTYPE
+enum CodecBufferSupplierType
 {
-    OMX_BufferSupplyUnspecified = 0,                 /**< The port that provides the buffers is not specified. */
-    OMX_BufferSupplyInput,                           /**< The input port provides the buffers. */
-    OMX_BufferSupplyOutput,                          /**< The output port provides the buffers. */
-    OMX_BufferSupplyKhronosExtensions = 0x6F000000,  /**< Reserved region for introducing Khronos standard extensions. */
-    OMX_BufferSupplyVendorStartUnused = 0x7F000000,  /**< Reserved region for introducing vendor extensions. */
-    OMX_BufferSupplyMax = 0x7FFFFFFF,                /**< Maximum value. */
+    CODEC_BUFFER_SUPPLY_UNSPECIFIED = 0,                   /**< The port that provides the buffers is not specified. */
+    CODEC_BUFFER_SUPPLY_INPUT,                             /**< The input port provides the buffers. */
+    CODEC_BUFFER_SUPPLY_OUTPUT,                            /**< The output port provides the buffers. */
+    CODEC_BUFFER_SUPPLY_KHRONOS_EXTENSIONS = 0x6F000000,   /**< Reserved region for introducing Khronos
+                                                                standard extensions. */
+    CODEC_BUFFER_SUPPLY_VENDOR_START_UNUSED = 0x7F000000,  /**< Reserved region for introducing vendor extensions. */
+    CODEC_BUFFER_SUPPLY_MAX = 0x7FFFFFFF,                  /**< Maximum value. */
 };
 
 /**
@@ -307,20 +308,20 @@ struct PortCap {
 /**
  * @brief Defines the version type of a component.
  */
-struct OmxVerType {
-    unsigned char nVersionMajor;        /**<  Major version accessor element. */
-    unsigned char nVersionMinor;        /**<  Minor version accessor element. */
-    unsigned char nRevision;            /**< Revision version accessor element. */
-    unsigned char nStep;                /**< Step version accessor element. */
+struct CodecVerType {
+    unsigned char majorVersion;        /**<  Major version accessor element. */
+    unsigned char minorVersion;        /**<  Minor version accessor element. */
+    unsigned char revision;            /**< Revision version accessor element. */
+    unsigned char step;                /**< Step version accessor element. */
 };
 
 /**
  * @brief Defines the component version information.
  */
-union OMX_VERSIONTYPE {
-    struct OmxVerType s;          /**< Component version. */
-    unsigned int nVersion;        /**< 32-bit value to make accessing the version easily done in a single
-                                       word size copy or compare operation. */
+union CodecVersionType {
+    struct CodecVerType version;        /**< Component version. */
+    unsigned int nVersion;              /**< 32-bit value to make accessing the version easily done in a single
+                                             word size copy or compare operation. */
 };
 
 /**
@@ -348,7 +349,7 @@ struct CodecCompCapability {
 struct OmxCodecBuffer {
     unsigned int bufferId;               /**< Buffer ID. */
     unsigned int size;                   /**< Size of the structure. */
-    union OMX_VERSIONTYPE version;       /**< Component version. */
+    union CodecVersionType version;       /**< Component version. */
     unsigned int bufferType;             /**< Buffer type. For details, see {@link CodecBufferType}. */
     NativeBuffer bufferhandle;           /**< Buffer handle used for encoding or decoding. For details,
                                               see {@link NativeBuffer}. */
@@ -365,9 +366,9 @@ struct OmxCodecBuffer {
 /**
  * @brief Defines the structure that is used to pass data from an output port to an input port.
  */
-struct OMX_TUNNELSETUPTYPE {
-    unsigned int nTunnelFlags;                /**< Bit flags for tunneling. */
-    enum OMX_BUFFERSUPPLIERTYPE eSupplier;    /**< Supplier preference. */
+struct CodecTunnelSetupType {
+    unsigned int tunnelFlags;                 /**< Bit flags for tunneling. */
+    enum CodecBufferSupplierType supplier;    /**< Supplier preference. */
 };
 
 /**
@@ -376,8 +377,8 @@ struct OMX_TUNNELSETUPTYPE {
 struct CompVerInfo {
     String compName;                    /**< Component name. */
     unsigned char[] compUUID;           /**< UUID of the component. */
-    union OMX_VERSIONTYPE compVersion;  /**< OMX component version. */
-    union OMX_VERSIONTYPE specVersion;  /**< Version of the specifications on which the component is built. */
+    union CodecVersionType compVersion;  /**< OMX component version. */
+    union CodecVersionType specVersion;  /**< Version of the specifications on which the component is built. */
 };
 
 /**
