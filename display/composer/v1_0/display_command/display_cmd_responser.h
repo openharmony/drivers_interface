@@ -674,7 +674,7 @@ EXIT:
         ret = unpacker->ReadUint32(maskInfo) ? HDF_SUCCESS : HDF_FAILURE;
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = HDF_SUCCESS;
+        ret = impl_->SetLayerMaskInfo(devId, layerId, static_cast<MaskInfo>(maskInfo));
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 EXIT:
         if (ret != HDF_SUCCESS) {
@@ -695,7 +695,7 @@ EXIT:
         ret = CmdUtils::LayerColorUnpack(unpacker, layerColor);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = HDF_SUCCESS;
+        ret = impl_->SetLayerColor(devId, layerId, layerColor);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 EXIT:
         if (ret != HDF_SUCCESS) {
