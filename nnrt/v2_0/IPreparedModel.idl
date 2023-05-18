@@ -20,6 +20,5 @@ import ohos.hdi.nnrt.v2_0.NnrtTypes;
 interface IPreparedModel {
     ExportModelCache([out] struct SharedBuffer[] modelCache);
     GetInputDimRanges([out] unsigned int[][] minInputDims, [out] unsigned int[][] maxInputDims);
-    Run([in] struct IOTensor[] inputs, [in] struct IOTensor[] outputs,
-        [out] int[][] outputsDims, [out] boolean[] isOutputBufferEnough);
+    Run([in] struct IOTensor[] inputs, [in] struct IOTensor[] outputs, [out] int[][] outputDims);
 }

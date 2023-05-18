@@ -33,6 +33,8 @@ interface INnrtDevice {
     IsModelCacheSupported([out] boolean isSupported);
     PrepareModelFromModelCache([in] struct SharedBuffer[] modelCache, [in] struct ModelConfig config,
                                [out] IPreparedModel preparedModel);
+    PrepareOfflineModel([in] struct SharedBuffer[] offlineModels, [in] struct ModelConfig config,
+                        [out] IPreparedModel preparedModel);
     AllocateBuffer([in] unsigned int length, [out] struct SharedBuffer buffer);
     ReleaseBuffer([in] struct SharedBuffer buffer);
 }
