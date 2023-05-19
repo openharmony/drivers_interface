@@ -146,6 +146,7 @@ void DisplayBufferHdiImpl::FreeMem(const BufferHandle& handle) const
 {
     CHECK_NULLPOINTER_RETURN(mapper_);
     sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
+    CHECK_NULLPOINTER_RETURN(hdiBuffer);
     hdiBuffer->SetBufferHandle(const_cast<BufferHandle*>(&handle), true);
     mapper_->FreeMem(hdiBuffer);
 }
@@ -154,6 +155,7 @@ void *DisplayBufferHdiImpl::Mmap(const BufferHandle& handle) const
 {
     CHECK_NULLPOINTER_RETURN_VALUE(mapper_, nullptr);
     sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
+    CHECK_NULLPOINTER_RETURN_VALUE(hdiBuffer, nullptr);
     hdiBuffer->SetBufferHandle(const_cast<BufferHandle*>(&handle));
     int32_t ret = mapper_->Mmap(hdiBuffer);
     void *virAddr = (ret == HDF_SUCCESS ? handle.virAddr : nullptr);
@@ -164,6 +166,7 @@ int32_t DisplayBufferHdiImpl::Unmap(const BufferHandle& handle) const
 {
     CHECK_NULLPOINTER_RETURN_VALUE(mapper_, HDF_FAILURE);
     sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
+    CHECK_NULLPOINTER_RETURN_VALUE(hdiBuffer, HDF_FAILURE);
     hdiBuffer->SetBufferHandle(const_cast<BufferHandle*>(&handle));
     int32_t ret = mapper_->Unmap(hdiBuffer);
     return ret;
@@ -173,6 +176,7 @@ int32_t DisplayBufferHdiImpl::FlushCache(const BufferHandle& handle) const
 {
     CHECK_NULLPOINTER_RETURN_VALUE(mapper_, HDF_FAILURE);
     sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
+    CHECK_NULLPOINTER_RETURN_VALUE(hdiBuffer, HDF_FAILURE);
     hdiBuffer->SetBufferHandle(const_cast<BufferHandle*>(&handle));
     int32_t ret = mapper_->FlushCache(hdiBuffer);
     return ret;
@@ -182,6 +186,7 @@ int32_t DisplayBufferHdiImpl::InvalidateCache(const BufferHandle& handle) const
 {
     CHECK_NULLPOINTER_RETURN_VALUE(mapper_, HDF_FAILURE);
     sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
+    CHECK_NULLPOINTER_RETURN_VALUE(hdiBuffer, HDF_FAILURE);
     hdiBuffer->SetBufferHandle(const_cast<BufferHandle*>(&handle));
     int32_t ret = mapper_->InvalidateCache(hdiBuffer);
     return ret;
