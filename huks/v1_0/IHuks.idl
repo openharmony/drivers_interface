@@ -1,0 +1,63 @@
+package ohos.hdi.huks.v1_0;
+
+import ohos.hdi.huks.v1_0.IHuksTypes;
+
+interface IHuks {
+    ModuleInit();
+
+    GenerateKey([in] struct HuksBlob keyAlias,[in] struct HuksParamSet paramSet,[in] struct HuksBlob keyIn, [out] struct HuksBlob keyOut);
+    ImportKey([in] struct HuksBlob keyAlias, [in] struct HuksBlob key,
+        [in] struct HuksParamSet paramSet, [out] struct HuksBlob keyOut);
+
+    ImportWrappedKey([in] struct HuksBlob wrappingKeyAlias, [in] struct HuksBlob key,
+        [in] struct HuksBlob wrappedKeyData, [in] struct HuksParamSet paramSet, [out] struct HuksBlob keyOut);
+
+    ExportPublicKey([in] struct HuksBlob key, [in] struct HuksParamSet paramSet, [out] struct HuksBlob keyOut);
+
+    Init([in] struct HuksBlob key, [in] struct HuksParamSet paramSet, [out]struct HuksBlob handle,
+        [out] struct HuksBlob token);
+
+    Update([in] struct HuksBlob handle, [in] struct HuksParamSet paramSet,
+        [in] struct HuksBlob inData, [out] struct HuksBlob outData);
+
+
+    Finish([in] struct HuksBlob handle, [in] struct HuksParamSet paramSet,
+        [in] struct HuksBlob inData, [out] struct HuksBlob outData);
+
+    Abort([in] struct HuksBlob  handle, [in] struct HuksParamSet paramSet);
+
+    GetKeyProperties([in] struct HuksParamSet paramSet, [in] struct HuksBlob key);
+
+    AttestKey([in] struct HuksBlob key, [in] struct HuksParamSet paramSet,
+        [out] struct HuksBlob certChain);
+
+    GenerateRandom([in] struct HuksParamSet  paramSet, [out]struct HuksBlob random);
+
+    Sign([in] struct HuksBlob  key, [in] struct HuksParamSet paramSet,
+        [in] struct HuksBlob  srcData, [out]struct HuksBlob signature);
+
+    Verify([in] struct HuksBlob  key, [in] struct HuksParamSet  paramSet,
+        [in] struct HuksBlob  srcData, [in] struct HuksBlob  signature);
+
+    Encrypt([in] struct HuksBlob  key, [in] struct HuksParamSet  paramSet,
+        [in] struct HuksBlob  plainText, [out] struct HuksBlob  cipherText);
+
+    Decrypt([in] struct HuksBlob  key, [in] struct HuksParamSet  paramSet,
+        [in] struct HuksBlob  cipherText, [out] struct HuksBlob  plainText);
+
+    AgreeKey([in] struct HuksParamSet paramSet, [in] struct HuksBlob privateKey,
+        [in] struct HuksBlob peerPublicKey, [out] struct HuksBlob agreedKey);
+
+    DeriveKey([in] struct HuksParamSet  paramSet, [in] struct HuksBlob kdfKey,
+        [out] struct HuksBlob derivedKey);
+
+    Mac([in] struct HuksBlob key, [in] struct HuksParamSet paramSet,
+        [in] struct HuksBlob srcData, [out] struct HuksBlob mac);
+
+    UpgradeKey([in] struct HuksBlob  oldKey, [in] struct HuksParamSet  paramSet,
+        [out] struct HuksBlob newKey);
+
+
+    ExportChipsetPlatformPublicKey([in] struct HuksBlob salt,
+        [in] enum HuksChipsetPlatformDecryptScene scene, [out] struct HuksBlob publicKey);
+}

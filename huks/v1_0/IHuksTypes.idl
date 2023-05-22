@@ -1,0 +1,13 @@
+package ohos.hdi.huks.v1_0;
+
+struct HuksBlob {
+    unsigned char[] data;
+};
+
+struct HuksParamSet {
+    unsigned char[] data;
+};
+
+enum HuksChipsetPlatformDecryptScene {
+    HUKS_CHIPSET_PLATFORM_DECRYPT_SCENCE_TA_TO_TA = 1,
+};
