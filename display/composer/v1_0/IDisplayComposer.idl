@@ -216,23 +216,6 @@ interface IDisplayComposer {
      */
     DestroyLayer([in] unsigned int devId, [in] unsigned int layerId);
 
-    /* *
-     * @brief Obtains the layers whose composition types have changed.
-     *
-     * In the preparation for composition, the display device changes the composition type for each layer based on
-     * the composition capability of the device. This function returns the layers whose composition types have changed.
-     *
-     * @param devId Indicates the ID of the display device.
-     * @param layers Indicates the vector of the start address of the layer array.
-     * @param type Indicates the vector of the start address of the composition type array.
-     *
-     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
-     * in {@link DispErrCode} otherwise.
-     * @since 4.0
-     * @version 1.0
-     */
-    GetDisplayCompChange([in] unsigned int devId, [out] unsigned int[] layers, [out] int[] types);
-
      /* *
      * @brief Sets the cropped region for a display device.
      *

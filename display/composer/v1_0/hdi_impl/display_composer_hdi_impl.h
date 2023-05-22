@@ -182,7 +182,7 @@ public:
         uint32_t devId, std::vector<uint32_t>& layers, std::vector<int32_t>& types) override
     {
         COMPOSER_CHECK_NULLPTR(hdi_);
-        return ToDispErrCode(hdi_->GetDisplayCompChange(devId, layers, types));
+        return ToDispErrCode(req_->GetDisplayCompChange(devId, layers, types));
     }
 
     virtual int32_t SetDisplayClientCrop(uint32_t devId, const IRect& rect) override

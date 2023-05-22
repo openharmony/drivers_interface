@@ -288,18 +288,40 @@ private:
 
         uint32_t devId = 0;
         bool needFlush = false;
+        uint32_t vectSize = 0;
+        std::vector<uint32_t> layers;
+        std::vector<int32_t> types;
+
         int32_t ret = unpacker->ReadUint32(devId) ? HDF_SUCCESS : HDF_FAILURE;
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
         ret = impl_->PrepareDisplayLayers(devId, needFlush);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
+        ret = impl_->GetDisplayCompChange(devId, layers, types);
+        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+
         ret = CmdUtils::StartSection(REPLY_CMD_PREPARE_DISPLAY_LAYERS, replyPacker_);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = replyPacker_->WriteBool(needFlush) ? HDF_SUCCESS : HDF_FAILURE;
-        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+        DISPLAY_CHECK(replyPacker_->WriteUint32(devId) == false, goto EXIT);
 
+        DISPLAY_CHECK(replyPacker_->WriteBool(needFlush) == false, goto EXIT);
+        // Write layers vector
+        vectSize = static_cast<uint32_t>(layers.size());
+        DISPLAY_CHECK(replyPacker_->WriteUint32(vectSize) == false, goto EXIT);
+
+        for (uint32_t i = 0; i < vectSize; i++) {
+            DISPLAY_CHECK(replyPacker_->WriteUint32(layers[i]) == false, goto EXIT);
+        }
+        // Write composer types vector
+        vectSize = static_cast<uint32_t>(types.size());
+        DISPLAY_CHECK(replyPacker_->WriteUint32(vectSize) == false, goto EXIT);
+
+        for (uint32_t i = 0; i < vectSize; i++) {
+            DISPLAY_CHECK(replyPacker_->WriteUint32(types[i]) == false, goto EXIT);
+        }
+        // End this cmd section
         ret = CmdUtils::EndSection(replyPacker_);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
         replyCommandCnt_++;
