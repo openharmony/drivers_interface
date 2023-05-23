@@ -646,6 +646,8 @@ private:
 
         if (replyEleCnt != 0) {
             replyData.reset(new char[replyEleCnt * CmdUtils::ELEMENT_SIZE], std::default_delete<char[]>());
+            DISPLAY_CHK_RETURN(replyData == nullptr, HDF_FAILURE,
+                HDF_LOGE("%{public}s: get replyData failed", __func__));
             ret = reply_->Read(reinterpret_cast<int32_t *>(replyData.get()), replyEleCnt, CmdUtils::TRANSFER_WAIT_TIME);
             if (ret != HDF_SUCCESS) {
                 HDF_LOGE("reply read data failure, ret=%{public}d", ret);
