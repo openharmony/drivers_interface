@@ -21,14 +21,12 @@
     "ram": "12200KB",
     "deps": {
       "components": [
+        "c_utils",
         "ipc",
         "hdf_core",
-        "hiviewdfx_hilog_native",
-        "utils_base"
+        "hiviewdfx_hilog_native"
       ],
-      "third_party": [
-        "bounds_checking_function"
-      ]
+      "third_party": []
     },
     "build": {
       "sub_component": [
