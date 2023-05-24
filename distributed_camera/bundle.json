@@ -21,10 +21,7 @@
           "ipc",
           "hdf_core",
           "hiviewdfx_hilog_native",
-          "utils_base"
-        ],
-        "third_party": [
-          "bounds_checking_function"
+          "c_utils"
         ]
       },
       "build": {
