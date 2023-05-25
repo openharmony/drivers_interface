@@ -19,13 +19,8 @@
       "ram": "1MB",
       "deps": {
         "components": [
-          "ipc",
-          "hdf_core",
           "c_utils",
           "hiviewdfx_hilog_native"
-        ],
-        "third_party": [
-          "bounds_checking_function"
         ]
       },
         "build": {
@@ -39,16 +34,14 @@
                 {
                     "name": "//drivers/interface/ril/v1_1:libril_proxy_1.1",
                     "header": {
-                      "header_files": [
-                      ],
+                      "header_files": [],
                       "header_base": "//drivers/interface/ril"
                     }
                 },
                 {
                   "name": "//drivers/interface/ril/v1_1:ril_idl_headers",
                   "header": {
-                    "header_files": [
-                    ],
+                    "header_files": [],
                     "header_base": "//drivers/interface/ril"
                   }
                 },
@@ -56,24 +49,7 @@
                     "type": "so",
                     "name": "//base/telephony/ril_adapter/interfaces/innerkits:hril_innerkits",
                     "header": {
-                        "header_files": [
-                            "hril_types.h",
-                            "hril_sms_parcel.h",
-                            "hril_sim_parcel.h",
-                            "hril_request.h",
-                            "hril_notification.h",
-                            "hril_network_parcel.h",
-                            "hril_modem_parcel.h",
-                            "hril_data_parcel.h",
-                            "hril_call_parcel.h",
-                            "hril.h",
-                            "hril_vendor_call_defs.h",
-                            "hril_vendor_data_defs.h",
-                            "hril_vendor_modem_defs.h",
-                            "hril_vendor_network_defs.h",
-                            "hril_vendor_sim_defs.h",
-                            "hril_vendor_sms_defs.h"
-                        ],
+                        "header_files": [],
                         "header_base": "//base/telephony/ril_adapter/interfaces/innerkits/include"
                     }
                 }
