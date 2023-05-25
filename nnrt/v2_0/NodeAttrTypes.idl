@@ -162,6 +162,7 @@ struct MaxPoolFusion
     long[] pad;
     enum PadMode padMode;
     enum Format format;
+    enum RoundMode roundMode;
     boolean global;
     enum ActivationType activationType;
 };
