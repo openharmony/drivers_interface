@@ -41,6 +41,14 @@
             }
           },
           {
+            "name": "//drivers/interface/light/v1_0:liblight_stub_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/light"
+            }
+          },
+          {
             "name": "//drivers/interface/light/v1_0:light_idl_headers",
             "header": {
               "header_files": [
