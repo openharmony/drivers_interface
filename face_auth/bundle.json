@@ -20,10 +20,9 @@
           "ipc",
           "hdf_core",
           "hiviewdfx_hilog_native",
-          "utils_base"
+          "c_utils"
         ],
-        "third_party": [
-        ]
+        "third_party": []
       },
       "build": {
         "sub_component": [

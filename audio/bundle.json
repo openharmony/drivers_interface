@@ -20,7 +20,8 @@
           "c_utils",
           "hdf_core",
           "hiviewdfx_hilog_native"
-        ]
+        ],
+        "third_party": []
       },
       "build": {
         "sub_component": [
