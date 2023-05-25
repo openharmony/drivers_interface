@@ -23,8 +23,7 @@
         "hiviewdfx_hilog_native",
         "c_utils"
       ],
-      "third_party": [
-      ]
+      "third_party": []
     },
     "build": {
       "sub_component": [
