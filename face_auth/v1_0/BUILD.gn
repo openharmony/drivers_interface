@@ -20,7 +20,7 @@ hdi("face_auth") {
     "IExecutorCallback.idl",
     "IFaceAuthInterface.idl",
   ]
-  sequenceable = [ "//drivers/hdf_core/adapter/uhdf2/model/camera/sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0" ]
+  sequenceable = [ "../../../hdf_core/adapter/uhdf2/model/camera/sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0" ]
   language = "cpp"
   subsystem_name = "hdf"
   part_name = "drivers_interface_face_auth"
