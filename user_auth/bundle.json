@@ -49,7 +49,23 @@
             }
           },
           {
+            "name": "//drivers/interface/user_auth/v1_0:libuser_auth_stub_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/user_auth"
+            }
+          },
+          {
             "name": "//drivers/interface/user_auth/v1_1:libuser_auth_proxy_1.1",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/user_auth"
+            }
+          },
+          {
+            "name": "//drivers/interface/user_auth/v1_1:libuser_auth_stub_1.1",
             "header": {
               "header_files": [
               ],
