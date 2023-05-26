@@ -41,14 +41,14 @@ using HdifdSet = std::vector<std::shared_ptr<HdifdParcelable>>;
 template <typename Transfer, typename VdiImpl>
 class DisplayCmdResponser {
 public:
-    static std::unique_ptr<DisplayCmdResponser> Create(std::shared_ptr<VdiImpl> impl)
+    static std::unique_ptr<DisplayCmdResponser> Create(VdiImpl* impl)
     {
         DISPLAY_CHK_RETURN(impl == nullptr, nullptr,
             HDF_LOGE("%{public}s: error, VdiImpl is nullptr", __func__));
         return std::make_unique<DisplayCmdResponser>(impl);
     }
 
-    DisplayCmdResponser(std::shared_ptr<VdiImpl> impl)
+    DisplayCmdResponser(VdiImpl* impl)
         : impl_(impl),
         request_(nullptr),
         isReplyUpdated_(false),
@@ -717,7 +717,7 @@ EXIT:
     }
 
 private:
-    std::shared_ptr<VdiImpl> impl_;
+    VdiImpl *impl_ = nullptr;
     std::shared_ptr<Transfer> request_;
     bool isReplyUpdated_;
     std::shared_ptr<Transfer> reply_;
