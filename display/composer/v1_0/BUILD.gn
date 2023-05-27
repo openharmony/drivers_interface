@@ -24,7 +24,7 @@ hdi("display_composer") {
     "IVBlankCallback.idl",
   ]
 
-  sequenceable = [ "../hdifd_parcelable:libhdifd_parcelable" ]
+  sequenceable_pub_deps = [ "../hdifd_parcelable:libhdifd_parcelable" ]
 
   language = "cpp"
   subsystem_name = "hdf"
