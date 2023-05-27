@@ -41,6 +41,14 @@
             }
           },
           {
+            "name": "//drivers/interface/vibrator/v1_1:libvibrator_stub_1.1",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/vibrator"
+            }
+          },
+          {
             "name": "//drivers/interface/vibrator/v1_1:vibrator_idl_headers",
             "header": {
               "header_files": [
