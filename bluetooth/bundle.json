@@ -43,6 +43,14 @@
             }
           },
           {
+            "name": "//drivers/interface/bluetooth/hci/v1_0:libbluetooth_hci_stub_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/bluetooth/hci"
+            }
+          },
+          {
             "name": "//drivers/interface/bluetooth/hci/v1_0:bluetooth_hci_idl_headers",
             "header": {
               "header_files": [
