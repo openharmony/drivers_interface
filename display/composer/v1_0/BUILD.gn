@@ -43,11 +43,13 @@ ohos_shared_library("libdisplay_composer_hdi_impl") {
 
   public_configs = [ ":libdisplay_composer_hdi_impl_config" ]
 
-  deps = [ "../hdifd_parcelable:libhdifd_parcelable" ]
+  deps = [
+    ":libdisplay_composer_proxy_1.0",
+    "../hdifd_parcelable:libhdifd_parcelable",
+  ]
 
   external_deps = [
     "c_utils:utils",
-    "drivers_interface_display:libdisplay_composer_proxy_1.0",
     "graphic_chipsetsdk:buffer_handle",
     "hdf_core:libhdi",
     "hdf_core:libpub_utils",

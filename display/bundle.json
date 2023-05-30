@@ -26,6 +26,11 @@
     "ram": "1MB",
     "deps": {
       "components": [
+        "hdf_core",
+        "hiviewdfx_hilog_native",
+        "c_utils",
+        "ipc",
+        "graphic_chipsetsdk"
       ],
       "third_party": [
       ]
