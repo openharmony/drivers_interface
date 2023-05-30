@@ -32,7 +32,10 @@ if (defined(ohos_lite)) {
       "Types.idl",
     ]
 
-    sequenceable = [ "//drivers/hdf_core/adapter/uhdf2/model/camera/sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0" ]
+    sequenceable_pub_deps = [
+      "../sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0",
+    ]
+    sequenceable_ext_deps = [ "graphic_chipsetsdk:surface" ]
 
     language = "cpp"
     subsystem_name = "hdf"

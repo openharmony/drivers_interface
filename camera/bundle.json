@@ -20,7 +20,8 @@
           "ipc",
           "hdf_core",
           "hiviewdfx_hilog_native",
-          "c_utils"
+          "c_utils",
+          "graphic_chipsetsdk"
         ],
         "third_party": []
       },
@@ -28,8 +29,8 @@
         "sub_component": [
           "//drivers/interface/camera/v1_0:camera_idl_target",
           "//drivers/interface/camera/v2_0:camera_idl_target",
-          "//drivers/hdf_core/adapter/uhdf2/model/camera/sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0",
-          "//drivers/hdf_core/adapter/uhdf2/model/camera/metadata:metadata",
+          "//drivers/interface/camera/sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0",
+          "//drivers/interface/camera/metadata:metadata",
           "//drivers/interface/camera/v2_0:libcamera_stub_2.0",
           "//drivers/interface/camera/v1_0:libcamera_stub_1.0"
         ],
@@ -59,7 +60,7 @@
               ],
               "header_base": "//drivers/interface/camera"
             }
-	  },
+	        },
           {
             "name": "//drivers/interface/camera/v1_0:libcamera_stub_1.0",
             "header": {
@@ -85,7 +86,7 @@
             }
           },
           {
-            "name": "//drivers/hdf_core/adapter/uhdf2/model/camera/metadata:metadata",
+            "name": "//drivers/interface/camera/metadata:metadata",
             "header": {
               "header_files": [
                 "camera_device_ability_items.h",
@@ -95,7 +96,16 @@
                 "metadata_log.h",
                 "metadata_utils.h"
               ],
-              "header_base": "//drivers/hdf_core/adapter/uhdf2/model/camera/metadata/include"
+              "header_base": "//drivers/interface/camera/metadata/include"
+            }
+          },
+          {
+            "name": "//drivers/interface/camera/sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0",
+            "header": {
+              "header_files": [
+                "buffer_producer_sequenceable.h"
+              ],
+              "header_base": "//drivers/interface/camera/sequenceable/buffer_producer"
             }
           }
         ]
