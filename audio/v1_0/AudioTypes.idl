@@ -162,6 +162,8 @@ enum AudioDeviceType {
     AUDIO_PRIMARY_DEVICE = 1 << 7,
     AUDIO_USB_DEVICE     = 1 << 8,
     AUDIO_A2DP_DEVICE    = 1 << 9,
+    AUDIO_HDMI_DEVICE    = 1 << 10,
+    AUDIO_ADAPTER_DEVICE = 1 << 11,
     AUDIO_DEVICE_UNKNOWN,
 };
 enum AudioEventType {
