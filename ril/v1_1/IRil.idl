@@ -594,6 +594,22 @@ interface IRil {
     [oneway] SetBarringPassword([in] int slotId, [in] int serialId, [in] struct SetBarringInfo setBarringInfo);
 
     /**
+     * @brief Sets the VoNR switch.
+     *
+     * @param slotId Card slot ID.
+     * @param serialId Serial ID of a request.
+     * @param status Whether to enable the VoNR switch. The value <b>0</b> means to
+     * disable the VoNR switch, and the value <b>1</b> means the opposite.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-0 value if the operation fails.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    [oneway] SetVonrSwitch([in] int slotId, [in] int serialId, [in] int status);
+
+    /**
      * @brief Activates the packet data protocol (PDP) context.
      *
      * @param slotId Card slot ID.

@@ -548,6 +548,17 @@ import ohos.hdi.ril.v1_1.Types;
     SetBarringPasswordResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
+     * @brief Callback for the response of setting the VoNR switch.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
+     * For details, see {@link RilRadioResponseInfo}.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    SetVonrSwitchResponse([in] struct RilRadioResponseInfo responseInfo);
+
+    /**
      * @brief Callback for reporting status updates such as data service connection or disconnection.
      *
      * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
