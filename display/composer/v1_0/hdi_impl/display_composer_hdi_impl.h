@@ -17,6 +17,7 @@
 #define OHOS_HDI_DISPLAY_V1_0_DISPLAY_COMPOSER_HDI_IMPL_H
 
 #include <unistd.h>
+#include "hdf_trace.h"
 #include "hilog/log.h"
 #include "iproxy_broker.h"
 #include "iremote_object.h"
@@ -36,6 +37,8 @@ namespace Display {
 namespace Composer {
 namespace V1_0 {
 using namespace OHOS::HDI::Display::Composer::V1_0;
+
+#define DISPLAY_TRACE HdfTrace trace(__func__, "HDI:DISP:")
 
 #define COMPOSER_CHECK_NULLPTR(ptr)                                                         \
     if ((ptr) == nullptr) {                                                                 \
@@ -479,6 +482,8 @@ public:
 
     virtual int32_t OnVBlank(uint32_t sequence, uint64_t ns) override
     {
+        DISPLAY_TRACE;
+
         int32_t ret = HDF_SUCCESS;
         if (vBlankCb_ != nullptr) {
             vBlankCb_(sequence, ns, vBlankCbData_);

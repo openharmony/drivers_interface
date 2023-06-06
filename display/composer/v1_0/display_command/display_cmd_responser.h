@@ -31,12 +31,15 @@
 #include "command_pack/command_data_unpacker.h"
 #include "display_cmd_utils.h"
 #include "hdf_base.h"
+#include "hdf_trace.h"
 #include "hdifd_parcelable.h"
 #include "hilog/log.h"
 #include "idisplay_composer_vdi.h"
 #include "parameter.h"
 #include "v1_0/display_composer_type.h"
 #include "v1_0/mapper_stub.h"
+
+#define DISPLAY_TRACE HdfTrace trace(__func__, "HDI:DISP:")
 
 namespace OHOS {
 namespace HDI {
@@ -250,6 +253,8 @@ private:
 
     int32_t OnRequestEnd(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
+        DISPLAY_TRACE;
+
         size_t errCnt = errMaps_.size();
         if (errCnt >= 0) {
             int32_t ret = CmdUtils::StartSection(REPLY_CMD_SET_ERROR, replyPacker_);
@@ -279,6 +284,8 @@ private:
 
     void OnPrepareDisplayLayers(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
+        DISPLAY_TRACE;
+
         uint32_t devId = 0;
         bool needFlush = false;
         int32_t ret = unpacker->ReadUint32(devId) ? HDF_SUCCESS : HDF_FAILURE;
@@ -305,6 +312,8 @@ EXIT:
 
     void OnSetDisplayClientBuffer(std::shared_ptr<CommandDataUnpacker> unpacker, const std::vector<HdifdInfo>& inFds)
     {
+        DISPLAY_TRACE;
+
         uint32_t devId = 0;
         int32_t ret = unpacker->ReadUint32(devId) ? HDF_SUCCESS : HDF_FAILURE;
 
@@ -342,6 +351,8 @@ EXIT:
 
     void OnSetDisplayClientDamage(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
+        DISPLAY_TRACE;
+
         uint32_t devId = 0;
         uint32_t vectSize = 0;
         bool retBool = true;
@@ -370,6 +381,8 @@ EXIT:
 
     void OnCommit(std::shared_ptr<CommandDataUnpacker> unpacker, std::vector<HdifdInfo>& outFds)
     {
+        DISPLAY_TRACE;
+
         uint32_t devId = 0;
         int32_t fence = -1;
 
@@ -406,6 +419,8 @@ EXIT:
 
     void OnSetLayerAlpha(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
+        DISPLAY_TRACE;
+
         uint32_t devId = 0;
         uint32_t layerId = 0;
         LayerAlpha alpha = {0};
@@ -441,6 +456,8 @@ EXIT:
 
     void OnSetLayerRegion(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
+        DISPLAY_TRACE;
+
         uint32_t devId = 0;
         uint32_t layerId = 0;
         IRect rect = {0};
@@ -462,6 +479,8 @@ EXIT:
 
     void OnSetLayerCrop(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
+        DISPLAY_TRACE;
+
         uint32_t devId = 0;
         uint32_t layerId = 0;
         IRect rect = {0};
@@ -483,6 +502,8 @@ EXIT:
 
     void OnSetLayerZorder(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
+        DISPLAY_TRACE;
+
         uint32_t devId = 0;
         uint32_t layerId = 0;
         uint32_t zorder = 0;
@@ -504,6 +525,8 @@ EXIT:
 
     void OnSetLayerPreMulti(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
+        DISPLAY_TRACE;
+
         uint32_t devId = 0;
         uint32_t layerId = 0;
         bool preMulti = false;
@@ -525,6 +548,8 @@ EXIT:
 
     void OnSetLayerTransformMode(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
+        DISPLAY_TRACE;
+
         uint32_t devId = 0;
         uint32_t layerId = 0;
         int32_t type = 0;
@@ -546,6 +571,8 @@ EXIT:
 
     void OnSetLayerDirtyRegion(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
+        DISPLAY_TRACE;
+
         uint32_t devId = 0;
         uint32_t layerId = 0;
         uint32_t vectSize = 0;
@@ -576,6 +603,8 @@ EXIT:
 
     void OnSetLayerVisibleRegion(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
+        DISPLAY_TRACE;
+
         uint32_t devId = 0;
         uint32_t layerId = 0;
         uint32_t vectSize = 0;
@@ -606,6 +635,8 @@ EXIT:
 
     void OnSetLayerBuffer(std::shared_ptr<CommandDataUnpacker> unpacker, const std::vector<HdifdInfo>& inFds)
     {
+        DISPLAY_TRACE;
+
         uint32_t devId = 0;
         uint32_t layerId = 0;
         BufferHandle *buffer = nullptr;
@@ -652,6 +683,8 @@ EXIT:
 
     void OnSetLayerCompositionType(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
+        DISPLAY_TRACE;
+
         uint32_t devId = 0;
         uint32_t layerId = 0;
         int32_t type;
@@ -672,6 +705,8 @@ EXIT:
 
     void OnSetLayerBlendType(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
+        DISPLAY_TRACE;
+
         uint32_t devId = 0;
         uint32_t layerId = 0;
         int32_t type;
@@ -692,6 +727,8 @@ EXIT:
 
     void OnSetLayerMaskInfo(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
+        DISPLAY_TRACE;
+
         uint32_t devId = 0;
         uint32_t layerId = 0;
         uint32_t maskInfo = 0;
@@ -713,6 +750,8 @@ EXIT:
 
     void OnSetLayerColor(std::shared_ptr<CommandDataUnpacker> unpacker)
     {
+        DISPLAY_TRACE;
+
         uint32_t devId = 0;
         uint32_t layerId = 0;
         LayerColor layerColor = {0};
