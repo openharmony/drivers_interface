@@ -18,7 +18,7 @@
  *
  * @brief Defines Ril-related APIs.
  *
- * The radio interface layer (RIL) module provides APIs and callbacks for upper-layer telephony services, 
+ * The radio interface layer (RIL) module provides APIs and callbacks for upper-layer telephony services,
  * including call, SMS, MMS, network search, and SIM card services.
  *
  * @since 3.2
@@ -52,7 +52,7 @@ enum EccType {
     TYPE_CATEGORY = 0,
 
      /**
-     * Police 
+     * Police
      */
     TYPE_POLICE = 1,
 
@@ -93,7 +93,7 @@ enum SimpresentType {
 };
 
 /**
- * @brief Specifies whether a number is valid for all states or only for the abnormal service state of 
+ * @brief Specifies whether a number is valid for all states or only for the abnormal service state of
  * the circuit switched (CS) domain.
  */
 enum AbnormalServiceType {
@@ -253,7 +253,7 @@ enum RilSrvStatus {
     RIL_NO_SRV_SERVICE = 0,
 
     /**
-     * Restricted service 
+     * Restricted service
      */
     RIL_RESTRICTED_SERVICE = 1,
 
@@ -671,7 +671,7 @@ struct EmergencyCall {
     enum SimpresentType simpresent;
 
     /**
-     * Whether a number is valid for all states or only for the abnormal service state of the CS domain. 
+     * Whether a number is valid for all states or only for the abnormal service state of the CS domain.
      * For details, see {@link AbnormalService}.
      */
     enum AbnormalServiceType abnormalService;
@@ -753,7 +753,7 @@ struct SetupDataCallResultInfo {
     int cid;
 
     /**
-     * Whether the activation is successful. The value 0 indicates that the activation fails, 
+     * Whether the activation is successful. The value 0 indicates that the activation fails,
      * and the value 1 indicates that the activation is successful.
      */
     int active;
@@ -769,7 +769,7 @@ struct SetupDataCallResultInfo {
     int pduSessionId;
 
     /**
-     * Data service type. The value default indicates the default data service, 
+     * Data service type. The value default indicates the default data service,
      * and the value mms indicates the MMS data service.
      */
     String type;
@@ -875,14 +875,14 @@ struct DataProfileDataInfo {
     int serial;
 
     /**
-     * Data service type. The value 0 indicates the default data service, 
+     * Data service type. The value 0 indicates the default data service,
      * and the value 1 indicates the MMS data service.
      */
     int profileId;
 
     /**
      * Authentication mode:
-     *- 0: no authentication 
+     *- 0: no authentication
      *- 1: Password Authentication Protocol (PAP)
      *- 2: Challenge Handshake Authentication Protocol (CHAP)
      */
@@ -959,13 +959,13 @@ struct DataCallInfo {
     boolean modemCognitive;
 
     /**
-     * Whether roaming is allowed. The value true indicates that roaming is allowed, 
+     * Whether roaming is allowed. The value true indicates that roaming is allowed,
      * and the value false indicates the opposite.
      */
     boolean roamingAllowed;
 
     /**
-     * Whether the user is roaming. The value true indicates that the user is roaming, 
+     * Whether the user is roaming. The value true indicates that the user is roaming,
      * and the value false indicates the opposite.
      */
     boolean isRoaming;
@@ -1086,12 +1086,12 @@ struct DataLinkBandwidthReportingRule {
  */
 struct DataPerformanceInfo {
     /**
-     * Enabling the performance mode 
+     * Enabling the performance mode
      */
     int performanceEnable;
 
     /**
-     * Forcibly enabling the performance mode 
+     * Forcibly enabling the performance mode
      */
     int enforce;
 };
@@ -1265,7 +1265,7 @@ struct CallInfo {
 
     /**
      * Call domain of the voice call:
-     *- 0: CS domain 
+     *- 0: CS domain
      *- 1: IP multimedia system (IMS) domain
      */
     int voiceDomain;
@@ -2409,7 +2409,7 @@ struct CellListRatGsm {
     int arfcn;
 
     /**
-     * Base transceiver station identity code 
+     * Base transceiver station identity code
      */
     int bsic;
 
@@ -2696,7 +2696,7 @@ struct CellRatGsm {
     int arfcn;
 
     /**
-     * Base transceiver station identity code 
+     * Base transceiver station identity code
      */
     int bsic;
 

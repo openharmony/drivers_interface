@@ -48,7 +48,7 @@ import ohos.hdi.ril.v1_1.Types;
 /**
  * @brief Declares the request API of the RIL module.
  *
- * Request APIs are called to make calls, send SMS and MMS messages, activate SIM cards, 
+ * Request APIs are called to make calls, send SMS and MMS messages, activate SIM cards,
  * and access the Internet.
  *
  * @since 3.2
@@ -261,7 +261,7 @@ interface IRil {
      *
      * @param slotId Card slot ID.
      * @param serialId Serial ID of a request.
-     * @param activate Whether to enable or disable call waiting. The value <b>0</b> means to 
+     * @param activate Whether to enable or disable call waiting. The value <b>0</b> means to
      * disable the call waiting function, and the value <b>1</b> means the opposite.
      *
      * @return Returns <b>0</b> if the operation is successful.
@@ -277,8 +277,8 @@ interface IRil {
      *
      * @param slotId Card slot ID.
      * @param serialId Serial ID of a request.
-     * @param reason Call forwarding type. The value <b>0</b> indicates unconditional call forwarding, 
-     * <b>1</b> indicates call forwarding when the user is busy, <b>2</b> indicates call forwarding 
+     * @param reason Call forwarding type. The value <b>0</b> indicates unconditional call forwarding,
+     * <b>1</b> indicates call forwarding when the user is busy, <b>2</b> indicates call forwarding
      * when the user does not reply, and <b>3</b> indicates call forwarding when the user is unreachable.
      *
      * @return Returns <b>0</b> if the operation is successful.
@@ -355,7 +355,7 @@ interface IRil {
      *
      * @param slotId Card slot ID.
      * @param serialId Serial ID of a request.
-     * @param action Whether to enable or disable the CLIP function. The value <b>0</b> means to 
+     * @param action Whether to enable or disable the CLIP function. The value <b>0</b> means to
      * disable the CLIP function, and the value <b>1</b> means the opposite.
      *
      * @return Returns <b>0</b> if the operation is successful.
@@ -385,7 +385,7 @@ interface IRil {
      *
      * @param slotId Card slot ID.
      * @param serialId Serial ID of a request.
-     * @param action Whether to enable or disable the CLIR function. The value <b>0</b> means to 
+     * @param action Whether to enable or disable the CLIR function. The value <b>0</b> means to
      * disable the CLIR function, and the value <b>1</b> means the opposite.
      *
      * @return Returns <b>0</b> if the operation is successful.
@@ -401,9 +401,9 @@ interface IRil {
      *
      * @param slotId Card slot ID.
      * @param serialId Serial ID of a request.
-     * @param mode Call preference mode. The value <b>1</b> indicates that only the CS domain is used for calls. 
-     * The value <b>2</b> indicates that the CS domain is preferred for calls. The value <b>3</b> indicates 
-     * that the IP multimedia system (IMS) is preferred for calls. The value <b>4</b> indicates that only the 
+     * @param mode Call preference mode. The value <b>1</b> indicates that only the CS domain is used for calls.
+     * The value <b>2</b> indicates that the CS domain is preferred for calls. The value <b>3</b> indicates
+     * that the IP multimedia system (IMS) is preferred for calls. The value <b>4</b> indicates that only the
      * IMS is used for calls.
      *
      * @return Returns <b>0</b> if the operation is successful.
@@ -476,7 +476,7 @@ interface IRil {
      *
      * @param slotId Card slot ID.
      * @param serialId Serial ID of a request.
-     * @param mute Whether to enable the mute function. The value <b>0</b> means to 
+     * @param mute Whether to enable the mute function. The value <b>0</b> means to
      * disable the mute function, and the value <b>1</b> means the opposite.
      *
      * @return Returns <b>0</b> if the operation is successful.
@@ -520,9 +520,9 @@ interface IRil {
      *
      * @param slotId Card slot ID.
      * @param serialId Serial ID of a request.
-     * @param type Type of ending calls. The value <b>0</b> indicates that the call is ended directly, 
-     * the value <b>1</b> indicates that the call is ended in the foreground and background, 
-     * the value <b>2</b> indicates that the call is ended in the foreground and resumed in the background, 
+     * @param type Type of ending calls. The value <b>0</b> indicates that the call is ended directly,
+     * the value <b>1</b> indicates that the call is ended in the foreground and background,
+     * the value <b>2</b> indicates that the call is ended in the foreground and resumed in the background,
      * and the value <b>3</b> indicates that all calls are ended.
      *
      * @return Returns <b>0</b> if the operation is successful.
@@ -703,7 +703,7 @@ interface IRil {
      *
      * @param slotId Card slot ID.
      * @param serialId Serial ID of a request.
-     * @param dataLinkBandwidthReportingRule Data link bandwidth reporting rule. 
+     * @param dataLinkBandwidthReportingRule Data link bandwidth reporting rule.
      * For details, see {@link DataLinkBandwidthReportingRule}.
      *
      * @return Returns <b>0</b> if the operation is successful.
@@ -720,7 +720,7 @@ interface IRil {
      *
      * @param slotId Card slot ID.
      * @param serialId Serial ID of a request.
-     * @param dataPermitted Whether to enable the data service. The value <b>0</b> means to 
+     * @param dataPermitted Whether to enable the data service. The value <b>0</b> means to
      * disable the data service, and the value <b>1</b> means the opposite.
      *
      * @return Returns <b>0</b> if the operation is successful.
@@ -781,9 +781,9 @@ interface IRil {
      *
      * @param slotId Card slot ID.
      * @param serialId Serial ID of a request.
-     * @param fun Function mode. The value <b>0</b> indicates the minimum mode, <b>1</b> indicates the online mode, 
+     * @param fun Function mode. The value <b>0</b> indicates the minimum mode, <b>1</b> indicates the online mode,
      * and <b>4</b> indicates the offline mode. Other modes are chip-specific.
-     * @param rst Whether to enable automatic reset of the modem. The value <b>0</b> means to disable automatic reset, 
+     * @param rst Whether to enable automatic reset of the modem. The value <b>0</b> means to disable automatic reset,
      * and the value <b>1</b> means the opposite.
      *
      * @return Returns <b>0</b> if the operation is successful.
@@ -1034,7 +1034,7 @@ interface IRil {
      * @param slotId Card slot ID.
      * @param serialId Serial ID of a request.
      * @param index Index value.
-     * @param enable Whether to enable the SIM card. The value <b>0</b> means to activate the SIM card, 
+     * @param enable Whether to enable the SIM card. The value <b>0</b> means to activate the SIM card,
      * and the value <b>1</b> means the opposite.
      *
      * @return Returns <b>0</b> if the operation is successful.
@@ -1080,8 +1080,8 @@ interface IRil {
      *
      * @param slotId Card slot ID.
      * @param serialId Serial ID of a request.
-     * @param accept Whether to accept the <b>CallSetup</b> request. The value <b>0</b> means not to accept the request, 
-     * and the value <b>1</b> means the opposite. 
+     * @param accept Whether to accept the <b>CallSetup</b> request. The value <b>0</b> means not to accept the request,
+     * and the value <b>1</b> means the opposite.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-0 value if the operation fails.
@@ -1170,7 +1170,7 @@ interface IRil {
      *
      * @param slotId Card slot ID.
      * @param serialId Serial ID of a request.
-     * @param apduSimIO SIM card data request transmitted through the logical channel of the APDU. 
+     * @param apduSimIO SIM card data request transmitted through the logical channel of the APDU.
      * For details, see {@link ApduSimIORequestInfo}.
      *
      * @return Returns <b>0</b> if the operation is successful.
@@ -1187,7 +1187,7 @@ interface IRil {
      *
      * @param slotId Card slot ID.
      * @param serialId Serial ID of a request.
-     * @param apduSimIO SIM card data request transmitted through the logical channel of the APDU. 
+     * @param apduSimIO SIM card data request transmitted through the logical channel of the APDU.
      * For details, see {@link ApduSimIORequestInfo}.
      *
      * @return Returns <b>0</b> if the operation is successful.
@@ -1422,9 +1422,9 @@ interface IRil {
      *
      * @param slotId Card slot ID.
      * @param serialId Serial ID of a request.
-     * @param newFilter Notificaiton filter. Binary flag bits are used to indicate different notification types. 
-     * The value <b>0</b> indicates that the filter is disabled, <b>1</b> indicates the signal strength, 
-     * <b>2</b> indicates the network registration status, <b>4</b> indicates the data connection status, 
+     * @param newFilter Notificaiton filter. Binary flag bits are used to indicate different notification types.
+     * The value <b>0</b> indicates that the filter is disabled, <b>1</b> indicates the signal strength,
+     * <b>2</b> indicates the network registration status, <b>4</b> indicates the data connection status,
      * <b>8</b> indicates the link capacity, and <b>16</b> indicates the physical channel configuration.
      *
      * @return Returns <b>0</b> if the operation is successful.
@@ -1440,9 +1440,9 @@ interface IRil {
      *
      * @param slotId Card slot ID.
      * @param serialId Serial ID of a request.
-     * @param deviceStateType Device status type. The value <b>0</b> indicates the power saving mode, 
+     * @param deviceStateType Device status type. The value <b>0</b> indicates the power saving mode,
      * <b>1</b> indicates the charging mode, and <b>2</b> indicates the low data mode.
-     * @param deviceStateOn Whether to enable the device status switch. The value <b>0</b> means to 
+     * @param deviceStateOn Whether to enable the device status switch. The value <b>0</b> means to
      * disable the switch, and the value <b>1</b> means the opposite.
      *
      * @return Returns <b>0</b> if the operation is successful.
@@ -1607,7 +1607,7 @@ interface IRil {
      *
      * @param slotId Card slot ID.
      * @param serialId Serial ID of a request.
-     * @param cellBroadcastInfo GSM cell broadcast configuration information. 
+     * @param cellBroadcastInfo GSM cell broadcast configuration information.
      * For details, see {@link CBConfigInfo}.
      *
      * @return Returns <b>0</b> if the operation is successful.
