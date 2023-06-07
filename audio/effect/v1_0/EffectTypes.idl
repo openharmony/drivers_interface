@@ -27,16 +27,16 @@ struct EffectInfo {
 /**
  * @brief Defines effect contoller info including which library its belongs to and it's effectId.
  */
- struct ControllerId {
+struct ControllerId {
     String libName;         /**< assign the effect library name which is used to create contoller */
     String effectId;        /**< effectId of the effect */
- };
+};
 
 /**
  * @brief Defines the effect controller descriptor.
  */
 struct EffectControllerDescriptor {
-    String effectId;                   /**< UUID of the effect controller */
+    String effectId;                   /**< effectId of the effect controller */
     String effectName;                 /**< Name of the effect controller */
     String libName;                    /**< Name of the effect library*/
     String supplier;                   /**< Name of the effect supplier */
@@ -46,7 +46,7 @@ struct EffectControllerDescriptor {
  * @brief data point type tag, the type is using on demand.
  */
 enum AudioEffectBufferTag {
-    EFFECT_BUFFER_VOID_TYPE       = 0, /**< raw audio data point to the start of the buffer */
+    EFFECT_BUFFER_VOID_TYPE       = 0,      /**< raw audio data point to the start of the buffer */
     EFFECT_BUFFER_FLOAT_SIGNED_32 = 1 << 0, /**< 32bit float type audio data point to the start of the buffer */
     EFFECT_BUFFER_SINGED_32       = 1 << 1, /**< 32bit signed type audio data point to the start of the buffer */
     EFFECT_BUFFER_SIGNED_16       = 1 << 2, /**< 16bit signed type audio data point to the start of the buffer */
@@ -62,10 +62,10 @@ struct AudioEffectBuffer {
     byte[] rawData;            /**< audio data point to the start of the buffer, the type is defined by datatag*/
 };
 
- /**
+/**
  * @brief Defines effect contoller command index.
  */
- enum EffectCommandTableIndex {
+enum EffectCommandTableIndex {
     AUDIO_EFFECT_COMMAND_INIT_CONTOLLER, /* Init effect controller */
     AUDIO_EFFECT_COMMAND_SET_CONFIG,     /* Set configuration */
     AUDIO_EFFECT_COMMAND_GET_CONFIG,     /* Get configuration */
