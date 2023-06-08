@@ -1688,5 +1688,52 @@ import ohos.hdi.ril.v1_1.Types;
      * @version 1.0
      */
     CommonErrorResponse([in] struct RilRadioResponseInfo responseInfo);
+
+    /**
+     * @brief Callback for the response of rrc connect state.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. For details,
+     * see {@link RilRadioResponseInfo}.
+     * @param state Rrc connection state.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    GetRrcConnectionStateResponse([in] struct RilRadioResponseInfo responseInfo, [in] int state);
+
+    /**
+     * @brief Callback for the response of set nr option mode.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. For details,
+     * see {@link RilRadioResponseInfo}.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    SetNrOptionModeResponse([in] struct RilRadioResponseInfo responseInfo);
+
+    /**
+     * @brief Callback for the response of get nr option mode.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. For details,
+     * see {@link RilRadioResponseInfo}.
+     * @param mode Nr option mode.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    GetNrOptionModeResponse([in] struct RilRadioResponseInfo responseInfo, [in] int mode);
+
+    /**
+     * @brief Reporting the rrc connection state.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. For details,
+     * see {@link RilRadioResponseInfo}.
+     * @param state Rrc connection state.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    GetRrcConnectionStateUpdated([in] struct RilRadioResponseInfo responseInfo, [in] int state);
 }
 /** @} */
