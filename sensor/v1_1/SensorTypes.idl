@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -24,7 +24,7 @@
  * subscribing to or unsubscribing from sensor data, enabling or disabling a sensor,
  * setting the sensor data reporting mode, and setting sensor options such as the accuracy and measurement range.
  *
- * @version 1.0
+ * @version 1.1
  */
 
 /**
@@ -33,11 +33,11 @@
  * @brief Defines the data used by the sensor module, including the sensor information,
  * and reported sensor data.
  *
- * @since 2.2
- * @version 1.0
+ * @since 4.0
+ * @version 1.1
  */
 
-package ohos.hdi.sensor.v1_0;
+package ohos.hdi.sensor.v1_1;
 
 /**
  * @brief Defines basic sensor information.
@@ -82,7 +82,7 @@ struct HdfSensorEvents {
 /**
  * @brief Enumerates sensor types.
  *
- * @since 2.2
+ * @since 4.0
  */
 enum HdfSensorTypeTag {
     HDF_SENSOR_TYPE_NONE                = 0,   /**< None, for testing only */
@@ -99,6 +99,8 @@ enum HdfSensorTypeTag {
     HDF_SENSOR_TYPE_GESTURE             = 11,  /**< Gesture sensor */
     HDF_SENSOR_TYPE_PROXIMITY           = 12,  /**< Proximity sensor */
     HDF_SENSOR_TYPE_HUMIDITY            = 13,  /**< Humidity sensor */
+    HDF_SENSOR_TYPE_COLOR               = 14,  /**< Color sensor */
+    HDF_SENSOR_TYPE_SAR                 = 15,  /**< SAR sensor */
     HDF_SENSOR_TYPE_MEDICAL_BEGIN       = 128, /**< The begin of medical sensorId enumeration value range */
     HDF_SENSOR_TYPE_MEDICAL_END         = 160, /**< The end of medical sensorId enumeration value range */
     HDF_SENSOR_TYPE_PHYSICAL_MAX        = 255, /**< Maximum type of a physical sensor */
