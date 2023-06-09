@@ -93,7 +93,17 @@ struct StreamInfo_V1_1 {
  */
 struct PrelaunchConfig {
     /**
+     * Camera ID, which uniquely identifies a camera device.
+     */
+    String cameraId;
+
+    /**
      * Stream infos used in stream prelaunch mode, which can be ignored currently.
      */
     struct StreamInfo_V1_1[] streamInfos_V1_1;
+
+    /**
+     * Indicates the prelaunch configuration parameters.
+     */
+    unsigned char[] setting;
 };
