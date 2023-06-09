@@ -17,11 +17,10 @@
  * @addtogroup HdfHuks
  * @{
  *
- * @brief 提供通用密钥库服务（OpenHarmony Universal KeyStore，简称HUKS）核心逻辑的标准驱动API接口
+ * @brief 提供通用密钥库服务（OpenHarmony Universal KeyStore，简称HUKS）核心逻辑的标准驱动API接口。
  *
- * HUKS驱动模块承载着HUKS的核心功能（HUKS Core），驱动API向HUKS服务侧提供了标准的驱动接口，
- * 通过这些接口实现密钥全生命周期管理的核心逻辑，包括密钥生成、密钥导入导出、密钥操作、
- * 密钥访问控制、密钥证明等功能，而且保证密钥明文不出驱动。
+ * HUKS驱动API定义了HUKS核心组件（HUKS Core）的标准接口，向HUKS服务侧提供了统一的驱动接口，
+ * 这些接口涵盖了密钥全生命周期管理，包括密钥生成、密钥导入导出、密钥操作、 密钥访问控制、密钥证明等功能。
  *
  * @since 4.0
  */
@@ -50,27 +49,27 @@ struct HuksBlob {
 };
 
 /**
- * @brief 定义了HUKS的密钥参数集数据结构体
+ * @brief 定义了HUKS的密钥参数集数据结构体。
  *
  * @since 4.0
  * @version 1.0
  */
 struct HuksParamSet {
     /**
-     * 参数集序列化后的数据
+     * 参数集序列化后的数据，属性集结构参见《HUKS设备开发指南》
      */
     unsigned char[] data;
 };
 
 /**
- * @brief 芯片平台密钥解密场景
+ * @brief 芯片平台密钥解密场景枚举。
  *
  * @since 4.0
  * @version 1.0
  */
 enum HuksChipsetPlatformDecryptScene {
     /**
-     * TA-TA 解密场景
+     * 针对TEE（Trusted Execution Environment）环境中的应用（Trusted Application)开放的平台密钥解密场景
      */
     HUKS_CHIPSET_PLATFORM_DECRYPT_SCENCE_TA_TO_TA = 1,
 };

@@ -17,11 +17,10 @@
  * @addtogroup HdfHuks
  * @{
  *
- * @brief 提供通用密钥库服务（OpenHarmony Universal KeyStore，简称HUKS）核心逻辑的标准驱动API接口
+ * @brief 提供通用密钥库服务（OpenHarmony Universal KeyStore，简称HUKS）的标准驱动API接口。
  *
- * HUKS驱动模块承载着HUKS的核心功能（HUKS Core），驱动API向HUKS服务侧提供了标准的驱动接口，
- * 通过这些接口实现密钥全生命周期管理的核心逻辑，包括密钥生成、密钥导入导出、密钥操作、
- * 密钥访问控制、密钥证明等功能，而且保证密钥明文不出驱动。
+ * HUKS驱动API定义了HUKS核心组件（HUKS Core）的标准接口，向HUKS Service提供了统一的驱动接口，
+ * 这些接口涵盖了密钥全生命周期管理，包括密钥生成、密钥导入导出、密钥操作、密钥访问控制、密钥证明等功能。
  *
  * @since 4.0
  */
@@ -57,12 +56,12 @@ interface IHuks {
     ModuleInit();
 
     /**
-     * @brief 生成新密钥
+     * @brief 根据待生成密钥的属性生成对应的密钥材料，并返回加密后的密钥材料密文
      *
      * @param keyAlias 待生成密钥的别名{@link HuksBlob}
-     * @param paramSet 待生成密钥的密钥属性集{@link HuksParamSet}
-     * @param keyIn 待生成密钥的密钥材料{@link HuksBlob}
-     * @param encKeyOut 生成密钥的密文材料{@link HuksBlob}
+     * @param paramSet 待生成密钥的密钥属性参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
+     * @param keyIn 待生成密钥的密钥材料{@link HuksBlob}，可选
+     * @param encKeyOut 生成密钥的密文材料{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
      *
      * @return 0 表示生成密钥成功
      * @return 非0表示生成密钥失败
@@ -76,9 +75,9 @@ interface IHuks {
      * @brief 导入明文密钥
      *
      * @param keyAlias 待导入密钥的别名{@link HuksBlob}
-     * @param key 待导入密钥的明文密钥材料{@link HuksBlob}
-     * @param paramSet 待导入密钥的密钥属性集{@link HuksParamSet}
-     * @param encKeyOut 导入密钥的密文材料{@link HuksBlob}
+     * @param key 待导入密钥的明文密钥材料{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
+     * @param paramSet 待导入密钥的密钥属性集{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
+     * @param encKeyOut 导入密钥的密文材料{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
      *
      * @return 0 表示导入密钥成功
      * @return 非0表示导入密钥失败
@@ -93,10 +92,10 @@ interface IHuks {
      * @brief 导入加密密钥
      *
      * @param wrappingKeyAlias 用于做加密导入的中间密钥别名{@link HuksBlob}
-     * @param wrappingEncKey 用于做加密导入的中间密钥密文{@link HuksBlob}
-     * @param wrappedKeyData 待导入密钥的密文密钥材料{@link HuksBlob}
-     * @param paramSet 待导入密钥的密钥属性集{@link HuksParamSet}
-     * @param encKeyOut 导入密钥的密文材料{@link HuksBlob}
+     * @param wrappingEncKey 用于做加密导入的中间密钥密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
+     * @param wrappedKeyData 待导入密钥的密文密钥材料{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
+     * @param paramSet 待导入密钥的密钥属性集{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
+     * @param encKeyOut 导入密钥的密文材料{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
      *
      * @return 0 表示导入密钥成功
      * @return 非0表示导入密钥失败
@@ -110,9 +109,9 @@ interface IHuks {
     /**
      * @brief 导出密钥对的公钥
      *
-     * @param encKey 加密的密钥对材料{@link HuksBlob}
-     * @param paramSet 导出密钥密钥属性集{@link HuksParamSet}
-     * @param keyOut 公钥材料{@link HuksBlob}
+     * @param encKey 加密的密钥对材料{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
+     * @param paramSet 导出密钥密钥属性集{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
+     * @param keyOut 公钥材料{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
      *
      * @return 0 表示导出密钥成功
      * @return 非0表示导出密钥失败
@@ -125,10 +124,12 @@ interface IHuks {
     /**
      * @brief 初始化密钥会话，解密密钥材料到内存中，并返回一个句柄和令牌
      *
-     * @param encKey 加密的密钥材料{@link HuksBlob}
-     * @param paramSet 操作密钥的参数集{@link HuksParamSet}
-     * @param handle 密钥会话句柄{@link HuksBlob}
-     * @param token 密钥会话令牌{@link HuksBlob}
+     * @param encKey 加密的密钥材料{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
+     * @param paramSet 操作密钥的参数集{@link HuksParamSet}，用于指定该次密钥操作的参数
+     * @param handle 密钥会话句柄{@link HuksBlob}，用于后续操作密钥会话
+     * @param token 密钥会话令牌{@link HuksBlob}，用于密钥访问控制使用
+     *
+     * @see Init | Update| Finish
      *
      * @return 0 表示初始化会话成功
      * @return 非0表示初始化失败
@@ -142,10 +143,12 @@ interface IHuks {
     /**
      * @brief 分段操作数据或分段传参，根据密码算法的本身的要求需要对数据进行分段操作或传参（密钥协商场景）
      *
-     * @param handle 密钥会话句柄{@link HuksBlob}
-     * @param paramSet 操作密钥的参数集{@link HuksParamSet}
+     * @param handle 密钥会话句柄{@link HuksBlob}，通过初始化密钥会话接口获取
+     * @param paramSet 操作密钥的参数集{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
      * @param inData 分段数据或者参数{@link HuksBlob}
      * @param outData 操作完成的数据{@link HuksBlob}
+     *
+     * @see Init | Finish | Abort
      *
      * @return 0 表示操作成功
      * @return 非0表示操作失败
@@ -160,9 +163,11 @@ interface IHuks {
      * @brief 结束密钥会话和操作数据
      *
      * @param handle 密钥会话句柄{@link HuksBlob}
-     * @param paramSet 操作密钥的参数集{@link HuksParamSet}
+     * @param paramSet 操作密钥的参数集{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
      * @param inData 分段数据或者参数{@link HuksBlob}
      * @param outData 操作完成的数据{@link HuksBlob}
+     *
+     * @see Init | Update | Abort
      *
      * @return 0 表示操作成功
      * @return 非0表示操作失败
@@ -174,10 +179,12 @@ interface IHuks {
         [out] struct HuksBlob outData);
 
     /**
-     * @brief 中止密钥会话
+     * @brief 中止密钥会话，并释放会话内部的数据，中止后不能操作会话
      *
      * @param handle 密钥会话句柄{@link HuksBlob}
-     * @param paramSet 操作密钥的参数集{@link HuksParamSet}
+     * @param paramSet 操作密钥的参数集{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
+     *
+     * @see Init | Update | Finish
      *
      * @return 0 表示操作成功
      * @return 非0表示操作失败
@@ -190,8 +197,8 @@ interface IHuks {
     /**
      * @brief 校验密钥材料的有效性（密钥和属性的完整性）
      *
-     * @param paramSet 校验密钥有效性的参数集{@link HuksParamSet}
-     * @param encKey 密钥材料密文{@link HuksBlob}
+     * @param paramSet 校验密钥有效性的参数集{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
+     * @param encKey 密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
      *
      * @return 0 表示密钥材料有效
      * @return 非0表示密钥材料无效
@@ -204,9 +211,9 @@ interface IHuks {
     /**
      * @brief 获取密钥证书链
      *
-     * @param encKey 密钥材料密文{@link HuksBlob}
-     * @param paramSet 用于获取密钥证书链的参数{@link HuksParamSet}
-     * @param certChain 密钥证书链{@link HuksBlob}
+     * @param encKey 密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
+     * @param paramSet 用于获取密钥证书链的参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
+     * @param certChain 密钥证书链{@link HuksBlob}，证书链结构参见《HUKS设备开发指南》
      *
      * @return 0 表示操作成功
      * @return 非0表示操作失败
@@ -219,7 +226,7 @@ interface IHuks {
     /**
      * @brief 生成随机数
      *
-     * @param paramSet 用于生成随机数的参数{@link HuksParamSet}
+     * @param paramSet 用于生成随机数的参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
      * @param random 生成的随机数{@link HuksBlob}
      *
      * @return 0 表示生成成功
@@ -233,8 +240,8 @@ interface IHuks {
     /**
      * @brief 使用密钥对数据进行签名
      *
-     * @param encKey 密钥材料密文{@link HuksBlob}
-     * @param paramSet 用于签名的参数{@link HuksParamSet}
+     * @param encKey 密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
+     * @param paramSet 用于签名的参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
      * @param srcData 待签名的数据{@link HuksBlob}
      * @param signature 数据的签名{@link HuksBlob}
      *
@@ -250,8 +257,8 @@ interface IHuks {
     /**
      * @brief 校验数据的签名
      *
-     * @param encKey 密钥材料密文{@link HuksBlob}
-     * @param paramSet 用于校验签名的参数{@link HuksParamSet}
+     * @param encKey 密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
+     * @param paramSet 用于校验签名的参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
      * @param srcData 待验签的数据{@link HuksBlob}
      * @param signature 待校验数据的签名{@link HuksBlob}
      *
@@ -267,8 +274,8 @@ interface IHuks {
     /**
      * @brief 使用密钥对数据进行加密
      *
-     * @param encKey 密钥材料密文{@link HuksBlob}
-     * @param paramSet 用于加密的参数{@link HuksParamSet}
+     * @param encKey 密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
+     * @param paramSet 用于加密的参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
      * @param plainText 待加密的数据{@link HuksBlob}
      * @param cipherText 数据的密文{@link HuksBlob}
      *
@@ -284,8 +291,8 @@ interface IHuks {
     /**
      * @brief 使用密钥对数据的密文进行解密
      *
-     * @param encKey 密钥材料密文{@link HuksBlob}
-     * @param paramSet 用于加密的参数{@link HuksParamSet}
+     * @param encKey 密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
+     * @param paramSet 用于加密的参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
      * @param cipherText 数据的密文{@link HuksBlob}
      * @param plainText 数据的明文{@link HuksBlob}
      *
@@ -302,7 +309,7 @@ interface IHuks {
      * @brief 使用HUKS存储的私钥和业务的公钥进行密钥协商
      *
      * @param paramSet 用于协商的参数{@link HuksParamSet}
-     * @param encPrivateKey HUKS存储的密钥对材料密文{@link HuksBlob}
+     * @param encPrivateKey HUKS存储的密钥对材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
      * @param peerPublicKey 待协商的公钥{@link HuksBlob}
      * @param agreedKey 协商出的密钥明文{@link HuksBlob}
      *
@@ -318,8 +325,8 @@ interface IHuks {
     /**
      * @brief 使用HUKS存储的密钥进行派生
      *
-     * @param paramSet 用于派生的参数{@link HuksParamSet}
-     * @param encKdfKey HUKS存储的密钥材料密文{@link HuksBlob}
+     * @param paramSet 用于派生的参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
+     * @param encKdfKey HUKS存储的密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
      * @param derivedKey 派生出的密钥明文{@link HuksBlob}
      *
      * @return 0 表示成功
@@ -333,8 +340,8 @@ interface IHuks {
     /**
      * @brief 使用HUKS存储的密钥做数据的消息认证码
      *
-     * @param encKey 密钥材料密文{@link HuksBlob}
-     * @param paramSet 用于做MAC的参数{@link HuksParamSet}
+     * @param encKey 密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
+     * @param paramSet 用于做MAC的参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
      * @param srcData 用于做MAC的数据{@link HuksBlob}
      * @param mac 消息认证码{@link HuksBlob}
      *
@@ -350,9 +357,9 @@ interface IHuks {
     /**
      * @brief 升级密钥，包括升级加密方式和加密材料。当密钥文件版本号小于最新版本号时，HUKS Service触发该升级能力。
      *
-     * @param encOldKey 待升级密钥材料密文{@link HuksBlob}
-     * @param paramSet 升级密钥的参数{@link HuksParamSet}
-     * @param encNewKey 升级后的密钥材料密文{@link HuksBlob}
+     * @param encOldKey 待升级密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
+     * @param paramSet 升级密钥的参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
+     * @param encNewKey 升级后的密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
      *
      * @return 0 表示成功
      * @return 非0表示失败
@@ -366,7 +373,7 @@ interface IHuks {
      * @brief 导出芯片平台级密钥对的公钥。
      *
      * @param salt 用来派生芯片平台密钥对时的派生因子{@link HuksBlob}
-     * @param scene 业务预期进行芯片平台解密的场景{@link HuksParamSet}
+     * @param scene 业务预期进行芯片平台解密的场景{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
      * @param publicKey 公钥材料，如出参为ECC-P256的x、y轴值裸数据，各32字节{@link HuksBlob}
      *
      * @return 0 表示成功
