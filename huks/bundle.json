@@ -1,7 +1,7 @@
 {
     "name": "@ohos/drivers_interface_huks",
     "description": "huks device driver",
-    "version": "3.2",
+    "version": "4.0",
     "license": "Apache License 2.0",
     "publishAs": "code-segment",
     "segment": {
@@ -11,8 +11,7 @@
     "scripts": {},
     "component": {
       "name": "drivers_interface_huks",
-      "subsystem": "hdf",
-      "syscap": [""],
+      "subsystem": "drivers",
       "adapter_system_type": ["standard"],
       "rom": "675KB",
       "ram": "1024KB",

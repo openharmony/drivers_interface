@@ -61,7 +61,7 @@ interface IHuks {
     /**
      * @brief Destroy the HUKS driver, including clear memory, temp key, etc.
      *
-     * @return Returns <b>0</b> if destroy success.
+     * @return Returns <b>0</b> if the destory is successful.
      * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
