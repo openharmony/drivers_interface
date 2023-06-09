@@ -17,10 +17,13 @@
  * @addtogroup HdfHuks
  * @{
  *
- * @brief 提供通用密钥库服务（OpenHarmony Universal KeyStore，简称HUKS）的标准驱动API接口。
+ * @brief Provides standard driver APIs for OpenHarmony Universal KeyStore (HUKS).
  *
- * HUKS驱动API定义了HUKS核心组件（HUKS Core）的标准接口，向HUKS Service提供了统一的驱动接口，
- * 这些接口涵盖了密钥全生命周期管理，包括密钥生成、密钥导入导出、密钥操作、密钥访问控制、密钥证明等功能。
+ * The HUKS driver APIs define standard interfaces of the HUKS Core and provide
+ * a unified driver interface for the HUKS service.
+ * You can use these APIs to implement key lifecycle management, including
+ * key generation, key import and export, key operations, key access control,
+ * and key attestation.
  *
  * @since 4.0
  */
@@ -28,7 +31,7 @@
  /**
  * @file IHuks.idl
  *
- * @brief 定义了HUKS的驱动接口，用于进行密钥管理。
+ * @brief Defines the HUKS driver interfaces for key management.
  *
  * @since 4.0
  */
@@ -38,17 +41,17 @@ package ohos.hdi.huks.v1_0;
 import ohos.hdi.huks.v1_0.IHuksTypes;
 
 /**
- * @brief 定义了HUKS的驱动接口，用于进行密钥管理。
+ * @brief Defines the HUKS driver interfaces for key management.
  *
  * @since 4.0
  * @version 1.0
  */
 interface IHuks {
     /**
-     * @brief HUKS驱动初始化
+     * @brief Initializes the HUKS driver.
      *
-     * @return 0 表示初始化成功
-     * @return 非0表示初始化失败
+     * @return Returns <b>0</b> if the initialization is successful.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
@@ -56,49 +59,82 @@ interface IHuks {
     ModuleInit();
 
     /**
-     * @brief 根据待生成密钥的属性生成对应的密钥材料，并返回加密后的密钥材料密文
+     * @brief Destroy the HUKS driver, including clear memory, temp key, etc.
      *
-     * @param keyAlias 待生成密钥的别名{@link HuksBlob}
-     * @param paramSet 待生成密钥的密钥属性参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
-     * @param keyIn 待生成密钥的密钥材料{@link HuksBlob}，可选
-     * @param encKeyOut 生成密钥的密文材料{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
-     *
-     * @return 0 表示生成密钥成功
-     * @return 非0表示生成密钥失败
+     * @return Returns <b>0</b> if destroy success.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
      */
-    GenerateKey([in] struct HuksBlob keyAlias,[in] struct HuksParamSet paramSet,[in] struct HuksBlob keyIn, [out] struct HuksBlob encKeyOut);
+    ModuleDestroy();
 
     /**
-     * @brief 导入明文密钥
+     * @brief Generates a key and returns the key in ciphertext.
      *
-     * @param keyAlias 待导入密钥的别名{@link HuksBlob}
-     * @param key 待导入密钥的明文密钥材料{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
-     * @param paramSet 待导入密钥的密钥属性集{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
-     * @param encKeyOut 导入密钥的密文材料{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
+     * @param keyAlias Indicates the alias {@link HuksBlob} of the key
+     * to generate.
+     * @param paramSet Indicates the property set {@link HuksParamSet} of the
+     * key to generate. For details about the key property set struct,
+     * see the HUKS Device Development.
+     * @param keyIn Indicates the material {@link HuksBlob} of the key
+     * to generate. This parameter is optional.
+     * @param encKeyOut Indicates the key {@link HuksBlob} generated in
+     * ciphertext. For details about the key material struct, see the
+     * HUKS Device Development.
      *
-     * @return 0 表示导入密钥成功
-     * @return 非0表示导入密钥失败
+     * @return Returns <b>0</b> if the key is generated.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
      */
-    ImportKey([in] struct HuksBlob keyAlias, [in] struct HuksBlob key, [in] struct HuksParamSet paramSet,
-        [out] struct HuksBlob encKeyOut);
+    GenerateKey([in] struct HuksBlob keyAlias,[in] struct HuksParamSet paramSet,
+       [in] struct HuksBlob keyIn, [out] struct HuksBlob encKeyOut);
 
     /**
-     * @brief 导入加密密钥
+     * @brief Imports a key in plaintext.
      *
-     * @param wrappingKeyAlias 用于做加密导入的中间密钥别名{@link HuksBlob}
-     * @param wrappingEncKey 用于做加密导入的中间密钥密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
-     * @param wrappedKeyData 待导入密钥的密文密钥材料{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
-     * @param paramSet 待导入密钥的密钥属性集{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
-     * @param encKeyOut 导入密钥的密文材料{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
+     * @param keyAlias Indicates the alias {@link HuksBlob} of the key to import.
+     * @param key Indicates the material {@link HuksBlob} in plaintext of the
+     * key to import. For details about the key material struct, see the
+     * HUKS Device Development.
+     * @param paramSet Indicates the property set {@link HuksParamSet} of the
+     * key to import. For details about the key property set struct, see the
+     * HUKS Device Development.
+     * @param encKeyOut Indicates the key {@link HuksBlob} in ciphertext
+     * imported. For details about the key material struct, see the
+     * HUKS Device Development.
      *
-     * @return 0 表示导入密钥成功
-     * @return 非0表示导入密钥失败
+     * @return Returns <b>0</b> if the key is imported.
+     * @return Returns a non-zero value otherwise.
+     *
+     * @since 4.0
+     * @version 1.0
+     */
+    ImportKey([in] struct HuksBlob keyAlias, [in] struct HuksBlob key,
+        [in] struct HuksParamSet paramSet, [out] struct HuksBlob encKeyOut);
+
+    /**
+     * @brief Imports an encrypted key.
+     *
+     * @param wrappingKeyAlias Indicates the alias of an intermediate key used
+     * to wrap the key to import. For details, see {@link HuksBlob}.
+     * @param wrappingEncKey Indicates the encrypted intermediate
+     * key {@link HuksBlob}. For details about the key material struct, see the
+     * HUKS Device Development.
+     * @param wrappedKeyData Indicates the encrypted key
+     * material {@link HuksBlob} of the key to import. For details about the
+     * key material struct, see the HUKS Device Development.
+     * @param paramSet Indicates the property set {@link HuksParamSet} of the
+     * key to import. For details about the key property set struct, see the
+     * HUKS Device Development.
+     * @param encKeyOut Indicates the key {@link HuksBlob} in ciphertext
+     * imported. For details about the key material struct, see the
+     * HUKS Device Development.
+     *
+     * @return Returns <b>0</b> if the key is imported.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
@@ -107,14 +143,20 @@ interface IHuks {
         [in] struct HuksBlob wrappedKeyData, [in] struct HuksParamSet paramSet, [out] struct HuksBlob encKeyOut);
 
     /**
-     * @brief 导出密钥对的公钥
+     * @brief Exports the public key of a key pair.
      *
-     * @param encKey 加密的密钥对材料{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
-     * @param paramSet 导出密钥密钥属性集{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
-     * @param keyOut 公钥材料{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
+     * @param encKey Indicates the key pair material {@link HuksBlob}
+     * in ciphertext. For details about the key material struct, see the
+     * HUKS Device Development.
+     * @param paramSet Indicates the property set {@link HuksParamSet} of the
+     * key to export. For details about the key property set struct, see the
+     * HUKS Device Development.
+     * @param keyOut Indicates the public key material {@link HuksBlob}
+     * exported. For details about the key material struct, see the
+     * HUKS Device Development.
      *
-     * @return 0 表示导出密钥成功
-     * @return 非0表示导出密钥失败
+     * @return Returns <b>0</b> if the public key is exported.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
@@ -122,17 +164,22 @@ interface IHuks {
     ExportPublicKey([in] struct HuksBlob encKey, [in] struct HuksParamSet paramSet, [out] struct HuksBlob keyOut);
 
     /**
-     * @brief 初始化密钥会话，解密密钥材料到内存中，并返回一个句柄和令牌
+     * @brief Initializes a key session, decrypts the key material into memory,
+     * and returns a handle and a token.
      *
-     * @param encKey 加密的密钥材料{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
-     * @param paramSet 操作密钥的参数集{@link HuksParamSet}，用于指定该次密钥操作的参数
-     * @param handle 密钥会话句柄{@link HuksBlob}，用于后续操作密钥会话
-     * @param token 密钥会话令牌{@link HuksBlob}，用于密钥访问控制使用
+     * @param encKey Indicates the key material {@link HuksBlob} in ciphertext.
+     * For details about the key material struct, see the HUKS Device Development.
+     * @param paramSet Indicates the parameter set {@link HuksParamSet} used
+     * for the key operation. It contains parameters for the key operation.
+     * @param handle Indicates the key session handle {@link HuksBlob} returned
+     * for subsequent key session operations.
+     * @param token Indicates the key session token {@link HuksBlob},
+     * which is used for key access control.
      *
      * @see Init | Update| Finish
      *
-     * @return 0 表示初始化会话成功
-     * @return 非0表示初始化失败
+     * @return Returns 0 if the session initialization is successful.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
@@ -141,53 +188,62 @@ interface IHuks {
         [out] struct HuksBlob token);
 
     /**
-     * @brief 分段操作数据或分段传参，根据密码算法的本身的要求需要对数据进行分段操作或传参（密钥协商场景）
+     * @brief Updates (processes or passes in) data by segment based on
+     * the cryptographic algorithm used (for example, in key agreement).
      *
-     * @param handle 密钥会话句柄{@link HuksBlob}，通过初始化密钥会话接口获取
-     * @param paramSet 操作密钥的参数集{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
-     * @param inData 分段数据或者参数{@link HuksBlob}
-     * @param outData 操作完成的数据{@link HuksBlob}
+     * @param handle Indicates the key session handle {@link HuksBlob},
+     * which is obtained by {@Init()}.
+     * @param paramSet Indicates the parameter set {@link HuksParamSet}
+     * used for the key operation. For details about the key property set
+     * struct, see the HUKS Device Development.
+     * @param inData Indicates the data segment or parameters {@link HuksBlob}.
+     * @param outData Indicates the output data {@link HuksBlob}.
      *
      * @see Init | Finish | Abort
      *
-     * @return 0 表示操作成功
-     * @return 非0表示操作失败
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
      */
-    Update([in] struct HuksBlob handle, [in] struct HuksParamSet paramSet, [in] struct HuksBlob inData,
-        [out] struct HuksBlob outData);
+    Update([in] struct HuksBlob handle, [in] struct HuksParamSet paramSet,
+        [in] struct HuksBlob inData, [out] struct HuksBlob outData);
 
     /**
-     * @brief 结束密钥会话和操作数据
+     * @brief Finishes the key session operation.
      *
-     * @param handle 密钥会话句柄{@link HuksBlob}
-     * @param paramSet 操作密钥的参数集{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
-     * @param inData 分段数据或者参数{@link HuksBlob}
-     * @param outData 操作完成的数据{@link HuksBlob}
+     * @param handle Indicates the key session handle {@link HuksBlob}.
+     * @param paramSet Indicates the parameter set {@link HuksParamSet} used
+     * for the key operation. For details about the key property set struct,
+     * see the HUKS Device Development.
+     * @param inData Indicates the data segment or parameters {@link HuksBlob}.
+     * @param outData Indicates the output data {@link HuksBlob}.
      *
      * @see Init | Update | Abort
      *
-     * @return 0 表示操作成功
-     * @return 非0表示操作失败
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
      */
-    Finish([in] struct HuksBlob handle, [in] struct HuksParamSet paramSet, [in] struct HuksBlob inData,
-        [out] struct HuksBlob outData);
+    Finish([in] struct HuksBlob handle, [in] struct HuksParamSet paramSet,
+        [in] struct HuksBlob inData, [out] struct HuksBlob outData);
 
     /**
-     * @brief 中止密钥会话，并释放会话内部的数据，中止后不能操作会话
+     * @brief Aborts a key session and releases the data used in the session.
+     * The aborted session cannot be operated.
      *
-     * @param handle 密钥会话句柄{@link HuksBlob}
-     * @param paramSet 操作密钥的参数集{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
+     * @param handle Indicates the key session handle {@link HuksBlob}.
+     * @param paramSet Indicates the parameter set {@link HuksParamSet} used
+     * for the key operation. For details about the key property set struct,
+     * see the HUKS Device Development.
      *
      * @see Init | Update | Finish
      *
-     * @return 0 表示操作成功
-     * @return 非0表示操作失败
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
@@ -195,13 +251,17 @@ interface IHuks {
     Abort([in] struct HuksBlob handle, [in] struct HuksParamSet paramSet);
 
     /**
-     * @brief 校验密钥材料的有效性（密钥和属性的完整性）
+     * @brief Checks the key validity (integrity of the key and its properties).
      *
-     * @param paramSet 校验密钥有效性的参数集{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
-     * @param encKey 密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
+     * @param paramSet Indicates the parameter set {@link HuksParamSet} for
+     * checking the key validity. For details about the key property set struct,
+     * see the HUKS Device Development.
+     * @param encKey Indicates the key material {@link HuksBlob} in ciphertext
+     * to check. For details about the key material struct, see
+     * the HUKS Device Development.
      *
-     * @return 0 表示密钥材料有效
-     * @return 非0表示密钥材料无效
+     * @return Returns <b>0</b> if the key material is valid.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
@@ -209,14 +269,19 @@ interface IHuks {
     CheckKeyValidity([in] struct HuksParamSet paramSet, [in] struct HuksBlob encKey);
 
     /**
-     * @brief 获取密钥证书链
+     * @brief Obtains the certificate chain for the given key.
      *
-     * @param encKey 密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
-     * @param paramSet 用于获取密钥证书链的参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
-     * @param certChain 密钥证书链{@link HuksBlob}，证书链结构参见《HUKS设备开发指南》
+     * @param encKey Indicates the key material {@link HuksBlob} in ciphertext.
+     * For details about the key material struct, see the HUKS Device Development.
+     * @param paramSet Indicates the parameters {@link HuksParamSet} used to
+     * obtain the certificate chain. For details about the key property
+     * set struct, see the HUKS Device Development.
+     * @param certChain Indicates the certificate chain {@link HuksBlob}
+     * obtained. For details about the certificate chain struct, see the
+     * HUKS Device Development.
      *
-     * @return 0 表示操作成功
-     * @return 非0表示操作失败
+     * @return Returns <b>0</b> if the certificate chain is obtained.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
@@ -224,13 +289,15 @@ interface IHuks {
     AttestKey([in] struct HuksBlob encKey, [in] struct HuksParamSet paramSet, [out] struct HuksBlob certChain);
 
     /**
-     * @brief 生成随机数
+     * @brief Generates a random number.
      *
-     * @param paramSet 用于生成随机数的参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
-     * @param random 生成的随机数{@link HuksBlob}
+     * @param paramSet Indicates the parameters {@link HuksParamSet} used to
+     * generate a random number. For details about the key property set struct,
+     * see the HUKS Device Development.
+     * @param random Indicates the random number {@link HuksBlob} generated.
      *
-     * @return 0 表示生成成功
-     * @return 非0表示生成失败
+     * @return Returns <b>0</b> if a random number is generated.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
@@ -238,15 +305,17 @@ interface IHuks {
     GenerateRandom([in] struct HuksParamSet paramSet, [out]struct HuksBlob random);
 
     /**
-     * @brief 使用密钥对数据进行签名
+     * @brief Generates a signature for data using a key.
      *
-     * @param encKey 密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
-     * @param paramSet 用于签名的参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
-     * @param srcData 待签名的数据{@link HuksBlob}
-     * @param signature 数据的签名{@link HuksBlob}
+     * @param encKey Indicates the key material {@link HuksBlob} in ciphertext.
+     * For details about the key material struct, see the HUKS Device Development.
+     * @param paramSet Indicates the parameters {@link HuksParamSet} used for signing.
+     * For details about the key property set struct, see the HUKS Device Development.
+     * @param srcData Indicates the data {@link HuksBlob} to be signed.
+     * @param signature Indicates the signature {@link HuksBlob} generated.
      *
-     * @return 0 表示成功
-     * @return 非0表示失败
+     * @return Returns <b>0</b> if a signature is generated.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
@@ -255,15 +324,19 @@ interface IHuks {
         [out]struct HuksBlob signature);
 
     /**
-     * @brief 校验数据的签名
+     * @brief Verifies a signature.
      *
-     * @param encKey 密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
-     * @param paramSet 用于校验签名的参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
-     * @param srcData 待验签的数据{@link HuksBlob}
-     * @param signature 待校验数据的签名{@link HuksBlob}
+     * @param encKey Indicates the key material {@link HuksBlob} in ciphertext.
+     * For details about the key material struct, see the HUKS Device Development.
+     * @param paramSet Indicates the parameters {@link HuksParamSet} used for
+     * signature verification. For details about the key property set struct,
+     * see the HUKS Device Development.
+     * @param srcData Indicates the data {@link HuksBlob} whose signature is
+     * to be verified.
+     * @param signature Indicates the signature {@link HuksBlob} to verify.
      *
-     * @return 0 表示成功
-     * @return 非0表示失败
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
@@ -272,15 +345,18 @@ interface IHuks {
         [in] struct HuksBlob  signature);
 
     /**
-     * @brief 使用密钥对数据进行加密
+     * @brief Encrypts data using a key.
      *
-     * @param encKey 密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
-     * @param paramSet 用于加密的参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
-     * @param plainText 待加密的数据{@link HuksBlob}
-     * @param cipherText 数据的密文{@link HuksBlob}
+     * @param encKey Indicates the key material {@link HuksBlob} in ciphertext.
+     * For details about the key material struct, see the HUKS Device Development.
+     * @param paramSet Indicates the parameters {@link HuksParamSet} used for
+     * encryption. For details about the key property set struct, see the
+     * HUKS Device Development.
+     * @param plainText Indicates the data {@link HuksBlob} to encrypt.
+     * @param cipherText indicates the data {@link HuksBlob} in ciphertext.
      *
-     * @return 0 表示成功
-     * @return 非0表示失败
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
@@ -289,15 +365,18 @@ interface IHuks {
         [out] struct HuksBlob  cipherText);
 
     /**
-     * @brief 使用密钥对数据的密文进行解密
+     * @brief Decrypts data using a key.
      *
-     * @param encKey 密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
-     * @param paramSet 用于加密的参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
-     * @param cipherText 数据的密文{@link HuksBlob}
-     * @param plainText 数据的明文{@link HuksBlob}
+     * @param encKey Indicates the key material {@link HuksBlob} in ciphertext.
+     * For details about the key material struct, see the HUKS Device Development.
+     * @param paramSet Indicates the parameters {@link HuksParamSet} used for
+     * decryption. For details about the key property set struct, see the
+     * HUKS Device Development.
+     * @param cipherText indicates the data {@link HuksBlob} in ciphertext to decrypt.
+     * @param plainText Indicates the decrypted data {@link HuksBlob} in plaintext.
      *
-     * @return 0 表示成功
-     * @return 非0表示失败
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
@@ -306,15 +385,21 @@ interface IHuks {
         [out] struct HuksBlob  plainText);
 
     /**
-     * @brief 使用HUKS存储的私钥和业务的公钥进行密钥协商
+     * @brief Performs key agreement using a private key stored in the HUKS
+     * and the public key of the service.
      *
-     * @param paramSet 用于协商的参数{@link HuksParamSet}
-     * @param encPrivateKey HUKS存储的密钥对材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
-     * @param peerPublicKey 待协商的公钥{@link HuksBlob}
-     * @param agreedKey 协商出的密钥明文{@link HuksBlob}
+     * @param paramSet Indicates the parameters {@link HuksParamSet} used
+     * for key agreement.
+     * @param encPrivateKey Indicates the key pair material {@link HuksBlob}
+     * stored in the HUKS. For details about the key material struct, see the
+     * HUKS Device Development.
+     * @param peerPublicKey Indicates the public key {@link HuksBlob} used
+     * for key agreement.
+     * @param agreedKey Indicates the key {@link HuksBlob} in plaintext obtained
+     * after key agreement.
      *
-     * @return 0 表示成功
-     * @return 非0表示失败
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
@@ -323,14 +408,18 @@ interface IHuks {
         [out] struct HuksBlob agreedKey);
 
     /**
-     * @brief 使用HUKS存储的密钥进行派生
+     * @brief Derives a key from a key stored in the HUKS.
      *
-     * @param paramSet 用于派生的参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
-     * @param encKdfKey HUKS存储的密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
-     * @param derivedKey 派生出的密钥明文{@link HuksBlob}
+     * @param paramSet Indicates the parameters {@link HuksParamSet} used for
+     * key derivation. For details about the key property set struct, see the
+     * HUKS Device Development.
+     * @param encKdfKey Indicates the key material {@link HuksBlob} stored
+     * in the HUKS. For details about the key material struct, see the
+     * HUKS Device Development.
+     * @param derivedKey Indicates the derived key {@link HuksBlob} in plaintext.
      *
-     * @return 0 表示成功
-     * @return 非0表示失败
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
@@ -338,15 +427,19 @@ interface IHuks {
     DeriveKey([in] struct HuksParamSet paramSet, [in] struct HuksBlob encKdfKey, [out] struct HuksBlob derivedKey);
 
     /**
-     * @brief 使用HUKS存储的密钥做数据的消息认证码
+     * @brief Generates a message authentication code (MAC) using a key
+     * stored in the HUKS.
      *
-     * @param encKey 密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
-     * @param paramSet 用于做MAC的参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
-     * @param srcData 用于做MAC的数据{@link HuksBlob}
-     * @param mac 消息认证码{@link HuksBlob}
+     * @param encKey Indicates the key material {@link HuksBlob} in ciphertext.
+     * For details about the key material struct, see the HUKS Device Development.
+     * @param paramSet Indicates the parameters {@link HuksParamSet} used for
+     * generating a MAC. For details about the key property set struct, see the
+     * HUKS Device Development.
+     * @param srcData Indicates the data {@link HuksBlob} used to generate a MAC.
+     * @param mac Indicates the MAC {@link HuksBlob} generated.
      *
-     * @return 0 表示成功
-     * @return 非0表示失败
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
@@ -355,14 +448,22 @@ interface IHuks {
         [out] struct HuksBlob mac);
 
     /**
-     * @brief 升级密钥，包括升级加密方式和加密材料。当密钥文件版本号小于最新版本号时，HUKS Service触发该升级能力。
+     * @brief Upgrades a key, including its encryption mode and encryption
+     * material. The HUKS service triggers the upgrade when the key file version
+     * is earlier than the latest version.
      *
-     * @param encOldKey 待升级密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
-     * @param paramSet 升级密钥的参数{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
-     * @param encNewKey 升级后的密钥材料密文{@link HuksBlob}，密钥材料结构参见《HUKS设备开发指南》
+     * @param encOldKey Indicates the key material {@link HuksBlob} in
+     * ciphertext to upgrade. For details about the key material struct, see the
+     * HUKS Device Development.
+     * @param paramSet Indicates the parameters {@link HuksParamSet} used for
+     * the upgrade. For details about the key property set struct, see the
+     * HUKS Device Development.
+     * @param encNewKey Indicates the key material {@link HuksBlob} in
+     * ciphertext after the upgrade. For details about the key material struct,
+     * see the HUKS Device Development.
      *
-     * @return 0 表示成功
-     * @return 非0表示失败
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0
@@ -370,14 +471,19 @@ interface IHuks {
     UpgradeKey([in] struct HuksBlob encOldKey, [in] struct HuksParamSet paramSet, [out] struct HuksBlob encNewKey);
 
     /**
-     * @brief 导出芯片平台级密钥对的公钥。
+     * @brief Exports the public key of a chipset key pair.
      *
-     * @param salt 用来派生芯片平台密钥对时的派生因子{@link HuksBlob}
-     * @param scene 业务预期进行芯片平台解密的场景{@link HuksParamSet}，属性集结构参见《HUKS设备开发指南》
-     * @param publicKey 公钥材料，如出参为ECC-P256的x、y轴值裸数据，各32字节{@link HuksBlob}
+     * @param salt Indicates the salt {@link HuksBlob} used to derive the key
+     * pair of the chipset.
+     * @param scene Indicates the expected chipset decryption
+     * scenario {@link HuksParamSet} of the service. For details about the
+     * key property set struct, see the HUKS Device Development.
+     * @param publicKey Indicates the public key material {@link HuksBlob}
+     * exported, for example, the raw data (32 bytes) of the x-axis and y-axis
+     * values of ECC-P256.
      *
-     * @return 0 表示成功
-     * @return 非0表示失败
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value otherwise.
      *
      * @since 4.0
      * @version 1.0

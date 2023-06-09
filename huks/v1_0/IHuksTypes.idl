@@ -17,10 +17,13 @@
  * @addtogroup HdfHuks
  * @{
  *
- * @brief 提供通用密钥库服务（OpenHarmony Universal KeyStore，简称HUKS）核心逻辑的标准驱动API接口。
+ * @brief Provides standard driver APIs for the OpenHarmony Universal KeyStore (HUKS).
  *
- * HUKS驱动API定义了HUKS核心组件（HUKS Core）的标准接口，向HUKS服务侧提供了统一的驱动接口，
- * 这些接口涵盖了密钥全生命周期管理，包括密钥生成、密钥导入导出、密钥操作、 密钥访问控制、密钥证明等功能。
+ * The HUKS driver APIs define standard interfaces of the HUKS Core and provide
+ * a unified driver interface for the HUKS service.
+ * You can use these APIs to implement key lifecycle management, including key
+ * generation, key import and export, key operations, key access control, and
+ * key attestation.
  *
  * @since 4.0
  */
@@ -28,7 +31,7 @@
  /**
  * @file IHuksTypes.idl
  *
- * @brief 定义了HUKS的驱动接口的结构体。
+ * @brief Defines the structs used in HUKS driver interfaces.
  *
  * @since 4.0
  */
@@ -36,40 +39,43 @@
 package ohos.hdi.huks.v1_0;
 
 /**
- * @brief HUKS的二进制数据结构体，用于封装密钥材料和密钥属性等参数。
+ * @brief Defines the HUKS binary data struct, which encapsulates parameters
+ * such as the key material and key properties.
  *
  * @since 4.0
  * @version 1.0
  */
 struct HuksBlob {
     /**
-     * 二进制数据
+     * Binary data
      */
     unsigned char[] data;
 };
 
 /**
- * @brief 定义了HUKS的密钥参数集数据结构体。
+ * @brief Defines the struct for the parameter set of HUKS key management interfaces.
  *
  * @since 4.0
  * @version 1.0
  */
 struct HuksParamSet {
     /**
-     * 参数集序列化后的数据，属性集结构参见《HUKS设备开发指南》
+     * Serialized parameter set. For details about the property set struct,
+     * see the HUKS Device Development.
      */
     unsigned char[] data;
 };
 
 /**
- * @brief 芯片平台密钥解密场景枚举。
+ * @brief Enumerates the decryption scenarios using the chipset key.
  *
  * @since 4.0
  * @version 1.0
  */
 enum HuksChipsetPlatformDecryptScene {
     /**
-     * 针对TEE（Trusted Execution Environment）环境中的应用（Trusted Application)开放的平台密钥解密场景
+     * Chipset key decryption for trusted applications in a Trusted Execution
+     * Environment (TEE).
      */
     HUKS_CHIPSET_PLATFORM_DECRYPT_SCENCE_TA_TO_TA = 1,
 };
