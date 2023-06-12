@@ -31,7 +31,8 @@
         "c_utils",
         "ipc",
         "graphic_chipsetsdk",
-        "init"
+        "init",
+        "hitrace_native"
       ],
       "third_party": [
       ]
