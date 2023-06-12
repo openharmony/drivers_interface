@@ -71,7 +71,7 @@ interface IAudioRender {
      * @see RenderFrame
      */
     GetRenderPosition([out] unsigned long frames, [out] struct AudioTimeStamp time);
-    
+
     /**
      * @brief Sets the audio rendering speed.
      *
@@ -81,7 +81,7 @@ interface IAudioRender {
      * @see GetRenderSpeed
      */
     SetRenderSpeed([in] float speed);
-    
+
     /**
      * @brief Obtains the current audio rendering speed.
      *
@@ -91,7 +91,7 @@ interface IAudioRender {
      * @see SetRenderSpeed
      */
     GetRenderSpeed([out] float speed);
-    
+
     /**
      * @brief Sets the channel mode for audio rendering.
      *
@@ -157,7 +157,7 @@ interface IAudioRender {
      * @see SelectScene
      */
     CheckSceneCapability([in] struct AudioSceneDescriptor scene, [out] boolean supported);
-    
+
     /**
      * @brief Selects an audio scene.
      *
@@ -345,7 +345,7 @@ interface IAudioRender {
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
      */
     ReqMmapBuffer([in] int reqSize, [out] struct AudioMmapBufferDescriptor desc);
-    
+
     /**
      * @brief Obtains the read/write position of the current mmap buffer.
      *
@@ -355,7 +355,7 @@ interface IAudioRender {
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
      */
     GetMmapPosition([out] unsigned long frames, [out] struct AudioTimeStamp time);
-    
+
     /**
      * @brief Add the audio effect which the effectid indicated.
      *
@@ -373,7 +373,7 @@ interface IAudioRender {
      * @return Returns <b>0</b> if the audio effect were removed succesffully; returns a negative value otherwise.
      */
     RemoveAudioEffect([in] unsigned long effectid);
-    
+
     /**
      * @brief Get the buffer size of render or capturer
      *

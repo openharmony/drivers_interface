@@ -137,7 +137,7 @@ enum AudioPortPassthroughMode {
  */
 enum AudioSampleFormat {
     /* 8 bits */
-    AUDIO_SAMPLE_FORMAT_S8   = 0,  /**< signed 8 bit sample */ 
+    AUDIO_SAMPLE_FORMAT_S8   = 0,  /**< signed 8 bit sample */
     AUDIO_SAMPLE_FORMAT_S8P  = 1,  /**< signed 8 bit planar sample */
     AUDIO_SAMPLE_FORMAT_U8   = 2,  /**< unsigned 8 bit sample */
     AUDIO_SAMPLE_FORMAT_U8P  = 3,  /**< unsigned 8 bit planar sample */
@@ -459,7 +459,7 @@ struct AudioRouteNode {
     int portId;              /**< Audio port ID */
     enum AudioPortRole role; /**< Audio port as a sink or a source */
     enum AudioPortType type; /**< device, mix ... */
-    struct AudioInfo ext;    /**< The <b>ext</b> object */ 
+    struct AudioInfo ext;    /**< The <b>ext</b> object */
 };
 
 /**

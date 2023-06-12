@@ -120,7 +120,7 @@ interface IAudioAdapter {
      * @return Returns <b>0</b> if the capability set is successfully obtained; returns a negative value otherwise.
      */
     GetPortCapability([in] struct AudioPort port, [out] struct AudioPortCapability capability);
-    
+
     /**
      * @brief Sets the passthrough data transmission mode of the audio port driver.
      *
@@ -131,7 +131,7 @@ interface IAudioAdapter {
      * @see GetPassthroughMode
      */
     SetPassthroughMode([in] struct AudioPort port, [in] enum AudioPortPassthroughMode mode);
-    
+
     /**
      * @brief Obtains the passthrough data transmission mode of the audio port driver.
      *
@@ -142,7 +142,7 @@ interface IAudioAdapter {
      * @see SetPassthroughMode
      */
     GetPassthroughMode([in] struct AudioPort port, [out] enum AudioPortPassthroughMode mode);
-    
+
     /**
      * @brief Get the device status of an adapter.
      *
@@ -226,7 +226,7 @@ interface IAudioAdapter {
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
      */
     SetExtraParams([in] enum AudioExtParamKey key, [in] String condition, [in] String value);
-    
+
     /**
      * @brief Get extra audio parameters.
      *
@@ -246,7 +246,7 @@ interface IAudioAdapter {
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
      */
     GetExtraParams([in] enum AudioExtParamKey key, [in] String condition, [out] String value);
-    
+
     /**
      * @brief Register extra audio parameters observer.
      *
