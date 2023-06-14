@@ -61,7 +61,7 @@ interface IAudioCapture {
      * @see CaptureFrame
      */
     GetCapturePosition([out] unsigned long frames, [out] struct AudioTimeStamp time);
-    
+
     /**
      * @brief Checks whether the configuration of an audio scene is supported.
      *
@@ -73,7 +73,7 @@ interface IAudioCapture {
      * @see SelectScene
      */
     CheckSceneCapability([in] struct AudioSceneDescriptor scene, [out] boolean supported);
-    
+
     /**
      * @brief Selects an audio scene.
      *
@@ -96,7 +96,7 @@ interface IAudioCapture {
      * @see CheckSceneCapability
      */
     SelectScene([in] struct AudioSceneDescriptor scene);
-    
+
     /**
      * @brief Sets the mute operation for the audio.
      *
@@ -271,7 +271,7 @@ interface IAudioCapture {
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
      */
     GetMmapPosition([out] unsigned long frames, [out] struct AudioTimeStamp time);
-    
+
     /**
      * @brief Add the audio effect which the effectid indicated.
      *
@@ -280,7 +280,7 @@ interface IAudioCapture {
      * @return Returns <b>0</b> if the audio effect were added succesffully; returns a negative value otherwise.
      */
     AddAudioEffect([in] unsigned long effectid);
-    
+
     /**
      * @brief Remove the audio effect which the effectid indicated.
      *
