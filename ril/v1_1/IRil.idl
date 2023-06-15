@@ -1701,5 +1701,45 @@ interface IRil {
      * @version 1.0
      */
     [oneway] SendRilAck();
+
+    /**
+     * @brief Get rrc connection state.
+     *
+     * @param slotId Card slot ID.
+     * @param serialId Serial ID of a request.
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-0 value if the operation fails.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    [oneway] GetRrcConnectionState([in] int slotId, [in] int serialId);
+
+    /**
+     * @brief Set nr option mode.
+     *
+     * @param slotId Card slot ID.
+     * @param serialId Serial ID of a request.
+     * @param mode Nr option mode.
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-0 value if the operation fails.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    [oneway] SetNrOptionMode([in] int slotId, [in] int serialId, [in] int mode);
+
+    /**
+     * @brief Get nr option mode.
+     *
+     * @param slotId Card slot ID.
+     * @param serialId Serial ID of a request.
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-0 value if the operation fails.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    [oneway] GetNrOptionMode([in] int slotId, [in] int serialId);
 }
 /** @} */
