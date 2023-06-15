@@ -251,6 +251,8 @@ enum AudioDeviceType {
     AUDIO_PRIMARY_DEVICE = 1 << 7, /**< Assigned primary device type */
     AUDIO_USB_DEVICE     = 1 << 8, /**< Assigned usb device type */
     AUDIO_A2DP_DEVICE    = 1 << 9, /**< Assigned a2dp device type */
+    AUDIO_HDMI_DEVICE    = 1 << 10, /**< Assigned hdmi device type */
+    AUDIO_ADAPTER_DEVICE = 1 << 11, /**< Assigned adapter device type */
     AUDIO_DEVICE_UNKNOWN,          /**< Assigned unknown device type */
 };
 
