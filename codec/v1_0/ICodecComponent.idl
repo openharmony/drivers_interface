@@ -247,7 +247,7 @@ interface ICodecComponent {
      * @since 3.2
      */
     ComponentTunnelRequest([in] unsigned int port, [in] int tunneledComp, [in] unsigned int tunneledPort, [in]
-    struct OMX_TUNNELSETUPTYPE inTunnelSetup, [out] struct OMX_TUNNELSETUPTYPE outTunnelSetup);
+    struct CodecTunnelSetupType inTunnelSetup, [out] struct CodecTunnelSetupType outTunnelSetup);
 	
     /**
      * @brief Requests the component to use a buffer that is already allocated by another component.

@@ -49,5 +49,9 @@ ohos_shared_library("libdisplay_buffer_hdi_impl") {
 
   install_images = [ "system" ]
   subsystem_name = "hdf"
+  innerapi_tags = [
+    "chipsetsdk_indirect",
+    "platformsdk_indirect",
+  ]
   part_name = "drivers_interface_display"
 }

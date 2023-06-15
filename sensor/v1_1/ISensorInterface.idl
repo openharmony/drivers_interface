@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -24,7 +24,7 @@
  * subscribing to or unsubscribing from sensor data, enabling or disabling a sensor,
  * setting the sensor data reporting mode, and setting sensor options such as the accuracy and measurement range.
  *
- * @since 2.2
+ * @since 4.0
  */
 
 /**
@@ -34,14 +34,14 @@
  * unsubscribing from sensor data, enabling or disabling a sensor, setting the sensor data reporting mode,
  * and setting sensor options such as the accuracy and measurement range.
  *
- * @since 2.2
- * @version 1.0
+ * @since 4.0
+ * @version 1.1
  */
 
-package ohos.hdi.sensor.v1_0;
+package ohos.hdi.sensor.v1_1;
 
-import ohos.hdi.sensor.v1_0.SensorTypes;
-import ohos.hdi.sensor.v1_0.ISensorCallback;
+import ohos.hdi.sensor.v1_1.SensorTypes;
+import ohos.hdi.sensor.v1_1.ISensorCallback;
 
 /**
  * @brief Defines the functions for performing basic operations on sensors.
@@ -168,8 +168,8 @@ interface ISensorInterface {
      * For details, see {@link HdfSensorEvents}.
      * @return Returns <b>0</b> if the event data is obtained; returns a negative value otherwise.
      *
-     * @since 2.2
-     * @version 1.0
+     * @since 4.0
+     * @version 1.1
      */
     ReadData([in] int sensorId, [out] struct HdfSensorEvents[] event);
 }

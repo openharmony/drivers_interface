@@ -30,7 +30,9 @@
         "hiviewdfx_hilog_native",
         "c_utils",
         "ipc",
-        "graphic_chipsetsdk"
+        "graphic_chipsetsdk",
+        "init",
+        "hitrace_native"
       ],
       "third_party": [
       ]

@@ -19,7 +19,7 @@
  *
  * @brief Defines Ril-related APIs.
  *
- * The radio interface layer (RIL) module provides APIs and callbacks for upper-layer telephony services, 
+ * The radio interface layer (RIL) module provides APIs and callbacks for upper-layer telephony services,
  * including call, SMS, MMS, network search, and SIM card services.
  *
  * @since 3.2
@@ -48,7 +48,7 @@ import ohos.hdi.ril.v1_1.Types;
 /**
  * @brief Declares callback APIs of the RIL module.
  *
- * These APIs provide the callback functions for making calls, sending SMS and MMS messages, 
+ * These APIs provide the callback functions for making calls, sending SMS and MMS messages,
  * activating SIM cards, and accessing the Internet. The caller needs to implement these callbacks.
  *
  * @since 3.2
@@ -58,7 +58,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback used to report the emergency call number.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param emergencyInfoList Emergency call number list. For details, see {@link EmergencyInfoList}.
      *
@@ -71,7 +71,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting call status updates.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -82,7 +82,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting the call ringback tone.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param ringbackVoice Ringback tone information. For details, see {@link RingbackVoice}.
      *
@@ -95,7 +95,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting the Single Radio Voice Call Continuity (SRVCC) status.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param srvccStatus SRVCC status. For details, see {@link SrvccStatus}.
      *
@@ -108,7 +108,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting USSD service information.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param ussdNoticeInfo USSD service information. For details, see {@link UssdNoticeInfo}.
      *
@@ -121,7 +121,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting supplementary service information.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param ssNoticeInfo Supplementary service information. For details, see {@link SsNoticeInfo}.
      *
@@ -134,7 +134,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting the Reverse Single Radio Voice Call Continuity (RSRVCC) status.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -145,7 +145,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of setting the emergency call number list.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -156,7 +156,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying the emergency call number list.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param emergencyInfoList Emergency call number list. For details, see {@link EmergencyInfoList}.
      *
@@ -169,7 +169,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying the call status information list.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param callList Call status information list. For details, see {@link CallInfoList}.
      *
@@ -182,7 +182,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of making a call.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -193,7 +193,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for ending a call.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -204,7 +204,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for rejecting a call.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -215,7 +215,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for answering a call.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -226,7 +226,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for holding a call.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -237,7 +237,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for unholding a call.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -248,7 +248,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for switching a call.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -259,7 +259,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for querying the CLIP service.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param getClipResult CLIP result. For details, see {@link GetClipResult}.
      *
@@ -272,7 +272,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for setting the CLIP service.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -283,7 +283,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for combining calls into a conference call.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -294,7 +294,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for separating calls from a conference call.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -305,7 +305,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for ending the call is in the foreground and resuming the call in the background.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -316,7 +316,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for querying the call waiting information.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param callWaitResult Call waiting result. For details, see {@link CallWaitResult}.
      *
@@ -329,7 +329,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for setting the call waiting information.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -340,9 +340,9 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for querying call forwarding information.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
-     * @param cFQueryList Call forwarding query information list. 
+     * @param cFQueryList Call forwarding query information list.
      * For details, see {@link CallForwardQueryInfoList}.
      *
      * @since 3.2
@@ -354,7 +354,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of setting call forwarding information.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -365,7 +365,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying call restriction information.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param result Call restriction result. For details, see {@link CallRestrictionResult}.
      *
@@ -378,7 +378,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of setting call restriction information.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -389,7 +389,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying CLIR service information.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param getClirResult CLIR result. For details, see {@link GetClirResult}.
      *
@@ -402,7 +402,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of setting CLIR service information.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -413,7 +413,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of enabling DTMF.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -424,7 +424,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of sending DTMF.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -435,7 +435,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of stopping DTMF sending.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -446,7 +446,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying the call preference mode.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param mode CallPreference mode.
      *
@@ -458,7 +458,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of setting the call preference mode.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -469,7 +469,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of setting the USSD service.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -491,7 +491,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying the USSD service.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param cusd USSD service information.
      *
@@ -503,7 +503,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of setting the mute mode.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -514,9 +514,9 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying the mute status.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
-     * @param mute Mute status. The value <b>0</b> indicates the unmuted state, and the value <b>1</b> 
+     * @param mute Mute status. The value <b>0</b> indicates the unmuted state, and the value <b>1</b>
      * indicates the muted state.
      *
      * @since 3.2
@@ -527,7 +527,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying the call failure cause.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param callFail Call failure cause.
      *
@@ -539,7 +539,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of setting the call restriction password.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -548,9 +548,20 @@ import ohos.hdi.ril.v1_1.Types;
     SetBarringPasswordResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
+     * @brief Callback for the response of setting the VoNR switch.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
+     * For details, see {@link RilRadioResponseInfo}.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    SetVonrSwitchResponse([in] struct RilRadioResponseInfo responseInfo);
+
+    /**
      * @brief Callback for reporting status updates such as data service connection or disconnection.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param dataCallResultList List of data service activation results. For details, see {@link DataCallResultList}.
      *
@@ -574,7 +585,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of activating the data service.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param setupDataCallResultInfo Data service activation result. For details, see {@link SetupDataCallResultInfo}.
      *
@@ -587,7 +598,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of disconnecting the data service.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -598,7 +609,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying the PDP context list.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param dataCallResultList List of data service activation results. For details, see {@link DataCallResultList}.
      *
@@ -611,7 +622,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of setting the initial default access point name (APN).
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -622,7 +633,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying the current data link bandwidth information.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param dataLinkBandwidthInfo Data link bandwidth information. For details, see {@link DataLinkBandwidthInfo}.
      *
@@ -647,7 +658,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of setting the rule for reporting the data link bandwidth information.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -658,7 +669,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of enabling the data service for a SIM card slot.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -669,7 +680,7 @@ import ohos.hdi.ril.v1_1.Types;
      /**
       * @brief Callback for reporting the radio status.
       *
-      * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+      * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
       * For details, see {@link RilRadioResponseInfo}.
       * @param state Radio status. The value <b>0</b> indicates OFF, and the value <b>1</b> indicates ON.
       *
@@ -681,9 +692,9 @@ import ohos.hdi.ril.v1_1.Types;
      /**
       * @brief Callback for reporting the change of the radio access technology.
       *
-      * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+      * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
       * For details, see {@link RilRadioResponseInfo}.
-      * @param voiceRadioTechnology New radio access technology of the CS domain. 
+      * @param voiceRadioTechnology New radio access technology of the CS domain.
       * For details, see {@link VoiceRadioTechnology}.
       *
       * @since 3.2
@@ -707,7 +718,7 @@ import ohos.hdi.ril.v1_1.Types;
      /**
       * @brief Callback for the response indicating that the mobile phone is powering off.
       *
-      * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+      * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
       * For details, see {@link RilRadioResponseInfo}.
       *
       * @since 3.2
@@ -718,7 +729,7 @@ import ohos.hdi.ril.v1_1.Types;
      /**
       * @brief Callback for the response of setting the modem status.
       *
-      * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+      * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
       * For details, see {@link RilRadioResponseInfo}.
       *
       * @since 3.2
@@ -729,7 +740,7 @@ import ohos.hdi.ril.v1_1.Types;
      /**
       * @brief Callback for the response of querying the modem status.
       *
-      * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+      * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
       * For details, see {@link RilRadioResponseInfo}.
       *
       * @since 3.2
@@ -740,7 +751,7 @@ import ohos.hdi.ril.v1_1.Types;
      /**
       * @brief Callback for the response of querying the international mobile equipment identity (IMEI).
       *
-      * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+      * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
       * For details, see {@link RilRadioResponseInfo}.
       * @param imei IMEI of the device.
       *
@@ -752,7 +763,7 @@ import ohos.hdi.ril.v1_1.Types;
      /**
       * @brief Callback for the response of querying the mobile equipment identifier (MEID).
       *
-      * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+      * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
       * For details, see {@link RilRadioResponseInfo}.
       * @param meid MEID of the device.
       *
@@ -764,7 +775,7 @@ import ohos.hdi.ril.v1_1.Types;
      /**
       * @brief Callback for the response of querying the radio access technology of the CS domain.
       *
-      * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+      * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
       * For details, see {@link RilRadioResponseInfo}.
       * @param VoiceRadioTechnology Voice radio access technology. For details, see {@link VoiceRadioTechnology}.
       *
@@ -777,7 +788,7 @@ import ohos.hdi.ril.v1_1.Types;
      /**
       * @brief Callback for the response of querying the baseband version.
       *
-      * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+      * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
       * For details, see {@link RilRadioResponseInfo}.
       * @param basebandVersion Baseband version.
       *
@@ -789,7 +800,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting SIM card status updates.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -800,7 +811,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting the STK <b>SessionEnd</b> instruction.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -811,7 +822,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting STK <b>Proactive</b> instructions.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -822,7 +833,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting STK <b>Alpha</b> instructions.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -833,7 +844,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting STK events.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -844,7 +855,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting STK <b>CallSetup</b> instructions.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -855,7 +866,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting the SIM card status.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -866,7 +877,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting STK Radio protocol updates.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -877,7 +888,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying SIM card data.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param result I/O response result of the SIM card. For details, see {@link IccIoResultInfo}.
      *
@@ -889,7 +900,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of obtaining the SIM card status.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param CardStatusInfo SIM card status. For details, see {@link CardStatusInfo}.
      *
@@ -901,7 +912,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of obtaining the IMSI of a SIM card.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param response IMSI of the SIM card.
      *
@@ -913,7 +924,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of obtaining the SIM card lock status.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param simLockStatus SIM card lock status. For details, see {@link simLockStatus}.
      *
@@ -925,7 +936,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of setting the SIM card lock status.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param LockStatusResp SIM card lock status response. For details, see {@link LockStatusResp}.
      *
@@ -937,7 +948,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of changing the SIM card password.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param LockStatusResp SIM card lock status response. For details, see {@link LockStatusResp}.
      *
@@ -949,7 +960,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of unlocking with the PIN.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param LockStatusResp SIM card lock status response. For details, see {@link LockStatusResp}.
      *
@@ -961,7 +972,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of unlocking with the PUK.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param LockStatusResp SIM card lock status response. For details, see {@link LockStatusResp}.
      *
@@ -973,7 +984,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of unlocking with PIN2.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param LockStatusResp SIM card lock status response. For details, see {@link LockStatusResp}.
      *
@@ -985,7 +996,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of unlocking with PUK2.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param LockStatusResp SIM card lock status response. For details, see {@link LockStatusResp}.
      *
@@ -997,7 +1008,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of activating or deactivating the SIM card.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1008,7 +1019,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of sending the STK <b>TerminalResponse</b> instruction.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1019,7 +1030,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of sending the STK <b>Envelope</b> instruction.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1030,7 +1041,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of sending the STK <b>CallSetup</b> instruction.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1041,7 +1052,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying whether the STK is ready.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1052,7 +1063,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying the protocol stack of the primary and secondary SIM cards.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param RadioProtocol Radio protocol. For details, see {@link RadioProtocol}.
      *
@@ -1064,7 +1075,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of setting the protocol stack of the primary and secondary SIM cards.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param RadioProtocol Radio protocol. For details, see {@link RadioProtocol}.
      *
@@ -1076,9 +1087,9 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of opening the logical channel for APDU transmission.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
-     * @param OpenLogicalChannelResponse Response of opening the logical channel. 
+     * @param OpenLogicalChannelResponse Response of opening the logical channel.
      * For details, see {@link OpenLogicalChannelResponse}.
      *
      * @since 3.2
@@ -1090,7 +1101,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of closing the logical channel for APDU transmission.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1101,7 +1112,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of transmitting APDU over a logical channel.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param result Data transmission result. For details, see {@link IccIoResultInfo}.
      *
@@ -1114,7 +1125,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of transmitting APDU over a basic channel.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param result Indicates the data transmission result. For details, see {@link IccIoResultInfo}.
      *
@@ -1127,7 +1138,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of SIM card authentication.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param result SIM card authentication result. For details, see {@link IccIoResultInfo}.
      *
@@ -1139,7 +1150,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of SIM card unlocking.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param LockStatusResp SIM card lock status response. For details, see {@link LockStatusResp}.
      *
@@ -1151,7 +1162,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting network registration status updates of the CS domain.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param csRegStatusInfo Network registration status of the CS domain. For details, see {@link CsRegStatusInfo}.
      *
@@ -1164,7 +1175,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting network registration status updates of the PS domain.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param psRegStatusInfo Network registration status of the PS domain. For details, see {@link PsRegStatusInfo}.
      *
@@ -1177,7 +1188,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting signal strength updates.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param rssi Signal strength. For details, see {@link Rssi}.
      *
@@ -1189,7 +1200,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting NITZ time zone updates.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param timeZoneStr NITZ time zone.
      *
@@ -1201,7 +1212,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting NITZ time updates.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param timeStr NITZ time.
      *
@@ -1213,7 +1224,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting physical channel configuration updates.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param channelConfigInfoList Channel configuration information list. For details, see {@link ChannelConfigInfoList}.
      *
@@ -1226,7 +1237,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting cell information.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param cellListCurrentInfo Cell information list. For details, see {@link CellListCurrentInfo}.
      *
@@ -1239,7 +1250,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for querying the signal strength.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param rssi Signal strength. For details, see {@link Rssi}.
      *
@@ -1251,7 +1262,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of obtaining the network registration status of the CS domain.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param csRegStatusInfo Network registration status of the CS domain. For details, see {@link CsRegStatusInfo}.
      *
@@ -1264,7 +1275,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of obtaining the network registration status of the PS domain.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param psRegStatusInfo Network registration status of the PS domain. For details, see {@link PsRegStatusInfo}.
      *
@@ -1277,7 +1288,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying the carrier name.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param psRegStatusInfo Carrier information. For details, see {@link OperatorInfo}.
      *
@@ -1289,7 +1300,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying available network information.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param availableNetworkList Available network list. For details, see {@link AvailableNetworkList}.
      *
@@ -1302,7 +1313,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying the network selection mode.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param setNetworkModeInfo Network modes available for selection. For details, see {@link SetNetworkModeInfo}.
      *
@@ -1315,7 +1326,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of setting the network selection mode.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1326,7 +1337,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying neighboring cell information.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param cellListNearbyInfo Neighboring cell information list. For details, see {@link CellListNearbyInfo}.
      *
@@ -1339,7 +1350,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying cell information.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param cellListCurrentInfo Cell information list. For details, see {@link CellListNearbyInfo}.
      *
@@ -1352,7 +1363,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of setting the preferred network type.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1363,7 +1374,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying the preferred network type.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param preferredNetworkTypeInfo Preferred network type information. For details, see {@link PreferredNetworkTypeInfo}.
      *
@@ -1376,7 +1387,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying the physical channel configuration.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param channelConfigInfoList Physical channel configuration information list. For details, see {@link ChannelConfigInfoList}.
      *
@@ -1389,7 +1400,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of enabling or disabling cell location update.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1400,7 +1411,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of setting a notification filter.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1411,7 +1422,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of setting the device status.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1422,7 +1433,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting new GSM SMS message notifications.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param smsMessageInfo SMS message information. For details, see {@link SmsMessageInfo}.
      *
@@ -1434,7 +1445,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting new CDMA SMS message notifications.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param smsMessageInfo SMS message information. For details, see {@link SmsMessageInfo}.
      *
@@ -1446,7 +1457,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting SMS status notifications.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param smsMessageInfo SMS message information. For details, see {@link SmsMessageInfo}.
      *
@@ -1458,7 +1469,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting storage of new SMS message in a SIM card.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param recordNumber Number of SMS messages in the SIM card.
      * @param indicationType Notification type. For details, see {@link HRilNotiType}.
@@ -1472,7 +1483,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for reporting cell broadcast configuration.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param cellBroadConfigReportInfo Cell broadcast information. For details, see {@link CBConfigReportInfo}.
      *
@@ -1485,7 +1496,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of sending a GSM SMS message.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param sendSmsResultInfo SMS message sending result. For details, see {@link SendSmsResultInfo}.
      *
@@ -1497,7 +1508,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of sending a CDMA SMS message.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param sendSmsResultInfo SMS message sending result. For details, see {@link SendSmsResultInfo}.
      *
@@ -1510,7 +1521,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of writing GSM SMS messages to a SIM card.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1521,7 +1532,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of deleting GSM SMS messages from a SIM card.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1532,7 +1543,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of updating the GSM SMS messages in a SIM card.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1543,7 +1554,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of writing CDMA SMS messages to a SIM card.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1554,7 +1565,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of deleting CDMA SMS messages from a SIM card.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1565,7 +1576,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of updating the CDMA SMS messages in a SIM card.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1576,7 +1587,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of setting an SMSC address.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1587,7 +1598,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying the SMSC address.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @param serviceCenterAddress SMSC address. For details, see {@link ServiceCenterAddress}.
@@ -1600,7 +1611,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of activating GSM cell broadcast.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1611,7 +1622,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying the GSM cell broadcast configuration.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param cellBroadcastInfo GSM cell broadcast configuration information. For details, see {@link CBConfigInfo}.
      *
@@ -1623,7 +1634,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of activating CDMA cell broadcast.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1634,7 +1645,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of querying the CDMA cell broadcast configuration.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param cdmaCBConfigInfo CDMA cell broadcast configuration information. For details, see {@link CdmaCBConfigInfo}.
      *
@@ -1647,7 +1658,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of sending a long GSM SMS message.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      * @param sendSmsResultInfo SMS message sending result. For details, see {@link SendSmsResultInfo}.
      *
@@ -1660,7 +1671,7 @@ import ohos.hdi.ril.v1_1.Types;
     /**
      * @brief Callback for the response of acknowledging the receipt of a new SMS message.
      *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. 
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
@@ -1677,5 +1688,52 @@ import ohos.hdi.ril.v1_1.Types;
      * @version 1.0
      */
     CommonErrorResponse([in] struct RilRadioResponseInfo responseInfo);
+
+    /**
+     * @brief Callback for the response of rrc connect state.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. For details,
+     * see {@link RilRadioResponseInfo}.
+     * @param state Rrc connection state.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    GetRrcConnectionStateResponse([in] struct RilRadioResponseInfo responseInfo, [in] int state);
+
+    /**
+     * @brief Callback for the response of set nr option mode.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. For details,
+     * see {@link RilRadioResponseInfo}.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    SetNrOptionModeResponse([in] struct RilRadioResponseInfo responseInfo);
+
+    /**
+     * @brief Callback for the response of get nr option mode.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. For details,
+     * see {@link RilRadioResponseInfo}.
+     * @param mode Nr option mode.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    GetNrOptionModeResponse([in] struct RilRadioResponseInfo responseInfo, [in] int mode);
+
+    /**
+     * @brief Reporting the rrc connection state.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. For details,
+     * see {@link RilRadioResponseInfo}.
+     * @param state Rrc connection state.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    GetRrcConnectionStateUpdated([in] struct RilRadioResponseInfo responseInfo, [in] int state);
 }
 /** @} */
