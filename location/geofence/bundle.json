@@ -12,8 +12,10 @@
     "component": {
       "name": "drivers_interface_location_geofence",
       "subsystem": "hdf",
-      "syscap": [""],
-      "adapter_system_type": ["standard"],
+      "syscap": [ "SystemCapability.Location.Location.Geofence" ],
+      "adapted_system_type": [
+        "standard"
+      ],
       "rom": "675KB",
       "ram": "1024KB",
       "deps": {
@@ -44,6 +46,14 @@
           },
           {
             "name": "//drivers/interface/location/geofence/v1_0:location_geofence_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/location/geofence"
+            }
+          },
+          {
+            "name": "//drivers/interface/location/geofence/v1_0:liblocation_geofence_stub_1.0",
             "header": {
               "header_files": [
               ],
