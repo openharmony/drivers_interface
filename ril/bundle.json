@@ -41,6 +41,13 @@
                     }
                 },
                 {
+                  "name": "//drivers/interface/ril/v1_1:libril_stub_1.1",
+                  "header": {
+                    "header_files": [],
+                    "header_base": "//drivers/interface/ril"
+                  }
+                },
+                {
                   "name": "//drivers/interface/ril/v1_1:ril_idl_headers",
                   "header": {
                     "header_files": [],
