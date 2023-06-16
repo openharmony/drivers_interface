@@ -46,7 +46,7 @@
                     "header_files": [],
                     "header_base": "//drivers/interface/ril"
                   }
-              },
+                },
                 {
                   "name": "//drivers/interface/ril/v1_1:ril_idl_headers",
                   "header": {
