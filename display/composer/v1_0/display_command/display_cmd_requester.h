@@ -517,6 +517,14 @@ EXIT:
         return HDF_SUCCESS;
     }
 
+    int32_t GetDisplayCompChange(uint32_t devId, std::vector<uint32_t>& layers, std::vector<int32_t>& types)
+    {
+        layers = compChangeLayers_[devId];
+        types = compChangeTypes_[devId];
+        compChangeLayers_.erase(devId);
+        compChangeTypes_.erase(devId);
+        return HDF_SUCCESS;
+    }
 private:
     int32_t OnReplySetError(
         std::shared_ptr<CommandDataUnpacker> replyUnpacker, std::unordered_map<int32_t, int32_t> &errMaps)
@@ -543,9 +551,33 @@ private:
 
     int32_t OnReplyPrepareDisplayLayers(std::shared_ptr<CommandDataUnpacker> replyUnpacker, bool &needFlushFb)
     {
-        bool retBool = replyUnpacker->ReadBool(needFlushFb);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: read needFlushFb failed", __func__));
+        uint32_t devId = 0;
+        int32_t retBool = replyUnpacker->ReadUint32(devId);
+        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE, HDF_LOGE("%{public}s: read devId failed", __func__));
+
+        retBool = replyUnpacker->ReadBool(needFlushFb);
+        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE, HDF_LOGE("%{public}s: read needFlushFb failed", __func__));
+        // unpack layers vector
+        uint32_t vectSize = 0;
+        retBool = replyUnpacker->ReadUint32(vectSize);
+        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE, HDF_LOGE("%{public}s: read vect size failed", __func__));
+
+        compChangeLayers_[devId].resize(vectSize);
+        for (int32_t i = 0; i < vectSize; i++) {
+            DISPLAY_CHK_RETURN(replyUnpacker->ReadUint32(compChangeLayers_[devId][i]) == false, HDF_FAILURE,
+                HDF_LOGE("%{public}s: read layer vector failed", __func__));
+        }
+        // unpack types vector
+        vectSize = 0;
+        retBool = replyUnpacker->ReadUint32(vectSize);
+        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE, HDF_LOGE("%{public}s: read vect size failed", __func__));
+
+        compChangeTypes_[devId].resize(vectSize);
+        for (int32_t i = 0; i < vectSize; i++) {
+            DISPLAY_CHK_RETURN(replyUnpacker->ReadInt32(compChangeTypes_[devId][i]) == false, HDF_FAILURE,
+                HDF_LOGE("%{public}s: read composition type vector failed", __func__));
+        }
+
         return HDF_SUCCESS;
     }
 
@@ -678,9 +710,12 @@ private:
     sptr<CompHdi> hdi_;
     std::shared_ptr<Transfer> request_;
     std::shared_ptr<Transfer> reply_;
-    /* Period data */
+    // Period data
     std::shared_ptr<CommandDataPacker> requestPacker_;
     std::vector<HdifdInfo> requestHdiFds_;
+    // Composition layers/types changed
+    std::unordered_map<uint32_t, std::vector<uint32_t>> compChangeLayers_;
+    std::unordered_map<uint32_t, std::vector<int32_t>> compChangeTypes_;
 };
 using HdiDisplayCmdRequester = DisplayCmdRequester<SharedMemQueue<int32_t>, IDisplayComposer>;
 } // namespace V1_0
