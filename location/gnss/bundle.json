@@ -49,6 +49,14 @@
               ],
               "header_base": "//drivers/interface/location/gnss"
             }
+          },
+          {
+            "name": "//drivers/interface/location/gnss/v1_0:liblocation_gnss_stub_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/location/gnss"
+            }
           }
         ]
       }
