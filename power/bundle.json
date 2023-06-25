@@ -12,7 +12,10 @@
     "component": {
       "name": "drivers_interface_power",
       "subsystem": "hdf",
-      "adapted_system_type": ["standard"],
+      "adapted_system_type": [
+        "small",
+        "standard"
+      ],
       "rom": "675KB",
       "ram": "1024KB",
       "deps": {
@@ -41,6 +44,14 @@
             }
           },
           {
+            "name": "//drivers/interface/power/v1_0:libpower_stub_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/power"
+            }
+          },
+          {
             "name": "//drivers/interface/power/v1_0:power_idl_headers",
             "header": {
               "header_files": [
@@ -50,6 +61,14 @@
           },
           {
             "name": "//drivers/interface/power/v1_1:libpower_proxy_1.1",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/power"
+            }
+          },
+          {
+            "name": "//drivers/interface/power/v1_1:libpower_stub_1.1",
             "header": {
               "header_files": [
               ],

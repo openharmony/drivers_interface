@@ -12,7 +12,10 @@
     "component": {
       "name": "drivers_interface_battery",
       "subsystem": "hdf",
-      "adapted_system_type": ["standard"],
+      "adapted_system_type": [
+        "small",
+        "standard"
+      ],
       "rom": "675KB",
       "ram": "1024KB",
       "deps": {
@@ -33,6 +36,14 @@
         "inner_kits": [
           {
             "name": "//drivers/interface/battery/v1_2:libbattery_proxy_1.2",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/battery"
+            }
+          },
+          {
+            "name": "//drivers/interface/battery/v1_2:libbattery_stub_1.2",
             "header": {
               "header_files": [
               ],
