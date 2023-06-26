@@ -107,7 +107,7 @@ public:
         return true;
     }
 
-    bool BeginSection(int32_t cmdId, int32_t len = 0)
+    bool BeginSection(int32_t cmdId, uint32_t len = 0)
     {
         // len must be 4 byte alignment.
         DISPLAY_CHK_RETURN((len & SECTION_LEN_ALIGN - 1) != 0, false,
@@ -219,7 +219,7 @@ private:
     static constexpr uint32_t ALLOC_PAGE_SIZE = 1024;
     static constexpr uint32_t INIT_DATA_SIZE = 32 * ALLOC_PAGE_SIZE;
     static constexpr uint32_t SECTION_END_MAGIC = 0xB5B5B5B5;
-    static constexpr int32_t SECTION_LEN_ALIGN = 4;
+    static constexpr uint32_t SECTION_LEN_ALIGN = 4;
     static constexpr uint32_t DUMP_HALF_LINE_SPACE = 4;
     static constexpr uint32_t DUMP_LINE_LEN = 8;
 
