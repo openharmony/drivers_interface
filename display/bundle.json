@@ -27,7 +27,7 @@
     "deps": {
       "components": [
         "hdf_core",
-        "hiviewdfx_hilog_native",
+        "hilog",
         "c_utils",
         "ipc",
         "graphic_chipsetsdk",

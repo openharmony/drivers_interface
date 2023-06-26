@@ -53,8 +53,8 @@ ohos_shared_library("libdisplay_composer_hdi_impl") {
     "graphic_chipsetsdk:buffer_handle",
     "hdf_core:libhdi",
     "hdf_core:libpub_utils",
+    "hilog:libhilog",
     "hitrace_native:hitrace_meter",
-    "hiviewdfx_hilog_native:libhilog",
     "init:libbegetutil",
     "ipc:ipc_single",
   ]
@@ -83,7 +83,7 @@ ohos_shared_library("libcomposer_buffer_cache") {
     "c_utils:utils",
     "hdf_core:libhdi",
     "hdf_core:libpub_utils",
-    "hiviewdfx_hilog_native:libhilog",
+    "hilog:libhilog",
     "ipc:ipc_single",
   ]
 

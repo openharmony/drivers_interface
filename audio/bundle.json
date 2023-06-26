@@ -19,7 +19,7 @@
         "components": [
           "c_utils",
           "hdf_core",
-          "hiviewdfx_hilog_native"
+          "hilog"
         ],
         "third_party": []
       },
