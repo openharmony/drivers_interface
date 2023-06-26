@@ -13,7 +13,10 @@
       "name": "drivers_interface_motion",
       "subsystem": "hdf",
       "syscap": [],
-      "adapted_system_type": ["standard"],
+      "adapted_system_type": [
+        "standard",
+        "small"
+      ],
       "rom": "675KB",
       "ram": "1024KB",
       "deps": {
@@ -27,7 +30,8 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/motion/v1_0:motion_idl_target"
+          "//drivers/interface/motion/v1_0:motion_idl_target",
+          "//drivers/interface/motion/v1_1:motion_idl_target"
         ],
         "test": [
         ],
@@ -50,6 +54,30 @@
           },
           {
             "name": "//drivers/interface/motion/v1_0:motion_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/motion"
+            }
+          },
+          {
+            "name": "//drivers/interface/motion/v1_1:libmotion_proxy_1.1",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/motion"
+            }
+          },
+          {
+            "name": "//drivers/interface/motion/v1_1:libmotion_stub_1.1",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/motion"
+            }
+          },
+          {
+            "name": "//drivers/interface/motion/v1_1:motion_idl_headers",
             "header": {
               "header_files": [
               ],
