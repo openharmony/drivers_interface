@@ -17,8 +17,8 @@
 #define DISPLAY_COMMAND_DATA_UNPACKER_H
 
 #include <memory>
+#include "common/include/display_interface_utils.h"
 #include "hilog/log.h"
-#include "command_data_utils.h"
 
 namespace OHOS {
 namespace HDI {

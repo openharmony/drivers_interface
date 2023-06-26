@@ -124,6 +124,12 @@ public:
         return ToDispErrCode(hdi_->RegHotPlugCallback(this));
     }
 
+    virtual int32_t SetClientBufferCacheCount(uint32_t devId, uint32_t cacheCount) override
+    {
+        COMPOSER_CHECK_NULLPTR(hdi_);
+        return ToDispErrCode(hdi_->SetClientBufferCacheCount(devId, cacheCount));
+    }
+
     virtual int32_t GetDisplayCapability(uint32_t devId, DisplayCapability& info) override
     {
         COMPOSER_CHECK_NULLPTR(hdi_);
@@ -191,10 +197,11 @@ public:
         return ToDispErrCode(hdi_->SetDisplayClientCrop(devId, rect));
     }
 
-    virtual int32_t SetDisplayClientBuffer(uint32_t devId, const BufferHandle& buffer, int32_t fence) override
+    virtual int32_t SetDisplayClientBuffer(uint32_t devId, const BufferHandle* buffer, uint32_t seqNo,
+        int32_t fence) override
     {
         COMPOSER_CHECK_NULLPTR(req_);
-        return ToDispErrCode(req_->SetDisplayClientBuffer(devId, buffer, fence));
+        return ToDispErrCode(req_->SetDisplayClientBuffer(devId, buffer, seqNo, fence));
     }
 
     virtual int32_t SetDisplayClientDamage(uint32_t devId, std::vector<IRect>& rects) override
@@ -320,10 +327,11 @@ public:
     }
 
     // layer func
-    virtual int32_t CreateLayer(uint32_t devId, const LayerInfo& layerInfo, uint32_t& layerId) override
+    virtual int32_t CreateLayer(uint32_t devId, const LayerInfo& layerInfo, uint32_t cacheCount,
+        uint32_t& layerId) override
     {
         COMPOSER_CHECK_NULLPTR(hdi_);
-        return ToDispErrCode(hdi_->CreateLayer(devId, layerInfo, layerId));
+        return ToDispErrCode(hdi_->CreateLayer(devId, layerInfo, cacheCount, layerId));
     }
 
     virtual int32_t DestroyLayer(uint32_t devId, uint32_t layerId) override
@@ -386,10 +394,11 @@ public:
         return ToDispErrCode(req_->SetLayerVisibleRegion(devId, layerId, rects));
     }
 
-    virtual int32_t SetLayerBuffer(uint32_t devId, uint32_t layerId, const BufferHandle& buffer, int32_t fence) override
+    virtual int32_t SetLayerBuffer(uint32_t devId, uint32_t layerId, const BufferHandle* buffer, uint32_t seqNo,
+        int32_t fence, const std::vector<uint32_t>& deletingList) override
     {
         COMPOSER_CHECK_NULLPTR(req_);
-        return ToDispErrCode(req_->SetLayerBuffer(devId, layerId, buffer, fence));
+        return ToDispErrCode(req_->SetLayerBuffer(devId, layerId, buffer, seqNo, fence, deletingList));
     }
 
     virtual int32_t SetLayerCompositionType(uint32_t devId, uint32_t layerId, CompositionType type) override

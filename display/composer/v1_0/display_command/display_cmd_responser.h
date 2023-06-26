@@ -58,15 +58,18 @@ static sptr<IMapper> g_bufferServiceImpl = nullptr;
 template <typename Transfer, typename VdiImpl>
 class DisplayCmdResponser {
 public:
-    static std::unique_ptr<DisplayCmdResponser> Create(VdiImpl* impl)
+    static std::unique_ptr<DisplayCmdResponser> Create(VdiImpl* impl, std::shared_ptr<DeviceCacheManager> cacheMgr)
     {
         DISPLAY_CHK_RETURN(impl == nullptr, nullptr,
             HDF_LOGE("%{public}s: error, VdiImpl is nullptr", __func__));
-        return std::make_unique<DisplayCmdResponser>(impl);
+        DISPLAY_CHK_RETURN(cacheMgr == nullptr, nullptr,
+            HDF_LOGE("%{public}s: error, VdiImpl is nullptr", __func__));
+        return std::make_unique<DisplayCmdResponser>(impl, cacheMgr);
     }
 
-    DisplayCmdResponser(VdiImpl* impl)
+    DisplayCmdResponser(VdiImpl* impl, std::shared_ptr<DeviceCacheManager> cacheMgr)
         : impl_(impl),
+        cacheMgr_(cacheMgr),
         request_(nullptr),
         isReplyUpdated_(false),
         reply_(nullptr),
@@ -340,34 +343,44 @@ EXIT:
         int32_t ret = unpacker->ReadUint32(devId) ? HDF_SUCCESS : HDF_FAILURE;
 
         BufferHandle *buffer = nullptr;
-        if (ret == HDF_SUCCESS) {
-            ret = CmdUtils::BufferHandleUnpack(unpacker, inFds, buffer);
-        } else {
-            HDF_LOGE("%{public}s, read devId error", __func__);
-        }
+        DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::BufferHandleUnpack(unpacker, inFds, buffer),
+            HDF_LOGE("%{public}s, read buffer handle error", __func__));
+        bool isValidBuffer = (ret == HDF_SUCCESS ? true : false);
+
+        uint32_t seqNo = -1;
+        bool result = true;
+        DISPLAY_CHK_CONDITION(result, ret == HDF_SUCCESS, unpacker->ReadUint32(seqNo),
+            HDF_LOGE("%{public}s, read seqNo error", __func__));
+        ret = result ? HDF_SUCCESS : HDF_FAILURE;
 
         int32_t fence = -1;
-        if (ret == HDF_SUCCESS) {
-            ret = CmdUtils::FileDescriptorUnpack(unpacker, inFds, fence);
-        } else {
-            HDF_LOGE("%{public}s, BufferHandleUnpack error", __func__);
-        }
+        DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::FileDescriptorUnpack(unpacker, inFds, fence),
+            HDF_LOGE("%{public}s, FileDescriptorUnpack error", __func__));
         HdifdParcelable fdParcel(fence);
+        {
+            DISPLAY_CHECK(cacheMgr_ == nullptr, goto EXIT);
+            std::lock_guard<std::mutex> lock(cacheMgr_->GetCacheMgrMutex());
+            DeviceCache* devCache = cacheMgr_->DeviceCacheInstance(devId);
+            DISPLAY_CHECK(devCache == nullptr, goto EXIT);
 
-        if (ret == HDF_SUCCESS) {
-            ret = impl_->SetDisplayClientBuffer(devId, *buffer, fdParcel.GetFd());
-        } else {
-            HDF_LOGE("%{public}s, FileDescriptorUnpack error", __func__);
+            ret = devCache->SetDisplayClientBuffer(buffer, seqNo, [&](const BufferHandle& handle)->int32_t {
+                int rc = impl_->SetDisplayClientBuffer(devId, handle, fdParcel.GetFd());
+                DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
+                return HDF_SUCCESS;
+            });
         }
-#ifdef DISPLAY_COMMUNITY
-        FreeBufferHandle(buffer);
-#else
+#ifndef DISPLAY_COMMUNITY
         fdParcel.Move();
 #endif // DISPLAY_COMMUNITY
+EXIT:
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("%{public}s, SetDisplayClientBuffer error", __func__);
+            if (isValidBuffer != HDF_SUCCESS) {
+                FreeBufferHandle(buffer);
+            }
             errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, ret);
         }
+
         return;
     }
 
@@ -389,7 +402,10 @@ EXIT:
         if (ret == HDF_SUCCESS) {
             for (int32_t i = 0; i < vectSize; i++) {
                 DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::RectUnpack(unpacker, rects[i]),
-                    HDF_LOGE("%{public}s, read vect error", __func__); break);
+                    HDF_LOGE("%{public}s, read vect error at i = %{public}d", __func__, i));
+                if (ret != HDF_SUCCESS) {
+                    break;
+                }
             }
         }
         DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, impl_->SetDisplayClientDamage(devId, rects),
@@ -408,6 +424,10 @@ EXIT:
         uint32_t devId = 0;
         int32_t fence = -1;
 
+#define DEBUG_COMPOSER_CACHE
+#ifdef DEBUG_COMPOSER_CACHE
+        cacheMgr_->Dump();
+#endif // DEBUG_COMPOSER_CACHE
         bool retBool = true;
         DISPLAY_CHK_CONDITION(retBool, true, unpacker->ReadUint32(devId),
             HDF_LOGE("%{public}s, read devId error", __func__));
@@ -610,7 +630,10 @@ EXIT:
         if (ret == HDF_SUCCESS) {
             for (int32_t i = 0; i < vectSize; i++) {
                 DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::RectUnpack(unpacker, rects[i]),
-                    HDF_LOGE("%{public}s, read vect error", __func__));
+                    HDF_LOGE("%{public}s, read vect error, at i = %{public}d", __func__, i));
+                if (ret != HDF_SUCCESS) {
+                    break;
+                }
             }
         }
 
@@ -642,7 +665,10 @@ EXIT:
         if (ret == HDF_SUCCESS) {
             for (int32_t i = 0; i < vectSize; i++) {
                 DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::RectUnpack(unpacker, rects[i]),
-                    HDF_LOGE("%{public}s, read vect error", __func__));
+                    HDF_LOGE("%{public}s, read vect error, at i = %{public}d", __func__, i));
+                if (ret != HDF_SUCCESS) {
+                    break;
+                }
             }
         }
 
@@ -669,37 +695,64 @@ EXIT:
 
         DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::BufferHandleUnpack(unpacker, inFds, buffer),
             HDF_LOGE("%{public}s, read BufferHandleUnpack error", __func__));
+        bool isValidBuffer = (ret == HDF_SUCCESS ? true : false);
+
+        int32_t seqNo = -1;
+        bool result = true;
+        DISPLAY_CHK_CONDITION(result, ret == HDF_SUCCESS, unpacker->ReadInt32(seqNo),
+            HDF_LOGE("%{public}s, read seqNo error", __func__));
+        ret = result ? HDF_SUCCESS : HDF_FAILURE;
 
         int32_t fence = -1;
         DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::FileDescriptorUnpack(unpacker, inFds, fence),
             HDF_LOGE("%{public}s, FileDescriptorUnpack error", __func__));
 
-        const std::string SWITCH_ON = "on";
-        const uint32_t DUMP_BUFFER_SWITCH_LEN = 4;
-        char dumpSwitch[DUMP_BUFFER_SWITCH_LEN] = {0};
-        GetParameter("hdi.composer.dumpbuffer", "off", dumpSwitch, DUMP_BUFFER_SWITCH_LEN);
+        HdifdParcelable fdParcel(fence);
 
-        if (SWITCH_ON.compare(dumpSwitch) == 0) {
-            const uint32_t FENCE_TIMEOUT = 3000;
-            int32_t retCode = WaitFence(fence, FENCE_TIMEOUT);
-            if (retCode == HDF_SUCCESS) {
-                DISPLAY_CHK_CONDITION(retCode, HDF_SUCCESS, DumpLayerBuffer(devId, layerId, *buffer),
-                    HDF_LOGE("%{public}s, DumpLayerBuffer error", __func__));
+        // unpack deletingList
+        uint32_t vectSize = 0;
+        DISPLAY_CHK_CONDITION(result, ret == HDF_SUCCESS, unpacker->ReadUint32(vectSize),
+            HDF_LOGE("%{public}s, read vectSize error", __func__));
+
+        std::vector<uint32_t> deletingList(vectSize);
+        for (int32_t i = 0; i < vectSize; i++) {
+            DISPLAY_CHK_CONDITION(result, true, unpacker->ReadUint32(deletingList[i]),
+                HDF_LOGE("%{public}s, read seqNo error, at i = %{public}d", __func__, i));
+            if (result != true) {
+                break;
             }
         }
+        ret = result ? HDF_SUCCESS : HDF_FAILURE;
+        {
+            DISPLAY_CHECK(cacheMgr_ == nullptr, goto EXIT);
+            std::lock_guard<std::mutex> lock(cacheMgr_->GetCacheMgrMutex());
+            DeviceCache* devCache = nullptr;
+            LayerCache* layerCache = nullptr;
+            devCache = cacheMgr_->DeviceCacheInstance(devId);
+            DISPLAY_CHECK(devCache == nullptr, goto EXIT);
+            layerCache = devCache->LayerCacheInstance(layerId);
+            DISPLAY_CHECK(layerCache == nullptr, goto EXIT);
 
-        HdifdParcelable fdParcel(fence);
-        DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, impl_->SetLayerBuffer(devId, layerId, *buffer, fdParcel.GetFd()),
-            HDF_LOGE("%{public}s, SetLayerBuffer error", __func__));
+            ret = layerCache->SetLayerBuffer(buffer, seqNo, deletingList, [&](const BufferHandle& handle)->int32_t {
+                DumpLayerBuffer(devId, layerId, fence, handle);
 
-#ifdef DISPLAY_COMMUNITY
-        FreeBufferHandle(buffer);
-#else
+                int rc = impl_->SetLayerBuffer(devId, layerId, handle, fdParcel.GetFd());
+                DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
+                return HDF_SUCCESS;
+            });
+        }
+#ifndef DISPLAY_COMMUNITY
         fdParcel.Move();
 #endif // DISPLAY_COMMUNITY
+EXIT:
         if (ret != HDF_SUCCESS) {
-            errMaps_.emplace(REQUEST_CMD_SET_LAYER_BUFFER, ret);
+            HDF_LOGE("%{public}s, SetLayerBuffer error", __func__);
+            if (isValidBuffer != HDF_SUCCESS) {
+                FreeBufferHandle(buffer);
+            }
+            errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, ret);
         }
+
         return;
     }
 
@@ -822,22 +875,37 @@ EXIT:
         return strStream.str();
     }
 
-    static int32_t DumpLayerBuffer(uint32_t devId, uint32_t layerId, BufferHandle& buffer)
+    static void DumpLayerBuffer(uint32_t devId, uint32_t layerId, int32_t fence, const BufferHandle& buffer)
     {
+        const std::string SWITCH_ON = "on";
+        const uint32_t DUMP_BUFFER_SWITCH_LEN = 4;
+        char dumpSwitch[DUMP_BUFFER_SWITCH_LEN] = {0};
+        GetParameter("hdi.composer.dumpbuffer", "off", dumpSwitch, DUMP_BUFFER_SWITCH_LEN);
+
+        if (SWITCH_ON.compare(dumpSwitch) != 0) {
+            return;
+        }
+
+        const uint32_t FENCE_TIMEOUT = 3000;
+        int32_t retCode = WaitFence(fence, FENCE_TIMEOUT);
+        if (retCode != HDF_SUCCESS) {
+            return;
+        }
+
         if (g_bufferServiceImpl == nullptr) {
             g_bufferServiceImpl = IMapper::Get(true);
-            DISPLAY_CHK_RETURN((g_bufferServiceImpl == nullptr), HDF_FAILURE, HDF_LOGE("get IMapper failed"));
+            DISPLAY_CHECK((g_bufferServiceImpl == nullptr), HDF_LOGE("get IMapper failed"));
         }
 
         std::string fileName = GetFileName(devId, layerId, buffer);
-        DISPLAY_CHK_RETURN((fileName == ""), HDF_FAILURE, HDF_LOGE("GetFileName failed"));
+        DISPLAY_CHECK((fileName == ""), HDF_LOGE("GetFileName failed"));
         HDF_LOGI("fileName = %{public}s", fileName.c_str());
 
         const std::string PATH_PREFIX = "/data/local/traces/";
         std::stringstream filePath;
         filePath << PATH_PREFIX << fileName;
         std::ofstream rawDataFile(filePath.str(), std::ofstream::binary);
-        DISPLAY_CHK_RETURN((!rawDataFile.good()), HDF_FAILURE, HDF_LOGE("open file failed, %{public}s",
+        DISPLAY_CHECK((!rawDataFile.good()), HDF_LOGE("open file failed, %{public}s",
             std::strerror(errno)));
 
         sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
@@ -845,7 +913,7 @@ EXIT:
 
         int32_t ret = 0;
         ret = g_bufferServiceImpl->Mmap(hdiBuffer);
-        DISPLAY_CHK_RETURN((ret != HDF_SUCCESS), HDF_FAILURE, HDF_LOGE("Mmap buffer failed"));
+        DISPLAY_CHECK((ret != HDF_SUCCESS), HDF_LOGE("Mmap buffer failed"));
 
         std::chrono::milliseconds time_before = std::chrono::duration_cast<std::chrono::milliseconds> (
             std::chrono::system_clock::now().time_since_epoch()
@@ -858,9 +926,7 @@ EXIT:
         rawDataFile.close();
 
         ret = g_bufferServiceImpl->Unmap(hdiBuffer);
-        DISPLAY_CHK_RETURN((ret != HDF_SUCCESS), HDF_FAILURE, HDF_LOGE("Unmap buffer failed"));
-
-        return HDF_SUCCESS;
+        DISPLAY_CHECK((ret != HDF_SUCCESS), HDF_LOGE("Unmap buffer failed"));
     }
 
     static int32_t WaitFence(int32_t fence, uint32_t timeout)
@@ -894,7 +960,8 @@ EXIT:
     }
 
 private:
-    VdiImpl *impl_ = nullptr;
+    VdiImpl* impl_ = nullptr;
+    std::shared_ptr<DeviceCacheManager> cacheMgr_;
     std::shared_ptr<Transfer> request_;
     bool isReplyUpdated_;
     std::shared_ptr<Transfer> reply_;
