@@ -19,7 +19,7 @@
         "components": [
           "ipc",
           "hdf_core",
-          "hiviewdfx_hilog_native",
+          "hilog",
           "c_utils",
           "graphic_chipsetsdk",
           "drivers_interface_camera"

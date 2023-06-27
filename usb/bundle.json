@@ -24,7 +24,7 @@
         "c_utils",
         "ipc",
         "hdf_core",
-        "hiviewdfx_hilog_native"
+        "hilog"
       ],
       "third_party": []
     },
