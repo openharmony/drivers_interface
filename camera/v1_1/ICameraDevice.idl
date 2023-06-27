@@ -46,4 +46,18 @@ interface ICameraDevice extends ohos.hdi.camera.v1_0.ICameraDevice {
      * @version 1.1
      */
     GetStreamOperator_V1_1([in] IStreamOperatorCallback callbackObj, [out] IStreamOperator streamOperator);
+
+    /**
+     * @brief Get default camera device control parameters.
+     *
+     * @param settings Indicates the default camera parameters, including the sensor frame rate and 3A parameters.
+     * 3A stands for automatic focus (AF), automatic exposure (AE), and automatic white-balance (?AWB).
+     *
+     * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
+     * in {@link CamRetCode} otherwise.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    GetDefaultSettings([out] unsigned char[] settings);
 }
