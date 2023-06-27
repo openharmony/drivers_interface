@@ -400,7 +400,7 @@ EXIT:
         int32_t ret = (retBool ? HDF_SUCCESS : HDF_FAILURE);
         std::vector<IRect> rects(vectSize);
         if (ret == HDF_SUCCESS) {
-            for (int32_t i = 0; i < vectSize; i++) {
+            for (uint32_t i = 0; i < vectSize; i++) {
                 DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::RectUnpack(unpacker, rects[i]),
                     HDF_LOGE("%{public}s, read vect error at i = %{public}d", __func__, i));
                 if (ret != HDF_SUCCESS) {
@@ -628,7 +628,7 @@ EXIT:
 
         std::vector<IRect> rects(vectSize);
         if (ret == HDF_SUCCESS) {
-            for (int32_t i = 0; i < vectSize; i++) {
+            for (uint32_t i = 0; i < vectSize; i++) {
                 DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::RectUnpack(unpacker, rects[i]),
                     HDF_LOGE("%{public}s, read vect error, at i = %{public}d", __func__, i));
                 if (ret != HDF_SUCCESS) {
@@ -663,7 +663,7 @@ EXIT:
 
         std::vector<IRect> rects(vectSize);
         if (ret == HDF_SUCCESS) {
-            for (int32_t i = 0; i < vectSize; i++) {
+            for (uint32_t i = 0; i < vectSize; i++) {
                 DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::RectUnpack(unpacker, rects[i]),
                     HDF_LOGE("%{public}s, read vect error, at i = %{public}d", __func__, i));
                 if (ret != HDF_SUCCESS) {

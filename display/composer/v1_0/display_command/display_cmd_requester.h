@@ -584,7 +584,7 @@ private:
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE, HDF_LOGE("%{public}s: read vect size failed", __func__));
 
         compChangeLayers_[devId].resize(vectSize);
-        for (int32_t i = 0; i < vectSize; i++) {
+        for (uint32_t i = 0; i < vectSize; i++) {
             DISPLAY_CHK_RETURN(replyUnpacker->ReadUint32(compChangeLayers_[devId][i]) == false, HDF_FAILURE,
                 HDF_LOGE("%{public}s: read layer vector failed", __func__));
         }
@@ -594,7 +594,7 @@ private:
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE, HDF_LOGE("%{public}s: read vect size failed", __func__));
 
         compChangeTypes_[devId].resize(vectSize);
-        for (int32_t i = 0; i < vectSize; i++) {
+        for (uint32_t i = 0; i < vectSize; i++) {
             DISPLAY_CHK_RETURN(replyUnpacker->ReadInt32(compChangeTypes_[devId][i]) == false, HDF_FAILURE,
                 HDF_LOGE("%{public}s: read composition type vector failed", __func__));
         }
@@ -687,7 +687,7 @@ private:
 #ifdef DEBUG_DISPLAY_CMD_RAW_DATA
         requestPacker_->Dump();
 #endif // DEBUG_DISPLAY_CMD_RAW_DATA
-        int32_t eleCnt = requestPacker_->ValidSize() / CmdUtils::ELEMENT_SIZE;
+        uint32_t eleCnt = requestPacker_->ValidSize() / CmdUtils::ELEMENT_SIZE;
         int32_t ret = request_->Write(
             reinterpret_cast<int32_t *>(requestPacker_->GetDataPtr()), eleCnt, CmdUtils::TRANSFER_WAIT_TIME);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,

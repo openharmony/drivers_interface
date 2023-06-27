@@ -46,8 +46,8 @@ public:
 
     bool ReadUint8(uint8_t& value)
     {
-        int32_t intVal = 0;
-        bool ret = Read<int32_t>(intVal);
+        uint32_t intVal = 0;
+        bool ret = Read<uint32_t>(intVal);
         if (ret == true) {
             value = static_cast<uint8_t>(intVal & 0xFF);
         }

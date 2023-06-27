@@ -231,7 +231,7 @@ public:
         COMPOSER_CHECK_NULLPTR(hdi_);
         int32_t ret = ToDispErrCode(hdi_->GetDisplayReleaseFence(devId, layers, hdiFences));
         if (ret == DISPLAY_SUCCESS) {
-            for (int i = 0; i < hdiFences.size(); i++) {
+            for (uint32_t i = 0; i < hdiFences.size(); i++) {
                 fences.push_back(hdiFences[i]->Move());
             }
         }

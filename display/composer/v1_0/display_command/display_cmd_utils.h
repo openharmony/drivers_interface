@@ -312,7 +312,7 @@ public:
                     HDF_LOGE("%{public}s, read handle->reserve error", __func__));
                 if (!retVal) {
                     HDF_LOGE("%{public}s, get reserve date error, i:%{public}u, j:%{public}u",
-                    __func__, i, j);
+                       __func__, i, j);
                     break;
                 }
             }
