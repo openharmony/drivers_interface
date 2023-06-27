@@ -43,18 +43,18 @@ package ohos.hdi.thermal.v1_1;
 import ohos.hdi.thermal.v1_1.ThermalTypes;
 
 /**
- * @brief Represents the callback of fan statu changes.
+ * @brief Represents the callback of fan status changes.
  *
  * After creating a callback object, the thermal service can call {@link IThermalInterface} to register a callback to
- * subscribe to thermal status changes.
+ * subscribe to fan status changes.
  *
  * @since 4.0
  */
 [callback] interface IFanCallback {
     /**
-     * @brief Callback of fan statu changes.
+     * @brief Callback of fan status changes.
      *
-     * @param event fan information of the device, including device temperature and fan speed.
+     * @param event Fan information of the device, including device temperature and fan speed.
      * @see HdfThermalCallbackInfo
      *
      * @since4.0

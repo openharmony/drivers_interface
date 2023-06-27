@@ -129,7 +129,7 @@ interface IThermalInterface {
     Unregister();
 
     /**
-     * @brief Registers the callback of fan fault detect.
+     * @brief Register the callback of fan fault detect.
      *
      * @param callbackObj Callback to register.
      *
@@ -141,7 +141,7 @@ interface IThermalInterface {
     RegisterFanCallback([in] IFanCallback callbackObj);
 
     /**
-     * @brief Registers the callback of the device thermal status.
+     * @brief Unregister the callback of the fan fault detect.
      *
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      *

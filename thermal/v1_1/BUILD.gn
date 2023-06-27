@@ -22,6 +22,7 @@ if (defined(ohos_lite)) {
     module_name = "thermal_interface_service"
 
     sources = [
+      "IFanCallback.idl",
       "IThermalCallback.idl",
       "IThermalInterface.idl",
       "ThermalTypes.idl",
