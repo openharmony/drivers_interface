@@ -12,7 +12,10 @@
     "component": {
       "name": "drivers_interface_thermal",
       "subsystem": "hdf",
-      "adapted_system_type": ["standard"],
+      "adapted_system_type": [
+        "small",
+        "standard"
+      ],
       "rom": "675KB",
       "ram": "1024KB",
       "deps": {
@@ -33,6 +36,14 @@
         "inner_kits": [
           {
             "name": "//drivers/interface/thermal/v1_0:libthermal_proxy_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/thermal"
+            }
+          },
+          {
+            "name": "//drivers/interface/thermal/v1_0:libthermal_stub_1.0",
             "header": {
               "header_files": [
               ],
