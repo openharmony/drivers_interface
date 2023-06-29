@@ -2976,6 +2976,129 @@ union CurrentServiceCellParas {
     struct CellRatNr nr;
 };
 
+
+/**
+ * @brief Defines the NR cellular information.
+ *
+ * @since 4.0
+ * @version 1.1
+ */
+struct CellRatNr_1_1 {
+    /**
+     * Absolute RF channel number of the BCCH carrier
+     */
+    int nrArfcn;
+
+    /**
+     * Physical cell ID
+     */
+    int pci;
+
+    /**
+     * Type allocation code
+     */
+    int tac;
+
+    /**
+     * NR cell ID
+     */
+    int nci;
+
+    /**
+     * Signal received power, which ranges from -140 to -44
+     */
+    int rsrp;
+
+    /**
+     * Signal received quality, which ranges from -19 to -3
+     */
+    int rsrq;
+};
+
+/**
+ * @brief Defines the current cellular data information.
+ *
+ * @since 4.0
+ * @version 1.1
+ */
+union CurrentServiceCellParas_1_1 {
+    /**
+     * GSM cellular information
+     */
+    struct CellRatGsm gsm;
+
+    /**
+     * LTE cellular information
+     */
+    struct CellRatLte lte;
+
+    /**
+     * WCDMA cellular information
+     */
+    struct CellRatWcdma wcdma;
+
+    /**
+     * CDMA cellular information
+     */
+    struct CellRatCdma cdma;
+
+    /**
+     * TD-SCDMA cellular information
+     */
+    struct CellRatTdscdma tdscdma;
+
+    /**
+     * NR cellular information
+     */
+    struct CellRatNr_1_1 nr;
+};
+
+/**
+ * @brief Defines the current cell information.
+ *
+ * @since 4.0
+ * @version 1.1
+ */
+struct CurrentCellInfo_1_1 {
+    /**
+     * Radio access technology type. For details, see {@link RilRadioTech}.
+     */
+    int ratType;
+
+    /**
+     * Mobile country code (MCC)
+     */
+    int mcc;
+
+    /**
+     * Mobile network code (MNC)
+     */
+    int mnc;
+
+    /**
+     * Cell information parameters. For details, see {@link CurrentServiceCellParas_1_1}.
+     */
+    union CurrentServiceCellParas_1_1 serviceCells;
+};
+
+/**
+ * @brief Defines the current cell information list.
+ *
+ * @since 4.0
+ * @version 1.1
+ */
+struct CellListCurrentInfo_1_1 {
+    /**
+     * Number of cells
+     */
+    int itemNum;
+
+    /**
+     * Current cell information
+     */
+    List<struct CurrentCellInfo_1_1> cellCurrentInfo;
+};
+
 /**
  * @brief Defines the current cell information.
  */

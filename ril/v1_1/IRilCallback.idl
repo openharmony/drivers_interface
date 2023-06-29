@@ -1248,6 +1248,19 @@ import ohos.hdi.ril.v1_1.Types;
         [in] struct CellListCurrentInfo cellListCurrentInfo);
 
     /**
+     * @brief Callback for reporting cell information.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
+     * For details, see {@link RilRadioResponseInfo}.
+     * @param cellListCurrentInfo Cell information list. For details, see {@link CellListCurrentInfo_1_1}.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    NetworkCurrentCellUpdated_1_1([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct CellListCurrentInfo_1_1 cellListCurrentInfo);
+
+    /**
      * @brief Callback for querying the signal strength.
      *
      * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
@@ -1359,6 +1372,19 @@ import ohos.hdi.ril.v1_1.Types;
      */
     GetCurrentCellInfoResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct CellListCurrentInfo cellListCurrentInfo);
+
+    /**
+     * @brief Callback for the response of querying cell information.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
+     * For details, see {@link RilRadioResponseInfo}.
+     * @param cellListCurrentInfo Cell information list. For details, see {@link CellListCurrentInfo_1_1}.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    GetCurrentCellInfoResponse_1_1([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct CellListCurrentInfo_1_1 cellListCurrentInfo);
 
     /**
      * @brief Callback for the response of setting the preferred network type.
