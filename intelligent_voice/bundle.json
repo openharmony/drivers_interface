@@ -1,7 +1,7 @@
 {
     "name": "@ohos/drivers_interface_intelligent_voice",
     "description": "intelligent voice driver interface",
-    "version": "3.2",
+    "version": "4.0",
     "license": "Apache License 2.0",
     "publishAs": "code-segment",
     "segment": {
@@ -18,14 +18,11 @@
       "ram": "1024KB",
       "deps": {
         "components": [
-          "ipc",
-          "device_driver_framework",
-          "hiviewdfx_hilog_native",
-          "utils_base"
+          "c_utils",
+          "hilog",
+          "hdf_core"
         ],
-        "third_party": [
-          "bounds_checking_function"
-        ]
+        "third_party": []
       },
       "build": {
         "sub_component": [
@@ -44,6 +41,14 @@
             }
           },
           {
+            "name": "//drivers/interface/intelligent_voice/engine/v1_0:libintell_voice_engine_stub_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/intelligent_voice/engine"
+            }
+          },
+          {
             "name": "//drivers/interface/intelligent_voice/engine/v1_0:intell_voice_engine_idl_headers",
             "header": {
               "header_files": [
@@ -53,6 +58,14 @@
           },
           {
             "name": "//drivers/interface/intelligent_voice/trigger/v1_0:libintell_voice_trigger_proxy_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/intelligent_voice/trigger"
+            }
+          },
+          {
+            "name": "//drivers/interface/intelligent_voice/trigger/v1_0:libintell_voice_trigger_stub_1.0",
             "header": {
               "header_files": [
               ],
