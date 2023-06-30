@@ -19,8 +19,9 @@
       "deps": {
         "components": [
           "c_utils",
+          "hdf_core",
           "hilog",
-          "hdf_core"
+          "ipc"
         ],
         "third_party": []
       },
