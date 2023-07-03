@@ -53,6 +53,11 @@ enum FingerprintTipsCode : int {
     FINGERPRINT_AUTH_TIP_TOO_SLOW = 5, /**< Indicates that the fingerprint image is unreadable due to lack of motion. */
     FINGERPRINT_AUTH_TIP_FINGER_DOWN = 6, /**< Indicates that the finger is down. */
     FINGERPRINT_AUTH_TIP_FINGER_UP = 7, /**< Indicates that the finger is up. */
+    FINGERPRINT_AUTH_TIP_SINGLE_PRESS_RESULT = 8, /**< Indicates that a single press result. */
+    FINGERPRINT_AUTH_TIP_SAME_FINGER_AREA = 9, /**< Indicates that the finger area of this press and last press is same. */
+    FINGERPRINT_AUTH_TIP_FINGER_ALREADY_ENROLLED = 10, /**< Indicates that the finger is already enrolled. */
+    FINGERPRINT_AUTH_TIP_FINGER_TOO_WET = 11, /**< Indicates that the finger is too wet. */
+    FINGERPRINT_AUTH_TIP_ENROLL_PROGRESS = 12, /**< Indicates that the enroll progress. */
     VENDOR_FINGERPRINT_AUTH_TIP_BEGIN = 10000 /**< Vendor may add custom fingerprint auth tip after this. */
 };
 
@@ -105,9 +110,9 @@ enum SaCommandId : int {
     ENABLE_SENSOR_ILLUMINATION = 1,
     /**< Indicates that the sa command is disable sensor illumination. */
     DISABLE_SENSOR_ILLUMINATION = 2,
-    /**< Indicates that the sa command is turn off sensor illumination. */
-    TURN_ON_SENSOR_ILLUMINATION = 3,
     /**< Indicates that the sa command is turn on sensor illumination. */
+    TURN_ON_SENSOR_ILLUMINATION = 3,
+    /**< Indicates that the sa command is turn off sensor illumination. */
     TURN_OFF_SENSOR_ILLUMINATION = 4,
 };
 
@@ -163,4 +168,18 @@ struct SaCommand {
     enum SaCommandId id;
     /**< Indicates sa command parameter. See {@link SaCommandParam}. */
     union SaCommandParam param;
+};
+
+/**
+ * Enumerates command id.
+ *
+ * @since 4.0
+ * @version 1.1
+ */
+enum CommandId : int {
+    LOCK_TEMPLATE = 1, /**< Indicates lock template command id. */
+    UNLOCK_TEMPLATE = 2, /**< Indicates unlock template command id. */
+    INIT_ALGORITHM = 3, /**< Indicates init algorithm command id. */
+    SUSPEND_SENSOR = 4, /**< Indicates suspend sensor command id. */
+    VENDOR_COMMAND_BEGIN = 10000 /**< Vendor may add custom command id after this. */
 };
