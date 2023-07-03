@@ -29,13 +29,13 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/thermal/v1_0:thermal_idl_target"
+          "//drivers/interface/thermal/v1_1:thermal_idl_target"
         ],
         "test": [
         ],
         "inner_kits": [
           {
-            "name": "//drivers/interface/thermal/v1_0:libthermal_proxy_1.0",
+            "name": "//drivers/interface/thermal/v1_1:libthermal_proxy_1.1",
             "header": {
               "header_files": [
               ],
@@ -43,7 +43,7 @@
             }
           },
           {
-            "name": "//drivers/interface/thermal/v1_0:libthermal_stub_1.0",
+            "name": "//drivers/interface/thermal/v1_1:libthermal_stub_1.1",
             "header": {
               "header_files": [
               ],
@@ -51,7 +51,7 @@
             }
           },
           {
-            "name": "//drivers/interface/thermal/v1_0:thermal_idl_headers",
+            "name": "//drivers/interface/thermal/v1_1:thermal_idl_headers",
             "header": {
               "header_files": [
               ],
