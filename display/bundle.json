@@ -32,7 +32,7 @@
         "ipc",
         "graphic_chipsetsdk",
         "init",
-        "hitrace_native"
+        "hitrace"
       ],
       "third_party": [
       ]

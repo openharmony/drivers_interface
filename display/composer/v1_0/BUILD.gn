@@ -54,7 +54,7 @@ ohos_shared_library("libdisplay_composer_hdi_impl") {
     "hdf_core:libhdi",
     "hdf_core:libpub_utils",
     "hilog:libhilog",
-    "hitrace_native:hitrace_meter",
+    "hitrace:hitrace_meter",
     "init:libbegetutil",
     "ipc:ipc_single",
   ]
