@@ -210,8 +210,6 @@ public:
             HDF_LOGE("%{public}s, write buffer->usage failed", __func__));
         DISPLAY_CHK_RETURN(packer->WriteUint64(buffer->phyAddr) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write buffer->phyAddr failed", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteInt32(buffer->key) == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s, write buffer->key failed", __func__));
         uint32_t i = 0;
         for (i = 0; i < buffer->reserveFds; i++) {
             ret = FileDescriptorPack(buffer->reserve[i], packer, hdiFds);
@@ -296,8 +294,6 @@ public:
             HDF_LOGE("%{public}s, read handle->usage error", __func__));
         DISPLAY_CHK_CONDITION(retVal, true, unpacker->ReadUint64(handle->phyAddr),
             HDF_LOGE("%{public}s, read handle->phyAddr error", __func__));
-        DISPLAY_CHK_CONDITION(retVal, true, unpacker->ReadInt32(handle->key),
-            HDF_LOGE("%{public}s, read handle->key error", __func__));
         if (retVal) {
             uint32_t i = 0;
             for (i = 0; i < handle->reserveFds; i++) {
