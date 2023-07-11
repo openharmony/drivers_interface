@@ -36,7 +36,7 @@ namespace V1_0 {
 template <typename IdType, typename CacheType>
 class CacheManager : public NoCopyable {
 public:
-    CacheManager() : cacheCountMax_(-1)
+    CacheManager() : cacheCountMax_(0)
     {
     }
 
@@ -45,10 +45,10 @@ public:
         caches_.clear();
     }
 
-    bool SetCacheMaxCount(int32_t count)
+    bool SetCacheMaxCount(uint32_t count)
     {
         bool ret = true;
-        int32_t originalMaxCount = cacheCountMax_;
+        uint32_t originalMaxCount = cacheCountMax_;
         if (count >= cacheCountMax_) {
             cacheCountMax_ = count;
         } else if (Size() <= count) {
@@ -57,7 +57,7 @@ public:
             HDF_LOGE("%{public}s error: clientCacheCount can't be set, because cacheCountMax_ > count", __func__);
             ret = false;
         }
-        HDF_LOGI("%{public}s: set cache max count from %{public}d to %{public}d",
+        HDF_LOGI("%{public}s: set cache max count from %{public}u to %{public}u",
             __func__, originalMaxCount, cacheCountMax_);
         return ret;
     }
@@ -72,7 +72,7 @@ public:
         if (SearchCache(id) != nullptr) {
             HDF_LOGI("%{public}s: intend to insert a existing cache, SeqNo=%{public}d", __func__, id);
         } else {
-            if (cacheCountMax_ != -1 && Size() >= cacheCountMax_) {
+            if (cacheCountMax_ != 0 && Size() >= cacheCountMax_) {
                 HDF_LOGE("%{public}s: Caches is full, new seqNo:%{public}d can't be inserted", __func__, id);
                 return false;
             }
@@ -113,7 +113,7 @@ public:
     }
 
 private:
-    int32_t cacheCountMax_;
+    uint32_t cacheCountMax_;
     std::unordered_map<IdType, std::unique_ptr<CacheType>> caches_;
 };
 } // namespace V1_0
