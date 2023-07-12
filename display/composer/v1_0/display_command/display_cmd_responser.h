@@ -424,10 +424,15 @@ EXIT:
         uint32_t devId = 0;
         int32_t fence = -1;
 
-#define DEBUG_COMPOSER_CACHE
-#ifdef DEBUG_COMPOSER_CACHE
-        cacheMgr_->Dump();
-#endif // DEBUG_COMPOSER_CACHE
+        const std::string SWITCH_ON = "on";
+        const uint32_t DUMP_CACHE_SWITCH_LEN = 4;
+        char dumpSwitch[DUMP_CACHE_SWITCH_LEN] = {0};
+        GetParameter("hdi.composer.dumpcache", "off", dumpSwitch, DUMP_CACHE_SWITCH_LEN);
+
+        if (SWITCH_ON.compare(dumpSwitch) == 0) {
+            cacheMgr_->Dump();
+        }
+
         bool retBool = true;
         DISPLAY_CHK_CONDITION(retBool, true, unpacker->ReadUint32(devId),
             HDF_LOGE("%{public}s, read devId error", __func__));
