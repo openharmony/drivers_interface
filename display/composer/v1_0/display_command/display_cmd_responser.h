@@ -697,9 +697,9 @@ EXIT:
             HDF_LOGE("%{public}s, read BufferHandleUnpack error", __func__));
         bool isValidBuffer = (ret == HDF_SUCCESS ? true : false);
 
-        int32_t seqNo = -1;
+        uint32_t seqNo = 0;
         bool result = true;
-        DISPLAY_CHK_CONDITION(result, ret == HDF_SUCCESS, unpacker->ReadInt32(seqNo),
+        DISPLAY_CHK_CONDITION(result, ret == HDF_SUCCESS, unpacker->ReadUint32(seqNo),
             HDF_LOGE("%{public}s, read seqNo error", __func__));
         ret = result ? HDF_SUCCESS : HDF_FAILURE;
 
@@ -715,7 +715,7 @@ EXIT:
             HDF_LOGE("%{public}s, read vectSize error", __func__));
 
         std::vector<uint32_t> deletingList(vectSize);
-        for (int32_t i = 0; i < vectSize; i++) {
+        for (uint32_t i = 0; i < vectSize; i++) {
             DISPLAY_CHK_CONDITION(result, true, unpacker->ReadUint32(deletingList[i]),
                 HDF_LOGE("%{public}s, read seqNo error, at i = %{public}d", __func__, i));
             if (result != true) {

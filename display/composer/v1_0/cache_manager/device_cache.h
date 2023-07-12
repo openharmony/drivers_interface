@@ -40,7 +40,7 @@ public:
 
     ~DeviceCache();
     static DeviceCache* Create(uint32_t id, DeviceType type);
-    int32_t SetClientBufferCacheCount(uint32_t cacheCount);
+    int32_t SetClientBufferCacheCount(uint32_t bufferCacheCount);
     LayerCache* LayerCacheInstance(uint32_t layerId) const;
     int32_t AddLayerCache(uint32_t id, uint32_t bufferCacheCount);
     int32_t RemoveLayerCache(uint32_t id);

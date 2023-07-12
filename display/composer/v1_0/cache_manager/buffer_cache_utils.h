@@ -73,7 +73,7 @@ public:
             handle = buffer;
         } else {
             // Input arguments error
-            DISPLAY_CHK_RETURN(((buffer == nullptr) && seqNo < 0), nullptr,
+            DISPLAY_CHK_RETURN(((buffer == nullptr)), nullptr,
                 HDF_LOGE("%{public}s: Inputs args check error", __func__));
         }
 
