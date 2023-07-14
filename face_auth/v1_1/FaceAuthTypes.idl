@@ -135,46 +135,7 @@ enum CommandId : int {
     UNLOCK_TEMPLATE = 2,
     /**< Indicates the command ID for init algorithm. */
     INIT_ALGORITHM = 3,
-    /**< Indicates the command ID for suspend sensor. */
-    SUSPEND_SENSOR = 4,
-    /**< Indicates the command ID for update template version. */
-    UPDATE_TEMPLATE_VERSION = 5,
     /**< The vendor may add a custom command ID after this. */
     VENDOR_COMMAND_BEGIN = 10000
-};
-
-/**
- * @brief Enumerates prompt codes.
- *
- * @since 4.0
- * @version 1.1
- */
-enum FaceTipsCode : int {
-    /**< Indicates that the obtained facial image is too bright due to high illumination. */
-    FACE_AUTH_TIP_TOO_BRIGHT = 1,
-    /**< Indicates that the obtained facial image is too dark due to low illumination. */
-    FACE_AUTH_TIP_TOO_DARK = 2,
-    /**< Indicates that the face is too close to the device. */
-    FACE_AUTH_TIP_TOO_CLOSE = 3,
-    /**< Indicates that the face is too far away from the device. */
-    FACE_AUTH_TIP_TOO_FAR = 4,
-    /**< Indicates that the device is too high, and that only the upper part of the face is captured. */
-    FACE_AUTH_TIP_TOO_HIGH = 5,
-    /**< Indicates that the device is too low, and that only the lower part of the face is captured. */
-    FACE_AUTH_TIP_TOO_LOW = 6,
-    /**< Indicates that the device is deviated to the right, and that only the right part of the face is captured. */
-    FACE_AUTH_TIP_TOO_RIGHT = 7,
-    /**< Indicates that the device is deviated to the left, and that only the left part of the face is captured. */
-    FACE_AUTH_TIP_TOO_LEFT = 8,
-    /**< Indicates that the face moves too much during facial information collection. */
-    FACE_AUTH_TIP_TOO_MUCH_MOTION = 9,
-    /**< Indicates that the user is not gazing at the device. */
-    FACE_AUTH_TIP_POOR_GAZE = 10,
-    /**< Indicates that no face is detected. */
-    FACE_AUTH_TIP_NOT_DETECTED = 11,
-    /**< Indicates that face auth is success. */
-    FACE_AUTH_TIP_AUTH_SUCCESS = 12,
-    /**< The vendor may add a custom face auth tip after this. */
-    VENDOR_FACE_AUTH_TIP_BEGIN = 10000
 };
 /** @} */
