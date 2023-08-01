@@ -49,7 +49,7 @@
             }
           },
           {
-            "name": "//drivers/interface/fingerprint_auth/v1_0:fingerprint_auth_idl_headers",
+            "name": "//drivers/interface/fingerprint_auth/v1_0:fingerprint_auth_idl_headers_1.0",
             "header": {
               "header_files": [
               ],
@@ -73,7 +73,7 @@
             }
           },
           {
-            "name": "//drivers/interface/fingerprint_auth/v1_1:fingerprint_auth_idl_headers",
+            "name": "//drivers/interface/fingerprint_auth/v1_1:fingerprint_auth_idl_headers_1.1",
             "header": {
               "header_files": [
               ],
