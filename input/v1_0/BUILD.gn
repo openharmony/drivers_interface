@@ -14,10 +14,6 @@
 HDF_CORE_PATH = "../../../hdf_core"
 import("$HDF_CORE_PATH/adapter/uhdf2/hdi.gni")
 
-declare_args() {
-  drivers_interface_input_feature_passthrough = false
-}
-
 if (defined(ohos_lite)) {
   group("libinput_proxy_1.0") {
     deps = []
@@ -32,11 +28,7 @@ if (defined(ohos_lite)) {
       "IInputInterfaces.idl",
       "InputTypes.idl",
     ]
-
-    if (drivers_interface_input_feature_passthrough) {
-      mode = "passthrough"
-    }
-
+    mode = "passthrough"
     language = "cpp"
     subsystem_name = "hdf"
     part_name = "drivers_interface_input"
