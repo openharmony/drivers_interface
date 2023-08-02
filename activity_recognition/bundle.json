@@ -48,7 +48,7 @@
             }
           },
           {
-            "name": "//drivers/interface/activity_recognition/v1_0:ar_idl_headers",
+            "name": "//drivers/interface/activity_recognition/v1_0:ar_idl_headers_1.0",
             "header": {
               "header_files": [
               ],
