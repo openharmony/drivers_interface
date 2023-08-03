@@ -124,6 +124,22 @@ const std::vector<int32_t> METADATATAGS = {
 
     OHOS_ABILITY_VIDEO_STABILIZATION_MODES,
     OHOS_CONTROL_VIDEO_STABILIZATION_MODE,
+
+    // camera effects & algorithms
+    OHOS_ABILITY_SCENE_FILTER_TYPES,
+    OHOS_CONTROL_FILTER_TYPE,
+    OHOS_ABILITY_SCENE_PORTRAIT_EFFECT_TYPES,
+    OHOS_CONTROL_PORTRAIT_EFFECT_TYPE,
+    OHOS_ABILITY_SCENE_BEAUTY_TYPES,
+    OHOS_CONTROL_BEAUTY_TYPE,
+    OHOS_ABILITY_BEAUTY_AUTO_VALUES,
+    OHOS_CONTROL_BEAUTY_AUTO_VALUE,
+    OHOS_ABILITY_BEAUTY_FACE_SLENDER_VALUES,
+    OHOS_CONTROL_BEAUTY_FACE_SLENDER_VALUE,
+    OHOS_ABILITY_BEAUTY_SKIN_TONE_VALUES,
+    OHOS_CONTROL_BEAUTY_SKIN_TONE_VALUE,
+    OHOS_ABILITY_BEAUTY_SKIN_SMOOTH_VALUES,
+    OHOS_CONTROL_BEAUTY_SKIN_SMOOTH_VALUE,
 };
 
 uint32_t AlignTo(uint32_t val, uint32_t alignment)
@@ -264,6 +280,9 @@ int32_t GetMetadataSection(uint32_t itemSection, uint32_t *section)
             break;
         case OHOS_STREAM_VIDEO:
             *section = OHOS_SECTION_STREAM_VIDEO;
+            break;
+        case OHOS_CAMERA_EFFECT:
+            *section = OHOS_SECTION_CAMERA_EFFECT;
             break;
         default:
             METADATA_ERR_LOG("GetMetadataSection item section is not defined");
