@@ -50,7 +50,7 @@ typedef enum camera_ability_section {
     OHOS_STREAM_METADATA_BODY,
 
     // Secure camera control related
-    OHOS_CAMERA_SECURE_CONTROL = 0x4000,
+    OHOS_CAMERA_SECURE = 0x4000,
 
     OHOS_ABILITY_SECTION_END
 } camera_ability_section_t;
@@ -84,7 +84,7 @@ typedef enum camera_device_metadata_section_start {
     OHOS_STREAM_METADATA_FACE_START = OHOS_STREAM_METADATA_FACE << 16,
     OHOS_STREAM_METADATA_BODY_START = OHOS_STREAM_METADATA_BODY << 16,
 
-    OHOS_CAMERA_SECURE_CONTROL_START = OHOS_CAMERA_SECURE_CONTROL << 16,
+    OHOS_CAMERA_SECURE_START = OHOS_CAMERA_SECURE << 16,
 } camera_device_info_section_start_t;
 
 typedef enum camera_device_metadata_tag {
@@ -207,13 +207,14 @@ typedef enum camera_device_metadata_tag {
     OHOS_CONTROL_VIDEO_STABILIZATION_MODE,
     OHOS_STREAM_VIDEO_END,
 
-    OHOS_CONTROL_SECURE_FACE_MODE = OHOS_CAMERA_SECURE_CONTROL_START,
+    // camera secure related
+    OHOS_CONTROL_SECURE_FACE_MODE = OHOS_CAMERA_SECURE_START,
     OHOS_CONTROL_SECURE_FACE_INFO,
     OHOS_CONTROL_SECURE_FACE_AUTH_RESULT,
     OHOS_CONTROL_SECURE_FLASH_SEQ,
     OHOS_CONTROL_SECURE_IR_LED_SWITCH,
     OHOS_CONTROL_SECURE_IR_LOCKAE_SWITCH,
-    OHOS_CAMERA_SECURE_CONTROL_END,
+    OHOS_CAMERA_SECURE_END,
 } camera_device_metadata_tag_t;
 
 // OHOS_ABILITY_CAMERA_POSITION enumeration values
