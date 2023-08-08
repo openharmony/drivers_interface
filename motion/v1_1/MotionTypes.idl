@@ -56,4 +56,38 @@ struct WaveParam {
     /** wave is use gyroscope */
     boolean isUseGyroscope;
 };
+
+/**
+ * @brief Enumerates motion types.
+ *
+ * @since 4.0
+ */
+enum HdfMotionTypeTag {
+    /** Pickup */
+    HDF_MOTION_TYPE_PICKUP = 0,
+    /** Flip */
+    HDF_MOTION_TYPE_FLIP,
+    /** Closing to the ear */
+    HDF_MOTION_CLOSE_TO_EAR,
+    /** Shaking */
+    HDF_MOTION_TYPE_SHAKE,
+    /** Screen rotation */
+    HDF_MOTION_TYPE_ROTATION,
+    /** Pocket mode */
+    HDF_MOTION_TYPE_POCKET_MODE,
+    /** Taking away from the ear */
+    HDF_MOTION_TYPE_LEAVE_EAR,
+    /** Wrist-up */
+    HDF_MOTION_TYPE_WRIST_UP,
+    /** Wrist-down */
+    HDF_MOTION_TYPE_WRIST_DOWN,
+    /** Wave */
+    HDF_MOTION_TYPE_WAVE,
+    /** Step counter */
+    HDF_MOTION_TYPE_STEP_COUNTER,
+    /** Reserved */
+    HDF_MOTION_TYPE_RESERVED,
+    /** Maximum motion type */
+    HDF_MOTION_TYPE_MAX,
+};
 /** @} */
