@@ -107,3 +107,45 @@ struct PrelaunchConfig {
      */
     unsigned char[] setting;
 };
+
+/**
+ * @brief Enumerates stream operation modes.
+ */
+enum OperationMode_V1_1 {
+    /**
+     * Normal mode, which supports both photo and video scenes
+     */
+    NORMAL = 0,
+
+    /**
+     * Capture mode, which dedicated to photo scene
+     * IF this mode is implemented, then the NORMAL mode should no longer be implemented
+     */
+    CAPTURE = 1,
+
+    /**
+     * Video mode, which dedicated to video secne
+     * IF this mode is implemented, then the NORMAL mode should no longer be implemented
+     */
+    VIDEO = 2,
+
+    /**
+     * Portrait mode, which dedicated to portrait photo secne
+     */
+    PORTRAIT = 3,
+
+    /**
+     * Night mode, which dedicated to night shooting scene
+     */
+    NIGHT = 4,
+
+    /**
+     * Professional mode, which dedicated to professional photo scene
+     */
+    PROFESSIONAL = 5,
+
+    /**
+     * Slow motion mode, which dedicated to capturing slow motion
+     */
+    SLOW_MOTION = 6,
+};

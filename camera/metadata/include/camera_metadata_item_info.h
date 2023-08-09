@@ -42,6 +42,7 @@ static uint32_t g_ohosCameraSectionBounds[OHOS_SECTION_COUNT][2] = {
     [OHOS_SECTION_STREAM_ABILITY] = {OHOS_STREAM_ABILITY_START,     OHOS_STREAM_ABILITY_END    },
     [OHOS_SECTION_STREAM_JPEG] = {OHOS_STREAM_JPEG_START,        OHOS_STREAM_JPEG_END       },
     [OHOS_SECTION_STREAM_VIDEO] = {OHOS_STREAM_VIDEO_START,       OHOS_STREAM_VIDEO_END      },
+    [OHOS_SECTION_CAMERA_EFFECT] = {OHOS_CAMERA_EFFECT_START, OHOS_CAMERA_EFFECT_END },
     [OHOS_SECTION_CAMERA_SECURE] = {OHOS_CAMERA_SECURE_START, OHOS_CAMERA_SECURE_END },
 };
 
@@ -56,6 +57,7 @@ static item_info_t g_ohosCameraProperties[OHOS_CAMERA_PROPERTIES_END - OHOS_CAME
     [OHOS_CAMERA_STREAM_ID - OHOS_CAMERA_PROPERTIES_START] = {"streamId",       META_TYPE_INT32,  1 },
     [OHOS_ABILITY_PRELAUNCH_AVAILABLE - OHOS_CAMERA_PROPERTIES_START] = {"prelaunchAvailable", META_TYPE_BYTE, 1 },
     [OHOS_ABILITY_CUSTOM_VIDEO_FPS - OHOS_CAMERA_PROPERTIES_START] = {"customVideoFps",   META_TYPE_INT32, -1},
+    [OHOS_ABILITY_CAMERA_MODES - OHOS_CAMERA_PROPERTIES_START] = {"availableCameraModes", META_TYPE_BYTE, -1 },
 };
 
 static item_info_t g_ohosCameraSensor[OHOS_CAMERA_SENSOR_END - OHOS_CAMERA_SENSOR_START] = {
@@ -130,6 +132,7 @@ static item_info_t g_ohosCameraControl[OHOS_DEVICE_CONTROL_END - OHOS_DEVICE_CON
     [OHOS_CONTROL_METER_POINT - OHOS_DEVICE_CONTROL_START] = {"meterPoint",                  META_TYPE_INT32,    -1},
     [OHOS_CONTROL_METER_MODE - OHOS_DEVICE_CONTROL_START] = {"meterMode",                   META_TYPE_BYTE,     1 },
     [OHOS_CONTROL_EXPOSURE_STATE - OHOS_DEVICE_CONTROL_START] = {"exposureState",               META_TYPE_BYTE,     1 },
+    [OHOS_CONTROL_FOCUSED_POINT - OHOS_DEVICE_CONTROL_START] = {"focusedPoint", META_TYPE_INT32, -1 },
 };
 
 static item_info_t g_ohosDeviceExposure[OHOS_DEVICE_EXPOSURE_END - OHOS_DEVICE_EXPOSURE_START] = {
@@ -139,6 +142,7 @@ static item_info_t g_ohosDeviceExposure[OHOS_DEVICE_EXPOSURE_END - OHOS_DEVICE_E
     [OHOS_ABILITY_EXPOSURE_MODES - OHOS_DEVICE_EXPOSURE_START] = {"exposureSupportiveModes", META_TYPE_BYTE, -1},
     [OHOS_CONTROL_EXPOSURE_MODE - OHOS_DEVICE_EXPOSURE_START] = {"exMode",                  META_TYPE_BYTE, 1 },
     [OHOS_ABILITY_METER_MODES - OHOS_DEVICE_EXPOSURE_START] = {"meterAvailableModes",     META_TYPE_BYTE, -1},
+    [OHOS_ABILITY_SCENE_EXPOSURE_MODES - OHOS_DEVICE_EXPOSURE_START] = {"sceneExposureSupportiveModes", META_TYPE_BYTE, -1},
 };
 
 static item_info_t g_ohosDeviceFocus[OHOS_DEVICE_FOCUS_END - OHOS_DEVICE_FOCUS_START] = {
@@ -148,6 +152,7 @@ static item_info_t g_ohosDeviceFocus[OHOS_DEVICE_FOCUS_END - OHOS_DEVICE_FOCUS_S
     [OHOS_ABILITY_FOCUS_MODES - OHOS_DEVICE_FOCUS_START] = {"focusSupportiveModes", META_TYPE_BYTE,  -1},
     [OHOS_CONTROL_FOCUS_MODE - OHOS_DEVICE_FOCUS_START] = {"fMode",                META_TYPE_BYTE,  1 },
     [OHOS_ABILITY_FOCAL_LENGTH - OHOS_DEVICE_FOCUS_START] = {"focalLength",          META_TYPE_FLOAT, 1 },
+    [OHOS_ABILITY_SCENE_FOCUS_MODES - OHOS_DEVICE_FOCUS_START] = {"sceneFocusSupportiveModes", META_TYPE_BYTE, -1},
 };
 
 static item_info_t g_ohosDeviceFlash[OHOS_DEVICE_FLASH_END - OHOS_DEVICE_FLASH_START] = {
@@ -156,6 +161,7 @@ static item_info_t g_ohosDeviceFlash[OHOS_DEVICE_FLASH_END - OHOS_DEVICE_FLASH_S
     [OHOS_ABILITY_FLASH_MODES - OHOS_DEVICE_FLASH_START] = {"flashSupportiveModes", META_TYPE_BYTE, -1},
     [OHOS_CONTROL_FLASH_MODE - OHOS_DEVICE_FLASH_START] = {"flaMode",              META_TYPE_BYTE, 1 },
     [OHOS_CONTROL_FLASH_STATE - OHOS_DEVICE_FLASH_START] = {"flashstate",           META_TYPE_BYTE, 1 },
+    [OHOS_ABILITY_SCENE_FLASH_MODES - OHOS_DEVICE_FLASH_START] = {"sceneFlashSupportiveModes", META_TYPE_BYTE, -1},
 };
 
 static item_info_t g_ohosDeviceZoom[OHOS_DEVICE_ZOOM_END - OHOS_DEVICE_ZOOM_START] = {
@@ -175,6 +181,10 @@ static item_info_t g_ohosStreamAbility[OHOS_STREAM_ABILITY_END - OHOS_STREAM_ABI
         OHOS_STREAM_ABILITY_START] = {"streamExtendConfigurations",    META_TYPE_INT32, -1},
     [OHOS_ABILITY_STREAM_QUICK_THUMBNAIL_AVAILABLE -
         OHOS_STREAM_ABILITY_START] = {"streamQuickThumbnailAvailable", META_TYPE_BYTE, 1},
+    [OHOS_ABILITY_PORTRAIT_RESOLUSION -
+        OHOS_STREAM_ABILITY_START] = {"streamPortraitResolusion", META_TYPE_INT32, -1},
+    [OHOS_ABILITY_SCENE_STREAM_QUICK_THUMBNAIL_AVAILABLE -
+        OHOS_STREAM_ABILITY_START] = {"sceneStreamQuickThumbnailAvailable", META_TYPE_BYTE, -1},
 };
 
 static item_info_t g_ohosStreamJpeg[OHOS_STREAM_JPEG_END - OHOS_STREAM_JPEG_START] = {
@@ -195,6 +205,37 @@ static item_info_t g_ohosStreamVideo[OHOS_STREAM_VIDEO_END - OHOS_STREAM_VIDEO_S
         OHOS_STREAM_VIDEO_START] = {"videoAvailableStabilizationModes", META_TYPE_BYTE, -1},
     [OHOS_CONTROL_VIDEO_STABILIZATION_MODE -
         OHOS_STREAM_VIDEO_START] = {"videoStabilizationMode",           META_TYPE_BYTE, 1 },
+};
+
+static item_info_t g_ohosPostProcess[OHOS_CAMERA_EFFECT_END - OHOS_CAMERA_EFFECT_START] {
+    [OHOS_ABILITY_SCENE_FILTER_TYPES -
+        OHOS_CAMERA_EFFECT_START] = {"sceneAvailableFilterTypes", META_TYPE_BYTE, -1},
+    [OHOS_CONTROL_FILTER_TYPE -
+        OHOS_CAMERA_EFFECT_START] = {"filterType", META_TYPE_BYTE, 1},
+    [OHOS_ABILITY_SCENE_PORTRAIT_EFFECT_TYPES -
+        OHOS_CAMERA_EFFECT_START] = {"sceneAvailablePotraitTypes", META_TYPE_BYTE, -1},
+    [OHOS_CONTROL_PORTRAIT_EFFECT_TYPE -
+        OHOS_CAMERA_EFFECT_START] = {"portraitType", META_TYPE_BYTE, 1},
+    [OHOS_ABILITY_SCENE_BEAUTY_TYPES -
+        OHOS_CAMERA_EFFECT_START] = {"sceneAvailableBeautyTypes", META_TYPE_BYTE, -1},
+    [OHOS_CONTROL_BEAUTY_TYPE -
+        OHOS_CAMERA_EFFECT_START] = {"beautyType", META_TYPE_BYTE, 1},
+    [OHOS_ABILITY_BEAUTY_AUTO_VALUES -
+        OHOS_CAMERA_EFFECT_START] = {"availableAutoBeautyValues", META_TYPE_BYTE, -1},
+    [OHOS_CONTROL_BEAUTY_AUTO_VALUE -
+        OHOS_CAMERA_EFFECT_START] = {"autoBeautyValue", META_TYPE_BYTE, 1},
+    [OHOS_ABILITY_BEAUTY_FACE_SLENDER_VALUES -
+        OHOS_CAMERA_EFFECT_START] = {"availableFaceSlenderValues", META_TYPE_BYTE, -1},
+    [OHOS_CONTROL_BEAUTY_FACE_SLENDER_VALUE -
+        OHOS_CAMERA_EFFECT_START] = {"faceSlenderValue", META_TYPE_BYTE, 1},
+    [OHOS_ABILITY_BEAUTY_SKIN_SMOOTH_VALUES -
+        OHOS_CAMERA_EFFECT_START] = {"availableSkinSmoothValues", META_TYPE_BYTE, -1},
+    [OHOS_CONTROL_BEAUTY_SKIN_SMOOTH_VALUE -
+        OHOS_CAMERA_EFFECT_START] = {"skinSmoothValue", META_TYPE_BYTE, 1},
+    [OHOS_ABILITY_BEAUTY_SKIN_TONE_VALUES -
+        OHOS_CAMERA_EFFECT_START] = {"availableSkinToneValues", META_TYPE_INT32, -1},
+    [OHOS_CONTROL_BEAUTY_SKIN_TONE_VALUE -
+        OHOS_CAMERA_EFFECT_START] = {"skinToneValue", META_TYPE_INT32, 1},
 };
 
 static item_info_t g_ohosCameraSecure[OHOS_CAMERA_SECURE_END - OHOS_CAMERA_SECURE_START] = {
@@ -225,6 +266,7 @@ const static item_info_t *g_ohosItemInfo[OHOS_SECTION_COUNT] = {
     g_ohosStreamAbility,
     g_ohosStreamJpeg,
     g_ohosStreamVideo,
+    g_ohosPostProcess,
     g_ohosCameraSecure,
 };
 } // namespace Camera

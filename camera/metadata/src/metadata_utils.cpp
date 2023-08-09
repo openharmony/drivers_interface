@@ -17,8 +17,13 @@
 #include <securec.h>
 #include "metadata_log.h"
 
+static constexpr uint32_t MAX_SUPPORTED_TAGS = 1000;
+static constexpr uint32_t MAX_SUPPORTED_ITEMS = 2000;
+static constexpr uint32_t MAX_ITEM_CAPACITY = (1000 * 10);
+static constexpr uint32_t MAX_DATA_CAPACITY = (1000 * 10 * 10);
+
 namespace OHOS::Camera {
-bool MetadataUtils::WriteMetadataDataToVec(const camera_metadata_item_t &entry, std::vector<uint8_t>& cameraAbility)
+void MetadataUtils::WriteMetadataDataToVec(const camera_metadata_item_t &entry, std::vector<uint8_t>& cameraAbility)
 {
     if (entry.data_type == META_TYPE_BYTE) {
         for (size_t i = 0; i < entry.count; i++) {
@@ -46,44 +51,64 @@ bool MetadataUtils::WriteMetadataDataToVec(const camera_metadata_item_t &entry, 
             WriteData<int32_t>((*(entry.data.r + i)).denominator, cameraAbility);
         }
     }
-
-    return true;
 }
 
 bool MetadataUtils::ConvertMetadataToVec(const std::shared_ptr<CameraMetadata> &metadata,
     std::vector<uint8_t>& cameraAbility)
 {
     if (metadata == nullptr) {
+        METADATA_ERR_LOG("MetadataUtils::ConvertMetadataToVec: metadata is null!");
         return false;
     }
 
-    bool bRet = true;
-    uint32_t tagCount = 0;
     common_metadata_header_t *meta = metadata->get();
-    if (meta != nullptr) {
-        tagCount = GetCameraMetadataItemCount(meta);
-        WriteData<uint32_t>(tagCount, cameraAbility);
-        WriteData<uint32_t>(GetCameraMetadataItemCapacity(meta), cameraAbility);
-        WriteData<uint32_t>(GetCameraMetadataDataSize(meta), cameraAbility);
-        for (uint32_t i = 0; i < tagCount; i++) {
-            camera_metadata_item_t item;
-            int ret = GetCameraMetadataItem(meta, i, &item);
-            if (ret != CAM_META_SUCCESS) {
-                return false;
-            }
-
-            WriteData<uint32_t>(item.index, cameraAbility);
-            WriteData<uint32_t>(item.item, cameraAbility);
-            WriteData<uint32_t>(item.data_type, cameraAbility);
-            WriteData<uint32_t>(item.count, cameraAbility);
-
-            bRet = WriteMetadataDataToVec(item, cameraAbility);
-        }
-    } else {
-        cameraAbility.push_back(tagCount);
+    if (meta == nullptr) {
+        WriteData<uint32_t>(0, cameraAbility);
+        METADATA_WARNING_LOG("MetadataUtils::ConvertMetadataToVec: tagCount is 0!");
+        return true;
     }
 
-    return bRet;
+    uint32_t tagCount = GetCameraMetadataItemCount(meta);
+    if (tagCount > MAX_SUPPORTED_TAGS) {
+        METADATA_ERR_LOG("MetadataUtils::ConvertMetadataToVec: tagCount out of range: %u", tagCount);
+        return false;
+    }
+
+    uint32_t itemCapacity = GetCameraMetadataItemCapacity(meta);
+    if (itemCapacity > MAX_ITEM_CAPACITY) {
+        METADATA_ERR_LOG("MetadataUtils::ConvertMetadataToVec: itemCapacity out of range: %u", itemCapacity);
+        return false;
+    }
+
+    uint32_t dataCapacity = GetCameraMetadataDataSize(meta);
+    if (dataCapacity > MAX_DATA_CAPACITY) {
+        METADATA_ERR_LOG("MetadataUtils::ConvertMetadataToVec: dataCapacity out of range: %u", dataCapacity);
+        return false;
+    }
+
+    WriteData<uint32_t>(tagCount, cameraAbility);
+    WriteData<uint32_t>(itemCapacity, cameraAbility);
+    WriteData<uint32_t>(dataCapacity, cameraAbility);
+    for (uint32_t i = 0; i < tagCount; i++) {
+        camera_metadata_item_t item;
+        int ret = GetCameraMetadataItem(meta, i, &item);
+        if (ret != CAM_META_SUCCESS) {
+            METADATA_ERR_LOG("MetadataUtils::ConvertMetadataToVec: get meta item failed!");
+            return false;
+        }
+
+        if (item.count > MAX_SUPPORTED_ITEMS) {
+            METADATA_ERR_LOG("MetadataUtils::ConvertMetadataToVec: item.count out of range:%u", item.count);
+            return false;
+        }
+        WriteData<uint32_t>(item.index, cameraAbility);
+        WriteData<uint32_t>(item.item, cameraAbility);
+        WriteData<uint32_t>(item.data_type, cameraAbility);
+        WriteData<uint32_t>(item.count, cameraAbility);
+
+        WriteMetadataDataToVec(item, cameraAbility);
+    }
+    return true;
 }
 
 bool MetadataUtils::EncodeCameraMetadata(const std::shared_ptr<CameraMetadata> &metadata,
@@ -120,7 +145,7 @@ bool MetadataUtils::EncodeCameraMetadata(const std::shared_ptr<CameraMetadata> &
     return bRet;
 }
 
-bool MetadataUtils::ReadMetadataDataFromVec(int32_t &index, camera_metadata_item_t &entry,
+void MetadataUtils::ReadMetadataDataFromVec(int32_t &index, camera_metadata_item_t &entry,
     const std::vector<uint8_t>& cameraAbility)
 {
     if (entry.data_type == META_TYPE_BYTE) {
@@ -167,8 +192,6 @@ bool MetadataUtils::ReadMetadataDataFromVec(int32_t &index, camera_metadata_item
             }
         }
     }
-
-    return true;
 }
 
 void MetadataUtils::ConvertVecToMetadata(const std::vector<uint8_t>& cameraAbility,
@@ -178,25 +201,21 @@ void MetadataUtils::ConvertVecToMetadata(const std::vector<uint8_t>& cameraAbili
     uint32_t tagCount = 0;
     uint32_t itemCapacity = 0;
     uint32_t dataCapacity = 0;
-    constexpr uint32_t MAX_SUPPORTED_TAGS = 1000;
-    constexpr uint32_t MAX_SUPPORTED_ITEMS = 1000;
-    constexpr uint32_t MAX_ITEM_CAPACITY = (1000 * 10);
-    constexpr uint32_t MAX_DATA_CAPACITY = (1000 * 10 * 10);
 
     ReadData<uint32_t>(tagCount, index, cameraAbility);
     if (tagCount > MAX_SUPPORTED_TAGS) {
-        tagCount = MAX_SUPPORTED_TAGS;
-        METADATA_ERR_LOG("MetadataUtils::DecodeCameraMetadata tagCount is more than supported value");
+        METADATA_ERR_LOG("MetadataUtils::ConvertVecToMetadata: tagCount out of range: %u", tagCount);
+        return;
     }
     ReadData<uint32_t>(itemCapacity, index, cameraAbility);
     if (itemCapacity > MAX_ITEM_CAPACITY) {
-        itemCapacity = MAX_ITEM_CAPACITY;
-        METADATA_ERR_LOG("MetadataUtils::DecodeCameraMetadata itemCapacity is more than supported value");
+        METADATA_ERR_LOG("MetadataUtils::ConvertVecToMetadata: itemCapacity out of range: %u", itemCapacity);
+        return;
     }
     ReadData<uint32_t>(dataCapacity, index, cameraAbility);
     if (dataCapacity > MAX_DATA_CAPACITY) {
-        dataCapacity = MAX_DATA_CAPACITY;
-        METADATA_ERR_LOG("MetadataUtils::DecodeCameraMetadata dataCapacity is more than supported value");
+        METADATA_ERR_LOG("MetadataUtils::ConvertVecToMetadata: dataCapacity out of range: %u", dataCapacity);
+        return;
     }
 
     std::vector<camera_metadata_item_t> items;
@@ -207,8 +226,8 @@ void MetadataUtils::ConvertVecToMetadata(const std::vector<uint8_t>& cameraAbili
         ReadData<uint32_t>(item.data_type, index, cameraAbility);
         ReadData<uint32_t>(item.count, index, cameraAbility);
         if (item.count > MAX_SUPPORTED_ITEMS) {
-            item.count = MAX_SUPPORTED_ITEMS;
-            METADATA_ERR_LOG("MetadataUtils::DecodeCameraMetadata item.count is more than supported value");
+            METADATA_ERR_LOG("MetadataUtils::DecodeCameraMetadata item.count out of range:%u", item.count);
+            return;
         }
         ReadMetadataDataFromVec(index, item, cameraAbility);
         items.push_back(item);
@@ -229,10 +248,6 @@ void MetadataUtils::DecodeCameraMetadata(MessageParcel &data, std::shared_ptr<Ca
     uint32_t tagCount = data.ReadUint32();
     uint32_t itemCapacity = data.ReadUint32();
     uint32_t dataCapacity = data.ReadUint32();
-    constexpr uint32_t MAX_SUPPORTED_TAGS = 1000;
-    constexpr uint32_t MAX_SUPPORTED_ITEMS = 1000;
-    constexpr uint32_t MAX_ITEM_CAPACITY = (1000 * 10);
-    constexpr uint32_t MAX_DATA_CAPACITY = (1000 * 10 * 10);
 
     if (tagCount > MAX_SUPPORTED_TAGS) {
         tagCount = MAX_SUPPORTED_TAGS;

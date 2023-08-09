@@ -47,7 +47,7 @@ interface IStreamOperator extends ohos.hdi.camera.v1_0.IStreamOperator {
      * If the streams are not supported, <b>type</b> is set to <b>NOT_SUPPORTED</b>.
      * This function must be called prior to {@link CreateStreams}.
      *
-     * @param mode Indicates the operation mode of the streams. For details, see {@link OperationMode}.
+     * @param mode Indicates the operation mode of the streams. For details, see {@link OperationMode_V1_1}.
      * @param modeSetting Indicates the stream configuration parameters, including the frame rate and 3A.
      * 3A stands for automatic focus (AF), automatic exposure (AE), and automatic white-balance (AWB).
      * @param infos Indicates the stream configuration information. For details, see {@link StreamInfo}.
@@ -60,7 +60,7 @@ interface IStreamOperator extends ohos.hdi.camera.v1_0.IStreamOperator {
      * @since 4.0
      * @version 1.1
      */
-    IsStreamsSupported_V1_1([in] enum OperationMode mode, [in] unsigned char[] modeSetting,
+    IsStreamsSupported_V1_1([in] enum OperationMode_V1_1 mode, [in] unsigned char[] modeSetting,
         [in] struct StreamInfo_V1_1[] infos, [out] enum StreamSupportType type);
 
     /**
@@ -80,4 +80,19 @@ interface IStreamOperator extends ohos.hdi.camera.v1_0.IStreamOperator {
      * @version 1.1
      */
     CreateStreams_V1_1([in] struct StreamInfo_V1_1[] streamInfos);
+
+    /**
+     * @brief Configures a stream.
+     *
+     * This function must be called after {@link CreateStreams}.
+     *
+     * @param mode Indicates the operation mode of the stream. For details, see {@link OperationMode_V1_1}.
+     * @param modeSetting Indicates the stream configuration parameters, including the frame rate and zoom information.
+     * @return Returns <b>NO_ERROR</b> if the operation is successful;
+     * returns an error code defined in {@link CamRetCode} otherwise.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    CommitStreams_V1_1([in] enum OperationMode_V1_1 mode, [in] unsigned char[] modeSetting);
 }
