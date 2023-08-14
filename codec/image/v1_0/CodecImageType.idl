@@ -58,6 +58,15 @@ struct CodecImageRegion {
 };
 
 /**
+ * @brief Enumerates the types of image that can be encoded or decoded
+ */
+enum CodecImageRole {
+    CODEC_IMAGE_JPEG = 0,       /**< Jpeg image. */
+    CODEC_IMAGE_HEIF,           /**< Heif image. */
+    CODEC_IMAGE_INVALID,        /**< Invalid image type. */
+};
+
+/**
  * @brief Defines the codec image buffer information.
  */
 struct CodecImageBuffer {
@@ -66,15 +75,7 @@ struct CodecImageBuffer {
     NativeBuffer buffer;        /**< Buffer handle used for encoding or decoding. For details,
                                      see {@link NativeBuffer}. */
     FileDescriptor fenceFd;     /**< Fence file descriptor. */
-};
-
-/**
- * @brief Enumerates the types of image that can be encoded or decoded
- */
-enum CodecImageRole {
-    CODEC_IMAGE_JPEG = 0,       /**< Jpeg image. */
-    CODEC_IMAGE_HEIF,           /**< Heif image. */
-    CODEC_IMAGE_INVALID,        /**< Invalid image type. */
+    CodecImageRole bufferRole;  /**< Image buffer role, see {@link CodecImageRole}. */
 };
 
 /**

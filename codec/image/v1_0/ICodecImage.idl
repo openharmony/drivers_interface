@@ -27,11 +27,11 @@
  */
 
 /**
- * @file ICodecImageJpeg.idl
+ * @file ICodecImage.idl
  *
- * @brief Declares the APIs for jpeg image codec.
+ * @brief Declares the APIs for image codec.
  *
- *You can use these APIs to allocate input buffer, and decode jpeg image
+ *You can use these APIs to allocate input buffer, and decode image
  *
  * @since 4.0
  * @version 1.0
@@ -46,9 +46,8 @@
 package ohos.hdi.codec.image.v1_0;
 
 import ohos.hdi.codec.image.v1_0.CodecImageType;
-import ohos.hdi.codec.image.v1_0.ICodecImageCallback;
 
-interface ICodecImageJpeg {
+interface ICodecImage {
 
     /**
      * @brief Obtains image codec capabilities.
@@ -66,9 +65,11 @@ interface ICodecImageJpeg {
     GetImageCapability([out] struct CodecImageCapability[] capList);
 
     /**
-     * @brief Jpeg image codec module init.
+     * @brief Image codec module init.
      *
-     * You can use this API to init the jpeg image Codec module.
+     * You can use this API to init the Image Codec module.
+     *
+     * @param role Indicates the image codec role {@link CodecImageRole} obtained.
      *
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      * @return Returns <b>HDF_FAILURE</b> if the execution fails.
@@ -77,12 +78,14 @@ interface ICodecImageJpeg {
      *
      * @since 4.0
      */
-    JpegInit();
+    Init([in] enum CodecImageRole role);
 
     /**
-     * @brief Jpeg image codec module deinit.
+     * @brief Image codec module deinit.
      *
-     * You can use this API to deinit the jpeg image Codec module.
+     * You can use this API to deinit the Image Codec module.
+     *
+     * @param role Indicates the image codec role {@link CodecImageRole} obtained.
      *
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      * @return Returns <b>HDF_FAILURE</b> if the execution fails.
@@ -91,17 +94,15 @@ interface ICodecImageJpeg {
      *
      * @since 4.0
      */
-    JpegDeInit();
+    DeInit([in] enum CodecImageRole role);
 
     /**
      * @brief Start jpeg image decode.
      *
-     * You can use this API to start jpeg image decode, if return Returns <b>HDF_SUCCESS</b>,
-     * the image is decoding, you should receive the decode result by <b>callbacks</b>.
+     * You can use this API to start jpeg image decode.
      *
      * @param inBuffer Indicates input buffer of the jpeg image decode {@link CodecImageBuffer} obtained.
      * @param outBuffer Indicates output buffer of the jpeg image decode {@link CodecImageBuffer} obtained.
-     * @param callbacks Indicates callback of the image decode {@link ICodecImageCallback} obtained.
      * @param decInfo Indicates decode information of the image decode {@link JpegDecInfo} obtained.
      *
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
@@ -113,15 +114,16 @@ interface ICodecImageJpeg {
      * @since 4.0
      */
     DoJpegDecode([in] struct CodecImageBuffer inBuffer, [in] struct CodecImageBuffer outBuffer,
-                 [in] ICodecImageCallback callbacks, [in] struct CodecJpegDecInfo decInfo);
+                 [in] struct CodecJpegDecInfo decInfo);
 
     /**
      * @brief Allocate input buffer.
      *
-     * You can use this API to allocate input buffer for jpeg image decode.
+     * You can use this API to allocate input buffer for image codec.
      *
-     * @param inBuffer Indicates input buffer of the jpeg image decode {@link CodecImageBuffer} obtained.
+     * @param inBuffer Indicates input buffer of the image codec {@link CodecImageBuffer} obtained.
      * @param size Indicates size of input buffer {@link CodecImageBuffer} obtained.
+     * @param role Indicates image codec role of input buffer {@link CodecImageRole} obtained.
      *
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      * @return Returns <b>HDF_ERR_INVALID_PARAM</b> if the operation fails due to invalid parameters.
@@ -131,14 +133,14 @@ interface ICodecImageJpeg {
      *
      * @since 4.0
      */
-    AllocateInBuffer([out] struct CodecImageBuffer inBuffer, [in] unsigned int size);
+    AllocateInBuffer([out] struct CodecImageBuffer inBuffer, [in] unsigned int size, [in] CodecImageRole role);
 
     /**
      * @brief Free input buffer.
      *
-     * You can use this API to free input buffer for jpeg image decode.
+     * You can use this API to free input buffer for image decode.
      *
-     * @param buffer Indicates input buffer of the jpeg image decode {@link CodecImageBuffer} obtained.
+     * @param buffer Indicates input buffer of the image codec {@link CodecImageBuffer} obtained.
      *
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      * @return Returns <b>HDF_FAILURE</b> if the execution fails.
