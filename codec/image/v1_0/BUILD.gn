@@ -23,8 +23,7 @@ if (defined(ohos_lite)) {
 
     sources = [
       "CodecImageType.idl",
-      "ICodecImageCallback.idl",
-      "ICodecImageJpeg.idl",
+      "ICodecImage.idl",
     ]
     language = "cpp"
     subsystem_name = "hdf"
