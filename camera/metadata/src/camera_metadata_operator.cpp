@@ -291,6 +291,7 @@ int32_t GetMetadataSection(uint32_t itemSection, uint32_t *section)
             break;
         case OHOS_CAMERA_EFFECT:
             *section = OHOS_SECTION_CAMERA_EFFECT;
+	    break;
         case OHOS_CAMERA_SECURE:
             *section = OHOS_SECTION_CAMERA_SECURE;
             break;
