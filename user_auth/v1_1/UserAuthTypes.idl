@@ -60,4 +60,18 @@ struct ScheduleInfoV1_1 {
     unsigned char[] extraInfo;
 };
 
+/**
+ * @brief Defines enrolled users information.
+ *
+ * @since 4.0
+ * @version 1.1
+ */
+struct UserInfo {
+    /**< SecureUid of this user. */
+    unsigned long secureUid;
+    /**< PinSubType of this user. See @{@PinSubType}. */
+    enum PinSubType pinSubType;
+    /**< Related enrolled information list. See @{EnrolledInfo}. */
+    struct EnrolledInfo[] enrolledInfos;
+};
 /** @} */
