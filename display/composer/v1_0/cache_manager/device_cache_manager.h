@@ -31,8 +31,9 @@ namespace V1_0 {
 
 class DeviceCacheManager : public NoCopyable {
 public:
+    DeviceCacheManager();
     ~DeviceCacheManager();
-    static DeviceCacheManager* GetInstance();
+    static std::shared_ptr<DeviceCacheManager> GetInstance();
     int32_t AddDeviceCache(uint32_t deviceId);
     int32_t RemoveDeviceCache(uint32_t deviceId);
     int32_t CreateVirtualDisplayCache(uint32_t deviceId);
@@ -43,7 +44,6 @@ public:
     void Dump() const;
     static std::mutex& GetCacheMgrMutex();
 private:
-    DeviceCacheManager();
     int32_t Init();
     int32_t AddCacheInternal(uint32_t deviceId, DeviceCache::DeviceType type);
     std::unique_ptr<CacheManager<uint32_t, DeviceCache>> deviceCaches_;
