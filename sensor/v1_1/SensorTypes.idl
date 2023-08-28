@@ -115,7 +115,6 @@ enum HdfSensorTypeTag {
     HDF_SENSOR_TYPE_SIGNIFICANT_MOTION          = 264,   /**< Significant motion sensor */
     HDF_SENSOR_TYPE_PEDOMETER_DETECTION         = 265,   /**< Pedometer detection sensor */
     HDF_SENSOR_TYPE_PEDOMETER                   = 266,   /**< Pedometer sensor */
-    HDF_SENSOR_TYPE_POSTURE                     = 267,   /**< Posture sensor */
     HDF_SENSOR_TYPE_GEOMAGNETIC_ROTATION_VECTOR = 277,   /**< Geomagnetic rotation vector sensor */
     HDF_SENSOR_TYPE_HEART_RATE                  = 278,   /**< Heart rate sensor */
     HDF_SENSOR_TYPE_DEVICE_ORIENTATION          = 279,   /**< Device orientation sensor */
