@@ -358,10 +358,19 @@ EXIT:
             HDF_LOGE("%{public}s, FileDescriptorUnpack error", __func__));
         HdifdParcelable fdParcel(fence);
         {
-            DISPLAY_CHECK(cacheMgr_ == nullptr, goto EXIT);
+            if (cacheMgr_ == nullptr) {
+                ret = HDF_FAILURE;
+                HDF_LOGE("%{public}s, get cache manager error", __func__);
+                goto EXIT;
+            }
             std::lock_guard<std::mutex> lock(cacheMgr_->GetCacheMgrMutex());
+
             DeviceCache* devCache = cacheMgr_->DeviceCacheInstance(devId);
-            DISPLAY_CHECK(devCache == nullptr, goto EXIT);
+            if (devCache == nullptr) {
+                ret = HDF_FAILURE;
+                HDF_LOGE("%{public}s, get device cache error", __func__);
+                goto EXIT;
+            }
 
             ret = devCache->SetDisplayClientBuffer(buffer, seqNo, [&](const BufferHandle& handle)->int32_t {
                 int rc = impl_->SetDisplayClientBuffer(devId, handle, fdParcel.GetFd());
