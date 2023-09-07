@@ -99,7 +99,7 @@ static item_info_t g_ohosCameraControl[OHOS_DEVICE_CONTROL_END - OHOS_DEVICE_CON
         OHOS_DEVICE_CONTROL_START] = {"aeExposureCompensation",      META_TYPE_INT32,    1 },
     [OHOS_CONTROL_AE_LOCK - OHOS_DEVICE_CONTROL_START] = {"aeLock",                      META_TYPE_BYTE,     1 },
     [OHOS_CONTROL_AE_MODE - OHOS_DEVICE_CONTROL_START] = {"aeMode",                      META_TYPE_BYTE,     1 },
-    [OHOS_CONTROL_AE_REGIONS - OHOS_DEVICE_CONTROL_START] = {"aeRegions",                   META_TYPE_INT32,    -1},
+    [OHOS_CONTROL_AE_REGIONS - OHOS_DEVICE_CONTROL_START] = {"aeRegions",                META_TYPE_FLOAT,    -1},
     [OHOS_CONTROL_AE_TARGET_FPS_RANGE -
         OHOS_DEVICE_CONTROL_START] = {"aeTargetFpsRange",            META_TYPE_INT32,    -1},
     [OHOS_CONTROL_FPS_RANGES - OHOS_DEVICE_CONTROL_START] = {"fpsRange",                    META_TYPE_INT32,    -1},
