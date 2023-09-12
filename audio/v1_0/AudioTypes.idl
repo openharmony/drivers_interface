@@ -73,6 +73,7 @@ enum AudioCategory {
     AUDIO_IN_RINGTONE      = 2, /**< Ringtone */
     AUDIO_IN_CALL          = 3, /**< Call */
     AUDIO_MMAP_NOIRQ       = 4, /**< Mmap mode */
+    AUDIO_OFFLOAD          = 5, /**< Offload */
 };
 
 /**
@@ -83,6 +84,8 @@ enum AudioFormat {
     AUDIO_FORMAT_TYPE_PCM_16_BIT = 1 << 1,                      /**< 16-bit PCM */
     AUDIO_FORMAT_TYPE_PCM_24_BIT = 1 << 1 | 1 << 0,             /**< 24-bit PCM */
     AUDIO_FORMAT_TYPE_PCM_32_BIT = 1 << 2,                      /**< 32-bit PCM */
+    AUDIO_FORMAT_TYPE_PCM_FLOAT  = 1 << 2 | 1 << 0,             /**< FLOAT PCM */
+    AUDIO_FORMAT_TYPE_MP3        = 1 << 24,                     /**< MP3 */
     AUDIO_FORMAT_TYPE_AAC_MAIN   = 1 << 24 | 1 << 0,            /**< AAC main */
     AUDIO_FORMAT_TYPE_AAC_LC     = 1 << 24 | 1 << 1,            /**< AAC LC */
     AUDIO_FORMAT_TYPE_AAC_LD     = 1 << 24 | 1 << 1 | 1 << 0,   /**< AAC LD */
@@ -351,6 +354,19 @@ enum AudioInputType {
 };
 
 /**
+ * @brief Defines audio offload attributes.
+ */
+struct AudioOffloadInfo
+{
+    unsigned int sampleRate;    /**< Audio sampling rate */    
+    unsigned int channelCount;  /**< Number of audio channels */
+    unsigned int bitRate;       /**< bitRate of compressed audio data */
+    unsigned int bitWidth;      /**< bitwidth of audio data */
+    unsigned int offloadBufferSize;    /**< buffersize for offload audio data */
+    unsigned long duration;           /** audio duration, unit is nanosecond*/
+};
+
+/**
  * @brief Defines audio sampling attributes.
  */
 struct AudioSampleAttributes {
@@ -370,6 +386,7 @@ struct AudioSampleAttributes {
     unsigned int silenceThreshold; /**< Audio capture buffer threshold. */
     int streamId;                  /**< Audio Identifier of render or capture */
     int sourceType;                /**< Audio sourceType of render or capture */
+    AudioOffloadInfo offloadInfo;  /**< offload info for offload stream */
 };
 
 /**
