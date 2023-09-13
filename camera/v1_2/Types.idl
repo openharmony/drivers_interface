@@ -23,7 +23,7 @@
  * @version 1.2
  */
 
-package ohos.hdi.camera.v1_1;
+package ohos.hdi.camera.v1_2;
 
 /**
  * @brief Enumerates types of the extended stream information.
