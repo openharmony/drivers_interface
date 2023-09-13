@@ -36,11 +36,6 @@ enum ExtendedStreamInfoType {
      * Extended stream information of quick thumbnail.
      */
     EXTENDED_STREAM_INFO_QUICK_THUMBNAIL = 0,
-
-    /**
-     * Extended stream information of sketch.
-     */
-    EXTENDED_STREAM_INFO_SKETCH = 1,
 };
 
 /**
