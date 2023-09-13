@@ -24,6 +24,9 @@
  */
 
 package ohos.hdi.camera.v1_2;
+sequenceable ohos.hdi.camera.v1_0.BufferProducerSequenceable;
+
+import ohos.hdi.camera.v1_1.Types;
 
 /**
  * @brief Enumerates types of the extended stream information.
