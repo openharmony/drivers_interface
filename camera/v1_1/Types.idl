@@ -40,7 +40,7 @@ enum ExtendedStreamInfoType {
     /**
      * Extended stream information of sketch.
      */
-    EXTENDED_STREAM_INFO_SKETCH,
+    EXTENDED_STREAM_INFO_SKETCH = 1,
 };
 
 /**
