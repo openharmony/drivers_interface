@@ -47,7 +47,9 @@ typedef enum camera_ability_section {
 
     // Secure camera control related
     OHOS_CAMERA_SECURE = 0x4000,
-
+    // Xmage camera ability
+    OHOS_XMAGE_COLOR_ABILITY = 0x5000,
+    
     OHOS_ABILITY_SECTION_END
 } camera_ability_section_t;
 
@@ -77,6 +79,8 @@ typedef enum camera_device_metadata_section_start {
     OHOS_STREAM_METADATA_BODY_START = OHOS_STREAM_METADATA_BODY << 16,
 
     OHOS_CAMERA_SECURE_START = OHOS_CAMERA_SECURE << 16,
+
+    OHOS_XMAGE_COLOR_MODES_START = OHOS_XMAGE_COLOR_ABILITY << 16,
 } camera_device_info_section_start_t;
 
 typedef enum camera_device_metadata_tag {
@@ -231,6 +235,11 @@ typedef enum camera_device_metadata_tag {
     OHOS_CONTROL_SECURE_IR_LED_SWITCH,
     OHOS_CONTROL_SECURE_IR_LOCKAE_SWITCH,
     OHOS_CAMERA_SECURE_END,
+
+    //XMAGE MODE
+    OHOS_ABILITY_SUPPORTED_COLOR_MODES = OHOS_XMAGE_COLOR_MODES_START,
+    OHOS_CONTROL_SUPPORTED_COLOR_MODES,
+    OHOS_XMAGE_COLOR_MODES_END,
 } camera_device_metadata_tag_t;
 
 // OHOS_ABILITY_CAMERA_POSITION enumeration values
@@ -491,4 +500,13 @@ typedef enum camera_beauty_type {
     OHOS_CAMERA_BEAUTY_TYPE_FACE_SLENDER,
     OHOS_CAMERA_BEAUTY_TYPE_SKIN_TONE,
 } camera_beauty_type_t;
+
+//OHOS_ABILITY_SUPPORTED_COLOR_MODES and OHOS_CONTROL_SUPPORTED_COLOR_MODES enumeration
+typedef enum camera_xmage_color_type {
+    CAMERA_CUSTOM_COLOR_NORMAL = 0,
+    CAMERA_CUSTOM_COLOR_BRIGHT,
+    CAMERA_CUSTOM_COLOR_SOFT,
+} camera_xmage_color_type_t;
+
+
 #endif

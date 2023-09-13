@@ -148,6 +148,10 @@ const std::vector<int32_t> METADATATAGS = {
     OHOS_CONTROL_SECURE_FLASH_SEQ,
     OHOS_CONTROL_SECURE_IR_LED_SWITCH,
     OHOS_CONTROL_SECURE_IR_LOCKAE_SWITCH,
+
+    //XMAGE MODES
+    OHOS_ABILITY_SUPPORTED_COLOR_MODES,
+    OHOS_CONTROL_SUPPORTED_COLOR_MODES,
 };
 
 uint32_t AlignTo(uint32_t val, uint32_t alignment)
@@ -294,6 +298,9 @@ int32_t GetMetadataSection(uint32_t itemSection, uint32_t *section)
 	    break;
         case OHOS_CAMERA_SECURE:
             *section = OHOS_SECTION_CAMERA_SECURE;
+            break;
+        case OHOS_XMAGE_COLOR_ABILITY:
+            *section = OHOS_SECTION_CAMERA_XMAGE;
             break;
         default:
             METADATA_ERR_LOG("GetMetadataSection item section is not defined");
