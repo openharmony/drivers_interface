@@ -22,7 +22,10 @@ if (defined(ohos_lite)) {
     module_name = "camera_service"
     imports = [ "ohos.hdi.camera.v1_1:camera" ]
 
-    sources = [ "ICameraHost.idl" ]
+    sources = [
+      "ICameraHost.idl",
+      "Types.idl",
+    ]
 
     sequenceable_pub_deps = [
       "../sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0",
