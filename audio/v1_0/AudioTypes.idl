@@ -362,6 +362,7 @@ struct AudioOffloadInfo
     unsigned int channelCount;  /**< Number of audio channels */
     unsigned int bitRate;       /**< bitRate of compressed audio data */
     unsigned int bitWidth;      /**< bitwidth of audio data */
+    enum AudioFormat format;       /**< Audio data format. */
     unsigned int offloadBufferSize;    /**< buffersize for offload audio data */
     unsigned long duration;           /** audio duration, unit is nanosecond*/
 };
