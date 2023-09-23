@@ -462,4 +462,13 @@ interface IAudioRender {
      * @see IsSupportsPauseAndResume
      */
     IsSupportsPauseAndResume([out] boolean supportPause, [out] boolean supportResume);
+
+    /**
+     * @brief Set offload buffer size.
+     *
+     * @param handle Indicates the audio handle.
+     * @param size Indicates the buffer size which contains the audio data.
+     * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
+     */
+    SetBufferSize([in] unsigned int size);
 }
