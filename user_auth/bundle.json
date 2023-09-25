@@ -1,7 +1,7 @@
 {
     "name": "@ohos/drivers_interface_user_auth",
     "description": "user_auth device driver",
-    "version": "4.0",
+    "version": "4.1",
     "license": "Apache License 2.0",
     "publishAs": "code-segment",
     "segment": {
@@ -26,14 +26,13 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/user_auth/v1_0:user_auth_idl_target",
-          "//drivers/interface/user_auth/v1_1:user_auth_idl_target"
+          "//drivers/interface/user_auth/v1_2:user_auth_idl_target"
         ],
         "test": [
         ],
         "inner_kits": [
           {
-            "name": "//drivers/interface/user_auth/v1_0:libuser_auth_proxy_1.0",
+            "name": "//drivers/interface/user_auth/v1_2:libuser_auth_proxy_1.2",
             "header": {
               "header_files": [
               ],
@@ -41,7 +40,7 @@
             }
           },
           {
-            "name": "//drivers/interface/user_auth/v1_0:user_auth_idl_headers",
+            "name": "//drivers/interface/user_auth/v1_2:user_auth_idl_headers",
             "header": {
               "header_files": [
               ],
@@ -49,35 +48,11 @@
             }
           },
           {
-            "name": "//drivers/interface/user_auth/v1_0:libuser_auth_stub_1.0",
+            "name": "//drivers/interface/user_auth/v1_2:libuser_auth_stub_1.2",
             "header": {
               "header_files": [
               ],
               "header_base": "//drivers/interface/user_auth"
-            }
-          },
-          {
-            "name": "//drivers/interface/user_auth/v1_1:libuser_auth_proxy_1.1",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interface/user_auth"
-            }
-          },
-          {
-            "name": "//drivers/interface/user_auth/v1_1:libuser_auth_stub_1.1",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interface/user_auth"
-            }
-          },
-          {
-            "name": "//drivers/interface/user_auth/v1_1:user_auth_idl_headers",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interfaces/user_auth"
             }
           }
         ]
