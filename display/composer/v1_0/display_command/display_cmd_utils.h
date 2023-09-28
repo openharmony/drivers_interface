@@ -259,25 +259,9 @@ public:
         return HDF_SUCCESS;
     }
 
-    static int32_t BufferHandleUnpack(std::shared_ptr<CommandDataUnpacker> unpacker,
-        const std::vector<HdifdInfo>& hdiFds, BufferHandle*& buffer)
+    static bool UnpackBasicInfo(std::shared_ptr<CommandDataUnpacker> unpacker, const std::vector<HdifdInfo>& hdiFds,
+        BufferHandle *handle)
     {
-        uint32_t fdsNum = 0;
-        uint32_t intsNum = 0;
-        DISPLAY_CHK_RETURN(unpacker->ReadUint32(fdsNum) == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s, read fdsNum error", __func__));
-        DISPLAY_CHK_RETURN(unpacker->ReadUint32(intsNum) == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s, write intsNum error", __func__));
-        if (fdsNum == UINT32_MAX && intsNum == UINT32_MAX) {
-            buffer = nullptr;
-            return HDF_SUCCESS;
-        }
-        BufferHandle *handle = AllocateBufferHandle(fdsNum, intsNum);
-        if (handle == nullptr) {
-            return HDF_FAILURE;
-        }
-        handle->reserveFds = fdsNum;
-        handle->reserveInts = intsNum;
         int32_t ret = FileDescriptorUnpack(unpacker, hdiFds, handle->fd);
         bool retVal = (ret == HDF_SUCCESS ? true : false);
         DISPLAY_CHK_CONDITION(retVal, true, unpacker->ReadInt32(handle->width),
@@ -294,24 +278,52 @@ public:
             HDF_LOGE("%{public}s, read handle->usage error", __func__));
         DISPLAY_CHK_CONDITION(retVal, true, unpacker->ReadUint64(handle->phyAddr),
             HDF_LOGE("%{public}s, read handle->phyAddr error", __func__));
+        return retVal;
+    }
+
+    static bool UnpackExtraInfo(std::shared_ptr<CommandDataUnpacker> unpacker, const std::vector<HdifdInfo>& hdiFds,
+        BufferHandle *handle)
+    {
+        bool retVal = true;
+        uint32_t i = 0;
+        for (i = 0; i < handle->reserveFds; i++) {
+            int32_t ret = FileDescriptorUnpack(unpacker, hdiFds, handle->reserve[i]);
+            if (ret != HDF_SUCCESS) {
+                retVal = false;
+                break;
+            }
+        }
+        for (uint32_t j = 0; j < handle->reserveInts; j++) {
+            retVal = unpacker->ReadInt32(handle->reserve[i++]);
+            if (!retVal) {
+                HDF_LOGE("%{public}s, get reserve data error, i:%{public}u, j:%{public}u",
+                    __func__, i, j);
+                break;
+            }
+        }
+        return retVal;
+    }
+
+    static int32_t BufferHandleUnpack(std::shared_ptr<CommandDataUnpacker> unpacker,
+        const std::vector<HdifdInfo>& hdiFds, BufferHandle*& buffer)
+    {
+        uint32_t fdsNum = 0;
+        uint32_t intsNum = 0;
+        DISPLAY_CHK_RETURN(unpacker->ReadUint32(fdsNum) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, read fdsNum error", __func__));
+        DISPLAY_CHK_RETURN(unpacker->ReadUint32(intsNum) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, read intsNum error", __func__));
+        if (fdsNum == UINT32_MAX && intsNum == UINT32_MAX) {
+            buffer = nullptr;
+            return HDF_SUCCESS;
+        }
+        BufferHandle *handle = AllocateBufferHandle(fdsNum, intsNum);
+        if (handle == nullptr) {
+            return HDF_FAILURE;
+        }
+        bool retVal = UnpackBasicInfo(unpacker, hdiFds, handle);
         if (retVal) {
-            uint32_t i = 0;
-            for (i = 0; i < handle->reserveFds; i++) {
-                ret = FileDescriptorUnpack(unpacker, hdiFds, handle->reserve[i]);
-                if (ret != HDF_SUCCESS) {
-                    retVal = false;
-                    break;
-                }
-            }
-            for (uint32_t j = 0; j < handle->reserveInts; j++) {
-                DISPLAY_CHK_CONDITION(retVal, true, unpacker->ReadInt32(handle->reserve[i++]),
-                    HDF_LOGE("%{public}s, read handle->reserve error", __func__));
-                if (!retVal) {
-                    HDF_LOGE("%{public}s, get reserve date error, i:%{public}u, j:%{public}u",
-                       __func__, i, j);
-                    break;
-                }
-            }
+            retVal = UnpackExtraInfo(unpacker, hdiFds, handle);
         }
         if (!retVal) {
             if (handle != nullptr) {
