@@ -14,9 +14,13 @@
  */
 
 #include "camera_metadata_operator.h"
+#include <dlfcn.h>
+#include <memory>
 #include <securec.h>
 #include <vector>
 #include "camera_metadata_item_info.h"
+#include "camera_vendor_tag.h"
+#include "camera_example_vendor_tags.h"
 #include "metadata_log.h"
 
 namespace OHOS::Camera {
@@ -323,7 +327,31 @@ int32_t GetCameraMetadataItemType(uint32_t item, uint32_t *dataType)
         return CAM_META_INVALID_PARAM;
     }
     uint32_t section;
-    int32_t ret = GetMetadataSection(item >> BITWISE_SHIFT_16, &section);
+    uint32_t itemTag = item >> BITWISE_SHIFT_16;
+    if (itemTag >= OHOS_VENDOR_SECTION) {
+#ifndef CAMERA_VENDOR_TAG
+        std::shared_ptr<CameraVendorTagExample> vendorTag = std::make_shared<CameraVendorTagExample>();
+        *dataType = vendorTag->GetVendorTagType(item);
+#else
+        void* libHandle_ = dlopen("libcamera_vendor_tag_impl.z.so", RTLD_LAZY);
+        if (libHandle_ == nullptr) {
+            METADATA_ERR_LOG("dlopen failed %{public}s", __func__);
+            return CAM_META_FAILURE;
+        }
+
+        CreateCameraVendorTag* createVendorTag =
+            reinterpret_cast<CreateCameraVendorTag*>(dlsym(libHandle_, "CreateVendorTagImpl"));
+        if (createVendorTag == nullptr) {
+            METADATA_ERR_LOG("CreateCameraVendorTag failed %{public}s", __func__);
+            return CAM_META_FAILURE;
+        }
+
+        CameraVendorTag* vendorTagImpl = createVendorTag();
+        *dataType = vendorTagImpl->GetVendorTagType(item);
+#endif
+        return CAM_META_SUCCESS;
+    }
+    int32_t ret = GetMetadataSection(itemTag, &section);
     if (ret != CAM_META_SUCCESS) {
         METADATA_ERR_LOG("GetCameraMetadataItemType section is not valid");
         return ret;
@@ -351,7 +379,30 @@ const char *GetCameraMetadataItemName(uint32_t item)
     METADATA_DEBUG_LOG("GetCameraMetadataItemName start");
     METADATA_DEBUG_LOG("GetCameraMetadataItemName item: %{public}u", item);
     uint32_t section;
-    int32_t ret = GetMetadataSection(item >> BITWISE_SHIFT_16, &section);
+    uint32_t itemTag = item >> BITWISE_SHIFT_16;
+    if (itemTag >= OHOS_VENDOR_SECTION) {
+#ifndef CAMERA_VENDOR_TAG
+        std::shared_ptr<CameraVendorTagExample> vendorTag = std::make_shared<CameraVendorTagExample>();
+        return vendorTag->GetVendorTagName(item);
+#else
+        void* libHandle_ = dlopen("libcamera_vendor_tag_impl.z.so", RTLD_LAZY);
+        if (libHandle_ == nullptr) {
+            METADATA_ERR_LOG("dlopen failed %{public}s", __func__);
+            return nullptr;
+        }
+
+        CreateCameraVendorTag* createVendorTag =
+            reinterpret_cast<CreateCameraVendorTag*>(dlsym(libHandle_, "CreateVendorTagImpl"));
+        if (createVendorTag == nullptr) {
+            METADATA_ERR_LOG("CreateCameraVendorTag failed %{public}s", __func__);
+            return nullptr;
+        }
+
+        CameraVendorTag* vendorTagImpl = createVendorTag();
+        return vendorTagImpl->GetVendorTagName(item);
+#endif
+    }
+    int32_t ret = GetMetadataSection(itemTag, &section);
     if (ret != CAM_META_SUCCESS) {
         METADATA_ERR_LOG("GetCameraMetadataItemName section is not valid");
         return nullptr;
