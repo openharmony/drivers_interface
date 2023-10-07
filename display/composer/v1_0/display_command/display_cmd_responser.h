@@ -622,6 +622,7 @@ EXIT:
         if (ret != HDF_SUCCESS) {
             errMaps_.emplace(REQUEST_CMD_SET_LAYER_TRANSFORM_MODE, ret);
         }
+    
         return;
     }
 
@@ -707,36 +708,30 @@ EXIT:
     int32_t  UnPackLayerBufferInfo(std::shared_ptr<CommandDataUnpacker> unpacker, const std::vector<HdifdInfo>& inFds,
         struct LayerBufferData *data, std::vector<uint32_t> &deletingList)
     {
-        int32_t ret = HDF_SUCCESS;
+        DISPLAY_CHK_RETURN(HDF_SUCCESS != CmdUtils::SetupDeviceUnpack(unpacker, data->devId, data->layerId),
+            HDF_FAILURE, HDF_LOGE("%{public}s, read devId error", __func__));
 
-        DISPLAY_CHK_RETURN(ret == HDF_SUCCESS, CmdUtils::SetupDeviceUnpack(unpacker, data->devId, data->layerId),
-            HDF_LOGE("%{public}s, read devId error", __func__));
-
-        DISPLAY_CHK_RETURN(ret == HDF_SUCCESS, CmdUtils::BufferHandleUnpack(unpacker, inFds, data->buffer),
+        DISPLAY_CHK_RETURN(HDF_SUCCESS != CmdUtils::BufferHandleUnpack(unpacker, inFds, data->buffer), HDF_FAILURE,
             HDF_LOGE("%{public}s, read BufferHandleUnpack error", __func__));
 
-        data->isValidBuffer = ret == HDF_SUCCESS;
-        bool result = ret == HDF_SUCCESS;
+        data->isValidBuffer = true;
 
-        DISPLAY_CHK_RETURN(result, unpacker->ReadUint32(data->seqNo),
+        DISPLAY_CHK_RETURN(true != unpacker->ReadUint32(data->seqNo), HDF_FAILURE,
             HDF_LOGE("%{public}s, read seqNo error", __func__));
 
-        DISPLAY_CHK_RETURN(result, CmdUtils::FileDescriptorUnpack(unpacker, inFds, data->fence),
+        DISPLAY_CHK_RETURN(HDF_SUCCESS != CmdUtils::FileDescriptorUnpack(unpacker, inFds, data->fence), HDF_FAILURE,
             HDF_LOGE("%{public}s, FileDescriptorUnpack error", __func__));
 
         // unpack deletingList
         uint32_t vectSize = 0;
-        DISPLAY_CHK_RETURN(result == HDF_SUCCESS, unpacker->ReadUint32(vectSize),
+        DISPLAY_CHK_RETURN(true != unpacker->ReadUint32(vectSize), HDF_FAILURE,
             HDF_LOGE("%{public}s, read vectSize error", __func__));
         deletingList.resize(vectSize);
         for (uint32_t i = 0; i < vectSize; i++) {
-            DISPLAY_CHK_RETURN(result, unpacker->ReadUint32(deletingList[i]),
+            DISPLAY_CHK_RETURN(true != unpacker->ReadUint32(deletingList[i]), HDF_FAILURE,
                 HDF_LOGE("%{public}s, read seqNo error, at i = %{public}d", __func__, i));
-            if (result != true) {
-                break;
-            }
         }
-        return ret;
+        return HDF_SUCCESS;
     }
 
     void OnSetLayerBuffer(std::shared_ptr<CommandDataUnpacker> unpacker, const std::vector<HdifdInfo>& inFds)
@@ -771,6 +766,7 @@ EXIT:
                 return HDF_SUCCESS;
             });
         }
+
 #ifndef DISPLAY_COMMUNITY
         fdParcel.Move();
 #endif // DISPLAY_COMMUNITY

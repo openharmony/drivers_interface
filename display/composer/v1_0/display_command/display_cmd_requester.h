@@ -676,7 +676,7 @@ private:
             HDF_LOGE("%{public}s: PackBegin failed", __func__));
         DISPLAY_CHK_RETURN(unpackCmd != CONTROL_CMD_REPLY_BEGIN, HDF_FAILURE,
             HDF_LOGE("%{public}s: PackBegin cmd not match, unpackCmd=%{public}d", __func__, unpackCmd));
-        if(ProcessUnpackCmd(replyUnpacker, unpackCmd, replyFds, fn) != HDF_SUCCESS) {
+        if (ProcessUnpackCmd(replyUnpacker, unpackCmd, replyFds, fn) != HDF_SUCCESS) {
             return HDF_FAILURE;
         }
 
