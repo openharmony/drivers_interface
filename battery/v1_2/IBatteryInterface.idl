@@ -250,5 +250,38 @@ interface IBatteryInterface {
      * @since 4.0
      */
     GetChargeType([out] enum ChargeType type);
+
+    /**
+     * @brief set power conf by feature name 
+     *
+     * @param feature name
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 4.0
+     */
+    SetPowerConfByFeatureName([in] String featureName, [out] String result);
+
+    /**
+     * @brief get power conf by feature name 
+     *
+     * @param feature name
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 4.0
+     */
+    GetPowerConfByFeatureName([in] String featureName, [out] String result);
+
+    /**
+     * @brief get is support power conf by feature name 
+     *
+     * @param feature name
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 4.0
+     */
+    IsSupportPowerConfByFeatureName([in] String featureName, [out] boolean result);
 }
 /** @} */
