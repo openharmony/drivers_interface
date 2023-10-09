@@ -472,9 +472,9 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
 bool MetadataUtils::ReadMetadata(camera_metadata_item_t &item, MessageParcel &data)
 {
     size_t i, j;
-    if(item.count > MAX_SUPPORTED_ITEMS){
+    if (item.count > MAX_SUPPORTED_ITEMS) {
         item.count = MAX_SUPPORTED_ITEMS;
-	METADATA_ERR_LOG("MetadataUtils::ReadMetadata item.count is more than supported value");
+        METADATA_ERR_LOG("MetadataUtils::ReadMetadata item.count is more than supported value");
     }
     if (item.data_type == META_TYPE_BYTE) {
         std::vector<uint8_t> byteBuffers;
