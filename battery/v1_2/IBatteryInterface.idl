@@ -252,36 +252,42 @@ interface IBatteryInterface {
     GetChargeType([out] enum ChargeType type);
 
     /**
-     * @brief set power conf by feature name 
+     * @brief set battery config by scene name 
      *
-     * @param feature name
+     * @param sceneName battery charge scene name
+     *
+     * @param value battery config value
      *
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      *
-     * @since 4.0
+     * @since 4.1
      */
-    SetPowerConfByFeatureName([in] String featureName, [out] String result);
+    SetBatteryConfig([in] String sceneName, [in] String value);
 
     /**
-     * @brief get power conf by feature name 
+     * @brief get the battery config by scene name 
      *
-     * @param feature name
+     * @param sceneName battery charge scene name
+     * 
+     * @param value battery config value
      *
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      *
-     * @since 4.0
+     * @since 4.1
      */
-    GetPowerConfByFeatureName([in] String featureName, [out] String result);
+    GetBatteryConfig([in] String sceneName, [out] String value);
 
     /**
-     * @brief get is support power conf by feature name 
+     * @brief checks the battery config is enable by scene name
      *
-     * @param feature name
+     * @param sceneName battery charge scene name
      *
+     * @param value the battery config is enable or not
+     * 
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      *
-     * @since 4.0
+     * @since 4.1
      */
-    IsSupportPowerConfByFeatureName([in] String featureName, [out] boolean result);
+    IsBatteryConfigSupported([in] String sceneName, [out] boolean value);
 }
 /** @} */
