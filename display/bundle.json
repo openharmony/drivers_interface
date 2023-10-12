@@ -41,6 +41,7 @@
       "sub_component": [
         "//drivers/interface/display/buffer/v1_0:display_buffer_idl_target",
         "//drivers/interface/display/composer/v1_0:display_composer_idl_target",
+        "//drivers/interface/display/graphic/common/v1_0:display_commontype_idl_target",
         "//drivers/interface/display/buffer/v1_0:libdisplay_buffer_hdi_impl",
         "//drivers/interface/display/composer/v1_0:libdisplay_composer_hdi_impl",
         "//drivers/interface/display/composer/v1_0:libcomposer_buffer_cache"
@@ -78,6 +79,14 @@
             "header_files": [
             ],
             "header_base": "//drivers/interface/display/buffer"
+          }
+        },
+        {
+          "name": "//drivers/interface/display/graphic/common/v1_0:display_commontype_idl_headers",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/display/graphic/common"
           }
         },
         {
