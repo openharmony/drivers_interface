@@ -63,6 +63,8 @@ static item_info_t g_ohosCameraProperties[OHOS_CAMERA_PROPERTIES_END - OHOS_CAME
         OHOS_CAMERA_PROPERTIES_START] = {"sketchEnableRatio",       META_TYPE_FLOAT, -1},
     [OHOS_ABILITY_SKETCH_REFERENCE_FOV_RATIO -
         OHOS_CAMERA_PROPERTIES_START] = {"sketchReferenceFovRatio", META_TYPE_FLOAT, -1},
+    [OHOS_ABILITY_CAMERA_FOLDSCREEN_TYPE -
+        OHOS_CAMERA_PROPERTIES_START] = {"cameraFoldscreenType", META_TYPE_BYTE, 1},
 };
 
 static item_info_t g_ohosCameraSensor[OHOS_CAMERA_SENSOR_END - OHOS_CAMERA_SENSOR_START] = {
