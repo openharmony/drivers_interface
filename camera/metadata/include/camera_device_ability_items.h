@@ -97,6 +97,7 @@ typedef enum camera_device_metadata_tag {
     OHOS_ABILITY_CAMERA_MODES,
     OHOS_ABILITY_SKETCH_ENABLE_RATIO,
     OHOS_ABILITY_SKETCH_REFERENCE_FOV_RATIO,
+    OHOS_ABILITY_CAMERA_FOLDSCREEN_TYPE,
     OHOS_CAMERA_PROPERTIES_END,
 
     OHOS_SENSOR_EXPOSURE_TIME = OHOS_CAMERA_SENSOR_START,
@@ -514,5 +515,11 @@ typedef enum camera_xmage_color_type {
     CAMERA_CUSTOM_COLOR_SOFT,
 } camera_xmage_color_type_t;
 
+// OHOS_ABILITY_CAMERA_FOLDSCREEN_TYPE enumeration values
+typedef enum camera_fold_screen_enum {
+    OHOS_CAMERA_FOLDSCREEN_OTHER = 0,
+    OHOS_CAMERA_FOLDSCREEN_INNER,
+    OHOS_CAMERA_FOLDSCREEN_OUTER,
+} camera_foldscreen_enum_t;
 
 #endif
