@@ -1761,17 +1761,5 @@ import ohos.hdi.ril.v1_1.Types;
      * @version 1.1
      */
     GetRrcConnectionStateUpdated([in] struct RilRadioResponseInfo responseInfo, [in] int state);
-
-    /**
-     * @brief Callback for reporting resident network.
-     *
-     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
-     * For details, see {@link RilRadioResponseInfo}.
-     * @param plmn Resident network.
-     *
-     * @since 4.1
-     * @version 1.1
-     */
-    ResidentNetworkUpdated([in] struct RilRadioResponseInfo responseInfo, [in] String plmn);
 }
 /** @} */
