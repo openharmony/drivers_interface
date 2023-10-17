@@ -16,10 +16,10 @@
         "ram": "1024KB",
         "deps": {
             "components": [
-                "c_utils",
+                "ipc",
                 "hdf_core",
                 "hilog",
-                "ipc"
+                "c_utils"
             ],
             "third_party": []
         },
