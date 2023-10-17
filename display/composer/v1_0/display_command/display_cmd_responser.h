@@ -622,6 +622,7 @@ EXIT:
         if (ret != HDF_SUCCESS) {
             errMaps_.emplace(REQUEST_CMD_SET_LAYER_TRANSFORM_MODE, ret);
         }
+    
         return;
     }
 
@@ -695,74 +696,85 @@ EXIT:
         return;
     }
 
+    typedef struct LayerBufferData {
+        bool isValidBuffer;
+        uint32_t devId;
+        uint32_t layerId;
+        uint32_t seqNo;
+        int32_t fence;
+        BufferHandle *buffer;
+    } LayerBufferData;
+
+    int32_t  UnPackLayerBufferInfo(std::shared_ptr<CommandDataUnpacker> unpacker, const std::vector<HdifdInfo>& inFds,
+        struct LayerBufferData *data, std::vector<uint32_t> &deletingList)
+    {
+        DISPLAY_CHK_RETURN(HDF_SUCCESS != CmdUtils::SetupDeviceUnpack(unpacker, data->devId, data->layerId),
+            HDF_FAILURE, HDF_LOGE("%{public}s, read devId error", __func__));
+
+        DISPLAY_CHK_RETURN(HDF_SUCCESS != CmdUtils::BufferHandleUnpack(unpacker, inFds, data->buffer), HDF_FAILURE,
+            HDF_LOGE("%{public}s, read BufferHandleUnpack error", __func__));
+
+        data->isValidBuffer = true;
+
+        DISPLAY_CHK_RETURN(true != unpacker->ReadUint32(data->seqNo), HDF_FAILURE,
+            HDF_LOGE("%{public}s, read seqNo error", __func__));
+
+        DISPLAY_CHK_RETURN(HDF_SUCCESS != CmdUtils::FileDescriptorUnpack(unpacker, inFds, data->fence), HDF_FAILURE,
+            HDF_LOGE("%{public}s, FileDescriptorUnpack error", __func__));
+
+        // unpack deletingList
+        uint32_t vectSize = 0;
+        DISPLAY_CHK_RETURN(true != unpacker->ReadUint32(vectSize), HDF_FAILURE,
+            HDF_LOGE("%{public}s, read vectSize error", __func__));
+        deletingList.resize(vectSize);
+        for (uint32_t i = 0; i < vectSize; i++) {
+            DISPLAY_CHK_RETURN(true != unpacker->ReadUint32(deletingList[i]), HDF_FAILURE,
+                HDF_LOGE("%{public}s, read seqNo error, at i = %{public}d", __func__, i));
+        }
+        return HDF_SUCCESS;
+    }
+
     void OnSetLayerBuffer(std::shared_ptr<CommandDataUnpacker> unpacker, const std::vector<HdifdInfo>& inFds)
     {
         DISPLAY_TRACE;
 
-        uint32_t devId = 0;
-        uint32_t layerId = 0;
-        BufferHandle *buffer = nullptr;
-        int32_t ret = HDF_SUCCESS;
+        struct LayerBufferData data;
+        std::vector<uint32_t> deletingList;
+        
+        int32_t ret = UnPackLayerBufferInfo(unpacker, inFds, &data, deletingList);
+        HdifdParcelable fdParcel(data.fence);
 
-        DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::SetupDeviceUnpack(unpacker, devId, layerId),
-            HDF_LOGE("%{public}s, read devId error", __func__));
-
-        DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::BufferHandleUnpack(unpacker, inFds, buffer),
-            HDF_LOGE("%{public}s, read BufferHandleUnpack error", __func__));
-        bool isValidBuffer = (ret == HDF_SUCCESS ? true : false);
-
-        uint32_t seqNo = 0;
-        bool result = true;
-        DISPLAY_CHK_CONDITION(result, ret == HDF_SUCCESS, unpacker->ReadUint32(seqNo),
-            HDF_LOGE("%{public}s, read seqNo error", __func__));
-        ret = result ? HDF_SUCCESS : HDF_FAILURE;
-
-        int32_t fence = -1;
-        DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::FileDescriptorUnpack(unpacker, inFds, fence),
-            HDF_LOGE("%{public}s, FileDescriptorUnpack error", __func__));
-
-        HdifdParcelable fdParcel(fence);
-
-        // unpack deletingList
-        uint32_t vectSize = 0;
-        DISPLAY_CHK_CONDITION(result, ret == HDF_SUCCESS, unpacker->ReadUint32(vectSize),
-            HDF_LOGE("%{public}s, read vectSize error", __func__));
-
-        std::vector<uint32_t> deletingList(vectSize);
-        for (uint32_t i = 0; i < vectSize; i++) {
-            DISPLAY_CHK_CONDITION(result, true, unpacker->ReadUint32(deletingList[i]),
-                HDF_LOGE("%{public}s, read seqNo error, at i = %{public}d", __func__, i));
-            if (result != true) {
-                break;
-            }
+        if (ret != HDF_SUCCESS) {
+            goto EXIT;
         }
-        ret = result ? HDF_SUCCESS : HDF_FAILURE;
         {
             DISPLAY_CHECK(cacheMgr_ == nullptr, goto EXIT);
             std::lock_guard<std::mutex> lock(cacheMgr_->GetCacheMgrMutex());
             DeviceCache* devCache = nullptr;
             LayerCache* layerCache = nullptr;
-            devCache = cacheMgr_->DeviceCacheInstance(devId);
+            devCache = cacheMgr_->DeviceCacheInstance(data.devId);
             DISPLAY_CHECK(devCache == nullptr, goto EXIT);
-            layerCache = devCache->LayerCacheInstance(layerId);
+            layerCache = devCache->LayerCacheInstance(data.layerId);
             DISPLAY_CHECK(layerCache == nullptr, goto EXIT);
 
-            ret = layerCache->SetLayerBuffer(buffer, seqNo, deletingList, [&](const BufferHandle& handle)->int32_t {
-                DumpLayerBuffer(devId, layerId, fence, handle);
+            ret = layerCache->SetLayerBuffer(data.buffer, data.seqNo, deletingList,
+                [&](const BufferHandle& handle)->int32_t {
+                DumpLayerBuffer(data.devId, data.layerId, data.fence, handle);
 
-                int rc = impl_->SetLayerBuffer(devId, layerId, handle, fdParcel.GetFd());
+                int rc = impl_->SetLayerBuffer(data.devId, data.layerId, handle, fdParcel.GetFd());
                 DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
                 return HDF_SUCCESS;
             });
         }
+
 #ifndef DISPLAY_COMMUNITY
         fdParcel.Move();
 #endif // DISPLAY_COMMUNITY
 EXIT:
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("%{public}s, SetLayerBuffer error", __func__);
-            if (isValidBuffer != HDF_SUCCESS) {
-                FreeBufferHandle(buffer);
+            if (data.isValidBuffer) {
+                FreeBufferHandle(data.buffer);
             }
             errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, ret);
         }

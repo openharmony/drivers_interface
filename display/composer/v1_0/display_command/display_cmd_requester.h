@@ -611,23 +611,9 @@ private:
         return HDF_SUCCESS;
     }
 
-    int32_t DoReplyResults(uint32_t replyEleCnt, std::vector<HdifdInfo> replyFds, std::shared_ptr<char> replyData,
-        std::function<int32_t(void *)> fn)
+    int32_t ProcessUnpackCmd(std::shared_ptr<CommandDataUnpacker> replyUnpacker, int32_t unpackCmd,
+        std::vector<HdifdInfo> replyFds, std::function<int32_t(void *)> fn)
     {
-        std::shared_ptr<CommandDataUnpacker> replyUnpacker = std::make_shared<CommandDataUnpacker>();
-        DISPLAY_CHK_RETURN(replyUnpacker == nullptr, HDF_FAILURE,
-            HDF_LOGE("%{public}s: CommandDataUnpacker construct failed", __func__));
-        replyUnpacker->Init(replyData.get(), replyEleCnt * CmdUtils::ELEMENT_SIZE);
-#ifdef DEBUG_DISPLAY_CMD_RAW_DATA
-        replyUnpacker->Dump();
-#endif // DEBUG_DISPLAY_CMD_RAW_DATA
-        int32_t unpackCmd = -1;
-        bool retBool = replyUnpacker->PackBegin(unpackCmd);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: PackBegin failed", __func__));
-        DISPLAY_CHK_RETURN(unpackCmd != CONTROL_CMD_REPLY_BEGIN, HDF_FAILURE,
-            HDF_LOGE("%{public}s: PackBegin cmd not match, unpackCmd=%{public}d", __func__, unpackCmd));
-
         int32_t ret = HDF_SUCCESS;
         while (replyUnpacker->NextSection()) {
             bool retBool = replyUnpacker->BeginSection(unpackCmd);
@@ -671,6 +657,29 @@ private:
                     return HDF_FAILURE;
             }
         }
+        return HDF_SUCCESS;
+    }
+
+    int32_t DoReplyResults(uint32_t replyEleCnt, std::vector<HdifdInfo> replyFds, std::shared_ptr<char> replyData,
+        std::function<int32_t(void *)> fn)
+    {
+        std::shared_ptr<CommandDataUnpacker> replyUnpacker = std::make_shared<CommandDataUnpacker>();
+        DISPLAY_CHK_RETURN(replyUnpacker == nullptr, HDF_FAILURE,
+            HDF_LOGE("%{public}s: CommandDataUnpacker construct failed", __func__));
+        replyUnpacker->Init(replyData.get(), replyEleCnt * CmdUtils::ELEMENT_SIZE);
+#ifdef DEBUG_DISPLAY_CMD_RAW_DATA
+        replyUnpacker->Dump();
+#endif // DEBUG_DISPLAY_CMD_RAW_DATA
+        int32_t unpackCmd = -1;
+        bool retBool = replyUnpacker->PackBegin(unpackCmd);
+        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s: PackBegin failed", __func__));
+        DISPLAY_CHK_RETURN(unpackCmd != CONTROL_CMD_REPLY_BEGIN, HDF_FAILURE,
+            HDF_LOGE("%{public}s: PackBegin cmd not match, unpackCmd=%{public}d", __func__, unpackCmd));
+        if (ProcessUnpackCmd(replyUnpacker, unpackCmd, replyFds, fn) != HDF_SUCCESS) {
+            return HDF_FAILURE;
+        }
+
         retBool = replyUnpacker->PackEnd(unpackCmd);
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
             HDF_LOGE("%{public}s: PackEnd failed", __func__));
