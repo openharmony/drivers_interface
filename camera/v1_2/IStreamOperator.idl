@@ -18,7 +18,7 @@
  *
  * @brief Declares APIs for stream operations.
  *
- * @since 4.2
+ * @since 4.1
  * @version 1.2
  */
 
@@ -41,7 +41,7 @@ interface IStreamOperator extends ohos.hdi.camera.v1_1.IStreamOperator {
      * @return Returns <b>NO_ERROR</b> if the operation is successful;
      * returns an error code defined in {@link CamRetCode} otherwise.
      *
-     * @since 4.2
+     * @since 4.1
      * @version 1.2
      */
     UpdateStreams([in] struct StreamInfo_V1_1[] streamInfos);

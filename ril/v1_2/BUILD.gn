@@ -11,31 +11,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
+DRIVERS_DIR = "../../.."
+import("$DRIVERS_DIR/hdf_core/adapter/uhdf2/hdi.gni")
 if (defined(ohos_lite)) {
-  group("libcamera_proxy_1.2") {
+  group("libril_proxy_1.2") {
     deps = []
     public_configs = []
   }
 } else {
-  hdi("camera") {
-    module_name = "camera_service"
-    imports = [ "ohos.hdi.camera.v1_1:camera" ]
-
+  hdi("ril") {
+    module_name = "ril_service"
+    imports = [ "ohos.hdi.ril.v1_1:ril" ]
     sources = [
-      "ICameraDevice.idl",
-      "ICameraHost.idl",
-      "IStreamOperator.idl",
-      "Types.idl",
+      "IRil.idl",
+      "IRilCallback.idl",
     ]
-
-    sequenceable_pub_deps = [
-      "../sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0",
-    ]
-    sequenceable_ext_deps = [ "graphic_chipsetsdk:surface" ]
-
     language = "cpp"
     subsystem_name = "hdf"
-    part_name = "drivers_interface_camera"
+    part_name = "drivers_interface_ril"
   }
 }

@@ -31,6 +31,7 @@ const std::vector<int32_t> METADATATAGS = {
     OHOS_CAMERA_STREAM_ID,
     OHOS_ABILITY_SKETCH_ENABLE_RATIO,
     OHOS_ABILITY_SKETCH_REFERENCE_FOV_RATIO,
+    OHOS_ABILITY_AVAILABLE_COLOR_SPACES,
 
     OHOS_SENSOR_EXPOSURE_TIME,
     OHOS_SENSOR_COLOR_CORRECTION_GAINS,
@@ -1036,7 +1037,7 @@ std::string FormatCameraMetadataToString(const common_metadata_header_t *metadat
     for (auto it = METADATATAGS.begin(); it != METADATATAGS.end(); it++) {
         metaStr += MetadataItemDump(metadataHeader, *it);
     }
-
+    METADATA_INFO_LOG("metadataHeader item = %{public}s", metaStr.c_str());
     return metaStr;
 }
 } // Camera
