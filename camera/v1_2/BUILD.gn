@@ -25,12 +25,17 @@ if (defined(ohos_lite)) {
     sources = [
       "ICameraDevice.idl",
       "ICameraHost.idl",
+      "IImageProcessCallback.idl",
+      "IImageProcessService.idl",
+      "IImageProcessSession.idl",
       "IStreamOperator.idl",
       "Types.idl",
     ]
 
     sequenceable_pub_deps = [
+      "../sequenceable/buffer_handle:libbuffer_handle_sequenceable_1.0",
       "../sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0",
+      "../sequenceable/map_data:libmap_data_sequenceable_1.0",
     ]
     sequenceable_ext_deps = [ "graphic_chipsetsdk:surface" ]
 
