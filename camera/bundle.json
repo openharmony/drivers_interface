@@ -31,6 +31,8 @@
           "//drivers/interface/camera/v1_1:camera_idl_target",
           "//drivers/interface/camera/v1_0:camera_idl_target",
           "//drivers/interface/camera/sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0",
+          "//drivers/interface/camera/sequenceable/buffer_handle:libbuffer_handle_sequenceable_1.0",
+          "//drivers/interface/camera/sequenceable/map_data:libmap_data_sequenceable_1.0",
           "//drivers/interface/camera/metadata:metadata",
           "//drivers/interface/camera/v1_2:libcamera_stub_1.2",
           "//drivers/interface/camera/v1_1:libcamera_stub_1.1",
@@ -132,6 +134,24 @@
                 "buffer_producer_sequenceable.h"
               ],
               "header_base": "//drivers/interface/camera/sequenceable/buffer_producer"
+            }
+          },
+          {
+            "name": "//drivers/interface/camera/sequenceable/buffer_handle:libbuffer_handle_sequenceable_1.0",
+            "header": {
+              "header_files": [
+                "buffer_handle_sequenceable.h"
+              ],
+              "header_base": "//drivers/interface/camera/sequenceable/buffer_handle"
+            }
+          },
+          {
+            "name": "//drivers/interface/camera/sequenceable/map_data:libmap_data_sequenceable_1.0",
+            "header": {
+              "header_files": [
+                "map_data_sequenceable.h"
+              ],
+              "header_base": "//drivers/interface/camera/sequenceable/map_data"
             }
           }
         ]

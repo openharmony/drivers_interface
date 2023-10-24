@@ -24,10 +24,11 @@
  */
 
 package ohos.hdi.camera.v1_2;
-sequenceable ohos.hdi.camera.v1_0.BufferProducerSequenceable;
 
 import ohos.hdi.camera.v1_1.Types;
 
+sequenceable ohos.hdi.camera.v1_0.BufferHandleSequenceable;
+sequenceable ohos.hdi.camera.v1_0.MapDataSequenceable;
 /**
  * @brief Enumerates types of the extended stream information.
  */
@@ -88,4 +89,144 @@ enum OperationMode_V1_2 {
      * Scan mode, which dedicated to scan code
      */
     SCAN_CODE = 7,
+};
+
+/**
+ * @brief Enumerates types of the defferred delivery image.
+ */
+enum DefferredDeliveryImageType {
+    /**
+     * Not support defferred delivery image.
+     */
+    NONE = 0,
+
+    /**
+     * Support still image.
+     */
+    STILL_IMAGE = 1,
+
+    /**
+     * Support moving image.
+     */
+    MOVING_IMAGE = 2,
+};
+
+/**
+ * @brief Enumerates types of the session statues.
+ */
+enum SessionStatus {
+    /**
+     * Session is ready.
+     */
+    SESSION_STATUS_READY = 0,
+
+    /**
+     * Session is ready but the storage limit has been reached.
+     */
+    SESSION_STATUS_READY_SPACE_LIMIT_REACHED = 1,
+
+    /**
+     * Session is not ready temporarily.
+     */
+    SESSSON_STATUS_NOT_READY_TEMPORARILY = 2,
+
+    /**
+     * Session is not ready because of overheat.
+     */
+    SESSION_STATUS_NOT_READY_OVERHEAT = 3,
+
+    /**
+     * Session is not ready because of preempted.
+     */
+    SESSION_STATUS_NOT_READY_PREEMPTED = 4,
+};
+
+/**
+ * @brief Enumerates types of the error codes.
+ */
+enum ErrorCode {
+    /**
+     * Timeout.
+     */
+    TIMEOUT = 0,
+
+    /**
+     * Error.
+     */
+    ERROR = 1,
+
+    /**
+     * Busy.
+     */
+    BUSY = 3,
+
+    /**
+     * High temperature.
+     */
+    HIGH_TEMPERATURE = 4,
+
+    /**
+     * Abort.
+     */
+    ABORT = 5,
+};
+
+/**
+ * @brief Enumerates types of the execution modes.
+ */
+enum ExecutionMode {
+    /**
+     * High performance mode.
+     */
+    HIGH_PREFORMANCE = 0,
+
+    /**
+     * Balance mode.
+     */
+    BALANCED = 1,
+
+    /**
+     * Low power mode.
+     */
+    LOW_POWER = 2,
+};
+
+/**
+ * @brief Defines the ImageBufferInfo, which is used by {@link IImageProcessCallback::OnProcessDone}.
+ */
+struct ImageBufferInfo {
+    /**
+     * Is the metadata valid.
+     */
+    boolean isMetaDataValid;
+
+    /**
+     * Data of metadata.
+     */
+    MapDataSequenceable metadata;
+
+    /**
+     * Data of ImageHandle.
+     */
+    BufferHandleSequenceable imageHandle;
+
+    /**
+     * Is gainMapHandle valid.
+     */
+    boolean isGainMapValid;
+
+    /**
+     * Data of gainMapHandle.
+     */
+    BufferHandleSequenceable gainMapHandle;
+
+    /**
+     * Is depthMapHandle valid.
+     */
+    boolean isDepthMapValid;
+
+    /**
+     * Data of depthMapHandle.
+     */
+    BufferHandleSequenceable depthMapHandle;
 };
