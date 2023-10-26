@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -33,6 +33,7 @@ BufferHandleSequenceable::BufferHandleSequenceable(const BufferHandle &bufferHan
     }
     bufferHandle_ = newBufferHandle;
 }
+
 bool BufferHandleSequenceable::Marshalling(Parcel &parcel) const
 {
     if (bufferHandle_ == nullptr) {
@@ -43,7 +44,7 @@ bool BufferHandleSequenceable::Marshalling(Parcel &parcel) const
         return false;
     }
     return true ;
-};
+}
 
 sptr<BufferHandleSequenceable> BufferHandleSequenceable::Unmarshalling(Parcel &parcel)
 {
@@ -55,7 +56,7 @@ sptr<BufferHandleSequenceable> BufferHandleSequenceable::Unmarshalling(Parcel &p
         sequenceData->bufferHandle_ = newBufferHandle;
     }
     return sequenceData;
-};
+}
 
 }
 }
