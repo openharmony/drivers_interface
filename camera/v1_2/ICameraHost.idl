@@ -26,6 +26,7 @@ package ohos.hdi.camera.v1_2;
 
 import ohos.hdi.camera.v1_1.ICameraHost;
 import ohos.hdi.camera.v1_1.ICameraDevice;
+import ohos.hdi.camera.v1_2.ICameraHostCallback;
 
 interface ICameraHost extends ohos.hdi.camera.v1_1.ICameraHost {
     /**
@@ -43,4 +44,33 @@ interface ICameraHost extends ohos.hdi.camera.v1_1.ICameraHost {
      * @version 1.2
      */
     NotifyDeviceStateChangeInfo([in] int notifyType, [in] int deviceState);
+
+    /**
+     * @brief Sets callbacks. For details about the callbacks, see {@link ICameraHostCallback}.
+     *
+     * @param callback Indicates the callbacks to set.
+     *
+     * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
+     * in {@link CamRetCode} otherwise.
+     *
+     * @since 4.1
+     * @version 1.2
+     */
+    SetCallbackV1_2([in] ICameraHostCallback callbackObj);
+
+    /**
+     * @brief Turns on or off the flash.
+     *
+     * This function can be used only by the caller who has opened the camera device.
+     *
+     * @param level Specifies whether to turn on or off the flash. The value 1 means to turn on the flash,
+     * and 0 means the opposite.
+     *
+     * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
+     * in {@link CamRetCode} otherwise.
+     *
+     * @since 4.1
+     * @version 1.2
+     */
+    SetFlashlightV1_2([in] float level);
 }

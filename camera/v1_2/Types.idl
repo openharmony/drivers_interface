@@ -29,6 +29,57 @@ import ohos.hdi.camera.v1_1.Types;
 
 sequenceable ohos.hdi.camera.v1_0.BufferHandleSequenceable;
 sequenceable ohos.hdi.camera.v1_0.MapDataSequenceable;
+
+/**
+ * @brief Enumerates return values of the HDIs.
+ */
+enum CamRetCode {
+    /**
+     * Successful call.
+     */
+    NO_ERROR = 0,
+
+    /**
+     * The camera device is busy.
+     */
+    CAMERA_BUSY = -1,
+
+    /**
+     * Insufficient resources.
+     */
+    INSUFFICIENT_RESOURCES = -2,
+
+    /**
+     * Invalid parameters.
+     */
+    INVALID_ARGUMENT = -3,
+
+    /**
+     * Unsupported function.
+     */
+    METHOD_NOT_SUPPORTED = -4,
+
+    /**
+     * The camera device is closed.
+     */
+    CAMERA_CLOSED = -5,
+
+    /**
+     * A critical error occurs at the driver layer.
+     */
+    DEVICE_ERROR = -6,
+
+    /**
+     * No permission to access the camera device.
+     */
+    NO_PERMISSION = -7,
+
+    /**
+     * Device conflicts.
+     */
+    DEVICE_CONFLICT = -8
+};
+
 /**
  * @brief Enumerates types of the extended stream information.
  */
