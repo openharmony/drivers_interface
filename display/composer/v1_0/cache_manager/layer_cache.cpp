@@ -65,7 +65,7 @@ int32_t LayerCache::SetBufferCacheMaxCount(uint32_t cacheCount)
     return HDF_SUCCESS;
 }
 
-int32_t LayerCache::SetLayerBuffer(const BufferHandle* buffer, uint32_t seqNo,
+int32_t LayerCache::SetLayerBuffer(const BufferHandle* buffer, uint32_t seqNo, bool &needFreeBuffer,
     const std::vector<uint32_t>& deletingList, std::function<int32_t (const BufferHandle&)> realFunc)
 {
     bool result = false;
@@ -76,7 +76,7 @@ int32_t LayerCache::SetLayerBuffer(const BufferHandle* buffer, uint32_t seqNo,
     }
 
     BufferHandle* handle = BufferCacheUtils::NativeBufferCache(bufferCaches_,
-        const_cast<BufferHandle*>(buffer), seqNo, layerId_);
+        const_cast<BufferHandle*>(buffer), seqNo, layerId_, needFreeBuffer);
     DISPLAY_CHK_RETURN(handle == nullptr, HDF_FAILURE,
         HDF_LOGE("%{public}s: call NativeBufferCache fail", __func__));
     int32_t ret = realFunc(*handle);

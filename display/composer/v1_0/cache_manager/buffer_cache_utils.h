@@ -34,9 +34,10 @@ namespace V1_0 {
 class BufferCacheUtils {
 public:
     static BufferHandle* NativeBufferCache(const std::shared_ptr<CacheManager<uint32_t, NativeBuffer>>& cacheMgr,
-        BufferHandle* buffer, uint32_t seqNo, uint32_t callerId)
+        BufferHandle* buffer, uint32_t seqNo, uint32_t callerId, bool &needFreeBuffer)
     {
         BufferHandle* handle = nullptr;
+        needFreeBuffer = false;
         if (buffer == nullptr && seqNo != UINT32_MAX) {
             // Fetch buffer from caches indexed by seqNo
             NativeBuffer* nativeBuffer = cacheMgr->SearchCache(seqNo);
@@ -63,6 +64,7 @@ public:
                 delete nativeBuffer;
                 HDF_LOGE("%{public}s: Set buffer cache fail, callerId=%{public}u, seqNo=%{public}u",
                     __func__, callerId, seqNo);
+                needFreeBuffer = true;
             } else {
                 handle = buffer;
             }
@@ -71,6 +73,7 @@ public:
             // Caches not used
             HDF_LOGI("%{public}s: buffer cache passthrough", __func__);
             handle = buffer;
+            needFreeBuffer = true;
         } else {
             // Input arguments error
             DISPLAY_CHK_RETURN(((buffer == nullptr)), nullptr,

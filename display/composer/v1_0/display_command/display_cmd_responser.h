@@ -24,6 +24,7 @@
 #include <sys/time.h>
 #include <unistd.h>
 #include <unordered_map>
+#include <queue>
 
 #include "base/hdi_smq.h"
 #include "buffer_handle_utils.h"
@@ -52,6 +53,7 @@ using namespace OHOS::HDI::Display::Buffer::V1_0;
 using HdifdSet = std::vector<std::shared_ptr<HdifdParcelable>>;
 
 static constexpr uint32_t TIME_BUFFER_MAX_LEN = 15;
+static constexpr uint32_t BUFFER_QUEUE_MAX_SIZE = 6;
 
 static sptr<IMapper> g_bufferServiceImpl = nullptr;
 
@@ -76,7 +78,15 @@ public:
         replyCommandCnt_(0),
         replyPacker_(nullptr) {}
 
-    ~DisplayCmdResponser() {}
+    ~DisplayCmdResponser()
+    {
+        while (bufferQueue_.size() > 0) {
+            BufferHandle *temp = bufferQueue_.front();
+            bufferQueue_.pop();
+            FreeBufferHandle(temp);
+            temp = nullptr;
+        }
+    }
 
     int32_t InitCmdRequest(const std::shared_ptr<Transfer>& request)
     {
@@ -335,28 +345,55 @@ EXIT:
         return;
     }
 
+    typedef struct ClientBufferData {
+        uint32_t devId;
+        uint32_t seqNo;
+        int32_t fence;
+        BufferHanlde *buffer;
+        bool isValidBuffer;
+    } ClientBufferData;
+
+    int32_t UnpackDisplayClientBufferInfo(std::shared_ptr<CommandDataUnpacker> unpacker,
+        const std::vector<HdifdInfo>& inFds, ClientBufferData &data)
+    {
+        if (!unpacker->ReadUint32(data.devId)) {
+            return HDF_FAILURE;
+        }
+
+        if (CmdUtils::BufferHandleUnpack(unpacker, inFds, data.buffer) != HDF_SUCCESS) {
+            data.isValidBuffer = false;
+            HDF_LOGE("%{public}s, read buffer handle error", __func__);
+            return HDF_FAILURE;
+        }
+        data.isValidBuffer = true;
+
+        if (!unpacker->ReadUint32(data.seqNo)) {
+            HDF_LOGE("%{public}s, read seqNo error", __func__);
+            return HDF_FAILURE;
+        }
+
+        if (CmdUtils::FileDescriptorUnpack(unpacker, inFds, data.fence) != HDF_SUCCESS) {
+            HDF_LOGE("%{public}s, FileDescriptorUnpack error", __func__);
+            return HDF_FAILURE;
+        }
+
+        return HDF_SUCCESS;
+    }
+
     void OnSetDisplayClientBuffer(std::shared_ptr<CommandDataUnpacker> unpacker, const std::vector<HdifdInfo>& inFds)
     {
         DISPLAY_TRACE;
 
-        uint32_t devId = 0;
-        int32_t ret = unpacker->ReadUint32(devId) ? HDF_SUCCESS : HDF_FAILURE;
+        ClientBufferData data = {0};
+        data.fence = -1;
+        bool needFreeBuffer = false;
+        int ret = UnpackDisplayClientBufferInfo(unpacker, inFds, data);
+        HdifdParcelable fdParcel(data.fence);
 
-        BufferHandle *buffer = nullptr;
-        DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::BufferHandleUnpack(unpacker, inFds, buffer),
-            HDF_LOGE("%{public}s, read buffer handle error", __func__));
-        bool isValidBuffer = (ret == HDF_SUCCESS ? true : false);
+        if (ret != HDF_SUCCESS) {
+            goto EXIT;
+        }
 
-        uint32_t seqNo = -1;
-        bool result = true;
-        DISPLAY_CHK_CONDITION(result, ret == HDF_SUCCESS, unpacker->ReadUint32(seqNo),
-            HDF_LOGE("%{public}s, read seqNo error", __func__));
-        ret = result ? HDF_SUCCESS : HDF_FAILURE;
-
-        int32_t fence = -1;
-        DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::FileDescriptorUnpack(unpacker, inFds, fence),
-            HDF_LOGE("%{public}s, FileDescriptorUnpack error", __func__));
-        HdifdParcelable fdParcel(fence);
         {
             if (cacheMgr_ == nullptr) {
                 ret = HDF_FAILURE;
@@ -365,32 +402,37 @@ EXIT:
             }
             std::lock_guard<std::mutex> lock(cacheMgr_->GetCacheMgrMutex());
 
-            DeviceCache* devCache = cacheMgr_->DeviceCacheInstance(devId);
+            DeviceCache* devCache = cacheMgr_->DeviceCacheInstance(data.devId);
             if (devCache == nullptr) {
                 ret = HDF_FAILURE;
                 HDF_LOGE("%{public}s, get device cache error", __func__);
                 goto EXIT;
             }
 
-            ret = devCache->SetDisplayClientBuffer(buffer, seqNo, [&](const BufferHandle& handle)->int32_t {
-                int rc = impl_->SetDisplayClientBuffer(devId, handle, fdParcel.GetFd());
+            ret = devCache->SetDisplayClientBuffer(data.buffer, data.seqNo, needFreeBuffer,
+                [&](const BufferHandle& handle)->int32_t {
+                int rc = impl_->SetDisplayClientBuffer(data.devId, handle, fdParcel.GetFd());
                 DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
                 return HDF_SUCCESS;
             });
         }
 #ifndef DISPLAY_COMMUNITY
+        // fix fd leak
+        if (data.buffer != nullptr && needFreeBuffer) {
+            FreeBufferWithDelay(data.buffer);
+            data.buffer = nullptr;
+            data.isValidBuffer = false;
+        }
         fdParcel.Move();
 #endif // DISPLAY_COMMUNITY
 EXIT:
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("%{public}s, SetDisplayClientBuffer error", __func__);
-            if (isValidBuffer != HDF_SUCCESS) {
-                FreeBufferHandle(buffer);
+            if (data.isValidBuffer) {
+                FreeBufferHandle(data.buffer);
             }
             errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, ret);
         }
-
-        return;
     }
 
     void OnSetDisplayClientDamage(std::shared_ptr<CommandDataUnpacker> unpacker)
@@ -743,6 +785,7 @@ EXIT:
         
         int32_t ret = UnPackLayerBufferInfo(unpacker, inFds, &data, deletingList);
         HdifdParcelable fdParcel(data.fence);
+        bool needFreeBuffer = false;
 
         if (ret != HDF_SUCCESS) {
             goto EXIT;
@@ -757,7 +800,7 @@ EXIT:
             layerCache = devCache->LayerCacheInstance(data.layerId);
             DISPLAY_CHECK(layerCache == nullptr, goto EXIT);
 
-            ret = layerCache->SetLayerBuffer(data.buffer, data.seqNo, deletingList,
+            ret = layerCache->SetLayerBuffer(data.buffer, data.seqNo, needFreeBuffer, deletingList,
                 [&](const BufferHandle& handle)->int32_t {
                 DumpLayerBuffer(data.devId, data.layerId, data.fence, handle);
 
@@ -768,6 +811,12 @@ EXIT:
         }
 
 #ifndef DISPLAY_COMMUNITY
+        // fix fd leak
+        if (data.buffer != nullptr && needFreeBuffer) {
+            FreeBufferWithDelay(data.buffer);
+            data.buffer = nullptr;
+            data.isValidBuffer = false;
+        }
         fdParcel.Move();
 #endif // DISPLAY_COMMUNITY
 EXIT:
@@ -984,6 +1033,17 @@ EXIT:
 
         return retCode < 0 ? -errno : HDF_SUCCESS;
     }
+private:
+    void FreeBufferWithDelay(BufferHandle *handle)
+    {
+        bufferQueue_.push(handle);
+        if (bufferQueue_.size() >= BUFFER_QUEUE_MAX_SIZE) {
+            BufferHandle *temp = bufferQueue_.front();
+            bufferQueue_.pop();
+            FreeBufferHandle(temp);
+            temp = nullptr;
+        }
+    }
 
 private:
     VdiImpl* impl_ = nullptr;
@@ -995,6 +1055,8 @@ private:
     uint32_t replyCommandCnt_;
     std::shared_ptr<CommandDataPacker> replyPacker_;
     std::unordered_map<int32_t, int32_t> errMaps_;
+    /* fix fd leak */
+    std::queue<BufferHandle *> bufferQueue_;
 };
 using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, IDisplayComposerVdi>;
 } // namespace V1_0
