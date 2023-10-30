@@ -80,9 +80,9 @@ public:
 
     ~DisplayCmdResponser()
     {
-        while (bufferQueue_.size() > 0) {
-            BufferHandle *temp = bufferQueue_.front();
-            bufferQueue_.pop();
+        while (delayFreeQueue_.size() > 0) {
+            BufferHandle *temp = delayFreeQueue_.front();
+            delayFreeQueue_.pop();
             FreeBufferHandle(temp);
             temp = nullptr;
         }
@@ -387,7 +387,7 @@ EXIT:
         ClientBufferData data = {0};
         data.fence = -1;
         bool needFreeBuffer = false;
-        int ret = UnpackDisplayClientBufferInfo(unpacker, inFds, data);
+        int32_t ret = UnpackDisplayClientBufferInfo(unpacker, inFds, data);
         HdifdParcelable fdParcel(data.fence);
 
         if (ret != HDF_SUCCESS) {
@@ -1036,10 +1036,10 @@ EXIT:
 private:
     void FreeBufferWithDelay(BufferHandle *handle)
     {
-        bufferQueue_.push(handle);
-        if (bufferQueue_.size() >= BUFFER_QUEUE_MAX_SIZE) {
-            BufferHandle *temp = bufferQueue_.front();
-            bufferQueue_.pop();
+        delayFreeQueue_.push(handle);
+        if (delayFreeQueue_.size() >= BUFFER_QUEUE_MAX_SIZE) {
+            BufferHandle *temp = delayFreeQueue_.front();
+            delayFreeQueue_.pop();
             FreeBufferHandle(temp);
             temp = nullptr;
         }
@@ -1056,7 +1056,7 @@ private:
     std::shared_ptr<CommandDataPacker> replyPacker_;
     std::unordered_map<int32_t, int32_t> errMaps_;
     /* fix fd leak */
-    std::queue<BufferHandle *> bufferQueue_;
+    std::queue<BufferHandle *> delayFreeQueue_;
 };
 using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, IDisplayComposerVdi>;
 } // namespace V1_0
