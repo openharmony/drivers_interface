@@ -349,7 +349,7 @@ EXIT:
         uint32_t devId;
         uint32_t seqNo;
         int32_t fence;
-        BufferHanlde *buffer;
+        BufferHandle *buffer;
         bool isValidBuffer;
     } ClientBufferData;
 
