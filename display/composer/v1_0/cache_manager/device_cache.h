@@ -44,9 +44,9 @@ public:
     LayerCache* LayerCacheInstance(uint32_t layerId) const;
     int32_t AddLayerCache(uint32_t id, uint32_t bufferCacheCount);
     int32_t RemoveLayerCache(uint32_t id);
-    int32_t SetDisplayClientBuffer(const BufferHandle* buffer, uint32_t seqNo,
+    int32_t SetDisplayClientBuffer(const BufferHandle* buffer, uint32_t seqNo, bool &needFreeBuffer,
         std::function<int32_t (const BufferHandle&)> realFunc);
-    int32_t SetVirtualDisplayBuffer(const BufferHandle* buffer, uint32_t seqNo,
+    int32_t SetVirtualDisplayBuffer(const BufferHandle* buffer, uint32_t seqNo, bool &needFreeBuffer,
         std::function<int32_t (const BufferHandle&)> realFunc);
     DeviceType CacheType() const;
     void Dump() const;
