@@ -14,22 +14,22 @@
  */
 
 #include "display_buffer_hdi_impl.h"
-
 namespace OHOS {
 namespace HDI {
 namespace Display {
 namespace Buffer {
-namespace V1_0 {
+namespace V1_1 {
+using namespace OHOS::HDI::Display::Buffer::V1_1;
 IDisplayBuffer *IDisplayBuffer::Get()
 {
-    IDisplayBuffer *instance = new HdiDisplayBufferImpl();
+    IDisplayBuffer *instance = new V1_1::HdiDisplayBufferImpl();
     if (instance == nullptr) {
         return nullptr;
     }
     return instance;
 }
 
-} // namespace V1_0
+} // namespace V1_1
 } // namespace Buffer
 } // namespace Display
 } // namespace HDI
