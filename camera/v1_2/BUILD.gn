@@ -23,7 +23,6 @@ if (defined(ohos_lite)) {
     imports = [ "ohos.hdi.camera.v1_1:camera" ]
 
     sources = [
-      "ICameraDevice.idl",
       "ICameraHost.idl",
       "ICameraHostCallback.idl",
       "IImageProcessCallback.idl",
