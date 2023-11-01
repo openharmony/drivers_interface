@@ -66,7 +66,7 @@ struct HapticEvent {
     /** ID of the vibration motor. The value 0indicates that all channels are transmitted. The value 1 and 2 indacate the left and right motors of the channel respectively. */
     int index;
     /** Indicates the number of vibration points. */
-    int point_num;
+    int pointNum;
     /** Indicates the vibration point array. */
     struct CurvePoint[] points;
 };
@@ -82,7 +82,7 @@ struct HapticPaket {
     /** Indicates the vibration Data delivery time. */
     int time;
     /** Indicates the vibration Number of data to be delivered. */
-    int event_num;
+    int eventNum;
     /** Indicates the vibration Data delivery event array. */
     struct HapticEvent[] events;
 };
