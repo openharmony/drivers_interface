@@ -234,6 +234,9 @@ typedef enum camera_device_metadata_tag {
     OHOS_CONTROL_BEAUTY_SKIN_TONE_VALUE,
     OHOS_ABILITY_BEAUTY_SKIN_SMOOTH_VALUES,
     OHOS_CONTROL_BEAUTY_SKIN_SMOOTH_VALUE,
+    OHOS_ABILITY_CAMERA_MACRO_SUPPORTED,
+    OHOS_CAMERA_MACRO_STATUS,
+    OHOS_CONTROL_CAMERA_MACRO,
     OHOS_CAMERA_EFFECT_END,
 
     // camera secure related
@@ -527,5 +530,17 @@ typedef enum camera_fold_screen_enum {
     OHOS_CAMERA_FOLDSCREEN_INNER,
     OHOS_CAMERA_FOLDSCREEN_OUTER,
 } camera_foldscreen_enum_t;
+
+// OHOS_ABILITY_CAMERA_MACRO_SUPPORTED enumeration values
+typedef enum camera_macro_supported_type {
+    OHOS_CAMERA_MACRO_NOT_SUPPORTED = 0,
+    OHOS_CAMERA_MACRO_SUPPORTED,
+} camera_macro_supported_type_t;
+
+// OHOS_CAMERA_MACRO_STATUS and OHOS_CONTROL_CAMERA_MACRO enumeration values
+typedef enum camera_macro_status_control_type {
+    OHOS_CAMERA_MACRO_DISABLE = 0,
+    OHOS_CAMERA_MACRO_ENABLE,
+} camera_macro_status_control_type_t;
 
 #endif
