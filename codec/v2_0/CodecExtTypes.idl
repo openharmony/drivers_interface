@@ -159,7 +159,7 @@ struct WorkingFrequencyParam {
 struct ProcessNameParam {
     unsigned int size;              /** Size of the structure */
     union CodecVersionType version; /** Component version */
-    unsigned char[] processName;    /** Process Name */
+    String processName;    /** Process Name */
 };
 
 /**
