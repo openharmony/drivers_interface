@@ -21,7 +21,6 @@ if (defined(ohos_lite)) {
 } else {
   hdi("vibrator") {
     module_name = "vibrator_service"
-    imports = [ "ohos.hdi.vibrator.v1_1:vibrator" ]
 
     sources = [
       "IVibratorInterface.idl",
