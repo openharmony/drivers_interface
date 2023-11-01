@@ -145,6 +145,24 @@ struct ControlRateConstantQuality {
 };
 
 /**
+ * @brief Defines the <b>WorkingFrequencyParam</b>.
+ */
+struct WorkingFrequencyParam {
+    unsigned int size;              /** Size of the structure */
+    union CodecVersionType version; /** Component version */
+    unsigned int level;             /** Working frequency level */
+};
+
+/**
+ * @brief Defines the <b>WorkingFrequencyParam</b>.
+ */
+struct ProcessNameParam {
+    unsigned int size;              /** Size of the structure */
+    union CodecVersionType version; /** Component version */
+    unsigned char[] processName;    /** Process Name */
+};
+
+/**
  * @brief Enumerates the extended codec indexes.
  */
 enum CodecIndexExType {
@@ -164,6 +182,10 @@ enum CodecIndexExType {
     Codec_IndexParamVideoHevc,
     /** range/primary/transfer/matrix */
     Codec_IndexColorAspects,
+    /** WorkingFrequencyParam */
+    Codec_IndexParamWorkingFrequency,
+    /** ProcessNameParam */
+    Codec_IndexParamProcessName,
 };
 
 /**
