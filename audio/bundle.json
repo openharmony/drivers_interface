@@ -26,8 +26,8 @@
       "build": {
         "sub_component": [
           "//drivers/interface/audio/v1_1:libaudio_proxy_1.1",
-          "//drivers/interface/audio/v1_0:libaudio_proxy_1.0",
-          "//drivers/interface/audio/effect/v1_0:libeffect_proxy_1.0"
+          "//drivers/interface/audio/effect/v1_0:libeffect_proxy_1.0",
+          "//drivers/interface/audio/v1_0:libaudio_proxy_1.0"
         ],
         "test": [
         ],
