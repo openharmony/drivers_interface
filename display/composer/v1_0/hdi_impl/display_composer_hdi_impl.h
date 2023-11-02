@@ -232,6 +232,10 @@ public:
         int32_t ret = ToDispErrCode(hdi_->GetDisplayReleaseFence(devId, layers, hdiFences));
         if (ret == DISPLAY_SUCCESS) {
             for (uint32_t i = 0; i < hdiFences.size(); i++) {
+                if (hdiFences[i] == nullptr) {
+                    HDF_LOGE("%{public}s: GetReleaseFence contains nullptr", __func__);
+                    continue;
+                }
                 fences.push_back(hdiFences[i]->Move());
             }
         }
