@@ -21,7 +21,7 @@ if (defined(ohos_lite)) {
 } else {
   hdi("audio") {
     module_name = "audio_service"
-    import = [ "ohos.hdi.audio.v1_0:audio" ]
+    imports = [ "ohos.hdi.audio.v1_0:audio" ]
 
     sources = [ "AudioTypes.idl" ]
 
