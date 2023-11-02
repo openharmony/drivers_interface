@@ -140,6 +140,16 @@ enum OperationMode_V1_2 {
      * Scan mode, which dedicated to scan code
      */
     SCAN_CODE = 7,
+
+    /**
+     * Macro mode, which dedicated to capture code
+     */
+    CAPTURE_MACRO = 8,
+
+    /**
+     * Macro mode, which dedicated to video code
+     */
+    VIDEO_MACRO = 9,
 };
 
 /**

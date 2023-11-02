@@ -254,6 +254,12 @@ static item_info_t g_ohosPostProcess[OHOS_CAMERA_EFFECT_END - OHOS_CAMERA_EFFECT
         OHOS_CAMERA_EFFECT_START] = {"availableSkinToneValues", META_TYPE_INT32, -1},
     [OHOS_CONTROL_BEAUTY_SKIN_TONE_VALUE -
         OHOS_CAMERA_EFFECT_START] = {"skinToneValue", META_TYPE_INT32, 1},
+    [OHOS_ABILITY_CAMERA_MACRO_SUPPORTED -
+        OHOS_CAMERA_EFFECT_START] = {"macroSupportedValue", META_TYPE_BYTE, 1},
+    [OHOS_CAMERA_MACRO_STATUS -
+        OHOS_CAMERA_EFFECT_START] = {"macroStatusValue", META_TYPE_BYTE, 1},
+    [OHOS_CONTROL_CAMERA_MACRO -
+        OHOS_CAMERA_EFFECT_START] = {"macroStatusControlValue", META_TYPE_BYTE, 1},
 };
 
 static item_info_t g_ohosCameraSecure[OHOS_CAMERA_SECURE_END - OHOS_CAMERA_SECURE_START] = {
