@@ -363,6 +363,7 @@ struct OmxCodecBuffer {
     enum ShareMemTypes type;        /**< Shared memory type. */
     long pts;                       /**< Timestamp of the first logical sample in the buffer. */
     unsigned int flag;              /**< Buffer specific flag. */
+    unsigned char[] alongParam;     /**< Along frame parameter. */
 };
 
 /**
