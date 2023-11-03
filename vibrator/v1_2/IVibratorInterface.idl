@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -68,7 +68,7 @@ interface IVibratorInterface extends ohos.hdi.vibrator.v1_1.IVibratorInterface{
     /**
      * @brief Obtains the start_up time of the motor.
      *
-     * @param Indicates the time from the time when the vabration command is issued to the time when the motor starts to vibrate.
+     * @param Indicates the time from command is issued to the time the motor starts.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns negative value if the get failed.
