@@ -150,6 +150,11 @@ enum OperationMode_V1_2 {
      * Macro mode, which dedicated to video code
      */
     VIDEO_MACRO = 9,
+
+    /**
+     * Super stabilization mode, which dedicated to use Suprt stabilization mode
+     */
+    SUPER_STAB = 10,
 };
 
 /**
