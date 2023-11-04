@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 /**
  * @addtogroup Ril
  * @{
@@ -32,7 +32,6 @@ import ohos.hdi.ril.v1_1.Types;
 
 /**
  * @brief Sim matched operator info.
- *
  */
 struct NcfgOperatorInfo {
     /**
@@ -51,4 +50,4 @@ struct NcfgOperatorInfo {
      * Reserved Field
      */
     String reserve;
-}
+};
