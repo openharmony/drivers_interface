@@ -74,7 +74,7 @@ interface IRil extends ohos.hdi.ril.v1_1.IRil {
       * @brief Send sim matched operator info.
       *
       * @param slotId Card slot ID.
-      * @param seriaId Serial ID of a request.
+      * @param serialId Serial ID of a request.
       * @param ncfgOperatorInfo Operator info. For details, see {@link Types}.
       *
       * @return Returns <b>0</b> if the operation is successful.
