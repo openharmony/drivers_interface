@@ -73,6 +73,8 @@ static item_info_t g_ohosCameraProperties[OHOS_CAMERA_PROPERTIES_END - OHOS_CAME
         OHOS_CAMERA_PROPERTIES_START] = {"cameraExposureModePreviewState", META_TYPE_BYTE, 1},
     [OHOS_ABILITY_AVAILABLE_COLOR_SPACES -
         OHOS_CAMERA_PROPERTIES_START] = {"availableColorSpaces", META_TYPE_INT32, -1},
+    [OHOS_CAMERA_USER_ID -
+        OHOS_CAMERA_PROPERTIES_START] = {"cameraUserId", META_TYPE_INT32, -1},
 };
 
 static item_info_t g_ohosCameraSensor[OHOS_CAMERA_SENSOR_END - OHOS_CAMERA_SENSOR_START] = {
@@ -202,6 +204,10 @@ static item_info_t g_ohosStreamAbility[OHOS_STREAM_ABILITY_END - OHOS_STREAM_ABI
         OHOS_STREAM_ABILITY_START] = {"streamPortraitResolusion", META_TYPE_INT32, -1},
     [OHOS_ABILITY_SCENE_STREAM_QUICK_THUMBNAIL_AVAILABLE -
         OHOS_STREAM_ABILITY_START] = {"sceneStreamQuickThumbnailAvailable", META_TYPE_BYTE, -1},
+    [OHOS_ABILITY_DEFERRED_IMAGE_DELIVERY -
+        OHOS_STREAM_ABILITY_START] = {"deferredImageDeliverySupportModes", META_TYPE_BYTE, -1},
+    [OHOS_CONTROL_DEFERRED_IMAGE_DELIVERY -
+        OHOS_STREAM_ABILITY_START] = {"deferredImageDeliveryMode", META_TYPE_BYTE, -1},
 };
 
 static item_info_t g_ohosStreamJpeg[OHOS_STREAM_JPEG_END - OHOS_STREAM_JPEG_START] = {

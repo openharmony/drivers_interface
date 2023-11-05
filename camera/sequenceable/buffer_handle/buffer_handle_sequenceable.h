@@ -13,13 +13,13 @@
  * limitations under the License.
  */
 
-#ifndef OHOS_HDI_BUFFER_HANDLE_H
-#define OHOS_HDI_BUFFER_HANDLE_H
+#ifndef OHOS_HDI_BUFFER_HANDLE_SEQUENCEABLE_H
+#define OHOS_HDI_BUFFER_HANDLE_SEQUENCEABLE_H
 
 #include <parcel.h>
 #include <string>
 #include <vector>
-#include "surface.h"
+#include "buffer_handle.h"
 
 namespace OHOS {
 namespace HDI {
@@ -28,24 +28,24 @@ namespace V1_0 {
 using OHOS::Parcelable;
 using OHOS::Parcel;
 using OHOS::sptr;
-
 class BufferHandleSequenceable : public Parcelable {
 public:
-    BufferHandleSequenceable() = default;
     virtual ~BufferHandleSequenceable() = default;
 
-    explicit BufferHandleSequenceable(const std::shared_ptr<BufferHandle> &bufferHandle):bufferHandle_(bufferHandle) {}
+    explicit BufferHandleSequenceable(BufferHandle *bufferHandle = nullptr);
     explicit BufferHandleSequenceable(const BufferHandle &bufferHandle);
-    BufferHandleSequenceable(const BufferHandleSequenceable &other) {}
-    BufferHandleSequenceable &operator=(const BufferHandleSequenceable &other) = delete;
 
     bool Marshalling(Parcel &parcel) const override;
     static sptr<BufferHandleSequenceable> Unmarshalling(Parcel &parcel);
-
-    std::shared_ptr<BufferHandle> bufferHandle_ = nullptr;
+    static BufferHandle* NewBufferHandle(uint32_t reserveFds, uint32_t reserveInts);
+    void SetBufferHandle(BufferHandle *handle);
+    BufferHandle* GetBufferHandle();
+private:
+    class BufferHandleWrap;
+    std::shared_ptr<BufferHandleWrap> bufferHandleWrap_;
 };
 } // V1_0
 } // Camera
 } // HDI
 } // OHOS
-#endif // OHOS_HDI_SEQUENCE_DATA_H
+#endif // OHOS_HDI_BUFFER_HANDLE_SEQUENCEABLE_H

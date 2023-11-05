@@ -126,7 +126,7 @@ bool MapDataSequenceable::Marshalling(Parcel &parcel) const
                 break;
         }
     }
-    return ERROR_OK;
+    return true;
 }
 
 int32_t MapDataSequenceable::Get(const std::string &key, int32_t &value) const

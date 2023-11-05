@@ -40,7 +40,7 @@ interface IImageProcessService {
      */
     CreateImageProcessSession([in] int userId,
         [in] IImageProcessCallback imageProcessCallback,
-        [in] IImageProcessSession imageProcessSession);
+        [out] IImageProcessSession imageProcessSession);
 
     /**
      * @brief Resigter back ground post capture callback.
