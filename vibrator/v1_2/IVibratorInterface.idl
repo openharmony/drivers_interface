@@ -76,5 +76,5 @@ interface IVibratorInterface extends ohos.hdi.vibrator.v1_1.IVibratorInterface{
      * @since 4.1
      * @version 1.2
      */
-    GetHapticStartUpTime([out] int startUpTime, [in] int mode);
+    GetHapticStartUpTime([in] int mode, [out] int startUpTime);
 }
