@@ -20,10 +20,10 @@ enum BufferHandleAttrKey {
     ATTRKEY_COLORSPACE_INFO = 1,            // value: CM_ColorSpaceInfo
     ATTRKEY_COLORSPACE_TYPE,                // value: CM_ColorSpaceType
     ATTRKEY_HDR_METADATA_TYPE,              // value: CM_HDRMetaDataType
-    
+
     ATTRKEY_HDR_STATIC_METADATA,            // value: HdrStaticMetadata
     ATTRKEY_HDR_DYNAMIC_METADATA,           // byte stream of SEI in video stream
-    
+
     ATTRKEY_HDR_PROCESSED,                  // value: int
     ATTRKEY_CROP_REGION,                    // value: Meta_Rect_Region
     ATTRKEY_EXPECT_FPS,                     // value: int
@@ -33,5 +33,6 @@ enum BufferHandleAttrKey {
     ATTRKEY_VENDOR_EXT_START = 2048,
 
     /* temporarily extended meta type, between system and vendor */
-    ATTRKEY_OEM_EXT_START = 4096
+    ATTRKEY_OEM_EXT_START = 4096,
+    ATTRKEY_END = 8192
 };
