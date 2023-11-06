@@ -33,5 +33,6 @@ enum BufferHandleAttrKey {
     ATTRKEY_VENDOR_EXT_START = 2048,
 
     /* temporarily extended meta type, between system and vendor */
-    ATTRKEY_OEM_EXT_START = 4096
+    ATTRKEY_OEM_EXT_START = 4096,
+    ATTRKEY_END = 8192
 };
