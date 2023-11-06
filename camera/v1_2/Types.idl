@@ -158,11 +158,11 @@ enum OperationMode_V1_2 {
 };
 
 /**
- * @brief Enumerates types of the defferred delivery image.
+ * @brief Enumerates types of the deferred delivery image.
  */
-enum DefferredDeliveryImageType {
+enum DeferredDeliveryImageType {
     /**
-     * Not support defferred delivery image.
+     * Not support deferred delivery image.
      */
     NONE = 0,
 

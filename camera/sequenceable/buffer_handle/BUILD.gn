@@ -25,7 +25,8 @@ ohos_shared_library("libbuffer_handle_sequenceable_1.0") {
 
   external_deps = [
     "c_utils:utils",
-    "graphic_chipsetsdk:surface",
+    "hdf_core:libhdf_utils",
+    "hdf_core:libhdi",
     "ipc:ipc_single",
   ]
 

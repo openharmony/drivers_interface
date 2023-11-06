@@ -13,52 +13,74 @@
  * limitations under the License.
  */
 
-#include "buffer_handle_sequenceable.h"
-#include "buffer_handle_parcel.h"
-#include <message_parcel.h>
 #include "securec.h"
+#include <message_parcel.h>
+#include "buffer_handle_sequenceable.h"
+#include "buffer_util.h"
+#include "native_buffer.h"
+
 namespace OHOS {
 namespace HDI {
 namespace Camera {
 namespace V1_0 {
+using namespace OHOS::HDI::Base;
+
+class BufferHandleSequenceable::BufferHandleWrap {
+public:
+    explicit BufferHandleWrap(BufferHandle *bufferHandle = nullptr)
+    {
+        nativeBuffer_ = new NativeBuffer();
+        nativeBuffer_->SetBufferHandle(bufferHandle);
+    }
+    sptr<NativeBuffer> nativeBuffer_;
+};
+
 BufferHandleSequenceable::BufferHandleSequenceable(const BufferHandle &bufferHandle)
 {
-    size_t bufferSize = sizeof(BufferHandle) +
-        bufferHandle.reserveFds * sizeof(uint32_t) +
-        bufferHandle.reserveInts * sizeof(uint32_t);
+    auto newBufferHandle = NewBufferHandle(bufferHandle.reserveFds, bufferHandle.reserveInts);
+    bufferHandleWrap_ = std::make_shared<BufferHandleWrap>(newBufferHandle);
+}
 
-    std::shared_ptr<BufferHandle> newBufferHandle(static_cast<BufferHandle*>(malloc(bufferSize)));
-    if (memcpy_s(newBufferHandle.get(), bufferSize, &bufferHandle, bufferSize) != 0) {
-        return;
+BufferHandleSequenceable::BufferHandleSequenceable(BufferHandle *bufferHandle)
+{
+    bufferHandleWrap_ = std::make_shared<BufferHandleWrap>(bufferHandle);
+}
+
+BufferHandle* BufferHandleSequenceable::NewBufferHandle(uint32_t reserveFds, uint32_t reserveInts)
+{
+    return AllocateNativeBufferHandle(reserveFds, reserveInts);
+}
+
+void BufferHandleSequenceable::SetBufferHandle(BufferHandle *handle)
+{
+    if (bufferHandleWrap_->nativeBuffer_ != nullptr) {
+        bufferHandleWrap_->nativeBuffer_->SetBufferHandle(handle);
     }
-    bufferHandle_ = newBufferHandle;
+}
+BufferHandle* BufferHandleSequenceable::GetBufferHandle()
+{
+    if (bufferHandleWrap_->nativeBuffer_ == nullptr) {
+        return nullptr;
+    }
+    return bufferHandleWrap_->nativeBuffer_->GetBufferHandle();
 }
 
 bool BufferHandleSequenceable::Marshalling(Parcel &parcel) const
 {
-    if (bufferHandle_ == nullptr) {
+    if (bufferHandleWrap_->nativeBuffer_ == nullptr) {
         return false;
     }
-    OHOS::MessageParcel &dataParcel = static_cast<OHOS::MessageParcel &>(parcel);
-    if (WriteBufferHandle(dataParcel, *bufferHandle_) != true) {
-        return false;
-    }
-    return true ;
+    return bufferHandleWrap_->nativeBuffer_->Marshalling(parcel);
 }
 
 sptr<BufferHandleSequenceable> BufferHandleSequenceable::Unmarshalling(Parcel &parcel)
 {
-    OHOS::MessageParcel &dataParcel = static_cast<OHOS::MessageParcel &>(parcel);
-
-    sptr<BufferHandleSequenceable> sequenceData;
-    std::shared_ptr<BufferHandle> newBufferHandle(ReadBufferHandle(dataParcel));
-    if (newBufferHandle != nullptr) {
-        sequenceData->bufferHandle_ = newBufferHandle;
-    }
-    return sequenceData;
+    sptr<BufferHandleSequenceable> sequenceObj = new BufferHandleSequenceable();
+    sequenceObj->bufferHandleWrap_->nativeBuffer_ = NativeBuffer::Unmarshalling(parcel);
+    return sequenceObj;
 }
 
-}
-}
-}
-}
+} // V1_0
+} // Camera
+} // HDI
+} // OHOS
