@@ -25,6 +25,7 @@ if (defined(ohos_lite)) {
     sources = [
       "IRil.idl",
       "IRilCallback.idl",
+      "Types.idl",
     ]
     language = "cpp"
     subsystem_name = "hdf"

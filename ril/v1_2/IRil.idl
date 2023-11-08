@@ -45,7 +45,7 @@ package ohos.hdi.ril.v1_2;
 
 import ohos.hdi.ril.v1_2.IRilCallback;
 import ohos.hdi.ril.v1_1.IRil;
-import ohos.hdi.ril.v1_1.Types;
+import ohos.hdi.ril.v1_2.Types;
 
 /**
  * @brief Declares the request API of the RIL module.
@@ -69,5 +69,21 @@ interface IRil extends ohos.hdi.ril.v1_1.IRil {
       * @version 1.2
       */
     [oneway] SetCallback1_2([in] IRilCallback rilCallback);
+
+     /**
+      * @brief Send sim matched operator info.
+      *
+      * @param slotId Card slot ID.
+      * @param serialId Serial ID of a request.
+      * @param ncfgOperatorInfo Operator info. For details, see {@link Types}.
+      *
+      * @return Returns <b>0</b> if the operation is successful.
+      * @return Returns a non-0 value if the operation fails.
+      *
+      * @since 4.1
+      * @version 1.2
+      */
+    [oneway] SendSimMatchedOperatorInfo([in] int slotId, [in] int serialId,
+        [in] struct NcfgOperatorInfo ncfgOperatorInfo);
 }
 /** @} */
