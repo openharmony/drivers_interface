@@ -17,7 +17,10 @@ hdi("display_buffer") {
   module_name = "display_buffer"
 
   sources = [ "IMetadata.idl" ]
-
+  innerapi_tags = [
+    "chipsetsdk_indirect",
+    "platformsdk_indirect",
+  ]
   language = "cpp"
   subsystem_name = "hdf"
   part_name = "drivers_interface_display"
