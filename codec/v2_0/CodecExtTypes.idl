@@ -179,7 +179,7 @@ enum CodecIndexExType {
     /** ControlRateConstantQuality */
     Codec_IndexParamControlRateConstantQuality,
     /** Codec_IndexParamVideoHevc */
-    Codec_IndexParamVideoHevc,
+    Codec_IndexParamVideoHevc = 0x6F000000 + 0x00a00007,
     /** range/primary/transfer/matrix */
     Codec_IndexColorAspects,
     /** WorkingFrequencyParam */
