@@ -22,7 +22,14 @@ if (defined(ohos_lite)) {
   hdi("audio") {
     module_name = "audio_service"
 
-    sources = [ "AudioTypes.idl" ]
+    sources = [
+      "AudioTypes.idl",
+      "IAudioAdapter.idl",
+      "IAudioCallback.idl",
+      "IAudioCapture.idl",
+      "IAudioManager.idl",
+      "IAudioRender.idl",
+    ]
 
     language = "c"
     subsystem_name = "hdf"
