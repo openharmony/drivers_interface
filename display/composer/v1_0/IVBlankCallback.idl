@@ -18,5 +18,17 @@ package ohos.hdi.display.composer.v1_0;
 import ohos.hdi.display.composer.v1_0.DisplayComposerType;
 
 [callback] interface IVBlankCallback {
+    
+    /**
+     * @brief the callback to be IVBlankCallback when a hot plug event occurs.
+     *
+     * @param sequence  VBlank sequence.
+     * @param ns  Time when called.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.0
+     * @version 1.0
+     */
     OnVBlank([in] unsigned int sequence, [in] unsigned long ns);
 }

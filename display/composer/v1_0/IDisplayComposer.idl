@@ -223,9 +223,6 @@ interface IDisplayComposer {
      *
      * @param devId Indicates the ID of the display device. The value ranges from 0 to 4, where 0 indicates the first
      * display device, and 4 indicates the last display device.
-     * @param layerInfo Indicates the pointer to the layer information passed to open a layer, including the layer
-     * type, layer size, and pixel format.
-     * @param cacheCount Indicates the count of buffer cache.
      * @param layerId Indicates the pointer to the layer ID, which uniquely identifies a layer. The layer ID is returned
      * to the GUI after the layer is successfully opened.
      *
@@ -276,7 +273,6 @@ interface IDisplayComposer {
      * @param devId Indicates the ID of the display device.
      * For details, see {@link PixelFormat}. The <b>format</b> can be modified based on hardware requirements and
      * returned to the graphics service.
-     * @param devId Indicates the pointer to the ID of the virtual display device created.
      *
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined
      * in {@link DispErrCode} otherwise.
