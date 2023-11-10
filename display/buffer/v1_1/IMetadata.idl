@@ -16,9 +16,69 @@
 package ohos.hdi.display.buffer.v1_1;
 
 interface IMetadata {
+    /**
+     * @brief Init Buffer when 
+     *
+     * @param handle The input buffer handle
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.1
+     * @version 1.1
+     */
     RegisterBuffer([in] NativeBuffer handle);
+
+    /**
+     * @brief set metadata
+     *
+     * @param handle The input buffer handle
+     * @param key metadata key
+     * @param value metadata value
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.1
+     * @version 1.1
+     */
     SetMetadata([in] NativeBuffer handle, [in] unsigned int key, [in] unsigned char[] value);
+
+    /**
+     * @brief get metadata
+     *
+     * @param handle The input buffer handle
+     * @param key metadata key
+     * @param value metadata value
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.1
+     * @version 1.1
+     */
     GetMetadata([in] NativeBuffer handle, [in] unsigned int key, [out] unsigned char[] value);
+
+    /**
+     * @brief list metadata keys
+     *
+     * @param handle The input buffer handle
+     * @param keys metadata keys
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.1
+     * @version 1.1
+     */
     ListMetadataKeys([in] NativeBuffer handle, [out] unsigned int[] keys);
+
+    /**
+     * @brief erase metadata by key
+     *
+     * @param handle The input buffer handle
+     * @param key the metadata key to be erased
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.1
+     * @version 1.1
+     */
     EraseMetadataKey([in] NativeBuffer handle, [in] unsigned int key);
 }
