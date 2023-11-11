@@ -19,9 +19,9 @@ import ohos.hdi.display.composer.v1_0.DisplayComposerType;
 
 [callback] interface IRefreshCallback {
     /**
-     * @brief the callback to be invoked when a hot plug event occurs.
+     * @brief the callback to be invoked when a refresh event occurs.
      *
-     * @param devId  Indicates the ID of the display device.
+     * @param devId Indicates the ID of the display device.
      *
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined
      * in {@link DispErrCode} otherwise.
