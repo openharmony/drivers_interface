@@ -136,6 +136,8 @@ struct BatteryInfo {
     byte present;
     /** Battery technology */
     String technology;
+    /** Event name */
+    String uevent;
 };
 
 /**
