@@ -17,7 +17,7 @@ package ohos.hdi.display.buffer.v1_1;
 
 interface IMetadata {
     /**
-     * @brief Init Buffer when 
+     * @brief Init Buffer after IPC
      *
      * @param handle The input buffer handle
      *
