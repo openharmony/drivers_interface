@@ -296,3 +296,18 @@ struct ImageBufferInfo {
      */
     BufferHandleSequenceable depthMapHandle;
 };
+
+/**
+ * @brief Defines the CaptureStartedInfo, which is used by {@link IStreamOperatorCallback::OnCaptureStartedV1_2}.
+ */
+struct CaptureStartedInfo {
+    /**
+     * ID of a captured stream.
+     */
+    int streamId_;
+
+    /**
+     * Time of exposure time, the unit is ms.
+     */
+    int exposureTime_;
+};
