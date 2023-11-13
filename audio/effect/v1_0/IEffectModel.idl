@@ -46,6 +46,7 @@ interface IEffectModel {
     /**
      * @brief Create an effect controller which is used to operate the effect instance.
      *
+     * @param info Indicates the effect information.
      * @param contoller Indicates the <b>IEffectControl</b> object.
      * @param contollerId Indicates the contoller to the <b>IEffectControl</b> object.
      *
