@@ -22,7 +22,9 @@ ohos_shared_library("metadata") {
   cflags = [
     "-fPIC",
     "-Wall",
+    "--coverage",
   ]
+  ldflags = [ "--coverage" ]
   cflags_cc = cflags
   all_dependent_configs = [ ":camera_metadata_config" ]
   if (defined(ohos_lite)) {
