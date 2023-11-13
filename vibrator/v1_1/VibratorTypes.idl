@@ -25,6 +25,8 @@ enum HdfVibratorMode {
     HDF_VIBRATOR_MODE_ONCE,
     /**< Indicates the periodic vibration with the preset effect. */
     HDF_VIBRATOR_MODE_PRESET,
+    /**< Indicates the vibration is high-definition. */
+    HDF_VIBRATOR_MODE_HDHAPTIC,
     /**< Indicates invalid the effect mode. */
     HDF_VIBRATOR_MODE_BUTT,
 };
