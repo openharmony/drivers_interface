@@ -49,8 +49,11 @@ typedef enum camera_ability_section {
     OHOS_CAMERA_SECURE = 0x4000,
     // Xmage camera ability
     OHOS_XMAGE_COLOR_ABILITY = 0x5000,
-    
-    OHOS_ABILITY_SECTION_END
+
+    OHOS_ABILITY_SECTION_END = 0x6000,
+
+    // Start vendor tag section
+    OHOS_VENDOR_SECTION = 0X7000
 } camera_ability_section_t;
 
 typedef enum camera_device_metadata_section_start {
@@ -81,6 +84,7 @@ typedef enum camera_device_metadata_section_start {
     OHOS_CAMERA_SECURE_START = OHOS_CAMERA_SECURE << 16,
 
     OHOS_XMAGE_COLOR_MODES_START = OHOS_XMAGE_COLOR_ABILITY << 16,
+    OHOS_VENDOR_SECTION_START = OHOS_VENDOR_SECTION << 16,
 } camera_device_info_section_start_t;
 
 typedef enum camera_device_metadata_tag {

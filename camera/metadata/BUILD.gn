@@ -12,6 +12,7 @@
 # limitations under the License.
 
 import("//build/ohos.gni")
+import("//drivers/interface/camera/camera.gni")
 
 config("camera_metadata_config") {
   include_dirs = [ "./include" ]
@@ -39,6 +40,16 @@ ohos_shared_library("metadata") {
       "src/camera_metadata_operator.cpp",
       "src/metadata_utils.cpp",
     ]
+
+    if (drivers_interface_camera_feature_vendor_tag == false) {
+      sources += [ "src/camera_example_vendor_tags.cpp" ]
+    }
+
+    if (drivers_interface_camera_feature_vendor_tag == true) {
+      defines = []
+      defines += [ "CAMERA_VENDOR_TAG" ]
+    }
+
     deps = [ "../v1_0:libcamera_proxy_1.0" ]
     external_deps = [
       "c_utils:utils",

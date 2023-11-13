@@ -12,6 +12,9 @@
     "component": {
       "name": "drivers_interface_camera",
       "subsystem": "hdf",
+      "features": [
+        "drivers_interface_camera_feature_vendor_tag"
+      ],
       "adapted_system_type": ["standard"],
       "rom": "675KB",
       "ram": "2322KB",
