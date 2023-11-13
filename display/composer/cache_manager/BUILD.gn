@@ -20,8 +20,10 @@ ohos_shared_library("libcomposer_buffer_cache") {
     "layer_cache.cpp",
   ]
 
-  include_dirs = [ "./",
-                   "../" ]
+  include_dirs = [
+    "./",
+    "../",
+  ]
 
   external_deps = [
     "c_utils:utils",

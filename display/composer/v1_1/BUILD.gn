@@ -15,7 +15,7 @@ import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
 
 hdi("display_composer") {
   module_name = "display_composer"
-  imports = ["ohos.hdi.display.composer.v1_0:display_composer"]
+  imports = [ "ohos.hdi.display.composer.v1_0:display_composer" ]
 
   sources = [
     "DisplayComposerType.idl",
@@ -44,9 +44,9 @@ ohos_shared_library("libdisplay_composer_hdi_impl_1.1") {
   public_configs = [ ":libdisplay_composer_hdi_impl_config" ]
 
   deps = [
-    "../v1_0:libdisplay_composer_proxy_1.0",
     ":libdisplay_composer_proxy_1.1",
     "../hdifd_parcelable:libhdifd_parcelable",
+    "../v1_0:libdisplay_composer_proxy_1.0",
   ]
 
   external_deps = [
