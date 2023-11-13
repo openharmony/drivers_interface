@@ -232,10 +232,6 @@ public:
         int32_t ret = ToDispErrCode(hdi_->GetDisplayReleaseFence(devId, layers, hdiFences));
         if (ret == DISPLAY_SUCCESS) {
             for (uint32_t i = 0; i < hdiFences.size(); i++) {
-                if (hdiFences[i] == nullptr) {
-                    HDF_LOGE("%{public}s: GetReleaseFence contains nullptr", __func__);
-                    continue;
-                }
                 fences.push_back(hdiFences[i]->Move());
             }
         }
@@ -486,7 +482,7 @@ public:
         if (hotPlugCb_ != nullptr) {
             hotPlugCb_(outputId, connected, hotPlugCbData_);
         } else {
-            HDF_LOGE("erroe: hot plug callback fn is nullptr");
+            HDF_LOGE("error: hot plug callback fn is nullptr");
             ret = HDF_FAILURE;
         }
 
@@ -501,14 +497,14 @@ public:
         if (vBlankCb_ != nullptr) {
             vBlankCb_(sequence, ns, vBlankCbData_);
         } else {
-            HDF_LOGE("erroe: vblank callback fn is nullptr");
+            HDF_LOGE("error: vblank callback fn is nullptr");
             ret = HDF_FAILURE;
         }
 
         return ret;
     }
 
-private:
+protected:
     int32_t ToDispErrCode(int32_t hdfStatus)
     {
         int32_t ec = DISPLAY_FAILURE;
@@ -561,7 +557,7 @@ private:
         return ec;
     }
 
-private:
+protected:
     static constexpr uint32_t WAIT_TIME_INTERVAL = 1000;
     sptr<CompHdi> hdi_;
     std::shared_ptr<CmdReq> req_;

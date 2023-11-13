@@ -13,21 +13,18 @@
  * limitations under the License.
  */
 
-#ifndef DISPLAY_COMMON_H
-#define DISPLAY_COMMON_H
+package ohos.hdi.display.composer.v1_1;
 
-#include <functional>
-
-namespace OHOS {
-namespace HDI {
-namespace Display {
-
-typedef void (*HotPlugCallback)(uint32_t devId, bool connected, void* data);
-typedef void (*VBlankCallback)(unsigned int sequence, uint64_t ns, void* data);
-typedef void (*RefreshCallback)(uint32_t devId, void* data);
-typedef void (*ModeCallback)(uint32_t modeId, uint64_t vBlankPeriod, void* data);
-typedef void (*SeamlessChangeCallback)(uint32_t devId, void* data);
-} // namespace Display
-} // namespace HDI
-} // namespace OHOS
-#endif /* DISPLAY_COMMON_H */
+[callback] interface ISeamlessChangeCallback {
+    /**
+    * @brief the callback to be invoked when it's ready to change framerate
+    *
+    * @param devId Indicates the ID of the display device.
+    *
+    * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+    * in {@link DispErrCode} otherwise.
+    * @since 4.1
+    * @version 1.1
+    */
+    OnSeamlessChange([in] unsigned int devId);
+}

@@ -13,21 +13,14 @@
  * limitations under the License.
  */
 
-#ifndef DISPLAY_COMMON_H
-#define DISPLAY_COMMON_H
+package ohos.hdi.display.composer.v1_1;
+sequenceable OHOS.HDI.Display.HdifdParcelable;
+import ohos.hdi.display.composer.v1_0.DisplayComposerType;
 
-#include <functional>
-
-namespace OHOS {
-namespace HDI {
-namespace Display {
-
-typedef void (*HotPlugCallback)(uint32_t devId, bool connected, void* data);
-typedef void (*VBlankCallback)(unsigned int sequence, uint64_t ns, void* data);
-typedef void (*RefreshCallback)(uint32_t devId, void* data);
-typedef void (*ModeCallback)(uint32_t modeId, uint64_t vBlankPeriod, void* data);
-typedef void (*SeamlessChangeCallback)(uint32_t devId, void* data);
-} // namespace Display
-} // namespace HDI
-} // namespace OHOS
-#endif /* DISPLAY_COMMON_H */
+/**
+ * @brief Defines output mode info.
+ */
+struct DisplayModeInfoExt {
+    struct DisplayModeInfo v1_0;
+    unsigned int groupId;
+};

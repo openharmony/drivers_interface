@@ -546,7 +546,7 @@ EXIT:
         compChangeTypes_.erase(devId);
         return HDF_SUCCESS;
     }
-private:
+protected:
     int32_t OnReplySetError(
         std::shared_ptr<CommandDataUnpacker> replyUnpacker, std::unordered_map<int32_t, int32_t> &errMaps)
     {
@@ -735,7 +735,7 @@ private:
         return HDF_SUCCESS;
     }
 
-private:
+protected:
     bool initFlag_;
     sptr<CompHdi> hdi_;
     std::shared_ptr<Transfer> request_;

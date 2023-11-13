@@ -24,7 +24,6 @@ namespace OHOS {
 namespace HDI {
 namespace Display {
 namespace Composer {
-namespace V1_0 {
 
 LayerCache* LayerCache::Create(uint32_t id)
 {
@@ -92,7 +91,6 @@ void LayerCache::Dump() const
         HDF_LOGE("layerId-%{public}d, buffer[%{public}d]: %{public}s", layerId_, id, info.c_str());
     });
 }
-} // namespace V1_0
 } // namespace Composer
 } // namespace Display
 } // namespace HDI

@@ -31,7 +31,6 @@ namespace OHOS {
 namespace HDI {
 namespace Display {
 namespace Composer {
-namespace V1_0 {
 
 template <typename IdType, typename CacheType>
 class CacheManager : public NoCopyable {
@@ -116,7 +115,6 @@ private:
     uint32_t cacheCountMax_;
     std::unordered_map<IdType, std::unique_ptr<CacheType>> caches_;
 };
-} // namespace V1_0
 } // namespace Composer
 } // namespace Display
 } // namespace HDI

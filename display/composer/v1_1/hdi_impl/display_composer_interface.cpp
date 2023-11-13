@@ -13,21 +13,20 @@
  * limitations under the License.
  */
 
-#ifndef DISPLAY_COMMON_H
-#define DISPLAY_COMMON_H
-
-#include <functional>
+#include "v1_1/hdi_impl/display_composer_hdi_impl.h"
+#include "hilog/log.h"
 
 namespace OHOS {
 namespace HDI {
 namespace Display {
-
-typedef void (*HotPlugCallback)(uint32_t devId, bool connected, void* data);
-typedef void (*VBlankCallback)(unsigned int sequence, uint64_t ns, void* data);
-typedef void (*RefreshCallback)(uint32_t devId, void* data);
-typedef void (*ModeCallback)(uint32_t modeId, uint64_t vBlankPeriod, void* data);
-typedef void (*SeamlessChangeCallback)(uint32_t devId, void* data);
+namespace Composer {
+namespace V1_1 {
+IDisplayComposerInterface* IDisplayComposerInterface::Get()
+{
+    return HdiDisplayComposer::Create();
+}
+} // namespace V1_1
+} // namespace Composer
 } // namespace Display
 } // namespace HDI
 } // namespace OHOS
-#endif /* DISPLAY_COMMON_H */
