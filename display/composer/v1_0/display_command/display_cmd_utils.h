@@ -120,6 +120,10 @@ public:
     static bool MatchHdiFd(int32_t id, std::vector<HdifdInfo> hdiFds, int32_t& fd)
     {
         for (uint32_t i = 0; i < hdiFds.size(); ++i) {
+            if (hdiFds[i].hdiFd == nullptr) {
+                HDF_LOGE("%{public}s, hdiFd is nullptr", __func__);
+                continue;
+            }
             if (hdiFds[i].id == id) {
                 fd = hdiFds[i].hdiFd->Move();
                 return true;

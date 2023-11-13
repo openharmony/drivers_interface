@@ -17,10 +17,10 @@ package ohos.hdi.display.composer.v1_1;
 sequenceable OHOS.HDI.Display.HdifdParcelable;
 import ohos.hdi.display.composer.v1_0.DisplayComposerType;
 
-/**
- * @brief Defines output mode info.
+/*
+ * @brief Defines output mode ext info.
  */
 struct DisplayModeInfoExt {
     struct DisplayModeInfo v1_0;
-    unsigned int groupId;
+    unsigned int groupId; /* ltpo groupId */
 };

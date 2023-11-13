@@ -25,7 +25,7 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_0.IDisplayCompos
      * @brief Registers the callback to be invoked when it's ready to change framerate.
      *
      * @param cb Indicates the instance used to notify graphics service that it's ready to change framerate.
-
+     *
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined
      * in {@link DispErrCode} otherwise.
      * @since 4.1
@@ -38,8 +38,8 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_0.IDisplayCompos
      *
      * @param devId Indicates the ID of the display device.
      * @param modes Indicates the vector of the information about all modes supported by the display device,
-     * including all supported resolutions and refresh rates. Each mode has an ID, which will be used when
-     * the mode is set or obtained. For details, see {@link DisplayModeInfo}.
+     * including all supported resolutions, refresh rates and groupId. Each mode has an ID, which will be used when
+     * the mode is set or obtained. For details, see {@link DisplayModeInfoExt}.
      *
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined
      * in {@link DispErrCode} otherwise.

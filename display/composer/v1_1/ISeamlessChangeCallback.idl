@@ -17,14 +17,14 @@ package ohos.hdi.display.composer.v1_1;
 
 [callback] interface ISeamlessChangeCallback {
     /**
-    * @brief the callback to be invoked when it's ready to change framerate
-    *
-    * @param devId Indicates the ID of the display device.
-    *
-    * @return Returns <b>0</b> if the operation is successful; returns an error code defined
-    * in {@link DispErrCode} otherwise.
-    * @since 4.1
-    * @version 1.1
-    */
+     * @brief the callback to be invoked when it's ready to change framerate
+     *
+     * @param devId Indicates the ID of the display device.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.1
+     * @version 1.1
+     */
     OnSeamlessChange([in] unsigned int devId);
 }

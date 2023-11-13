@@ -27,7 +27,6 @@ namespace V1_1 {
 
 class IDisplayComposerInterface : public V1_0::IDisplayComposerInterface {
 public:
-
     /**
      * @brief Obtains all interfaces of IDisplayComposerInterface.
      *
@@ -39,14 +38,15 @@ public:
     static IDisplayComposerInterface* Get();
 
     /**
-     * @brief register callback for seamless change.
+     * @brief Registers the callback to be invoked when it's ready to change framerate.
      *
      * @param cb Indicates the callback
+     * @param data Data used by cb
      *
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined
      * in {@link DispErrCode} otherwise.
-     * @since 4.0
-     * @version 1.0
+     * @since 4.1
+     * @version 1.1
      */
     virtual int32_t RegSeamlessChangeCallback(SeamlessChangeCallback cb, void* data) = 0;
 
@@ -66,18 +66,18 @@ public:
     virtual int32_t GetDisplaySupportedModesExt(unsigned int devId, std::vector<DisplayModeInfoExt>& modes) = 0;
 
     /**
-     * @brief Obtains the power status of a display device.
+     * @brief Sets the display mode of a display device.
      *
      * @param devId Indicates the ID of the display device.
-     * @param status Indicates the pointer to the power status of the device. The status is written by this interface.
-     * @param cb Indicates the function to call after mode change.
+     * @param modeId Indicates the ID of the display mode. The device is switched to the display mode specified by
+     * this parameter in this interface.
+     * @param cb Indicates the callback to be invoked when mode is change.
      *
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined
      * in {@link DispErrCode} otherwise.
-     * @since 4.0
-     * @version 1.0
+     * @since 4.1
+     * @version 1.1
      */
-
     virtual int32_t SetDisplayModeAsync(uint32_t devId, uint32_t modeId, ModeCallback cb) = 0;
 
     /**
@@ -87,10 +87,9 @@ public:
      *
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined
      * in {@link DispErrCode} otherwise.
-     * @since 4.0
-     * @version 1.0
+     * @since 4.1
+     * @version 1.1
      */
-
     virtual int32_t GetDisplayVBlankPeriod(uint32_t devId, uint64_t &period) = 0;
 };
 } // V1_1

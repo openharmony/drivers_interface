@@ -19,15 +19,15 @@ import ohos.hdi.display.composer.v1_1.DisplayComposerType;
 
 [callback] interface IModeCallback {
     /**
-    * @brief the callback to be invoked when display mode changes.
-    *
-    * @param modeId  display mode id returned by {@link GetDisplaySupportedModes}
-    * @param vBlankPeriod the vblank period indicated by modeId
-    *
-    * @return Returns <b>0</b> if the operation is successful; returns an error code defined
-    * in {@link DispErrCode} otherwise.
-    * @since 4.1
-    * @version 1.1
-    */
+     * @brief the callback to be invoked when display mode changes.
+     *
+     * @param modeId display mode id returned by {@link GetDisplaySupportedModes}
+     * @param vBlankPeriod the vblank period indicated by modeId
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.1
+     * @version 1.1
+     */
     OnMode([in] unsigned int modeId, [in] unsigned long vBlankPeriod);
 }

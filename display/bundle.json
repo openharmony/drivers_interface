@@ -86,6 +86,14 @@
           }
         },
         {
+          "name": "//drivers/interface/display/buffer/v1_0:display_buffer_idl_headers_1.0",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/display/buffer"
+          }
+        },
+        {
           "name": "//drivers/interface/display/buffer/v1_0:libdisplay_buffer_hdi_impl",
             "header": {
               "header_files": [
@@ -110,7 +118,7 @@
           }
         },
         {
-          "name": "//drivers/interface/display/buffer/v1_1:display_buffer_idl_headers",
+          "name": "//drivers/interface/display/buffer/v1_1:display_buffer_idl_headers_1.1",
           "header": {
             "header_files": [
             ],

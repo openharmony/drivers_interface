@@ -34,7 +34,8 @@ namespace Composer {
 namespace V1_1 {
 
 template <typename Interface, typename CompHdi, typename CmdReq>
-class DisplayComposerHdiImpl : public V1_0::DisplayComposerHdiImpl<Interface, CompHdi, CmdReq>, public ISeamlessChangeCallback, public IModeCallback {
+class DisplayComposerHdiImpl : public V1_0::DisplayComposerHdiImpl<Interface, CompHdi, CmdReq>,
+    public ISeamlessChangeCallback, public IModeCallback {
 public:
     static IDisplayComposerInterface* Create()
     {
