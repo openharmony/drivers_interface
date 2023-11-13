@@ -36,7 +36,7 @@
  * @since 3.2
  * @version 1.1
  */
-package ohos.hdi.battery.v1_2;
+package ohos.hdi.battery.v2_0;
 
 
 /**
@@ -136,6 +136,8 @@ struct BatteryInfo {
     byte present;
     /** Battery technology */
     String technology;
+    /** Uevent name */
+    String uevent;
 };
 
 /**
