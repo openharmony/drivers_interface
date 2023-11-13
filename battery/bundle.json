@@ -29,13 +29,13 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/battery/v1_2:battery_idl_target"
+          "//drivers/interface/battery/v2_0:battery_idl_target"
         ],
         "test": [
         ],
         "inner_kits": [
           {
-            "name": "//drivers/interface/battery/v1_2:libbattery_proxy_1.2",
+            "name": "//drivers/interface/battery/v2_0:libbattery_proxy_2.0",
             "header": {
               "header_files": [
               ],
@@ -43,7 +43,7 @@
             }
           },
           {
-            "name": "//drivers/interface/battery/v1_2:libbattery_stub_1.2",
+            "name": "//drivers/interface/battery/v2_0:libbattery_stub_2.0",
             "header": {
               "header_files": [
               ],
@@ -51,7 +51,7 @@
             }
           },
           {
-            "name": "//drivers/interface/battery/v1_2:battery_idl_headers",
+            "name": "//drivers/interface/battery/v2_0:battery_idl_headers",
             "header": {
               "header_files": [
               ],
