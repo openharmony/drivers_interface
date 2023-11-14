@@ -23,9 +23,9 @@
  */
 
 /**
- * @file IMediaKeySystemFactory.idl
+ * @file IMediaKeySystemCallback.idl
  *
- * @brief Defines the factory method used in HdiDrm.
+ * @brief Defines the callbacks used in MediaKeySystem.
  * @since 4.1
  * @version 1.0
  */
@@ -34,9 +34,7 @@
 package ohos.hdi.drm.v1_0;
 
 import ohos.hdi.drm.v1_0.MediaKeySystemTypes;
-import ohos.hdi.drm.v1_0.IMediaKeySystem;
 
-interface IMediaKeySystemFactory {
-    IsMediaKeySystemSupported([in] String uuid, [in] String mimeType, [in] enum SecurityLevel level, [out] boolean isSupported);
-    CreateMediaKeySystem([out] IMediaKeySystem mediaKeySystem);
-};
+[callback] interface IMediaKeySystemCallback {
+    SendEvent([in] enum EventType eventType, [in] int extra, [in] unsigned char[] data);
+}

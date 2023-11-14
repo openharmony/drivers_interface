@@ -22,15 +22,19 @@ if (defined(ohos_lite)) {
     module_name = "drm_interface_service"
 
     sources = [
-      "IKeySession.idl",
-      "IKeySessionListener.idl",
-      "IMediaDecryptModule.idl",
-      "IMediaKeySystem.idl",
+      "IMediaKeySession.idl",
       "IMediaKeySystemFactory.idl",
-      "KeySystemTypes.idl",
+      "IMediaKeySystemCallback.idl",
+      "IMediaDecryptModule.idl",
+      "IMediaKeySessionCallback.idl",
+      "IMediaKeySystem.idl",
+      "IOemCertificate.idl",
+      "MediaKeySystemTypes.idl",
     ]
 
     language = "cpp"
+    mode = "ipc"
+    root = "ohos.hdi://drivers/interface/"
     subsystem_name = "hdf"
     part_name = "drivers_interface_drm"
   }

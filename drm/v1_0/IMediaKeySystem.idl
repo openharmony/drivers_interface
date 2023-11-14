@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,21 +13,50 @@
  * limitations under the License.
  */
 
+/**
+ * @addtogroup HdiDrm
+ * @
+ * @brief Defines APIs of the Drm module.
+ * The Drm module provides APIs for multimedia Drm.
+ * @since 4.1
+ * @version 1.0
+ */
+
+/**
+ * @file IMediaKeySystem.idl
+ *
+ * @brief Defines methods used in MediaKeySystem.
+ * @since 4.1
+ * @version 1.0
+ */
+
+
 package ohos.hdi.drm.v1_0;
 
-import ohos.hdi.drm.v1_0.KeySystemTypes;
-import ohos.hdi.drm.v1_0.IKeySession;
+import ohos.hdi.drm.v1_0.MediaKeySystemTypes;
+import ohos.hdi.drm.v1_0.IMediaKeySession;
+import ohos.hdi.drm.v1_0.IMediaKeySystemCallback;
+import ohos.hdi.drm.v1_0.IOemCertificate;
 
 interface IMediaKeySystem {
-    GetConfiguration([in] enum ConfigType configType, [in] String name, [out] unsigned char[] value);
-    SetConfiguration([in] enum ConfigType configType, [in] String name, [in] unsigned char[] value);
-    GetMetric([out] Map<String, String> metric);
-    GetSecurityLevel([out] enum SecurityLevel level);
+    GetConfigurationString([in] String name, [out] String value);
+    SetConfigurationString([in] String name, [in] String value);
+    GetConfigurationByteArray([in] String name, [out] unsigned char[] value);
+    SetConfigurationByteArray([in] String name, [in] unsigned char[] value);
+    GetMetrics([out] Map<String, String> metrics);
+    GetMaxSecurityLevel([out] enum SecurityLevel level);
 
-    GenerateKeySystemRequest([in] enum RequestType type, [out] String defaultUrl, [out] unsigned char[] request);
-    ProcessKeySystemResponse([in] enum RequestType type, [in] unsigned char[] response);
+    GenerateKeySystemRequest([out] String defaultUrl, [out] unsigned char[] request);
+    ProcessKeySystemResponse([in] unsigned char[] response);
+    GetOemCertificateStatus([out] enum CertificateStatus status);
+    SetCallback([in] IMediaKeySystemCallback systemCallback);
 
-    CreateKeySession([in] enum SecurityLevel level, [out] IKeySession keySession);
+    CreateMediaKeySession([in] enum SecurityLevel level, [out] IMediaKeySession keySession);
 
-    Close();
+    GetOfflineLicenseIds([out] unsigned char[][] licenseIds);
+    GetOfflineLicenseStatus([in] unsigned char[] licenseId, [out] enum OfflineLicenseStatus licenseStatus);
+    RemoveOfflineLicense([in] unsigned char[] licenseId);
+    
+    GetOemCertificate([out] IOemCertificate oemCert);
+    Destroy();
 };
