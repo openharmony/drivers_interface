@@ -29,6 +29,7 @@ if (defined(ohos_lite)) {
       "IImageProcessService.idl",
       "IImageProcessSession.idl",
       "IStreamOperator.idl",
+      "IStreamOperatorCallback.idl",
       "Types.idl",
     ]
 
