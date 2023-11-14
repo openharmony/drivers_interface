@@ -1,0 +1,8 @@
+package ohos.hdi.drm.v1_0;
+
+import ohos.hdi.drm.v1_0.KeySystemTypes;
+
+interface IMediaDecryptModule {
+    RequiresSecureDecoderModule([in] String mimeType, [out] boolean required);
+    DecryptData([in] boolean secure, [in] struct CryptoInfo info, [in] struct DrmSrcBuffer srcBuffer, [in] struct DrmDestBuffer destBuffer);
+}

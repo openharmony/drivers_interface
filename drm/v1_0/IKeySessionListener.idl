@@ -1,0 +1,7 @@
+package ohos.hdi.drm.v1_0;
+
+import ohos.hdi.drm.v1_0.KeySystemTypes;
+
+interface IKeySessionListener {
+    SendEvent([in] enum EventType eventType, [in] int extra, [in] unsigned char[] data);
+}

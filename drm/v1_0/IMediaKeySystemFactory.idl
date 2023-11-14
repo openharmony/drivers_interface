@@ -1,0 +1,9 @@
+package ohos.hdi.drm.v1_0;
+
+import ohos.hdi.drm.v1_0.KeySystemTypes;
+import ohos.hdi.drm.v1_0.IMediaKeySystem;
+
+interface IMediaKeySystemFactory {
+    IsMediaKeySystemSupported([in] String uuid, [in] String mimeType, [in] enum SecurityLevel level, [out] boolean isSupported);
+    CreateMediaKeySystem([out] IMediaKeySystem mediaKeySystem);
+}

@@ -1,0 +1,18 @@
+package ohos.hdi.drm.v1_0;
+
+import ohos.hdi.drm.v1_0.KeySystemTypes;
+import ohos.hdi.drm.v1_0.IKeySession;
+
+interface IMediaKeySystem {
+    GetConfiguration([in] enum ConfigType configType, [in] String name, [out] unsigned char[] value);
+    SetConfiguration([in] enum ConfigType configType, [in] String name, [in] unsigned char[] value);
+    GetMetric([out] Map<String, String> metric);
+    GetSecurityLevel([out] enum SecurityLevel level);
+
+    GenerateKeySystemRequest([in] enum RequestType type, [out] String defaultUrl, [out] unsigned char[] request);
+    ProcessKeySystemResponse([in] enum RequestType type, [in] unsigned char[] response);
+
+    CreateKeySession([in] enum SecurityLevel level, [out] IKeySession keySession);
+
+    Close();
+};

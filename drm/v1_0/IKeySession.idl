@@ -1,0 +1,24 @@
+package ohos.hdi.drm.v1_0;
+
+import ohos.hdi.drm.v1_0.KeySystemTypes;
+import ohos.hdi.drm.v1_0.IKeySessionListener;
+import ohos.hdi.drm.v1_0.IMediaDecryptModule;
+
+interface IKeySession {
+    GenerateLicenseRequest([in] struct DrmInfo drmInfo, [out] struct LicenseInfo licenseInfo);
+    ProcessLicenseResponse([in] unsigned char[] response, [out] unsigned char[] keyId);
+    CheckLicenseStatus([out] struct KeyValue[] infoList);
+    RemoveLicenses();
+
+    GetOfflineReleaseRequest([in] unsigned char[] keyId, [out] unsigned char[] releaseRequest);
+    ProcessOfflineReleaseResponse([in] unsigned char[] keyId, [in] unsigned char[] response);
+    RestoreOfflineKeys([in] unsigned char[] keyId);
+    GetOfflineKeyIds([out] unsigned char[][] keyIds);
+    RemoveOfflineKeyId([in] unsigned char[] keyId);
+    GetOfflineLicenseState([in] unsigned char[] keyId, [out] enum OfflineKeyStatus keyStatus);
+
+    GetKeySessionListener([out] IKeySessionListener listener);
+    GetMediaDecryptModule([out] IMediaDecryptModule decryptModule);
+
+    Close();
+};
