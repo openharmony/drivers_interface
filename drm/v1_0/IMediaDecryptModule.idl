@@ -30,7 +30,6 @@
  * @version 1.0
  */
 
-
 package ohos.hdi.drm.v1_0;
 
 import ohos.hdi.drm.v1_0.MediaKeySystemTypes;

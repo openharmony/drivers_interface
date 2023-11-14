@@ -30,13 +30,12 @@
  * @version 1.0
  */
 
-
 package ohos.hdi.drm.v1_0;
 
 import ohos.hdi.drm.v1_0.MediaKeySystemTypes;
 import ohos.hdi.drm.v1_0.IMediaKeySystem;
 
 interface IMediaKeySystemFactory {
-    IsMediaKeySystemSupported([in] String uuid, [in] String mimeType, [in] enum SecurityLevel level, [out] boolean isSupported);
+    IsMediaKeySystemSupported([in] String name, [in] String mimeType, [in] enum SecurityLevel level, [out] boolean isSupported);
     CreateMediaKeySystem([out] IMediaKeySystem mediaKeySystem);
 };

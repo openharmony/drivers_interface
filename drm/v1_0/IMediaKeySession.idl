@@ -40,7 +40,7 @@ import ohos.hdi.drm.v1_0.IMediaDecryptModule;
 interface IMediaKeySession {
     GenerateLicenseRequest([in] struct LicenseRequestInfo licenseRequestInfo, [out] struct LicenseRequest licenseRequest);
     ProcessLicenseResponse([in] unsigned char[] licenseResponse, [out] unsigned char[] licenseId);
-    CheckLicenseStatus([out] struct LicenseStatusString[] licenseStatus);
+    CheckLicenseStatus([out] Map<String, enum MediaKeySessionKeyStatus> licenseStatus);
     RemoveLicense();
 
     GetOfflineReleaseRequest([in] unsigned char[] licenseId, [out] unsigned char[] releaseRequest);
