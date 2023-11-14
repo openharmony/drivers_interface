@@ -30,6 +30,22 @@ enum EVENT_TYPE {
 };
 
 /**
+ * @brief Enumerates the vibration modes of this vibrator.
+ *
+ * @since 4.1
+ */
+enum HdfVibratorModeV1_2 {
+    /**< Indicates the one-shot vibration with the given duration. */
+    HDF_VIBRATOR_MODE_ONCE,
+    /**< Indicates the periodic vibration with the preset effect. */
+    HDF_VIBRATOR_MODE_PRESET,
+    /**< Indicates the vibration is high-definition. */
+    HDF_VIBRATOR_MODE_HDHAPTIC,
+    /**< Indicates invalid the effect mode. */
+    HDF_VIBRATOR_MODE_BUTT,
+};
+
+/**
  * @brief Defines the vibration point parameters.
  *
  * The information include the time, intensity, and frequency.
@@ -105,20 +121,4 @@ struct HapticCapacity {
     boolean reserved0;
     /** Indicates the vibration Standby parameter. */
     int reserved1;
-};
-
-/**
- * @brief Enumerates the vibration modes of this vibrator.
- *
- * @since 4.1
- */
-enum HdfVibratorModeV1_2 {
-    /**< Indicates the one-shot vibration with the given duration. */
-    HDF_VIBRATOR_MODE_ONCE,
-    /**< Indicates the periodic vibration with the preset effect. */
-    HDF_VIBRATOR_MODE_PRESET,
-    /**< Indicates the vibration is high-definition. */
-    HDF_VIBRATOR_MODE_HDHAPTIC,
-    /**< Indicates invalid the effect mode. */
-    HDF_VIBRATOR_MODE_BUTT,
 };
