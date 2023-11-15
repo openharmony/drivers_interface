@@ -54,7 +54,7 @@ interface ICameraHost extends ohos.hdi.camera.v1_0.ICameraHost {
      * This function can be called when user touch camera application icon to accelerate the startup
      * of the camera device specified by <b>cameraId</b>.
      *
-     * @param config Indicates the preluanch configuration. For details, see {@link PrelaunchConfig}.
+     * @param config Indicates the preluanch configuration,which can be ignored currently. For details, see {@link PrelaunchConfig}.
      *
      * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
      * in {@link CamRetCode} otherwise.
