@@ -39,7 +39,6 @@ package ohos.hdi.vibrator.v1_2;
 
 import ohos.hdi.vibrator.v1_2.VibratorTypes;
 import ohos.hdi.vibrator.v1_1.IVibratorInterface;
-import ohos.hdi.vibrator.v1_1.VibratorTypes;
 
 interface IVibratorInterface extends ohos.hdi.vibrator.v1_1.IVibratorInterface{
     /**
