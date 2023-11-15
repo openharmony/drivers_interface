@@ -1099,4 +1099,29 @@ std::string FormatCameraMetadataToString(const common_metadata_header_t *metadat
     METADATA_INFO_LOG("metadataHeader item = %{public}s", metaStr.c_str());
     return metaStr;
 }
+
+int32_t GetAllVendorTags(std::vector<vendorTag_t>& tagVec)
+{
+#ifndef CAMERA_VENDOR_TAG
+        std::shared_ptr<CameraVendorTagExample> vendorTag = std::make_shared<CameraVendorTagExample>();
+        vendorTag->GetAllVendorTags(tagVec);
+#else
+        void* libHandle_ = dlopen("libcamera_vendor_tag_impl.z.so", RTLD_LAZY);
+        if (libHandle_ == nullptr) {
+            METADATA_ERR_LOG("dlopen failed %{public}s", __func__);
+            return CAM_META_FAILURE;
+        }
+
+        CreateCameraVendorTag* createVendorTag =
+            reinterpret_cast<CreateCameraVendorTag*>(dlsym(libHandle_, "CreateVendorTagImpl"));
+        if (createVendorTag == nullptr) {
+            METADATA_ERR_LOG("CreateCameraVendorTag failed %{public}s", __func__);
+            return CAM_META_FAILURE;
+        }
+
+        CameraVendorTag* vendorTagImpl = createVendorTag();
+        vendorTagImpl->GetAllVendorTags(tagVec);
+#endif
+        return CAM_META_SUCCESS;
+}
 } // Camera
