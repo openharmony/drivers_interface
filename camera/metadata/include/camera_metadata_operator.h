@@ -136,6 +136,12 @@ typedef enum camera_metadata_sec {
     OHOS_SECTION_COUNT,
 } camera_metadata_sec_t;
 
+typedef struct VendoTagInfo {
+    uint32_t tagId;
+    const char* tagName;
+    uint8_t tagType;
+} vendorTag_t;
+
 /* Return codes */
 #define CAM_META_FAILURE        (-1)
 #define CAM_META_SUCCESS         0
@@ -203,5 +209,6 @@ common_metadata_header_t *FillCameraMetadata(common_metadata_header_t *buffer, s
 int32_t GetMetadataSection(uint32_t itemSection, uint32_t *section);
 int MetadataExpandItemMem(common_metadata_header_t *dst, camera_metadata_item_entry_t *item,
     size_t oldItemSize);
+int32_t GetAllVendorTags(std::vector<vendorTag_t>& tagVec);
 } // Camera
 #endif // CAMERA_METADATA_OPERATOR_H
