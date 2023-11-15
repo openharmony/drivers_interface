@@ -21,13 +21,6 @@
 #include "camera_metadata_operator.h"
 
 namespace OHOS::Camera {
-
-typedef struct VendoTagInfo {
-    uint32_t tagId;
-    const char* tagName;
-    uint8_t tagType;
-} vendorTag_t;
-
 // Example vendor tag operator interfaces, vendor should implements these interfaces.
 class CameraVendorTag {
 public:
