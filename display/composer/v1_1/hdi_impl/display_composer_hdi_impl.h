@@ -63,7 +63,6 @@ public:
 
     virtual int32_t RegSeamlessChangeCallback(SeamlessChangeCallback cb, void *data) override
     {
-        HDF_LOGE("%{public}s: starts", __func__);
         seamlessChangeCb_ = cb;
         seamlessChangeCbData_ = data;
         COMPOSER_CHECK_NULLPTR(hdi_v1_1_);
@@ -72,7 +71,6 @@ public:
 
     virtual int32_t SetDisplayModeAsync(uint32_t devId, uint32_t modeId, ModeCallback cb) override
     {
-        HDF_LOGE("%{public}s: starts", __func__);
         modeCb_ = cb;
         COMPOSER_CHECK_NULLPTR(hdi_v1_1_);
         return ToDispErrCode(hdi_v1_1_->SetDisplayModeAsync(devId, modeId, this));
@@ -80,14 +78,12 @@ public:
 
     virtual int32_t GetDisplaySupportedModesExt(unsigned int devId, std::vector<DisplayModeInfoExt> &modes) override
     {
-        HDF_LOGE("%{public}s: starts", __func__);
         COMPOSER_CHECK_NULLPTR(hdi_v1_1_);
         return ToDispErrCode(hdi_v1_1_->GetDisplaySupportedModesExt(devId, modes));
     }
 
     virtual int32_t GetDisplayVBlankPeriod(uint32_t devId, uint64_t &period) override
     {
-        HDF_LOGE("%{public}s: starts", __func__);
         COMPOSER_CHECK_NULLPTR(hdi_v1_1_);
         return ToDispErrCode(hdi_v1_1_->GetDisplayVBlankPeriod(devId, period));
     }
@@ -98,7 +94,7 @@ public:
         if (seamlessChangeCb_) {
             seamlessChangeCb_(outputId, seamlessChangeCbData_);
         } else {
-            HDF_LOGE("error: sellmessChange callback is nullptr");
+            HDF_LOGE("error: seamlessChange callback is nullptr");
             ret = HDF_FAILURE;
         }
         return ret;
@@ -110,7 +106,7 @@ public:
         if (modeCb_) {
             modeCb_(modeId, vBlankPeriod, nullptr);
         } else {
-            HDF_LOGE("error: sellmessChange callback is nullptr");
+            HDF_LOGE("error: seamlessChange callback is nullptr");
             ret = HDF_FAILURE;
         }
         return ret;
