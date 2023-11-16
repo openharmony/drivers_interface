@@ -90,5 +90,5 @@ interface IVibratorInterface extends ohos.hdi.vibrator.v1_1.IVibratorInterface{
      * @since 4.1
      * @version 1.2
      */
-    StopV1_2([in] HdfVibratorModeV1_2 mode);
+    StopV1_2([in] int mode);
 }
