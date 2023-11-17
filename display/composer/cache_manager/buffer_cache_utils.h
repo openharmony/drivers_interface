@@ -28,7 +28,6 @@ namespace OHOS {
 namespace HDI {
 namespace Display {
 namespace Composer {
-namespace V1_0 {
 
 #define DEBUG_BUFFER_CACHE_UTILS
 class BufferCacheUtils {
@@ -83,7 +82,6 @@ public:
         return handle;
     }
 };
-} // namespace V1_0
 } // namespace Composer
 } // namespace Display
 } // namespace HDI

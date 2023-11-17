@@ -15,13 +15,13 @@ import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
 
 hdi("display_composer") {
   module_name = "display_composer"
+  imports = [ "ohos.hdi.display.composer.v1_0:display_composer" ]
 
   sources = [
     "DisplayComposerType.idl",
     "IDisplayComposer.idl",
-    "IHotPlugCallback.idl",
-    "IRefreshCallback.idl",
-    "IVBlankCallback.idl",
+    "IModeCallback.idl",
+    "ISeamlessChangeCallback.idl",
   ]
 
   sequenceable_pub_deps = [ "../hdifd_parcelable:libhdifd_parcelable" ]
@@ -38,14 +38,15 @@ config("libdisplay_composer_hdi_impl_config") {
   ]
 }
 
-ohos_shared_library("libdisplay_composer_hdi_impl") {
-  sources = [ "hdi_impl/display_composer_interface.cpp" ]
+ohos_shared_library("libdisplay_composer_hdi_impl_1.1") {
+  sources = [ "../v1_1/hdi_impl/display_composer_interface.cpp" ]
 
   public_configs = [ ":libdisplay_composer_hdi_impl_config" ]
 
   deps = [
-    ":libdisplay_composer_proxy_1.0",
+    ":libdisplay_composer_proxy_1.1",
     "../hdifd_parcelable:libhdifd_parcelable",
+    "../v1_0:libdisplay_composer_proxy_1.0",
   ]
 
   external_deps = [

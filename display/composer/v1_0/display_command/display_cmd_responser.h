@@ -78,7 +78,7 @@ public:
         replyCommandCnt_(0),
         replyPacker_(nullptr) {}
 
-    ~DisplayCmdResponser()
+    virtual ~DisplayCmdResponser()
     {
         while (delayFreeQueue_.size() > 0) {
             BufferHandle *temp = delayFreeQueue_.front();
@@ -246,7 +246,7 @@ public:
         return (ret == HDF_SUCCESS ? ec : ret);
     }
 
-private:
+protected:
     int32_t InitReply(uint32_t size)
     {
         reply_ = std::make_shared<Transfer>(size, SmqType::SYNCED_SMQ);
@@ -1033,7 +1033,7 @@ EXIT:
 
         return retCode < 0 ? -errno : HDF_SUCCESS;
     }
-private:
+
     void FreeBufferWithDelay(BufferHandle *handle)
     {
         delayFreeQueue_.push(handle);
@@ -1045,7 +1045,7 @@ private:
         }
     }
 
-private:
+protected:
     VdiImpl* impl_ = nullptr;
     std::shared_ptr<DeviceCacheManager> cacheMgr_;
     std::shared_ptr<Transfer> request_;

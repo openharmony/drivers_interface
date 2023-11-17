@@ -27,7 +27,6 @@ namespace OHOS {
 namespace HDI {
 namespace Display {
 namespace Composer {
-namespace V1_0 {
 using namespace OHOS::HDI::Base;
 class LayerCache : public NoCopyable {
 public:
@@ -44,7 +43,6 @@ private:
     uint32_t layerId_;
     std::shared_ptr<CacheManager<uint32_t, NativeBuffer>> bufferCaches_;
 };
-} // namespace V1_0
 } // namespace Composer
 } // namespace Display
 } // namespace HDI

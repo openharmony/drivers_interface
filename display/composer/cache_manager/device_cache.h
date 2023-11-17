@@ -28,7 +28,6 @@ namespace OHOS {
 namespace HDI {
 namespace Display {
 namespace Composer {
-namespace V1_0 {
 using namespace OHOS::HDI::Base;
 class DeviceCache : public NoCopyable {
 public:
@@ -59,7 +58,6 @@ private:
     std::shared_ptr<CacheManager<uint32_t, NativeBuffer>> outputBufferCaches_;
     std::shared_ptr<CacheManager<uint32_t, LayerCache>> layerCaches_;
 };
-} // namespace V1_0
 } // namespace Composer
 } // namespace Display
 } // namespace HDI

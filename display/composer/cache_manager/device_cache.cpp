@@ -24,7 +24,6 @@ namespace OHOS {
 namespace HDI {
 namespace Display {
 namespace Composer {
-namespace V1_0 {
 
 DeviceCache* DeviceCache::Create(uint32_t id, DeviceType type)
 {
@@ -148,7 +147,6 @@ void DeviceCache::Dump() const
         cache.Dump();
     });
 }
-} // namespace V1_0
 } // namespace Composer
 } // namespace Display
 } // namespace HDI

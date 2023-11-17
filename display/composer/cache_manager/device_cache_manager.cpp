@@ -23,7 +23,6 @@ namespace OHOS {
 namespace HDI {
 namespace Display {
 namespace Composer {
-namespace V1_0 {
 
 std::shared_ptr<DeviceCacheManager> DeviceCacheManager::GetInstance()
 {
@@ -149,7 +148,6 @@ std::mutex& DeviceCacheManager::GetCacheMgrMutex()
     static std::mutex deviceCacheMgr;
     return deviceCacheMgr;
 }
-} // namespace V1_0
 } // namespace Composer
 } // namespace Display
 } // namespace HDI
