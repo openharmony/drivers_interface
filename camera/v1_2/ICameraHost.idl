@@ -73,4 +73,20 @@ interface ICameraHost extends ohos.hdi.camera.v1_1.ICameraHost {
      * @version 1.2
      */
     SetFlashlightV1_2([in] float level);
+
+    /**
+     * @brief Warm-up a camera device before lens switching.
+     *
+     * This function can be called when user touch camera application lens switch icon to accelerate the startup
+     * of the camera device specified by <b>cameraId</b>.
+     *
+     * @param cameraId Indicates the ID of the camera device, which can be obtained by calling {@link GetCameraIds}.
+     *
+     * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
+     * in {@link CamRetCode} otherwise.
+     *
+     * @since 4.1
+     * @version 1.2
+     */
+    PreCameraSwitch([in] String cameraId);
 }
