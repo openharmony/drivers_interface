@@ -136,7 +136,9 @@ public:
             handle = hdiBuffer->Move();
         } else {
             handle = nullptr;
-            ret = HDF_FAILURE;
+            if (ret == HDF_SUCCESS) {
+                ret = HDF_FAILURE;
+            }
             HDF_LOGE("%{public}s: AllocMem error", __func__);
         }
         return ret;
