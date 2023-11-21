@@ -25,10 +25,28 @@
 package ohos.hdi.camera.v1_2;
 
 import ohos.hdi.camera.v1_1.ICameraHost;
-import ohos.hdi.camera.v1_1.ICameraDevice;
+import ohos.hdi.camera.v1_2.ICameraDevice;
 import ohos.hdi.camera.v1_2.ICameraHostCallback;
-
+import ohos.hdi.camera.v1_0.ICameraDeviceCallback;
 interface ICameraHost extends ohos.hdi.camera.v1_1.ICameraHost {
+    /**
+     * @brief Opens a camera device.
+     *
+     * By calling this function, you can obtain the <b>ICameraDevice</b> instance and operate the
+     * specific camera device mapping to the instance.
+     *
+     * @param cameraId Indicates the ID of the camera device, which can be obtained by calling {@link GetCameraIds}.
+     * @param callback Indicates the callback related to the camera. For details, see {@link ICameraDeviceCallback}.
+     * @param device Indicates the <b>ICameraDevice</b> instance corresponding to the ID of the camera device.
+     *
+     * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
+     * in {@link CamRetCode} otherwise.
+     *
+     * @since 4.1
+     * @version 1.2
+     */
+    OpenCameraV1_2([in] String cameraId, [in] ICameraDeviceCallback callbackObj, [out] ICameraDevice device);
+
     /**
      * @brief Notify the device vendor of the device status change.
      *
