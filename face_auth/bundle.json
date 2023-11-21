@@ -21,7 +21,7 @@
           "hdf_core",
           "hilog",
           "c_utils",
-          "graphic_chipsetsdk",
+          "graphic_surface",
           "drivers_interface_camera"
         ],
         "third_party": []
