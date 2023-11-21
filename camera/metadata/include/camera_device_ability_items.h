@@ -165,6 +165,7 @@ typedef enum camera_device_metadata_tag {
     OHOS_CONTROL_FOCUSED_POINT,
     OHOS_CONTROL_NIGHT_MODE_TRY_AE,
     OHOS_CONTROL_MANUAL_EXPOSURE_TIME,
+    OHOS_STATUS_CAMERA_CURRENT_FPS,
     OHOS_DEVICE_CONTROL_END,
 
     // Camera device image acquisition related
@@ -197,6 +198,10 @@ typedef enum camera_device_metadata_tag {
     OHOS_CONTROL_ZOOM_CROP_REGION,
     OHOS_ABILITY_ZOOM_CAP,
     OHOS_ABILITY_SCENE_ZOOM_CAP,
+    OHOS_STATUS_CAMERA_CURRENT_ZOOM_RATIO,
+    OHOS_CONTROL_SMOOTH_ZOOM_RATIOS,
+    OHOS_CONTROL_PREPARE_ZOOM,
+    OHOS_ABILITY_CAMERA_ZOOM_PERFORMANCE,
     OHOS_DEVICE_ZOOM_END,
 
     // Camera flow control related
@@ -556,5 +561,11 @@ typedef enum camera_macro_status_control_type {
     OHOS_CAMERA_MACRO_DISABLE = 0,
     OHOS_CAMERA_MACRO_ENABLE,
 } camera_macro_status_control_type_t;
+
+// OHOS_CONTROL_PREPARE_ZOOM enumeration values
+typedef enum camera_zoomsmooth_control_type {
+    OHOS_CAMERA_ZOOMSMOOTH_PREPARE_DISABLE = 0,
+    OHOS_CAMERA_ZOOMSMOOTH_PREPARE_ENABLE,
+} camera_zoomsmooth_control_type_t;
 
 #endif
