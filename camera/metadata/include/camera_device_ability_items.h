@@ -53,7 +53,7 @@ typedef enum camera_ability_section {
     OHOS_ABILITY_SECTION_END = 0x6000,
 
     // Start vendor tag section
-    OHOS_VENDOR_SECTION = 0X7000
+    OHOS_VENDOR_SECTION = 0X8000
 } camera_ability_section_t;
 
 typedef enum camera_device_metadata_section_start {
