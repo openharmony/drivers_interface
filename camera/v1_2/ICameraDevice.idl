@@ -46,4 +46,18 @@ interface ICameraDevice extends ohos.hdi.camera.v1_1.ICameraDevice {
      */
     GetStreamOperator_V1_2([in] IStreamOperatorCallback callbackObj, [out] IStreamOperator streamOperator);
 
+    /**
+     * @brief Obtains the dynaimic ability value.
+     *
+     * @param metaIn Indicates ability input.
+     * @param metaOut Indicates ability output,
+     * and {@link OnCaptureError} is used to report a capture error.
+     *
+     * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
+     * in {@link CamRetCode} otherwise.
+     *
+     * @since 4.1
+     * @version 1.2
+     */
+    GetStatus([in] unsigned char[] metaIn, [out] unsigned char[] metaOut);
 }
