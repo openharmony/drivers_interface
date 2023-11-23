@@ -91,6 +91,89 @@ public:
      * @version 1.1
      */
     virtual int32_t GetDisplayVBlankPeriod(uint32_t devId, uint64_t &period) = 0;
+
+    /* *
+     * @brief Set the layer per frame keys supported by a display device.
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param layerId Indicates the layer ID, which uniquely identifies a layer. You can perform operations on the layer
+     * with the specified layer ID.
+     * @param key Indicates the metadata key.
+     * @param value Indicates the property to get.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.1
+     * @version 1.1
+     */
+    virtual int32_t SetLayerPerFrameParameter(uint32_t devId, uint32_t layerId, const std::string& key,
+         std::vector<int8_t>& value) = 0;
+
+    /* *
+     * @brief Obtains the layer per frame keys supported by a display device.
+     *
+     * @param keys Indicates the vector of the information about all HDR metadata keys supported by the display device.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.1
+     * @version 1.1
+     */
+    virtual int32_t GetSupportedLayerPerFrameParameterKey(std::vector<std::string>& keys) = 0;
+
+    /* *
+     * @brief Set display width and height of a display device.
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param width Indicates the pixel width of the display device.
+     * @param height Indicates the pixel height of the display device.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.1
+     * @version 1.1
+     */
+    virtual int32_t SetDisplayOverlayResolution(uint32_t devId, uint32_t width, uint32_t height) = 0;
+
+    /**
+     * @brief Registers the callback to be invoked when a refresh event occurs.
+     * 
+     * @param cb Indicates the instance used to notify the graphics service of a refresh event occurred.
+     * @param data Indicates the pointer to the private data returned to the graphics service in the
+     * <b>RefreshCallback</b> callback.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.1
+     * @version 1.1
+     */
+    virtual int32_t RegRefreshCallback(RefreshCallback cb, void *data) = 0;
+
+    /* *
+     * @brief Obtains the capabilities of a display device.
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param gamuts Indicates the vector of the information about all color gamuts supported by the display device.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.1
+     * @version 1.1
+     */
+    virtual int32_t GetDisplaySupportedColorGamuts(uint32_t devId, std::vector<ColorGamut>& gamuts) = 0;
+
+    /* *
+     * @brief Obtains the capabilities of a display device.
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param info Indicates the pointer to the capabilities supported by the hdr device.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.1
+     * @version 1.1
+     */
+    virtual int32_t GetHDRCapabilityInfos(uint32_t devId, HDRCapability& info) = 0;
 };
 } // V1_1
 } // Composer
