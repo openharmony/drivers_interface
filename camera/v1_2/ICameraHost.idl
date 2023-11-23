@@ -115,7 +115,7 @@ interface ICameraHost extends ohos.hdi.camera.v1_1.ICameraHost {
      * of the camera device specified by <b>cameraId</b>.
      *
      * @param config Indicates the preluanch configuration. For details, see {@link PrelaunchConfig}.
-     * @param operationMode Indicates the stream operation mode. For details, see {@link OperationMode_V1_1}.
+     * @param operationMode Indicates the stream operation mode. For details, see {@link OperationMode}.
      *
      * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
      * in {@link CamRetCode} otherwise.
