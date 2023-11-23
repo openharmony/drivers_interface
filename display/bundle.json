@@ -30,7 +30,7 @@
         "hilog",
         "c_utils",
         "ipc",
-        "graphic_chipsetsdk",
+        "graphic_surface",
         "init",
         "hitrace"
       ],
