@@ -137,7 +137,7 @@ public:
 
     /**
      * @brief Registers the callback to be invoked when a refresh event occurs.
-     * 
+     *
      * @param cb Indicates the instance used to notify the graphics service of a refresh event occurred.
      * @param data Indicates the pointer to the private data returned to the graphics service in the
      * <b>RefreshCallback</b> callback.

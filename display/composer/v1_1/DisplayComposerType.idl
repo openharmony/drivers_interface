@@ -36,10 +36,10 @@ enum DispPowerStatus : ohos.hdi.display.composer.v1_0.DispPowerStatus {
 };
 
 /**
- * @brief Enumerates power status.
+ * @brief Enumerates composition type.
  */
 enum CompositionType : ohos.hdi.display.composer.v1_0.CompositionType {
-    COMPOSITION_SOLIT_COLOR = 7,    /**< Tunnel composition type, used for tunnel. */
+    COMPOSITION_SOLID_COLOR = 7,    /**< Tunnel composition type, used for tunnel. */
     COMPOSITION_BUTT_V1_1,          /**< Invalid composition type */
 };
 
