@@ -130,7 +130,7 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_0.IDisplayCompos
     */
     RegRefreshCallback([in] IRefreshCallback cb);
 
-    /* *
+    /**
      * @brief Obtains the color gamuts of a display device.
      *
      * @param devId Indicates the ID of the display device.
@@ -143,7 +143,7 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_0.IDisplayCompos
      */
     GetDisplaySupportedColorGamuts([in] unsigned int devId, [out] struct ColorGamut[] gamuts);
 
-    /* *
+    /**
      * @brief Obtains the capabilities of a display device.
      *
      * @param devId Indicates the ID of the display device.
