@@ -285,48 +285,40 @@ public:
 
     virtual int32_t GetDisplaySupportedColorGamuts(uint32_t devId, std::vector<ColorGamut>& gamuts) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
     virtual int32_t GetDisplayColorGamut(uint32_t devId, ColorGamut& gamut) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t SetDisplayColorGamut(uint32_t devId, const ColorGamut& gamut) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t GetDisplayGamutMap(uint32_t devId, GamutMap& gamutMap) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t SetDisplayGamutMap(uint32_t devId, const GamutMap& gamutMap) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t SetDisplayColorTransform(uint32_t devId, const std::vector<float>& matrix) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t GetHDRCapabilityInfos(uint32_t devId, HDRCapability& info) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t GetSupportedMetadataKey(uint32_t devId, std::vector<HDRMetadataKey>& keys) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
@@ -425,51 +417,43 @@ public:
 
     virtual int32_t SetLayerColorTransform(uint32_t devId, uint32_t layerId, const std::vector<float>& matrix) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t SetLayerColorDataSpace(uint32_t devId, uint32_t layerId, const ColorDataSpace colorSpace) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t GetLayerColorDataSpace(uint32_t devId, uint32_t layerId, ColorDataSpace& colorSpace) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t SetLayerMetaData(uint32_t devId, uint32_t layerId,
         const std::vector<HDRMetaData>& metaData) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t SetLayerMetaDataSet(uint32_t devId, uint32_t layerId, HDRMetadataKey key,
         const std::vector<uint8_t>& metaData) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t GetSupportedPresentTimestamp(uint32_t devId, uint32_t layerId, PresentTimestampType& type) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t GetHwPresentTimestamp(uint32_t devId, uint32_t layerId, PresentTimestamp& pts) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t SetLayerTunnelHandle(uint32_t devId, uint32_t layerId, const ExtDataHandle& handle) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
