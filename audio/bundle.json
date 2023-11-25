@@ -27,7 +27,8 @@
         "sub_component": [
           "//drivers/interface/audio/v1_0:libaudio_proxy_1.0",
           "//drivers/interface/audio/effect/v1_0:libeffect_proxy_1.0",
-          "//drivers/interface/audio/v1_1:libaudio_proxy_1.1"
+          "//drivers/interface/audio/v1_1:libaudio_proxy_1.1",
+          "//drivers/interface/audio/v1_1:libaudio_proxy_2.0"
         ],
         "test": [
         ],
@@ -98,6 +99,30 @@
           },
           {
             "name": "//drivers/interface/audio/v1_1:libaudio_stub_1.1",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/audio"
+            }
+          },
+          {
+            "name": "//drivers/interface/audio/v2_0:libaudio_proxy_2.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/audio"
+            }
+          },
+          {
+            "name": "//drivers/interface/audio/v2_0:audio_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/audio"
+            }
+          },
+          {
+            "name": "//drivers/interface/audio/v2_0:libaudio_stub_2.0",
             "header": {
               "header_files": [
               ],
