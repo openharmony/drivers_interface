@@ -28,7 +28,6 @@ enum PixelFormat : ohos.hdi.display.composer.v1_0.PixelFormat {
 
 /**
  * @brief Enumerates power status.
- *
  */
 enum DispPowerStatus : ohos.hdi.display.composer.v1_0.DispPowerStatus {
     POWER_STATUS_OFF_FAKE = 4,      /**< The power status is on while hwc is off */
