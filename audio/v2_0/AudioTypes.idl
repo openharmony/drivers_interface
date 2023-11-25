@@ -386,7 +386,7 @@ struct AudioSampleAttributes {
     unsigned int channelCount;     /**< Number of audio channels. For example, for the mono channel, the value is 1,
                                     * and for the stereo channel, the value is 2.
                                     */
-    unsigned long channelLayout    /**< Audio channel layout */
+    unsigned long channelLayout;   /**< Audio channel layout */
     unsigned int period;           /**< Audio sampling period */
     unsigned int frameSize;        /**< Frame size of the audio data */
     boolean isBigEndian;           /**< Big endian flag of audio data */
