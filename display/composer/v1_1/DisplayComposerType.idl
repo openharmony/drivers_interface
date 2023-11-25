@@ -21,9 +21,9 @@ import ohos.hdi.display.composer.v1_0.DisplayComposerType;
  * @brief Enumerates pixel formats.
  */
 enum PixelFormat : ohos.hdi.display.composer.v1_0.PixelFormat {
-    PIXEL_FMT_YCBCR_P010 = 35,      /**< YCBCR420 semi-planar 10bit format */
-    PIXEL_FMT_YCRCB_P010,           /**< YCRCB420 semi-planar 10bit format */
-    PIXEL_FMT_RAW10,                /**< RAW 10bit format */
+    PIXEL_FMT_YCBCR_P010 = 35, /**< YCBCR420 semi-planar 10bit format */
+    PIXEL_FMT_YCRCB_P010,      /**< YCRCB420 semi-planar 10bit format */
+    PIXEL_FMT_RAW10,           /**< RAW 10bit format */
 };
 
 /**
@@ -48,5 +48,5 @@ enum CompositionType : ohos.hdi.display.composer.v1_0.CompositionType {
  */
 struct DisplayModeInfoExt {
     struct DisplayModeInfo v1_0;
-    unsigned int groupId;           /* ltpo groupId */
+    unsigned int groupId; /* ltpo groupId */
 };
