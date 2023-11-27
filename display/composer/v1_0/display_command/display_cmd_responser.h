@@ -636,7 +636,7 @@ EXIT:
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
         ret = impl_->SetLayerPreMulti(devId, layerId, preMulti);
-        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+        DISPLAY_CHECK(ret != HDF_SUCCESS && ret != DISPLAY_NOT_SUPPORT && ret != HDF_ERR_NOT_SUPPORT, goto EXIT);
 EXIT:
         if (ret != HDF_SUCCESS) {
             errMaps_.emplace(REQUEST_CMD_SET_LAYER_PREMULTI, ret);
