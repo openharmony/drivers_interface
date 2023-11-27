@@ -368,6 +368,7 @@ struct AudioOffloadInfo
 {
     unsigned int sampleRate;    /**< Audio sampling rate */    
     unsigned int channelCount;  /**< Number of audio channels */
+    unsigned long channelLayout;   /**< Audio channel layout */
     unsigned int bitRate;       /**< bitRate of compressed audio data */
     unsigned int bitWidth;      /**< bitwidth of audio data */
     enum AudioFormat format;       /**< Audio data format. */
