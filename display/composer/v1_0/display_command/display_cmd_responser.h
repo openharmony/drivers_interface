@@ -474,7 +474,7 @@ EXIT:
 
         uint32_t devId = 0;
         int32_t fence = -1;
-
+#ifdef DISPLAY_COMSPOER_DEBUG_DUMP
         const std::string SWITCH_ON = "on";
         const uint32_t DUMP_CACHE_SWITCH_LEN = 4;
         char dumpSwitch[DUMP_CACHE_SWITCH_LEN] = {0};
@@ -483,7 +483,7 @@ EXIT:
         if (SWITCH_ON.compare(dumpSwitch) == 0) {
             cacheMgr_->Dump();
         }
-
+#endif
         bool retBool = true;
         DISPLAY_CHK_CONDITION(retBool, true, unpacker->ReadUint32(devId),
             HDF_LOGE("%{public}s, read devId error", __func__));
@@ -802,8 +802,9 @@ EXIT:
 
             ret = layerCache->SetLayerBuffer(data.buffer, data.seqNo, needFreeBuffer, deletingList,
                 [&](const BufferHandle& handle)->int32_t {
+#ifdef DISPLAY_COMSPOER_DEBUG_DUMP
                 DumpLayerBuffer(data.devId, data.layerId, data.fence, handle);
-
+#endif
                 int rc = impl_->SetLayerBuffer(data.devId, data.layerId, handle, fdParcel.GetFd());
                 DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
                 return HDF_SUCCESS;
@@ -949,7 +950,7 @@ EXIT:
             nowStr << "-" << tv.tv_usec;
         return strStream.str();
     }
-
+#ifdef DISPLAY_COMSPOER_DEBUG_DUMP
     static void DumpLayerBuffer(uint32_t devId, uint32_t layerId, int32_t fence, const BufferHandle& buffer)
     {
         const std::string SWITCH_ON = "on";
@@ -1003,6 +1004,7 @@ EXIT:
         ret = g_bufferServiceImpl->Unmap(hdiBuffer);
         DISPLAY_CHECK((ret != HDF_SUCCESS), HDF_LOGE("Unmap buffer failed"));
     }
+#endif
 
     static int32_t WaitFence(int32_t fence, uint32_t timeout)
     {
