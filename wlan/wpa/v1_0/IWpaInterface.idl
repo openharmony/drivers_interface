@@ -1,0 +1,555 @@
+/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup WPA
+ * @{
+ *
+ * @brief Provides APIs for the upper-layer WLAN service.
+ *
+ * You can use the APIs to enable or disable a WLAN hotspot, scan for hotspots, connect to a WLAN hotspot,
+ * manage WLAN chips, network devices, and power, and apply for, release, and move network data buffers.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
+
+/**
+ * @file IWpaInterface.idl
+ *
+ * @brief Provides APIs to enable or disable a WLAN hotspot, scan for hotspots, connect to or disconnect from a WLAN hotspot,
+ * set the country code, and manage network devices.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
+
+/**
+ * @brief Defines the package path of the Wpa module interface.
+ *
+ * @since 3.2
+ * @version 1.0
+ */
+
+package ohos.hdi.wlan.wpa.v1_0;
+
+import ohos.hdi.wlan.wpa.v1_0.WpaTypes;
+import ohos.hdi.wlan.wpa.v1_0.IWpaCallback;
+
+/**
+ * @brief Defines an interface for the upper-layer WLAN service.
+ *
+ * @since 4.1
+ * @version 1.0
+ */
+
+ interface IWpaInterface {
+    /**
+     * @brief Creates a channel between the HAL and the wpa supplicant and obtains the driver network interface card (NIC)
+     * information. This function must be called after an <b>IWiFi</b> instance is created.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    Start();
+
+    /**
+     * @brief Destroys the channel between the HAL and wpa supplicant. This function must be called before an <b>IWiFi</b>
+     * instance is destroyed.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    Stop();
+
+    /**
+     * @brief Add interface in wpa supplicant.
+     *
+     * @param ifName indicates the interface that needs to be added(such as: wlan0 or wlan2).
+     * @param confName indicates the config file(such as: /data/service/el1/public/wifi/wpa_supplicant/wpa_supplicant.conf).
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */    
+    AddWpaIface([in] String ifName, [in] String confName);
+	
+    /**
+     * @brief Remove interface in wpa supplicant.
+     *
+     * @param ifName indicates the interface that needs to be removed(such as: wlan0 or wlan2).
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */    
+    RemoveWpaIface([in] String ifName);
+
+    /**
+     * @brief Scan in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */    
+    Scan([in] String ifName);
+
+    /**
+     * @brief Scan Result in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param resultBuf Indicates Scan Result obtained. 
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    ScanResult([in] String ifName, [out] unsigned char[] resultBuf);
+
+    /**
+     * @brief Add nework in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param networkId Indicates the  network ID added.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */    
+    AddNetwork([in] String ifName, [out] int networkId);
+
+    /**
+     * @brief Remove nework in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param networkId Indicates the  network ID Remove.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */    
+    RemoveNetwork([in] String ifName, [in] int networkId);
+
+    /**
+     * @brief Disable nework in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param networkId Indicates the  network ID Disable.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */    
+    DisableNetwork([in] String ifName, [in] int networkId);
+
+    /**
+     * @brief Set Network in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param networkId Indicates the  network ID Set
+     * @param name Indicates the name to set
+     * @param value Indicates the value to set
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    SetNetwork([in] String ifName, [in] int networkId, [in] String name, [in] String value);
+
+    /**
+     * @brief List Networks in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param mode Indicates wifiNetworkInfo obtained. 
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    ListNetworks([in] String ifName, [out] struct HdiWifiWpaNetworkInfo[] networkInfo);
+
+    /**
+     * @brief Select nework in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param networkId Indicates the network ID Select.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */    
+    SelectNetwork([in] String ifName, [in] int networkId);
+     
+    /**
+     * @brief Enable nework in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param networkId Indicates the network ID Enable.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */    
+    EnableNetwork([in] String ifName, [in] int networkId);
+
+    /**
+     * @brief Reconnect in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */    
+    Reconnect([in] String ifName);
+
+    /**
+     * @brief Disconnect in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */    
+    Disconnect([in] String ifName);
+      
+    /**
+     * @brief Save config in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    SaveConfig([in] String ifName);
+
+    /**
+     * @brief Set PowerSave in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param enable Indicates whether set powerSave .
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */    
+    SetPowerSave([in] String ifName, [in] int enable);  
+
+    /**
+     * @brief Auto connect in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param enable Indicates whether auto connect .
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */    
+    AutoConnect([in] String ifName, [in] int enable);
+
+    /**
+     * @brief get Wifi Status in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name. 
+     * @param mode Indicates wifiStatus obtained. 
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */    
+    WifiStatus([in] String ifName, [out] struct HdiWpaCmdStatus wifiStatus);
+
+    /**
+     * @brief set WpsPbcMode in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param wpsParam Indicates wifiStatus obtained. 
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */    
+    WpsPbcMode([in] String ifName, [in] struct HdiWifiWpsParam wpsParam);
+
+    /**
+     * @brief set Wifi Status in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param wpsParam Indicates wifiStatus obtained. 
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */    
+    WpsPinMode([in] String ifName, [in] struct HdiWifiWpsParam wpsParam, [out] int pinCode);
+
+    /**
+     * @brief Cancel Wps in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    WpsCancel([in] String ifName);
+
+    /**
+     * @brief get countrycode in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.     
+     * @param countrycode Indicates the country code obtained.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    GetCountryCode([in] String ifName, [out] String countrycode);    
+
+    /**
+     * @brief get Network  in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param networkId Indicates the network ID of parameter
+     * @param param Indicates the param
+     * @param value Indicates the value obtained.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    GetNetwork([in] String ifName, [in] int networkId, [in] String param, [out] String value);
+
+    /**
+     * @brief clear block list in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    BlocklistClear([in] String ifName);
+
+    /**
+     * @brief Set SuspendMode in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param mode Indicates to set Suspend .
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */    
+    SetSuspendMode([in] String ifName, [in] int mode);
+
+    /**
+     * @brief Registers a callback to listen for asynchronous events.
+     *
+     * @param cbFunc Indicates the callback to register.
+     * @param ifName Indicates the NIC name.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    RegisterEventCallback([in] IWpaCallback cbFunc, [in] String ifName);
+
+    /**
+     * @brief Unregisters a callback.
+     *
+     * @param cbFunc Indicates the callback to unregister.
+     * @param ifName Indicates the NIC name.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    UnregisterEventCallback([in] IWpaCallback cbFunc, [in] String ifName);
+
+    /**
+     * @brief Get ConnectionCapabilities in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param connectionCap Indicates connectionCap obtained. 
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    GetConnectionCapabilities([in] String ifName, [out] struct ConnectionCapabilities connectionCap);
+
+    /**
+     * @brief Get whether Probe Requests are being sent for this network (hidden).
+     *
+     * @param ifName Indicates the NIC name.
+     * @param enabled true if set, false otherwise.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */    
+    GetScanSsid([in] String ifName, [out] int enable);
+
+    /**
+     * @brief Get passphrase in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param psk the psk value set.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    GetPskPassphrase([in] String ifName, [out] String psk);
+
+    /**
+     * @brief Get raw psk in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param psk the psk value set.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+     GetPsk([in] String ifName, [out] unsigned char[] psk);
+
+    /**
+     * @brief Get WEP key in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param keyIdx Index of wep key to be fetched
+     * @param wepKey the wep Key value set.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+     GetWepKey([in] String ifName, [in] int keyIdx, [out] unsigned char[] wepKey);
+
+    /**
+     * @brief Get default Tx key index in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param keyIdx the keyIdx valu value set.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    GetWepTxKeyIdx([in] String ifName, [out] int keyIdx);
+
+    /**
+     * @brief Get whether RequirePmf is enabled for this network.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param enabled true if set, false otherwise.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */    
+     GetRequirePmf([in] String ifName, [out] int enable);
+
+    /**
+     * @brief Set CountryCode in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param countrycode Indicates the country code to set
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */    
+    SetCountryCode([in] String ifName,[in] String countrycode);
+   
+ }
