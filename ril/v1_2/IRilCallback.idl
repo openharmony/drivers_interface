@@ -77,5 +77,16 @@ import ohos.hdi.ril.v1_1.IRilCallback;
      * @version 1.2
      */
     SendSimMatchedOperatorInfoResponse([in] struct RilRadioResponseInfo responseInfo);
+
+    /**
+     * @brief Callback for the response of cleaning all data connections.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
+     * For details, see {@link RilRadioResponseInfo}.
+     *
+     * @since 4.1
+     * @version 1.2
+     */
+    CleanAllConnectionsResponse([in] struct RilRadioResponseInfo responseInfo);
 }
 /** @} */
