@@ -15,7 +15,10 @@ import("//build/ohos.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 
 config("camera_sequenceable_config") {
-  include_dirs = [ "./" ]
+  include_dirs = [
+    "./",
+    "//drivers/peripheral/base",
+  ]
 }
 
 ohos_shared_library("libbuffer_producer_sequenceable_1.0") {
