@@ -35,7 +35,7 @@ namespace V1_1 {
 
 template <typename Interface, typename CompHdi, typename CmdReq>
 class DisplayComposerHdiImpl : public V1_0::DisplayComposerHdiImpl<Interface, CompHdi, CmdReq>,
-    public ISeamlessChangeCallback, public IModeCallback {
+    public ISeamlessChangeCallback, public IModeCallback, public IRefreshCallback {
 public:
     static IDisplayComposerInterface* Create()
     {
@@ -61,12 +61,42 @@ public:
 
     virtual ~DisplayComposerHdiImpl() {}
 
+    virtual int32_t OnSeamlessChange(uint32_t outputId) override
+    {
+        int32_t ret = HDF_SUCCESS;
+        if (seamlessChangeCb_) {
+            seamlessChangeCb_(outputId, seamlessChangeCbData_);
+        } else {
+            HDF_LOGE("seamless change callback is nullptr");
+            ret = HDF_FAILURE;
+        }
+        return ret;
+    }
+
     virtual int32_t RegSeamlessChangeCallback(SeamlessChangeCallback cb, void *data) override
     {
         seamlessChangeCb_ = cb;
         seamlessChangeCbData_ = data;
         COMPOSER_CHECK_NULLPTR(hdi_v1_1_);
         return ToDispErrCode(hdi_v1_1_->RegSeamlessChangeCallback(this));
+    }
+
+    virtual int32_t GetDisplaySupportedModesExt(unsigned int devId, std::vector<DisplayModeInfoExt> &modes) override
+    {
+        COMPOSER_CHECK_NULLPTR(hdi_v1_1_);
+        return ToDispErrCode(hdi_v1_1_->GetDisplaySupportedModesExt(devId, modes));
+    }
+
+    virtual int32_t OnMode(uint32_t modeId, uint64_t vBlankPeriod) override
+    {
+        int32_t ret = HDF_SUCCESS;
+        if (modeCb_) {
+            modeCb_(modeId, vBlankPeriod, nullptr);
+        } else {
+            HDF_LOGE("mode callback is nullptr");
+            ret = HDF_FAILURE;
+        }
+        return ret;
     }
 
     virtual int32_t SetDisplayModeAsync(uint32_t devId, uint32_t modeId, ModeCallback cb) override
@@ -76,40 +106,58 @@ public:
         return ToDispErrCode(hdi_v1_1_->SetDisplayModeAsync(devId, modeId, this));
     }
 
-    virtual int32_t GetDisplaySupportedModesExt(unsigned int devId, std::vector<DisplayModeInfoExt> &modes) override
-    {
-        COMPOSER_CHECK_NULLPTR(hdi_v1_1_);
-        return ToDispErrCode(hdi_v1_1_->GetDisplaySupportedModesExt(devId, modes));
-    }
-
     virtual int32_t GetDisplayVBlankPeriod(uint32_t devId, uint64_t &period) override
     {
         COMPOSER_CHECK_NULLPTR(hdi_v1_1_);
         return ToDispErrCode(hdi_v1_1_->GetDisplayVBlankPeriod(devId, period));
     }
 
-    virtual int32_t OnSeamlessChange(uint32_t outputId) override
+    virtual int32_t SetLayerPerFrameParameter(uint32_t devId, uint32_t layerId, const std::string& key,
+         std::vector<int8_t>& value) override
+    {
+        return ToDispErrCode(hdi_v1_1_->SetLayerPerFrameParameter(devId, layerId, key, value));
+    }
+
+    virtual int32_t GetSupportedLayerPerFrameParameterKey(std::vector<std::string>& keys) override
+    {
+        return ToDispErrCode(hdi_v1_1_->GetSupportedLayerPerFrameParameterKey(keys));
+    }
+
+    virtual int32_t SetDisplayOverlayResolution(uint32_t devId, uint32_t width, uint32_t height) override
+    {
+        return ToDispErrCode(hdi_v1_1_->SetDisplayOverlayResolution(devId, width, height));
+    }
+
+    virtual int32_t OnRefresh(uint32_t devId) override
     {
         int32_t ret = HDF_SUCCESS;
-        if (seamlessChangeCb_) {
-            seamlessChangeCb_(outputId, seamlessChangeCbData_);
+        if (refreshCb_ != nullptr) {
+            refreshCb_(devId, refreshCbData_);
         } else {
-            HDF_LOGE("error: seamlessChange callback is nullptr");
+            HDF_LOGE("error: refresh callback fn is nullptr");
             ret = HDF_FAILURE;
         }
         return ret;
     }
 
-    virtual int32_t OnMode(uint32_t modeId, uint64_t vBlankPeriod) override
+    virtual int32_t RegRefreshCallback(RefreshCallback cb, void *data) override
     {
-        int32_t ret = HDF_SUCCESS;
-        if (modeCb_) {
-            modeCb_(modeId, vBlankPeriod, nullptr);
-        } else {
-            HDF_LOGE("error: seamlessChange callback is nullptr");
-            ret = HDF_FAILURE;
-        }
-        return ret;
+        refreshCb_ = cb;
+        refreshCbData_ = data;
+        COMPOSER_CHECK_NULLPTR(hdi_v1_1_);
+        return ToDispErrCode(hdi_v1_1_->RegRefreshCallback(this));
+    }
+
+    virtual int32_t GetDisplaySupportedColorGamuts(uint32_t devId, std::vector<ColorGamut>& gamuts) override
+    {
+        COMPOSER_CHECK_NULLPTR(hdi_v1_1_);
+        return ToDispErrCode(hdi_v1_1_->GetDisplaySupportedColorGamuts(devId, gamuts));
+    }
+
+    virtual int32_t GetHDRCapabilityInfos(uint32_t devId, HDRCapability& info) override
+    {
+        COMPOSER_CHECK_NULLPTR(hdi_v1_1_);
+        return ToDispErrCode(hdi_v1_1_->GetHDRCapabilityInfos(devId, info));
     }
 
     private:
@@ -118,7 +166,9 @@ public:
     using BaseType1_0::ToDispErrCode;
     sptr<CompHdi> hdi_v1_1_;
     SeamlessChangeCallback seamlessChangeCb_;
+    RefreshCallback refreshCb_;
     void *seamlessChangeCbData_;
+    void *refreshCbData_;
     ModeCallback modeCb_;
 };
 using HdiDisplayComposer = DisplayComposerHdiImpl<IDisplayComposerInterface, IDisplayComposer, HdiDisplayCmdRequester>;

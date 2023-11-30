@@ -16,9 +16,11 @@
 package ohos.hdi.display.composer.v1_1;
 
 import ohos.hdi.display.composer.v1_0.IDisplayComposer;
+import ohos.hdi.display.composer.v1_0.DisplayComposerType;
 import ohos.hdi.display.composer.v1_1.DisplayComposerType;
 import ohos.hdi.display.composer.v1_1.IModeCallback;
 import ohos.hdi.display.composer.v1_1.ISeamlessChangeCallback;
+import ohos.hdi.display.composer.v1_0.IRefreshCallback;
 
 interface IDisplayComposer extends ohos.hdi.display.composer.v1_0.IDisplayComposer {
     /**
@@ -74,4 +76,83 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_0.IDisplayCompos
      * @version 1.1
      */
     GetDisplayVBlankPeriod([in] unsigned int devId, [out] unsigned long period);
+
+    /**
+     * @brief Sets parameter for the given layer, the parameter change must have fully taken effect after this call.
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param layerId Indicates the ID of the layer to be operated on.
+     * @param key Indicates a particular key.
+     * @param value Indicates the value corresponding to the key.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.1
+     * @version 1.1
+     */
+    SetLayerPerFrameParameter([in] unsigned int devId, [in] unsigned int layerId, [in] String key, [out] byte[] value);
+
+    /**
+     * @brief returns the list of supported parameter keys
+     *
+     * @param keys Indicates the supported parameter keys.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.1
+     * @version 1.1
+     */
+    GetSupportedLayerPerFrameParameterKey([out] String[] keys);
+
+    /**
+     * @brief Sets parameter for the given layer, the parameter change must have fully taken effect after this call.
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param width Indicates the pixel width of the display device
+     * @param height Indicates the pixel height of the display device
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.1
+     * @version 1.1
+     */
+    SetDisplayOverlayResolution([in] unsigned int devId, [in] unsigned int width, [in] unsigned int height);
+
+    /**
+     * @brief Registers the callback to be invoked when a refresh event occurs.
+     * 
+     * @param cb Indicates the instance used to notify the graphics service of a refresh event occurred.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.1
+     * @version 1.1
+    */
+    RegRefreshCallback([in] IRefreshCallback cb);
+
+    /**
+     * @brief Obtains the color gamuts of a display device.
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param gamuts Indicates the vector of the information about all color gamuts supported by the display device.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.1
+     * @version 1.1
+     */
+    GetDisplaySupportedColorGamuts([in] unsigned int devId, [out] struct ColorGamut[] gamuts);
+
+    /**
+     * @brief Obtains the capabilities of a display device.
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param info Indicates the pointer to the capabilities supported by the hdr device.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.1
+     * @version 1.1
+     */
+    GetHDRCapabilityInfos([in] unsigned int devId, [out] struct HDRCapability info);
 }
