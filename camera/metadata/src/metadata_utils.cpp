@@ -33,6 +33,10 @@ void MetadataUtils::WriteMetadataDataToVec(const camera_metadata_item_t &entry, 
         for (size_t i = 0; i < entry.count; i++) {
             WriteData<int32_t>(*(entry.data.i32 + i), cameraAbility);
         }
+    } else if (entry.data_type == META_TYPE_UINT32) {
+        for (size_t i = 0; i < entry.count; i++) {
+            WriteData<uint32_t>(*(entry.data.ui32 + i), cameraAbility);
+        }
     } else if (entry.data_type == META_TYPE_FLOAT) {
         for (size_t i = 0; i < entry.count; i++) {
             WriteData<float>(*(entry.data.f + i), cameraAbility);
@@ -160,6 +164,13 @@ void MetadataUtils::ReadMetadataDataFromVec(int32_t &index, camera_metadata_item
         if (entry.data.i32 != nullptr) {
             for (size_t i = 0; i < entry.count; i++) {
                 ReadData<int32_t>(entry.data.i32[i], index, cameraAbility);
+            }
+        }
+    } else if (entry.data_type == META_TYPE_UINT32) {
+        entry.data.ui32 = new(std::nothrow) uint32_t[entry.count];
+        if (entry.data.ui32 != nullptr) {
+            for (size_t i = 0; i < entry.count; i++) {
+                ReadData<uint32_t>(entry.data.ui32[i], index, cameraAbility);
             }
         }
     } else if (entry.data_type == META_TYPE_FLOAT) {
@@ -391,7 +402,7 @@ std::string MetadataUtils::EncodeToString(std::shared_ptr<CameraMetadata> metada
         }
         encodeData += meta->data_count;
     }
-    METADATA_DEBUG_LOG("MetadataUtils::EncodeToString Calculated length: %{public}d, encoded length: %{public}d",
+    METADATA_DEBUG_LOG("MetadataUtils::EncodeToString Calculated length: %{public}zu, encoded length: %{public}zu",
                        s.capacity(), (encodeData - &s[0]));
 
     return s;
@@ -464,7 +475,7 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
         decodeData += meta->data_count;
     }
 
-    METADATA_DEBUG_LOG("MetadataUtils::DecodeFromString String length: %{public}d, Decoded length: %{public}d",
+    METADATA_DEBUG_LOG("MetadataUtils::DecodeFromString String length: %{public}zu, Decoded length: %{public}zu",
                        setting.capacity(), (decodeData - &setting[0]));
     return metadata;
 }
