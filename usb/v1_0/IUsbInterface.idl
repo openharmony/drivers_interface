@@ -166,7 +166,7 @@ interface IUsbInterface {
     ClaimInterface([in] struct UsbDev dev, [in] unsigned char interfaceid, [in] unsigned char force);
 
     /* *
-     * @brief Claims a USB interface exclusively. This must be done before data transfer.
+     * @brief Manage a USB interface exclusively. Detach or attach the interface.
      *
      * @param dev Indicates the USB device address.
      * @param interfaceid Indicates the interface ID of the USB device.
