@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -150,5 +150,16 @@ interface IPowerInterface {
      * @since 4.0
      */
     UnholdRunningLock([in] struct RunningLockInfo info);
+
+    /**
+     * @brief obtain system wakeup reason.
+     *
+     * @param info wakeup reason info.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 4.1
+     */
+    GetWakeupReason([out] String reason);
 }
 /** @} */
