@@ -18,5 +18,16 @@ package ohos.hdi.display.buffer.v1_0;
 import ohos.hdi.display.buffer.v1_0.DisplayBufferType;
 
 interface IAllocator {
+    /**
+     * @brief the function to alloc memory
+     *
+     * @param info describs the buffer to be alloced
+     * @param handle The allocated buffer handle
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.0
+     * @version 1.0
+     */
     AllocMem([in] struct AllocInfo info, [out] NativeBuffer handle);
 }

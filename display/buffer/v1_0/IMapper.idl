@@ -18,9 +18,63 @@ package ohos.hdi.display.buffer.v1_0;
 import ohos.hdi.display.buffer.v1_0.DisplayBufferType;
 
 interface IMapper {
+    /**
+     * @brief the function to free memory
+     *
+     * @param handle The input buffer handle
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.0
+     * @version 1.0
+     */
     FreeMem([in] NativeBuffer handle);
+
+    /**
+     * @brief map buffer handle
+     *
+     * @param handle The input buffer handle
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.0
+     * @version 1.0
+     */
     Mmap([in] NativeBuffer handle);
+
+    /**
+     * @brief unmap buffer handle
+     *
+     * @param handle The input buffer handle
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.0
+     * @version 1.0
+     */
     Unmap([in] NativeBuffer handle);
+
+    /**
+     * @brief flush buffer handle cache
+     *
+     * @param handle The input buffer handle
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.0
+     * @version 1.0
+     */
     FlushCache([in] NativeBuffer handle);
+
+    /**
+     * @brief invalidate buffer handle cache
+     *
+     * @param handle The input buffer handle
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.0
+     * @version 1.0
+     */
     InvalidateCache([in] NativeBuffer handle);
 }

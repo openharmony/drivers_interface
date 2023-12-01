@@ -18,5 +18,16 @@ package ohos.hdi.display.composer.v1_0;
 import ohos.hdi.display.composer.v1_0.DisplayComposerType;
 
 [callback] interface IHotPlugCallback {
+    /**
+     * @brief the callback to be invoked when a hot plug event occurs.
+     *
+     * @param outputId  Indicates the ID of the display device.
+     * @param connected  If the device is connected.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 4.0
+     * @version 1.0
+     */
     OnHotPlug([in] unsigned int outputId, [in] boolean connected);
 }
