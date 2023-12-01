@@ -56,7 +56,9 @@ interface IExecutor extends ohos.hdi.fingerprint_auth.v1_0.IExecutor {
      * @brief Authenticate template.
      *
      * @param scheduleId Indicates schedule id of authenticate.
-     * @param para Indicates authenticate parameter, see {@link AuthenticateParam}.
+     * @param templateIdList Indicates the templates to process.
+     * @param endAfterFirstFail Indicates end authentication after the first authentication failure.
+     * @param extraInfo Indicates extra info of authenticate.
      * @param callbackObj Indicates authenticate callback object, see {@link IExecutorCallback}.
      *
      * @return Returns <b>0</b> if the operation is successful.
