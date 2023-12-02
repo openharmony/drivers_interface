@@ -17,6 +17,7 @@ hdi("intell_voice_engine") {
   module_name = "intell_voice_engine_service"
 
   sources = [
+    "IIntellVoiceDataOprCallback.idl",
     "IIntellVoiceEngineAdapter.idl",
     "IIntellVoiceEngineCallback.idl",
     "IIntellVoiceEngineManager.idl",

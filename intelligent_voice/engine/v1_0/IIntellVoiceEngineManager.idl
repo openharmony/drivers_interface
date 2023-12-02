@@ -17,9 +17,11 @@ package ohos.hdi.intelligent_voice.engine.v1_0;
 
 import ohos.hdi.intelligent_voice.engine.v1_0.IntellVoiceEngineTypes;
 import ohos.hdi.intelligent_voice.engine.v1_0.IIntellVoiceEngineAdapter;
+import ohos.hdi.intelligent_voice.engine.v1_0.IIntellVoiceDataOprCallback;
 
 interface IIntellVoiceEngineManager {
     GetAdapterDescriptors([out] List <struct IntellVoiceEngineAdapterDescriptor> descs);
     CreateAdapter([in] struct IntellVoiceEngineAdapterDescriptor descriptor, [out] IIntellVoiceEngineAdapter adapter);
     ReleaseAdapter([in] struct IntellVoiceEngineAdapterDescriptor descriptor);
+    SetDataOprCallback([in] IIntellVoiceDataOprCallback dataOprCallback);
 }
