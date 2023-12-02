@@ -166,6 +166,18 @@ interface IUsbInterface {
     ClaimInterface([in] struct UsbDev dev, [in] unsigned char interfaceid, [in] unsigned char force);
 
     /* *
+     * @brief Manage a USB interface exclusively. Detach or attach the interface.
+     *
+     * @param dev Indicates the USB device address.
+     * @param interfaceid Indicates the interface ID of the USB device.
+     * @param disable Indicates whether to disable the interface.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
+     * @since 3.2
+     */
+    ManageInterface([in] struct UsbDev dev, [in] unsigned char interfaceid, [in] boolean disable);
+
+    /* *
      * @brief Releases a USB interface. This is usually done after data transfer.
      *
      * @param dev Indicates the USB device address.
