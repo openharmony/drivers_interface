@@ -265,6 +265,32 @@ common_metadata_header_t *AllocateCameraMetadataBuffer(uint32_t item_capacity, u
     return metadataHeader;
 }
 
+// Load vendor tag impl
+CameraVendorTag* LoadVendorTagImpl(void* libHandle)
+{
+    libHandle = dlopen("libcamera_vendor_tag_impl.z.so", RTLD_LAZY);
+    if (libHandle == nullptr) {
+        METADATA_ERR_LOG("dlopen failed %{public}s", __func__);
+        return nullptr;
+    }
+
+    CreateCameraVendorTag* createVendorTag =
+        reinterpret_cast<CreateCameraVendorTag*>(dlsym(libHandle, "CreateVendorTagImpl"));
+    if (createVendorTag == nullptr) {
+        METADATA_ERR_LOG("CreateCameraVendorTag failed %{public}s", __func__);
+        dlclose(libHandle);
+        return nullptr;
+    }
+
+    CameraVendorTag* vendorTagImpl = createVendorTag();
+    if (vendorTagImpl == nullptr) {
+        METADATA_ERR_LOG("createVendorTag failed %{public}s", __func__);
+        dlclose(libHandle);
+        return nullptr;
+    }
+    return vendorTagImpl;
+}
+
 int32_t GetMetadataSection(uint32_t itemSection, uint32_t *section)
 {
     METADATA_DEBUG_LOG("GetMetadataSection start");
@@ -345,21 +371,15 @@ int32_t GetCameraMetadataItemType(uint32_t item, uint32_t *dataType)
         std::shared_ptr<CameraVendorTagExample> vendorTag = std::make_shared<CameraVendorTagExample>();
         *dataType = vendorTag->GetVendorTagType(item);
 #else
-        void* libHandle_ = dlopen("libcamera_vendor_tag_impl.z.so", RTLD_LAZY);
-        if (libHandle_ == nullptr) {
-            METADATA_ERR_LOG("dlopen failed %{public}s", __func__);
+        void* libHandle = nullptr;
+        CameraVendorTag* vendorTagImpl = LoadVendorTagImpl(libHandle);
+        if (vendorTagImpl == nullptr) {
+            METADATA_ERR_LOG("LoadVendorTagImpl failed");
             return CAM_META_FAILURE;
         }
-
-        CreateCameraVendorTag* createVendorTag =
-            reinterpret_cast<CreateCameraVendorTag*>(dlsym(libHandle_, "CreateVendorTagImpl"));
-        if (createVendorTag == nullptr) {
-            METADATA_ERR_LOG("CreateCameraVendorTag failed %{public}s", __func__);
-            return CAM_META_FAILURE;
-        }
-
-        CameraVendorTag* vendorTagImpl = createVendorTag();
         *dataType = vendorTagImpl->GetVendorTagType(item);
+        delete vendorTagImpl;
+        dlclose(libHandle);
 #endif
         return CAM_META_SUCCESS;
     }
@@ -397,21 +417,16 @@ const char *GetCameraMetadataItemName(uint32_t item)
         std::shared_ptr<CameraVendorTagExample> vendorTag = std::make_shared<CameraVendorTagExample>();
         return vendorTag->GetVendorTagName(item);
 #else
-        void* libHandle_ = dlopen("libcamera_vendor_tag_impl.z.so", RTLD_LAZY);
-        if (libHandle_ == nullptr) {
-            METADATA_ERR_LOG("dlopen failed %{public}s", __func__);
+        void* libHandle = nullptr;
+        CameraVendorTag* vendorTagImpl = LoadVendorTagImpl(libHandle);
+        if (vendorTagImpl == nullptr) {
+            METADATA_ERR_LOG("LoadVendorTagImpl failed");
             return nullptr;
         }
-
-        CreateCameraVendorTag* createVendorTag =
-            reinterpret_cast<CreateCameraVendorTag*>(dlsym(libHandle_, "CreateVendorTagImpl"));
-        if (createVendorTag == nullptr) {
-            METADATA_ERR_LOG("CreateCameraVendorTag failed %{public}s", __func__);
-            return nullptr;
-        }
-
-        CameraVendorTag* vendorTagImpl = createVendorTag();
-        return vendorTagImpl->GetVendorTagName(item);
+        const char* tagName = vendorTagImpl->GetVendorTagName(item);
+        delete vendorTagImpl;
+        dlclose(libHandle);
+        return tagName;
 #endif
     }
     int32_t ret = GetMetadataSection(itemTag, &section);
@@ -1110,21 +1125,15 @@ int32_t GetAllVendorTags(std::vector<vendorTag_t>& tagVec)
         std::shared_ptr<CameraVendorTagExample> vendorTag = std::make_shared<CameraVendorTagExample>();
         vendorTag->GetAllVendorTags(tagVec);
 #else
-        void* libHandle_ = dlopen("libcamera_vendor_tag_impl.z.so", RTLD_LAZY);
-        if (libHandle_ == nullptr) {
-            METADATA_ERR_LOG("dlopen failed %{public}s", __func__);
+        void* libHandle = nullptr;
+        CameraVendorTag* vendorTagImpl = LoadVendorTagImpl(libHandle);
+        if (vendorTagImpl == nullptr) {
+            METADATA_ERR_LOG("LoadVendorTagImpl failed");
             return CAM_META_FAILURE;
         }
-
-        CreateCameraVendorTag* createVendorTag =
-            reinterpret_cast<CreateCameraVendorTag*>(dlsym(libHandle_, "CreateVendorTagImpl"));
-        if (createVendorTag == nullptr) {
-            METADATA_ERR_LOG("CreateCameraVendorTag failed %{public}s", __func__);
-            return CAM_META_FAILURE;
-        }
-
-        CameraVendorTag* vendorTagImpl = createVendorTag();
         vendorTagImpl->GetAllVendorTags(tagVec);
+        delete vendorTagImpl;
+        dlclose(libHandle);
 #endif
         return CAM_META_SUCCESS;
 }
