@@ -107,7 +107,7 @@ public:
      * @version 1.1
      */
     virtual int32_t SetLayerPerFrameParameter(uint32_t devId, uint32_t layerId, const std::string& key,
-         std::vector<int8_t>& value) = 0;
+        const std::vector<int8_t>& value) = 0;
 
     /* *
      * @brief Obtains the layer per frame keys supported by a display device.

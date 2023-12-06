@@ -113,7 +113,7 @@ public:
     }
 
     virtual int32_t SetLayerPerFrameParameter(uint32_t devId, uint32_t layerId, const std::string& key,
-         std::vector<int8_t>& value) override
+        const std::vector<int8_t>& value) override
     {
         return ToDispErrCode(hdi_v1_1_->SetLayerPerFrameParameter(devId, layerId, key, value));
     }

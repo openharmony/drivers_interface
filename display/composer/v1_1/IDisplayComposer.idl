@@ -90,7 +90,7 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_0.IDisplayCompos
      * @since 4.1
      * @version 1.1
      */
-    SetLayerPerFrameParameter([in] unsigned int devId, [in] unsigned int layerId, [in] String key, [out] byte[] value);
+    SetLayerPerFrameParameter([in] unsigned int devId, [in] unsigned int layerId, [in] String key, [in] byte[] value);
 
     /**
      * @brief returns the list of supported parameter keys
