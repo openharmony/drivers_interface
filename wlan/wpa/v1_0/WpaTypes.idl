@@ -283,3 +283,171 @@ struct ConnectionCapabilities {
      */
     LegacyMode legacyMode;
 };
+
+/**
+ * @brief Defines the p2p Network Info for a Wi-Fi 
+ *
+ * @since 4.1
+ * @version 1.0
+ */
+struct HdiP2pNetworkInfo {
+    int id;
+    unsigned char[] ssid;
+    unsigned char[] bssid;
+    unsigned char[] flags;
+};
+
+/**
+ * @brief Defines the p2p Network List for a Wi-Fi 
+ *
+ * @since 4.1
+ * @version 1.0
+ */
+struct HdiP2pNetworkList  {
+    int infoNum;
+    struct HdiP2pNetworkInfo[] infos;
+};
+
+/**
+ * @brief Defines the P2p Device Info for a Wi-Fi 
+ *
+ * @since 4.1
+ * @version 1.0
+ */
+struct HdiP2pDeviceInfo {
+    unsigned char[] srcAddress;
+    unsigned char[] p2pDeviceAddress;
+    unsigned char[] primaryDeviceType;
+    unsigned char[] deviceName;
+    int configMethods;
+    int deviceCapabilities;
+    int groupCapabilities;
+    unsigned char[] wfdDeviceInfo;
+    unsigned int wfdLength;
+    unsigned char[] operSsid;
+};
+
+struct HdiP2pServiceInfo {
+    int mode; /* 0/1, upnp/bonjour  */
+    int version;
+    unsigned char[] name;
+    unsigned char[] query;
+    unsigned char[] resp;
+};
+
+struct HdiP2pReqService {
+    unsigned char[] bssid;
+    unsigned char[] msg;
+};
+
+struct HdiP2pServDiscReqInfo {
+    int freq;
+    int dialogToken;
+    int updateIndic;
+    unsigned char[] mac;
+    unsigned char[] tlvs;
+};
+
+struct HdiHid2dConnectInfo {
+    unsigned char[] ssid;
+    unsigned char[] bssid;
+    unsigned char[] passphrase;
+    int frequency;
+};
+struct HdiP2pConnectInfo {
+    int persistent; /* |persistent=<network id>] */
+    int mode; /* [join|auth] */
+    int goIntent; /* [go_intent=<0..15>] */
+    int provdisc; /* [provdisc] */
+    unsigned char[] peerDevAddr;
+    unsigned char[] pin; /* <pbc|pin|PIN#|p2ps> */
+};
+
+struct HdiP2pDeviceInfoParam {
+    unsigned char[] srcAddress;
+    unsigned char[] p2pDeviceAddress;
+    unsigned char[] primaryDeviceType;
+    unsigned char[] deviceName;
+    int configMethods;
+    int deviceCapabilities;
+    int groupCapabilities;
+    unsigned char[] wfdDeviceInfo;
+    unsigned int wfdLength;
+    unsigned char[] operSsid;
+};
+
+struct HdiP2pDeviceLostParam {
+    unsigned char[] p2pDeviceAddress;
+    int networkId;
+};
+
+struct HdiP2pGoNegotiationRequestParam {
+    unsigned char[] srcAddress;
+    int passwordId;
+};
+
+struct HdiP2pGoNegotiationCompletedParam {
+    int status;
+};
+
+struct HdiP2pInvitationReceivedParam {
+    int type; /* 0:Received, 1:Accepted */
+    int persistentNetworkId;
+    int operatingFrequency;
+    unsigned char[] srcAddress;
+    unsigned char[] goDeviceAddress;
+    unsigned char[] bssid;
+};
+
+struct HdiP2pInvitationResultParam {
+    int status;
+    unsigned char[] bssid;
+};
+
+struct HdiP2pGroupStartedParam {
+    int isGo;
+    int isPersistent;
+    int frequency;
+    unsigned char[] groupIfName;
+    unsigned char[] ssid;
+    unsigned char[] psk;
+    unsigned char[] passphrase;
+    unsigned char[] goDeviceAddress;
+};
+
+struct HdiP2pGroupRemovedParam {
+    int isGo;
+    unsigned char[] groupIfName;
+};
+
+struct HdiP2pProvisionDiscoveryCompletedParam {
+    int isRequest;
+    int provDiscStatusCode;
+    int configMethods;
+    unsigned char[] p2pDeviceAddress;
+    unsigned char[] generatedPin;
+};
+
+struct HdiP2pServDiscReqInfoParam {
+    int freq;
+    int dialogToken;
+    int updateIndic;
+    unsigned char[] mac;
+    unsigned char[] tlvs;
+};
+
+struct HdiP2pServDiscRespParam {
+    int updateIndicator;
+    unsigned char[] srcAddress;
+    unsigned char[] tlvs;
+};
+
+struct HdiP2pStaConnectStateParam {
+    int state;
+    unsigned char[] srcAddress;
+    unsigned char[] p2pDeviceAddress;
+};
+
+struct HdiP2pIfaceCreatedParam {
+    int isGo;
+};
