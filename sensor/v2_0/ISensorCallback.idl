@@ -36,7 +36,7 @@ import ohos.hdi.sensor.v2_0.SensorTypes;
  * a sensor user subscribes to sensor data. Only after the sensor is enabled, the sensor data subscriber can receive
  * sensor data. For details, see {@link ISensorInterface}.
  *
- * @since 4.0
+ * @since 4.1
  */
 [callback] interface ISensorCallback {
     /**
