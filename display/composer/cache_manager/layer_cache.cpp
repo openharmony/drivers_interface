@@ -67,7 +67,7 @@ int32_t LayerCache::SetBufferCacheMaxCount(uint32_t cacheCount)
 int32_t LayerCache::SetLayerBuffer(const BufferHandle* buffer, uint32_t seqNo, bool &needFreeBuffer,
     const std::vector<uint32_t>& deletingList, std::function<int32_t (const BufferHandle&)> realFunc)
 {
-    bool result = false;
+    bool result;
     for (auto num : deletingList) {
         result = bufferCaches_->EraseCache(num);
         DISPLAY_CHECK((result != true), HDF_LOGE("%{public}s: warning, erase buffer cache fail, num: %{public}u",

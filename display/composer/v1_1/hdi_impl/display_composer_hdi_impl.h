@@ -57,7 +57,14 @@ public:
         return new DisplayComposerHdiImpl(hdi, req);
     }
 
-    DisplayComposerHdiImpl(sptr<CompHdi> hdi, std::shared_ptr<CmdReq> req): BaseType1_0(hdi, req), hdi_v1_1_(hdi) {}
+    DisplayComposerHdiImpl(sptr<CompHdi> hdi, std::shared_ptr<CmdReq> req)
+        : BaseType1_0(hdi, req),
+        hdi_v1_1_(hdi),
+        seamlessChangeCb_(nullptr),
+        refreshCb_(nullptr),
+        seamlessChangeCbData_(nullptr),
+        refreshCbData_(nullptr),
+        modeCb_(nullptr) {}
 
     virtual ~DisplayComposerHdiImpl() {}
 
