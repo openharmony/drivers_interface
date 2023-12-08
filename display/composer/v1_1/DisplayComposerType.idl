@@ -24,6 +24,7 @@ enum PixelFormat : ohos.hdi.display.composer.v1_0.PixelFormat {
     PIXEL_FMT_YCBCR_P010 = 35, /**< YCBCR420 semi-planar 10bit format */
     PIXEL_FMT_YCRCB_P010,      /**< YCRCB420 semi-planar 10bit format */
     PIXEL_FMT_RAW10,           /**< RAW 10bit format */
+    PIXEL_FMT_BLOB,            /**< BLOB format */
 };
 
 /**
