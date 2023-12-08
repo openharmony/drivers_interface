@@ -1,7 +1,7 @@
 {
     "name": "@ohos/drivers_interface_sensor",
     "description": "sensor device driver interface",
-    "version": "4.0",
+    "version": "4.1",
     "license": "Apache License 2.0",
     "publishAs": "code-segment",
     "segment": {
@@ -27,13 +27,13 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/sensor/v1_1:sensor_idl_target"
+          "//drivers/interface/sensor/v2_0:sensor_idl_target"
         ],
         "test": [
         ],
         "inner_kits": [
           {
-            "name": "//drivers/interface/sensor/v1_1:libsensor_proxy_1.1",
+            "name": "//drivers/interface/sensor/v2_0:libsensor_proxy_2.0",
             "header": {
               "header_files": [
               ],
@@ -41,7 +41,7 @@
             }
           },
           {
-            "name": "//drivers/interface/sensor/v1_1:libsensor_stub_1.1",
+            "name": "//drivers/interface/sensor/v2_0:libsensor_stub_2.0",
             "header": {
               "header_files": [
               ],
@@ -49,7 +49,7 @@
             }
           },
           {
-            "name": "//drivers/interface/sensor/v1_1:sensor_idl_headers",
+            "name": "//drivers/interface/sensor/v2_0:sensor_idl_headers",
             "header": {
               "header_files": [
               ],
