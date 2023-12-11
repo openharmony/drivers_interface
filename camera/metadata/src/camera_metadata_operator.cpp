@@ -24,6 +24,7 @@
 #include "metadata_log.h"
 
 namespace OHOS::Camera {
+static CameraVendorTag* g_vendorTagImpl = nullptr;
 const int METADATA_HEADER_DATA_SIZE = 4;
 const std::vector<int32_t> METADATATAGS = {
     OHOS_ABILITY_CAMERA_POSITION,
@@ -266,29 +267,32 @@ common_metadata_header_t *AllocateCameraMetadataBuffer(uint32_t item_capacity, u
 }
 
 // Load vendor tag impl
-CameraVendorTag* LoadVendorTagImpl(void* libHandle)
+int32_t LoadVendorTagImpl()
 {
-    libHandle = dlopen("libcamera_vendor_tag_impl.z.so", RTLD_LAZY);
-    if (libHandle == nullptr) {
-        METADATA_ERR_LOG("dlopen failed %{public}s", __func__);
-        return nullptr;
+    if (g_vendorTagImpl == nullptr) {
+        void* libHandle = dlopen("libcamera_vendor_tag_impl.z.so", RTLD_LAZY);
+        if (libHandle == nullptr) {
+            METADATA_ERR_LOG("dlopen failed %{public}s", __func__);
+            return CAM_META_FAILURE;
+        }
+
+        CreateCameraVendorTag* createVendorTag =
+            reinterpret_cast<CreateCameraVendorTag*>(dlsym(libHandle, "CreateVendorTagImpl"));
+        if (createVendorTag == nullptr) {
+            METADATA_ERR_LOG("CreateCameraVendorTag failed %{public}s", __func__);
+            dlclose(libHandle);
+            return CAM_META_FAILURE;
+        }
+
+        g_vendorTagImpl = createVendorTag();
+        if (g_vendorTagImpl == nullptr) {
+            METADATA_ERR_LOG("createVendorTag failed %{public}s", __func__);
+            dlclose(libHandle);
+            return CAM_META_FAILURE;
+        }
     }
 
-    CreateCameraVendorTag* createVendorTag =
-        reinterpret_cast<CreateCameraVendorTag*>(dlsym(libHandle, "CreateVendorTagImpl"));
-    if (createVendorTag == nullptr) {
-        METADATA_ERR_LOG("CreateCameraVendorTag failed %{public}s", __func__);
-        dlclose(libHandle);
-        return nullptr;
-    }
-
-    CameraVendorTag* vendorTagImpl = createVendorTag();
-    if (vendorTagImpl == nullptr) {
-        METADATA_ERR_LOG("createVendorTag failed %{public}s", __func__);
-        dlclose(libHandle);
-        return nullptr;
-    }
-    return vendorTagImpl;
+    return CAM_META_SUCCESS;
 }
 
 int32_t GetMetadataSection(uint32_t itemSection, uint32_t *section)
@@ -371,15 +375,12 @@ int32_t GetCameraMetadataItemType(uint32_t item, uint32_t *dataType)
         std::shared_ptr<CameraVendorTagExample> vendorTag = std::make_shared<CameraVendorTagExample>();
         *dataType = vendorTag->GetVendorTagType(item);
 #else
-        void* libHandle = nullptr;
-        CameraVendorTag* vendorTagImpl = LoadVendorTagImpl(libHandle);
-        if (vendorTagImpl == nullptr) {
+        int32_t ret = LoadVendorTagImpl();
+        if (ret != CAM_META_SUCCESS) {
             METADATA_ERR_LOG("LoadVendorTagImpl failed");
             return CAM_META_FAILURE;
         }
-        *dataType = vendorTagImpl->GetVendorTagType(item);
-        delete vendorTagImpl;
-        dlclose(libHandle);
+        *dataType = g_vendorTagImpl->GetVendorTagType(item);
 #endif
         return CAM_META_SUCCESS;
     }
@@ -417,15 +418,12 @@ const char *GetCameraMetadataItemName(uint32_t item)
         std::shared_ptr<CameraVendorTagExample> vendorTag = std::make_shared<CameraVendorTagExample>();
         return vendorTag->GetVendorTagName(item);
 #else
-        void* libHandle = nullptr;
-        CameraVendorTag* vendorTagImpl = LoadVendorTagImpl(libHandle);
-        if (vendorTagImpl == nullptr) {
+        int32_t ret = LoadVendorTagImpl();
+        if (ret != CAM_META_SUCCESS) {
             METADATA_ERR_LOG("LoadVendorTagImpl failed");
             return nullptr;
         }
-        const char* tagName = vendorTagImpl->GetVendorTagName(item);
-        delete vendorTagImpl;
-        dlclose(libHandle);
+        const char* tagName = g_vendorTagImpl->GetVendorTagName(item);
         return tagName;
 #endif
     }
@@ -1125,15 +1123,12 @@ int32_t GetAllVendorTags(std::vector<vendorTag_t>& tagVec)
         std::shared_ptr<CameraVendorTagExample> vendorTag = std::make_shared<CameraVendorTagExample>();
         vendorTag->GetAllVendorTags(tagVec);
 #else
-        void* libHandle = nullptr;
-        CameraVendorTag* vendorTagImpl = LoadVendorTagImpl(libHandle);
-        if (vendorTagImpl == nullptr) {
+        int32_t ret = LoadVendorTagImpl();
+        if (ret != CAM_META_SUCCESS) {
             METADATA_ERR_LOG("LoadVendorTagImpl failed");
             return CAM_META_FAILURE;
         }
-        vendorTagImpl->GetAllVendorTags(tagVec);
-        delete vendorTagImpl;
-        dlclose(libHandle);
+        g_vendorTagImpl->GetAllVendorTags(tagVec);
 #endif
         return CAM_META_SUCCESS;
 }
