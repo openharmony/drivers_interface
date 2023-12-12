@@ -327,6 +327,9 @@ int32_t GetMetadataSection(uint32_t itemSection, uint32_t *section)
         case OHOS_DEVICE_FOCUS:
             *section = OHOS_SECTION_DEVICE_FOCUS;
             break;
+        case OHOS_DEVICE_WHITE_BLANCE:
+            *section = OHOS_SECTION_DEVICE_WHITE;
+            break;
         case OHOS_DEVICE_FLASH:
             *section = OHOS_SECTION_DEVICE_FLASH;
             break;

@@ -344,6 +344,7 @@ typedef enum camera_ae_antibanding_mode {
     OHOS_CAMERA_AE_ANTIBANDING_MODE_AUTO,
 } camera_ae_antibanding_mode_t;
 
+// OHOS_ABILITY_AE_LOCK
 // OHOS_CONTROL_AE_LOCK enumeration values
 typedef enum camera_ae_lock {
     OHOS_CAMERA_AE_LOCK_OFF,
