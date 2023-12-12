@@ -51,3 +51,66 @@ struct NcfgOperatorInfo {
      */
     String reserve;
 };
+
+/**
+ * @brief Defines NR cell's ssb id information.
+ */
+struct SsbIdInfo {
+    /** SSB index. */
+    int ssbId;
+
+    /** Reference Signal Received Power -140~-44, dBm */
+    int rsrp;
+};
+
+/**
+ * @brief Defines NR Neighboring cell's information.
+ */
+struct NeighboringCellSsbInfo {
+    /** Physical cell ID. */
+    int pci;
+
+    /** Absolute Radio Frequency Channel Number of the BCCH carrier 0~1023 */
+    int arfcn;
+
+    /** Reference Signal Received Power -140~-44, dBm */
+    int rsrp;
+
+    /** Signal To Interference Plus Noise Ratio. */
+    int sinr;
+
+    /** Neighboring cell ssbId list, always size is 4 */
+    List<struct SsbIdInfo> ssbIdList;
+};
+
+/**
+ * @brief Defines NR cell's information.
+ */
+struct NrCellSsbIds {
+    /** Absolute Radio Frequency Channel Number of the BCCH carrier 0~1023 */
+    int arfcn;
+
+    /** Context Identifier. */
+    long cid;
+
+    /** Physical cell ID. */
+    int pic;
+
+    /** Reference Signal Received Power -140~-44, dBm */
+    int rsrp;
+
+    /** Signal To Interference Plus Noise Ratio. */
+    int sinr;
+
+    /** Time advance. */
+    int timeAdvance;
+
+    /** Service cell ssbId list, always size is 8 */
+    List<struct SsbIdInfo> sCellSsbList;
+
+    /** Neighboring cell ssb list count, max size is 4 */
+    int nbCellCount;
+
+    /** Neighboring cell ssb info list, max size is 4 */
+    List<struct NeighboringCellSsbInfo> nbCellSsbList;
+};
