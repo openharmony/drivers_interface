@@ -57,6 +57,8 @@ static constexpr uint32_t BUFFER_QUEUE_MAX_SIZE = 6;
 
 static sptr<IMapper> g_bufferServiceImpl = nullptr;
 
+static constexpr uint32_t COMMIT_PRINT_INTERVAL = 1200;
+
 template <typename Transfer, typename VdiImpl>
 class DisplayCmdResponser {
 public:
@@ -76,7 +78,9 @@ public:
         isReplyUpdated_(false),
         reply_(nullptr),
         replyCommandCnt_(0),
-        replyPacker_(nullptr) {}
+        replyPacker_(nullptr),
+        g_CommitCount_(0),
+        g_CommitCountFail_(0) {}
 
     virtual ~DisplayCmdResponser()
     {
@@ -484,14 +488,25 @@ EXIT:
             cacheMgr_->Dump();
         }
 #endif
-        bool retBool = true;
-        DISPLAY_CHK_CONDITION(retBool, true, unpacker->ReadUint32(devId),
-            HDF_LOGE("%{public}s, read devId error", __func__));
+        int32_t ret = HDF_SUCCESS;
+        if (!unpacker->ReadUint32(devId)) {
+            HDF_LOGE("%{public}s, read devId error", __func__);
+            ret = HDF_FAILURE;
+            goto REPLY;
+        }
 
-        int32_t ret = (retBool ? HDF_SUCCESS : HDF_FAILURE);
-        DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, impl_->Commit(devId, fence),
-            HDF_LOGE("%{public}s, commit error", __func__));
+        ret = impl_->Commit(devId, fence);
+        g_CommitCount_++;
+        if (ret != HDF_SUCCESS) {
+            g_CommitCountFail_++;
+            HDF_LOGE("%{public}s, commit error", __func__);
+        }
 
+        if (g_CommitCount_ % COMMIT_PRINT_INTERVAL == 0) {
+            HDF_LOGI("Commit Status = %{public}u/%{public}u", g_CommitCountFail_, g_CommitCount_);
+            g_CommitCountFail_ = g_CommitCount_ = 0;
+        }
+REPLY:
         HdifdParcelable fdParcel(fence);
         DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::StartSection(REPLY_CMD_COMMIT, replyPacker_),
             HDF_LOGE("%{public}s, StartSection error", __func__));
@@ -1059,6 +1074,8 @@ protected:
     std::unordered_map<int32_t, int32_t> errMaps_;
     /* fix fd leak */
     std::queue<BufferHandle *> delayFreeQueue_;
+    uint32_t g_CommitCount_;
+    uint32_t g_CommitCountFail_;
 };
 using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, IDisplayComposerVdi>;
 } // namespace V1_0
