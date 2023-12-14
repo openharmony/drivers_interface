@@ -51,8 +51,9 @@ sptr<BufferProducerSequenceable> BufferProducerSequenceable::Unmarshalling(Parce
 
 BufferProducerSequenceable &BufferProducerSequenceable::operator=(const BufferProducerSequenceable &other)
 {
-    if (&other != this)
-    producer_ = other.producer_;
+    if (&other != this) {
+        producer_ = other.producer_;
+    }
     return *this;
 }
 } // V1_0
