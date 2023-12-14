@@ -139,3 +139,53 @@ enum HdfSensorGroupType {
     HDF_MEDICAL_SENSOR_TYPE = 1,  /**< medical sensor type, the sensorId enumeration value range is not within 128-160 */
     HDF_SENSOR_GROUP_TYPE_MAX,          /**< Maximum sensor group type*/
 };
+
+/**
+ * @brief Defines the data reported by the sensor about sdc.
+ *
+ * The reported sensor data includes the memAddr, offset, memSize,readIndex.
+ *
+ * @since 4.1
+ */
+struct SdcFifoInfo {
+    unsigned long memAddr;      /**< SdcFifoInfo of memAddr */
+    unsigned long offset;       /**< SdcFifoInfo of offset */
+    unsigned int memSize;       /**< SdcFifoInfo of memSize */
+    unsigned int readIndex;     /**< SdcFifoInfo of readIndex */
+};
+
+/**
+ * @brief Enumerates the level of the sdc escalation rate.
+ *
+ * @since 4.1
+ */
+enum SdcRateLevel {
+    SDC_RATE_STOP,              /**< Indicates that the report is stopped */
+    SDC_RATE_NORMAL,            /**< The reporting speed is normal which is 50 hz */
+    SDC_RATE_GEN_FAST,          /**< The reporting speed is 100 hz */
+    SDC_RATE_FAST,              /**< The report speed is 200 hz */
+    SDC_RATE_FASTER,            /**< The reporting speed is 500 hz */
+    SDC_RATE_VERY_FAST,         /**< The escalation speed is 800 hz */
+};
+
+/**
+ * @brief Defines SDC reports data object operations to the node.
+ *
+ * The reported sensor data includes the fifo, lastDataReachTime, sleepUs, period, sensorType, sensorHandle,
+ * minDelay, maxDelay, minRateLevel, maxRateLevel and sdcEnabled.
+ *
+ * @since 4.1
+ */
+struct SdcSensorNode {
+    SdcFifoInfo fifo;                   /**< SdcFifoInfo instance */
+    unsigned long lastDataReachTime;    /**< last Data Reach Time */
+    long sleepUs;                       /**< Indicates sleep Us */
+    long period;                        /**< Indicates period */
+    int sensorType;                     /**< Indicates sensor Type */
+    int sensorHandle;                   /**< Indicates sensor Handle */
+    int minDelay;                       /**< Indicates min Delay */
+    int maxDelay;                       /**< Indicates max Delay */
+    SdcRateLevel minRateLevel;          /**< Indicates min Rate Level */
+    SdcRateLevel maxRateLevel;          /**< Indicates max Rate Level */
+    boolean sdcEnabled;                 /**< Indicates sdc if it is enabled or not */
+};

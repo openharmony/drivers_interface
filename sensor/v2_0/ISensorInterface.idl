@@ -172,4 +172,17 @@ interface ISensorInterface {
      * @version 1.1
      */
     ReadData([in] int sensorId, [out] struct HdfSensorEvents[] event);
+
+    /**
+     * @brief Obtain the sensor event data in the small system.
+     *
+     * @param sensorId Indicates the sensor ID. For details, see {@link SensorTypeTag}.
+     * @param enabled Indicates the sensor ID. For details, see {@link SensorTypeTag}.
+     * @param retelevel Indicates the sensor ID. For details, see {@link SensorTypeTag}.
+     * @return Returns <b>0</b> if the event data is obtained; returns a negative value otherwise.
+     *
+     * @since 4.0
+     * @version 1.1
+     */
+    SdcSensorActive([in] int sensorId, [in] boolean enabled, [in] int retelevel);
 }
