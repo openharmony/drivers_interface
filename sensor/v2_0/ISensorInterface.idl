@@ -178,11 +178,11 @@ interface ISensorInterface {
      *
      * @param sensorId Indicates the sensor ID. For details, see {@link SensorTypeTag}.
      * @param enabled Indicates if the value is enabled.
-     * @param retelevel Indicates rateClass.
+     * @param rateLevel Indicates rateClass.
      * @return Returns <b>0</b> if the event data is obtained; returns a negative value otherwise.
      *
      * @since 4.0
      * @version 1.1
      */
-    SdcSensorActive([in] int sensorId, [in] boolean enabled, [in] int retelevel);
+    SdcSensorActive([in] int sensorId, [in] boolean enabled, [in] int rateLevel);
 }
