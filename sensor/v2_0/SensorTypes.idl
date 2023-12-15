@@ -141,20 +141,6 @@ enum HdfSensorGroupType {
 };
 
 /**
- * @brief Defines the data reported by the sensor about sdc.
- *
- * The reported sensor data includes the memAddr, offset, memSize,readIndex.
- *
- * @since 4.1
- */
-struct SdcFifoInfo {
-    unsigned long memAddr;      /**< SdcFifoInfo of memAddr */
-    unsigned long offset;       /**< SdcFifoInfo of offset */
-    unsigned int memSize;       /**< SdcFifoInfo of memSize */
-    unsigned int readIndex;     /**< SdcFifoInfo of readIndex */
-};
-
-/**
  * @brief Enumerates the level of the sdc escalation rate.
  *
  * @since 4.1
@@ -171,21 +157,15 @@ enum SdcRateLevel {
 /**
  * @brief Defines SDC reports data object operations to the node.
  *
- * The reported sensor data includes the fifo, lastDataReachTime, sleepUs, period, sensorType, sensorHandle,
- * minDelay, maxDelay, minRateLevel, maxRateLevel and sdcEnabled.
+ * The reported sensor data includes the offset, type, ddrSize, minRateLevel, maxRateLevel, reserved.
  *
  * @since 4.1
  */
-struct SdcSensorNode {
-    SdcFifoInfo fifo;                   /**< SdcFifoInfo instance */
-    unsigned long lastDataReachTime;    /**< last Data Reach Time */
-    long sleepUs;                       /**< Indicates sleep Us */
-    long period;                        /**< Indicates period */
-    int sensorType;                     /**< Indicates sensor Type */
-    int sensorHandle;                   /**< Indicates sensor Handle */
-    int minDelay;                       /**< Indicates min Delay */
-    int maxDelay;                       /**< Indicates max Delay */
-    SdcRateLevel minRateLevel;          /**< Indicates min Rate Level */
-    SdcRateLevel maxRateLevel;          /**< Indicates max Rate Level */
-    boolean sdcEnabled;                 /**< Indicates sdc if it is enabled or not */
+struct SdcSensorInfo {
+    unsigned long offset;       /**< Used for mmap */
+    int type;                   /**< Each sensor has a type which defines what this sensor measures */
+    int ddrSize;                /**< Shared memory Size */
+    SdcRateLevel minRateLevel;  /**< Supported min rate level */
+    SdcRateLevel maxRateLevel;  /**< Supported max rate level */
+    int reserved;               /**< Shared memory address */
 };
