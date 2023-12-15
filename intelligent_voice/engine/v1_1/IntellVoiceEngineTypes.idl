@@ -13,13 +13,9 @@
  * limitations under the License.
  */
 
-package ohos.hdi.intelligent_voice.engine.v1_0;
+package ohos.hdi.intelligent_voice.engine.v1_1;
 
-import ohos.hdi.intelligent_voice.engine.v1_0.IntellVoiceEngineTypes;
-import ohos.hdi.intelligent_voice.engine.v1_0.IIntellVoiceEngineAdapter;
-
-interface IIntellVoiceEngineManager {
-    GetAdapterDescriptors([out] List <struct IntellVoiceEngineAdapterDescriptor> descs);
-    CreateAdapter([in] struct IntellVoiceEngineAdapterDescriptor descriptor, [out] IIntellVoiceEngineAdapter adapter);
-    ReleaseAdapter([in] struct IntellVoiceEngineAdapterDescriptor descriptor);
-}
+enum IntellVoiceDataOprType {
+    ENCRYPT_TYPE = 0,
+    DECRYPT_TYPE = 1,
+};

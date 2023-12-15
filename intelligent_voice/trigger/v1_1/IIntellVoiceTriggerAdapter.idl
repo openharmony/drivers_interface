@@ -13,13 +13,11 @@
  * limitations under the License.
  */
 
-package ohos.hdi.intelligent_voice.engine.v1_0;
+package ohos.hdi.intelligent_voice.trigger.v1_1;
 
-import ohos.hdi.intelligent_voice.engine.v1_0.IntellVoiceEngineTypes;
-import ohos.hdi.intelligent_voice.engine.v1_0.IIntellVoiceEngineAdapter;
+import ohos.hdi.intelligent_voice.trigger.v1_0.IIntellVoiceTriggerAdapter;
 
-interface IIntellVoiceEngineManager {
-    GetAdapterDescriptors([out] List <struct IntellVoiceEngineAdapterDescriptor> descs);
-    CreateAdapter([in] struct IntellVoiceEngineAdapterDescriptor descriptor, [out] IIntellVoiceEngineAdapter adapter);
-    ReleaseAdapter([in] struct IntellVoiceEngineAdapterDescriptor descriptor);
+interface IIntellVoiceTriggerAdapter extends ohos.hdi.intelligent_voice.trigger.v1_0.IIntellVoiceTriggerAdapter {
+    SetParams([in] String key, [in] String value);
+    GetParams([in] String key, [out] String value);
 }
