@@ -31,6 +31,7 @@ std::shared_ptr<DeviceCacheManager> DeviceCacheManager::GetInstance()
         mgr = std::make_shared<DeviceCacheManager>();
         if (mgr == nullptr) {
             HDF_LOGE("%{public}s: DeviceCacheManager construct failed", __func__);
+            return mgr;
         }
 
         int32_t ret = mgr->Init();
