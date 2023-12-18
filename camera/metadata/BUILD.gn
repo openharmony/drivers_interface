@@ -41,10 +41,6 @@ ohos_shared_library("metadata") {
       "src/metadata_utils.cpp",
     ]
 
-    if (drivers_interface_camera_feature_vendor_tag == false) {
-      sources += [ "src/camera_example_vendor_tags.cpp" ]
-    }
-
     if (drivers_interface_camera_feature_vendor_tag == true) {
       defines = []
       defines += [ "CAMERA_VENDOR_TAG" ]
