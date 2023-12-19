@@ -961,8 +961,9 @@ EXIT:
         };
 
         std::ostringstream strStream;
-        strStream << "hdi_layer_" << devId << "_" << layerId << "_" << buffer.width << "x" << buffer.height << "_" <<
-            nowStr << "-" << tv.tv_usec;
+        const int32_t PIXEL_BYTES = 4;
+        strStream << "hdi_layer_" << devId << "_" << layerId << "_" << buffer.stride / PIXEL_BYTES << "x" <<
+            buffer.height << "_" << nowStr << "-" << tv.tv_usec;
         return strStream.str();
     }
 #ifdef DISPLAY_COMSPOER_DEBUG_DUMP
