@@ -165,7 +165,7 @@ struct SdcSensorInfo {
     unsigned long offset;       /**< Used for mmap */
     int type;                   /**< Each sensor has a type which defines what this sensor measures */
     int ddrSize;                /**< Shared memory Size */
-    SdcRateLevel minRateLevel;  /**< Supported min rate level */
-    SdcRateLevel maxRateLevel;  /**< Supported max rate level */
+    int minRateLevel;  /**< Supported min rate level, see {@link SdcRateLevel} */
+    int maxRateLevel;  /**< Supported max rate level, see {@link SdcRateLevel} */
     int reserved;               /**< Shared memory address */
 };
