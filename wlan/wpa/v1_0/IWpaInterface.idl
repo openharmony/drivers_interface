@@ -551,5 +551,600 @@ import ohos.hdi.wlan.wpa.v1_0.IWpaCallback;
      * @version 1.0
      */    
     SetCountryCode([in] String ifName,[in] String countrycode);
-   
+
+    /**
+    * Set the postfix to be used for P2P SSID's.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param postfix name String to be appended to SSID.
+    * 
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    */
+    P2pSetSsidPostfixName([in] String ifName, [in] String name);
+
+    /**
+    * @brief set Wps Device Type for p2p.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param type Indicates the wpa device type of parameter.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pSetWpsDeviceType([in] String ifName, [in] String type);
+
+    /**
+    * @brief set Wps config methods for p2p.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param methods Indicates the Wps config methods of parameter.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pSetWpsConfigMethods([in] String ifName, [in] String methods);
+
+    /**
+    * @brief the Maximum idle time in seconds for P2P groups.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param time Indicates the Maximum idle time of parameter.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pSetGroupMaxIdle([in] String ifName, [in] int time);
+
+    /**
+    * @brief Enable/Disable Wifi Display for p2p.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param enable 1 to enable, 0 to disable.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pSetWfdEnable([in] String ifName, [in] int enable);
+
+    /**
+    * @brief Set Persistent Reconnect for p2p.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param status Indicates the Persistent Reconnect status of parameter.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pSetPersistentReconnect([in] String ifName, [in] int status);
+
+    /**
+    * @brief set Wps Secondary Device Type for p2p.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param type Indicates the wpa Secondary device type of parameter.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pSetWpsSecondaryDeviceType([in] String ifName, [in] String type);
+    
+    /**
+    * @brief setup Wps pbc for p2p.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param address Indicates the BSSID of the AP of parameter.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */  
+    P2pSetupWpsPbc([in] String ifName, [in] String address);
+
+    /**
+    * @brief setup Wps pin for p2p.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param address Indicates the BSSID of the AP of parameter.
+    * @param pin 8 digit pin to be used.
+    * @param result Indicates the status of the operation.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */ 
+    P2pSetupWpsPin([in] String ifName, [in] String address, [in] String pin, [out] String result);
+    
+    /**
+    * @brief Turn on/off power save mode for the interface.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param enable Indicate if power save is to be turned on/off.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    */  
+    P2pSetPowerSave([in] String ifName, [in] int enable);
+
+    /**
+    * @brief Set Device Name for p2p.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param name Indicates Device Name of parameter.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */  
+    P2pSetDeviceName([in] String ifName, [in] String name);
+
+    /**
+    * @brief set Wifi Display device config for p2p.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param config Indicates device config of parameter.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pSetWfdDeviceConfig([in] String ifName, [in] String config);
+
+    /**
+    * @brief set Random Mac for p2p.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param networkId Indicates the network ID Enable.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pSetRandomMac([in] String ifName, [in] int networkId);
+
+    /**
+    * @brief Start Find for p2p.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param timeout Indicates Max time to be spent is peforming discovery.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pStartFind([in] String ifName, [in] int timeout);
+
+    /**
+    * @brief Configure Extended Listen Timing for p2p.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param enable Indicates if to enable it.
+    * @param period Indicates Period in milliseconds.
+    * @param enable Indicates Interval in milliseconds.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pSetExtListen([in] String ifName, [in] int enable, [in] int period, [in] int interval);
+
+    /**
+    * @brief Set P2P Listen channel.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param channel Indicates the Wifi channel.
+    * @param regClass Indicates the channel set of the AP indicated by this BSSID.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pSetListenChannel([in] String ifName, [in] int channel, [in] int regClass);
+
+    /**
+    * @brief Send P2P provision discovery request to the specified peer.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param peerBssid Indicates MAC address of the device to send discovery.
+    * @param mode Indicates Provisioning mode of parameter.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pProvisionDiscovery([in] String ifName, [in] String peerBssid, [in] int mode);
+
+    /**
+    * @brief Set up a P2P group owner manually.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param isPersistent Indicates Used to request a persistent group to be formed.
+    * @param networkId Indicates the network ID Enable.
+    * @param freq Indicates the freq of p2p group.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pAddGroup([in] String ifName, [in] int isPersistent, [in] int networkId, [in] int freq);
+
+    /**
+    * @brief add service for p2p.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param info Indicates P2p Service Info.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pAddService([in] String ifName, [in] struct HdiP2pServiceInfo info);
+
+    /**
+    * @brief Remove service for p2p.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param info Indicates P2p Service Info.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pRemoveService([in] String ifName, [in] struct HdiP2pServiceInfo info);
+    
+    /**
+    * @brief Stop an ongoing P2P service discovery.
+    *
+    * @param ifName Indicates the NIC name.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pStopFind([in] String ifName);
+
+    /**
+    * @brief Flush P2P peer table and state.
+    *
+    * @param ifName Indicates the NIC name.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pFlush([in] String ifName);
+
+    /**
+    * @brief This command can be used to flush all services from the device.
+    *
+    * @param ifName Indicates the NIC name.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pFlushService([in] String ifName);
+
+    /**
+    * @brief Remove Network for p2p.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param networkId Indicates the network ID Enable.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pRemoveNetwork([in] String ifName, [in] int networkId);
+
+    /**
+    * @brief set group config for p2p.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param networkId Indicates the network ID Enable.
+    * @param name Indicates the group config name of parameter.
+    * @param value Indicates the group config value of parameter.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pSetGroupConfig([in] String ifName, [in] int networkId, [in] String name, [in] String value);
+
+    /**
+    * @brief set group config for p2p.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param peerAddress MAC address of the device to invite.
+    * @param goBssid MAC address of the group owner device.
+    * @param ifName Indicates the NIC name.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pInvite([in] String ifName, [in] String peerBssid, [in] String goBssid);
+
+    /**
+    * @brief set group config for p2p.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param networkId Indicates the network ID Enable.
+    * @param bssid MAC address of the device to reinvoke.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pReinvoke([in] String ifName, [in] int networkId,[in] String bssid);
+
+    /**
+    * @brief get the device address.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param deviceAddress Indicates the device address info.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pGetDeviceAddress([in] String ifName, [out] String deviceAddress);
+
+    /**
+    * @brief Schedule a P2P service discovery request.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param reqService Indicates device mac address of the peer device.
+    * @param replyDisc Indicates service discovery sequence.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pReqServiceDiscovery([in] String ifName, [in] struct HdiP2pReqService reqService,[out] String replyDisc);
+
+    /**
+    * @brief Cancel a previous service discovery request.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param id Identifier for the request to cancel.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pCancelServiceDiscovery([in] String ifName, [in] String id);
+
+    /**
+    * @brief the resp of server discovery for p2p
+    *
+    * @param ifName Indicates the NIC name.
+    * @param info Indicates resp info of server discovery.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pRespServerDiscovery([in] String ifName, [in] struct HdiP2pServDiscReqInfo info);
+
+    /**
+    * @brief Start P2P group formation with a discovered P2P peer.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param info Indicates all msg of the device to connect to.
+    * @param replyPin Pin generated, if |provisionMethod| uses one of the enerated |PIN*| methods.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pConnect([in] String ifName, [in] struct HdiP2pConnectInfo info, [out] String replyPin);
+
+    /**
+    * @brief Start P2P group formation with a discovered P2P peer.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param info Indicates all msg of the device to connect to.
+    * @param replyPin Pin generated, if |provisionMethod| uses one of the enerated |PIN*| methods.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    P2pHid2dConnect([in] String ifName, [in] struct HdiHid2dConnectInfo info);
+
+    /**
+    * @brief Set service discovery mode for p2p
+    *
+    * @param ifName Indicates the NIC name.
+    * @param mode Indicates the service discovery mode of parameter.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */ 
+    P2pSetServDiscExternal([in] String ifName, [in] int mode);
+
+    /**
+    * @brief remove group for p2p
+    *
+    * @param ifName Indicates the NIC name.
+    * @param groupName Indicates the group name of p2p.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */ 
+    P2pRemoveGroup([in] String ifName, [in] String groupName);
+
+    /**
+    * @brief Cancel Connect for p2p
+    *
+    * @param ifName Indicates the NIC name.
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */ 
+    P2pCancelConnect([in] String ifName);
+
+    /**
+    * @brief Get Group Config for p2p
+    *
+    * @param ifName Indicates the NIC name.
+    * @param networkId Indicates the network ID Enable.
+    * @param param Indicates the group config name.
+    * @param value Indicates the group config value.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */ 
+    P2pGetGroupConfig([in] String ifName, [in] int networkId, [in] String param, [out] String value);
+
+    /**
+    * @brief Add a Network for p2p
+    *
+    * @param ifName Indicates the NIC name.
+    * @param networkId Indicates the network ID Enable.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */ 
+    P2pAddNetwork([in] String ifName, [out] int networkId);
+
+    /**
+    * @brief Gets the capability of the group which the device is member of.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param bssid Indicates MAC address of the peer.
+    * @param info Indicates Structure for saving device information.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */    
+    P2pGetPeer([in] String ifName, [in] String bssid, [out] struct HdiP2pDeviceInfo info);
+
+    /**
+    * @brief Gets the capability of the group which the device is member of.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param bssid Indicates MAC address of the peer.
+    * @param cap Indicates capabilityMask Combination of |P2pGroupCapabilityMask| values.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */ 
+    P2pGetGroupCapability([in] String ifName, [in] String bssid, [out] int cap);
+
+    /**
+    * @brief List all network information.
+    *
+    * @param ifName Indicates the NIC name.
+    * @param infoList Indicates Structure for saving network information.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */ 
+    P2pListNetworks([in] String ifName, [out] struct HdiP2pNetworkList infoList);
+    
+    /**
+    * @brief save config for p2p.
+    *
+    * @param ifName Indicates the NIC name.
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */ 
+    P2pSaveConfig([in] String ifName);
+    
  }
