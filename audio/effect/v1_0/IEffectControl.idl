@@ -22,6 +22,7 @@ interface IEffectControl {
      * the input and output buffer have to be specificed, if they are not specified，the process have to use the
      * data process function which is provided by the command.
      *
+     * @param control Indicates the pointer to the effect control to operate.
      * @param input Indicates the buffer for original data.
      * @param output Indicates the buffer for output data.
      *
@@ -35,9 +36,12 @@ interface IEffectControl {
     /**
      * @brief Send the effect processing command.
      *
+     * @param control Indicates the pointer to the effect control to operate.
      * @param cmdId Command index used to match command options in the command table.
      * @param cmdData Data comes from the system service.
+     * @param cmdDataLen to the length of the cmdData.
      * @param replyData Data comes from vendor.
+     * @param replyDataLen Indicates the pointer to the length of the replyData.
      *
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
      *
@@ -49,6 +53,7 @@ interface IEffectControl {
     /**
      * @brief Get the descriptor of the effect.
      *
+     * @param control Indicates the pointer to the effect control to operate.
      * @param desc Indicates the specified effect descriptor.
      *
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
@@ -63,6 +68,7 @@ interface IEffectControl {
      * the input and output buffer have to be specificed, if they are not specified，the reverse have to use the
      * data reverse function which is provided by the command.
      *
+     * @param control Indicates the pointer to the effect control to operate.
      * @param input Indicates the buffer for input data.
      * @param output Indicates the buffer for output data.
      *
