@@ -141,20 +141,6 @@ enum HdfSensorGroupType {
 };
 
 /**
- * @brief Enumerates the level of the sdc escalation rate.
- *
- * @since 4.1
- */
-enum SdcRateLevel {
-    SDC_RATE_STOP,              /**< Indicates that the report is stopped */
-    SDC_RATE_NORMAL,            /**< The reporting speed is normal which is 50 hz */
-    SDC_RATE_GEN_FAST,          /**< The reporting speed is 100 hz */
-    SDC_RATE_FAST,              /**< The report speed is 200 hz */
-    SDC_RATE_FASTER,            /**< The reporting speed is 500 hz */
-    SDC_RATE_VERY_FAST,         /**< The escalation speed is 800 hz */
-};
-
-/**
  * @brief Defines SDC reports data object operations to the node.
  *
  * The reported sensor data includes the offset, type, ddrSize, minRateLevel, maxRateLevel, reserved.
@@ -165,7 +151,7 @@ struct SdcSensorInfo {
     unsigned long offset;       /**< Used for mmap */
     int type;                   /**< Each sensor has a type which defines what this sensor measures */
     int ddrSize;                /**< Shared memory Size */
-    int minRateLevel;  /**< Supported min rate level, see {@link SdcRateLevel} */
-    int maxRateLevel;  /**< Supported max rate level, see {@link SdcRateLevel} */
-    int reserved;               /**< Shared memory address */
+    int minRateLevel;           /**< Supported min rate level */
+    int maxRateLevel;           /**< Supported max rate level */
+    int reserved;               /**< Reserved */
 };
