@@ -184,7 +184,7 @@ interface ISensorInterface {
      * @since 4.1
      * @version 2.0
      */
-    SetSdcSensorActive([in] int sensorId, [in] boolean enabled, [in] int rateLevel);
+    SetSdcSensor([in] int sensorId, [in] boolean enabled, [in] int rateLevel);
 
     /**
      * @brief Obtain sensor information for SDC
