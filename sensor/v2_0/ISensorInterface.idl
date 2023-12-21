@@ -195,5 +195,5 @@ interface ISensorInterface {
      * @since 4.1
      * @version 2.0
      */
-    GetSdcSensorInfo([out] struct SdcSensorInfo[] sdcSensorInfos);
+    GetSdcSensorInfo([out] struct SdcSensorInfo[] sdcSensorInfo);
 }
