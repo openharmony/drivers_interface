@@ -499,7 +499,7 @@ EXIT:
         g_CommitCount_++;
         if (ret != HDF_SUCCESS) {
             g_CommitCountFail_++;
-            HDF_LOGE("%{public}s, commit error", __func__);
+            HDF_LOGE("%{public}s, commit failed with ret = %{public}d", __func__, ret);
         }
 
         if (g_CommitCount_ % COMMIT_PRINT_INTERVAL == 0) {
