@@ -31,9 +31,6 @@
 
 #define METADATA_ALIGNMENT ((size_t) 4)
 
-#define METADATA_PACKET_ALIGNMENT \
-    MaxAlignment(MaxAlignment(DATA_ALIGNMENT, METADATA_ALIGNMENT), ITEM_ALIGNMENT)
-
 #define INDEX_COUNTER 2
 #define WRAP_LENGTH 4
 
@@ -155,15 +152,12 @@ typedef struct VendoTagInfo {
 #define BITWISE_SHIFT_16 16
 
 namespace OHOS::Camera {
-uint32_t AlignTo(uint32_t val, uint32_t alignment);
-
-uint32_t MaxAlignment(uint32_t dataAlignment, uint32_t metadataAlignment);
-
 // Allocate a new camera metadata buffer and return the metadata header
 common_metadata_header_t *AllocateCameraMetadataBuffer(uint32_t item_capacity, uint32_t data_capacity);
 
 // Find camera metadata item and fill the found item
-int FindCameraMetadataItem(const common_metadata_header_t *src, uint32_t item, camera_metadata_item_t *metadataItem);
+int FindCameraMetadataItem(const common_metadata_header_t *src, uint32_t item,
+    camera_metadata_item_t *metadataItem);
 
 // Find camera metadata item index if the item exists
 int FindCameraMetadataItemIndex(const common_metadata_header_t *src, uint32_t item, uint32_t *index);
@@ -173,11 +167,11 @@ const char *GetCameraMetadataItemName(uint32_t item);
 
 // Update camera metadata item and fill the updated item
 int UpdateCameraMetadataItem(common_metadata_header_t *dst, uint32_t item, const void *data, uint32_t dataCount,
-                             camera_metadata_item_t *updatedItem);
+    camera_metadata_item_t *updatedItem);
 
 // Update camera metadata item by index and fill the updated item
 int UpdateCameraMetadataItemByIndex(common_metadata_header_t *dst, uint32_t index, const void *data,
-                                    uint32_t dataCount, camera_metadata_item_t *updated_item);
+    uint32_t dataCount, camera_metadata_item_t *updated_item);
 
 // Add camera metadata item
 int AddCameraMetadataItem(common_metadata_header_t *dst, uint32_t item, const void *data, size_t dataCount);
@@ -202,11 +196,12 @@ int GetCameraMetadataItem(const common_metadata_header_t *src, uint32_t index, c
 uint32_t GetCameraMetadataItemCount(const common_metadata_header_t *metadata_header);
 uint32_t GetCameraMetadataItemCapacity(const common_metadata_header_t *metadata_header);
 uint32_t GetCameraMetadataDataSize(const common_metadata_header_t *metadata_header);
-int32_t CopyCameraMetadataItems(common_metadata_header_t *newMetadata, const common_metadata_header_t *oldMetadata);
+int32_t CopyCameraMetadataItems(common_metadata_header_t *newMetadata,
+    const common_metadata_header_t *oldMetadata);
 size_t CalculateCameraMetadataItemDataSize(uint32_t type, size_t data_count);
 int32_t GetCameraMetadataItemType(uint32_t item, uint32_t *data_type);
 common_metadata_header_t *FillCameraMetadata(common_metadata_header_t *buffer, size_t memoryRequired,
-                                             uint32_t itemCapacity, uint32_t dataCapacity);
+    uint32_t itemCapacity, uint32_t dataCapacity);
 int32_t GetMetadataSection(uint32_t itemSection, uint32_t *section);
 int MetadataExpandItemMem(common_metadata_header_t *dst, camera_metadata_item_entry_t *item,
     size_t oldItemSize);
