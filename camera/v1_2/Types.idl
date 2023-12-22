@@ -155,6 +155,11 @@ enum OperationMode_V1_2 {
      * Super stabilization mode, which dedicated to use Suprt stabilization mode
      */
     SUPER_STAB = 10,
+
+    /**
+     * Operation mode max
+     */
+    OPERATION_MODE_MAX,
 };
 
 /**
