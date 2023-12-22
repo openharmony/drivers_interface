@@ -212,29 +212,29 @@ enum SessionStatus {
  */
 enum ErrorCode {
     /**
-     * The imageId is Invalid.
+     * Timeout.
      */
-    ERROR_INVALID_ID = 0,
+    TIMEOUT = 0,
+
     /**
-     * Processing error, no image can provide
+     * Error.
      */
-    ERROR_PROCESS = 1,
+    ERROR = 1,
+
     /**
-     * Processing timeout, can be retried.
+     * Busy.
      */
-    ERROR_TIMEOUT = 2,
+    BUSY = 3,
+
     /**
-     * Processing error due to high temperature.
+     * High temperature.
      */
-    ERROR_HIGH_TEMPERATURE = 3,
+    HIGH_TEMPERATURE = 4,
+
     /**
-     * Processing is abnormal, can be retried
+     * Abort.
      */
-    ERROR_ABNORMAL = 4,
-    /**
-     * Processing is abort.
-     */
-    ERROR_ABORT = 5,
+    ABORT = 5,
 };
 
 /**
@@ -261,6 +261,11 @@ enum ExecutionMode {
  * @brief Defines the ImageBufferInfo, which is used by {@link IImageProcessCallback::OnProcessDone}.
  */
 struct ImageBufferInfo {
+    /**
+     * Is the metadata valid.
+     */
+    boolean isMetaDataValid;
+
     /**
      * Data of metadata.
      */

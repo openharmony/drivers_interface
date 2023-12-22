@@ -60,15 +60,4 @@ interface ICameraDevice extends ohos.hdi.camera.v1_1.ICameraDevice {
      * @version 1.2
      */
     GetStatus([in] unsigned char[] metaIn, [out] unsigned char[] metaOut);
-
-    /**
-     * @brief Reset camera device setting.
-     *
-     * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
-     * in {@link CamRetCode} otherwise.
-     *
-     * @since 4.1
-     * @version 1.2
-     */
-    Reset();
 }
