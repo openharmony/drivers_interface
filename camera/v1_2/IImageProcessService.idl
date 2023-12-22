@@ -41,4 +41,14 @@ interface IImageProcessService {
     CreateImageProcessSession([in] int userId,
         [in] IImageProcessCallback imageProcessCallback,
         [out] IImageProcessSession imageProcessSession);
+
+    /**
+     * @brief Resigter back ground post capture callback.
+     *
+     * @param imageProcessSession Indicates the image process session. For details, see {@link IImageProcessSession}
+     *
+     * @since 4.1
+     * @version 1.2
+     */
+    RegisterBackgroundPostCaptureCallback([in] IImageProcessCallback imageProcessCallback);
 }
