@@ -499,7 +499,7 @@ EXIT:
         g_CommitCount_++;
         if (ret != HDF_SUCCESS) {
             g_CommitCountFail_++;
-            HDF_LOGE("%{public}s, commit error", __func__);
+            HDF_LOGE("%{public}s, commit failed with ret = %{public}d", __func__, ret);
         }
 
         if (g_CommitCount_ % COMMIT_PRINT_INTERVAL == 0) {
@@ -906,7 +906,7 @@ EXIT:
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
         ret = impl_->SetLayerMaskInfo(devId, layerId, static_cast<MaskInfo>(maskInfo));
-        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+        DISPLAY_CHECK(ret != HDF_SUCCESS && ret != DISPLAY_NOT_SUPPORT && ret != HDF_ERR_NOT_SUPPORT, goto EXIT);
 EXIT:
         if (ret != HDF_SUCCESS) {
             errMaps_.emplace(REQUEST_CMD_SET_LAYER_MASK_INFO, ret);

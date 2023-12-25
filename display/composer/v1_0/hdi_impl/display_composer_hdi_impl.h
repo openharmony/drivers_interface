@@ -466,6 +466,7 @@ public:
     // Callback implement
     virtual int32_t OnHotPlug(uint32_t outputId, bool connected) override
     {
+        HDF_LOGI("OnHotPlug(%{public}u, %{public}u)", outputId, connected);
         int32_t ret = HDF_SUCCESS;
         if (hotPlugCb_ != nullptr) {
             hotPlugCb_(outputId, connected, hotPlugCbData_);
