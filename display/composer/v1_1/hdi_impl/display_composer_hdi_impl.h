@@ -70,6 +70,7 @@ public:
 
     virtual int32_t OnSeamlessChange(uint32_t outputId) override
     {
+        HDF_LOGI("OnSeamlessChange(%{public}u)", outputId);
         int32_t ret = HDF_SUCCESS;
         if (seamlessChangeCb_) {
             seamlessChangeCb_(outputId, seamlessChangeCbData_);
@@ -96,6 +97,7 @@ public:
 
     virtual int32_t OnMode(uint32_t modeId, uint64_t vBlankPeriod) override
     {
+        HDF_LOGI("OnMode(%{public}u, %{public}llu)", modeId, vBlankPeriod);
         int32_t ret = HDF_SUCCESS;
         if (modeCb_) {
             modeCb_(modeId, vBlankPeriod, nullptr);
@@ -137,6 +139,7 @@ public:
 
     virtual int32_t OnRefresh(uint32_t devId) override
     {
+        HDF_LOGI("OnRefresh(%{public}u)", devId);
         int32_t ret = HDF_SUCCESS;
         if (refreshCb_ != nullptr) {
             refreshCb_(devId, refreshCbData_);

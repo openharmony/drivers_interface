@@ -11,28 +11,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("../../../hdf_core/adapter/uhdf2/hdi.gni")
+import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
+hdi("hid_ddk") {
+  module_name = "hid_ddk"
 
-if (defined(ohos_lite)) {
-  group("libaudio_proxy_1.1") {
-    deps = []
-    public_configs = []
-  }
-} else {
-  hdi("audio") {
-    module_name = "audio_service"
+  sources = [
+    "HidDdkTypes.idl",
+    "IHidDdk.idl",
+  ]
 
-    sources = [
-      "AudioTypes.idl",
-      "IAudioAdapter.idl",
-      "IAudioCallback.idl",
-      "IAudioCapture.idl",
-      "IAudioManager.idl",
-      "IAudioRender.idl",
-    ]
-
-    language = "c"
-    subsystem_name = "hdf"
-    part_name = "drivers_interface_audio"
-  }
+  language = "cpp"
+  mode = "ipc"
+  subsystem_name = "hdf"
+  part_name = "drivers_interface_input"
 }

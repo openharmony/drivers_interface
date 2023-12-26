@@ -11,19 +11,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("../../../../hdf_core/adapter/uhdf2/hdi.gni")
+import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
+if (defined(ohos_lite)) {
+  group("libhostapd_proxy_1.0") {
+    deps = []
+    public_configs = []
+  }
+} else {
+  hdi("hostapd") {
+    module_name = "hostapd_service"
 
-hdi("intell_voice_engine") {
-  module_name = "intell_voice_engine_service"
+    sources = [
+      "HostapdTypes.idl",
+      "IHostapdCallback.idl",
+      "IHostapdInterface.idl",
+    ]
 
-  sources = [
-    "IIntellVoiceEngineAdapter.idl",
-    "IIntellVoiceEngineCallback.idl",
-    "IIntellVoiceEngineManager.idl",
-    "IntellVoiceEngineTypes.idl",
-  ]
-
-  language = "cpp"
-  subsystem_name = "hdf"
-  part_name = "drivers_interface_intelligent_voice"
+    language = "c"
+    subsystem_name = "hdf"
+    part_name = "drivers_interface_wlan"
+  }
 }

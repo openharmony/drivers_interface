@@ -54,5 +54,34 @@ interface IWlanInterface extends ohos.hdi.wlan.v1_1.IWlanInterface {
      * @version 1.2
      */
     ResetToFactoryMacAddress([in] String ifName);
+
+    /**
+     * @brief send action frame to driver.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param freq Indicates the send channel frequency.
+     * @param ifName Indicates the action frame data.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.2
+     */
+    SendActionFrame([in] String ifName, [in] unsigned int freq, [in] unsigned char[] frameData);
+
+    /**
+     * @brief register action frame receiver.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param txChannel Indicates the data matching action frame.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.2
+     */
+    RegisterActionFrameReceiver([in] String ifName, [in] unsigned char[] match);
 }
 /** @} */

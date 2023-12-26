@@ -13,14 +13,14 @@
 
 import("../../../../hdf_core/adapter/uhdf2/hdi.gni")
 
-hdi("intell_voice_engine") {
-  module_name = "intell_voice_engine_service"
+hdi("intell_voice_trigger") {
+  module_name = "intell_voice_trigger_service"
+
+  imports = [ "ohos.hdi.intelligent_voice.trigger.v1_0:intell_voice_trigger" ]
 
   sources = [
-    "IIntellVoiceEngineAdapter.idl",
-    "IIntellVoiceEngineCallback.idl",
-    "IIntellVoiceEngineManager.idl",
-    "IntellVoiceEngineTypes.idl",
+    "IIntellVoiceTriggerAdapter.idl",
+    "IIntellVoiceTriggerManager.idl",
   ]
 
   language = "cpp"

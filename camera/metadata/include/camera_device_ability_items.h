@@ -344,6 +344,7 @@ typedef enum camera_ae_antibanding_mode {
     OHOS_CAMERA_AE_ANTIBANDING_MODE_AUTO,
 } camera_ae_antibanding_mode_t;
 
+// OHOS_ABILITY_AE_LOCK
 // OHOS_CONTROL_AE_LOCK enumeration values
 typedef enum camera_ae_lock {
     OHOS_CAMERA_AE_LOCK_OFF,
@@ -531,7 +532,7 @@ typedef enum camera_portrait_effect_type {
     OHOS_CAMERA_PORTRAIT_HEART,
     OHOS_CAMERA_PORTRAIT_ROTATED,
     OHOS_CAMERA_PORTRAIT_STUDIO,
-    OHOS_CAMERA_PORTRAIT_THEATOR,
+    OHOS_CAMERA_PORTRAIT_THEATER,
 } camera_portrait_effect_type_t;
 
 // OHOS_ABILITY_SCENE_BEAUTY_TYPES enumeration values

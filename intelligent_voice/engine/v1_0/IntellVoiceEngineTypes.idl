@@ -46,11 +46,6 @@ enum IntellVoiceEngineErrors {
     INTELL_VOICE_ENGINE_WAKEUP_FAILED = -105,
 };
 
-enum IntellVoiceDataOprType {
-    ENCRYPT_TYPE = 0,
-    DECRYPT_TYPE = 1,
-};
-
 struct IntellVoiceEngineAdapterDescriptor {
     enum IntellVoiceEngineAdapterType adapterType;
 };

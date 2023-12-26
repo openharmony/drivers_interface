@@ -15,10 +15,10 @@ import("../../../../hdf_core/adapter/uhdf2/hdi.gni")
 
 hdi("intell_voice_engine") {
   module_name = "intell_voice_engine_service"
+  imports = [ "ohos.hdi.intelligent_voice.engine.v1_0:intell_voice_engine" ]
 
   sources = [
-    "IIntellVoiceEngineAdapter.idl",
-    "IIntellVoiceEngineCallback.idl",
+    "IIntellVoiceDataOprCallback.idl",
     "IIntellVoiceEngineManager.idl",
     "IntellVoiceEngineTypes.idl",
   ]

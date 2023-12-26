@@ -44,6 +44,7 @@
 package ohos.hdi.ril.v1_2;
 
 import ohos.hdi.ril.v1_1.IRilCallback;
+import ohos.hdi.ril.v1_2.Types;
 
 /**
  * @brief Declares callback APIs of the RIL module.
@@ -88,5 +89,17 @@ import ohos.hdi.ril.v1_1.IRilCallback;
      * @version 1.2
      */
     CleanAllConnectionsResponse([in] struct RilRadioResponseInfo responseInfo);
+
+    /**
+     * @brief Callback for the response of querying nr ssd id information.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
+     * For details, see {@link RilRadioResponseInfo}.
+     * @param nrCellSsbIds is NR cell ssb Id info. For details, see {@link NrCellSsbIds}.
+     *
+     * @since 4.1
+     * @version 1.2
+     */
+    GetNrSsbIdResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct NrCellSsbIds nrCellSsbIds);
 }
 /** @} */
