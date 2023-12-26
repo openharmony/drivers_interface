@@ -21,6 +21,7 @@
 #include "v1_1/display_composer_type.h"
 #include "v1_1/idisplay_composer.h"
 #include "v1_1/include/idisplay_composer_interface.h"
+#include <cinttypes>
 
 #undef LOG_TAG
 #define LOG_TAG "DISP_HDI_COMP"
@@ -97,7 +98,7 @@ public:
 
     virtual int32_t OnMode(uint32_t modeId, uint64_t vBlankPeriod) override
     {
-        HDF_LOGI("OnMode(%{public}u, %{public}llu)", modeId, vBlankPeriod);
+        HDF_LOGI("OnMode(%{public}u, %{public}" PRIu64 ")", modeId, vBlankPeriod);
         int32_t ret = HDF_SUCCESS;
         if (modeCb_) {
             modeCb_(modeId, vBlankPeriod, nullptr);
