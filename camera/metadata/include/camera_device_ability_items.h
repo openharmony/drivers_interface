@@ -532,7 +532,7 @@ typedef enum camera_portrait_effect_type {
     OHOS_CAMERA_PORTRAIT_HEART,
     OHOS_CAMERA_PORTRAIT_ROTATED,
     OHOS_CAMERA_PORTRAIT_STUDIO,
-    OHOS_CAMERA_PORTRAIT_THEATOR,
+    OHOS_CAMERA_PORTRAIT_THEATER,
 } camera_portrait_effect_type_t;
 
 // OHOS_ABILITY_SCENE_BEAUTY_TYPES enumeration values
