@@ -39,6 +39,8 @@ public:
         std::shared_ptr<CameraMetadata> &metadata);
     static void FreeMetadataBuffer(camera_metadata_item_t &entry);
 
+    template <class T> static void WriteData(T data, std::vector<uint8_t>& cameraAbility);
+    template <class T> static void ReadData(T &data, int32_t &index, const std::vector<uint8_t>& cameraAbility);
 private:
     static bool WriteMetadata(const camera_metadata_item_t &item, MessageParcel &data);
     static bool ReadMetadata(camera_metadata_item_t &item, MessageParcel &data);
@@ -46,8 +48,6 @@ private:
     static void WriteMetadataDataToVec(const camera_metadata_item_t &entry, std::vector<uint8_t>& cameraAbility);
     static void ReadMetadataDataFromVec(int32_t &index, camera_metadata_item_t &entry,
         const std::vector<uint8_t>& cameraAbility);
-    template <class T> static void WriteData(T data, std::vector<uint8_t>& cameraAbility);
-    template <class T> static void ReadData(T &data, int32_t &index, const std::vector<uint8_t>& cameraAbility);
 };
 
 template <class T>
