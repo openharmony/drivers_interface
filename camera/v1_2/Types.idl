@@ -298,7 +298,7 @@ struct ImageBufferInfo {
 };
 
 /**
- * @brief Defines the CaptureStartedInfo, which is used by {@link IStreamOperatorCallback::OnCaptureStartedV1_2}.
+ * @brief Defines the CaptureStartedInfo, which is used by {@link IStreamOperatorCallback::OnCaptureStarted_V1_2}.
  */
 struct CaptureStartedInfo {
     /**

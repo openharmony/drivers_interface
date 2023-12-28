@@ -45,7 +45,7 @@ interface ICameraHost extends ohos.hdi.camera.v1_1.ICameraHost {
      * @since 4.1
      * @version 1.2
      */
-    OpenCameraV1_2([in] String cameraId, [in] ICameraDeviceCallback callbackObj, [out] ICameraDevice device);
+    OpenCamera_V1_2([in] String cameraId, [in] ICameraDeviceCallback callbackObj, [out] ICameraDevice device);
 
     /**
      * @brief Notify the device vendor of the device status change.
@@ -74,7 +74,7 @@ interface ICameraHost extends ohos.hdi.camera.v1_1.ICameraHost {
      * @since 4.1
      * @version 1.2
      */
-    SetCallbackV1_2([in] ICameraHostCallback callbackObj);
+    SetCallback_V1_2([in] ICameraHostCallback callbackObj);
 
     /**
      * @brief Turns on or off the flash.
@@ -90,7 +90,7 @@ interface ICameraHost extends ohos.hdi.camera.v1_1.ICameraHost {
      * @since 4.1
      * @version 1.2
      */
-    SetFlashlightV1_2([in] float level);
+    SetFlashlight_V1_2([in] float level);
 
     /**
      * @brief Warm-up a camera device when lens switching.
