@@ -172,4 +172,28 @@ interface ISensorInterface {
      * @version 1.1
      */
     ReadData([in] int sensorId, [out] struct HdfSensorEvents[] event);
+
+    /**
+     * @brief Obtain the sensor event data in the small system.
+     *
+     * @param sensorId Indicates the sensor ID. For details, see {@link SensorTypeTag}.
+     * @param enabled Indicates if the value is enabled.
+     * @param rateLevel Indicates rateClass.
+     * @return Returns <b>0</b> if the event data is obtained; returns a negative value otherwise.
+     *
+     * @since 4.1
+     * @version 2.0
+     */
+    SetSdcSensor([in] int sensorId, [in] boolean enabled, [in] int rateLevel);
+
+    /**
+     * @brief Obtain sensor information for SDC
+     *
+     * @param sdcSensorInfos Indicates the data of the SDC type.
+     * @return Returns <b>0</b> if the event data is obtained; returns a negative value otherwise.
+     *
+     * @since 4.1
+     * @version 2.0
+     */
+    GetSdcSensorInfo([out] struct SdcSensorInfo[] sdcSensorInfo);
 }
