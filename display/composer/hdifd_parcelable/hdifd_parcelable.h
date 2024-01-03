@@ -43,7 +43,7 @@ private:
     static int ReadFileDescriptor(Parcel& parcel);
 
 private:
-    bool init_;
+    bool isOwner_;
     int32_t hdiFd_;
 };
 } // Display
