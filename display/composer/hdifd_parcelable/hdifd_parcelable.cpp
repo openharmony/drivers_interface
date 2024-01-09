@@ -78,7 +78,7 @@ bool HdifdParcelable::WriteFileDescriptor(const int fd, Parcel& parcel)
         return false;
     }
 
-    sptr<IPCFileDescriptor> descriptor = new (std::nothrow) IPCFileDescriptor(dupFd);
+    sptr<IPCFileDescriptor> descriptor(new (std::nothrow) IPCFileDescriptor(dupFd));
     if (descriptor == nullptr) {
         HDF_LOGE("%{public}s: create IPCFileDescriptor object failed", __func__);
         close(dupFd);
@@ -125,23 +125,24 @@ sptr<HdifdParcelable> HdifdParcelable::Unmarshalling(Parcel& parcel)
     bool validFlag = false;
     if (!parcel.ReadBool(validFlag)) {
         HDF_LOGE("%{public}s: ReadBool validFlag failed", __func__);
-        return nullptr;
+        return sptr<HdifdParcelable>();
     }
     int32_t fd = -1;
     if (validFlag) {
         fd = ReadFileDescriptor(parcel);
         if (fd < 0) {
             HDF_LOGE("%{public}s: ReadFileDescriptor fd failed", __func__);
-            return nullptr;
+            return sptr<HdifdParcelable>();
         }
     }
-    sptr<HdifdParcelable> newParcelable = new HdifdParcelable(fd);
+    sptr<HdifdParcelable> newParcelable(new HdifdParcelable(fd));
+
     if (newParcelable == nullptr) {
         HDF_LOGE("%{public}s: new HdifdParcelable failed", __func__);
         if (fd >= 0) {
             close(fd);
         }
-        return nullptr;
+        return sptr<HdifdParcelable>();
     }
     return newParcelable;
 }

@@ -83,7 +83,7 @@ int32_t DeviceCacheManager::CreateVirtualDisplayCache(uint32_t deviceId)
 int32_t DeviceCacheManager::DestroyVirtualDisplayCache(uint32_t deviceId)
 {
     auto cache = deviceCaches_->SearchCache(deviceId);
-    DISPLAY_CHK_RETURN((cache->CacheType() != DeviceCache::DEVICE_TYPE_VIRTUAL) || (cache == nullptr),
+    DISPLAY_CHK_RETURN((cache == nullptr) || (cache->CacheType() != DeviceCache::DEVICE_TYPE_VIRTUAL),
         HDF_FAILURE, HDF_LOGE("%{public}s: device is not virtual display cache", __func__));
 
     bool ret = deviceCaches_->EraseCache(deviceId);
