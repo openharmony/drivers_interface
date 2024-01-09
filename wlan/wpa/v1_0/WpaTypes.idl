@@ -451,3 +451,16 @@ struct HdiP2pStaConnectStateParam {
 struct HdiP2pIfaceCreatedParam {
     int isGo;
 };
+
+/**
+ * @brief STA authentication rejection parameter
+ *
+ * @since 4.1
+ * @version 1.0
+ */
+struct HdiWpaAuthRejectParam {
+    unsigned char[] bssid;
+    unsigned short authType;
+    unsigned short authTransaction;
+    unsigned short statusCode;
+};
