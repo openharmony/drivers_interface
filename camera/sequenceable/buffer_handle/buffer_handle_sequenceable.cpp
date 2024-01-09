@@ -75,7 +75,10 @@ bool BufferHandleSequenceable::Marshalling(Parcel &parcel) const
 
 sptr<BufferHandleSequenceable> BufferHandleSequenceable::Unmarshalling(Parcel &parcel)
 {
-    sptr<BufferHandleSequenceable> sequenceObj = new BufferHandleSequenceable();
+    sptr<BufferHandleSequenceable> sequenceObj(new BufferHandleSequenceable());
+    if (sequenceObj->bufferHandleWrap_ == nullptr) {
+        return nullptr;
+    }
     sequenceObj->bufferHandleWrap_->nativeBuffer_ = NativeBuffer::Unmarshalling(parcel);
     return sequenceObj;
 }

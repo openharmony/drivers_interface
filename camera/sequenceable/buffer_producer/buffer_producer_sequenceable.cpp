@@ -38,11 +38,14 @@ bool BufferProducerSequenceable::Marshalling(Parcel &parcel) const
 
 sptr<BufferProducerSequenceable> BufferProducerSequenceable::Unmarshalling(Parcel &parcel)
 {
-    sptr<BufferProducerSequenceable> sequenceData = new BufferProducerSequenceable();
+    sptr<BufferProducerSequenceable> sequenceData(new BufferProducerSequenceable());
 
     OHOS::MessageParcel &dataParcel = static_cast<OHOS::MessageParcel &>(parcel);
 
     sptr<IRemoteObject> remoteObj = dataParcel.ReadRemoteObject();
+    if (remoteObj == nullptr) {
+        return nullptr;
+    }
     sptr<OHOS::IBufferProducer> bufferProducer = OHOS::iface_cast<OHOS::IBufferProducer>(remoteObj);
     sequenceData->producer_ = bufferProducer;
 

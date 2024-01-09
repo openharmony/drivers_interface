@@ -50,7 +50,7 @@ sptr<MapDataSequenceable> MapDataSequenceable::Unmarshalling(Parcel &parcel)
         HDF_LOGE("Too much data obtained from Parcel");
         return nullptr;
     }
-    sptr<MapDataSequenceable> sequenceData = new MapDataSequenceable();
+    sptr<MapDataSequenceable> sequenceData(new MapDataSequenceable());
 
     int32_t ret = ERROR_OK;
     for (int32_t i = 0; i < size; i++) {
