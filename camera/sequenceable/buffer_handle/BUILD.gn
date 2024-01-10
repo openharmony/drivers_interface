@@ -27,6 +27,8 @@ ohos_shared_library("libbuffer_handle_sequenceable_1.0") {
     "c_utils:utils",
     "hdf_core:libhdf_utils",
     "hdf_core:libhdi",
+    "hdf_core:libpub_utils",
+    "hilog:libhilog",
     "ipc:ipc_single",
   ]
   cflags_cc = [ "--coverage" ]
