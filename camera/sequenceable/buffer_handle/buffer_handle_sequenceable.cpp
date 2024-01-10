@@ -17,6 +17,7 @@
 #include <message_parcel.h>
 #include "buffer_handle_sequenceable.h"
 #include "buffer_util.h"
+#include "hdf_log.h"
 #include "native_buffer.h"
 
 namespace OHOS {
@@ -29,7 +30,11 @@ class BufferHandleSequenceable::BufferHandleWrap {
 public:
     explicit BufferHandleWrap(BufferHandle *bufferHandle = nullptr)
     {
-        nativeBuffer_ = new NativeBuffer();
+        nativeBuffer_ = new (std::nothrow) NativeBuffer();
+        if (nativeBuffer_ == nullptr) {
+            HDF_LOGE("Native buffer object create failed.");
+            return;
+        }
         nativeBuffer_->SetBufferHandle(bufferHandle);
     }
     sptr<NativeBuffer> nativeBuffer_;
