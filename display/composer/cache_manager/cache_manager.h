@@ -21,6 +21,7 @@
 #include <unordered_map>
 #include "hdf_log.h"
 #include "nocopyable.h"
+#include <mutex>
 
 #undef LOG_TAG
 #define LOG_TAG "DISP_CACHE_MGR"
@@ -41,6 +42,7 @@ public:
 
     virtual ~CacheManager()
     {
+        std::lock_guard<std::mutex> lock(mutex_);
         caches_.clear();
     }
 
@@ -76,6 +78,7 @@ public:
                 return false;
             }
         }
+        std::lock_guard<std::mutex> lock(mutex_);
         caches_[id] = std::move(*(new std::unique_ptr<CacheType>(cache)));
 
         return true;
@@ -85,6 +88,7 @@ public:
     {
         bool ret = false;
         if (SearchCache(id) != nullptr) {
+            std::lock_guard<std::mutex> lock(mutex_);
             caches_.erase(id);
             ret = true;
         } else {
@@ -114,6 +118,7 @@ public:
 private:
     uint32_t cacheCountMax_;
     std::unordered_map<IdType, std::unique_ptr<CacheType>> caches_;
+    std::mutex mutex_;
 };
 } // namespace Composer
 } // namespace Display
