@@ -30,7 +30,7 @@
 #undef LOG_TAG
 #define LOG_TAG "DISP_HDI_BUFF"
 #undef LOG_DOMAIN
-#define LOG_DOMAIN 0xD002500
+#define LOG_DOMAIN 0xD002515
 
 #ifndef BUFFER_HDI_IMPL_LOGE
 #define BUFFER_HDI_IMPL_LOGE(format, ...)              \
