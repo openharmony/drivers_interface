@@ -29,7 +29,7 @@
 #undef LOG_TAG
 #define LOG_TAG "DISP_HDI_COMP"
 #undef LOG_DOMAIN
-#define LOG_DOMAIN 0xD002500
+#define LOG_DOMAIN 0xD002515
 
 namespace OHOS {
 namespace HDI {
