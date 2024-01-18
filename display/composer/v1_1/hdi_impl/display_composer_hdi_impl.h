@@ -41,11 +41,8 @@ public:
     static IDisplayComposerInterface* Create()
     {
         sptr<CompHdi> hdi;
-        uint32_t count = 0;
 
         while ((hdi = CompHdi::Get()) == nullptr) {
-            HDF_LOGE("%{public}s: get display_composer_service, count = %{public}d, %{public}d",
-                __func__, ++count, __LINE__);
             // Waiting for display composer service ready
             usleep(WAIT_TIME_INTERVAL);
         }
@@ -71,7 +68,7 @@ public:
 
     virtual int32_t OnSeamlessChange(uint32_t outputId) override
     {
-        HDF_LOGI("OnSeamlessChange(%{public}u)", outputId);
+        HDF_LOGD("OnSeamlessChange(%{public}u)", outputId);
         int32_t ret = HDF_SUCCESS;
         if (seamlessChangeCb_) {
             seamlessChangeCb_(outputId, seamlessChangeCbData_);
@@ -98,7 +95,7 @@ public:
 
     virtual int32_t OnMode(uint32_t modeId, uint64_t vBlankPeriod) override
     {
-        HDF_LOGI("OnMode(%{public}u, %{public}" PRIu64 ")", modeId, vBlankPeriod);
+        HDF_LOGD("OnMode(%{public}u, %{public}" PRIu64 ")", modeId, vBlankPeriod);
         int32_t ret = HDF_SUCCESS;
         if (modeCb_) {
             modeCb_(modeId, vBlankPeriod, nullptr);
@@ -140,7 +137,7 @@ public:
 
     virtual int32_t OnRefresh(uint32_t devId) override
     {
-        HDF_LOGI("OnRefresh(%{public}u)", devId);
+        HDF_LOGD("OnRefresh(%{public}u)", devId);
         int32_t ret = HDF_SUCCESS;
         if (refreshCb_ != nullptr) {
             refreshCb_(devId, refreshCbData_);

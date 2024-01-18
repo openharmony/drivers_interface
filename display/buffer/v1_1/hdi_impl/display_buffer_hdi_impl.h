@@ -39,10 +39,7 @@ class DisplayBufferHdiImpl : public V1_0::DisplayBufferHdiImpl<Interface> {
 public:
     explicit DisplayBufferHdiImpl(bool isAllocLocal = false) : BaseType1_0(isAllocLocal), metadata_(nullptr)
     {
-        uint32_t count = 0;
         while ((metadata_ = IMetadata::Get(true)) == nullptr) {
-            HDF_LOGE("%{public}d@%{public}s get metadata service, count = %{public}d",
-                __LINE__, __func__, ++count);
             // Waiting for metadata service ready
             usleep(WAIT_TIME_INTERVAL);
         }
