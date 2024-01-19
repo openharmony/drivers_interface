@@ -75,4 +75,18 @@ interface INfcInterface extends ohos.hdi.nfc.v1_0.INfcInterface {
      * @version 1.0
      */
      Shutdown([out] enum NfcStatus status);
+
+    /**
+     * @brief Sends I/O control commands and data from the nfc stack to HDI.
+     *
+     * @param cmd Indicates the commands that defined in NfcCommand in {@link NfcTypes}.
+     * @param data Indicates the data that sent to HDI.
+     * @return response Return the response of the cmd from HDI to nfc.
+     * @return NfcStatus Returns <b>0</b> if the operation is succeed, otherwise marks the reason of failure.
+     * For details, see {@link NfcTypes}.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    IoctlWithResponse([in] enum NfcCommand cmd, [in] List<unsigned char> data, [out] List<unsigned char> response, [out] enum NfcStatus status);
 }
