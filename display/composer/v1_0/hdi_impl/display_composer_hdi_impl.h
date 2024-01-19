@@ -52,11 +52,8 @@ public:
     static IDisplayComposerInterface* Create()
     {
         sptr<CompHdi> hdi;
-        uint32_t count = 0;
 
         while ((hdi = CompHdi::Get()) == nullptr) {
-            HDF_LOGE("%{public}s: get display_composer_service, count = %{public}d, %{public}d",
-                __func__, ++count, __LINE__);
             // Waiting for display composer service ready
             usleep(WAIT_TIME_INTERVAL);
         }
@@ -187,7 +184,7 @@ public:
     virtual int32_t GetDisplayCompChange(
         uint32_t devId, std::vector<uint32_t>& layers, std::vector<int32_t>& types) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR(req_);
         return ToDispErrCode(req_->GetDisplayCompChange(devId, layers, types));
     }
 
@@ -547,7 +544,7 @@ protected:
     }
 
 protected:
-    static constexpr uint32_t WAIT_TIME_INTERVAL = 1000;
+    static constexpr uint32_t WAIT_TIME_INTERVAL = 10000;
     sptr<CompHdi> hdi_;
     std::shared_ptr<CmdReq> req_;
     HotPlugCallback hotPlugCb_;

@@ -78,9 +78,7 @@ public:
         isReplyUpdated_(false),
         reply_(nullptr),
         replyCommandCnt_(0),
-        replyPacker_(nullptr),
-        g_CommitCount_(0),
-        g_CommitCountFail_(0) {}
+        replyPacker_(nullptr) {}
 
     virtual ~DisplayCmdResponser()
     {
@@ -496,16 +494,10 @@ EXIT:
         }
 
         ret = impl_->Commit(devId, fence);
-        g_CommitCount_++;
         if (ret != HDF_SUCCESS) {
-            g_CommitCountFail_++;
             HDF_LOGE("%{public}s, commit failed with ret = %{public}d", __func__, ret);
         }
 
-        if (g_CommitCount_ % COMMIT_PRINT_INTERVAL == 0) {
-            HDF_LOGI("Commit Status = %{public}u/%{public}u", g_CommitCountFail_, g_CommitCount_);
-            g_CommitCountFail_ = g_CommitCount_ = 0;
-        }
 REPLY:
         HdifdParcelable fdParcel(fence);
         DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::StartSection(REPLY_CMD_COMMIT, replyPacker_),
@@ -1075,8 +1067,6 @@ protected:
     std::unordered_map<int32_t, int32_t> errMaps_;
     /* fix fd leak */
     std::queue<BufferHandle *> delayFreeQueue_;
-    uint32_t g_CommitCount_;
-    uint32_t g_CommitCountFail_;
 };
 using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, IDisplayComposerVdi>;
 } // namespace V1_0

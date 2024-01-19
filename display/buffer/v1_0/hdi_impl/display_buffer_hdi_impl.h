@@ -75,17 +75,11 @@ public:
     explicit DisplayBufferHdiImpl(bool isAllocLocal = false) : allocator_(nullptr),
         mapper_(nullptr), recipient_(nullptr)
     {
-        uint32_t count = 0;
         while ((allocator_ = IAllocator::Get(isAllocLocal)) == nullptr) {
-            HDF_LOGE("%{public}d@%{public}s get allocator service, count = %{public}d",
-                __LINE__, __func__, ++count);
             // Waiting for allocator service ready
             usleep(WAIT_TIME_INTERVAL);
         }
-        count= 0;
         while ((mapper_ = IMapper::Get(true)) == nullptr) {
-            HDF_LOGE("%{public}d@%{public}s get mapper service, count = %{public}d",
-                __LINE__, __func__, ++count);
             // Waiting for mapper IF ready
             usleep(WAIT_TIME_INTERVAL);
         }
@@ -203,7 +197,7 @@ public:
     }
 
 protected:
-    static constexpr uint32_t WAIT_TIME_INTERVAL = 1000;
+    static constexpr uint32_t WAIT_TIME_INTERVAL = 10000;
     sptr<IAllocator> allocator_;
     sptr<IMapper> mapper_;
     sptr<IRemoteObject::DeathRecipient> recipient_;
