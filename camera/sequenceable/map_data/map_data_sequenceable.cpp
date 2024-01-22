@@ -14,7 +14,7 @@
  */
 
 #include "map_data_sequenceable.h"
-#include "hdf_log.h"
+#include "hdi_log.h"
 #include <message_parcel.h>
 namespace OHOS {
 namespace HDI {
@@ -41,13 +41,13 @@ sptr<MapDataSequenceable> MapDataSequenceable::Unmarshalling(Parcel &parcel)
 {
     int32_t magic;
     if (parcel.ReadInt32(magic) == false || magic != BUFFER_DATA_MAGIC) {
-        HDF_LOGW("read failed, magic is error");
+        HDI_CAMERA_LOGW("read failed, magic is error");
         return nullptr;
     }
 
     int32_t size = parcel.ReadInt32();
     if (size > BUFFER_MAX_USER_DATA_COUNT) {
-        HDF_LOGE("Too much data obtained from Parcel");
+        HDI_CAMERA_LOGE("Too much data obtained from Parcel");
         return nullptr;
     }
     sptr<MapDataSequenceable> sequenceData(new MapDataSequenceable());
@@ -77,7 +77,7 @@ sptr<MapDataSequenceable> MapDataSequenceable::Unmarshalling(Parcel &parcel)
         }
 
         if (ret != ERROR_OK) {
-            HDF_LOGE("Set extra data failed, return %{public}d", ret);
+            HDI_CAMERA_LOGE("Set extra data failed, return %{public}d", ret);
             return nullptr;
         }
     }
@@ -193,7 +193,7 @@ int32_t MapDataSequenceable::Set(const std::string &key, MapDataType type, const
     std::lock_guard<std::mutex> lockGuard(mtx_);
     auto it = datas_.find(key);
     if (it == datas_.end() && datas_.size() > BUFFER_MAX_USER_DATA_COUNT) {
-        HDF_LOGW("SurfaceBuffer has too many extra data, cannot save one more!!!");
+        HDI_CAMERA_LOGW("SurfaceBuffer has too many extra data, cannot save one more!!!");
         return ERROR_OUT_OF_RANGE;
     }
     datas_[key].type = type;

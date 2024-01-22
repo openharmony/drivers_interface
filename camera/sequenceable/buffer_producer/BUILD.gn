@@ -18,6 +18,7 @@ config("camera_sequenceable_config") {
   include_dirs = [
     "./",
     "//drivers/peripheral/base",
+    "../include",
   ]
 }
 
