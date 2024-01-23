@@ -38,16 +38,16 @@ import ohos.hdi.drm.v1_0.IMediaKeySessionCallback;
 import ohos.hdi.drm.v1_0.IMediaDecryptModule;
 
 interface IMediaKeySession {
-    GenerateLicenseRequest([in] struct LicenseRequestInfo licenseRequestInfo, [out] struct LicenseRequest licenseRequest);
-    ProcessLicenseResponse([in] unsigned char[] licenseResponse, [out] unsigned char[] licenseId);
-    CheckLicenseStatus([out] Map<String, enum MediaKeySessionKeyStatus> licenseStatus);
-    RemoveLicense();
+    GenerateMediaKeyRequest([in] struct MediaKeyRequestInfo mediaKeyRequestInfo, [out] struct MediaKeyRequest mediaKeyRequest);
+    ProcessMediaKeyResponse([in] unsigned char[] mediaKeyResponse, [out] unsigned char[] mediaKeyId);
+    CheckMediaKeyStatus([out] Map<String, String> mediaKeyStatus);
+    ClearMediaKeys();
 
-    GetOfflineReleaseRequest([in] unsigned char[] licenseId, [out] unsigned char[] releaseRequest);
-    ProcessOfflineReleaseResponse([in] unsigned char[] licenseId, [in] unsigned char[] response);
-    RestoreOfflineLicense([in] unsigned char[] licenseId);
+    GetOfflineReleaseRequest([in] unsigned char[] mediaKeyId, [out] unsigned char[] releaseRequest);
+    ProcessOfflineReleaseResponse([in] unsigned char[] mediaKeyId, [in] unsigned char[] response);
+    RestoreOfflineMediaKeys([in] unsigned char[] mediaKeyId);
 
-    GetSecurityLevel([out] enum SecurityLevel level);
+    GetContentProtectionLevel([out] enum ContentProtectionLevel level);
     RequiresSecureDecoderModule([in] String mimeType, [out] boolean required);
 
     SetCallback([in] IMediaKeySessionCallback sessionCallback);

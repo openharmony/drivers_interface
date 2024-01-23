@@ -42,20 +42,20 @@ interface IMediaKeySystem {
     SetConfigurationString([in] String name, [in] String value);
     GetConfigurationByteArray([in] String name, [out] unsigned char[] value);
     SetConfigurationByteArray([in] String name, [in] unsigned char[] value);
-    GetMetrics([out] Map<String, String> metrics);
-    GetMaxSecurityLevel([out] enum SecurityLevel level);
+    GetStatistics([out] Map<String, String> statistics);
+    GetMaxContentProtectionLevel([out] enum ContentProtectionLevel level);
 
     GenerateKeySystemRequest([out] String defaultUrl, [out] unsigned char[] request);
     ProcessKeySystemResponse([in] unsigned char[] response);
     GetOemCertificateStatus([out] enum CertificateStatus status);
     SetCallback([in] IMediaKeySystemCallback systemCallback);
 
-    CreateMediaKeySession([in] enum SecurityLevel level, [out] IMediaKeySession keySession);
+    CreateMediaKeySession([in] enum ContentProtectionLevel level, [out] IMediaKeySession keySession);
 
-    GetOfflineLicenseIds([out] unsigned char[][] licenseIds);
-    GetOfflineLicenseStatus([in] unsigned char[] licenseId, [out] enum OfflineLicenseStatus licenseStatus);
-    RemoveOfflineLicense([in] unsigned char[] licenseId);
-    
+    GetOfflineMediaKeyIds([out] unsigned char[][] mediaKeyIds);
+    GetOfflineMediaKeyStatus([in] unsigned char[] mediaKeyId, [out] enum OfflineMediaKeyStatus mediaKeyStatus);
+    ClearOfflineMediaKeys([in] unsigned char[] mediaKeyId);
+
     GetOemCertificate([out] IOemCertificate oemCert);
     Destroy();
 };

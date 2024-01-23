@@ -35,6 +35,6 @@ package ohos.hdi.drm.v1_0;
 import ohos.hdi.drm.v1_0.MediaKeySystemTypes;
 
 interface IOemCertificate {
-    GetOemProvisionRequest([out] String defaultUrl, [out] unsigned char[] request);
-    ProvideOemProvisionResponse([in] unsigned char[] response);
+    GenerateOemKeySystemRequest([out] String defaultUrl, [out] unsigned char[] request);
+    ProcessOemKeySystemResponse([in] unsigned char[] response);
 };

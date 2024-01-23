@@ -32,33 +32,30 @@
 
 package ohos.hdi.drm.v1_0;
 
-enum SecurityLevel {
+enum ContentProtectionLevel {
     SECURE_UNKNOWN = 0,
     SW_SECURE_CRYPTO,
-    SW_SECURE_DECODE,
     HW_SECURE_CRYPTO,
-    HW_SECURE_DECODE,
-    HW_SECURE_ALL,
+    HW_ENHANCED_SECURE_CRYPTO,
+    HW_SECURE_MAX,
 };
 
-enum RequestType {
-    REQUESTTYPE_UNKNOWN = 0,
-    REQUEST_TYPE_INITIAL,
-    REQUEST_TYPE_RENEWAL,
-    REQUEST_TYPE_RELEASE,
-    REQUEST_TYPE_NONE,
-    REQUEST_TYPE_UPDATE,
+enum MediaKeyRequestType {
+    MEDIA_KEY_REQUEST_TYPE_UNKNOWN = 0,
+    MEDIA_KEY_REQUEST_TYPE_INITIAL,
+    MEDIA_KEY_REQUEST_TYPE_RENEWAL,
+    MEDIA_KEY_REQUEST_TYPE_RELEASE,
+    MEDIA_KEY_REQUEST_TYPE_NONE,
+    MEDIA_KEY_REQUEST_TYPE_UPDATE,
 };
 
 enum EventType {
     EVENTTYPE_PROVISIONREQUIRED = 0,
-    EVENTTYPE_KEYNEEDED,
+    EVENTTYPE_KEYREQUIRED,
     EVENTTYPE_KEYEXPIRED,
     EVENTTYPE_VENDOR_DEFINED,
     EVENTTYPE_EXPIRATIONUPDATE,
     EVENTTYPE_KEYCHANGE,
-    EVENTTYPE_KEYSESSION_LOST,
-
 };
 
 enum CryptoAlgorithmType {
@@ -70,15 +67,15 @@ enum CryptoAlgorithmType {
     ALGTYPE_SM4_CTR,
 };
 
-enum OfflineLicenseStatus {
-    OFFLINELICENSE_STATUS_UNKNOWN = 0,
-    OFFLINELICENSE_STATUS_USABLE,
-    OFFLINELICENSE_STATUS_INACTIVE,
+enum OfflineMediaKeyStatus {
+    OFFLINE_MEDIA_KEY_STATUS_UNKNOWN = 0,
+    OFFLINE_MEDIA_KEY_STATUS_USABLE,
+    OFFLINE_MEDIA_KEY_STATUS_INACTIVE,
 };
 
-enum LicenseType {
-    LICENSE_TYPE_ONLINE = 0,
-    LICENSE_TYPE_OFFLINE,
+enum MediaKeyType {
+    MEDIA_KEY_TYPE_OFFLINE = 0,
+    MEDIA_KEY_TYPE_ONLINE,
 };
 
 enum CertificateStatus {
@@ -86,7 +83,7 @@ enum CertificateStatus {
     CERT_STATUS_NOT_PROVISIONED,
     CERT_STATUS_EXPIRED,
     CERT_STATUS_INVALID,
-    CERT_STATUS_GET_FAILED,
+    CERT_STATUS_UNAVAILABLE,
 };
 
 enum MediaKeySessionKeyStatus {
@@ -98,17 +95,17 @@ enum MediaKeySessionKeyStatus {
     MEDIA_KEY_SESSION_KEY_STATUS_USABLE_IN_FUTURE,
 };
 
-struct LicenseRequestInfo {
-    enum LicenseType licenseType;
+struct MediaKeyRequestInfo {
+    enum MediaKeyType mediaKeyType;
     String mimeType;
     unsigned char[] initData;
     Map<String, String> optionalData;
 };
 
-struct LicenseRequest {
-    enum RequestType requestType;
-    unsigned char[] mData;
-    String mDefaultUrl;
+struct MediaKeyRequest {
+    enum MediaKeyRequestType requestType;
+    unsigned char[] data;
+    String defaultUrl;
 };
 
 struct Pattern {
@@ -133,4 +130,13 @@ struct DrmBuffer {
     unsigned int bufferType;
     FileDescriptor fd;
     unsigned int bufferLen;
+    /* Reserved */
+    /* Size of buffer allocated. */
+    unsigned int allocLen;
+    /* Size of buffer filled. */
+    unsigned int filledLen;
+    /* Offset of the vaild data from the buffer start. */
+    unsigned int offset;
+    /* Shared memory type like read/write etc.. */
+    unsigned int sharedMemType;
 };

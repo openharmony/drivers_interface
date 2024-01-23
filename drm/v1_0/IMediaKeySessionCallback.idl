@@ -37,5 +37,5 @@ import ohos.hdi.drm.v1_0.MediaKeySystemTypes;
 
 [callback] interface IMediaKeySessionCallback {
     SendEvent([in] enum EventType eventType, [in] int extra, [in] unsigned char[] data);
-    SendEventKeyChange([in] Map<unsigned char[], enum MediaKeySessionKeyStatus> keyStatus, [in] boolean hasNewGoodLicense);
+    SendEventKeyChange([in] Map<unsigned char[], enum MediaKeySessionKeyStatus> keyStatus, [in] boolean newKeysAvailable);
 }
