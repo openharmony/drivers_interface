@@ -17,7 +17,7 @@
 #include <message_parcel.h>
 #include "buffer_handle_sequenceable.h"
 #include "buffer_util.h"
-#include "hdf_log.h"
+#include "hdi_log.h"
 #include "native_buffer.h"
 
 namespace OHOS {
@@ -32,7 +32,7 @@ public:
     {
         nativeBuffer_ = new (std::nothrow) NativeBuffer();
         if (nativeBuffer_ == nullptr) {
-            HDF_LOGE("Native buffer object create failed.");
+            HDI_CAMERA_LOGE("Native buffer object create failed.");
             return;
         }
         nativeBuffer_->SetBufferHandle(bufferHandle);

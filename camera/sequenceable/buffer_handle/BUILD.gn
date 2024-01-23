@@ -15,7 +15,10 @@ import("//build/ohos.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
 
 config("buffer_handle_sequenceable_config") {
-  include_dirs = [ "./" ]
+  include_dirs = [
+    "./",
+    "../include",
+  ]
 }
 
 ohos_shared_library("libbuffer_handle_sequenceable_1.0") {

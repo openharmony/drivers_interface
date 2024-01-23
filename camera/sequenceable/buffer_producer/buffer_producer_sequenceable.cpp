@@ -15,7 +15,7 @@
 
 #include "buffer_producer_sequenceable.h"
 
-#include "hdf_log.h"
+#include "hdi_log.h"
 #include <message_parcel.h>
 
 namespace OHOS {
@@ -45,7 +45,7 @@ sptr<BufferProducerSequenceable> BufferProducerSequenceable::Unmarshalling(Parce
 
     sptr<IRemoteObject> remoteObj = dataParcel.ReadRemoteObject();
     if (remoteObj == nullptr) {
-        HDF_LOGE("Remote object is null.");
+        HDI_CAMERA_LOGE("Remote object is null.");
         return nullptr;
     }
     sptr<OHOS::IBufferProducer> bufferProducer = OHOS::iface_cast<OHOS::IBufferProducer>(remoteObj);
