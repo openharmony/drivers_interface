@@ -210,7 +210,21 @@ public:
     virtual int32_t SetDisplayVsyncEnabled(uint32_t devId, bool enabled) override
     {
         COMPOSER_CHECK_NULLPTR(hdi_);
-        return ToDispErrCode(hdi_->SetDisplayVsyncEnabled(devId, enabled));
+        static std::unordered_map<uint32_t, uint32_t> vsyncEnableCount;
+
+        /* Already enabled, return success */
+        if (enabled && vsyncEnableCount[devId] > 0) {
+            ++vsyncEnableCount[devId];
+            return DISPLAY_SUCCESS;
+        }
+
+        int32_t ret = ToDispErrCode(hdi_->SetDisplayVsyncEnabled(devId, enabled));
+        if (ret != DISPLAY_SUCCESS) {
+            return ret;
+        }
+
+        vsyncEnableCount[devId] = enabled ? 1 : 0;
+        return ret;
     }
 
     virtual int32_t RegDisplayVBlankCallback(uint32_t devId, VBlankCallback cb, void *data) override
