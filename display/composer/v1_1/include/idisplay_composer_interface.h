@@ -35,7 +35,7 @@ public:
      * @since 4.0
      * @version 1.1
      */
-    static IDisplayComposerInterface* Get();
+    static IDisplayComposerInterface* Get(bool needSMQ = true);
 
     /**
      * @brief Registers the callback to be invoked when it's ready to change framerate.

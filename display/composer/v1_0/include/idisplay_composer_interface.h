@@ -41,7 +41,7 @@ public:
      * @since 4.0
      * @version 1.0
      */
-    static IDisplayComposerInterface* Get();
+    static IDisplayComposerInterface* Get(bool needSMQ = true);
 
     /**
      * @brief Adds a recipient for death notifications of a remote stub object.
