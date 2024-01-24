@@ -49,19 +49,22 @@ using namespace OHOS::HDI::Display::Composer::V1_0;
 template <typename Interface, typename CompHdi, typename CmdReq>
 class DisplayComposerHdiImpl : public Interface, public IHotPlugCallback, public IVBlankCallback {
 public:
-    static IDisplayComposerInterface* Create()
+    static IDisplayComposerInterface* Create(bool needSMQ)
     {
         sptr<CompHdi> hdi;
+        std::shared_ptr<CmdReq> req = nullptr;
 
         while ((hdi = CompHdi::Get()) == nullptr) {
             // Waiting for display composer service ready
             usleep(WAIT_TIME_INTERVAL);
         }
 
-        std::shared_ptr<CmdReq> req = CmdReq::Create(hdi);
-        if (req == nullptr) {
-            HDF_LOGE("%{public}s: Create DisplayCmdRequester failed %{public}d", __func__, __LINE__);
-            return nullptr;
+        if (needSMQ) {
+            req = CmdReq::Create(hdi);
+            if (req == nullptr) {
+                HDF_LOGE("%{public}s: Create DisplayCmdRequester failed %{public}d", __func__, __LINE__);
+                return nullptr;
+            }
         }
         return new DisplayComposerHdiImpl(hdi, req);
     }
