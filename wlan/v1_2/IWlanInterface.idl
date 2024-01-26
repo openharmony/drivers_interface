@@ -83,5 +83,35 @@ interface IWlanInterface extends ohos.hdi.wlan.v1_1.IWlanInterface {
      * @version 1.2
      */
     RegisterActionFrameReceiver([in] String ifName, [in] unsigned char[] match);
+
+    /**
+     * @brief set power save manager mode.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param frequency Indicates connected ap frequency.
+     * @param mode Indicates power save mode, 3(enable power save), 4(disable power save).
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.2
+     */
+    SetPowerSaveMode([in] String ifName, [in] int frequency, [in] int mode);
+
+    /**
+     * @brief set data packet identification mark rule.
+     *
+     * @param uid Indicates target app uid.
+     * @param protocol Indicates target protocol type, tcp/udp.
+     * @param enable Indicates enable/disable dpi mark rule.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.2
+     */
+    SetDpiMarkRule([in] int uid, [in] int protocol, [in] int enable);
 }
 /** @} */
