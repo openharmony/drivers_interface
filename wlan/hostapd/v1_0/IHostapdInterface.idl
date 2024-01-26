@@ -299,4 +299,18 @@ interface IHostapdInterface {
      * @version 1.0
      */
     UnregisterEventCallback([in] IHostapdCallback cbFunc, [in] String ifName);
+
+     /**
+     * @brief Used to process cmd of Hostapd
+     *
+     * @param ifName Indicates the NIC name.
+     * @param cmd Indicates command of HostApd from WifiHal
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+     HostApdShellCmd([in] String ifName, [in] String cmd);
  }
