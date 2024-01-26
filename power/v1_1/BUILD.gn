@@ -24,6 +24,7 @@ if (defined(ohos_lite)) {
     sources = [
       "IPowerHdiCallback.idl",
       "IPowerInterface.idl",
+      "IPowerRunningLockCallback.idl",
       "PowerTypes.idl",
       "RunningLockTypes.idl",
     ]
