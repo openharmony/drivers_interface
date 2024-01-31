@@ -28,7 +28,7 @@ static CameraVendorTag* g_vendorTagImpl = nullptr;
 const char* g_exampleVendorTagLib = "libcamera_example_vendor_tag_impl.z.so";
 const char* g_vendorTagLib = "libcamera_vendor_tag_impl.z.so";
 const int METADATA_HEADER_DATA_SIZE = 4;
-const std::vector<int32_t> g_metadataTags = {
+const std::vector<uint32_t> g_metadataTags = {
     OHOS_ABILITY_CAMERA_POSITION,
     OHOS_ABILITY_CAMERA_TYPE,
     OHOS_ABILITY_CAMERA_CONNECTION_TYPE,
