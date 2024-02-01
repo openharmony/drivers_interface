@@ -40,7 +40,7 @@ public:
     ~CommandDataPacker()
     {
         if (data_ != nullptr) {
-            delete data_;
+            delete[] data_;
         }
     }
 
@@ -205,7 +205,7 @@ private:
                 newData = nullptr;
                 return false;
             }
-            delete data_;
+            delete[] data_;
             data_ = newData;
             packSize_ = newSize;
         }
