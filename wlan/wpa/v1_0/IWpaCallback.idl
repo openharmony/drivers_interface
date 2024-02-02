@@ -339,4 +339,26 @@ import ohos.hdi.wlan.wpa.v1_0.WpaTypes;
    * @version 1.0
    */
    OnEventIfaceCreated([in] struct HdiP2pIfaceCreatedParam ifaceCreatedParam, [in] String ifName);
+
+   /**
+   * Used to indicate STA authentication reject
+   *
+   * @param authRejectParam  Indicates the paramerter of auth reject.
+   * @param ifName Indicates the NIC name.
+   *
+   * @since 4.1
+   * @version 1.0
+   */
+   OnEventAuthReject([in]  struct HdiWpaAuthRejectParam authRejectParam, [in] String ifName);
+
+  /**
+   * Used to handle STA callback parameters
+   *
+   * @param notifyParam Indicates the paramerter of Sta.
+   * @param cmd Indicates command of Sta from WifiHal.
+   *
+   * @since 4.1
+   * @version 1.0
+   */
+   OnEventStaNotify([in] String notifyParam, [in] String ifName);
 }
