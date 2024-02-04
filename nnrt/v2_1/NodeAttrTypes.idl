@@ -1,0 +1,429 @@
+/*
+ * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package ohos.hdi.nnrt.v2_1;
+
+import ohos.hdi.nnrt.v2_1.NnrtTypes;
+
+struct Abs
+{
+};
+
+struct Activation
+{
+    enum ActivationType activationType;
+    float alpha;
+    float minVal;
+    float maxVal;
+    boolean approximate;
+};
+
+struct AddFusion
+{
+    enum ActivationType activationType;
+};
+
+struct ArgMaxFusion
+{
+    long axis;
+    long topK;
+    boolean keepDims;
+    boolean outMaxValue;
+};
+
+struct AvgPoolFusion
+{
+    long[] kernelSize;
+    long[] strides;
+    long[] pad;
+    enum PadMode padMode;
+    enum RoundMode roundMode;
+    enum Format format;
+    boolean global;
+    enum ActivationType activationType;
+};
+
+struct BatchToSpaceND
+{
+    long[] blockShape;
+    long[][] crops;
+};
+
+struct BiasAdd
+{
+};
+
+struct BroadcastTo
+{
+    long[] shape;
+};
+
+struct Cast
+{
+};
+
+struct Clip
+{
+    float max;
+    float min;
+};
+
+struct Concat
+{
+    long axis;
+};
+
+struct Conv2DFusion
+{
+    long[] kernelSize;
+    long[] stride;
+    long[] dilation;
+    enum PadMode padMode;
+    long[] padList;
+    long group;
+    long inChannel;
+    long outChannel;
+    enum ActivationType activationType;
+};
+
+struct Conv2dTransposeFusion
+{
+    long[] kernelSize;
+    long[] stride;
+    long[] dilation;
+    enum PadMode padMode;
+    long[] padList;
+    long group;
+    long inChannel;
+    long outChannel;
+    enum ActivationType activationType;
+    long[] outputPaddings;
+};
+
+struct ConstantOfShape
+{
+    long data_type;
+    float[] value;
+};
+
+struct DepthToSpace
+{
+    long block_size;
+    enum Format format;
+    String mode;
+};
+
+struct DivFusion
+{
+    enum ActivationType activationType;
+};
+
+struct Eltwise
+{
+    enum EltwiseMode mode;
+};
+
+struct Equal
+{
+};
+
+struct ExpFusion
+{
+    float base;
+    float scale;
+    float shift;
+};
+
+struct ExpandDims
+{
+};
+
+struct Flatten
+{
+    long axis;
+};
+
+struct Fill
+{
+};
+
+struct FullConnection
+{
+    boolean hasBias;
+    boolean useAxis;
+    long axis;
+    enum ActivationType activationType;
+};
+
+struct FusedBatchNorm
+{
+    float epsilon;
+};
+
+struct Gather
+{
+};
+
+struct Greater
+{
+};
+
+struct GreaterEqual
+{
+};
+
+struct InstanceNorm
+{
+    float epsilon;
+};
+
+struct LayerNormFusion
+{
+    long beginNormAxis;
+    float epsilon;
+    boolean elementwiseAffine;
+    long beginParamsAxis;
+};
+
+struct LeakyRelu
+{
+    float negative_slope;
+};
+
+struct Less
+{
+};
+
+struct LessEqual
+{
+};
+
+struct LSTM
+{
+    boolean bidirectional;
+    boolean has_bias;
+    long input_size;
+    long hidden_size;
+    long num_layers;
+    long num_directions;
+    float dropout;
+    float zoneout_cell;
+    float zoneout_hidden;
+    long proj_size;
+};
+
+struct MatMulFusion
+{
+    boolean transposeA;
+    boolean transposeB;
+    enum ActivationType activationType;
+};
+
+struct Maximum
+{
+};
+
+struct MaxPoolFusion
+{
+    long[] kernelSize;
+    long[] strides;
+    long[] pad;
+    enum PadMode padMode;
+    enum Format format;
+    enum RoundMode roundMode;
+    boolean global;
+    enum ActivationType activationType;
+};
+
+struct MulFusion
+{
+    enum ActivationType activationType;
+};
+
+struct NotEqual
+{
+};
+
+struct OneHot
+{
+    long axis;
+};
+
+struct PadFusion
+{
+    long[][] paddings;
+    enum PaddingMode paddingMode;
+    float constantValue;
+};
+
+struct PowFusion
+{
+    float scale;
+    float shift;
+};
+
+struct PReLUFusion
+{
+    boolean channelShared;
+};
+
+struct QuantDTypeCast
+{
+    long srcT;
+    long dstT;
+};
+
+struct Range
+{
+    long d_type;
+    long start;
+    long limit;
+    long delta;
+};
+
+struct RealDiv
+{
+};
+
+struct ReduceFusion
+{
+    boolean keepDims;
+    enum ReduceMode mode;
+    boolean reduceToEnd;
+    float coeff;
+};
+
+struct Reshape
+{
+};
+
+struct Resize
+{
+    enum ResizeMethod method;
+    long newHeight;
+    long newWidth;
+    boolean preserveAspectRatio;
+    enum CoordinateTransformMode coordinateTransformMode;
+    float cubicCoeff;
+    long excludeOutside;
+    float extrapolationValue;
+    enum NearestMode nearestMode;
+};
+
+struct Rsqrt
+{
+};
+
+struct ScaleFusion
+{
+    long axis;
+    enum ActivationType activationType;
+};
+
+struct Shape
+{
+};
+
+struct SliceFusion
+{
+    long[] axes;
+};
+
+struct Softmax
+{
+    long[] axis;
+};
+
+struct SpaceToBatchND
+{
+    long[] blockShape;
+    long[][] paddings;
+};
+
+struct Split
+{
+    long outputNum;
+    long[] sizeSplits;
+    long axis;
+};
+
+struct Sqrt
+{
+};
+
+struct Square
+{
+};
+
+struct SquaredDifference
+{
+};
+
+struct Squeeze
+{
+    long[] axis;
+};
+
+struct Stack
+{
+    long axis;
+};
+
+struct StridedSlice
+{
+    long beginMask;
+    long endMask;
+    long ellipsisMask;
+    long newAxisMask;
+    long shrinkAxisMask;
+};
+
+struct SubFusion
+{
+    enum ActivationType activationType;
+};
+
+struct TileFusion
+{
+    long[] dims;
+};
+
+struct TopKFusion
+{
+    boolean sorted;
+    long axis;
+};
+
+struct Transpose
+{
+};
+
+struct Unsqueeze
+{
+    long[] axis;
+};
+
+struct Unstack
+{
+    long axis;
+};
+
+struct Select
+{
+};
+
+struct Erf
+{
+};
