@@ -1146,5 +1146,33 @@ import ohos.hdi.wlan.wpa.v1_0.IWpaCallback;
     * @version 1.0
     */ 
     P2pSaveConfig([in] String ifName);
-    
+
+    /**
+     * @brief Reassociate in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    Reassociate([in] String ifName);
+
+    /**
+     * @brief STA CMD in wpa supplicant.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param cmd Indicates command of Sta from WifiHal
+     * Example: If CMD is "SET external_sim 1", then
+     * the final result is "external_sim=1".
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+     StaShellCmd([in] String ifName, [in] String cmd);
  }
