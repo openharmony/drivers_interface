@@ -22,7 +22,7 @@
  * The Host can use the interface provided by the module to create an audio session,
  * and exchange data with the audio subsystem.
  *
- * @since 4.0
+ * @since 4.1
  */
 
 /*
@@ -30,42 +30,13 @@
  *
  * @brief Defines the data structure.
  *
- * @since 4.0
+ * @since 4.1
  * @version 1.1
  */
 
 package ohos.hdi.bluetooth.a2dp.v1_1;
 
-/*
- * @brief Defines the operation.
- *
- * @since 4.0
- */
-enum Operation {
-    SUSPEND_RENDER = 0,
-    START_RENDER = 1,
-};
-
-/*
- * @brief Defines the operation result of the interface.
- *
- * @since 4.0
- */
-enum Status {
-    SUCCESS = 0,
-    FAILURE = 1,
-};
-
-/*
- * @brief Defines the type of audio session.
- *
- * @since 4.0
- */
-enum SessionType {
-    UNKNOWN_TYPE,
-    SOFTWARE_ENCODING,
-    HARDWARE_ENCODING,
-};
+import ohos.hdi.bluetooth.a2dp.v1_0.BluetoothAudioTypes;
 
 /**
  * @brief Defines the start session parameters information.
