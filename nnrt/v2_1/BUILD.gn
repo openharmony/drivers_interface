@@ -14,10 +14,10 @@
 import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
 hdi("nnrt") {
   module_name = "nnrt"
+  imports = [
+    "ohos.hdi.nnrt.v2_0:nnrt"
+  ]
   sources = [
-    "INnrtDevice.idl",
-    "IPreparedModel.idl",
-    "ModelTypes.idl",
     "NnrtTypes.idl",
     "NodeAttrTypes.idl",
   ]
