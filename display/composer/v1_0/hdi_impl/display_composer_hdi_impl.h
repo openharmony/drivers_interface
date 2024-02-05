@@ -76,7 +76,9 @@ public:
         vBlankCb_(nullptr),
         hotPlugCbData_(nullptr),
         vBlankCbData_(nullptr),
-        recipient_(nullptr) {}
+        recipient_(nullptr) {
+            vsyncEnableCount_.clear();
+        }
 
     virtual ~DisplayComposerHdiImpl()
     {
@@ -213,11 +215,11 @@ public:
     virtual int32_t SetDisplayVsyncEnabled(uint32_t devId, bool enabled) override
     {
         COMPOSER_CHECK_NULLPTR(hdi_);
-        static std::unordered_map<uint32_t, uint32_t> vsyncEnableCount;
 
         /* Already enabled, return success */
-        if (enabled && vsyncEnableCount[devId] > 0) {
-            ++vsyncEnableCount[devId];
+        if (enabled && vsyncEnableCount_[devId] > 0) {
+            HDF_LOGD("%{public}s: Count[%{public}u] = %{public}u, Skip", __func__, devId, vsyncEnableCount_[devId]);
+            ++vsyncEnableCount_[devId];
             return DISPLAY_SUCCESS;
         }
 
@@ -226,7 +228,7 @@ public:
             return ret;
         }
 
-        vsyncEnableCount[devId] = enabled ? 1 : 0;
+        vsyncEnableCount_[devId] = enabled ? 1 : 0;
         return ret;
     }
 
@@ -569,6 +571,7 @@ protected:
     void *hotPlugCbData_;
     void *vBlankCbData_;
     sptr<IRemoteObject::DeathRecipient> recipient_;
+    std::unordered_map<uint32_t, uint32_t> vsyncEnableCount_;
 };
 using HdiDisplayComposer = DisplayComposerHdiImpl<IDisplayComposerInterface, IDisplayComposer, HdiDisplayCmdRequester>;
 } // namespace V1_0
