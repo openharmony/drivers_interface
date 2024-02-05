@@ -22,45 +22,33 @@
  * The Host can use the interface provided by the module to create an audio session,
  * and exchange data with the audio.
  *
- * @since 4.0
+ * @since 4.1
  */
 
 /**
  * @file IBluetoothAudioSession.idl
  *
- * @brief Defines the interfaces to start audio session, send render operation result,
+ * @brief Defines the interfaces to start audio session with parameters, send render operation result,
  * and stop the audio session.
  *
- * @since 4.0
+ * @since 4.1
  * @version 1.1
  */
 
 package ohos.hdi.bluetooth.a2dp.v1_1;
 
-import ohos.hdi.bluetooth.a2dp.v1_1.IBluetoothAudioCallback;
 import ohos.hdi.bluetooth.a2dp.v1_1.BluetoothAudioTypes;
+import ohos.hdi.bluetooth.a2dp.v1_0.IBluetoothAudioCallback;
+import ohos.hdi.bluetooth.a2dp.v1_0.IBluetoothAudioSession;
 
 /**
- * @brief Defines the interfaces to start audio session, send render operation result,
+ * @brief Defines the interfaces to start audio session with parameters, send render operation result,
  * and stop the audio session.
  *
- * @since 4.0
+ * @since 4.1
+ * @version 1.1
  */
-interface IBluetoothAudioSession {
-    /**
-     * @brief Start audio session and register the callback function.
-     *
-     * @param sessionType Indicates the session type.
-     * @param callbackObj Indicates the callback function. For details, see {@link IBluetoothAudioCallback}.
-     * @param queue Returns sharedMemQueue for audio data.
-     * @return Returns <b>0</b> if the operation is successfully; returns a negative value otherwise.
-     *
-     * @since 4.0
-     * @version 1.1
-     */
-    StartSession([in] enum SessionType sessionType, [in] IBluetoothAudioCallback callbackObj,
-        [out] SharedMemQueue<unsigned char> queue);
-
+interface IBluetoothAudioSession extends ohos.hdi.bluetooth.a2dp.v1_0.IBluetoothAudioSession {
     /**
      * @brief Start audio session and register the callback function.
      *
@@ -74,27 +62,4 @@ interface IBluetoothAudioSession {
      */
     StartSessionWithParams([in] struct StartSessionParams params, [in] IBluetoothAudioCallback callbackObj,
         [out] SharedMemQueue<unsigned char> queue);
-
-    /**
-     * @brief Stop audio session.
-     *
-     * @param sessionType Indicates the session type.
-     * @return Returns <b>0</b> if the operation is successfully; returns a negative value otherwise.
-     *
-     * @since 4.0
-     * @version 1.1
-     */
-    StopSession([in] enum SessionType sessionType);
-
-    /**
-     * @brief send the render operation result.
-     *
-     * @param operation Indicates the render operation.
-     * @param Status SUCCESS or FAILURE for operation.
-     * @return Returns <b>0</b> if the operation is successfully; returns a negative value otherwise.
-     *
-     * @since 4.0
-     * @version 1.1
-     */
-    RenderOperationResult([in] enum Operation operation, [in] enum Status status);
 }
