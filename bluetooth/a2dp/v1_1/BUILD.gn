@@ -14,10 +14,10 @@
 import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
 hdi("bluetooth_a2dp") {
   module_name = "bluetooth_a2dp"
+  imports = [ "ohos.hdi.bluetooth.a2dp.v1_0:bluetooth_a2dp" ]
 
   sources = [
     "BluetoothAudioTypes.idl",
-    "IBluetoothAudioCallback.idl",
     "IBluetoothAudioSession.idl",
   ]
 
