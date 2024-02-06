@@ -27,7 +27,8 @@
       "build": {
         "sub_component": [
           "//drivers/interface/bluetooth/hci/v1_0:bluetooth_hci_idl_target",
-          "//drivers/interface/bluetooth/a2dp/v1_0:bluetooth_a2dp_idl_target"
+          "//drivers/interface/bluetooth/a2dp/v1_0:bluetooth_a2dp_idl_target",
+          "//drivers/interface/bluetooth/a2dp/v1_1:bluetooth_a2dp_idl_target"
         ],
         "test": [
         ],
@@ -54,6 +55,30 @@
               "header_files": [
               ],
               "header_base": "//drivers/interface/bluetooth/hci"
+            }
+          },
+          {
+            "name": "//drivers/interface/bluetooth/a2dp/v1_1:libbluetooth_a2dp_proxy_1.1",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/bluetooth/a2dp"
+            }
+          },
+          {
+            "name": "//drivers/interface/bluetooth/a2dp/v1_1:libbluetooth_a2dp_stub_1.1",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/bluetooth/a2dp"
+            }
+          },
+          {
+            "name": "//drivers/interface/bluetooth/a2dp/v1_1:bluetooth_a2dp_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/bluetooth/a2dp"
             }
           },
           {
