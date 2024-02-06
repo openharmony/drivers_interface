@@ -726,6 +726,8 @@ struct MaxPoolFusion
     enum PadMode padMode;
     /** Format of the tensor data. For details, see {@link Format}. */
     enum Format format;
+    /** RoundMode mode. For details, see {@link RoundMode}. */
+    enum RoundMode roundMode;
     /** Whether to do global pooling. */
     boolean global;
     /** Activation function type. For details, see {@link ActivationType}. */
