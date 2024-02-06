@@ -38,7 +38,7 @@
  * and output is determined by <b>inputIndex</b> and <b>outIndex</b> of the {@link Node} structure.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 
 /**
@@ -66,7 +66,7 @@ import ohos.hdi.nnrt.v2_0.NnrtTypes;
  * * A tensor returned after the activation function is executed.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Activation
 {
@@ -101,7 +101,7 @@ struct Activation
  *   the output is returned.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct AddFusion
 {
@@ -124,7 +124,7 @@ struct AddFusion
  * * First <b>K</b> indices or values before the maximum input tensor on the axis.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct ArgMaxFusion
 {
@@ -157,7 +157,7 @@ struct ArgMaxFusion
  * * Tensor after average pooling.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct AvgPoolFusion
 {
@@ -207,7 +207,7 @@ struct AvgPoolFusion
  * \f$ c'= c \f$
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct BatchToSpaceND
 {
@@ -235,7 +235,7 @@ struct BatchToSpaceND
  * * Output tensor, which is the sum of the input tensor and the bias in each dimension.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct BiasAdd
 {
@@ -256,7 +256,7 @@ struct BiasAdd
  * * A tensor with the specified data type.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Cast
 {
@@ -276,7 +276,7 @@ struct Cast
  * * Result of the tensors connected.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Concat
 {
@@ -307,7 +307,7 @@ struct Concat
  * * Convolution output.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Conv2DFusion
 {
@@ -368,7 +368,7 @@ struct Conv2DFusion
  * * An n-dimensional tensor.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Conv2dTransposeFusion
 {
@@ -421,7 +421,7 @@ struct Conv2dTransposeFusion
  * * Quotient of the two inputs.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct DivFusion
 {
@@ -444,7 +444,7 @@ struct DivFusion
  * * A tensor with the same data type and shape as <b>x1</b>.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Eltwise
 {
@@ -468,7 +468,7 @@ struct Eltwise
  * * Operator with an additional dimension at the given axis.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct ExpandDims
 {
@@ -488,7 +488,7 @@ struct ExpandDims
  * *Tensor filled by the scaler.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Fill
 {
@@ -515,7 +515,7 @@ struct Fill
  * * <b>output</b>: computed tensor.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct FullConnection
 {
@@ -551,7 +551,7 @@ struct FullConnection
  * * <b>output</b>: computed tensor.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct FusedBatchNorm
 {
@@ -576,7 +576,7 @@ struct FusedBatchNorm
  * * Sliced tensor.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Gather
 {
@@ -599,7 +599,7 @@ struct Gather
  * * An n-dimensional tensor, with the same data type and shape as the input tensor.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct LayerNormFusion
 {
@@ -632,7 +632,7 @@ struct LayerNormFusion
  * * the output cannot be omitted. However, values of the quantization parameters do not affect the result.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct LessEqual
 {
@@ -655,7 +655,7 @@ struct LessEqual
  * * the data type of the output depends on the data type converted during the calculation of <b>x1</b> and <b>x2</b>.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct MatMulFusion
 {
@@ -687,7 +687,7 @@ struct MatMulFusion
  /** Maximum value of the elements of the two tensors.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Maximum
 {
@@ -710,7 +710,7 @@ struct Maximum
  /** Maximum value of the elements of the two tensors.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct MaxPoolFusion
 {
@@ -751,7 +751,7 @@ struct MaxPoolFusion
  * * Product of each element of <b>x1</b> and <b>x2</b>.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct MulFusion
 {
@@ -782,7 +782,7 @@ struct MulFusion
  * * <b>indices</b> and <b>axis</b>.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct OneHot
 {
@@ -821,7 +821,7 @@ struct OneHot
  *   output.shape[i] = input.shape[i] + paddings[i][0]+paddings[i][1]
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct PadFusion
 {
@@ -867,7 +867,7 @@ struct PadFusion
  * * A tensor, whose shape is determined by the shape of <b>x</b> and <b>y</b> after broadcasting.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct PowFusion
 {
@@ -896,7 +896,7 @@ struct PowFusion
  * * PReLU activation value of <b>x</b>, with the same shape and data type as <b>x</b>.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct PReLUFusion
 {
@@ -922,7 +922,7 @@ struct PReLUFusion
  * * Tensor after the data type conversion.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct QuantDTypeCast
 {
@@ -951,7 +951,7 @@ struct QuantDTypeCast
  * * If <b>keepDims</b> is <b>true</b>, m==n.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct ReduceFusion
 {
@@ -985,7 +985,7 @@ struct ReduceFusion
  * * A tensor of the specified shape. The data type is the same as that of <b>x</b>.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Reshape
 {
@@ -1010,7 +1010,7 @@ struct Reshape
  * * An n-dimensional tensor, with the same shape and data type as <b>x</b>.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Resize
 {
@@ -1056,7 +1056,7 @@ struct Resize
  * * An n-dimensional tensor, with the same shape and data type as <b>x</b>. 
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Rsqrt
 {
@@ -1079,7 +1079,7 @@ struct Rsqrt
  * * by <b>axis</b>.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct ScaleFusion
 {
@@ -1103,7 +1103,7 @@ struct ScaleFusion
  * * An integer array representing the dimensions of <b>x</b>.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Shape
 {
@@ -1126,7 +1126,7 @@ struct Shape
  * * An n-dimensional tensor obtained.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct SliceFusion
 {
@@ -1149,7 +1149,7 @@ struct SliceFusion
  * * as <b>x</b>.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Softmax
 {
@@ -1179,7 +1179,7 @@ struct Softmax
  * (w + paddings[1][0] + paddings[1][1]) \f$ must be an integer multiple of \f$ blockShape[1] \f$.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct SpaceToBatchND
 {
@@ -1205,7 +1205,7 @@ struct SpaceToBatchND
  * * The data type of each tensor is the same as that of <b>x</b>.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Split
 {
@@ -1236,7 +1236,7 @@ struct Split
  * * An n-dimensional tensor, with the same data type and shape as <b>x</b>.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Sqrt
 {
@@ -1262,7 +1262,7 @@ struct Sqrt
  *   The precision of the output is the same as the input tensor with higher precision.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct SquaredDifference
 {
@@ -1285,7 +1285,7 @@ struct SquaredDifference
  * *Tensor obtained.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Squeeze
 {
@@ -1310,7 +1310,7 @@ struct Squeeze
  * * An n+1D tensor along the specified axis, with the same data type and precision as the input tensors.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Stack
 {
@@ -1343,7 +1343,7 @@ struct Stack
  * * A tensor, with the same data type as <b>x</b>. The number of dimensions of the output tensor is rank (x[0])+1.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct StridedSlice
 {
@@ -1401,7 +1401,7 @@ struct StridedSlice
  *   The precision of the output is the same as the input tensor with higher precision.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct SubFusion
 {
@@ -1430,7 +1430,7 @@ struct SubFusion
  *   Then, <b>x</b> is copies the specified number of times in each dimension to obtain an m-dimensional tensor.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct TileFusion
 {
@@ -1455,7 +1455,7 @@ struct TileFusion
  * * <b>output1</b>, indices of the first K maximum values.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct TopKFusion
 {
@@ -1484,7 +1484,7 @@ struct TopKFusion
  * * The shape is determined by the shape of <b>x</b> and <b>perm</b>.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Transpose
 {
@@ -1504,7 +1504,7 @@ struct Transpose
  * * Tensor output.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Unsqueeze
 {

@@ -27,7 +27,7 @@
  * @file NodeAttrTypes.idl
  *
  * @brief Defines the parameters and functions of AI model operators.
- * 
+ *
  * All structures in this file declare only operator attributes and do not contain the interfaces for executing operator functions.
  * - 1. The operators in the file are in one-to-one correspondence with a {@link NodeType}. In model inference, {@link NodeType} is stored in nodeType of {@link Node}.
  * - 2. Each operator has at least one input and one output. The input is the tensor received by the operator, and the output is the tensor obtained after the operator operation. The relationship between the input, operator, and output is determined by <b>inputIndex</b> and <b>outIndex</b> of the {@link Node} structure.
@@ -48,7 +48,7 @@ import ohos.hdi.nnrt.v1_0.NnrtTypes;
 
 /**
  * @brief Defines the operator of the activation type. All activation functions belong to this operator. The specific activation function type is determined by the parameters.
- * 
+ *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_ACTIVATION</b>.
  *
  * Inputs:
@@ -78,7 +78,7 @@ struct Activation
 
 /**
  * @brief Adds tensors.
- * 
+ *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_ADD_FUSION</b>.
  *
  * Inputs:
@@ -383,7 +383,7 @@ struct Conv2dTransposeFusion
  *
  * * <b>x1</b>, a tensor of the int or float type.
  * * <b>x2</b>, a tensor of the int or float type.
- * 
+ *
  * Outputs:
  *
  * * Quotient of the two inputs.
@@ -635,7 +635,7 @@ struct MatMulFusion
  *
  * Outputs:
  *
- /** Maximum value of the elements of the two tensors.
+ * * Maximum value of the elements of the two tensors.
  *
  * @since 3.2
  * @version 1.0
@@ -657,7 +657,7 @@ struct Maximum
  *
  * Outputs:
  *
- /** Maximum value of the elements of the two tensors.
+ * * Maximum value of the elements of the two tensors.
  *
  * @since 3.2
  * @version 1.0
@@ -682,7 +682,7 @@ struct MaxPoolFusion
 
 /**
  * @brief Multiplies the elements in the same position of <b>x1</b> and <b>x2</b> to obtain output.
- *  
+ *
  * If the shapes of <b>x1</b> and <b>x2</b> are different, expand <b>x1</b> and <b>x2</b> to the same shape through broadcast and then perform the multiplication.
  * The {@link NodeType} of this operator is <b>NODE_TYPE_MUL_FUSION</b>.
  *
@@ -766,12 +766,12 @@ struct PadFusion
      * The meaning of this parameter is the same as that of <b>paddings</b> input.
      */
     long[][] paddings;
-    /** 
+    /**
       * Padding mode.
      * For details, see {@link PaddingMode}.
      */
     enum PaddingMode paddingMode;
-    /** 
+    /**
      * A constant with the same data type as <b>x</b>. It specifies the value to add in the pad operation.
      * This parameter is valid only when paddingMode==PADDING_MODE_CONSTANT. The default value is <b>0</b>.
      */
@@ -780,7 +780,7 @@ struct PadFusion
 
 /**
  * @brief Calculates the <b>y</b> power of each element in <b>x</b>. The inputs must be two tensors or one tensor and one scalar.
- * 
+ *
  * When the inputs are two tensors, their data types cannot be Boolean at the same time, and their shapes must be the same. When the inputs are one tensor and one scalar, the scalar must be a constant.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_POW_FUSION</b>.
@@ -1175,7 +1175,7 @@ struct SquaredDifference
 
 /**
  * @brief Removes the dimension with length of 1 from the specified axis. The int8 quantization input is supported.
- * 
+ *
  * Assume that the shape of <b>x</b> is [2, 1, 1, 2, 2] and <b>axis</b> is [0,1], the shape of the output tensor must be [2, 1, 2, 2]. That is, the dimension with one element between the 0th and 1st dimensions is removed.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_SQUARED_DIFFERENCE</b>.

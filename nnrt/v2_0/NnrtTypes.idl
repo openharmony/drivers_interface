@@ -45,7 +45,7 @@ package ohos.hdi.nnrt.v2_0;
  * @brief Defines the shared memory data structure.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct SharedBuffer {
     /** File descriptor of the shared memory. */
@@ -62,7 +62,7 @@ struct SharedBuffer {
  * @brief Enumerates the AI chip types.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 enum DeviceType: int {
     /** Other types. */
@@ -79,7 +79,7 @@ enum DeviceType: int {
  * @brief Enumerates the AI chip states.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 enum DeviceStatus: int {
     /** Available. */
@@ -96,7 +96,7 @@ enum DeviceStatus: int {
  * @brief Enumerates the performance modes for a chip to perform AI computing.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 enum PerformanceMode: int {
     /** No performance mode is specified. The specific running mode is defined by the chip. */
@@ -115,7 +115,7 @@ enum PerformanceMode: int {
  * @brief Enumerates the AI computing task priorities.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 enum Priority: int {
     /** No task priority is specified. The specific execution policy is defined by the chip. */
@@ -151,7 +151,7 @@ struct ModelConfig {
  * @brief Enumerates the operator data formats. This parameter must be used together with {@link Tensor}.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 enum Format : byte {
     /** Format initial value. */
@@ -202,7 +202,7 @@ enum Format : byte {
  * When \f$ r_{min} \f$ and \f$ r_{max} \f$ are <b>0</b>, <b>scale</b> and <b>zeroPoint</b> must be <b>0</b>.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct QuantParam {
     /** Number of quantized bits. */
@@ -217,7 +217,7 @@ struct QuantParam {
  * @brief Enumerates the tensor data types. This parameter must be used together with {@link Tensor}.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 enum DataType : byte {
     /** Unknown type. */
@@ -252,7 +252,7 @@ enum DataType : byte {
  * @brief Defines the input and output tensors of an AI model.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct IOTensor {
     /** Tensor name. */
@@ -273,7 +273,7 @@ struct IOTensor {
  * @brief Enumerates the quantization types. This parameter must be used together with {@link Node}.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 enum QuantType: byte {
     /** Do not use quantification. */
@@ -286,7 +286,7 @@ enum QuantType: byte {
  * @brief Enumerates the operator types.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 enum NodeType : unsigned int {
     /** None. */
@@ -393,7 +393,7 @@ enum NodeType : unsigned int {
  * @brief Enumerates the resize methods. It must be used together with the {@link Resize} operator.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 enum ResizeMethod : byte {
     /** Unknown. This is the default value. */
@@ -458,7 +458,7 @@ enum ResizeMethod : byte {
  * COORDINATE_TRANSFORM_MODE_HALF_PIXEL: \f$ old_i = newWidth > 1 ? (new_x + 0.5) * oldWidth / newWidth - 0.5 : 0 \f$<br>
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 enum CoordinateTransformMode : byte {
     /** Scale based on the ratio without alignment. */
@@ -474,7 +474,7 @@ enum CoordinateTransformMode : byte {
  * {@link Resize} operator.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 enum NearestMode : byte {
     /** Round off. */
@@ -498,7 +498,7 @@ enum NearestMode : byte {
  * the corresponding activation function will be called after the operator calculation is complete.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 enum ActivationType : byte {
     /** No activation function. */
@@ -714,7 +714,7 @@ enum ActivationType : byte {
  * @brief Enumerates the modes for removing dimensions. It must be used together with the {@link ReduceFusion} operator.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 enum ReduceMode : byte {
     /** Use the average value of all elements of a dimension to replace other elements of the dimension. */
@@ -740,7 +740,7 @@ enum ReduceMode : byte {
  * {@link Eltwise} operator.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 enum EltwiseMode : byte {
     /** Product of the elements of two tensors */
@@ -758,7 +758,7 @@ enum EltwiseMode : byte {
  * {@link Conv2DFusion}, and {@link MaxPoolFusion}.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 enum PadMode : byte {
     /**
@@ -785,7 +785,7 @@ enum PadMode : byte {
  * {@link AvgPoolFusion} operator.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 enum RoundMode : byte {
     /** Round down to the nearest integer. For example, 23.5 is rounded down to 23, and −23.5 is rounded down to −24. */
@@ -829,11 +829,9 @@ enum RoundMode : byte {
           [8. 7. 7. 8. 9. 9. 8.],\\
           [5. 4. 4. 5. 6. 6. 5.]]\\ \f$
  *
- *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
-
 enum PaddingMode : byte {
     /** Constant (0 by default) padding. */
     PADDING_MODE_CONSTANT = 0,

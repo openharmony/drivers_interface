@@ -42,7 +42,7 @@
  * and the outputs the model inference result.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 
 /**
@@ -59,7 +59,7 @@ import ohos.hdi.nnrt.v2_0.NnrtTypes;
  * @brief Defines the tensor structure.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Tensor {
     /** Tensor name. */
@@ -107,7 +107,7 @@ struct Tensor {
  *      Up to now, the four parameters are written into <b>full_connection</b>.
  * 
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Node {
     /** Operator node name. */
@@ -130,7 +130,7 @@ struct Node {
  * @brief Defines the subgraph structure.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct SubGraph {
     /** Subgraph name. */
@@ -150,7 +150,7 @@ struct SubGraph {
  * Generally, a model has only one <b>subGraph</b>.
  * 
  * @since 3.2
- * @version 1.0
+ * @version 2.0
  */
 struct Model {
     /** Model name. */
