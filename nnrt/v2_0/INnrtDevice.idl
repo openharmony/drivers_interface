@@ -177,9 +177,7 @@ interface INnrtDevice {
      * @return Returns a non-0 value if the operation fails. A negative value is an HDF standard error code,\n
      * and a positive value is a dedicated error code defined by NNRt. For details, see {@link NNRT_ReturnCode}.
      */
-    PrepareModel([in] struct Model model,
-                 [in] struct ModelConfig config,
-                 [out] IPreparedModel preparedModel);
+    PrepareModel([in] struct Model model, [in] struct ModelConfig config, [out] IPreparedModel preparedModel);
 
     /**
      * @brief Checks whether the device supports caching of the AI models built.
@@ -206,15 +204,14 @@ interface INnrtDevice {
      * @return Returns a non-0 value if the operation fails. A negative value is an HDF standard error code,\n
      * and a positive value is a dedicated error code defined by NNRt. For details, see {@link NNRT_ReturnCode}.
      */
-    PrepareModelFromModelCache([in] struct SharedBuffer[] modelCache,
-                               [in] struct ModelConfig config,
+    PrepareModelFromModelCache([in] struct SharedBuffer[] modelCache, [in] struct ModelConfig config,
                                [out] IPreparedModel preparedModel);
 
     /**
      * @brief Loads offline model files from the cache. The offline model is obtained after offline model files\n
      * are passed by the inference framework to the NNRt module and then parsed by the NNRt module.
      *
-     * @param modelCache Array of offline model files. The sequence of array elements depends on the format of\n
+     * @param offlineModels Array of offline model files. The sequence of array elements depends on the format of\n
      * the input offline model. For details about the element types, see the definition of SharedBuffer {@link SharedBuffer}.
      * @param config Configuration for loading the offline model files. For details, see {@link ModelConfig}.
      * @param preparedModel Model object obtained. For details, see {@link IPreparedModel}.
@@ -223,8 +220,7 @@ interface INnrtDevice {
      * @return Returns a non-0 value if the operation fails. A negative value is an HDF standard error code,\n
      * and a positive value is a dedicated error code defined by NNRt. For details, see {@link NNRT_ReturnCode}.
      */
-    PrepareOfflineModel([in] struct SharedBuffer[] modelCache,
-                        [in] struct ModelConfig config,
+    PrepareOfflineModel([in] struct SharedBuffer[] offlineModels, [in] struct ModelConfig config,
                         [out] IPreparedModel preparedModel);
 
     /**

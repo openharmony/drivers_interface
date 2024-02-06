@@ -85,7 +85,7 @@ interface IPreparedModel {
      *For details about the input data type, see {@link IOTensor}.
      * @param outputs Output data of AI model inference. After inference, the output data is written to the\n
      *shared buffer. For details about the output data type, see {@link IOTensor}.
-     * @param outputsDims Dimensions of the output data. The output sequence is the same as that of <b>outputs</b>.
+     * @param outputDims Dimensions of the output data. The output sequence is the same as that of <b>outputs</b>.
      * @param isOutputBufferEnough Whether the shared buffer space is sufficient for the output data.\n
      *The value <b>true</b> means the shared buffer space is sufficient; the value <b>false</b> means the opposite.
      *
@@ -93,7 +93,7 @@ interface IPreparedModel {
      * @return Returns a non-0 value if the operation fails. A negative value is an HDF standard error code,\n
      *and a positive value is a dedicated error code defined by NNRt. For details, see {@link NNRT_ReturnCode}.
      */
-    Run([in] struct IOTensor[] inputs, [in] struct IOTensor[] outputs, [out] int[][] outputsDims);
+    Run([in] struct IOTensor[] inputs, [in] struct IOTensor[] outputs, [out] int[][] outputDims);
 }
 
 /** @} */

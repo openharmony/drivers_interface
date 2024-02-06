@@ -851,7 +851,7 @@ enum PaddingMode : byte {
  * @since 4.0
  * @version 2.0
  */
-enum NNRT_ReturnCode : int {
+enum NNRT_ReturnCode : unsigned int {
     /** Success. */
     NNRT_SUCCESS = 0,
     /** Failed. */

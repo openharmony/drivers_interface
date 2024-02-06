@@ -161,9 +161,7 @@ interface INnrtDevice {
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a negative number if the operation fails.
      */
-    PrepareModel([in] struct Model model,
-                 [in] struct ModelConfig config,
-                 [out] IPreparedModel preparedModel);
+    PrepareModel([in] struct Model model, [in] struct ModelConfig config, [out] IPreparedModel preparedModel);
 
     /**
      * @brief Checks whether the device supports caching of the AI models built.
@@ -187,8 +185,7 @@ interface INnrtDevice {
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a negative number if the operation fails.
      */
-    PrepareModelFromModelCache([in] struct SharedBuffer[] modelCache,
-                               [in] struct ModelConfig config,
+    PrepareModelFromModelCache([in] struct SharedBuffer[] modelCache, [in] struct ModelConfig config,
                                [out] IPreparedModel preparedModel);
 
     /**
