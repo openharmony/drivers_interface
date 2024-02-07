@@ -361,9 +361,9 @@ enum NodeType : unsigned int {
     NODE_TYPE_SPLIT = 145,
     /** Sqrt operator */
     NODE_TYPE_SQRT = 146,
-    /** SquaredDifference operator */
-    NODE_TYPE_SQUEEZE = 147,
     /** Squeeze operator */
+    NODE_TYPE_SQUEEZE = 147,
+    /** SquaredDifference operator */
     NODE_TYPE_SQUARED_DIFFERENCE = 149,
     /** Stack operator */
     NODE_TYPE_STACK = 150,

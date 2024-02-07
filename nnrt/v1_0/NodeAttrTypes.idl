@@ -452,7 +452,7 @@ struct ExpandDims
  * * <b>shape</b>, which specifies the dimensions of the tensor to create.
  * Outputs:
  *
- * *Tensor filled by the scaler.
+ * * Tensor filled by the scaler.
  *
  * @since 3.2
  * @version 1.0

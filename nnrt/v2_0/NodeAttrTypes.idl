@@ -485,7 +485,7 @@ struct ExpandDims
  * * <b>shape</b>, which specifies the dimensions of the tensor to create.
  * Output:
  *
- * *Tensor filled by the scaler.
+ * * Tensor filled by the scaler.
  *
  * @since 3.2
  * @version 2.0
@@ -1271,7 +1271,7 @@ struct SquaredDifference
 /**
  * @brief Removes the dimension with length of 1 from the specified axis. The int8 quantization input is supported.
  * 
- * Assume that the shape of <b>x</b> is [2, 1, 1, 2, 2] and <b>axis</b> is [0,1], the shape of the output tensor 
+ * Assume that the shape of <b>x</b> is [2, 1, 1, 2, 2] and <b>axis</b> is [0,1], the shape of the output tensor\n
  * must be [2, 1, 2, 2]. That is, the dimension with the length of 1 between the 0th and 1st dimensions is removed.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_SQUARED_DIFFERENCE</b>.
@@ -1424,10 +1424,10 @@ struct SubFusion
  * Output:
  *
  * * An m-dimensional tensor, with the same data type as <b>x</b>. If the length of <b>x</b> is the same as that of
- *   <b>multiples</b>, the number of dimensions of the output tensor is the same as that of the <b>x</b>, that is, 
- *   an n-dimensional tensor is output.
- *   If the length of <b>multiples</b> is greater than <b>n</b>, <b>1s</b> are used to pad the dimensions of <b>x</b>.
- *   Then, <b>x</b> is copies the specified number of times in each dimension to obtain an m-dimensional tensor.
+ * * <b>multiples</b>, the number of dimensions of the output tensor is the same as that of the <b>x</b>, that is,
+ * * an n-dimensional tensor is output.
+ * * If the length of <b>multiples</b> is greater than <b>n</b>, <b>1s</b> are used to pad the dimensions of <b>x</b>.
+ * * Then, <b>x</b> is copies the specified number of times in each dimension to obtain an m-dimensional tensor.
  *
  * @since 3.2
  * @version 2.0
