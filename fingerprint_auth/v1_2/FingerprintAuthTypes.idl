@@ -53,8 +53,8 @@ enum FingerprintTipsCode : int {
     FINGERPRINT_AUTH_TIP_TOO_SLOW = 5, /**< Indicates that the fingerprint image is unreadable due to lack of motion. */
     FINGERPRINT_AUTH_TIP_FINGER_DOWN = 6, /**< Indicates that the finger is down. */
     FINGERPRINT_AUTH_TIP_FINGER_UP = 7, /**< Indicates that the finger is up. */
-    FINGERPRINT_AUTH_TIP_SINGLE_AUTH_RESULT = 8, /**< Indicates that a single auth result. The authentication result is carried in a JSON
-                                                    charactre string: {"authResult":1,"authRemainAttempts":5,"lockoutDuration":0} */
+    FINGERPRINT_AUTH_TIP_SINGLE_AUTH_RESULT = 8, /**< Indicates that a single auth result. The authentication result is carried in a json
+                                                   character string: {"authResult":1,"authRemainAttempts":3,"lockoutDuration":0} */
     VENDOR_FINGERPRINT_AUTH_TIP_BEGIN = 10000 /**< Vendor may add custom fingerprint auth tip after this. */
 };
 
