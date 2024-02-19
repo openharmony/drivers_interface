@@ -163,7 +163,8 @@ static item_info_t g_ohosDeviceExposure[OHOS_DEVICE_EXPOSURE_END - OHOS_DEVICE_E
     [OHOS_ABILITY_EXPOSURE_MODES - OHOS_DEVICE_EXPOSURE_START] = {"exposureSupportiveModes", META_TYPE_BYTE, -1},
     [OHOS_CONTROL_EXPOSURE_MODE - OHOS_DEVICE_EXPOSURE_START] = {"exMode",                  META_TYPE_BYTE, 1 },
     [OHOS_ABILITY_METER_MODES - OHOS_DEVICE_EXPOSURE_START] = {"meterAvailableModes",     META_TYPE_BYTE, -1},
-    [OHOS_ABILITY_SCENE_EXPOSURE_MODES - OHOS_DEVICE_EXPOSURE_START] = {"sceneExposureSupportiveModes", META_TYPE_BYTE, -1},
+    [OHOS_ABILITY_SCENE_EXPOSURE_MODES -
+        OHOS_DEVICE_EXPOSURE_START] = {"sceneExposureSupportiveModes", META_TYPE_BYTE, -1},
     [OHOS_ABILITY_EXPOSURE_TIME - OHOS_DEVICE_EXPOSURE_START] = {"abilityExposureTime", META_TYPE_INT32, -1},
     [OHOS_ABILITY_AE_LOCK - OHOS_DEVICE_EXPOSURE_START] = {"abilityAELock", META_TYPE_BYTE, -1},
 };
@@ -307,10 +308,10 @@ static item_info_t g_ohosCameraSecure[OHOS_CAMERA_SECURE_END - OHOS_CAMERA_SECUR
 };
 
 static item_info_t g_ohosCameraXmage[OHOS_XMAGE_COLOR_MODES_END - OHOS_XMAGE_COLOR_MODES_START] = {
-    [OHOS_ABILITY_SUPPORTED_COLOR_MODES - OHOS_XMAGE_COLOR_MODES_START] = 
-                                        {"cameraXmageSupportMode",  META_TYPE_BYTE,  1},
-    [OHOS_CONTROL_SUPPORTED_COLOR_MODES - OHOS_XMAGE_COLOR_MODES_START] = 
-                                        {"cameraXmageControlMode",  META_TYPE_BYTE,  1},
+    [OHOS_ABILITY_SUPPORTED_COLOR_MODES -
+        OHOS_XMAGE_COLOR_MODES_START] = {"cameraXmageSupportMode",  META_TYPE_BYTE,  1},
+    [OHOS_CONTROL_SUPPORTED_COLOR_MODES -
+        OHOS_XMAGE_COLOR_MODES_START] = {"cameraXmageControlMode",  META_TYPE_BYTE,  1},
 };
 
 
