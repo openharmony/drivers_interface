@@ -142,7 +142,8 @@ static item_info_t g_ohosDeviceExposure[OHOS_DEVICE_EXPOSURE_END - OHOS_DEVICE_E
     [OHOS_ABILITY_EXPOSURE_MODES - OHOS_DEVICE_EXPOSURE_START] = {"exposureSupportiveModes", META_TYPE_BYTE, -1},
     [OHOS_CONTROL_EXPOSURE_MODE - OHOS_DEVICE_EXPOSURE_START] = {"exMode",                  META_TYPE_BYTE, 1 },
     [OHOS_ABILITY_METER_MODES - OHOS_DEVICE_EXPOSURE_START] = {"meterAvailableModes",     META_TYPE_BYTE, -1},
-    [OHOS_ABILITY_SCENE_EXPOSURE_MODES - OHOS_DEVICE_EXPOSURE_START] = {"sceneExposureSupportiveModes", META_TYPE_BYTE, -1},
+    [OHOS_ABILITY_SCENE_EXPOSURE_MODES - OHOS_DEVICE_EXPOSURE_START] = {
+        "sceneExposureSupportiveModes", META_TYPE_BYTE, -1},
 };
 
 static item_info_t g_ohosDeviceFocus[OHOS_DEVICE_FOCUS_END - OHOS_DEVICE_FOCUS_START] = {

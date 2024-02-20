@@ -16,6 +16,7 @@
 #include "camera_metadata_operator.h"
 #include <securec.h>
 #include <vector>
+#include <map>
 #include "camera_metadata_item_info.h"
 #include "metadata_log.h"
 
@@ -150,6 +151,22 @@ const std::vector<int32_t> METADATATAGS = {
     OHOS_CONTROL_SECURE_IR_LOCKAE_SWITCH,
 };
 
+std::map<uint32_t, uint32_t> g_metadataSectionMap = {
+    {OHOS_CAMERA_PROPERTIES, OHOS_SECTION_CAMERA_PROPERTIES},
+    {OHOS_CAMERA_SENSOR, OHOS_SECTION_CAMERA_SENSOR},
+    {OHOS_CAMERA_SENSOR_INFO, OHOS_SECTION_CAMERA_SENSOR_INFO},
+    {OHOS_CAMERA_STATISTICS, OHOS_SECTION_CAMERA_STATISTICS},
+    {OHOS_DEVICE_CONTROL, OHOS_SECTION_CAMERA_CONTROL},
+    {OHOS_DEVICE_EXPOSURE, OHOS_SECTION_DEVICE_EXPOSURE},
+    {OHOS_DEVICE_FOCUS, OHOS_SECTION_DEVICE_FOCUS},
+    {OHOS_DEVICE_FLASH, OHOS_SECTION_DEVICE_FLASH},
+    {OHOS_DEVICE_ZOOM, OHOS_SECTION_DEVICE_ZOOM},
+    {OHOS_STREAM_ABILITY, OHOS_SECTION_STREAM_ABILITY},
+    {OHOS_STREAM_JPEG, OHOS_SECTION_STREAM_JPEG},
+    {OHOS_STREAM_VIDEO, OHOS_SECTION_STREAM_VIDEO},
+    {OHOS_CAMERA_EFFECT, OHOS_SECTION_CAMERA_EFFECT},
+    {OHOS_CAMERA_SECURE, OHOS_SECTION_CAMERA_SECURE}
+};
 uint32_t AlignTo(uint32_t val, uint32_t alignment)
 {
     return static_cast<uint32_t>((static_cast<uintptr_t>(val) + ((alignment) - 1)) & ~((alignment) - 1));
@@ -252,52 +269,12 @@ int32_t GetMetadataSection(uint32_t itemSection, uint32_t *section)
     }
 
     int32_t ret = CAM_META_SUCCESS;
-    switch (itemSection) {
-        case OHOS_CAMERA_PROPERTIES:
-            *section = OHOS_SECTION_CAMERA_PROPERTIES;
-            break;
-        case OHOS_CAMERA_SENSOR:
-            *section = OHOS_SECTION_CAMERA_SENSOR;
-            break;
-        case OHOS_CAMERA_SENSOR_INFO:
-            *section = OHOS_SECTION_CAMERA_SENSOR_INFO;
-            break;
-        case OHOS_CAMERA_STATISTICS:
-            *section = OHOS_SECTION_CAMERA_STATISTICS;
-            break;
-        case OHOS_DEVICE_CONTROL:
-            *section = OHOS_SECTION_CAMERA_CONTROL;
-            break;
-        case OHOS_DEVICE_EXPOSURE:
-            *section = OHOS_SECTION_DEVICE_EXPOSURE;
-            break;
-        case OHOS_DEVICE_FOCUS:
-            *section = OHOS_SECTION_DEVICE_FOCUS;
-            break;
-        case OHOS_DEVICE_FLASH:
-            *section = OHOS_SECTION_DEVICE_FLASH;
-            break;
-        case OHOS_DEVICE_ZOOM:
-            *section = OHOS_SECTION_DEVICE_ZOOM;
-            break;
-        case OHOS_STREAM_ABILITY:
-            *section = OHOS_SECTION_STREAM_ABILITY;
-            break;
-        case OHOS_STREAM_JPEG:
-            *section = OHOS_SECTION_STREAM_JPEG;
-            break;
-        case OHOS_STREAM_VIDEO:
-            *section = OHOS_SECTION_STREAM_VIDEO;
-            break;
-        case OHOS_CAMERA_EFFECT:
-            *section = OHOS_SECTION_CAMERA_EFFECT;
-        case OHOS_CAMERA_SECURE:
-            *section = OHOS_SECTION_CAMERA_SECURE;
-            break;
-        default:
-            METADATA_ERR_LOG("GetMetadataSection item section is not defined");
-            ret = CAM_META_FAILURE;
-            break;
+    auto iter = g_metadataSectionMap.find(itemSection);
+    if (iter != g_metadataSectionMap.end()) {
+        *section = iter->second;
+    } else {
+        METADATA_ERR_LOG("GetMetadataSection item section is not defined");
+        ret = CAM_META_FAILURE;
     }
 
     METADATA_DEBUG_LOG("GetMetadataSection end");
