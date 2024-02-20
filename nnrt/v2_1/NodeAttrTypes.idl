@@ -151,7 +151,7 @@ struct All
 {
     /** Whether to keep dimension info. */
     long keepDims;
-}
+};
 
 /**
  * @brief Obtains the first K indices or values of a cross-axis tensor.
@@ -206,7 +206,7 @@ struct Assert
 {
     /** Print this many entries of each tensor. */
     long summarize;
-}
+};
 
 /**
  * @brief Applies a 2D average pooling on the input tensor. The int8 quantization input is supported.
@@ -678,9 +678,9 @@ struct DetectionPostProcess
     /** Number of target classes to be detected. */
     long numClasses;
     /** Whether use NMS based on IoU threshold. */
-    bool useRegularNms;
+    boolean useRegularNms;
     /** Whether need to quantize. */
-    bool outQuantized;
+    boolean outQuantized;
 };
 
 /**
@@ -1272,7 +1272,7 @@ struct LRN
     /** Exponent. */
     float beta;
     /** Specifies normalization region. Options: "ACROSS_CHNNEL". */
-    string normRegion;
+    String normRegion;
 };
 
 /**
