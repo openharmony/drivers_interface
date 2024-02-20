@@ -144,7 +144,7 @@ struct AddFusion
  *
  * * First <b>K</b> indices or values before the maximum input tensor on the axis.
  *
- * @since 3.2
+ * @since 5.0
  * @version 2.1
  */
 struct All
