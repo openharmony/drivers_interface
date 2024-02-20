@@ -2580,6 +2580,7 @@ struct Unsqueeze
  */
 struct Unstack
 {
+    /** The specific axis to apply unstack operation. */
     long axis;
 };
 
