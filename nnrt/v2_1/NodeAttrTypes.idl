@@ -90,15 +90,15 @@ struct Abs
  */
 struct Activation
 {
-/** Activation function type. */
+    /** Activation function type. */
     enum ActivationType activationType;
-/** Size factor, used for the <b>LeakyReLU</b> and <b>ELU</b> activation functions. */
+    /** Size factor, used for the <b>LeakyReLU</b> and <b>ELU</b> activation functions. */
     float alpha;
-/** Minimum value, used for the <b>HardTanh</b> activation function. */
+    /** Minimum value, used for the <b>HardTanh</b> activation function. */
     float minVal;
-/** Maximum value, used for the <b>HardTanh</b> activation function. */
+    /** Maximum value, used for the <b>HardTanh</b> activation function. */
     float maxVal;
-/** Whether to use the approximation algorithm. It is used for the <b>GRLU</b> activation function. */
+    /** Whether to use the approximation algorithm. It is used for the <b>GRLU</b> activation function. */
     boolean approximate;
 };
 
@@ -240,9 +240,10 @@ struct AvgPoolFusion
      * The first number indicates the moving size in height, and the second number indicates the moving size in width.
      */
     long[] strides;
-    /** <b>x</b> is padded with an int array [top, bottom, left, right] with length of 4, and the nearest neighbor values\n
-      * are used for padding.
-      */
+    /**
+     * <b>x</b> is padded with an int array [top, bottom, left, right] with length of 4, and the nearest neighbor values\n
+     * are used for padding.
+     */
     long[] pad;
     /** Padding method. */
     enum PadMode padMode;
@@ -448,9 +449,10 @@ struct Conv2DFusion
 {
     /** Size (height and width) of the convolution kernel. */
     long[] kernelSize;
-    /** Movement stride of the convolution kernel in height and weight.\n
-      * It is an int array [strideHeight, strideWidth] with length of 2.
-      */
+    /**
+     * Movement stride of the convolution kernel in height and weight.\n
+     * It is an int array [strideHeight, strideWidth] with length of 2.
+     */
     long[] stride;
     /**
      * Dilation size of the convolution kernel in height and weight. It is an int array in the format of\n
@@ -460,9 +462,10 @@ struct Conv2DFusion
     long[] dilation;
     /** Padding mode. For details, see {@link PadMode}. */
     enum PadMode padMode;
-    /** Padding around <b>x</b> in the height and width directions. It is an int array [top, bottom, left, right]\n
-      * with length of 4.
-      */
+    /**
+     * Padding around <b>x</b> in the height and width directions. It is an int array [top, bottom, left, right]\n
+     * with length of 4.
+     */
     long[] padList;
     /**
      * Splits <b>x</b> into groups by <b>inChannel</b>. The <b>group</b> value is of the int type.
@@ -492,11 +495,11 @@ struct Conv2DFusion
  *
  * * <b>x</b>, a 4D tensor in NHWC format.
  * * <b>weight</b>, a convolution weight in [outChannel, kernelHeight, kernelWidth, inChannel/group] format.
- * * The value of <b>inChannel</b> divided by <b>group</b>must be an integer.
+ *   The value of <b>inChannel</b> divided by <b>group</b>must be an integer.
  * * <b>bias</b>: bias of the convolution. It is an array with a length of <b>[outChannel]</b>.\n
- * * In the quantization scenario, <b>bias</b> does not need to be quantized.
- * * If quantization is required, the input data must be of the int32 type.
- * * The actual quantization parameter is determined by <b>x</b> and <b>weight</b>.
+ *   In the quantization scenario, <b>bias</b> does not need to be quantized.
+ *   If quantization is required, the input data must be of the int32 type.
+ *   The actual quantization parameter is determined by <b>x</b> and <b>weight</b>.
  *
  * Output:
  *
@@ -649,10 +652,10 @@ struct CustomNormalize
  *
  * Output:
  *
- * * <b>image_id</b>.
- * * <b>label</b>.
- * * <b>confidence</b>.
- * * <b>coordinates</b>.
+ * * <b>image_id</b>, the image ID of target detected bboxes.
+ * * <b>label</b>, the label of target detected bboxes.
+ * * <b>confidence</b>, the score of target detected bboxes.
+ * * <b>coordinates</b>, the coordinate of target detected bboxes.
  *
  * @since 5.0
  * @version 2.1
@@ -700,7 +703,7 @@ struct DetectionPostProcess
  * Output:
  *
  * * Output tensor of [N, H * blocksize, W * blocksize, C/(blocksize * blocksize)] for NHWC format\n
- * * or [N, C/(blocksize * blocksize), H * blocksize, W * blocksize] for NCHW format.
+ *   or [N, C/(blocksize * blocksize), H * blocksize, W * blocksize] for NCHW format.
  *
  * @since 5.0
  * @version 2.1
@@ -821,7 +824,7 @@ struct ExpFusion
  *
  * * <b>x</b>, an n-dimensional tensor.
  * * <b>axis</b>: index of the dimension to be added. The value is of the int32_t type and must be a constant\n
-   * in the range [-dim-1, dim].
+ *   in the range [-dim-1, dim].
  *
  * Output:
  *
@@ -846,8 +849,8 @@ struct ExpandDims
  *
  * Output:
  *
- * * A 2D tensor with the contents of the input tensor, with input dimensions up to axis flattened to\n
- * * the outer dimension of the output and remaining input dimensions flattened into the inner dimension of the output.
+ * * A 2-dimension tensor with the contents of the input tensor, with input dimensions up to axis flattened to\n
+ *   the outer dimension of the output and remaining input dimensions flattened into the inner dimension of the output.
  *
  * @since 5.0
  * @version 2.1
@@ -914,9 +917,9 @@ struct Fill
  *
  * * <b>x</b>, an n-dimensional tensor.
  * * <b>weight</b>: weight tensor for a full connection.
- * * <b>bias</b>, a full-connection bias. In quantization scenarios, a quantized parameter is not required.\n
+ * * <b>bias</b>, a full-connection bias. In quantization scenarios, a quantized parameter is not required.
  * * If quantization is required, the data must be of the int32 type. The actual quantization parameter is\n
- * * determined by <b>x</b> and <b>weight</b>.
+ *   determined by <b>x</b> and <b>weight</b>.
  *
  * Output:
  *
@@ -950,9 +953,9 @@ struct FullConnection
  * * <b>scale</b>: 1D tensor of the scaling factor used to scale the first normalized tensor.
  * * <b>offset</b>: 1D tensor used to move to the first normalized tensor.
  * * <b>mean</b>: 1D tensor of the overall mean value. It is used only for inference. In case of training,\n
- * * this parameter must be left empty.
+ *   this parameter must be left empty.
  * * <b>variance</b>: 1D tensor used for the overall variance. It is used only for inference. In case of training,\n
- * * this parameter must be left empty.
+ *   this parameter must be left empty.
  *
  * Output:
  *
@@ -976,7 +979,7 @@ struct FusedBatchNorm
  *
  * * <b>x</b>, an n-dimensional tensor.
  * * <b>inputIndices</b>, indices of elements of the original tensor. The value is an array of the int type\n
- * * and must be in the range [0, x.shape[axis]).
+ *   and must be in the range [0, x.shape[axis]).
  * * <b>axis</b>, the axis on which <b>x</b> is sliced. The value is an array with one element of the int32_t type.
  *
  * Output:
@@ -1043,9 +1046,9 @@ struct GreaterEqual
  * Input:
  *
  * * <b>x</b>, input data tensor from the previous operator;
- * * dimensions for image case are (N x C x H x W), where N is the batch size,
- * * C is the number of channels, and H and W are the height and the width of the data.
- * * For non image case, the dimensions are in the form of (N x C x D1 x D2 … Dn), where N is the batch size.
+ *   Dimensions for image case are (N x C x H x W), where N is the batch size,
+ *   C is the number of channels, and H and W are the height and the width of the data.
+ *   For non image case, the dimensions are in the form of (N x C x D1 x D2 … Dn), where N is the batch size.
  * * <scale> The input 1-dimensional scale tensor of size C.
  * * <bias> The input 1-dimensional bias tensor of size C.
  *
@@ -1071,7 +1074,7 @@ struct InstanceNorm
  *
  * * <b>x</b>, an n-dimensional tensor.
  * * <b>gamma</b>, an m-dimensional tensor. The dimensions of <b>gamma</b> must be the same as the shape of the part\n
- * * of the input tensor to normalize.
+ *   of the input tensor to normalize.
  * * <b>beta</b>, an m-dimensional tensor with the same shape as <b>gamma</b>.
  *
  * Output:
@@ -1149,12 +1152,12 @@ struct Less
  *
  * * <b>x1</b>, which can be a number, a Boolean value, or a tensor whose data type is number or Boolean.
  * * <b>x2</b>, which can be a number or a Boolean value if <b>x1</b> is a tensor; or a tensor with the data type\n
- * * of number or Boolean if <b>x1</b> is not a tensor.
+ *   of number or Boolean if <b>x1</b> is not a tensor.
  *
  * Output:
  *
  * * A tensor with the data type of Boolean. When a quantization model is used, the quantization parameters of\n
- * * the output cannot be omitted. However, values of the quantization parameters do not affect the result.
+ *   the output cannot be omitted. However, values of the quantization parameters do not affect the result.
  *
  * @since 3.2
  * @version 2.1
@@ -1310,22 +1313,22 @@ struct L2NormalizeFusion
  *
  * * <b>input</b>, input tensor, shape is [seq_len, batch_size, input_size].
  * * <b>weight_ih</b>, weight tensor of input-layer to hidden-layer,
- * * shape is [num_directions* num_layers, 4 * hidden_size, input_size].
+ *   shape is [num_directions* num_layers, 4 * hidden_size, input_size].
  * * <b>weight_hh</b>, weight tensor of hidden-layer to hidden-layer,
- * * shape is [num_directions* num_layers, 4 * hidden_size, hidden_size].
+ *   shape is [num_directions* num_layers, 4 * hidden_size, hidden_size].
  * * <b>bias</b>, bias tensor of input-layer and hidden-layer to hidden-layer,
- * * shape is [num_directions* num_layers, 8 * hidden_size].
+ *   shape is [num_directions* num_layers, 8 * hidden_size].
  * * <b>hidden_state</b>, init state of hidden-layer, shape is [num_directions * num_layers, batch_size, hidden_size].
  * * <b>cell_state</b>, init state of cell, shape is [num_directions * num_layers, batch_size, hidden_size].
  *
  * Output:
  *
  * * <b>output</b>, a tensor that concats all the intermediate output tensor of the hidden,
- * * shape is [seq_len, batch_size, num_directions * real_hidden_size].
+ *   shape is [seq_len, batch_size, num_directions * real_hidden_size].
  * * <b>hidden_state</b>, the last output tensor of the hidden-layer,
- * * shape is [num_directions * num_layers, batch_size, real_hidden_size].
+ *   shape is [num_directions * num_layers, batch_size, real_hidden_size].
  * * <b>cell_state</b>, the last output tensor of the cell,
- * * shape is [num_directions * num_layers, batch_size, hidden_size].
+ *   shape is [num_directions * num_layers, batch_size, hidden_size].
  *
  * @since 5.0
  * @version 2.1
@@ -1367,8 +1370,8 @@ struct LSTM
  * Output:
  *
  * * Matrix product of the inputs. When type! When = DATA_TYPE_UNKNOWN, the data type of the output is determined by\n
- * * <b>type</b>. When type==DATA_TYPE_UNKNOWN,
- * * the data type of the output depends on the data type converted during the calculation of <b>x1</b> and <b>x2</b>.
+ *   <b>type</b>. When type==DATA_TYPE_UNKNOWN,
+ *   the data type of the output depends on the data type converted during the calculation of <b>x1</b> and <b>x2</b>.
  *
  * @since 3.2
  * @version 2.1
@@ -1490,7 +1493,7 @@ struct Minimum
  *
  * * <b>x</b>, a number, a bool or a tensor whose data type is number.
  * * <b>y</b>, if input <b>x</b> is a tensor, <b>y</b> could be a number, a bool or a tensor whose data type is number.
- * * If input <b>x</b> is a number or a bool, <b>y</b> must be a tensor whose data type is number.
+ *   If input <b>x</b> is a number or a bool, <b>y</b> must be a tensor whose data type is number.
  *
  * Output:
  *
@@ -1582,16 +1585,16 @@ struct NotEqual
  * Input:
  *
  * * <b>indices</b>, an n-dimensional tensor. Each element in <b>indices</b> determines the location of <b>on_value</b>\n
- * * in each one-hot vector.
+ *   in each one-hot vector.
  * * <b>depth</b>, an integer scalar that determines the depth of the one-hot vector. The value of <b>depth</b> must be\n
- * * greater than <b>0</b>.
+ *   greater than <b>0</b>.
  * * <b>on_value</b>, a scalar that specifies a valid value in the one-hot vector.
  * * <b>off_value</b>, a scalar that specifies the values of other locations in the one-hot vector except the valid value.
  *
  * Output:
  *
  * * An (n+1)-dimensional tensor if <b>indices</b> is an n-dimensional tensor. The output shape is determined by\n
- * * <b>indices</b> and <b>axis</b>.
+ *   <b>indices</b> and <b>axis</b>.
  *
  * @since 3.2
  * @version 2.1
@@ -1621,14 +1624,14 @@ struct OneHot
  *
  * * <b>x</b>, an n-dimensional tensor.
  * * <b>paddings</b>, a 2D tensor that specifies the length to add in each dimension.
- * * The shape is [n, 2]. <b>paddings[i][0]</b> indicates the number of paddings to add before the input
- * * tensor in ith dimension.
+ *   The shape is [n, 2]. <b>paddings[i][0]</b> indicates the number of paddings to add before the input\n
+ *   tensor in ith dimension.
  * * <b>paddings[i][1]</b> indicates the number of paddings to add after the input tensor in ith dimension.
  *
  * Output:
  *
  * * An n-dimensional tensor after padding, with the same dimensions and data type as <b>x</b>.
- * * The shape is determined by <b>x</b> and <b>paddings</b>.
+ *   The shape is determined by <b>x</b> and <b>paddings</b>.
  *   output.shape[i] = input.shape[i] + paddings[i][0]+paddings[i][1]
  *
  * @since 3.2
@@ -1644,7 +1647,7 @@ struct PadFusion
      */
     long[][] paddings;
     /**
-      * Padding mode.
+     * Padding mode.
      * For details, see {@link PaddingMode}.
      */
     enum PaddingMode paddingMode;
@@ -1696,9 +1699,9 @@ struct PowFusion
  * Input:
  *
  * * <b>x</b>, an n-dimensional tensor. If <b>n</b> is greater than or equal to 2, <b>x</b> must be
- * * [BatchSize, ..., Channels]. The second dimension is the number of channels.
+ *   [BatchSize, ..., Channels]. The second dimension is the number of channels.
  * * <b>weight</b>, a 1D tensor. The length of <b>weight</b> must be 1 or equal to the number of channels.
- * * If the length of <b>weight</b> is 1, all channels share the same weight.
+ *   If the length of <b>weight</b> is 1, all channels share the same weight.
  *   If the length of <b>weight</b> is equal to the number of channels, each channel exclusively has a weight.
  *   If <b>n</b> of <b>x</b> is less than 2, the <b>weight</b> length must be 1.
  *
@@ -1846,12 +1849,12 @@ struct RealDiv
  *
  * * <b>x</b>, an n-dimensional tensor, where <b>n</b> is less than 8.
  * * <b>axis</b>, a 1D tensor that specifies the dimension to reduce. The value range of each element in axis
- * * is [–n, n).
+ *   is [–n, n).
  *
  * Output:
  *
  * * An m-dimensional tensor, with the same data type as <b>x</b>. If <b>keepDims</b> is <b>false</b>, m < n.
- * * If <b>keepDims</b> is <b>true</b>, m==n.
+ *   If <b>keepDims</b> is <b>true</b>, m==n.
  *
  * @since 3.2
  * @version 2.1
@@ -1999,7 +2002,7 @@ struct Rsqrt
  * Output:
  *
  * * An n-dimensional tensor scaled, whose data type is the same as that of <b>x</b>x and shape is determined
- * * by <b>axis</b>.
+ *   by <b>axis</b>.
  *
  * @since 3.2
  * @version 2.1
@@ -2020,7 +2023,7 @@ struct ScaleFusion
  * Input:
  *
  * * <b>indices</b>, the index of scattering in the new tensor with int32 or int64 data type.
- * * The rank of indices must be at least 2 and indices_shape[-1] <= len(shape).
+ *   The rank of indices must be at least 2 and indices_shape[-1] <= len(shape).
  * * <b>updates</b>, the source tensor to be scattered. It has shape indices_shape[:-1] + shape[indices_shape[-1]:].
  * * <b>shape</b>, the shape of the output tensor, has the same data type as <b>indices</b>.
  *
@@ -2085,7 +2088,7 @@ struct Sin
  * * <b>x</b>, an n-dimensional tensor.
  * * <b>begin</b>, an array of integers greater than or equal to 0, specifying the start of the slice.
  * * <b>size</b>, an array of integers greater than or equal to 0, specifying the length of the slice.
- * * Assume that a dimension is <b>i</b> and 1<=size[i]<=input.shape[i]-begin[i].
+ *   Assume that a dimension is <b>i</b> and 1<=size[i]<=input.shape[i]-begin[i].
  *
  * Output:
  *
@@ -2112,7 +2115,7 @@ struct SliceFusion
  * Output:
  *
  * * Result of the <b>softmax</b> operation. It is an n-dimensional tensor with the same data type and shape
- * * as <b>x</b>.
+ *   as <b>x</b>.
  *
  * @since 3.2
  * @version 2.1
@@ -2194,7 +2197,7 @@ struct SpaceToDepth
  * * <b>indices</b>, 2-dimension tensor, represents the position of the element in the sparse tensor.
  * * <b>values</b>, 1-dimension Tensor, represents the value corresponding to the position in the indices.
  * * <b>sparseShape</b>, a positive int tuple which specifies the shape of sparse tensor,
- * * should have 2 elements, represent sparse tensor shape is (N, C).
+ *   should have 2 elements, represent sparse tensor shape is (N, C).
  *
  * Output:
  *
@@ -2220,7 +2223,7 @@ struct SparseToDense
  * Output:
  *
  * * An array of n-dimensional tensors, with the same data type and dimensions.
- * * The data type of each tensor is the same as that of <b>x</b>.
+ *   The data type of each tensor is the same as that of <b>x</b>.
  *
  * @since 3.2
  * @version 2.1
@@ -2294,7 +2297,7 @@ struct Square
  * Output:
  *
  * * A tensor obtained. The shape of the output is determined by <b>x</b> and <b>y</b>.
- * * If <b>x</b> and <b>y</b> are of the same shape, the output shape is the same as that of <b>x</b> and <b>y</b>.
+ *   If <b>x</b> and <b>y</b> are of the same shape, the output shape is the same as that of <b>x</b> and <b>y</b>.
  *   If <b>x</b> and <b>y</b> are of different types, you need to perform the broadcast operation on
  *   <b>x</b> and <b>y</b> first.
  *   The precision of the output is the same as the input tensor with higher precision.
@@ -2367,11 +2370,11 @@ struct Stack
  *
  * * <b>x</b>, an n-dimensional tensor.
  * * <b>begin</b>, a 1D tensor that specifies the position from which the tensor is sliced.
- * * The length of <b>begin</b> is <b>n</b>. begin[i] specifies the start point to slice in the ith dimension.
+ *   The length of <b>begin</b> is <b>n</b>. begin[i] specifies the start point to slice in the ith dimension.
  * * <b>end</b>, a 1D tensor that specifies the end to which the tensor is sliced. The length of <b>end</b> is <b>n</b>.
- * * end[i] specifies the end point to slice in the ith dimension.
+ *   end[i] specifies the end point to slice in the ith dimension.
  * * <b>strides</b>, a 1D tensor that specifies the intervals for slicing. The length of <b>strides</b> is <b>n</b>.
- * * strides[i] specifies the intervals at which the tensor is sliced in the ith dimension. Negative values are allowed.
+ *   strides[i] specifies the intervals at which the tensor is sliced in the ith dimension. Negative values are allowed.
  *
  * For the input tensor, the shapes of <b>begin</b>, <b>end</b>, and <b>strides</b> must be the same.
  * The indices of <b>begin</b> and <b>end</b> start from <b>0</b>. The elements of <b>strides</b> cannot be <b>0</b>.
@@ -2456,16 +2459,16 @@ struct SubFusion
  *
  * * <b>x</b>, an n-dimensional tensor.
  * * <b>multiples</b>, a 1D tensor that specifies the number of times that the input tensor is copied
- * * in each dimension.
- * * The length <b>m</b> is not less than the number of dimensions of <b>x</b>.
+ *   in each dimension.
+ * * The length <b>multiples</b> is not less than the number of dimensions of <b>x</b>.
  *
  * Output:
  *
  * * An m-dimensional tensor, with the same data type as <b>x</b>. If the length of <b>x</b> is the same as that of
- * * <b>multiples</b>, the number of dimensions of the output tensor is the same as that of the <b>x</b>, that is,
- * * an n-dimensional tensor is output.
- * * If the length of <b>multiples</b> is greater than <b>n</b>, <b>1s</b> are used to pad the dimensions of <b>x</b>.
- * * Then, <b>x</b> is copies the specified number of times in each dimension to obtain an m-dimensional tensor.
+ *   <b>multiples</b>, the number of dimensions of the output tensor is the same as that of the <b>x</b>, that is,
+ *   an n-dimensional tensor is output.
+ *   If the length of <b>multiples</b> is greater than <b>n</b>, <b>1s</b> are used to pad the dimensions of <b>x</b>.
+ *   Then, <b>x</b> is copies the specified number of times in each dimension to obtain an m-dimensional tensor.
  *
  * @since 3.2
  * @version 2.1
@@ -2519,7 +2522,7 @@ struct TopKFusion
  * Output:
  *
  * * An n-dimensional tensor, which has the same data type and quantization parameters as <b>x</b>.
- * * The shape is determined by the shape of <b>x</b> and <b>perm</b>.
+ *   The shape is determined by the shape of <b>x</b> and <b>perm</b>.
  *
  * @since 3.2
  * @version 2.1
@@ -2589,7 +2592,7 @@ struct Unstack
  *
  * * <b>condition</b>, A Tensor of type bool.
  * * <b>x1</b>, a tensor which may have the same shape as <b>condition</b>.
- * * If condition is rank 1, x1 may have higher rank, but its first dimension must match the size of condition.
+ *   If condition is rank 1, x1 may have higher rank, but its first dimension must match the size of condition.
  * * <b>x2</b>, a tensor with the same data type and shape as <b>x1</b>.
  * Output:
  *
@@ -2617,7 +2620,7 @@ struct Where
  *
  * * <b>condition</b>, A Tensor of type bool.
  * * <b>x1</b>, a tensor which may have the same shape as <b>condition</b>.
- * * If condition is rank 1, x1 may have higher rank, but its first dimension must match the size of condition.
+ *   If condition is rank 1, x1 may have higher rank, but its first dimension must match the size of condition.
  * * <b>x2</b>, a tensor with the same data type and shape as <b>x1</b>.
  * Output:
  *

@@ -92,7 +92,7 @@ interface INnrtDevice {
     GetDeviceType([out] enum DeviceType deviceType);
 
     /**
-      * @brief Obtains the device status.
+     * @brief Obtains the device status.
      *
      * @param deviceType Device status. For details, see {@link DeviceStatus}.
      *
@@ -212,7 +212,8 @@ interface INnrtDevice {
      * are passed by the inference framework to the NNRt module and then parsed by the NNRt module.
      *
      * @param offlineModels Array of offline model files. The sequence of array elements depends on the format of\n
-     * the input offline model. For details about the element types, see the definition of SharedBuffer {@link SharedBuffer}.
+     * the input offline model. For details about the element types, see the definition of SharedBuffer\n
+     * {@link SharedBuffer}.
      * @param config Configuration for loading the offline model files. For details, see {@link ModelConfig}.
      * @param preparedModel Model object obtained. For details, see {@link IPreparedModel}.
      *
@@ -238,7 +239,7 @@ interface INnrtDevice {
     AllocateBuffer([in] unsigned int length, [out] struct SharedBuffer buffer);
 
     /**
-      * @brief Releases the shared memory.
+     * @brief Releases the shared memory.
      *
      * @param buffer Information about the shared memory allocated, including the file descriptor and size.\n
      * For details, see {@link SharedBuffer}.
