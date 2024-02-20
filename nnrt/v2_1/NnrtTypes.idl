@@ -297,8 +297,12 @@ enum NodeType : unsigned int {
     NODE_TYPE_ACTIVATION = 2,
     /** ADD operator. */
     NODE_TYPE_ADD_FUSION = 5,
+    /** ALL operator. */
+    NODE_TYPE_ALL = 9,
     /** ArgMax operator. */
     NODE_TYPE_ARGMAX_FUSION = 11,
+    /** Assert operator. */
+    NODE_TYPE_ASSERT = 13,
     /** AVGPOOL operator. */
     NODE_TYPE_AVGPOOL_FUSION = 17,
     /** BatchToSpaceND operator. */
@@ -309,6 +313,8 @@ enum NodeType : unsigned int {
     NODE_TYPE_BROADCAST_TO = 27,
     /** Cast operator. */
     NODE_TYPE_CAST = 28,
+    /** Ceil operator. */
+    NODE_TYPE_CEIL = 29,
     /** Clip operator. */
     NODE_TYPE_CLIP = 30,
     /** Concat operator. */
@@ -317,10 +323,18 @@ enum NodeType : unsigned int {
     NODE_TYPE_CONV2D_FUSION = 35,
     /** Two-dimensional deconvolution operator. */
     NODE_TYPE_CONV2D_TRANSPOSE_FUSION = 36,
+    /** Cos operator. */
+    NODE_TYPE_COS = 37,
     /** ConstantOfShape operator. */
     NODE_TYPE_CONSTANT_OF_SHAPE = 38,
+    /** Crop operator. */
+    NODE_TYPE_CROP = 39,
+    /** CustomNormalize operator. */
+    NODE_TYPE_CUSTOM_NORMALIZE = 41,
     /** DepthToSpace operator. */
     NODE_TYPE_DEPTH_TO_SPACE = 45,
+    /** DetectionPostProcess operator. */
+    NODE_TYPE_DETECTION_POST_PROCESS = 46,
     /** Div operator. */
     NODE_TYPE_DIV_FUSION = 47,
     /** Element-level operator. */
@@ -333,6 +347,8 @@ enum NodeType : unsigned int {
     NODE_TYPE_EXPAND_DIMS = 56,
     /** Flatten operator. */
     NODE_TYPE_FLATTEN = 61,
+    /** Floor operator. */
+    NODE_TYPE_FLOOR = 63,
     /** Fill operator. */
     NODE_TYPE_FILL = 66,
     /** FullConnection operator. */
@@ -355,16 +371,34 @@ enum NodeType : unsigned int {
     NODE_TYPE_LESS = 77,
     /** LessEqual operator. */
     NODE_TYPE_LESS_EQUAL = 78,
+    /** Log operator. */
+    NODE_TYPE_LOG = 79,
+    /** LogicalAnd operator. */
+    NODE_TYPE_LOGICAL_AND = 81,
+    /** LogicalNot operator. */
+    NODE_TYPE_LOGICAL_NOT = 82,
+    /** LogicalOr operator. */
+    NODE_TYPE_LOGICAL_OR = 83,
+    /** LRN operator. */
+    NODE_TYPE_LRN = 87,
     /** LSTM operator. */
     NODE_TYPE_LSTM = 87,
+    /** L2NormalizeFusion operator. */
+    NODE_TYPE_L2_NORMALIZE_FUSION = 88,
     /** MatMul operator. */
     NODE_TYPE_MATMUL_FUSION = 89,
     /** Maximum operator. */
     NODE_TYPE_MAXIMUM = 90,
     /** MaxPool operator. */
     NODE_TYPE_MAX_POOL_FUSION = 92,
+    /** Minimum operator. */
+    NODE_TYPE_MINIMUM = 96,
+    /** Mod operator. */
+    NODE_TYPE_MOD = 98,
     /** Mul operator. */
     NODE_TYPE_MUL_FUSION = 99,
+    /** Neg operator. */
+    NODE_TYPE_NEG = 101,
     /** NotEqual operator. */
     NODE_TYPE_NOT_EQUAL = 103,
     /** OneHot operator. */
@@ -377,8 +411,12 @@ enum NodeType : unsigned int {
     NODE_TYPE_PRELU_FUSION = 112,
     /** QuantDTypeCast operator. */
     NODE_TYPE_QUANT_DTYPE_CAST = 113,
+    /** Rank operator. */
+    NODE_TYPE_RANK = 114,
     /** Range operator. */
     NODE_TYPE_RANGE = 115,
+    /** Reciprocal operator. */
+    NODE_TYPE_RECIPROCAL = 116,
     /** RealDiv operator. */
     NODE_TYPE_REAL_DIV = 117,
     /** Reduce operator. */
@@ -387,18 +425,28 @@ enum NodeType : unsigned int {
     NODE_TYPE_RESHAPE = 119,
     /** Resize operator. */
     NODE_TYPE_RESIZE = 120,
+    /** Round operator. */
+    NODE_TYPE_ROUND = 125,
     /** Rsqrt operator. */
     NODE_TYPE_RSQRT = 126,
     /** Scale operator. */
     NODE_TYPE_SCALE_FUSION = 127,
+    /** ScatterNd operator. */
+    NODE_TYPE_SCATTER_ND = 128,
     /** Shape operator. */
     NODE_TYPE_SHAPE = 130,
+    /** Sin operator. */
+    NODE_TYPE_SIN = 133,
     /** Slice operator. */
     NODE_TYPE_SLICE_FUSION = 135,
     /** Softmax operator. */
     NODE_TYPE_SOFTMAX = 138,
     /** SpaceToBatchND operator. */
     NODE_TYPE_SPACE_TO_BATCH_ND = 141,
+    /** SpaceToDepth operator. */
+    NODE_TYPE_SPACE_TO_DEPTH = 142,
+    /** SparseToDense operator. */
+    NODE_TYPE_SPARSE_TO_DENSE = 144,
     /** Split operator. */
     NODE_TYPE_SPLIT = 145,
     /** Sqrt operator. */
@@ -425,10 +473,14 @@ enum NodeType : unsigned int {
     NODE_TYPE_UNSQUEEZE = 165,
     /** Unstack operator. */
     NODE_TYPE_UNSTACK = 166,
+    /** Where operator. */
+    NODE_TYPE_WHERE = 168,
     /** Select operator. */
     NODE_TYPE_SELECT = 170,
     /** Ref operator. */
     NODE_TYPE_ERF = 178,
+    /** LogSoftmax operator. */
+    NODE_TYPE_LOG_SOFTMAX = 189,
 };
 
 /**
