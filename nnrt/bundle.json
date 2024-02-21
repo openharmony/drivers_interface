@@ -26,7 +26,8 @@
     "build": {
       "sub_component": [
         "//drivers/interface/nnrt/v1_0:nnrt_idl_target",
-        "//drivers/interface/nnrt/v2_0:nnrt_idl_target"
+        "//drivers/interface/nnrt/v2_0:nnrt_idl_target",
+        "//drivers/interface/nnrt/v2_1:nnrt_idl_target"
       ],
       "test": [
       ],
@@ -73,6 +74,30 @@
         },
         {
           "name": "//drivers/interface/nnrt/v2_0:nnrt_idl_headers",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/nnrt"
+          }
+        },
+        {
+          "name": "//drivers/interface/nnrt/v2_1:libnnrt_proxy_2.1",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/nnrt"
+          }
+        },
+        {
+          "name": "//drivers/interface/nnrt/v2_1:libnnrt_stub_2.1",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/nnrt"
+          }
+        },
+        {
+          "name": "//drivers/interface/nnrt/v2_1:nnrt_idl_headers",
           "header": {
             "header_files": [
             ],
