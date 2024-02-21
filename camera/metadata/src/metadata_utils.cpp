@@ -17,6 +17,12 @@
 #include <securec.h>
 #include "metadata_log.h"
 
+#define IF_COND_PRINT_MSG_AND_RETURN(cond, msg) \
+if (cond) { \
+    METADATA_ERR_LOG(msg); \
+    return {}; \
+}
+
 static constexpr uint32_t MAX_SUPPORTED_TAGS = 1000;
 static constexpr uint32_t MAX_SUPPORTED_ITEMS = 2000;
 static constexpr uint32_t MAX_ITEM_CAPACITY = (1000 * 10);
@@ -405,30 +411,25 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
     const uint32_t itemLen = sizeof(camera_metadata_item_entry_t);
     const uint32_t itemFixedLen = offsetof(camera_metadata_item_entry_t, data);
 
-    if (totalLen < headerLength) {
-        METADATA_ERR_LOG("MetadataUtils::DecodeFromString Length is less than metadata header length");
-        return {};
-    }
+    IF_COND_PRINT_MSG_AND_RETURN(totalLen < headerLength,
+        "MetadataUtils::DecodeFromString Length is less than metadata header length")
 
     char *decodeData = &setting[0];
     common_metadata_header_t header;
     ret = memcpy_s(&header, headerLength, decodeData, headerLength);
-    if (ret != EOK) {
-        METADATA_ERR_LOG("MetadataUtils::DecodeFromString Failed to copy memory for metadata header");
-        return {};
-    }
+
+    IF_COND_PRINT_MSG_AND_RETURN(ret != EOK,
+        "MetadataUtils::DecodeFromString Failed to copy memory for metadata header")
     std::shared_ptr<CameraMetadata> metadata
         = std::make_shared<CameraMetadata>(header.item_capacity, header.data_capacity);
     common_metadata_header_t *meta = metadata->get();
-    if (!meta) {
-        METADATA_ERR_LOG("MetadataUtils::DecodeFromString Failed to get metadata header");
-        return {};
-    }
+
+    IF_COND_PRINT_MSG_AND_RETURN(!meta,
+        "MetadataUtils::DecodeFromString Failed to get metadata header")
     ret = memcpy_s(meta, headerLength, &header, headerLength);
-    if (ret != EOK) {
-        METADATA_ERR_LOG("MetadataUtils::DecodeFromString Failed to copy memory for metadata header");
-        return {};
-    }
+
+    IF_COND_PRINT_MSG_AND_RETURN(ret != EOK,
+        "MetadataUtils::DecodeFromString Failed to copy memory for metadata header")
     decodeData += headerLength;
     camera_metadata_item_entry_t *item = GetMetadataItems(meta);
     for (uint32_t index = 0; index < meta->item_count; index++, item++) {
@@ -437,30 +438,25 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
             return {};
         }
         ret = memcpy_s(item, itemFixedLen, decodeData, itemFixedLen);
-        if (ret != EOK) {
-            METADATA_ERR_LOG("MetadataUtils::DecodeFromString Failed to copy memory for item fixed fields");
-            return {};
-        }
+
+        IF_COND_PRINT_MSG_AND_RETURN(ret != EOK,
+            "MetadataUtils::DecodeFromString Failed to copy memory for item fixed fields")
         decodeData += itemFixedLen;
         uint32_t dataLen = itemLen - itemFixedLen;
         ret = memcpy_s(&(item->data), dataLen,  decodeData, dataLen);
-        if (ret != EOK) {
-            METADATA_ERR_LOG("MetadataUtils::DecodeFromString Failed to copy memory for item data field");
-            return {};
-        }
+
+        IF_COND_PRINT_MSG_AND_RETURN(ret != EOK,
+            "MetadataUtils::DecodeFromString Failed to copy memory for item data field")
         decodeData += dataLen;
     }
 
     if (meta->data_count != 0) {
-        if (totalLen < static_cast<uint32_t>(((decodeData - &setting[0]) + meta->data_count))) {
-            METADATA_ERR_LOG("MetadataUtils::DecodeFromString Failed at data copy");
-            return {};
-        }
+        IF_COND_PRINT_MSG_AND_RETURN(totalLen < static_cast<uint32_t>(((decodeData - &setting[0]) + meta->data_count)),
+            "MetadataUtils::DecodeFromString Failed at data copy")
         ret = memcpy_s(GetMetadataData(meta), meta->data_count, decodeData, meta->data_count);
-        if (ret != EOK) {
-            METADATA_ERR_LOG("MetadataUtils::DecodeFromString Failed to copy memory for data");
-            return {};
-        }
+
+        IF_COND_PRINT_MSG_AND_RETURN(ret != EOK,
+            "MetadataUtils::DecodeFromString Failed to copy memory for item data field")
         decodeData += meta->data_count;
     }
 
@@ -469,75 +465,120 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
     return metadata;
 }
 
-bool MetadataUtils::ReadMetadata(camera_metadata_item_t &item, MessageParcel &data)
+static void ReadMetadataUInt8(camera_metadata_item_t &entry, MessageParcel &data)
 {
-    size_t i, j;
-    if (item.data_type == META_TYPE_BYTE) {
-        std::vector<uint8_t> byteBuffers;
-        data.ReadUInt8Vector(&byteBuffers);
-        item.data.u8 = new(std::nothrow) uint8_t[item.count];
-        if (item.data.u8 != nullptr) {
-            for (i = 0; i < item.count && i < byteBuffers.size(); i++) {
-                item.data.u8[i] = byteBuffers.at(i);
-            }
+    std::vector<uint8_t> buffers;
+    data.ReadUInt8Vector(&buffers);
+    entry.data.u8 = new(std::nothrow) uint8_t[entry.count];
+    if (entry.data.u8 != nullptr) {
+        for (size_t i = 0; i < entry.count && i < buffers.size(); i++) {
+            entry.data.u8[i] = buffers.at(i);
         }
-    } else if (item.data_type == META_TYPE_INT32) {
-        std::vector<int32_t> int32Buffers;
-        data.ReadInt32Vector(&int32Buffers);
-        item.data.i32 = new(std::nothrow) int32_t[item.count];
-        if (item.data.i32 != nullptr) {
-            for (i = 0; i < item.count && i < int32Buffers.size(); i++) {
-                item.data.i32[i] = int32Buffers.at(i);
-            }
+    }
+}
+
+static void ReadMetadataInt32(camera_metadata_item_t &entry, MessageParcel &data)
+{
+    std::vector<int32_t> buffers;
+    data.ReadInt32Vector(&buffers);
+    entry.data.i32 = new(std::nothrow) int32_t[entry.count];
+    if (entry.data.i32 != nullptr) {
+        for (size_t i = 0; i < entry.count && i < buffers.size(); i++) {
+            entry.data.i32[i] = buffers.at(i);
         }
-    } else if (item.data_type == META_TYPE_FLOAT) {
-        std::vector<float> floatBuffers;
-        data.ReadFloatVector(&floatBuffers);
-        item.data.f = new(std::nothrow) float[item.count];
-        if (item.data.f != nullptr) {
-            for (i = 0; i < item.count && i < floatBuffers.size(); i++) {
-                item.data.f[i] = floatBuffers.at(i);
-            }
+    }
+}
+
+static void ReadMetadataUInt32(camera_metadata_item_t &entry, MessageParcel &data)
+{
+    std::vector<uint32_t> buffers;
+    data.ReadUInt32Vector(&buffers);
+    entry.data.ui32 = new(std::nothrow) uint32_t[entry.count];
+    if (entry.data.ui32 != nullptr) {
+        for (size_t i = 0; i < entry.count && i < buffers.size(); i++) {
+            entry.data.ui32[i] = buffers.at(i);
         }
-    } else if (item.data_type == META_TYPE_UINT32) {
-        std::vector<uint32_t> uInt32Buffers;
-        data.ReadUInt32Vector(&uInt32Buffers);
-        item.data.ui32 = new(std::nothrow) uint32_t[item.count];
-        if (item.data.ui32 != nullptr) {
-            for (i = 0; i < item.count && i < uInt32Buffers.size(); i++) {
-                item.data.ui32[i] = uInt32Buffers.at(i);
-            }
+    }
+}
+
+static void ReadMetadataFloat(camera_metadata_item_t &entry, MessageParcel &data)
+{
+    std::vector<float> buffers;
+    data.ReadFloatVector(&buffers);
+    entry.data.f = new(std::nothrow) float[entry.count];
+    if (entry.data.f != nullptr) {
+        for (size_t i = 0; i < entry.count && i < buffers.size(); i++) {
+            entry.data.f[i] = buffers.at(i);
         }
-    } else if (item.data_type == META_TYPE_INT64) {
-        std::vector<int64_t> int64uBffers;
-        data.ReadInt64Vector(&int64uBffers);
-        item.data.i64 = new(std::nothrow) int64_t[item.count];
-        if (item.data.i64 != nullptr) {
-            for (i = 0; i < item.count && i < int64uBffers.size(); i++) {
-                item.data.i64[i] = int64uBffers.at(i);
-            }
+    }
+}
+
+static void ReadMetadataInt64(camera_metadata_item_t &entry, MessageParcel &data)
+{
+    std::vector<int64_t> buffers;
+    data.ReadInt64Vector(&buffers);
+    entry.data.i64 = new(std::nothrow) int64_t[entry.count];
+    if (entry.data.i64 != nullptr) {
+        for (size_t i = 0; i < entry.count && i < buffers.size(); i++) {
+            entry.data.i64[i] = buffers.at(i);
         }
-    } else if (item.data_type == META_TYPE_DOUBLE) {
-        std::vector<double> doubleBuffers;
-        data.ReadDoubleVector(&doubleBuffers);
-        item.data.d = new(std::nothrow) double[item.count];
-        if (item.data.d != nullptr) {
-            for (i = 0; i < item.count && i < doubleBuffers.size(); i++) {
-                item.data.d[i] = doubleBuffers.at(i);
-            }
+    }
+}
+
+static void ReadMetadataDouble(camera_metadata_item_t &entry, MessageParcel &data)
+{
+    std::vector<double> buffers;
+    data.ReadDoubleVector(&buffers);
+    entry.data.d = new(std::nothrow) double[entry.count];
+    if (entry.data.d != nullptr) {
+        for (size_t i = 0; i < entry.count && i < buffers.size(); i++) {
+            entry.data.d[i] = buffers.at(i);
         }
-    } else if (item.data_type == META_TYPE_RATIONAL) {
-        std::vector<int32_t> rationalBuffers;
-        data.ReadInt32Vector(&rationalBuffers);
-        item.data.r = new(std::nothrow) camera_rational_t[item.count];
-        if (item.data.r != nullptr) {
-            for (i = 0, j = 0;
-                    i < item.count && j < static_cast<size_t>(rationalBuffers.size() - 1);
-                    i++, j += INDEX_COUNTER) {
-                item.data.r[i].numerator = rationalBuffers.at(j);
-                item.data.r[i].denominator = rationalBuffers.at(j + 1);
-            }
+    }
+}
+
+static void ReadMetadataRational(camera_metadata_item_t &entry, MessageParcel &data)
+{
+    std::vector<int32_t> buffers;
+    data.ReadInt32Vector(&buffers);
+    entry.data.r = new(std::nothrow) camera_rational_t[entry.count];
+    if (entry.data.r != nullptr) {
+        for (size_t i = 0, j = 0;
+            i < entry.count && j < static_cast<size_t>(buffers.size() - 1);
+            i++, j += 2) { // 2:Take two elements from the buffer vector container
+            entry.data.r[i].numerator = buffers.at(j);
+            entry.data.r[i].denominator = buffers.at(j + 1);
         }
+    }
+}
+bool MetadataUtils::ReadMetadata(camera_metadata_item_t &entry, MessageParcel &data)
+{
+    if (entry.count > MAX_SUPPORTED_ITEMS) {
+        entry.count = MAX_SUPPORTED_ITEMS;
+        METADATA_ERR_LOG("MetadataUtils::ReadMetadata item.count is more than supported value");
+    }
+    switch (entry.data_type) {
+        case META_TYPE_BYTE:
+            ReadMetadataUInt8(entry, data);
+            break;
+        case META_TYPE_INT32:
+            ReadMetadataInt32(entry, data);
+            break;
+        case META_TYPE_UINT32:
+            ReadMetadataUInt32(entry, data);
+            break;
+        case META_TYPE_FLOAT:
+            ReadMetadataFloat(entry, data);
+            break;
+        case META_TYPE_INT64:
+            ReadMetadataInt64(entry, data);
+            break;
+        case META_TYPE_DOUBLE:
+            ReadMetadataDouble(entry, data);
+            break;
+        case META_TYPE_RATIONAL:
+            ReadMetadataRational(entry, data);
+            break;
     }
     return true;
 }
