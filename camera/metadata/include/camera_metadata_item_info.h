@@ -74,6 +74,12 @@ static item_info_t g_ohosCameraProperties[OHOS_CAMERA_PROPERTIES_END - OHOS_CAME
         OHOS_CAMERA_PROPERTIES_START] = {"cameraExposureModePreviewState", META_TYPE_BYTE, 1},
     [OHOS_ABILITY_AVAILABLE_COLOR_SPACES -
         OHOS_CAMERA_PROPERTIES_START] = {"availableColorSpaces", META_TYPE_INT32, -1},
+    [OHOS_ABILITY_MOON_CAPTURE_BOOST -
+        OHOS_CAMERA_PROPERTIES_START] = {"cameraAbilityMoonCaptureBoost", META_TYPE_UINT32, 1},
+    [OHOS_CONTROL_MOON_CAPTURE_BOOST -
+        OHOS_CAMERA_PROPERTIES_START] = {"cameraControlMoonCaptureBoost", META_TYPE_UINT32, 1},
+    [OHOS_STATUS_MOON_CAPTURE_DETECTION -
+        OHOS_CAMERA_PROPERTIES_START] = {"cameraStatusMoonCaptureDetection", META_TYPE_UINT32, 1},
     [OHOS_CAMERA_USER_ID -
         OHOS_CAMERA_PROPERTIES_START] = {"cameraUserId", META_TYPE_INT32, -1},
 };
