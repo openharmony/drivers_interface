@@ -26,6 +26,7 @@ if (defined(ohos_lite)) {
       "ICodecImage.idl",
     ]
     language = "cpp"
+    innerapi_tags = [ "platformsdk" ]
     subsystem_name = "hdf"
     part_name = "drivers_interface_codec"
   }
