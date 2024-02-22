@@ -41,6 +41,7 @@ import ohos.hdi.sensor.v1_0.SensorTypes;
 [callback] interface ISensorCallback {
     /**
     * @brief Defines the function for reporting sensor data. 
+    * @param event Indicates the information about sensor event in the system.
     *
     * @since 2.2
     */
