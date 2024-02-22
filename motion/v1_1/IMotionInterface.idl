@@ -58,6 +58,7 @@ interface IMotionInterface extends ohos.hdi.motion.v1_0.IMotionInterface {
      *
      * @param motionType Motion type. For details, see {@link HdfMotionTypeTag}.
      * @param data Motion wave config parameters for a trick. For details, see {@link WaveParam}.
+     * @param len length of data.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a negative value if the operation fails.
