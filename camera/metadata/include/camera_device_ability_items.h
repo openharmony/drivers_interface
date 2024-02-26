@@ -106,10 +106,10 @@ typedef enum camera_device_metadata_tag {
     OHOS_ABILITY_NIGHT_MODE_SUPPORTED_EXPOSURE_TIME,
     OHOS_CAMERA_MESURE_EXPOSURE_TIME,
     OHOS_CAMERA_EXPOSURE_MODE_PREVIEW_STATE,
+    OHOS_CAMERA_USER_ID,
     OHOS_ABILITY_MOON_CAPTURE_BOOST,
     OHOS_CONTROL_MOON_CAPTURE_BOOST,
     OHOS_STATUS_MOON_CAPTURE_DETECTION,
-    OHOS_CAMERA_USER_ID,
     OHOS_CAMERA_PROPERTIES_END,
 
     OHOS_SENSOR_EXPOSURE_TIME = OHOS_CAMERA_SENSOR_START,
@@ -574,6 +574,12 @@ typedef enum camera_macro_status_control_type {
     OHOS_CAMERA_MACRO_DISABLE = 0,
     OHOS_CAMERA_MACRO_ENABLE,
 } camera_macro_status_control_type_t;
+
+// OHOS_CONTROL_MOON_CAPTURE_BOOST enumeration values
+typedef enum camera_moon_capture_boost_control_type {
+    OHOS_CAMERA_MOON_CAPTURE_BOOST_ENABLE = 0,
+    OHOS_CAMERA_MOON_CAPTURE_BOOST_DISABLE,
+} camera_moon_capture_boost_control_type_t;
 
 // OHOS_CONTROL_PREPARE_ZOOM enumeration values
 typedef enum camera_zoomsmooth_control_type {
