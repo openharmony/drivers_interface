@@ -45,7 +45,8 @@ import ohos.hdi.user_auth.v1_2.UserAuthTypes;
 */
 struct EnrolledState {
     /** Desensitization Enrolled ID. */
-    unsigned long credentialDigest;
+    unsigned short credentialDigest;
+
     /** Number of Credential. */
     unsigned short credentialCount;
 };
@@ -67,9 +68,11 @@ struct ReuseUnlockInfo {
     unsigned char[] challenge;
     /** Caller name. */
     String callerName;
+    /** Caller Type. */
+    int callerType;
     /** Calling api version. */
     int apiVersion;
-    /** Valid duration of reused unlock result. */
+    /** The allowable reuse duration. */
     unsigned long reuseUnlockResultDuration;
     /** Reuse unlock result mode. */
     unsigned int reuseUnlockResultMode;

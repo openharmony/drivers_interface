@@ -77,4 +77,15 @@ import ohos.hdi.wlan.hostapd.v1_0.HostapdTypes;
      * @version 1.0
      */
     OnEventApState([in] struct HdiApCbParm apCbParm, [in] String ifName);
+
+    /**
+    * Used to handle Hostapd callback parameters
+    *
+    * @param notifyParam Indicates the paramerter of Hostapd.
+    * @param ifName Indicates the NIC name.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    OnEventHostApdNotify([in] String notifyParam, [in] String ifName);
 }

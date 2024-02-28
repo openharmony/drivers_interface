@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -21,14 +21,14 @@
  * Neural Network Runtime (NNRt) is a cross-chip inference computing runtime environment oriented to the AI field.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 
 /**
  * @file NodeAttrTypes.idl
  *
  * @brief Defines the parameters and functionality of AI model operators.
- * 
+ *
  * All structures in this file declare only operator attributes and do not contain the interfaces for executing\n
  * operator functions.
  * - 1. The operators in the file are in one-to-one correspondence with a {@link NodeType}. In model inference,\n
@@ -38,23 +38,43 @@
  * and output is determined by <b>inputIndex</b> and <b>outIndex</b> of the {@link Node} structure.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 
 /**
  * @brief Defines the package path of the NNRt module.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
-package ohos.hdi.nnrt.v2_0;
+package ohos.hdi.nnrt.v2_1;
 
-import ohos.hdi.nnrt.v2_0.NnrtTypes;
+import ohos.hdi.nnrt.v2_1.NnrtTypes;
+
+/**
+ * @brief Obtains the absolute value of the input tensor.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_ABS</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an n-dimensional tensor.
+ *
+ * Output:
+ *
+ * * The absolute value of the input tensor.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Abs
+{
+};
 
 /**
  * @brief Defines the operator of the activation type. All activation functions belong to this operator.\n
  * The specific activation function type is determined by the parameters.
- * 
+ *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_ACTIVATION</b>.
  *
  * Input:
@@ -66,7 +86,7 @@ import ohos.hdi.nnrt.v2_0.NnrtTypes;
  * * A tensor returned after the activation function is executed.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Activation
 {
@@ -85,7 +105,7 @@ struct Activation
 /**
  * @brief Adds tensors. The output shape is the same as the input one after broadcasting, and the data type\n
  * is the one with higher precision of the two inputs.
- * 
+ *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_ADD_FUSION</b>.
  *
  * Input:
@@ -101,7 +121,7 @@ struct Activation
  *   the output is returned.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct AddFusion
 {
@@ -110,10 +130,33 @@ struct AddFusion
 };
 
 /**
- * @brief Obtains the first K indices or values of a cross-axis tensor.
- * 
- * The {@link NodeType} of this operator is <b>NODE_TYPE_ARGMAX_FUSION</b>.
+ * @brief Determine whether all emements in a given tensor are non-zero. It returns a boolean tensor\n
+ * where each element is 'True' if corresponding element in the input tensor is non-zero, and 'False' otherwise.
  *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_ALL</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, a N-dimension tensor of shape <b>(N,*)</b>, where * indicates any number of additional dimensions.
+ * * <b>axis</b>, scalar or tensor, indices the dimension to be computed.
+ *
+ * Output:
+ *
+ * * First <b>K</b> indices or values before the maximum input tensor on the axis.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct All
+{
+    /** Whether to keep dimension info. */
+    long keepDims;
+};
+
+/**
+ * @brief Obtains the first K indices or values of a cross-axis tensor.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_ARGMAX_FUSION</b>.
  *
  * Input:
  *
@@ -124,7 +167,7 @@ struct AddFusion
  * * First <b>K</b> indices or values before the maximum input tensor on the axis.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct ArgMaxFusion
 {
@@ -141,6 +184,31 @@ struct ArgMaxFusion
 };
 
 /**
+ * @brief Asserts that the given condition si true.
+ * If <b>condition</b> evalutes to false, print the list of tensors in data.
+ * Summerize determines how many entries of the tensors to print.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_ASSERT</b>.
+ *
+ * Input:
+ *
+ * * <b>condition</b>, the condition to evalute.
+ * * <b>data</b>, the tensors to print out when condition is false.
+ *
+ * Output:
+ *
+ * * Tensor after average pooling.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Assert
+{
+    /** Print this many entries of each tensor. */
+    long summarize;
+};
+
+/**
  * @brief Applies a 2D average pooling on the input tensor. The int8 quantization input is supported.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_AVGPOOL_FUSION</b>.
@@ -149,7 +217,7 @@ struct ArgMaxFusion
  * In other cases, <b>padding</b> must be <b>0</b>.
  *
  * Input:
- * 
+ *
  * * <b>x</b>, an n-dimensional tensor.
  *
  * Output:
@@ -157,7 +225,7 @@ struct ArgMaxFusion
  * * Tensor after average pooling.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct AvgPoolFusion
 {
@@ -172,9 +240,10 @@ struct AvgPoolFusion
      * The first number indicates the moving size in height, and the second number indicates the moving size in width.
      */
     long[] strides;
-    /** <b>x</b> is padded with an int array [top, bottom, left, right] with length of 4, and the nearest neighbor values\n
-      * are used for padding.
-      */
+    /**
+     * <b>x</b> is padded with an int array [top, bottom, left, right] with length of 4, and the nearest neighbor values\n
+     * are used for padding.
+     */
     long[] pad;
     /** Padding method. */
     enum PadMode padMode;
@@ -207,7 +276,7 @@ struct AvgPoolFusion
  * \f$ c'= c \f$
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct BatchToSpaceND
 {
@@ -235,10 +304,32 @@ struct BatchToSpaceND
  * * Output tensor, which is the sum of the input tensor and the bias in each dimension.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct BiasAdd
 {
+};
+
+/**
+ * @brief Broadcast a tensor for a compatiable shape.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_BROADCAST_TO</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an n-dimensional tensor to broadcast.
+ *
+ * Output:
+ *
+ * * Output tensor after broadcasted.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct BroadcastTo
+{
+    /** An 1-dimensional Tensor, the shape of the desired output. */
+    long[] shape;
 };
 
 /**
@@ -256,10 +347,55 @@ struct BiasAdd
  * * A tensor with the specified data type.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Cast
 {
+};
+
+/**
+ * @brief Returns element-wise smallest integer in not less than x.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_CEIL</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an n-dimensional tensor.
+ *
+ * Output:
+ *
+ * * Output tensor after ceiled.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Ceil
+{
+};
+
+/**
+ * @brief Returns a tensor of the same type and shape as input tensor with its value clipped to min and max.
+ * Any values less than <b>min</b> are set to <b>min</b>. Any values greater than <b>max</b> are set to <b>max</b>.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_CLIP</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an n-dimensional tensor to clip.
+ *
+ * Output:
+ *
+ * * Output tensor after clipped.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Clip
+{
+    /** Maximum value, above which element is replaced by max. It must be a scalar(tensor of empty shape). */
+    float max;
+    /** Minimum value, under which element is replaced by min. It must be a scalar(tensor of empty shape). */
+    float min;
 };
 
 /**
@@ -276,7 +412,7 @@ struct Cast
  * * Result of the tensors connected.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Concat
 {
@@ -307,15 +443,16 @@ struct Concat
  * * Convolution output.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Conv2DFusion
 {
     /** Size (height and width) of the convolution kernel. */
     long[] kernelSize;
-    /** Movement stride of the convolution kernel in height and weight.\n
-      * It is an int array [strideHeight, strideWidth] with length of 2.
-      */
+    /**
+     * Movement stride of the convolution kernel in height and weight.\n
+     * It is an int array [strideHeight, strideWidth] with length of 2.
+     */
     long[] stride;
     /**
      * Dilation size of the convolution kernel in height and weight. It is an int array in the format of\n
@@ -325,9 +462,10 @@ struct Conv2DFusion
     long[] dilation;
     /** Padding mode. For details, see {@link PadMode}. */
     enum PadMode padMode;
-    /** Padding around <b>x</b> in the height and width directions. It is an int array [top, bottom, left, right]\n
-      * with length of 4.
-      */
+    /**
+     * Padding around <b>x</b> in the height and width directions. It is an int array [top, bottom, left, right]\n
+     * with length of 4.
+     */
     long[] padList;
     /**
      * Splits <b>x</b> into groups by <b>inChannel</b>. The <b>group</b> value is of the int type.
@@ -357,18 +495,18 @@ struct Conv2DFusion
  *
  * * <b>x</b>, a 4D tensor in NHWC format.
  * * <b>weight</b>, a convolution weight in [outChannel, kernelHeight, kernelWidth, inChannel/group] format.
- * * The value of <b>inChannel</b> divided by <b>group</b>must be an integer.
+ *   The value of <b>inChannel</b> divided by <b>group</b>must be an integer.
  * * <b>bias</b>: bias of the convolution. It is an array with a length of <b>[outChannel]</b>.\n
- * * In the quantization scenario, <b>bias</b> does not need to be quantized.
- * * If quantization is required, the input data must be of the int32 type.
- * * The actual quantization parameter is determined by <b>x</b> and <b>weight</b>.
+ *   In the quantization scenario, <b>bias</b> does not need to be quantized.
+ *   If quantization is required, the input data must be of the int32 type.
+ *   The actual quantization parameter is determined by <b>x</b> and <b>weight</b>.
  *
  * Output:
  *
  * * An n-dimensional tensor.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Conv2dTransposeFusion
 {
@@ -407,6 +545,180 @@ struct Conv2dTransposeFusion
 };
 
 /**
+ * @brief Calculates the cosine of the given input tensor, element-wise.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_COS</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an n-dimensional tensor.
+ *
+ * Output:
+ *
+ * * The cosine of the input tensor computed element-wise.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Cos
+{
+};
+
+/**
+ * @brief Generate a tensor with given value and shape.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_CONSTANT_OF_SHAPE</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an 1-dimensional tensor, indicates the shape of the expected output tensor.
+ * * If empty tensor is given, the output would be a scalar. All values must be >= 0.
+ *
+ * Output:
+ *
+ * * Output tensor of shape specified by <b>x</b>.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct ConstantOfShape
+{
+    /** The data type of output elements. */
+    long data_type;
+    /** The value of the output elements. Should be a one-element tensor. */
+    float[] value;
+};
+
+/**
+ * @brief Crop given tensor acrodding to axis and offset.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_CROP</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an n-dimensional tensor.
+ * * <b>shape</b>, an 1-dimensional tensor, indices cropped windows dimension.
+ *
+ * Output:
+ *
+ * * Cropped output tensor.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Crop
+{
+    /** Cropped dimension. */
+    long axis;
+    /** Cropped offset per dimension. */
+    long[] offset;
+};
+
+/**
+ * @brief Shift and scale inputs into a distribution centered around 0 with standard deviation 1.
+ * It accomplishes this by precomputing the mean and variance of the data, and calling\n
+ * <b>(x - mean) / sqrt(var)</b> at runtime.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_CUSTOM_NORMALIZE</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an n-dimensional tensor.
+ *
+ * Output:
+ *
+ * * Normalized output tensor.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct CustomNormalize
+{
+};
+
+/**
+ * @brief Generate the real coordinates of the prediction box relative to the original image,
+ * and filter all the prediction boxes to obtain the final object detection result.
+ * The information of each prediction box output includes image id, lable, confidence, and four coordinate values.
+ * <b>(x - mean) / sqrt(var)</b> at runtime.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_DETECTION_POST_PROCESS</b>.
+ *
+ * Input:
+ *
+ * * <b>bbox</b>, boxes to be predicted.
+ * * <b>scores</b>, socres of all boxes.
+ * * <b>anchors</b>, information of boxes, includes box, variance and coordinates.
+ *
+ * Output:
+ *
+ * * <b>image_id</b>, the image ID of target detected bboxes.
+ * * <b>label</b>, the label of target detected bboxes.
+ * * <b>confidence</b>, the score of target detected bboxes.
+ * * <b>coordinates</b>, the coordinate of target detected bboxes.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct DetectionPostProcess
+{
+    /** Format of input tensor, default NCHW. */
+    enum Format format;
+    /** The size of the input tensor. */
+    long input_size;
+    /** The scaling factor used to convert the output from the normalized form to the original image coordinates. */
+    float[] scale;
+    /** The threshold of overlapping region during NMS. */
+    float nmsIoUThreshold;
+    /** The socre threshold used to select target bbox duing NMS. */
+    float nmsScoreThreshold;
+    /** Maximum of bboxes per image. */
+    long maxDetections;
+    /** Maximum of bboxes per class. */
+    long detectionsPerClass;
+    /** Maximum of reserved classes per bboxes. */
+    long maxClassesPerDetection;
+    /** Number of target classes to be detected. */
+    long numClasses;
+    /** Whether use NMS based on IoU threshold. */
+    boolean useRegularNms;
+    /** Whether need to quantize. */
+    boolean outQuantized;
+};
+
+/**
+ * @brief DepthToSpace rearranges (permutes) data from depth into blocks of spatial data.
+ * This is the reverse transformation of SpaceToDepth. More specifically, this op outputsa copy of the input tensor\n
+ * where values from the depth dimension are moved in spatial blocks to the height and width dimensions.
+ * By default, mode = DCR. In the DCR mode, elements along the depth dimension from the input tensor are rearranged\n
+ * in the following order: depth, column, and then row.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_DEPTH_TO_SPACE</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, input tensor of 4-dimensional, with specific format of NHWC or NCHW.
+ * * where N is the batch axis, H is the height, W is the width and C is the channel or depth.
+ *
+ * Output:
+ *
+ * * Output tensor of [N, H * blocksize, W * blocksize, C/(blocksize * blocksize)] for NHWC format\n
+ *   or [N, C/(blocksize * blocksize), H * blocksize, W * blocksize] for NCHW format.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct DepthToSpace
+{
+    /** Blocks of [blocksize, blocksize] are moved. */
+    long block_size;
+    /** Format of input tensor, default NCHW. */
+    enum Format format;
+    /** DCR (default) for depth-column-row order re-arrangement. Use CRD for column-row-depth order. */
+    String mode;
+};
+
+/**
  * @brief Divides the first tensor by the second tensor element-wise.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_DIV_FUSION</b>.
@@ -421,7 +733,7 @@ struct Conv2dTransposeFusion
  * * Quotient of the two inputs.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct DivFusion
 {
@@ -444,12 +756,63 @@ struct DivFusion
  * * A tensor with the same data type and shape as <b>x1</b>.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Eltwise
 {
     /** Element-wise operation type. For details, see {@link EltwiseMode}. */
     enum EltwiseMode mode;
+};
+
+/**
+ * @brief Returns the tensor resulted from performing the equal logical operation elementwise\n
+ * on the input tensors <b>x1</b> and <b>x2</b>.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_EQUAL</b>.
+ *
+ * Input:
+ *
+ * * <b>x1</b>, the first input operand.
+ * * <b>x2</b>, the second input operand.
+ *
+ * Output:
+ *
+ * * Result tensor.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Equal
+{
+};
+
+/**
+ * @brief Calculates the exponential of the given input tensor, element-wise.
+ * ExpFusion computes outputs y = base ^ (shift + scale * x), for base > 0.
+ * Or if base is set to the default (-1), base is set to e,
+ * so y = exp(shift + scale * x).
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_EXPFUSION</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, input tensor.
+ *
+ * Output:
+ *
+ * * The exponential of the input tensor computed element-wise.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct ExpFusion
+{
+    /** base of exponential function, default -1 for a value of <b>e</b>, must be > 0 */
+    float base;
+    /** amplifcation factor of independent value, default 1 */
+    float scale;
+    /** offset of independent value, default 1 */
+    float shift;
 };
 
 /**
@@ -461,16 +824,63 @@ struct Eltwise
  *
  * * <b>x</b>, an n-dimensional tensor.
  * * <b>axis</b>: index of the dimension to be added. The value is of the int32_t type and must be a constant\n
-   * in the range [-dim-1, dim].
+ *   in the range [-dim-1, dim].
  *
  * Output:
  *
  * * Operator with an additional dimension at the given axis.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct ExpandDims
+{
+};
+
+/**
+ * @brief Flattens the input tensor into a 2D matrix. If input tensor has shape (d_0, d_1, … d_n),
+ * then the output will have shape (d_0 X d_1 … d_(axis-1), d_axis X d_(axis+1) … X dn).
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_FLATTEN</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>: A tensor of rank >= axis.
+ *
+ * Output:
+ *
+ * * A 2-dimension tensor with the contents of the input tensor, with input dimensions up to axis flattened to\n
+ *   the outer dimension of the output and remaining input dimensions flattened into the inner dimension of the output.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Flatten
+{
+    /** Indicate up to which input dimensions (exclusive) should be flattened to the outer dimension of the output.
+      * The value for axis must be in the range [-r, r], where r is the rank of the input tensor.
+      * Negative value means counting dimensions from the back. When axis = 0, the shape of the output tensor is\n
+      * (1, (d_0 X d_1 … d_n)), where the shape of the input tensor is (d_0, d_1, … d_n). */
+    long axis;
+};
+
+/**
+ * @brief Returns element-wise largest integer not greater than x.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_FLOOR</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an n-dimensional tensor.
+ *
+ * Output:
+ *
+ * * Output tensor after floored.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Floor
 {
 };
 
@@ -483,12 +893,13 @@ struct ExpandDims
  *
  * * <b>value</b>: scalar used to fill the tensor.
  * * <b>shape</b>, which specifies the dimensions of the tensor to create.
+ *
  * Output:
  *
  * * Tensor filled by the scaler.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Fill
 {
@@ -506,16 +917,16 @@ struct Fill
  *
  * * <b>x</b>, an n-dimensional tensor.
  * * <b>weight</b>: weight tensor for a full connection.
- * * <b>bias</b>, a full-connection bias. In quantization scenarios, a quantized parameter is not required.\n
+ * * <b>bias</b>, a full-connection bias. In quantization scenarios, a quantized parameter is not required.
  * * If quantization is required, the data must be of the int32 type. The actual quantization parameter is\n
- * * determined by <b>x</b> and <b>weight</b>.
- * *
+ *   determined by <b>x</b> and <b>weight</b>.
+ *
  * Output:
  *
  * * <b>output</b>: computed tensor.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct FullConnection
 {
@@ -542,16 +953,16 @@ struct FullConnection
  * * <b>scale</b>: 1D tensor of the scaling factor used to scale the first normalized tensor.
  * * <b>offset</b>: 1D tensor used to move to the first normalized tensor.
  * * <b>mean</b>: 1D tensor of the overall mean value. It is used only for inference. In case of training,\n
- * * this parameter must be left empty.
+ *   this parameter must be left empty.
  * * <b>variance</b>: 1D tensor used for the overall variance. It is used only for inference. In case of training,\n
- * * this parameter must be left empty.
+ *   this parameter must be left empty.
  *
  * Output:
  *
  * * <b>output</b>: computed tensor.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct FusedBatchNorm
 {
@@ -568,7 +979,7 @@ struct FusedBatchNorm
  *
  * * <b>x</b>, an n-dimensional tensor.
  * * <b>inputIndices</b>, indices of elements of the original tensor. The value is an array of the int type\n
- * * and must be in the range [0, x.shape[axis]).
+ *   and must be in the range [0, x.shape[axis]).
  * * <b>axis</b>, the axis on which <b>x</b> is sliced. The value is an array with one element of the int32_t type.
  *
  * Output:
@@ -576,10 +987,82 @@ struct FusedBatchNorm
  * * Sliced tensor.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Gather
 {
+};
+
+/**
+ * @brief Returns the tensor resulted from performing the greater logical operation elementwise\n
+ * on the input tensors <b>x1</b> and <b>x2</b>.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_GREATER</b>.
+ *
+ * Input:
+ *
+ * * <b>x1</b>, the first input operand.
+ * * <b>x2</b>, the second input operand.
+ *
+ * Output:
+ *
+ * * Result tensor.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Greater
+{
+};
+
+/**
+ * @brief Returns the tensor resulted from performing the greater_equal logical operation elementwise\n
+ * on the input tensors <b>x1</b> and <b>x2</b>.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_GREATER_EQUAL</b>.
+ *
+ * Input:
+ *
+ * * <b>x1</b>, the first input operand.
+ * * <b>x2</b>, the second input operand.
+ *
+ * Output:
+ *
+ * * Result tensor.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct GreaterEqual
+{
+};
+
+/**
+ * @brief Carries out instance normalization as formula <b>y = scale * (x - mean) / sqrt(variance + epsilon) + B</b>,
+ * where mean and variance are computed per instance per channel.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_INSTANCE_NORM</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, input data tensor from the previous operator;
+ *   Dimensions for image case are (N x C x H x W), where N is the batch size,
+ *   C is the number of channels, and H and W are the height and the width of the data.
+ *   For non image case, the dimensions are in the form of (N x C x D1 x D2 … Dn), where N is the batch size.
+ * * <scale> The input 1-dimensional scale tensor of size C.
+ * * <bias> The input 1-dimensional bias tensor of size C.
+ *
+ * Output:
+ *
+ * * The output tensor of the same shape as input.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct InstanceNorm
+{
+    /** The epsilon value to use to avoid division by zero. */
+    float epsilon;
 };
 
 /**
@@ -591,7 +1074,7 @@ struct Gather
  *
  * * <b>x</b>, an n-dimensional tensor.
  * * <b>gamma</b>, an m-dimensional tensor. The dimensions of <b>gamma</b> must be the same as the shape of the part\n
- * * of the input tensor to normalize.
+ *   of the input tensor to normalize.
  * * <b>beta</b>, an m-dimensional tensor with the same shape as <b>gamma</b>.
  *
  * Output:
@@ -599,7 +1082,7 @@ struct Gather
  * * An n-dimensional tensor, with the same data type and shape as the input tensor.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct LayerNormFusion
 {
@@ -616,6 +1099,51 @@ struct LayerNormFusion
 };
 
 /**
+ * @brief LeakyRelu takes input data (Tensor) and an argument alpha, and produces one output data (Tensor)\n
+ * where the function f(x) = alpha * x for x < 0, f(x) = x for x >= 0, is applied to the data tensor elementwise.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_LEAKY_RELU</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, input tensor.
+ *
+ * Output:
+ *
+ * * Result tensor.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct LeakyRelu
+{
+    /** Coefficient of leakage. */
+    float negative_slope;
+};
+
+/**
+ * @brief Returns the tensor resulted from performing the less logical operation elementwise\n
+ * on the input tensors <b>x1</b> and <b>x2</b>.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_LESS</b>.
+ *
+ * Input:
+ *
+ * * <b>x1</b>, the first input operand.
+ * * <b>x2</b>, the second input operand.
+ *
+ * Output:
+ *
+ * * Result tensor.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Less
+{
+};
+
+/**
  * @brief Calculates the result of <b>x1</b> <= <b>x2</b> element-wise.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_LESS_EQUAL</b>.
@@ -624,18 +1152,209 @@ struct LayerNormFusion
  *
  * * <b>x1</b>, which can be a number, a Boolean value, or a tensor whose data type is number or Boolean.
  * * <b>x2</b>, which can be a number or a Boolean value if <b>x1</b> is a tensor; or a tensor with the data type\n
- * * of number or Boolean if <b>x1</b> is not a tensor.
+ *   of number or Boolean if <b>x1</b> is not a tensor.
  *
  * Output:
  *
  * * A tensor with the data type of Boolean. When a quantization model is used, the quantization parameters of\n
- * * the output cannot be omitted. However, values of the quantization parameters do not affect the result.
+ *   the output cannot be omitted. However, values of the quantization parameters do not affect the result.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct LessEqual
 {
+};
+
+/**
+ * @brief Calculates the result of nature logarithm of the input <b>x</b>.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_LOG</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, the input tensor.
+ *
+ * Output:
+ *
+ * * Result tensor.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Log
+{
+};
+
+/**
+ * @brief Calculates the truth value of <b>x1</b> AND <b>x2</b> element-wise.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_LOGICAL_AND</b>.
+ *
+ * Input:
+ *
+ * * <b>x1</b>, tensor of type boolean or convert to boolean implicitly.
+ * * <b>x2</b>, tensor of type boolean or convert to boolean implicitly.
+ *
+ * Output:
+ *
+ * * A tensor of type bool with the shape that <b>x1</b> and <b>x2</b> broadcast to.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct LogicalAnd
+{
+};
+
+/**
+ * @brief Calculates the truth value of NOT <b>x</b> element-wise.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_LOGICAL_NOT</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, tensor of type boolean or convert to boolean implicitly.
+ *
+ * Output:
+ *
+ * * A tensor of type bool with the shape of <b>x</b>.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct LogicalNot
+{
+};
+
+/**
+ * @brief Calculates the truth value of <b>x1</b> OR <b>x2</b> element-wise.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_LOGICAL_OR</b>.
+ *
+ * Input:
+ *
+ * * <b>x1</b>, tensor of type boolean or convert to boolean implicitly.
+ * * <b>x2</b>, tensor of type boolean or convert to boolean implicitly.
+ *
+ * Output:
+ *
+ * * A tensor of type bool with the shape that <b>x1</b> and <b>x2</b> broadcast to.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct LogicalOr
+{
+};
+
+/**
+ * @brief Normalize over local input regions.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_LRN</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, input tensor of n-dimensional.
+ *
+ * Output:
+ *
+ * * Result output tensor.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct LRN
+{
+    /** Half-width of the 1-dimension normalization window. */
+    long depthRadius;
+    /** Offset. */
+    float bias;
+    /** Scale factor. */
+    float alpha;
+    /** Exponent. */
+    float beta;
+    /** Specifies normalization region. Options: "ACROSS_CHNNEL". */
+    String normRegion;
+};
+
+/**
+ * @brief Calculate the L2-normalize of the input using the given axis.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_L2_NORMALIZE_FUSION</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, input to compute the L2-normalization.
+ *
+ * Output:
+ *
+ * * Result tensor with the same type and shape as input <b>x</b>.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct L2NormalizeFusion
+{
+    /** The axis on which to apply normalization, -1 means last axis, default: 0.*/
+    long[] axis;
+    /** Value added for numerical stability. default: 1e-4; */
+    float epslion;
+    /** Activation function type. For details, see {@link ActivationType}. */
+    enum ActivationType activationType;
+};
+
+/**
+ * @brief Computes an one-layer LSTM. This operator is usually supported via some custom implementation.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_LSTM</b>.
+ *
+ * Input:
+ *
+ * * <b>input</b>, input tensor, shape is [seq_len, batch_size, input_size].
+ * * <b>weight_ih</b>, weight tensor of input-layer to hidden-layer,
+ *   shape is [num_directions* num_layers, 4 * hidden_size, input_size].
+ * * <b>weight_hh</b>, weight tensor of hidden-layer to hidden-layer,
+ *   shape is [num_directions* num_layers, 4 * hidden_size, hidden_size].
+ * * <b>bias</b>, bias tensor of input-layer and hidden-layer to hidden-layer,
+ *   shape is [num_directions* num_layers, 8 * hidden_size].
+ * * <b>hidden_state</b>, init state of hidden-layer, shape is [num_directions * num_layers, batch_size, hidden_size].
+ * * <b>cell_state</b>, init state of cell, shape is [num_directions * num_layers, batch_size, hidden_size].
+ *
+ * Output:
+ *
+ * * <b>output</b>, a tensor that concats all the intermediate output tensor of the hidden,
+ *   shape is [seq_len, batch_size, num_directions * real_hidden_size].
+ * * <b>hidden_state</b>, the last output tensor of the hidden-layer,
+ *   shape is [num_directions * num_layers, batch_size, real_hidden_size].
+ * * <b>cell_state</b>, the last output tensor of the cell,
+ *   shape is [num_directions * num_layers, batch_size, hidden_size].
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct LSTM
+{
+    /** Whether the LSTM operation is bidirectional. */
+    boolean bidirectional;
+    /** Whether the operation contains bias. */
+    boolean has_bias;
+    /** Size of input tensor. */
+    long input_size;
+    /** Size of hidden state tensor. */
+    long hidden_size;
+    /** Layers of LSTM network. */
+    long num_layers;
+    /** Number of directions, value is 2 if direction == bidirectional else 1. */
+    long num_directions;
+    /** Dropout probalility of each layer except first-layer. */
+    float dropout;
+    /** Probalility that the cell state retains the previous state. Default: 0. */
+    float zoneout_cell;
+    /** Probalility that the hidden state retains the previous state. Default: 0. */
+    float zoneout_hidden;
+    /** If proj_size > 0, will use LSTM with projections of corresponding size. Default: 0. */
+    long proj_size;
 };
 
 /**
@@ -651,11 +1370,11 @@ struct LessEqual
  * Output:
  *
  * * Matrix product of the inputs. When type! When = DATA_TYPE_UNKNOWN, the data type of the output is determined by\n
- * * <b>type</b>. When type==DATA_TYPE_UNKNOWN,
- * * the data type of the output depends on the data type converted during the calculation of <b>x1</b> and <b>x2</b>.
+ *   <b>type</b>. When type==DATA_TYPE_UNKNOWN,
+ *   the data type of the output depends on the data type converted during the calculation of <b>x1</b> and <b>x2</b>.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct MatMulFusion
 {
@@ -670,7 +1389,7 @@ struct MatMulFusion
 /**
  * @brief Calculates the maximum of <b>x1</b> and <b>x2</b> element-wise. The inputs of <b>x1</b> and <b>x2</b>\n
  * comply with the implicit type conversion rules to make the data types are consistent.
- * 
+ *
  * The input must be two tensors or one tensor and one scalar. When the input is two tensors, the data types\n
  * cannot be Boolean at the same time, and their shapes can be broadcast to the same size. When the inputs are\n
  * one tensor and one scalar, the scalar must be a constant.
@@ -684,10 +1403,10 @@ struct MatMulFusion
  *
  * Output:
  *
- /** Maximum value of the elements of the two tensors.
+ * * Maximum value of the elements of the two tensors.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Maximum
 {
@@ -707,10 +1426,10 @@ struct Maximum
  *
  * Output:
  *
- /** Maximum value of the elements of the two tensors.
+ * * Result tensor after max-pooling.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct MaxPoolFusion
 {
@@ -735,8 +1454,62 @@ struct MaxPoolFusion
 };
 
 /**
+ * @brief Calculates the minimum of <b>x1</b> and <b>x2</b> element-wise. The inputs of <b>x1</b> and <b>x2</b>\n
+ * comply with the implicit type conversion rules to make the data types are consistent.
+ *
+ * The input must be two tensors or one tensor and one scalar. When the input is two tensors, the data types\n
+ * cannot be Boolean at the same time, and their shapes can be broadcast to the same size. When the inputs are\n
+ * one tensor and one scalar, the scalar must be a constant.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_MINIMUM</b>.
+ *
+ * Input:
+ *
+ * * <b>x1</b>, an n-dimensional tensor, whose data type can be number or Boolean.
+ * * <b>x2</b>, an n-dimensional tensor, whose data type can be number or Boolean.
+ *
+ * Output:
+ *
+ * * Minimum value of the elements of the two tensors.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Minimum
+{
+};
+
+/**
+ * @brief Computes the remainder of dividing the first input tensor by the second input tensor element-wise.
+ *
+ * Inputs of x and y comply with the implicit type conversion rules to make the data types consistent.
+ * The inputs must be two tensors or one tensor and one scalar. When the inputs are two tensors,
+ * both dtypes cannot be bool, and the shapes of them could be broadcast.
+ * When the inputs are one tensor and one scalar, the scalar could only be a constant.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_MOD</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, a number, a bool or a tensor whose data type is number.
+ * * <b>y</b>, if input <b>x</b> is a tensor, <b>y</b> could be a number, a bool or a tensor whose data type is number.
+ *   If input <b>x</b> is a number or a bool, <b>y</b> must be a tensor whose data type is number.
+ *
+ * Output:
+ *
+ * * Result tensor, the shape is the same as the one after broadcasting, and the data type is the one with\n
+  higher precision or higher digits among the two inputs.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Mod
+{
+};
+
+/**
  * @brief Multiplies the elements in the same position of <b>x1</b> and <b>x2</b> to obtain output.
- *  
+ *
  * If the shapes of <b>x1</b> and <b>x2</b> are different, expand <b>x1</b> and <b>x2</b> to the same shape through\n
  * broadcast and then perform the multiplication.
  * The {@link NodeType} of this operator is <b>NODE_TYPE_MUL_FUSION</b>.
@@ -751,12 +1524,54 @@ struct MaxPoolFusion
  * * Product of each element of <b>x1</b> and <b>x2</b>.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct MulFusion
 {
     /** Activation function type. For details, see {@link ActivationType}. */
     enum ActivationType activationType;
+};
+
+/**
+ * @brief Returns a tensor with negative values of the input tensor element-wise.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_NEG</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, a tensor of the int or float type.
+ *
+ * Output:
+ *
+ * * Result tensor, has the same shape and dtype as input <b>x</b>.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Neg
+{
+};
+
+/**
+ * @brief Returns the tensor resulted from performing the not_equal logical operation elementwise\n
+ * on the input tensors <b>x1</b> and <b>x2</b>.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_NOT_EQUAL</b>.
+ *
+ * Input:
+ *
+ * * <b>x1</b>, the first input operand.
+ * * <b>x2</b>, the second input operand.
+ *
+ * Output:
+ *
+ * * Result tensor.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct NotEqual
+{
 };
 
 /**
@@ -770,30 +1585,29 @@ struct MulFusion
  * Input:
  *
  * * <b>indices</b>, an n-dimensional tensor. Each element in <b>indices</b> determines the location of <b>on_value</b>\n
- * * in each one-hot vector.
+ *   in each one-hot vector.
  * * <b>depth</b>, an integer scalar that determines the depth of the one-hot vector. The value of <b>depth</b> must be\n
- * * greater than <b>0</b>.
+ *   greater than <b>0</b>.
  * * <b>on_value</b>, a scalar that specifies a valid value in the one-hot vector.
  * * <b>off_value</b>, a scalar that specifies the values of other locations in the one-hot vector except the valid value.
  *
  * Output:
  *
  * * An (n+1)-dimensional tensor if <b>indices</b> is an n-dimensional tensor. The output shape is determined by\n
- * * <b>indices</b> and <b>axis</b>.
+ *   <b>indices</b> and <b>axis</b>.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct OneHot
 {
     /**
      * An integer scalar that specifies the dimension for inserting the one-hot.
      * Assume that the shape of <b>indices</b> is [N, C],\n
-     * and the value of <b>depth</b> is D. 
+     * and the value of <b>depth</b> is D.
      * When <b>axis</b> is <b>0</b>, the shape of the output is [D, N, C].
      * When <b>axis</b> is <b>-1</b>, the shape of the output is [N, C, D].
      * When <b>axis</b> is <b>-1</b>, the shape of the output is [N, D, C].
-     *
      */
     long axis;
 };
@@ -810,18 +1624,18 @@ struct OneHot
  *
  * * <b>x</b>, an n-dimensional tensor.
  * * <b>paddings</b>, a 2D tensor that specifies the length to add in each dimension.
- * * The shape is [n, 2]. <b>paddings[i][0]</b> indicates the number of paddings to add before the input 
- * * tensor in ith dimension.
+ *   The shape is [n, 2]. <b>paddings[i][0]</b> indicates the number of paddings to add before the input\n
+ *   tensor in ith dimension.
  * * <b>paddings[i][1]</b> indicates the number of paddings to add after the input tensor in ith dimension.
  *
  * Output:
  *
  * * An n-dimensional tensor after padding, with the same dimensions and data type as <b>x</b>.
- * * The shape is determined by <b>x</b> and <b>paddings</b>.
+ *   The shape is determined by <b>x</b> and <b>paddings</b>.
  *   output.shape[i] = input.shape[i] + paddings[i][0]+paddings[i][1]
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct PadFusion
 {
@@ -832,12 +1646,12 @@ struct PadFusion
      * The meaning of this parameter is the same as that of <b>paddings</b> input.
      */
     long[][] paddings;
-    /** 
-      * Padding mode.
+    /**
+     * Padding mode.
      * For details, see {@link PaddingMode}.
      */
     enum PaddingMode paddingMode;
-    /** 
+    /**
      * A constant with the same data type as <b>x</b>. It specifies the value to add in the pad operation.
      * This parameter is valid only when paddingMode==PADDING_MODE_CONSTANT. The default value is <b>0</b>.
      */
@@ -847,7 +1661,7 @@ struct PadFusion
 /**
  * @brief Calculates the <b>y</b> power of each element in <b>x</b>. The inputs must be two tensors or one tensor
  * and one scalar.
- * 
+ *
  * When the inputs are two tensors, their data types cannot be Boolean at the same time, and their shapes
  * must be the same.
  * When the inputs are one tensor and one scalar, the scalar must be a constant.
@@ -867,7 +1681,7 @@ struct PadFusion
  * * A tensor, whose shape is determined by the shape of <b>x</b> and <b>y</b> after broadcasting.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct PowFusion
 {
@@ -885,9 +1699,9 @@ struct PowFusion
  * Input:
  *
  * * <b>x</b>, an n-dimensional tensor. If <b>n</b> is greater than or equal to 2, <b>x</b> must be
- * * [BatchSize, ..., Channels]. The second dimension is the number of channels.
+ *   [BatchSize, ..., Channels]. The second dimension is the number of channels.
  * * <b>weight</b>, a 1D tensor. The length of <b>weight</b> must be 1 or equal to the number of channels.
- * * If the length of <b>weight</b> is 1, all channels share the same weight.
+ *   If the length of <b>weight</b> is 1, all channels share the same weight.
  *   If the length of <b>weight</b> is equal to the number of channels, each channel exclusively has a weight.
  *   If <b>n</b> of <b>x</b> is less than 2, the <b>weight</b> length must be 1.
  *
@@ -896,7 +1710,7 @@ struct PowFusion
  * * PReLU activation value of <b>x</b>, with the same shape and data type as <b>x</b>.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct PReLUFusion
 {
@@ -922,7 +1736,7 @@ struct PReLUFusion
  * * Tensor after the data type conversion.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct QuantDTypeCast
 {
@@ -930,6 +1744,98 @@ struct QuantDTypeCast
     long srcT;
     /** Data type of the output tensor. */
     long dstT;
+};
+
+/**
+ * @brief Calculate the rank of a tensor.
+ *
+ * The rank of a tensor is the number of indices required to uniquely select each element of the tensor.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_RANK</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an n-dimensional tensor.
+ *
+ * Output:
+ *
+ * * Result tensor. 0-D int32 Tensor representing the rank of input.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Rank
+{
+};
+
+/**
+ * @brief Generate a tensor containing a sequence of numbers that begin at <b>start</b>\n
+ * and extends by increments of <b>delta</b> up to <b>limit<b>.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_RANGE</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b> an n-dimensional tensor.
+ *
+ * Output:
+ *
+ * * A 1-D tensor with specific data type containing generated range of values.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Range
+{
+    /** Reserved dataType parameter. */
+    long d_type;
+    /** Scalar. First entry for the range of output values. */
+    long start;
+    /** Scalar. Exclusive upper limit for the range of output values. */
+    long limit;
+    /** Scalar. Value to step by. */
+    long delta;
+};
+
+/**
+ * @brief Calculate reciprocal of a tensor element-wise.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_RECIPROCAL</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an n-dimensional tensor.
+ *
+ * Output:
+ *
+ * * Result tensor with the same shape as the input <b>x</b>.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Reciprocal
+{
+};
+
+/**
+ * @brief Return x / y element-wise for real types. If x and y are reals, this will return floating-point division.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_REAL_DIV</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an n-dimensional tensor.
+ * * <b>y</b>, an n-dimensional tensor. Has the same data type as x.
+ *
+ * Output:
+ *
+ * * A tensor. Has the same data type as x.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct RealDiv
+{
 };
 
 /**
@@ -943,15 +1849,15 @@ struct QuantDTypeCast
  *
  * * <b>x</b>, an n-dimensional tensor, where <b>n</b> is less than 8.
  * * <b>axis</b>, a 1D tensor that specifies the dimension to reduce. The value range of each element in axis
- * * is [–n, n).
+ *   is [–n, n).
  *
  * Output:
  *
  * * An m-dimensional tensor, with the same data type as <b>x</b>. If <b>keepDims</b> is <b>false</b>, m < n.
- * * If <b>keepDims</b> is <b>true</b>, m==n.
+ *   If <b>keepDims</b> is <b>true</b>, m==n.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct ReduceFusion
 {
@@ -985,7 +1891,7 @@ struct ReduceFusion
  * * A tensor of the specified shape. The data type is the same as that of <b>x</b>.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Reshape
 {
@@ -1010,7 +1916,7 @@ struct Reshape
  * * An n-dimensional tensor, with the same shape and data type as <b>x</b>.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Resize
 {
@@ -1043,6 +1949,26 @@ struct Resize
 };
 
 /**
+ * @brief Calculate half to even of a tensor element-wise.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_ROUND</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an n-dimensional tensor.
+ *
+ * Output:
+ *
+ * * Result tensor with the same shape as the input <b>x</b>.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Round
+{
+};
+
+/**
  * @brief Calculates the reciprocal of the square root of a tensor.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_RSQRT</b>.
@@ -1053,10 +1979,10 @@ struct Resize
  *
  * Output:
  *
- * * An n-dimensional tensor, with the same shape and data type as <b>x</b>. 
+ * * An n-dimensional tensor, with the same shape and data type as <b>x</b>.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Rsqrt
 {
@@ -1076,10 +2002,10 @@ struct Rsqrt
  * Output:
  *
  * * An n-dimensional tensor scaled, whose data type is the same as that of <b>x</b>x and shape is determined
- * * by <b>axis</b>.
+ *   by <b>axis</b>.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct ScaleFusion
 {
@@ -1087,6 +2013,29 @@ struct ScaleFusion
     long axis;
     /** Activation function type. For details, see {@link ActivationType}. */
     enum ActivationType activationType;
+};
+
+/**
+ * @brief Scatters a tensor into a new tensor depending on the specified indices.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_SCATTER_ND</b>.
+ *
+ * Input:
+ *
+ * * <b>indices</b>, the index of scattering in the new tensor with int32 or int64 data type.
+ *   The rank of indices must be at least 2 and indices_shape[-1] <= len(shape).
+ * * <b>updates</b>, the source tensor to be scattered. It has shape indices_shape[:-1] + shape[indices_shape[-1]:].
+ * * <b>shape</b>, the shape of the output tensor, has the same data type as <b>indices</b>.
+ *
+ * Output:
+ *
+ * * Result tensor with the same type as <b>update</b> and the same shape as <b>shape</b>.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct ScatterNd
+{
 };
 
 /**
@@ -1103,9 +2052,29 @@ struct ScaleFusion
  * * An integer array representing the dimensions of <b>x</b>.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Shape
+{
+};
+
+/**
+ * @brief Calculate sine of the input element-wise.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_SIN</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an n-dimensional tensor.
+ *
+ * Output:
+ *
+ * * Result tensor with the same shape as the input <b>x</b>.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Sin
 {
 };
 
@@ -1119,14 +2088,14 @@ struct Shape
  * * <b>x</b>, an n-dimensional tensor.
  * * <b>begin</b>, an array of integers greater than or equal to 0, specifying the start of the slice.
  * * <b>size</b>, an array of integers greater than or equal to 0, specifying the length of the slice.
- * * Assume that a dimension is <b>i</b> and 1<=size[i]<=input.shape[i]-begin[i].
+ *   Assume that a dimension is <b>i</b> and 1<=size[i]<=input.shape[i]-begin[i].
  *
  * Output:
  *
  * * An n-dimensional tensor obtained.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct SliceFusion
 {
@@ -1146,10 +2115,10 @@ struct SliceFusion
  * Output:
  *
  * * Result of the <b>softmax</b> operation. It is an n-dimensional tensor with the same data type and shape
- * * as <b>x</b>.
+ *   as <b>x</b>.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Softmax
 {
@@ -1179,7 +2148,7 @@ struct Softmax
  * (w + paddings[1][0] + paddings[1][1]) \f$ must be an integer multiple of \f$ blockShape[1] \f$.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct SpaceToBatchND
 {
@@ -1187,6 +2156,58 @@ struct SpaceToBatchND
     long[] blockShape;
     /** Padding size for spatial dimensions. */
     long[][] paddings;
+};
+
+/**
+ * @brief Rearrange blocks of spatial data into depth.
+ *
+ * The output tensor’s height dimension is height / blocksize;
+ * The output tensor’s weight dimension is weight / blocksize;
+ * The depth of output tensor is blocksize * blocksize * inputDepth;
+ * The input tensor’s height and width must be divisible by blocksize.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_SPACE_TO_DEPTH</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an 4-dimensional tensor.
+ *
+ * Output:
+ *
+ * * Result tensor with the same data_type as the input <b>x</b>.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct SpaceToDepth
+{
+    /** The block size used to divide spatial data. It must be >= 2. */
+    long blocksize;
+    /** Format of the tensor data. For details, see {@link Format}. */
+    enum Format format;
+};
+
+/**
+ * @brief Converts a sparse representation into a dense tensor.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_SPARSE_TO_DENSE</b>.
+ *
+ * Input:
+ *
+ * * <b>indices</b>, 2-dimension tensor, represents the position of the element in the sparse tensor.
+ * * <b>values</b>, 1-dimension Tensor, represents the value corresponding to the position in the indices.
+ * * <b>sparseShape</b>, a positive int tuple which specifies the shape of sparse tensor,
+ *   should have 2 elements, represent sparse tensor shape is (N, C).
+ *
+ * Output:
+ *
+ * * Result tensor converted from sparse tensor with dtype samed as <b>values</b>, and the shape is <b>sparseShape</b>.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct SparseToDense
+{
 };
 
 /**
@@ -1202,10 +2223,10 @@ struct SpaceToBatchND
  * Output:
  *
  * * An array of n-dimensional tensors, with the same data type and dimensions.
- * * The data type of each tensor is the same as that of <b>x</b>.
+ *   The data type of each tensor is the same as that of <b>x</b>.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Split
 {
@@ -1236,9 +2257,29 @@ struct Split
  * * An n-dimensional tensor, with the same data type and shape as <b>x</b>.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Sqrt
+{
+};
+
+/**
+ * @brief Calculates the square of a tensor.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_SQUARE</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an n-dimensional tensor.
+ *
+ * Output:
+ *
+ * * An n-dimensional tensor, with the same data type and shape as <b>x</b>.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Square
 {
 };
 
@@ -1256,13 +2297,13 @@ struct Sqrt
  * Output:
  *
  * * A tensor obtained. The shape of the output is determined by <b>x</b> and <b>y</b>.
- * * If <b>x</b> and <b>y</b> are of the same shape, the output shape is the same as that of <b>x</b> and <b>y</b>.
+ *   If <b>x</b> and <b>y</b> are of the same shape, the output shape is the same as that of <b>x</b> and <b>y</b>.
  *   If <b>x</b> and <b>y</b> are of different types, you need to perform the broadcast operation on
  *   <b>x</b> and <b>y</b> first.
  *   The precision of the output is the same as the input tensor with higher precision.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct SquaredDifference
 {
@@ -1270,7 +2311,7 @@ struct SquaredDifference
 
 /**
  * @brief Removes the dimension with length of 1 from the specified axis. The int8 quantization input is supported.
- * 
+ *
  * Assume that the shape of <b>x</b> is [2, 1, 1, 2, 2] and <b>axis</b> is [0,1], the shape of the output tensor\n
  * must be [2, 1, 2, 2]. That is, the dimension with the length of 1 between the 0th and 1st dimensions is removed.
  *
@@ -1285,7 +2326,7 @@ struct SquaredDifference
  * *Tensor obtained.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Squeeze
 {
@@ -1310,7 +2351,7 @@ struct Squeeze
  * * An n+1D tensor along the specified axis, with the same data type and precision as the input tensors.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Stack
 {
@@ -1329,11 +2370,11 @@ struct Stack
  *
  * * <b>x</b>, an n-dimensional tensor.
  * * <b>begin</b>, a 1D tensor that specifies the position from which the tensor is sliced.
- * * The length of <b>begin</b> is <b>n</b>. begin[i] specifies the start point to slice in the ith dimension.
+ *   The length of <b>begin</b> is <b>n</b>. begin[i] specifies the start point to slice in the ith dimension.
  * * <b>end</b>, a 1D tensor that specifies the end to which the tensor is sliced. The length of <b>end</b> is <b>n</b>.
- * * end[i] specifies the end point to slice in the ith dimension.
+ *   end[i] specifies the end point to slice in the ith dimension.
  * * <b>strides</b>, a 1D tensor that specifies the intervals for slicing. The length of <b>strides</b> is <b>n</b>.
- * * strides[i] specifies the intervals at which the tensor is sliced in the ith dimension. Negative values are allowed.
+ *   strides[i] specifies the intervals at which the tensor is sliced in the ith dimension. Negative values are allowed.
  *
  * For the input tensor, the shapes of <b>begin</b>, <b>end</b>, and <b>strides</b> must be the same.
  * The indices of <b>begin</b> and <b>end</b> start from <b>0</b>. The elements of <b>strides</b> cannot be <b>0</b>.
@@ -1343,7 +2384,7 @@ struct Stack
  * * A tensor, with the same data type as <b>x</b>. The number of dimensions of the output tensor is rank (x[0])+1.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct StridedSlice
 {
@@ -1401,7 +2442,7 @@ struct StridedSlice
  *   The precision of the output is the same as the input tensor with higher precision.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct SubFusion
 {
@@ -1418,19 +2459,19 @@ struct SubFusion
  *
  * * <b>x</b>, an n-dimensional tensor.
  * * <b>multiples</b>, a 1D tensor that specifies the number of times that the input tensor is copied
- * * in each dimension.
- * * The length <b>m</b> is not less than the number of dimensions of <b>x</b>.
+ *   in each dimension.
+ * * The length <b>multiples</b> is not less than the number of dimensions of <b>x</b>.
  *
  * Output:
  *
  * * An m-dimensional tensor, with the same data type as <b>x</b>. If the length of <b>x</b> is the same as that of
- * * <b>multiples</b>, the number of dimensions of the output tensor is the same as that of the <b>x</b>, that is,
- * * an n-dimensional tensor is output.
- * * If the length of <b>multiples</b> is greater than <b>n</b>, <b>1s</b> are used to pad the dimensions of <b>x</b>.
- * * Then, <b>x</b> is copies the specified number of times in each dimension to obtain an m-dimensional tensor.
+ *   <b>multiples</b>, the number of dimensions of the output tensor is the same as that of the <b>x</b>, that is,
+ *   an n-dimensional tensor is output.
+ *   If the length of <b>multiples</b> is greater than <b>n</b>, <b>1s</b> are used to pad the dimensions of <b>x</b>.
+ *   Then, <b>x</b> is copies the specified number of times in each dimension to obtain an m-dimensional tensor.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct TileFusion
 {
@@ -1455,7 +2496,7 @@ struct TileFusion
  * * <b>output1</b>, indices of the first K maximum values.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct TopKFusion
 {
@@ -1481,10 +2522,10 @@ struct TopKFusion
  * Output:
  *
  * * An n-dimensional tensor, which has the same data type and quantization parameters as <b>x</b>.
- * * The shape is determined by the shape of <b>x</b> and <b>perm</b>.
+ *   The shape is determined by the shape of <b>x</b> and <b>perm</b>.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Transpose
 {
@@ -1504,7 +2545,7 @@ struct Transpose
  * * Tensor output.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 struct Unsqueeze
 {
@@ -1512,6 +2553,129 @@ struct Unsqueeze
       * The value range of the integer is [-n, n).
       */
     long[] axis;
+};
+
+/**
+ * @brief Unpacks the given dimension of a rank-R tensor into rank-(R-1) tensors.
+ * Unpacks tensors from <b>x</b> by chipping it along the <b>axis</b> dimension.
+ * For example, given a tensor of shape (A, B, C, D);
+ * If axis == 0, then the i'th tensor in output is the slice value[i, :, :, :],\n
+ * and each tensor in output will have shape (B, C, D).
+ * If axis == 1, then the i'th tensor in output is the slice value[:, i, :, :],\n
+ * and each tensor in output will have shape (A, C, D). Etc.
+ * This is the opposite of stack.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_UNSTACK</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an n-dimensional tensor.
+ *
+ * Output:
+ *
+ * * Tensor output.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Unstack
+{
+    /** The specific axis to apply unstack operation. */
+    long axis;
+};
+
+/**
+ * @brief Selects elements from x1 or x2 based on condition and returns a tensor.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_WHERE</b>.
+ *
+ * Input:
+ *
+ * * <b>condition</b>, A Tensor of type bool.
+ * * <b>x1</b>, a tensor which may have the same shape as <b>condition</b>.
+ *   If condition is rank 1, x1 may have higher rank, but its first dimension must match the size of condition.
+ * * <b>x2</b>, a tensor with the same data type and shape as <b>x1</b>.
+ * Output:
+ *
+ * * Tensor output. Has the same shape as <b>x1</b>.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Where
+{
+};
+
+/**
+ * @brief Selects elements from x1 or x2, depending on condition.
+ * The <b>x1</b> and <b>x2</b> tensors must all have the same shape, and the output will also have that shape.
+ * The condition tensor must be a scalar if <b>x1</b> and <b>x2</b> are scalars.
+ * If <b>x<b> and <b>x2</b> are vectors or higher rank, then condition must be either a scalar,
+ * a vector with size matching the first dimension of x, or must have the same shape as x.
+ * The condition tensor acts as a mask that chooses, based on the value at each element,
+ * whether the corresponding element / row in the output should be taken from x (if true) or y (if false).
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_SELECT</b>.
+ *
+ * Input:
+ *
+ * * <b>condition</b>, A Tensor of type bool.
+ * * <b>x1</b>, a tensor which may have the same shape as <b>condition</b>.
+ *   If condition is rank 1, x1 may have higher rank, but its first dimension must match the size of condition.
+ * * <b>x2</b>, a tensor with the same data type and shape as <b>x1</b>.
+ * Output:
+ *
+ * * Tensor output. Has the same shape as <b>x1</b>.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Select
+{
+};
+
+/**
+ * @brief Computes the Gauss error function of <b>x</b> element-wise.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_ERF</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an n-dimensional tensor.
+ *
+ * Output:
+ *
+ * * Tensor output. Has the same data type and shape as x.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct Erf
+{
+};
+
+/**
+ * @brief Computes the log-softmax function to n-dimensional input tensor.
+ *
+ * The input is transformed by the Softmax function and then by the log function to lie in range[-inf,0).
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_LOG_SOFTMAX</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an n-dimensional tensor.
+ *
+ * Output:
+ *
+ * * Tensor output. Has the same data type and shape as x.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct LogSoftmax
+{
+    /** The axis to apply LogSoftmax operation, -1 means the last dimension. */
+    long axis;
 };
 
 /** @} */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,11 +17,11 @@
  * @addtogroup NNRt
  * @{
  *
- * @brief Provides a unified interface for AI chip drivers to access OpenHarmony. 
+ * @brief Provides a unified interface for AI chip drivers to access OpenHarmony.
  * Neural Network Runtime (NNRt) is a cross-chip inference computing runtime environment oriented to the AI field.
- * It serves as a bridge between the upper-layer AI inference framework and the underlying acceleration chip to implement cross-chip inference computing of AI models.
+ *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 
 /**
@@ -30,22 +30,22 @@
  * @brief Defines the types used in the HDI methods.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 
 /**
  * @brief Defines the package path of the NNRt module.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
-package ohos.hdi.nnrt.v1_0;
+package ohos.hdi.nnrt.v2_1;
 
 /**
  * @brief Defines the shared memory data structure.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 struct SharedBuffer {
     /** File descriptor of the shared memory. */
@@ -62,16 +62,16 @@ struct SharedBuffer {
  * @brief Enumerates the AI chip types.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 enum DeviceType: int {
-    /** Other type */
+    /** Other types. */
     OTHER,
-    /** CPU chip */
+    /** CPU chip. */
     CPU,
-    /** GPU chip */
+    /** GPU chip. */
     GPU,
-    /** AI acceleration chip, such as NPU chip and DSP chip */
+    /** AI acceleration chip, such as NPU chip and DSP chip. */
     ACCELERATOR
 };
 
@@ -79,7 +79,7 @@ enum DeviceType: int {
  * @brief Enumerates the AI chip states.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 enum DeviceStatus: int {
     /** Available. */
@@ -96,7 +96,7 @@ enum DeviceStatus: int {
  * @brief Enumerates the performance modes for a chip to perform AI computing.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 enum PerformanceMode: int {
     /** No performance mode is specified. The specific running mode is defined by the chip. */
@@ -115,7 +115,7 @@ enum PerformanceMode: int {
  * @brief Enumerates the AI computing task priorities.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 enum Priority: int {
     /** No task priority is specified. The specific execution policy is defined by the chip. */
@@ -132,7 +132,7 @@ enum Priority: int {
  * @brief Defines the parameters required for model building.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 struct ModelConfig {
     /** Whether to run a Float32 model in Float16 precision. */
@@ -141,13 +141,17 @@ struct ModelConfig {
     enum PerformanceMode mode;
     /** Priority of the computing task. For details, see {@link Priority}. */
     enum Priority priority;
+    /** Custom attributes of the underlying hardware. They stored in the format of name:binary value
+      * and parsed by the HDI service.
+      */
+    Map<String, byte[]> extensions;
 };
 
 /**
  * @brief Enumerates the operator data formats. This parameter must be used together with {@link Tensor}.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 enum Format : byte {
     /** Format initial value. */
@@ -161,7 +165,9 @@ enum Format : byte {
 /**
  * @brief Defines the quantization parameter structure.
  *
- * In the following formula, <b>q</b> is a quantized parameter, <b>r</b> is a real parameter, <b>\f$ r_{max} \f$</b> is the maximum value of the data to be quantized, <b>\f$ r_{min} \f$</b> is the minimum value of the data to be quantized, and <b>round(x)</b> means to round off <b>x</b> to an integer.
+ * In the following formula, <b>q</b> is a quantized parameter, <b>r</b> is a real parameter, <b>\f$ r_{max} \f$</b>\n
+ * is the maximum value of the data to be quantized, <b>\f$ r_{min} \f$</b> is the minimum value of the data
+ * to be quantized, and <b>round(x)</b> means to round off <b>x</b> to an integer.
  \f[
   \text{clamp}(x,min,max) =
   \begin{cases}
@@ -196,12 +202,12 @@ enum Format : byte {
  * When \f$ r_{min} \f$ and \f$ r_{max} \f$ are <b>0</b>, <b>scale</b> and <b>zeroPoint</b> must be <b>0</b>.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 struct QuantParam {
-    /** Number of quantized bits */
+    /** Number of quantized bits. */
     int numBits;
-    /** Zero value */
+    /** Zero value. */
     int zeroPoint;
     /** Step of the quantizer. */
     double scale;
@@ -211,7 +217,7 @@ struct QuantParam {
  * @brief Enumerates the tensor data types. This parameter must be used together with {@link Tensor}.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 enum DataType : byte {
     /** Unknown type. */
@@ -246,7 +252,7 @@ enum DataType : byte {
  * @brief Defines the input and output tensors of an AI model.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 struct IOTensor {
     /** Tensor name. */
@@ -257,7 +263,9 @@ struct IOTensor {
     int[] dimensions;
     /** Format of the tensor. For details, see {@link Format}. */
     enum Format format;
-    /** Tensor data, which is stored in the shared memory. For details about the shared memory, see {@link SharedBuffer}. */
+    /** Tensor data, which is stored in the shared memory. For details about the shared memory,\n
+      * see {@link SharedBuffer}.
+      */
     struct SharedBuffer data;
 };
 
@@ -265,7 +273,7 @@ struct IOTensor {
  * @brief Enumerates the quantization types. This parameter must be used together with {@link Node}.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 enum QuantType: byte {
     /** Do not use quantification. */
@@ -278,122 +286,219 @@ enum QuantType: byte {
  * @brief Enumerates the operator types.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 enum NodeType : unsigned int {
     /** None. */
     NODE_TYPE_NONE = 0,
-    /** Activation function */
+    /** Abs operator. */
+    NODE_TYPE_ABS = 1,
+    /** Activation function. */
     NODE_TYPE_ACTIVATION = 2,
-    /** ADD operator */
+    /** ADD operator. */
     NODE_TYPE_ADD_FUSION = 5,
-    /** ArgMax operator */
+    /** ALL operator. */
+    NODE_TYPE_ALL = 9,
+    /** ArgMax operator. */
     NODE_TYPE_ARGMAX_FUSION = 11,
-    /** AVGPOOL operator */
+    /** Assert operator. */
+    NODE_TYPE_ASSERT = 13,
+    /** AVGPOOL operator. */
     NODE_TYPE_AVGPOOL_FUSION = 17,
-    /** BatchToSpaceND operator */
+    /** BatchToSpaceND operator. */
     NODE_TYPE_BATCH_TO_SPACE_ND = 22,
-    /** BiasAdd operator */
+    /** BiasAdd operator. */
     NODE_TYPE_BIAS_ADD = 23,
-    /** Cast operator */
+    /** BroadCastTo operator. */
+    NODE_TYPE_BROADCAST_TO = 27,
+    /** Cast operator. */
     NODE_TYPE_CAST = 28,
-    /** Concat operator */
+    /** Ceil operator. */
+    NODE_TYPE_CEIL = 29,
+    /** Clip operator. */
+    NODE_TYPE_CLIP = 30,
+    /** Concat operator. */
     NODE_TYPE_CONCAT = 31,
-    /** Conv2D operator, including common convolution, separable convolution, and group convolution */
+    /** Conv2D operator, including common convolution, separable convolution, and group convolution. */
     NODE_TYPE_CONV2D_FUSION = 35,
-    /** Two-dimensional deconvolution operator */
+    /** Two-dimensional deconvolution operator. */
     NODE_TYPE_CONV2D_TRANSPOSE_FUSION = 36,
-    /** Div operator */
+    /** Cos operator. */
+    NODE_TYPE_COS = 37,
+    /** ConstantOfShape operator. */
+    NODE_TYPE_CONSTANT_OF_SHAPE = 38,
+    /** Crop operator. */
+    NODE_TYPE_CROP = 39,
+    /** CustomNormalize operator. */
+    NODE_TYPE_CUSTOM_NORMALIZE = 41,
+    /** DepthToSpace operator. */
+    NODE_TYPE_DEPTH_TO_SPACE = 45,
+    /** DetectionPostProcess operator. */
+    NODE_TYPE_DETECTION_POST_PROCESS = 46,
+    /** Div operator. */
     NODE_TYPE_DIV_FUSION = 47,
-    /** Element-level operator */
+    /** Element-level operator. */
     NODE_TYPE_ELTWISE = 52,
-    /** ExpandDims operator */
+    /** Equal operator. */
+    NODE_TYPE_EQUAL = 53,
+    /** Exp operator. */
+    NODE_TYPE_EXPFUSION = 55,
+    /** ExpandDims operator. */
     NODE_TYPE_EXPAND_DIMS = 56,
-    /** Fill operator */
+    /** Flatten operator. */
+    NODE_TYPE_FLATTEN = 61,
+    /** Floor operator. */
+    NODE_TYPE_FLOOR = 63,
+    /** Fill operator. */
     NODE_TYPE_FILL = 66,
-    /** FullConnection operator */
+    /** FullConnection operator. */
     NODE_TYPE_FULL_CONNECTION = 67,
-    /** BatchNorm operator */
+    /** BatchNorm operator. */
     NODE_TYPE_FUSED_BATCH_NORM = 68,
-    /** Gather operator */
+    /** Gather operator. */
     NODE_TYPE_GATHER = 69,
-    /** LayerNorm operator */
+    /** Greater operator. */
+    NODE_TYPE_GREATER = 71,
+    /** GreaterEqual operator. */
+    NODE_TYPE_GREATER_EQUAL = 72,
+    /** InstanceNorm operator. */
+    NODE_TYPE_INSTANCE_NORM = 74,
+    /** LayerNorm operator. */
     NODE_TYPE_LAYER_NORM_FUSION = 75,
-    /** LessEqual operator */
+    /** LeakyReLU operator. */
+    NODE_TYPE_LEAKY_RELU = 76,
+    /** Less operator. */
+    NODE_TYPE_LESS = 77,
+    /** LessEqual operator. */
     NODE_TYPE_LESS_EQUAL = 78,
-    /** MatMul operator */
+    /** Log operator. */
+    NODE_TYPE_LOG = 79,
+    /** LogicalAnd operator. */
+    NODE_TYPE_LOGICAL_AND = 81,
+    /** LogicalNot operator. */
+    NODE_TYPE_LOGICAL_NOT = 82,
+    /** LogicalOr operator. */
+    NODE_TYPE_LOGICAL_OR = 83,
+    /** LRN operator. */
+    NODE_TYPE_LRN = 87,
+    /** LSTM operator. */
+    NODE_TYPE_LSTM = 87,
+    /** L2NormalizeFusion operator. */
+    NODE_TYPE_L2_NORMALIZE_FUSION = 88,
+    /** MatMul operator. */
     NODE_TYPE_MATMUL_FUSION = 89,
-    /** Maximum operator */
+    /** Maximum operator. */
     NODE_TYPE_MAXIMUM = 90,
-    /** MaxPool operator */
+    /** MaxPool operator. */
     NODE_TYPE_MAX_POOL_FUSION = 92,
-    /** Mul operator */
+    /** Minimum operator. */
+    NODE_TYPE_MINIMUM = 96,
+    /** Mod operator. */
+    NODE_TYPE_MOD = 98,
+    /** Mul operator. */
     NODE_TYPE_MUL_FUSION = 99,
-    /** OneHot operator */
+    /** Neg operator. */
+    NODE_TYPE_NEG = 101,
+    /** NotEqual operator. */
+    NODE_TYPE_NOT_EQUAL = 103,
+    /** OneHot operator. */
     NODE_TYPE_ONE_HOT = 105,
-    /** Pad operator */
+    /** Pad operator. */
     NODE_TYPE_PAD_FUSION = 107,
-    /** Pow operator */
+    /** Pow operator. */
     NODE_TYPE_POW_FUSION = 110,
-    /** PReLU operator */
+    /** PReLU operator. */
     NODE_TYPE_PRELU_FUSION = 112,
-    /** QuantDTypeCast operator */
+    /** QuantDTypeCast operator. */
     NODE_TYPE_QUANT_DTYPE_CAST = 113,
-    /** Reduce operator */
+    /** Rank operator. */
+    NODE_TYPE_RANK = 114,
+    /** Range operator. */
+    NODE_TYPE_RANGE = 115,
+    /** Reciprocal operator. */
+    NODE_TYPE_RECIPROCAL = 116,
+    /** RealDiv operator. */
+    NODE_TYPE_REAL_DIV = 117,
+    /** Reduce operator. */
     NODE_TYPE_REDUCE_FUSION = 118,
-    /** Reshape operator */
+    /** Reshape operator. */
     NODE_TYPE_RESHAPE = 119,
-    /** Resize operator */
+    /** Resize operator. */
     NODE_TYPE_RESIZE = 120,
-    /** Rsqrt operator */
+    /** Round operator. */
+    NODE_TYPE_ROUND = 125,
+    /** Rsqrt operator. */
     NODE_TYPE_RSQRT = 126,
-    /** Scale operator */
+    /** Scale operator. */
     NODE_TYPE_SCALE_FUSION = 127,
-    /** Shape operator */
+    /** ScatterNd operator. */
+    NODE_TYPE_SCATTER_ND = 128,
+    /** Shape operator. */
     NODE_TYPE_SHAPE = 130,
-    /** Slice operator */
+    /** Sin operator. */
+    NODE_TYPE_SIN = 133,
+    /** Slice operator. */
     NODE_TYPE_SLICE_FUSION = 135,
-    /** Softmax operator */
+    /** Softmax operator. */
     NODE_TYPE_SOFTMAX = 138,
-    /** SpaceToBatchND operator */
+    /** SpaceToBatchND operator. */
     NODE_TYPE_SPACE_TO_BATCH_ND = 141,
-    /** Split operator */
+    /** SpaceToDepth operator. */
+    NODE_TYPE_SPACE_TO_DEPTH = 142,
+    /** SparseToDense operator. */
+    NODE_TYPE_SPARSE_TO_DENSE = 144,
+    /** Split operator. */
     NODE_TYPE_SPLIT = 145,
-    /** Sqrt operator */
+    /** Sqrt operator. */
     NODE_TYPE_SQRT = 146,
-    /** Squeeze operator */
+    /** Squeeze operator. */
     NODE_TYPE_SQUEEZE = 147,
-    /** SquaredDifference operator */
+    /** Square operator. */
+    NODE_TYPE_SQUARE = 148,
+    /** SquaredDifference operator. */
     NODE_TYPE_SQUARED_DIFFERENCE = 149,
-    /** Stack operator */
+    /** Stack operator. */
     NODE_TYPE_STACK = 150,
-    /** StridedSlice operator */
+    /** StridedSlice operator. */
     NODE_TYPE_STRIDED_SLICE = 151,
-    /** Sub operator */
+    /** Sub operator. */
     NODE_TYPE_SUB_FUSION = 152,
-    /** Tile operator */
+    /** Tile operator. */
     NODE_TYPE_TILE_FUSION = 160,
-    /** TopK operator */
+    /** TopK operator. */
     NODE_TYPE_TOPK_FUSION = 161,
-    /** Transpose operator */
+    /** Transpose operator. */
     NODE_TYPE_TRANSPOSE = 162,
-    /** Unsqueeze operator */
+    /** Unsqueeze operator. */
     NODE_TYPE_UNSQUEEZE = 165,
+    /** Unstack operator. */
+    NODE_TYPE_UNSTACK = 166,
+    /** Where operator. */
+    NODE_TYPE_WHERE = 168,
+    /** Select operator. */
+    NODE_TYPE_SELECT = 170,
+    /** Ref operator. */
+    NODE_TYPE_ERF = 178,
+    /** LogSoftmax operator. */
+    NODE_TYPE_LOG_SOFTMAX = 189,
 };
 
 /**
  * @brief Enumerates the resize methods. It must be used together with the {@link Resize} operator.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 enum ResizeMethod : byte {
     /** Unknown. This is the default value. */
     RESIZE_METHOD_UNKNOWN = -1,
     /** Bilinear interpolation.
-     * For example, calculate the value of an unknown function <b>f</b> at point \f$ (x,y) \f$, where \f$ x_1< x < x_2, y_1< y < y_2 \f$.
-     * The values of the four coordinate points are \f$ Q_{11} = (x_1, y_1), Q_{12} = (x1, y2), Q_{21} = (x_2, y_1), and Q_{22} = (x_2, y_2) \f$.
-     * \f$f(Q_{11}), f(Q_{12}), f(Q_{21}), and f(Q_{22}) \f$ represent the values of the four points. The value of \f$ f(x,y) \f$ can be calculated by using the following formula:
+     * For example, calculate the value of an unknown function <b>f</b> at point \f$ (x,y) \f$, where\n
+     * \f$ x_1< x < x_2, y_1< y < y_2 \f$.
+     * The values of the four coordinate points are \f$ Q_{11} = (x_1, y_1), Q_{12} = (x1, y2), Q_{21} = (x_2, y_1),\n
+     * and Q_{22} = (x_2, y_2) \f$.
+     * \f$f(Q_{11}), f(Q_{12}), f(Q_{21}), and f(Q_{22}) \f$ represent the values of the four points.\n
+     * The value of \f$ f(x,y) \f$ can be calculated by using the following formula:
       \f[
          f(x,y_1) = \frac{x_2-x}{x_2-x_1}f(Q_{11})+\frac{x-x_1}{x_2-x_1}f(Q_{21})
       \f]
@@ -408,14 +513,19 @@ enum ResizeMethod : byte {
      */
     RESIZE_METHOD_LINEAR = 0,
     /** Nearest neighbor interpolation.
-     * For example, calculate the value of an unknown function <b>f</b> at point \f$ (x,y) \f$, where \f$ x_1< x < x_2, y_1< y < y_2 \f$.
-     * The values of the four coordinate points are \f$ Q_{11} = (x_1, y_1), Q_{12} = (x1, y2), Q_{21} = (x_2, y_1), and Q_{22} = (x_2, y_2) \f$.
+     * For example, calculate the value of an unknown function <b>f</b> at point \f$ (x,y) \f$, where\n
+     * \f$ x_1< x < x_2, y_1< y < y_2 \f$.
+     * The values of the four coordinate points are \f$ Q_{11} = (x_1, y_1), Q_{12} = (x1, y2),\n
+     * Q_{21} = (x_2, y_1), and Q_{22} = (x_2, y_2) \f$.
      * Then, the value of the point closest to the point \f$(x,y) \f$ is the value of \f$ f(x,y) \f$.
      */
     RESIZE_METHOD_NEAREST = 1,
     /** Bicubic interpolation.
-     * Bicubic interpolation obtains the value of a sampling point by calculating the weighted average of the values of 16 points around the sampling point. This parameter must be used together with <b>cubicCoeff</b> and <b>coordinateTransformMode</b> of {@link Resize}.
-     * When coordinateTransformMode==COORDINATE_TRANSFORM_MODE_HALF_PIXEL, <b>cubicCoeff</b> is <b>-0.5</b>. In other cases, cubicCoeff is <b>-0.75</b>. The weight function of the interpolation is as follows:
+     * Bicubic interpolation obtains the value of a sampling point by calculating the weighted average of the\n
+     * values of 16 points around the sampling point. This parameter must be used together with <b>cubicCoeff</b>\n
+     * and <b>coordinateTransformMode</b> of {@link Resize}.
+     * When coordinateTransformMode==COORDINATE_TRANSFORM_MODE_HALF_PIXEL, <b>cubicCoeff</b> is <b>-0.5</b>.\n
+     * In other cases, cubicCoeff is <b>-0.75</b>. The weight function of the interpolation is as follows:
       \f[
          W(x) =
          \begin{cases}
@@ -442,7 +552,7 @@ enum ResizeMethod : byte {
  * COORDINATE_TRANSFORM_MODE_HALF_PIXEL: \f$ old_i = newWidth > 1 ? (new_x + 0.5) * oldWidth / newWidth - 0.5 : 0 \f$<br>
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 enum CoordinateTransformMode : byte {
     /** Scale based on the ratio without alignment. */
@@ -454,10 +564,11 @@ enum CoordinateTransformMode : byte {
 };
 
 /**
- * @brief Enumerates the nearest neighbor interpolation types. It must be used together with the {@link Resize} operator.
+ * @brief Enumerates the nearest neighbor interpolation types. It must be used together with the
+ * {@link Resize} operator.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 enum NearestMode : byte {
     /** Round off. */
@@ -466,25 +577,30 @@ enum NearestMode : byte {
     NEAREST_MODE_ROUND_HALF_DOWN = 1,
     /** Round toward positive infinity. For example, 23.5 is rounded to 24, and −23.5 is rounded to −23. */
     NEAREST_MODE_ROUND_HALF_UP = 2,
-    /** Round down to the nearest integer. For example, 23.5 is rounded down to 23, and −23.5 is rounded down to −24. */
+    /** Round down to the nearest integer. For example, 23.5 is rounded down to 23, and −23.5 is rounded down
+      * to −24.
+      */
     NEAREST_MODE_FLOOR = 3,
     /** Round up to the nearest integer. For example, 23.5 is rounded up to 24, and −23.5 is rounded up to −23. */
     NEAREST_MODE_CEIL = 4
 };
 
 /**
- * @brief Enumerates the activation function types. Activation functions introduce nonlinearity to neural networks. This allows the use of neural network models in nonlinear models.
- * If an operator in the {@link NodeAttrTypes.idl} file has <b>ActivationType</b> parameters, the corresponding activation function will be called after the operator calculation is complete.
+ * @brief Enumerates the activation function types. Activation functions introduce nonlinearity to neural networks.\n
+ * This allows the use of neural network models in nonlinear models.
+ * If an operator in the {@link NodeAttrTypes.idl} file has <b>ActivationType</b> parameters,\n
+ * the corresponding activation function will be called after the operator calculation is complete.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 enum ActivationType : byte {
     /** No activation function. */
     ACTIVATION_TYPE_NO_ACTIVATION = 0,
     /**
      * ReLU activation function.
-     * ReLU calculates \f$ max(x_i, 0) \f$ element by element. It outputs the value directly if it is positive; otherwise, it outputs <b>0</b>.
+     * ReLU calculates \f$ max(x_i, 0) \f$ element by element. It outputs the value directly if it is positive;\n
+     * otherwise, it outputs <b>0</b>.
      \f[
         \text{ReLU}(x_i) = (x_i)^+ = \max(x_i, 0),
      \f]
@@ -503,7 +619,8 @@ enum ActivationType : byte {
     ACTIVATION_TYPE_SIGMOID = 2,
     /**
      * ReLU6 activation function.
-     * ReLU6 is similar to ReLU. The difference is ReLU6 has an upper limit of <b>6</b>. If the input is greater than 6, the output is limited to <b>6</b>.
+     * ReLU6 is similar to ReLU. The difference is ReLU6 has an upper limit of <b>6</b>. If the input is greater than 6,\n
+     * the output is limited to <b>6</b>.
      * The ReLU6 function is defined as follows:
      \f[
         \text{ReLU6}(x_i) = \min(\max(0, x_i), 6)
@@ -522,7 +639,8 @@ enum ActivationType : byte {
         \alpha * (\exp(x_i) - 1), &\text{otherwise.}
         \end{cases}
      \f]
-     * <b>\f$ x_i \f$</b> indicates the input element, and <b>\f$ \alpha \f$</b> indicates the alpha parameter, which is set by {@link Activation}.
+     * <b>\f$ x_i \f$</b> indicates the input element, and <b>\f$ \alpha \f$</b> indicates the alpha parameter,\n
+     * which is set by {@link Activation}.
      */
     ACTIVATION_TYPE_ELU = 4,
     /**
@@ -535,7 +653,8 @@ enum ActivationType : byte {
             {\alpha} * x_i, &\text{otherwise.}
         \end{cases}
      \f]
-     * <b>\f$ x_i \f$</b> indicates the input element, and <b>\f$ \alpha \f$</b> indicates the alpha parameter, which is set by {@link Activation}.
+     * <b>\f$ x_i \f$</b> indicates the input element, and <b>\f$ \alpha \f$</b> indicates the alpha parameter,\n
+     * which is set by {@link Activation}.
      */
     ACTIVATION_TYPE_LEAKY_RELU = 5,
     /**
@@ -595,7 +714,8 @@ enum ActivationType : byte {
         \text{alpha} * (\exp(x_i) - 1), &\text{otherwise.}
         \end{cases}
      \f]
-     * <b>\f$ x_i \f$</b> is the input element, and <b>\f$ \alpha \f$</b> and <b>\f$ scale \f$</b> are predefined constants (\f$ \alpha = 1.67326324 \f$, \f$ scale = 1.05070098 \f$).
+     * <b>\f$ x_i \f$</b> is the input element, and <b>\f$ \alpha \f$</b> and <b>\f$ scale \f$</b> are predefined\n
+     * constants (\f$ \alpha = 1.67326324 \f$, \f$ scale = 1.05070098 \f$).
      */
     ACTIVATION_TYPE_SELU = 11,
     /**
@@ -645,7 +765,8 @@ enum ActivationType : byte {
             x_i & \text{ otherwise } \\
         \end{cases}
      \f]
-     * <b>\f$ x_i \f$</b> is the input, <b>\f$ max\_val \f$</b> is the maximum value, and <b>\f$ min\_val \f$</b> is the minimum value. The two parameters are set by {@link Activation}.
+     * <b>\f$ x_i \f$</b> is the input, <b>\f$ max\_val \f$</b> is the maximum value, and <b>\f$ min\_val \f$</b>\n
+     * is the minimum value. The two parameters are set by {@link Activation}.
      */
     ACTIVATION_TYPE_HARD_TANH = 16,
     /**
@@ -674,11 +795,12 @@ enum ActivationType : byte {
      \f[
         GELU(x_i) = x_i*P(X < x_i)
      \f]
-     * <b>\f$ x_i \f$</b> is the input element, and <b>\f$ P \f$</b> is a cumulative distribution function of the standard Gaussian distribution.
+     * <b>\f$ x_i \f$</b> is the input element, and <b>\f$ P \f$</b> is a cumulative distribution function of\n
+     * the standard Gaussian distribution.
      * You need to use the <b>approximate</b> parameter of {@link Activation} to specify whether to use approximation.
      */
     ACTIVATION_TYPE_GELU = 19,
-    /** Unknown */
+    /** Unknown. */
     ACTIVATION_TYPE_UNKNOWN = 20
 };
 
@@ -686,7 +808,7 @@ enum ActivationType : byte {
  * @brief Enumerates the modes for removing dimensions. It must be used together with the {@link ReduceFusion} operator.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 enum ReduceMode : byte {
     /** Use the average value of all elements of a dimension to replace other elements of the dimension. */
@@ -708,10 +830,11 @@ enum ReduceMode : byte {
 };
 
 /**
- * @brief Enumerates the calculation types supported by elements. It must be used together with the {@link Eltwise} operator.
+ * @brief Enumerates the calculation types supported by elements. It must be used together with the\n
+ * {@link Eltwise} operator.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 enum EltwiseMode : byte {
     /** Product of the elements of two tensors */
@@ -720,15 +843,16 @@ enum EltwiseMode : byte {
     ELTWISE_MODE_SUM = 1,
     /** Maximum value of the elements of two tensors */
     ELTWISE_MODE_MAXIMUM = 2,
-    /** Unknown type */
+    /** Unknown type. */
     ELTWISE_MODE_UNKNOWN = 3
 };
 
 /**
- * @brief Enumerates the padding types. It must be used together with {@link AvgPoolFusion}, {@link AvgPoolFusion}, {@link Conv2DFusion}, and {@link MaxPoolFusion}.
+ * @brief Enumerates the padding types. It must be used together with {@link AvgPoolFusion}, {@link AvgPoolFusion},\n
+ * {@link Conv2DFusion}, and {@link MaxPoolFusion}.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 enum PadMode : byte {
     /**
@@ -737,22 +861,25 @@ enum PadMode : byte {
      */
     PAD_MODE_PAD = 0,
     /**
-     * The output height and width are obtained by dividing the input height and width by a stride and rounding off the quotient to an integer.
+     * The output height and width are obtained by dividing the input height and width by a stride and rounding off\n
+     * the quotient to an integer.
      * If this mode is used, the padding parameter of the operator must be <b>0</b>.
      */
     PAD_MODE_SAME = 1,
     /**
-     * Return the output of a valid calculation without padding. Pixels that do not meet the calculation requirements will be discarded.
+     * Return the output of a valid calculation without padding. Pixels that do not meet the calculation requirements\n
+     * will be discarded.
      * If this mode is used, the padding parameter of the operator must be <b>0</b>.
      */
     PAD_MODE_VALID = 2,
 };
 
 /**
- * @brief Enumerates the algorithms for rounding off decimals. It must be used together with the {@link AvgPoolFusion} operator.
+ * @brief Enumerates the algorithms for rounding off decimals. It must be used together with the\n
+ * {@link AvgPoolFusion} operator.
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 enum RoundMode : byte {
     /** Round down to the nearest integer. For example, 23.5 is rounded down to 23, and −23.5 is rounded down to −24. */
@@ -764,7 +891,8 @@ enum RoundMode : byte {
 /**
  * @brief Enumerates the padding modes. It must be used together with the {@link PadFusion} operator.
  *
- * When <b>x</b> is \f$[[1,2,3],[4,5,6],[7,8,9]]\f$ and <b>paddings</b>is \f$[[2,2], [2,2]] \f$, the effect is as follows: <br>
+ * When <b>x</b> is \f$[[1,2,3],[4,5,6],[7,8,9]]\f$ and <b>paddings</b>is \f$[[2,2], [2,2]] \f$,\n
+ * the effect is as follows: <br>
  * If paddingMode==PADDING_MODE_CONSTANT and constantValue = 0, the output is as follows:
  *
       \f$[[0. 0. 0. 0. 0. 0. 0.],\\
@@ -796,7 +924,7 @@ enum RoundMode : byte {
           [5. 4. 4. 5. 6. 6. 5.]]\\ \f$
  *
  * @since 3.2
- * @version 1.0
+ * @version 2.1
  */
 enum PaddingMode : byte {
     /** Constant (0 by default) padding. */
@@ -809,4 +937,80 @@ enum PaddingMode : byte {
     PADDING_MODE_RESERVED = 3
 };
 
+/**
+ * @brief Dedicated error codes defined by NNRt. They are used as the return values of HDIs.
+ *
+ * @since 4.0
+ * @version 2.1
+ */
+enum NNRT_ReturnCode : unsigned int {
+    /** Success. */
+    NNRT_SUCCESS = 0,
+    /** Failed. */
+    NNRT_FAILED = 1,
+    /** Null pointer. */
+    NNRT_NULL_PTR = 2,
+    /** Invalid parameter. */
+    NNRT_INVALID_PARAMETER = 3,
+    /** Memory error. */
+    NNRT_MEMORY_ERROR = 4,
+    /** Insufficient memory. */
+    NNRT_OUT_OF_MEMORY = 5,
+    /** Forbidden operation. */
+    NNRT_OPERATION_FORBIDDEN = 6,
+    /** Invalid file. */
+    NNRT_INVALID_FILE = 7,
+    /** Invalid path. */
+    NNRT_INVALID_PATH = 8,
+    /** Insufficient cache. */
+    NNRT_INSUFFICIENT_BUFFER = 9,
+    /** No change. */
+    NNRT_NO_CHANGE = 10,
+    /** Not supported. */
+    NNRT_NOT_SUPPORT = 11,
+    /** Service error. */
+    NNRT_SERVICE_ERROR = 12,
+    /** Device error. */
+    NNRT_DEVICE_ERROR = 13,
+    /** Device busy. */
+    NNRT_DEVICE_BUSY = 14,
+    /** Operation canceled. */
+    NNRT_CANCELLED = 15,
+    /** Access denied. */
+    NNRT_PERMISSION_DENIED = 16,
+    /** Timeout. */
+    NNRT_TIME_OUT = 17,
+    /** Invalid tensor. */
+    NNRT_INVALID_TENSOR = 18,
+    /** Invalid node. */
+    NNRT_INVALID_NODE = 19,
+    /** Invalid input. */
+    NNRT_INVALID_INPUT = 20,
+    /** Invalid output. */
+    NNRT_INVALID_OUTPUT = 21,
+    /** Invalid data type. */
+    NNRT_INVALID_DATATYPE = 22,
+    /** Invalid data layout. */
+    NNRT_INVALID_FORMAT = 23,
+    /** Invalid tensor name. */
+    NNRT_INVALID_TENSOR_NAME = 24,
+    /** Invalid shape. */
+    NNRT_INVALID_SHAPE = 25,
+    /** Dimension range exceeded. */
+    NNRT_OUT_OF_DIMENTION_RANGES = 26,
+    /** Invalid cache. */
+    NNRT_INVALID_BUFFER = 27,
+    /** Invalid cache size. */
+    NNRT_INVALID_BUFFER_SIZE = 28,
+    /** Invalid performance mode. */
+    NNRT_INVALID_PERFORMANCE_MODE = 29,
+    /** Invalid priority. */
+    NNRT_INVALID_PRIORITY = 30,
+    /** Invalid model. */
+    NNRT_INVALID_MODEL = 31,
+    /** Invalid model cache. */
+    NNRT_INVALID_MODEL_CACHE = 32,
+    /** Operator not supported. */
+    NNRT_UNSUPPORTED_OP = 33
+};
 /** @} */

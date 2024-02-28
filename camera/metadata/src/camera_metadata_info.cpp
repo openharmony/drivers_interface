@@ -28,7 +28,7 @@ static CameraVendorTag* g_vendorTagImpl = nullptr;
 const char* g_exampleVendorTagLib = "libcamera_example_vendor_tag_impl.z.so";
 const char* g_vendorTagLib = "libcamera_vendor_tag_impl.z.so";
 const int METADATA_HEADER_DATA_SIZE = 4;
-const std::vector<int32_t> g_metadataTags = {
+const std::vector<uint32_t> g_metadataTags = {
     OHOS_ABILITY_CAMERA_POSITION,
     OHOS_ABILITY_CAMERA_TYPE,
     OHOS_ABILITY_CAMERA_CONNECTION_TYPE,
@@ -39,6 +39,9 @@ const std::vector<int32_t> g_metadataTags = {
     OHOS_ABILITY_SKETCH_ENABLE_RATIO,
     OHOS_ABILITY_SKETCH_REFERENCE_FOV_RATIO,
     OHOS_ABILITY_AVAILABLE_COLOR_SPACES,
+    OHOS_ABILITY_MOON_CAPTURE_BOOST,
+    OHOS_CONTROL_MOON_CAPTURE_BOOST,
+    OHOS_STATUS_MOON_CAPTURE_DETECTION,
 
     OHOS_SENSOR_EXPOSURE_TIME,
     OHOS_SENSOR_COLOR_CORRECTION_GAINS,
@@ -162,6 +165,8 @@ const std::vector<int32_t> g_metadataTags = {
     OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE,
     OHOS_CONTROL_CAMERA_PHYSICAL_APERTURE_VALUE,
     OHOS_DEVICE_EXITCAMERA_EVENT,
+    OHOS_CONTROL_SUPER_SLOW_CHECK_AREA,
+    OHOS_STATUS_SUPER_SLOW_MOTION,
 
     // camera secure related
     OHOS_CONTROL_SECURE_FACE_MODE,

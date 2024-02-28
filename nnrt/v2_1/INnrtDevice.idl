@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,7 +22,7 @@
  * oriented to the AI field.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 
 /**
@@ -33,20 +33,20 @@
  * You can use the methods to query chip device information and build AI models.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 
 /**
  * @brief Defines the package path of the NNRt module.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
-package ohos.hdi.nnrt.v2_0;
+package ohos.hdi.nnrt.v2_1;
 
-import ohos.hdi.nnrt.v2_0.NnrtTypes;
-import ohos.hdi.nnrt.v2_0.ModelTypes;
-import ohos.hdi.nnrt.v2_0.IPreparedModel;
+import ohos.hdi.nnrt.v2_1.NnrtTypes;
+import ohos.hdi.nnrt.v2_1.ModelTypes;
+import ohos.hdi.nnrt.v2_1.IPreparedModel;
 
 /**
  * @brief Provides methods for device management and model building.
@@ -55,7 +55,7 @@ import ohos.hdi.nnrt.v2_0.IPreparedModel;
  * and vendor name is globally unique.
  *
  * @since 3.2
- * @version 2.0
+ * @version 2.1
  */
 interface INnrtDevice {
     /**
@@ -92,7 +92,7 @@ interface INnrtDevice {
     GetDeviceType([out] enum DeviceType deviceType);
 
     /**
-      * @brief Obtains the device status.
+     * @brief Obtains the device status.
      *
      * @param deviceType Device status. For details, see {@link DeviceStatus}.
      *
@@ -212,7 +212,8 @@ interface INnrtDevice {
      * are passed by the inference framework to the NNRt module and then parsed by the NNRt module.
      *
      * @param offlineModels Array of offline model files. The sequence of array elements depends on the format of\n
-     * the input offline model. For details about the element types, see the definition of SharedBuffer {@link SharedBuffer}.
+     * the input offline model. For details about the element types, see the definition of SharedBuffer\n
+     * {@link SharedBuffer}.
      * @param config Configuration for loading the offline model files. For details, see {@link ModelConfig}.
      * @param preparedModel Model object obtained. For details, see {@link IPreparedModel}.
      *
@@ -238,7 +239,7 @@ interface INnrtDevice {
     AllocateBuffer([in] unsigned int length, [out] struct SharedBuffer buffer);
 
     /**
-      * @brief Releases the shared memory.
+     * @brief Releases the shared memory.
      *
      * @param buffer Information about the shared memory allocated, including the file descriptor and size.\n
      * For details, see {@link SharedBuffer}.

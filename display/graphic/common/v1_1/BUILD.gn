@@ -11,26 +11,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("../../../hdf_core/adapter/uhdf2/hdi.gni")
-if (defined(ohos_lite)) {
-  group("libpower_proxy_1.1") {
-    deps = []
-    public_configs = []
-  }
-} else {
-  hdi("power") {
-    module_name = "power_interface_service"
+import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
 
-    sources = [
-      "IPowerHdiCallback.idl",
-      "IPowerInterface.idl",
-      "IPowerRunningLockCallback.idl",
-      "PowerTypes.idl",
-      "RunningLockTypes.idl",
-    ]
+hdi("display_commontype") {
+  module_name = "display_commontype"
 
-    language = "cpp"
-    subsystem_name = "hdf"
-    part_name = "drivers_interface_power"
-  }
+  sources = [ "BufferHandleMetaKeyType.idl" ]
+
+  language = "cpp"
+  subsystem_name = "hdf"
+  part_name = "drivers_interface_display"
 }
