@@ -32,7 +32,7 @@ interface IWlanInterface extends ohos.hdi.wlan.v1_2.IWlanInterface {
      * @brief get coex channel list.
      *
      * @param ifName Indicates the NIC name.
-     * @param parmeBuf coex channel list.
+     * @param paramBuf coex channel list.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a negative value if the operation fails.

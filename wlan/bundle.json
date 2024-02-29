@@ -84,7 +84,7 @@
             }
           },
           {
-            "name": "//drivers/interface/wlan/v1_3:libwpa_proxy_1.3",
+            "name": "//drivers/interface/wlan/v1_3:libwlan_proxy_1.3",
             "header": {
               "header_files": [
               ],
@@ -92,7 +92,7 @@
             }
           },
           {
-            "name": "//drivers/interface/wlan/wpa/v1_3:wpa_idl_headers",
+            "name": "//drivers/interface/wlan/v1_3:wlan_idl_headers",
             "header": {
               "header_files": [
               ],
@@ -100,7 +100,7 @@
             }
           },
           {
-            "name": "//drivers/interface/wlan/wpa/v1_3:libwpa_stub_1.3",
+            "name": "//drivers/interface/wlan/v1_3:libwlan_stub_1.3",
             "header": {
               "header_files": [
               ],
