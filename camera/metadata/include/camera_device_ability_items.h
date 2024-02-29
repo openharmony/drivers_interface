@@ -239,6 +239,7 @@ typedef enum camera_device_metadata_tag {
 
     OHOS_ABILITY_VIDEO_STABILIZATION_MODES = OHOS_STREAM_VIDEO_START,
     OHOS_CONTROL_VIDEO_STABILIZATION_MODE,
+    OHOS_CONTROL_VIDEO_DEBUG_SWITCH,
     OHOS_STREAM_VIDEO_END,
 
     // camera effects & algorithms
@@ -282,6 +283,12 @@ typedef enum camera_device_metadata_tag {
     OHOS_CONTROL_SUPPORTED_COLOR_MODES,
     OHOS_XMAGE_COLOR_MODES_END,
 } camera_device_metadata_tag_t;
+
+// switch type tag enumeration values
+typedef enum camera_switch_enum {
+    OHOS_CAMERA_SWTICH_OFF = 0,
+    OHOS_CAMERA_SWTICH_ON,
+} camera_switch_enum_t;
 
 // OHOS_ABILITY_CAMERA_POSITION enumeration values
 typedef enum camera_position_enum {

@@ -141,6 +141,7 @@ const std::vector<uint32_t> g_metadataTags = {
 
     OHOS_ABILITY_VIDEO_STABILIZATION_MODES,
     OHOS_CONTROL_VIDEO_STABILIZATION_MODE,
+    OHOS_CONTROL_VIDEO_DEBUG_SWITCH,
 
     // camera effects & algorithms
     OHOS_ABILITY_SCENE_FILTER_TYPES,

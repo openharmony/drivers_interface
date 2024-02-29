@@ -249,6 +249,8 @@ static item_info_t g_ohosStreamVideo[OHOS_STREAM_VIDEO_END - OHOS_STREAM_VIDEO_S
         OHOS_STREAM_VIDEO_START] = {"videoAvailableStabilizationModes", META_TYPE_BYTE, -1},
     [OHOS_CONTROL_VIDEO_STABILIZATION_MODE -
         OHOS_STREAM_VIDEO_START] = {"videoStabilizationMode",           META_TYPE_BYTE, 1 },
+    [OHOS_CONTROL_VIDEO_DEBUG_SWITCH -
+        OHOS_STREAM_VIDEO_START] = {"videoDebugSwitch",           META_TYPE_BYTE, 1 },
 };
 
 static item_info_t g_ohosPostProcess[OHOS_CAMERA_EFFECT_END - OHOS_CAMERA_EFFECT_START] {
