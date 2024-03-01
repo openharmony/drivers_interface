@@ -71,6 +71,20 @@ interface IHostapdInterface {
     StartAp();
 
     /**
+     * @brief Start AP for different ifName.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param id - ap id.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    StartApWithCmd([in] String ifName, [in] int id);
+
+    /**
      * @brief Stop AP.
      *
      * @param ifName Indicates the NIC name.
@@ -215,6 +229,21 @@ interface IHostapdInterface {
      * @version 1.0
      */
     SetApMaxConn([in] String ifName, [in] int maxConn, [in] int id);
+
+    /**
+     * @brief To check the configuration information, deliver security parameters to
+     * the driver, and clear old AP information after set ap configuration information.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param id - ap id.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    ReloadApConfigInfo([in] String ifName, [in] int id);
 
     /**
      * @brief To set the blocklish filtering in AP mode to prohibit
