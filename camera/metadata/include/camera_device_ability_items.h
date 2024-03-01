@@ -577,8 +577,8 @@ typedef enum camera_macro_status_control_type {
 
 // OHOS_CONTROL_MOON_CAPTURE_BOOST enumeration values
 typedef enum camera_moon_capture_boost_control_type {
-    OHOS_CAMERA_MOON_CAPTURE_BOOST_ENABLE = 0,
-    OHOS_CAMERA_MOON_CAPTURE_BOOST_DISABLE,
+    OHOS_CAMERA_MOON_CAPTURE_BOOST_DISABLE = 0,
+    OHOS_CAMERA_MOON_CAPTURE_BOOST_ENABLE,
 } camera_moon_capture_boost_control_type_t;
 
 // OHOS_CONTROL_PREPARE_ZOOM enumeration values
