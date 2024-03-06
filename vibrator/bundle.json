@@ -28,7 +28,8 @@
       "build": {
         "sub_component": [
           "//drivers/interface/vibrator/v1_1:vibrator_idl_target",
-          "//drivers/interface/vibrator/v1_2:vibrator_idl_target"
+          "//drivers/interface/vibrator/v1_2:vibrator_idl_target",
+          "//drivers/interface/vibrator/v1_3:vibrator_idl_target"
         ],
         "test": [
         ],
@@ -75,6 +76,30 @@
           },
           {
             "name": "//drivers/interface/vibrator/v1_2:vibrator_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/vibrator"
+            }
+          },
+          {
+            "name": "//drivers/interface/vibrator/v1_3:libvibrator_proxy_1.3",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/vibrator"
+            }
+          },
+          {
+            "name": "//drivers/interface/vibrator/v1_3:libvibrator_stub_1.3",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/vibrator"
+            }
+          },
+          {
+            "name": "//drivers/interface/vibrator/v1_3:vibrator_idl_headers",
             "header": {
               "header_files": [
               ],
