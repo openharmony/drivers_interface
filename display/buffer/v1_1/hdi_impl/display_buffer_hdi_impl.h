@@ -97,8 +97,8 @@ public:
     }
 private:
     using BaseType1_0 = V1_0::DisplayBufferHdiImpl<Interface>;
-    using BaseType1_0::WAIT_TIME_INTERVAL;
 protected:
+    using BaseType1_0::WAIT_TIME_INTERVAL;
     sptr<IMetadata> metadata_;
 };
 using HdiDisplayBufferImpl = DisplayBufferHdiImpl<V1_1::IDisplayBuffer>;
