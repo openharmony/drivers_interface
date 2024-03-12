@@ -74,6 +74,12 @@ static item_info_t g_ohosCameraProperties[OHOS_CAMERA_PROPERTIES_END - OHOS_CAME
         OHOS_CAMERA_PROPERTIES_START] = {"cameraExposureModePreviewState", META_TYPE_BYTE, 1},
     [OHOS_ABILITY_AVAILABLE_COLOR_SPACES -
         OHOS_CAMERA_PROPERTIES_START] = {"availableColorSpaces", META_TYPE_INT32, -1},
+    [OHOS_ABILITY_MOON_CAPTURE_BOOST -
+        OHOS_CAMERA_PROPERTIES_START] = {"cameraAbilityMoonCaptureBoost", META_TYPE_UINT32, -1},
+    [OHOS_CONTROL_MOON_CAPTURE_BOOST -
+        OHOS_CAMERA_PROPERTIES_START] = {"cameraControlMoonCaptureBoost", META_TYPE_UINT32, 1},
+    [OHOS_STATUS_MOON_CAPTURE_DETECTION -
+        OHOS_CAMERA_PROPERTIES_START] = {"cameraStatusMoonCaptureDetection", META_TYPE_UINT32, 1},
     [OHOS_CAMERA_USER_ID -
         OHOS_CAMERA_PROPERTIES_START] = {"cameraUserId", META_TYPE_INT32, -1},
 };
@@ -243,6 +249,8 @@ static item_info_t g_ohosStreamVideo[OHOS_STREAM_VIDEO_END - OHOS_STREAM_VIDEO_S
         OHOS_STREAM_VIDEO_START] = {"videoAvailableStabilizationModes", META_TYPE_BYTE, -1},
     [OHOS_CONTROL_VIDEO_STABILIZATION_MODE -
         OHOS_STREAM_VIDEO_START] = {"videoStabilizationMode",           META_TYPE_BYTE, 1 },
+    [OHOS_CONTROL_VIDEO_DEBUG_SWITCH -
+        OHOS_STREAM_VIDEO_START] = {"videoDebugSwitch",           META_TYPE_BYTE, 1 },
 };
 
 static item_info_t g_ohosPostProcess[OHOS_CAMERA_EFFECT_END - OHOS_CAMERA_EFFECT_START] {
@@ -289,6 +297,10 @@ static item_info_t g_ohosPostProcess[OHOS_CAMERA_EFFECT_END - OHOS_CAMERA_EFFECT
     [OHOS_CONTROL_CAMERA_PHYSICAL_APERTURE_VALUE -
         OHOS_CAMERA_EFFECT_START] = {"cameraPhysicalApertureControlValue", META_TYPE_FLOAT, 1},
     [OHOS_DEVICE_EXITCAMERA_EVENT - OHOS_CAMERA_EFFECT_START] = {"exitCameraEvent", META_TYPE_BYTE, 1},
+    [OHOS_CONTROL_SUPER_SLOW_CHECK_AREA -
+        OHOS_CAMERA_EFFECT_START] = {"superSlowMotionCheckArea", META_TYPE_FLOAT, -1},
+    [OHOS_STATUS_SUPER_SLOW_MOTION -
+        OHOS_CAMERA_EFFECT_START] = {"superSlowMotionStatus", META_TYPE_BYTE, 1},
 };
 
 static item_info_t g_ohosCameraSecure[OHOS_CAMERA_SECURE_END - OHOS_CAMERA_SECURE_START] = {

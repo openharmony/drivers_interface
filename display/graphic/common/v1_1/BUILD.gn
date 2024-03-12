@@ -11,23 +11,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("../../../../hdf_core/adapter/uhdf2/hdi.gni")
-if (defined(ohos_lite)) {
-  group("libimage_proxy_1.0") {
-    deps = []
-    public_configs = []
-  }
-} else {
-  hdi("image") {
-    module_name = "codec_service"
+import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
 
-    sources = [
-      "CodecImageType.idl",
-      "ICodecImage.idl",
-    ]
-    language = "cpp"
-    innerapi_tags = [ "platformsdk" ]
-    subsystem_name = "hdf"
-    part_name = "drivers_interface_codec"
-  }
+hdi("display_commontype") {
+  module_name = "display_commontype"
+
+  sources = [ "BufferHandleMetaKeyType.idl" ]
+
+  language = "cpp"
+  subsystem_name = "hdf"
+  part_name = "drivers_interface_display"
 }
