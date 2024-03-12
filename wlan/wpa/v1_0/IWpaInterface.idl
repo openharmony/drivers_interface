@@ -1175,4 +1175,18 @@ import ohos.hdi.wlan.wpa.v1_0.IWpaCallback;
      * @version 1.0
      */
      StaShellCmd([in] String ifName, [in] String cmd);
+
+    /**
+    * @brief wpa vendor ext process cmd.
+    *
+    * @param ifName Indicates the NIC name.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a negative value if the operation fails.
+    *
+    * @since 4.1
+    * @version 1.0
+    */
+    VendorProcessCmd([in] String ifname, [in] String cmd);
+
  }

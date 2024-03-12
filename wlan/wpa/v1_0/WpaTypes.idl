@@ -464,3 +464,16 @@ struct HdiWpaAuthRejectParam {
     unsigned short authTransaction;
     unsigned short statusCode;
 };
+
+struct WpaVendorInfo {
+    int type;
+    int freq;
+    int width;
+    int id;
+    int status;
+    int reason;
+    unsigned char[] ssid;
+    unsigned char[] psk;
+    unsigned char[] devAddr;
+    unsigned char[] data;
+};
