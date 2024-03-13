@@ -265,8 +265,9 @@ typedef enum camera_device_metadata_tag {
     OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE,
     OHOS_CONTROL_CAMERA_PHYSICAL_APERTURE_VALUE,
     OHOS_DEVICE_EXITCAMERA_EVENT,
-    OHOS_CONTROL_SUPER_SLOW_CHECK_AREA,
-    OHOS_STATUS_SUPER_SLOW_MOTION,
+    OHOS_STATUS_SLOW_MOTION_DETECTION,
+    OHOS_ABILITY_MOTION_DETECTION_SUPPORT,
+    OHOS_CONTROL_MOTION_DETECTION,
     OHOS_CAMERA_EFFECT_END,
 
     // camera secure related
@@ -595,12 +596,24 @@ typedef enum camera_zoomsmooth_control_type {
 } camera_zoomsmooth_control_type_t;
 
 // OHOS_STATUS_SUPER_SLOW_MOTION enumeration values
-typedef enum camera_super_slow_motion_status_type {
-    OHOS_CAMERA_SUPER_SLOW_MOTION_DISABLE = 0,
-    OHOS_CAMERA_SUPER_SLOW_MOTION_READY,
-    OHOS_CAMERA_SUPER_SLOW_MOTION_VIDEO_DONE,
-    OHOS_CAMERA_SUPER_SLOW_MOTION_FINISH,
-    OHOS_CAMERA_SUPER_SLOW_MOTION_VIDEO_START,
-} camera_super_slow_motion_status_type_t;
+typedef enum camera_slow_motion_status_type {
+    OHOS_CONTROL_SLOW_MOTION_STATUS_DISABLE = 0,
+    OHOS_CONTROL_SLOW_MOTION_STATUS_READY,
+    OHOS_CONTROL_SLOW_MOTION_STATUS_START,
+    OHOS_CONTROL_SLOW_MOTION_STATUS_RECORDING,
+    OHOS_CONTROL_SLOW_MOTION_STATUS_FINISH,
+} camera_slow_motion_status_type_t;
+
+// OHOS_ABILITY_MOTION_DETECTION_SUPPORT enumeration values
+typedef enum camera_motion_detection_supported_type {
+    OHOS_CAMERA_MOTION_DETECTION_NOT_SUPPORTED = 0,
+    OHOS_CAMERA_MOTION_DETECTION_SUPPORTED,
+} camera_motion_detection_supported_type_t;
+
+//  OHOS_CONTROL_MOTION_DETECTION enumeration values
+typedef enum camera_motion_detection_control_type {
+    OHOS_CAMERA_MOTION_DETECTION_DISABLE = 0,
+    OHOS_CAMERA_MOTION_DETECTION_ENABLE,
+} camera_motion_detection_control_type_t;
 
 #endif
