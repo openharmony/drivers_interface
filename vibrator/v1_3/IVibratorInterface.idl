@@ -54,5 +54,5 @@ interface IVibratorInterface extends ohos.hdi.vibrator.v1_2.IVibratorInterface{
      * @since 2.2
      * @version 1.0
      */
-    StartByIntensity([in] String effectType, [in] int Intensity);
+    StartByIntensity([in] String effectType, [in] unsigned short intensity);
 }
