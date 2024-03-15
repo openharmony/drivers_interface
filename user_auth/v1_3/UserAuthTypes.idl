@@ -51,4 +51,31 @@ struct EnrolledState {
     unsigned short credentialCount;
 };
 
+/**
+ * @brief Request information of reused unlock result.
+ *
+ * @since 5.0
+ * @version 1.3
+ */
+struct ReuseUnlockInfo {
+    /** User ID. */
+    int userId;
+    /** Authentication trust level. */
+    unsigned int authTrustLevel;
+    /** Authentication type. See @{AuthType}. */
+    enum AuthType[] authTypes;
+    /** Challenge of the authentication. */
+    unsigned char[] challenge;
+    /** Caller name. */
+    String callerName;
+    /** Caller Type. */
+    int callerType;
+    /** Calling api version. */
+    int apiVersion;
+    /** The allowable reuse duration. */
+    unsigned long reuseUnlockResultDuration;
+    /** Reuse unlock result mode. */
+    unsigned int reuseUnlockResultMode;
+};
+
 /** @} */
