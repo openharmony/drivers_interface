@@ -61,17 +61,17 @@ enum EvaluationResultCode {
     UNKNOWN = 0,                         /**< Unknown */
     PASS = 1,                            /**< Pass */
     WORD_EMPTY = 2,                      /**< Word is empty */
-    ONLY_SUPPORT_CHINESE = 3,            /**< Only chinese is supported */
+    CHINESE_ONLY = 3,                    /**< Only chinese is supported */
     INVALID_LENGTH = 4,                  /**< Invalid length */
     UNUSUAL_WORD = 5,                    /**< Unusual word */
     CONSECUTIVE_SAME_WORD = 6,           /**< Consecutive same word */
-    TOO_FEW_PHONES = 7,                  /**< Too few phonemes */
-    TOO_MANY_PHONES = 8,                 /**< Too many phonemes */
-    CONTAIN_COMMON_INSTRUCTION = 9,      /**< Contain common instruction */
-    CONTAIN_COMMON_SPOKEN_LANGUAGE = 10, /**< Contain common spoken language */
-    CONTAIN_SENSITIVE_WORD = 11,         /**< Contain sensitive word */
+    TOO_FEW_PHONEMES = 7,                /**< Too few phonemes */
+    TOO_MANY_PHONEMES = 8,               /**< Too many phonemes */
+    COMMON_INSTRUCTION = 9,              /**< Contain common instruction */
+    COMMON_SPOKEN_LANGUAGE = 10,         /**< Contain common spoken language */
+    SENSITIVE_WORD = 11,                 /**< Contain sensitive word */
     NO_INITIAL_CONSONANT = 12,           /**< Two consecutive words without initial consonant */ 
-    CONTAIN_REPEATED_PHONE = 13,         /**< Contain repeated phoneme */
+    REPEATED_PHONEME = 13,               /**< Contain repeated phoneme */
 };
 
 /**
