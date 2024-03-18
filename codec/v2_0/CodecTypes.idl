@@ -287,9 +287,9 @@ struct CodecVideoPortCap {
     struct RangeValue frameRate;       /**< Frame rate range. */
     int[] measuredFrameRate;           /**< Frame rate measured. */
     boolean isSupportLowLatency;       /**< Whether supports low-latency feature */
-    boolean isSupportTSVC;	        /**< Whether supports temporal level scale feature */
-    boolean isSupportLTR;	        /**< Whether supports long-term reference feature */
-    int maxLTRFrameNum;	        /**< Maximum long-term reference frame numbers supported */
+    boolean isSupportTSVC;	           /**< Whether supports temporal level scale feature */
+    boolean isSupportLTR;	           /**< Whether supports long-term reference feature */
+    int maxLTRFrameNum;	               /**< Maximum long-term reference frame numbers supported */
 };
 
 /**
