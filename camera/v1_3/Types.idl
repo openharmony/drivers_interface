@@ -112,3 +112,24 @@ enum OperationMode_V1_3 {
      */
     OPERATION_MODE_MAX,
 };
+
+/**
+ * @brief Enumerates types of the extended stream information.
+ */
+enum ExtendedStreamInfoType {
+    /**
+     * Extended stream information of quick thumbnail.
+     */
+    EXTENDED_STREAM_INFO_QUICK_THUMBNAIL = 0,
+
+    /**
+     * Extended stream information of sketch.
+     */
+    EXTENDED_STREAM_INFO_SKETCH = 1,
+
+    /**
+     * Extended stream information of raw.
+     */
+    EXTENDED_STREAM_INFO_RAW = 2,
+};
+
