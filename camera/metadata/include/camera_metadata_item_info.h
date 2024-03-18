@@ -82,6 +82,10 @@ static item_info_t g_ohosCameraProperties[OHOS_CAMERA_PROPERTIES_END - OHOS_CAME
         OHOS_CAMERA_PROPERTIES_START] = {"cameraStatusMoonCaptureDetection", META_TYPE_UINT32, 1},
     [OHOS_CAMERA_USER_ID -
         OHOS_CAMERA_PROPERTIES_START] = {"cameraUserId", META_TYPE_INT32, -1},
+    [OHOS_ABILITY_CAPTURE_DURATION_SUPPORTED -
+        OHOS_CAMERA_PROPERTIES_START] = {"captureDurationSupported", META_TYPE_BYTE, 1},
+    [OHOS_CAMERA_CUSTOM_SNAPSHOT_DURATION -
+        OHOS_CAMERA_PROPERTIES_START] = {"customSnapshotDuration", META_TYPE_UINT32, 1},
 };
 
 static item_info_t g_ohosCameraSensor[OHOS_CAMERA_SENSOR_END - OHOS_CAMERA_SENSOR_START] = {
