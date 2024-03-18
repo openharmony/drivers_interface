@@ -113,13 +113,6 @@
             "header_files": [],
             "header_base": "//drivers/interface/usb"
           }
-        },
-        {
-          "name": "//drivers/interface/usb/v1_1:usb_idl_headers",
-          "header": {
-            "header_files": [],
-            "header_base": "//drivers/interface/usb"
-          }
         }
       ]
     }
