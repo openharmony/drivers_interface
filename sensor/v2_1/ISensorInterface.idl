@@ -1,0 +1,77 @@
+/*
+ * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup HdiSensor
+ * @{
+ *
+ * @brief Provides unified APIs for sensor services to access sensor drivers.
+ *
+ * A sensor service can obtain a sensor driver object or agent and then call APIs provided by this object or agent to
+ * access different types of sensor devices based on the sensor IDs, thereby obtaining sensor information,
+ * subscribing to or unsubscribing from sensor data, enabling or disabling a sensor,
+ * setting the sensor data reporting mode, and setting sensor options such as the accuracy and measurement range.
+ *
+ * @since 4.1
+ */
+
+/**
+ * @file ISensorInterface.idl
+ *
+ * @brief Declares the APIs provided by the sensor module for obtaining sensor information, subscribing to or
+ * unsubscribing from sensor data, enabling or disabling a sensor, setting the sensor data reporting mode,
+ * and setting sensor options such as the accuracy and measurement range.
+ *
+ * @since 4.1
+ * @version 2.0
+ */
+
+package ohos.hdi.sensor.v2_1;
+
+import ohos.hdi.sensor.v2_1.SensorTypes;
+import ohos.hdi.sensor.v2_0.ISensorInterface;
+
+/**
+ * @brief Defines the functions for performing basic operations on sensors.
+ *
+ * The operations include obtaining sensor information, subscribing to or unsubscribing from sensor data,
+ * enabling or disabling a sensor, setting the sensor data reporting mode, and setting sensor options such as
+ * the accuracy and measurement range.
+ */
+interface ISensorInterface extends ohos.hdi.sensor.v2_0.ISensorInterface{
+
+    /**
+     * @brief Enables the sensor available in the sensor list based on the specified sensor ID.
+     * The subscriber can obtain the sensor data only after the sensor is enabled.
+     *
+     * @param sensorId Indicates the sensor ID. For details, see {@link SensorTypeTag}.
+     * @return Returns <b>0</b> if the sensor is successfully enabled; returns a negative value otherwise.
+     *
+     * @since 2.2
+     * @version 1.0
+     */
+    Enable([in] HdfSensorTypeTag sensorId);
+
+    /**
+     * @brief Disables an enabled sensor.
+     *
+     * @param sensorId Indicates the sensor ID. For details, see {@link SensorTypeTag}.
+     * @return Returns <b>0</b> if the sensor is successfully disabled; returns a negative value otherwise.
+     *
+     * @since 2.2
+     * @version 1.0
+     */
+    Disable([in] HdfSensorTypeTag sensorId);
+}
