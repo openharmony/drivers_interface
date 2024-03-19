@@ -1338,7 +1338,7 @@ struct L2NormalizeFusion
 struct LSTM
 {
     /** Whether the LSTM operation is bi-directional. */
-    boolean biDirectional;
+    boolean bidirectional;
     /** Whether the operation contains bias. */
     boolean hasBias;
     /** Size of input tensor. */
