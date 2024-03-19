@@ -25,24 +25,24 @@ namespace Display {
 namespace Composer {
 namespace V1_0 {
 
-DeviceCacheManager* DeviceCacheManager::GetInstance()
+std::shared_ptr<DeviceCacheManager> DeviceCacheManager::GetInstance()
 {
-    static DeviceCacheManager* ins = nullptr;
-    if (ins == nullptr) {
-        ins = new DeviceCacheManager();
-        if (ins == nullptr) {
+    static std::shared_ptr<DeviceCacheManager> mgr = nullptr;
+    if (mgr == nullptr) {
+        mgr = std::make_shared<DeviceCacheManager>();
+        if (mgr == nullptr) {
             HDF_LOGE("%{public}s: DeviceCacheManager construct failed", __func__);
+            return mgr;
         }
 
-        int32_t ret = ins->Init();
+        int32_t ret = mgr->Init();
         if (ret != HDF_SUCCESS) {
-            delete ins;
-            ins = nullptr;
+            mgr = nullptr;
             HDF_LOGE("%{public}s: DeviceCacheManager init failed", __func__);
         }
     }
 
-    return ins;
+    return mgr;
 }
 
 DeviceCacheManager::DeviceCacheManager()
