@@ -21,6 +21,7 @@ if (defined(ohos_lite)) {
 } else {
   hdi("sensor") {
     module_name = "sensor_service"
+    imports = [ "ohos.hdi.sensor.v1_1:sensor" ]
 
     sources = [
       "ISensorInterface.idl",
