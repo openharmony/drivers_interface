@@ -196,9 +196,8 @@ struct ArgMaxFusion
  * * <b>data</b>, the tensors to print out when condition is false.
  *
  * Output:
- * * <b>output</b>, result value judged by condition. If the condition is not true, an Error is returned.
  *
- * *
+ * * Result value judged by condition. If the condition is not true, an Error is returned.
  *
  * @since 5.0
  * @version 2.1
