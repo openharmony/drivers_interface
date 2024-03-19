@@ -482,7 +482,7 @@ enum NodeType : unsigned int {
     /** LogSoftmax operator. */
     NODE_TYPE_LOG_SOFTMAX = 189,
     /** QuantDTypeCastV2 operator. */
-    NODE_TYPE_QUANT_DTYPE_CAST_V2 = 500,
+    NODE_TYPE_QUANT_DTYPE_CAST_V2 = 999,
 };
 
 /**
