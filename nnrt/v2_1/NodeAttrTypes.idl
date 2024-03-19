@@ -1435,7 +1435,7 @@ struct Maximum
  */
 struct MaxPoolFusion
 {
-    /** Size of the kernel used to take the maximum value. It is an int array [kernelHeight, kernelWeight]\n
+    /** Size of the kernel used to take the maximum value. It is an int array [kernel_height, kernel_weight]\n
       * with length of 2.
       */
     long[] kernelSize;
@@ -2025,8 +2025,8 @@ struct ScaleFusion
  * Input:
  *
  * * <b>indices</b>, the index of scattering in the new tensor with int32 or int64 data type.
- *   The rank of indices must be at least 2 and indiceShape[-1] <= len(shape).
- * * <b>updates</b>, the source tensor to be scattered. It has shape indiceShape[:-1] + shape[indiceShape[-1]:].
+ *   The rank of indices must be at least 2 and indices_shape[-1] <= len(shape).
+ * * <b>updates</b>, the source tensor to be scattered. It has shape indices_shape[:-1] + shape[indices_shape[-1]:].
  * * <b>shape</b>, the shape of the output tensor, has the same data type as <b>indices</b>.
  *
  * Output:
