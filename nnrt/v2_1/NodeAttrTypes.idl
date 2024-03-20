@@ -615,28 +615,6 @@ struct Crop
 };
 
 /**
- * @brief Shift and scale inputs into a distribution centered around 0 with standard deviation 1.
- * It accomplishes this by precomputing the mean and variance of the data, and calling\n
- * <b>(x - mean) / sqrt(var)</b> at runtime.
- *
- * The {@link NodeType} of this operator is <b>NODE_TYPE_CUSTOM_NORMALIZE</b>.
- *
- * Input:
- *
- * * <b>x</b>, an n-dimensional tensor.
- *
- * Output:
- *
- * * Normalized output tensor.
- *
- * @since 5.0
- * @version 2.1
- */
-struct CustomNormalize
-{
-};
-
-/**
  * @brief The output of the object detection model is post-processed, including decoding the bounding box,
  * class probability and score of the model output, and then performing non-maximum suppression (NMS) to remove
  * the overlapping bounding box, and finally outputting the detection result.
