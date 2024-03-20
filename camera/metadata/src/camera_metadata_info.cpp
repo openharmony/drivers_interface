@@ -179,6 +179,7 @@ const std::vector<uint32_t> g_metadataTags = {
     OHOS_CONTROL_CAMERA_VIRTUAL_APERTURE_VALUE,
     OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE,
     OHOS_CONTROL_CAMERA_PHYSICAL_APERTURE_VALUE,
+    OHOS_STATUS_CAMERA_APERTURE_VALUE,
     OHOS_DEVICE_EXITCAMERA_EVENT,
     OHOS_CONTROL_MOTION_DETECTION_CHECK_AREA,
     OHOS_STATUS_SLOW_MOTION_DETECTION,
@@ -793,10 +794,12 @@ int CameraMetadata::UpdateameraMetadataItemSize(camera_metadata_item_entry_t *it
 {
     size_t dataSize = CalculateCameraMetadataItemDataSize(item->data_type, dataCount);
     size_t dataPayloadSize = dataCount * OHOS_CAMERA_METADATA_TYPE_SIZE[item->data_type];
-
     size_t oldItemSize = CalculateCameraMetadataItemDataSize(item->data_type, item->count);
-
     int32_t ret = CAM_META_SUCCESS;
+    if (item == nullptr || dst == nullptr) {
+        METADATA_ERR_LOG("UpdateameraMetadataItemSize item is null or dst is null");
+        return CAM_META_FAILURE;
+    }
     if (dataSize != oldItemSize) {
         if (dst->data_capacity < (dst->data_count + dataSize - oldItemSize)) {
             METADATA_ERR_LOG("UpdateCameraMetadataItemByIndex data_capacity limit reached");
@@ -1031,6 +1034,10 @@ std::string U8ItemToString(int32_t item, const camera_metadata_item_t entry)
 {
     std::string st = {};
     uint32_t count = entry.count;
+    if (entry.data.u8 == nullptr) {
+        METADATA_ERR_LOG("U8ItemToString: entry.data.u8 is null!");
+        return st;
+    }
     std::string dataStr = std::to_string(*(entry.data.u8));
     for (uint32_t i = 1; i < count; i++) {
         if ((i % WRAP_LENGTH) == 0) {
@@ -1057,6 +1064,10 @@ std::string I32ItemToString(int32_t item, const camera_metadata_item_t entry)
 {
     std::string st = {};
     uint32_t count = entry.count;
+    if (entry.data.i32 == nullptr) {
+        METADATA_ERR_LOG("I32ItemToString: entry.data.i32 is null!");
+        return st;
+    }
     std::string dataStr = std::to_string(*(entry.data.i32));
     for (uint32_t i = 1; i < count; i++) {
         if ((i % WRAP_LENGTH) == 0) {
@@ -1083,6 +1094,10 @@ std::string U32ItemToString(int32_t item, const camera_metadata_item_t entry)
 {
     std::string st = {};
     uint32_t count = entry.count;
+    if (entry.data.ui32 == nullptr) {
+        METADATA_ERR_LOG("U32ItemToString: entry.data.ui32 is null!");
+        return st;
+    }
     std::string dataStr = std::to_string(*(entry.data.ui32));
     for (uint32_t i = 1; i < count; i++) {
         if ((i % WRAP_LENGTH) == 0) {
@@ -1109,6 +1124,10 @@ std::string I64ItemToString(int32_t item, const camera_metadata_item_t entry)
 {
     std::string st = {};
     uint32_t count = entry.count;
+    if (entry.data.i64 == nullptr) {
+        METADATA_ERR_LOG("I64ItemToString: entry.data.i64 is null!");
+        return st;
+    }
     std::string dataStr = std::to_string(*(entry.data.i64));
     for (uint32_t i = 1; i < count; i++) {
         if ((i % WRAP_LENGTH) == 0) {
@@ -1135,6 +1154,10 @@ std::string FloatItemToString(int32_t item, const camera_metadata_item_t entry)
 {
     std::string st = {};
     uint32_t count = entry.count;
+    if (entry.data.f == nullptr) {
+        METADATA_ERR_LOG("FloatItemToString: entry.data.f is null!");
+        return st;
+    }
     std::string dataStr = std::to_string(*(entry.data.f));
     for (uint32_t i = 1; i < count; i++) {
         if ((i % WRAP_LENGTH) == 0) {
@@ -1161,6 +1184,10 @@ std::string DoubleItemToString(int32_t item, const camera_metadata_item_t entry)
 {
     std::string st = {};
     uint32_t count = entry.count;
+    if (entry.data.d == nullptr) {
+        METADATA_ERR_LOG("DoubleItemToString: entry.data.d is null!");
+        return st;
+    }
     std::string dataStr = std::to_string(*(entry.data.d));
     for (uint32_t i = 1; i < count; i++) {
         if ((i % WRAP_LENGTH) == 0) {
@@ -1187,6 +1214,10 @@ std::string RationalItemToString(int32_t item, const camera_metadata_item_t entr
 {
     std::string st = {};
     uint32_t count = entry.count;
+    if (entry.data.r == nullptr) {
+        METADATA_ERR_LOG("RationalItemToString: entry.data.r is null!");
+        return st;
+    }
     std::string dataStr = std::to_string((*(entry.data.r)).numerator) + "/" +
         std::to_string((*(entry.data.r)).denominator);
     for (uint32_t i = 1; i < count; i++) {
