@@ -2671,7 +2671,7 @@ struct LogSoftmax
  *
  * * Tensor after the data type conversion.
  *
- * @since 3.2
+ * @since 5.0
  * @version 2.1
  */
 struct QuantDTypeCastV2
