@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -22,7 +22,7 @@
  * A gnss service module can use the interfaces of this module to add fences, and delete fences, and monitor
  * fence status changes.
  *
- * @since 3.2
+ * @since 5.0
  */
 
 /*
@@ -31,19 +31,20 @@
  * @brief Define callback interfaces for reporting whether the geofence service is available, and reporting
  * geofence events, and reporting geofence operation results.
  *
- * @since 3.2
- * @version 1.0
+ * @since 5.0
+ * @version 2.0
  */
 
-package ohos.hdi.location.geofence.v1_0;
+package ohos.hdi.location.geofence.v2_0;
 
-import ohos.hdi.location.geofence.v1_0.GeofenceTypes;
+import ohos.hdi.location.geofence.v2_0.GeofenceTypes;
+import ohos.hdi.location.gnss.v2_0.GnssTypes;
 
 /*
  * @brief Defines the geofence callback interface for reporting geofence service availability, geofence events,
  * and geofence operation results.
  *
- * @since 3.2
+ * @since 5.0
  */
 [callback] interface IGeofenceCallback {
     /*
@@ -52,8 +53,8 @@ import ohos.hdi.location.geofence.v1_0.GeofenceTypes;
      * @param isAvailable Indicates whether the geofence service is available.
      * @return Returns <b>0</b> if reporting is successed; returns a negative value otherwise.
      *
-     * @since 3.2
-     * @version 1.0
+     * @since 5.0
+     * @version 2.0
      */
     ReportGeofenceAvailability([in] boolean isAvailable);
 
@@ -66,8 +67,8 @@ import ohos.hdi.location.geofence.v1_0.GeofenceTypes;
      * @param timestamp Indicates timestamp when the geofence event is reported. Milliseconds since January 1, 1970.
      * @return Returns <b>0</b> if reporting is successed; returns a negative value otherwise.
      *
-     * @since 3.2
-     * @version 1.0
+     * @since 5.0
+     * @version 2.0
      */
     ReportGeofenceEvent([in] int fenceIndex,
                         [in] struct LocationInfo location,
@@ -82,10 +83,11 @@ import ohos.hdi.location.geofence.v1_0.GeofenceTypes;
      * @param result Indicates geofence operation result. For details, see {@link GeofenceOperateResult}.
      * @return Returns <b>0</b> if reporting is successed; returns a negative value otherwise.
      *
-     * @since 3.2
-     * @version 1.0
+     * @since 5.0
+     * @version 2.0
      */
     ReportGeofenceOperateResult([in] int fenceIndex,
                             [in] enum GeofenceOperateType type,
                             [in] enum GeofenceOperateResult result);
 }
+/** @} */

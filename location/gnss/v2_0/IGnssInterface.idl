@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -24,7 +24,7 @@
  * set the GNSS working mode, inject reference information, obtain the positioning result, obtain the nmea,
  * obtain the satellite status information, and obtain the cache location information.
  *
- * @since 3.2
+ * @since 5.0
  */
 
 /*
@@ -34,14 +34,14 @@
  * set the GNSS working mode, inject reference information, Delete auxiliary data, inject PGNSS data,
  * obtain the number of GNSS cache locations, and obtain all cache locations.
  *
- * @since 3.2
- * @version 1.0
+ * @since 5.0
+ * @version 2.0
  */
 
-package ohos.hdi.location.gnss.v1_0;
+package ohos.hdi.location.gnss.v2_0;
 
-import ohos.hdi.location.gnss.v1_0.IGnssCallback;
-import ohos.hdi.location.gnss.v1_0.GnssTypes;
+import ohos.hdi.location.gnss.v2_0.IGnssCallback;
+import ohos.hdi.location.gnss.v2_0.GnssTypes;
 
 /*
  * @brief Defines the functions for performing basic operations on GNSS.
@@ -50,7 +50,7 @@ import ohos.hdi.location.gnss.v1_0.GnssTypes;
  * set the GNSS working mode, inject reference information, Delete auxiliary data, inject PGNSS data,
  * obtain the number of GNSS cache locations, and obtain all cache locations.
  *
- * @since 3.2
+ * @since 5.0
  */
 interface IGnssInterface {
     /*
@@ -60,8 +60,8 @@ interface IGnssInterface {
      * function configuration parameters. For details, see {@link GnssConfigPara}.
      * @return Returns <b>0</b> If the setting is successful; returns a negative value otherwise.
      *
-     * @since 3.2
-     * @version 1.0
+     * @since 5.0
+     * @version 2.0
      */
     SetGnssConfigPara([in] struct GnssConfigPara para);
 
@@ -72,8 +72,8 @@ interface IGnssInterface {
      * location results and satellite status information by the callbacks. For details, see {@link IGnssCallback}.
      * @return Returns <b>0</b> if the GNSS is successfully enabled; returns a negative value otherwise.
      *
-     * @since 3.2
-     * @version 1.0
+     * @since 5.0
+     * @version 2.0
      */
     EnableGnss([in] IGnssCallback callbackObj);
 
@@ -82,8 +82,8 @@ interface IGnssInterface {
      *
      * @return Returns <b>0</b> if the GNSS is successfully disabled; returns a negative value otherwise.
      *
-     * @since 3.2
-     * @version 1.0
+     * @since 5.0
+     * @version 2.0
      */
     DisableGnss();
 
@@ -94,8 +94,8 @@ interface IGnssInterface {
      * and GNSS caching function. For details, see {@link GnssStartType}.
      * @return Returns <b>0</b> if the GNSS navigation is successfully started; returns a negative value otherwise.
      *
-     * @since 3.2
-     * @version 1.0
+     * @since 5.0
+     * @version 2.0
      */
     StartGnss([in] enum GnssStartType type);
 
@@ -106,8 +106,8 @@ interface IGnssInterface {
      * and GNSS caching function. For details, see {@link GnssStartType}.
      * @return Returns <b>0</b> if the GNSS navigation is successfully stopped; returns a negative value otherwise.
      *
-     * @since 3.2
-     * @version 1.0
+     * @since 5.0
+     * @version 2.0
      */
     StopGnss([in] enum GnssStartType type);
 
@@ -118,21 +118,21 @@ interface IGnssInterface {
      * location. For details, see {@link GnssRefInfo}.
      * @return Returns <b>0</b> if ingestion succeeded; returns a negative value otherwise.
      *
-     * @since 3.2
-     * @version 1.0
+     * @since 5.0
+     * @version 2.0
      */
     SetGnssReferenceInfo([in] struct GnssRefInfo refInfo);
 
     /*
      * @brief Delete the specified auxiliary data.
      *
-     * @param data Indicates the type of auxiliary data to be deleted. For details, see {@link GnssAuxiliaryData}.
+     * @param data Indicates the type of auxiliary data to be deleted. For details, see {@link GnssAuxiliaryDataType}.
      * @return Returns <b>0</b> if deleted successfully; returns a negative value otherwise.
      *
-     * @since 3.2
-     * @version 1.0
+     * @since 5.0
+     * @version 2.0
      */
-    DeleteAuxiliaryData([in] enum GnssAuxiliaryData data);
+    DeleteAuxiliaryData([in] enum GnssAuxiliaryDataType data);
 
     /*
      * @brief Ingesting Predict Gnss Data.
@@ -140,8 +140,8 @@ interface IGnssInterface {
      * @param data Indicates Predict Gnss Data.
      * @return Returns <b>0</b> if ingesting successfully; returns a negative value otherwise.
      *
-     * @since 3.2
-     * @version 1.0
+     * @since 5.0
+     * @version 2.0
      */
     SetPredictGnssData([in] String data);
 
@@ -152,8 +152,8 @@ interface IGnssInterface {
      * cached by the GNSS module.
      * @return Returns <b>0</b> if obtain size successfully; returns a negative value otherwise.
      *
-     * @since 3.2
-     * @version 1.0
+     * @since 5.0
+     * @version 2.0
      */
     GetCachedGnssLocationsSize([out] int size);
 
@@ -162,9 +162,33 @@ interface IGnssInterface {
      * The cache location is reported through callback.
      *
      * @return Returns <b>0</b> if sending request successfully; returns a negative value otherwise.
-     *
-     * @since 3.2
-     * @version 1.0
+     * @since 5.0
+     * @version 2.0
      */
     GetCachedGnssLocations();
+
+    /*
+     * @brief Send NI user response command.
+     *
+     * @param gnssNiNotificationId Indicates the id of GNSS NI notifications.
+     * @param userResponse Indicates user reponse command.
+     * @return Returns <b>0</b> if sending response successfully; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 2.0
+     */
+    SendNiUserResponse([in] int gnssNiNotificationId, [in] enum GnssNiResponseCmd userResponse);
+
+    /*
+     * @brief Send network initiated message.
+     *
+     * @param msg Indicates the network initiated message.
+     * @param length Indicates length of network initiated message.
+     * @return Returns <b>0</b> if sending message successfully; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 2.0
+     */
+    SendNetworkInitiatedMsg([in] String msg, [in] int length);
 }
+/** @} */
