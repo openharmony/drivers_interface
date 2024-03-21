@@ -475,7 +475,7 @@ enum NodeType : unsigned int {
     NODE_TYPE_WHERE = 168,
     /** Select operator. */
     NODE_TYPE_SELECT = 170,
-    /** Ref operator. */
+    /** Erf operator. */
     NODE_TYPE_ERF = 178,
     /** LogSoftmax operator. */
     NODE_TYPE_LOG_SOFTMAX = 189,
