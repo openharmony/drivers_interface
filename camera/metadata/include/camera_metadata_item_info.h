@@ -86,6 +86,8 @@ static item_info_t g_ohosCameraProperties[OHOS_CAMERA_PROPERTIES_END - OHOS_CAME
         OHOS_CAMERA_PROPERTIES_START] = {"captureDurationSupported", META_TYPE_BYTE, 1},
     [OHOS_CAMERA_CUSTOM_SNAPSHOT_DURATION -
         OHOS_CAMERA_PROPERTIES_START] = {"customSnapshotDuration", META_TYPE_UINT32, 1},
+    [OHOS_ABILITY_MOVING_PHOTO -
+        OHOS_CAMERA_PROPERTIES_START] = {"cameraAbilityMovingPhoto", META_TYPE_INT32, -1},
 };
 
 static item_info_t g_ohosCameraSensor[OHOS_CAMERA_SENSOR_END - OHOS_CAMERA_SENSOR_START] = {
@@ -176,6 +178,7 @@ static item_info_t g_ohosCameraControl[OHOS_DEVICE_CONTROL_END - OHOS_DEVICE_CON
     [OHOS_CONTROL_SENSOR_EXPOSURE_TIME - OHOS_DEVICE_CONTROL_START] = {"sensorExposureTime", META_TYPE_RATIONAL, 1},
     [OHOS_STATUS_SENSOR_EXPOSURE_TIME -
         OHOS_DEVICE_CONTROL_START] = {"currentSensorExposureTime", META_TYPE_RATIONAL, 1},
+    [OHOS_CONTROL_MOVING_PHOTO - OHOS_DEVICE_CONTROL_START] = {"movingPhoto", META_TYPE_BYTE, 1},
 };
 
 static item_info_t g_ohosDeviceExposure[OHOS_DEVICE_EXPOSURE_END - OHOS_DEVICE_EXPOSURE_START] = {
