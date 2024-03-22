@@ -2662,6 +2662,8 @@ struct LogSoftmax
  * @brief Converts the data type.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_QUANT_DTYPE_CAST_V2</b>.
+ * The v1 version {@link NodeType} of this operator is <b>NODE_TYPE_QUANT_DTYPE_CAST</b>,
+ * and the corresponding NodeAttrType is {@link QuantDTypeCast}.
  *
  * Input:
  *
