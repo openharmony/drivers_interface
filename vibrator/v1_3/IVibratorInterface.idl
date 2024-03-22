@@ -49,10 +49,11 @@ interface IVibratorInterface extends ohos.hdi.vibrator.v1_2.IVibratorInterface{
      *
      * @param effectType Indicates the pointer to the preset effect type. It is recommended that the
      * maximum length be 64 bytes.
-      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
+     * @param intensity Indicates amplitude intensity, ranging from 1 to 100.
+     * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
      *
-     * @since 2.2
-     * @version 1.0
+     * @since 5.0
+     * @version 1.3
      */
     StartByIntensity([in] String effectType, [in] unsigned short intensity);
 }
