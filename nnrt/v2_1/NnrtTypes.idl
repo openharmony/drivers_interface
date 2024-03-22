@@ -329,8 +329,6 @@ enum NodeType : unsigned int {
     NODE_TYPE_CONSTANT_OF_SHAPE = 38,
     /** Crop operator. */
     NODE_TYPE_CROP = 39,
-    /** CustomNormalize operator. */
-    NODE_TYPE_CUSTOM_NORMALIZE = 41,
     /** DepthToSpace operator. */
     NODE_TYPE_DEPTH_TO_SPACE = 45,
     /** DetectionPostProcess operator. */
@@ -380,7 +378,7 @@ enum NodeType : unsigned int {
     /** LogicalOr operator. */
     NODE_TYPE_LOGICAL_OR = 83,
     /** LRN operator. */
-    NODE_TYPE_LRN = 87,
+    NODE_TYPE_LRN = 85,
     /** LSTM operator. */
     NODE_TYPE_LSTM = 87,
     /** L2NormalizeFusion operator. */
@@ -477,10 +475,12 @@ enum NodeType : unsigned int {
     NODE_TYPE_WHERE = 168,
     /** Select operator. */
     NODE_TYPE_SELECT = 170,
-    /** Ref operator. */
+    /** Erf operator. */
     NODE_TYPE_ERF = 178,
     /** LogSoftmax operator. */
     NODE_TYPE_LOG_SOFTMAX = 189,
+    /** QuantDTypeCastV2 operator. */
+    NODE_TYPE_QUANT_DTYPE_CAST_V2 = 999,
 };
 
 /**
