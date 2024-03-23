@@ -47,6 +47,9 @@ interface IAudioRender {
      * @param render Indicates the pointer to the <b>IAudioRender</b> object to operate.
      * @param ms Indicates the pointer to the latency (in milliseconds) to be obtained.
      * @return Returns <b>0</b> if the latency is obtained; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 3.0
      */
     GetLatency([out] unsigned int ms);
 
@@ -58,6 +61,9 @@ interface IAudioRender {
      * @param requestBytes Indicates the size of the frame, in bytes.
      * @param replyBytes Indicates the pointer to the actual length (in bytes) of the audio data to write.
      * @return Returns <b>0</b> if the data is written successfully; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 3.0
      */
     RenderFrame([in] byte[] frame, [out] unsigned long replyBytes);
 
@@ -69,6 +75,9 @@ interface IAudioRender {
      * @param time Indicates the pointer to the timestamp associated with the frame.
      * @return Returns <b>0</b> if the last number is obtained; returns a negative value otherwise.
      * @see RenderFrame
+     *
+     * @since 5.0
+     * @version 3.0
      */
     GetRenderPosition([out] unsigned long frames, [out] struct AudioTimeStamp time);
 
@@ -79,6 +88,9 @@ interface IAudioRender {
      * @param speed Indicates the rendering speed to set.
      * @return Returns <b>0</b> if the setting is successful; returns a negative value otherwise.
      * @see GetRenderSpeed
+     *
+     * @since 5.0
+     * @version 3.0
      */
     SetRenderSpeed([in] float speed);
 
@@ -89,6 +101,9 @@ interface IAudioRender {
      * @param speed Indicates the pointer to the current rendering speed to obtain.
      * @return Returns <b>0</b> if the speed is successfully obtained; returns a negative value otherwise.
      * @see SetRenderSpeed
+     *
+     * @since 5.0
+     * @version 3.0
      */
     GetRenderSpeed([out] float speed);
 
@@ -99,6 +114,9 @@ interface IAudioRender {
      * @param mode Indicates the channel mode to set.
      * @return Returns <b>0</b> if the setting is successful; returns a negative value otherwise.
      * @see GetChannelMode
+     *
+     * @since 5.0
+     * @version 3.0
      */
     SetChannelMode([in] enum AudioChannelMode mode);
 
@@ -109,6 +127,9 @@ interface IAudioRender {
      * @param mode Indicates the pointer to the channel mode to obtain.
      * @return Returns <b>0</b> if the mode is successfully obtained; returns a negative value otherwise.
      * @see SetChannelMode
+     *
+     * @since 5.0
+     * @version 3.0
      */
     GetChannelMode([out] enum AudioChannelMode mode);
 
@@ -121,6 +142,9 @@ interface IAudioRender {
      * @param cookie Indicates the pointer to the callback parameters.
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
      * @see RegCallback
+     *
+     * @since 5.0
+     * @version 3.0
      */
     RegCallback([in] IAudioCallback audioCallback, [in] byte cookie);
 
@@ -132,6 +156,9 @@ interface IAudioRender {
      * see {@link AudioDrainNotifyType}.
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
      * @see RegCallback
+     *
+     * @since 5.0
+     * @version 3.0
      */
     DrainBuffer([out] enum AudioDrainNotifyType type);
 
@@ -143,6 +170,9 @@ interface IAudioRender {
      * the vendor supports, and <b>false</b> means the opposite.
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
      * @see IsSupportsDrain
+     *
+     * @since 5.0
+     * @version 3.0
      */
     IsSupportsDrain([out] boolean support);
 
@@ -155,6 +185,9 @@ interface IAudioRender {
      * Value <b>true</b> means that the configuration is supported, and <b>false</b> means the opposite.
      * @return Returns <b>0</b> if the result is obtained; returns a negative value otherwise.
      * @see SelectScene
+     *
+     * @since 5.0
+     * @version 3.0
      */
     CheckSceneCapability([in] struct AudioSceneDescriptor scene, [out] boolean supported);
 
@@ -178,6 +211,9 @@ interface IAudioRender {
      * @param scene Indicates the pointer to the descriptor of the audio scene to select.
      * @return Returns <b>0</b> if the scene is selected successfully; returns a negative value otherwise.
      * @see CheckSceneCapability
+     *
+     * @since 5.0
+     * @version 3.0
      */
     SelectScene([in] struct AudioSceneDescriptor scene);
 
@@ -189,6 +225,9 @@ interface IAudioRender {
      * and <b>false</b> means the opposite.
      * @return Returns <b>0</b> if the setting is successful; returns a negative value otherwise.
      * @see GetMute
+     *
+     * @since 5.0
+     * @version 3.0
      */
     SetMute([in] boolean mute);
 
@@ -200,6 +239,9 @@ interface IAudioRender {
      * the audio is muted, and <b>false</b> means the opposite.
      * @return Returns <b>0</b> if the mute operation is obtained; returns a negative value otherwise.
      * @see SetMute
+     *
+     * @since 5.0
+     * @version 3.0
      */
     GetMute([out] boolean mute);
 
@@ -213,6 +255,9 @@ interface IAudioRender {
      * @param volume Indicates the volume to set. The value ranges from 0.0 to 1.0.
      * @return Returns <b>0</b> if the setting is successful; returns a negative value otherwise.
      * @see GetVolume
+     *
+     * @since 5.0
+     * @version 3.0
      */
     SetVolume([in] float volume);
 
@@ -223,6 +268,9 @@ interface IAudioRender {
      * @param volume Indicates the pointer to the volume to obtain. The value ranges from 0.0 to 1.0.
      * @return Returns <b>0</b> if the volume is obtained; returns a negative value otherwise.
      * @see SetVolume
+     *
+     * @since 5.0
+     * @version 3.0
      */
     GetVolume([out] float volume);
 
@@ -242,6 +290,9 @@ interface IAudioRender {
      * @return Returns <b>0</b> if the range is obtained; returns a negative value otherwise.
      * @see GetGain
      * @see SetGain
+     *
+     * @since 5.0
+     * @version 3.0
      */
     GetGainThreshold([out] float min, [out] float max);
 
@@ -253,6 +304,9 @@ interface IAudioRender {
      * @return Returns <b>0</b> if the audio gain is obtained; returns a negative value otherwise.
      * @see GetGainThreshold
      * @see SetGain
+     *
+     * @since 5.0
+     * @version 3.0
      */
     GetGain([out] float gain);
 
@@ -264,6 +318,9 @@ interface IAudioRender {
      * @return Returns <b>0</b> if the setting is successful; returns a negative value otherwise.
      * @see GetGainThreshold
      * @see GetGain
+     *
+     * @since 5.0
+     * @version 3.0
      */
     SetGain([in] float gain);
 
@@ -273,6 +330,9 @@ interface IAudioRender {
      * @param handle Indicates the audio handle.
      * @param size Indicates the pointer to the audio frame size (in bytes).
      * @return Returns <b>0</b> if the audio frame size is obtained; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 3.0
      */
     GetFrameSize([out] unsigned long size);
 
@@ -282,6 +342,9 @@ interface IAudioRender {
      * @param handle Indicates the audio handle.
      * @param count Indicates the pointer to the number of audio frames in the audio buffer.
      * @return Returns <b>0</b> if the number of audio frames is obtained; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 3.0
      */
     GetFrameCount([out] unsigned long count);
 
@@ -293,6 +356,9 @@ interface IAudioRender {
      * sampling precision, and channel.
      * @return Returns <b>0</b> if the setting is successful; returns a negative value otherwise.
      * @see GetSampleAttributes
+     *
+     * @since 5.0
+     * @version 3.0
      */
     SetSampleAttributes([in] struct AudioSampleAttributes attrs);
 
@@ -304,6 +370,9 @@ interface IAudioRender {
      * sampling precision, and channel.
      * @return Returns <b>0</b> if audio sampling attributes are obtained; returns a negative value otherwise.
      * @see SetSampleAttributes
+     *
+     * @since 5.0
+     * @version 3.0
      */
     GetSampleAttributes([out] struct AudioSampleAttributes attrs);
 
@@ -313,6 +382,9 @@ interface IAudioRender {
      * @param handle Indicates the audio handle.
      * @param channelId Indicates the pointer to the data channel ID.
      * @return Returns <b>0</b> if the data channel ID is obtained; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 3.0
      */
     GetCurrentChannelId([out] unsigned int channelId);
 
@@ -323,6 +395,9 @@ interface IAudioRender {
      * @param keyValueList Indicates the pointer to the key-value list of the extra audio parameters.
      * The format is <i>key=value</i>. Separate multiple key-value pairs by semicolons (;).
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 3.0
      */
     SetExtraParams([in] String keyValueList);
 
@@ -333,6 +408,9 @@ interface IAudioRender {
      * @param keyValueList Indicates the pointer to the key-value list of the extra audio parameters.
      * The format is <i>key=value</i>. Separate multiple key-value pairs by semicolons (;).
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 3.0
      */
     GetExtraParams([out] String keyValueList);
 
@@ -343,6 +421,9 @@ interface IAudioRender {
      * @param reqSize Indicates the size of the request mmap buffer.
      * @param desc Indicates the pointer to the mmap buffer descriptor.
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 3.0
      */
     ReqMmapBuffer([in] int reqSize, [out] struct AudioMmapBufferDescriptor desc);
 
@@ -353,6 +434,9 @@ interface IAudioRender {
      * @param frames Indicates the pointer to the frame where the read/write starts.
      * @param time Indicates the pointer to the timestamp associated with the frame where the read/write starts.
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 3.0
      */
     GetMmapPosition([out] unsigned long frames, [out] struct AudioTimeStamp time);
 
@@ -362,6 +446,9 @@ interface IAudioRender {
      * @param handle Indicates the audio handle.
      * @param effectid Indicates the audio effect instance identifier which is going to be added.
      * @return Returns <b>0</b> if the audio effect were added succesffully; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 3.0
      */
     AddAudioEffect([in] unsigned long effectid);
 
@@ -371,6 +458,9 @@ interface IAudioRender {
      * @param handle Indicates the audio handle.
      * @param effectid Indicates the audio effect which is going to be removed.
      * @return Returns <b>0</b> if the audio effect were removed succesffully; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 3.0
      */
     RemoveAudioEffect([in] unsigned long effectid);
 
@@ -380,6 +470,9 @@ interface IAudioRender {
      * @param handle Indicates the audio handle.
      * @param bufferSize Indicates the buffer size (in bytes) queried from the vendor
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 3.0
      */
     GetFrameBufferSize([out] unsigned long bufferSize);
 
@@ -390,6 +483,9 @@ interface IAudioRender {
      * @return Returns <b>0</b> if the rendering or capturing is successfully started;
      * returns a negative value otherwise.
      * @see Stop
+     *
+     * @since 5.0
+     * @version 3.0
      */
     Start();
 
@@ -400,6 +496,9 @@ interface IAudioRender {
      * @return Returns <b>0</b> if the rendering or capturing is successfully stopped;
      * returns a negative value otherwise.
      * @see Start
+     *
+     * @since 5.0
+     * @version 3.0
      */
     Stop();
 
@@ -410,6 +509,9 @@ interface IAudioRender {
      * @return Returns <b>0</b> if the rendering or capturing is successfully paused;
      * returns a negative value otherwise.
      * @see Resume
+     *
+     * @since 5.0
+     * @version 3.0
      */
     Pause();
 
@@ -420,6 +522,9 @@ interface IAudioRender {
      * @return Returns <b>0</b> if the rendering or capturing is successfully resumed;
      * returns a negative value otherwise.
      * @see Pause
+     *
+     * @since 5.0
+     * @version 3.0
      */
     Resume();
 
@@ -428,6 +533,9 @@ interface IAudioRender {
      *
      * @param handle Indicates the audio handle.
      * @return Returns <b>0</b> if the flush is successful; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 3.0
      */
     Flush();
 
@@ -437,6 +545,9 @@ interface IAudioRender {
      * @param handle Indicates the audio handle.
      * @return Returns <b>0</b> if the device is set to standby mode; returns a positive value if the standby mode is
      * canceled; returns a negative value if the setting fails.
+     *
+     * @since 5.0
+     * @version 3.0
      */
     TurnStandbyMode();
 
@@ -447,6 +558,9 @@ interface IAudioRender {
      * @param range Indicates the range of the device information to dump, which can be brief or full information.
      * @param fd Indicates the file to which the device information will be dumped.
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 3.0
      */
     AudioDevDump([in] int range, [in] int fd);
 
@@ -460,6 +574,9 @@ interface IAudioRender {
      * the vendor supports, and <b>false</b> means the opposite.
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
      * @see IsSupportsPauseAndResume
+     *
+     * @since 5.0
+     * @version 3.0
      */
     IsSupportsPauseAndResume([out] boolean supportPause, [out] boolean supportResume);
 
@@ -469,6 +586,9 @@ interface IAudioRender {
      * @param handle Indicates the audio handle.
      * @param size Indicates the buffer size which contains the audio data.
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 3.0
      */
     SetBufferSize([in] unsigned int size);
 }

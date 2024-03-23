@@ -32,6 +32,9 @@ package ohos.hdi.audio.v3_0;
 
 /**
  * @brief Enumerates the audio port type.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 enum AudioPortDirection {
     PORT_OUT    = 1, /**< Output port */
@@ -41,6 +44,9 @@ enum AudioPortDirection {
 
 /**
  * @brief Enumerates the pin of an audio adapter.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 enum AudioPortPin {
     PIN_NONE                     = 0,                 /**< Invalid pin */
@@ -68,6 +74,9 @@ enum AudioPortPin {
 
 /**
  * @brief Enumerates the audio category.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 enum AudioCategory {
     AUDIO_IN_MEDIA         = 0, /**< Media */
@@ -82,6 +91,9 @@ enum AudioCategory {
 
 /**
  * @brief Enumerates the audio format.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 enum AudioFormat {
     AUDIO_FORMAT_TYPE_PCM_8_BIT  = 1 << 0,                      /**< 8-bit PCM */
@@ -105,6 +117,9 @@ enum AudioFormat {
  * @brief Enumerates the audio channel mask.
  *
  * A mask describes an audio channel position.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 enum AudioChannelMask {
     AUDIO_CHANNEL_FRONT_LEFT  = 1,  /**< Front left channel */
@@ -115,6 +130,9 @@ enum AudioChannelMask {
 
 /**
  * @brief Enumerates masks of audio sampling rates.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 enum AudioSampleRatesMask {
     AUDIO_SAMPLE_RATE_MASK_8000    = 1 << 0,        /**< 8 kHz */
@@ -133,6 +151,9 @@ enum AudioSampleRatesMask {
 
 /**
  * @brief Enumerates the passthrough data transmission mode of an audio port.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 enum AudioPortPassthroughMode {
     PORT_PASSTHROUGH_LPCM    = 1 << 0, /**< Stereo PCM */
@@ -143,6 +164,9 @@ enum AudioPortPassthroughMode {
 
 /**
  * @brief Defines formats of raw audio samples.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 enum AudioSampleFormat {
     /* 8 bits */
@@ -181,6 +205,9 @@ enum AudioSampleFormat {
  * @brief Enumerates channel modes for audio rendering.
  *
  * @attention The following modes are set for rendering dual-channel audios. Others are not supported.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 enum AudioChannelMode {
     AUDIO_CHANNEL_NORMAL     = 0, /**< Normal mode. No processing is required. */
@@ -197,6 +224,9 @@ enum AudioChannelMode {
 
 /**
  * @brief Enumerates the execution types of the <b>DrainBuffer</b> function.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 enum AudioDrainNotifyType {
     AUDIO_DRAIN_NORMAL_MODE = 0, /**< The <b>DrainBuffer</b> function returns after all data finishes playback. */
@@ -208,6 +238,9 @@ enum AudioDrainNotifyType {
 
 /**
  * @brief Enumerates callback notification events.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 enum AudioCallbackType {
     AUDIO_NONBLOCK_WRITE_COMPLETED = 0, /**< The non-block write is complete. */
@@ -219,6 +252,9 @@ enum AudioCallbackType {
 
 /**
  * @brief Describes AudioPortRole.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 enum AudioPortRole {
     AUDIO_PORT_UNASSIGNED_ROLE = 0, /**< Unassigned port role */
@@ -228,6 +264,9 @@ enum AudioPortRole {
 
 /**
  * @brief Describes AudioPortType.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 enum AudioPortType {
     AUDIO_PORT_UNASSIGNED_TYPE = 0, /**< Unassigned port type */
@@ -238,6 +277,9 @@ enum AudioPortType {
 
 /**
  * @brief Describes AudioSessionType.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 enum AudioSessionType {
     AUDIO_OUTPUT_STAGE_SESSION = 0, /**< Assigned output stage session */
@@ -248,6 +290,9 @@ enum AudioSessionType {
 
 /**
  * @brief Describes AudioDeviceType.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 enum AudioDeviceType {
     AUDIO_LINEOUT        = 1 << 0, /**< Assigned lineout device type */
@@ -268,6 +313,9 @@ enum AudioDeviceType {
 
 /**
  * @brief Describes AudioEventType.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 enum AudioEventType {
     AUDIO_DEVICE_ADD        = 1,  /**< Assigned add device event type */
@@ -283,6 +331,9 @@ enum AudioEventType {
 
 /**
  * @brief Enumerates the restricted key type of the parameters
+ *
+ * @since 5.0
+ * @version 3.0
  */
 enum AudioExtParamKey {
     AUDIO_EXT_PARAM_KEY_NONE     = 0,    /**< Distributed audio extra param key none */
@@ -299,6 +350,9 @@ enum AudioExtParamKey {
 
 /**
  * @brief Describes status of audio deivce.@link enum AudioDeviceType
+ *
+ * @since 5.0
+ * @version 3.0
  */
 struct AudioDeviceStatus {
     unsigned int pnpStatus; /**< Audio pnp status */
@@ -306,6 +360,9 @@ struct AudioDeviceStatus {
 
 /**
  * @brief Describes the audio scene.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 union SceneDesc {
     unsigned int id; /**< Audio scene ID */
@@ -313,6 +370,9 @@ union SceneDesc {
 
 /**
  * @brief Defines the audio port.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 struct AudioPort {
     enum AudioPortDirection dir; /**< Audio port type. For details, see {@link AudioPortDirection} */
@@ -326,6 +386,9 @@ struct AudioPort {
  * An audio adapter is a set of port drivers for a sound card, including the output and input ports.
  * One port corresponds to multiple pins, and each pin belongs to a physical component (such as a
  * speaker or a wired headset).
+ *
+ * @since 5.0
+ * @version 3.0
  */
 struct AudioAdapterDescriptor {
     String adapterName;       /**< Name of the audio adapter */
@@ -334,6 +397,9 @@ struct AudioAdapterDescriptor {
 
 /**
  * @brief Defines the audio device descriptor.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 struct AudioDeviceDescriptor {
     unsigned int portId;    /**< Audio port ID */
@@ -343,6 +409,9 @@ struct AudioDeviceDescriptor {
 
 /**
  * @brief Defines the audio scene descriptor.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 struct AudioSceneDescriptor {
     union SceneDesc scene;             /**< Describes the audio scene */
@@ -351,6 +420,9 @@ struct AudioSceneDescriptor {
 
 /**
  * @brief Defines audio input type.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 enum AudioInputType {
     AUDIO_INPUT_DEFAULT_TYPE             = 0,      /**< Assigned default input type */
@@ -366,6 +438,9 @@ enum AudioInputType {
 
 /**
  * @brief Defines audio offload attributes.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 struct AudioOffloadInfo
 {
@@ -381,6 +456,9 @@ struct AudioOffloadInfo
 
 /**
  * @brief Defines audio sampling attributes.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 struct AudioSampleAttributes {
     enum AudioCategory type;       /**< Audio type. For details, see {@link AudioCategory} */
@@ -405,6 +483,9 @@ struct AudioSampleAttributes {
 
 /**
  * @brief Defines the audio timestamp, which is a substitute for POSIX <b>timespec</b>.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 struct AudioTimeStamp {
     long tvSec;  /**< Seconds */
@@ -413,6 +494,9 @@ struct AudioTimeStamp {
 
 /**
  * @brief Defines the sub-port capability.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 struct AudioSubPortCapability {
     unsigned int portId;                /**< Sub-port ID */
@@ -424,6 +508,9 @@ struct AudioSubPortCapability {
 
 /**
  * @brief Defines the audio port capability.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 struct AudioPortCapability {
     unsigned int deviceType;                       /**< Device type (output or input) */
@@ -444,6 +531,9 @@ struct AudioPortCapability {
 
 /**
  * @brief Describes a mmap buffer.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 struct AudioMmapBufferDescriptor {
     byte[] memoryAddress;    /**< Pointer to the mmap buffer */
@@ -457,6 +547,9 @@ struct AudioMmapBufferDescriptor {
 
 /**
  * @brief Describes AudioDevExtInfo.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 struct AudioDevExtInfo {
     int moduleId;           /**< Identifier of the module stream is attached to */
@@ -466,6 +559,9 @@ struct AudioDevExtInfo {
 
 /**
  * @brief Describes AudioMixInfo.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 struct AudioMixExtInfo {
     int moduleId; /**< Identifier of the module stream is attached to */
@@ -474,6 +570,9 @@ struct AudioMixExtInfo {
 
 /**
  * @brief Describes AudioSessionExtInfo.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 struct AudioSessionExtInfo {
     enum AudioSessionType sessionType; /**< Audio session type */
@@ -481,6 +580,9 @@ struct AudioSessionExtInfo {
 
 /**
  * @brief Describes AudioInfo.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 struct AudioInfo {
     struct AudioDevExtInfo device;      /* Specific Device Ext info */
@@ -490,6 +592,9 @@ struct AudioInfo {
 
 /**
  * @brief Describes AudioRouteNode.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 struct AudioRouteNode {
     int portId;              /**< Audio port ID */
@@ -500,6 +605,9 @@ struct AudioRouteNode {
 
 /**
  * @brief Describes AudioRoute.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 struct AudioRoute {
     struct AudioRouteNode[] sources; /**< List of sources */
@@ -508,6 +616,9 @@ struct AudioRoute {
 
 /**
  * @brief Describes AudioEvent.
+ *
+ * @since 5.0
+ * @version 3.0
  */
 struct AudioEvent {
     unsigned int eventType;  /**< @link enum AudioEventType */

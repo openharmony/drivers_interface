@@ -40,6 +40,9 @@ import ohos.hdi.audio.v3_0.AudioTypes;
  * @param cookie Indicates the pointer to the cookie for data transmission.
  * @return Returns <b>0</b> if the callback is successfully executed; returns a negative value otherwise.
  * @see RegCallback
+ *
+ * @since 5.0
+ * @version 3.0
  */
 [callback] interface IAudioCallback {
 /**
@@ -50,6 +53,9 @@ import ohos.hdi.audio.v3_0.AudioTypes;
  * @param cookie Indicates the pointer to the cookie for data transmission.
  * @return Returns <b>0</b> if the callback is successfully executed; returns a negative value otherwise.
  * @see RegCallback
+ *
+ * @since 5.0
+ * @version 3.0
  */
     RenderCallback([in] enum AudioCallbackType type, [out] byte reserved, [out] byte cookie);
 
@@ -62,6 +68,9 @@ import ohos.hdi.audio.v3_0.AudioTypes;
  * @param reserved Indicates reserved param.
  * @param cookie Indicates the pointer to the callback parameters;
  * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
+ *
+ * @since 5.0
+ * @version 3.0
  */
     ParamCallback([in] enum AudioExtParamKey key, [in] String condition, [in] String value, [out] byte reserved, [in] byte cookie);
 }

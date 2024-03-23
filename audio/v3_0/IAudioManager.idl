@@ -50,6 +50,9 @@ interface IAudioManager {
      * @param size Indicates the pointer to the length of the list.
      * @return Returns <b>0</b> if the list is obtained successfully; returns a negative value otherwise.
      * @see LoadAdapter
+     *
+     * @since 5.0
+     * @version 3.0
      */
     GetAllAdapters([out] struct AudioAdapterDescriptor[] descs);
 
@@ -64,6 +67,9 @@ interface IAudioManager {
      * @return Returns <b>0</b> if the driver is loaded successfully; returns a negative value otherwise.
      * @see GetAllAdapters
      * @see UnloadAdapter
+     *
+     * @since 5.0
+     * @version 3.0
      */
     LoadAdapter([in] struct AudioAdapterDescriptor desc, [out] IAudioAdapter adapter);
 
@@ -73,6 +79,9 @@ interface IAudioManager {
      * @param manager Indicates the pointer to the audio adapter manager to operate.
      * @param adapter Indicates the pointer to the audio adapter whose driver will be unloaded.
      * @see LoadAdapter
+     *
+     * @since 5.0
+     * @version 3.0
      */
     UnloadAdapter([in] String adapterName);
 
@@ -81,6 +90,9 @@ interface IAudioManager {
      *
      * @param object Indicates the pointer to the audio adapter manager to operate.
      * @return Returns <b>true</b> if the Object is released; returns <b>false</b> otherwise.
+     *
+     * @since 5.0
+     * @version 3.0
      */
     ReleaseAudioManagerObject();
 }
