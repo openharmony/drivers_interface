@@ -13,7 +13,7 @@
       "name": "drivers_interface_vibrator",
       "subsystem": "hdf",
       "syscap": [],
-      "adapted_system_type": ["small,standard"],
+      "adapted_system_type": ["small","standard"],
       "rom": "675KB",
       "ram": "1024KB",
       "deps": {
