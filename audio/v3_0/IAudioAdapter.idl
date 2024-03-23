@@ -24,7 +24,7 @@
  * subscribing to or unsubscribing from audio data, enabling or disabling an audio,
  * setting the audio data reporting mode, and setting audio options such as the accuracy and measurement range.
  *
- * @since 5.0
+ * @since 4.1
  * @version 3.0
  */
 
@@ -41,8 +41,8 @@ import ohos.hdi.audio.v3_0.IAudioCallback;
  *
  * @see IAudioRender
  * @see IAudioCapture
- * @since 5.0
- * @version 3.0
+ * @since 4.1
+ * @version 2.0
  */
 interface IAudioAdapter {
     /**
@@ -55,8 +55,8 @@ interface IAudioAdapter {
      * @param adapter Indicates the pointer to the audio adapter to operate.
      * @return Returns <b>0</b> if the initialization is successful; returns a negative value otherwise.
      *
-     * @since 5.0
-     * @version 3.0
+     * @since 4.1
+     * @version 2.0
      */
     InitAllPorts();
 
@@ -72,8 +72,8 @@ interface IAudioAdapter {
      * @see GetPortCapability
      * @see DestroyRender
      *
-     * @since 5.0
-     * @version 3.0
+     * @since 4.1
+     * @version 2.0
      */
     CreateRender([in] struct AudioDeviceDescriptor desc, [in] struct AudioSampleAttributes attrs,
                 [out] IAudioRender render, [out] unsigned int renderId);
@@ -88,8 +88,8 @@ interface IAudioAdapter {
      * @return Returns <b>0</b> if the <b>IAudioRender</b> object is destroyed; returns a negative value otherwise.
      * @see CreateRender
      *
-     * @since 5.0
-     * @version 3.0
+     * @since 4.1
+     * @version 2.0
      */
     DestroyRender([in] unsigned int renderId);
 
@@ -105,8 +105,8 @@ interface IAudioAdapter {
      * @see GetPortCapability
      * @see DestroyCapture
      *
-     * @since 5.0
-     * @version 3.0
+     * @since 4.1
+     * @version 2.0
      */
     CreateCapture([in] struct AudioDeviceDescriptor desc, [in] struct AudioSampleAttributes attrs,
                   [out] IAudioCapture capture, [out] unsigned int captureId);
@@ -121,8 +121,8 @@ interface IAudioAdapter {
      * @return Returns <b>0</b> if the <b>IAudioCapture</b> object is destroyed; returns a negative value otherwise.
      * @see CreateCapture
      *
-     * @since 5.0
-     * @version 3.0
+     * @since 4.1
+     * @version 2.0
      */
     DestroyCapture([in] unsigned int captureId);
 
@@ -134,8 +134,8 @@ interface IAudioAdapter {
      * @param capability Indicates the pointer to the capability set to obtain.
      * @return Returns <b>0</b> if the capability set is successfully obtained; returns a negative value otherwise.
      *
-     * @since 5.0
-     * @version 3.0
+     * @since 4.1
+     * @version 2.0
      */
     GetPortCapability([in] struct AudioPort port, [out] struct AudioPortCapability capability);
 
@@ -148,8 +148,8 @@ interface IAudioAdapter {
      * @return Returns <b>0</b> if the setting is successful; returns a negative value otherwise.
      * @see GetPassthroughMode
      *
-     * @since 5.0
-     * @version 3.0
+     * @since 4.1
+     * @version 2.0
      */
     SetPassthroughMode([in] struct AudioPort port, [in] enum AudioPortPassthroughMode mode);
 
@@ -162,8 +162,8 @@ interface IAudioAdapter {
      * @return Returns <b>0</b> if the mode is successfully obtained; returns a negative value otherwise.
      * @see SetPassthroughMode
      *
-     * @since 5.0
-     * @version 3.0
+     * @since 4.1
+     * @version 2.0
      */
     GetPassthroughMode([in] struct AudioPort port, [out] enum AudioPortPassthroughMode mode);
 
@@ -174,8 +174,8 @@ interface IAudioAdapter {
      * @param status Indicates the status of device .
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
      *
-     * @since 5.0
-     * @version 3.0
+     * @since 4.1
+     * @version 2.0
      */
     GetDeviceStatus([out] struct AudioDeviceStatus status);
 
@@ -188,8 +188,8 @@ interface IAudioAdapter {
      * @return Returns <b>0</b> if the mode is successfully obtained; returns a negative value otherwise.
      * @see SetPassthroughMode
      *
-     * @since 5.0
-     * @version 3.0
+     * @since 4.1
+     * @version 2.0
      */
     UpdateAudioRoute([in] struct AudioRoute route, [out] int routeHandle);
 
@@ -201,8 +201,8 @@ interface IAudioAdapter {
      * @return Returns <b>0</b> if the mode is successfully obtained; returns a negative value otherwise.
      * @see SetPassthroughMode
      *
-     * @since 5.0
-     * @version 3.0
+     * @since 4.1
+     * @version 2.0
      */
     ReleaseAudioRoute([in] int routeHandle);
 
@@ -215,8 +215,8 @@ interface IAudioAdapter {
      * @return Returns <b>0</b> if the setting is successful; returns a negative value otherwise.
      * @see GetMute
      *
-     * @since 5.0
-     * @version 3.0
+     * @since 4.1
+     * @version 2.0
      */
     SetMicMute([in] boolean mute);
 
@@ -229,8 +229,8 @@ interface IAudioAdapter {
      * @return Returns <b>0</b> if the mute operation is obtained; returns a negative value otherwise.
      * @see SetMute
      *
-     * @since 5.0
-     * @version 3.0
+     * @since 4.1
+     * @version 2.0
      */
     GetMicMute([out] boolean mute);
 
@@ -245,8 +245,8 @@ interface IAudioAdapter {
      * @return Returns <b>0</b> if the setting is successful; returns a negative value otherwise.
      * @see GetVolume
      *
-     * @since 5.0
-     * @version 3.0
+     * @since 4.1
+     * @version 2.0
      */
     SetVoiceVolume([in] float volume);
 
@@ -267,8 +267,8 @@ interface IAudioAdapter {
      *
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
      *
-     * @since 5.0
-     * @version 3.0
+     * @since 4.1
+     * @version 2.0
      */
     SetExtraParams([in] enum AudioExtParamKey key, [in] String condition, [in] String value);
 
@@ -290,8 +290,8 @@ interface IAudioAdapter {
      *
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
      *
-     * @since 5.0
-     * @version 3.0
+     * @since 4.1
+     * @version 2.0
      */
     GetExtraParams([in] enum AudioExtParamKey key, [in] String condition, [out] String value);
 
@@ -303,8 +303,8 @@ interface IAudioAdapter {
      * @param cookie Indicates the pointer to the callback parameters;
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
      *
-     * @since 5.0
-     * @version 3.0
+     * @since 4.1
+     * @version 2.0
      */
     RegExtraParamObserver([in] IAudioCallback audioCallback, [in] byte cookie);
 }
