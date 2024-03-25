@@ -77,7 +77,7 @@ static item_info_t g_ohosCameraProperties[OHOS_CAMERA_PROPERTIES_END - OHOS_CAME
     [OHOS_ABILITY_MOON_CAPTURE_BOOST -
         OHOS_CAMERA_PROPERTIES_START] = {"cameraAbilityMoonCaptureBoost", META_TYPE_UINT32, -1},
     [OHOS_CONTROL_MOON_CAPTURE_BOOST -
-        OHOS_CAMERA_PROPERTIES_START] = {"cameraControlMoonCaptureBoost", META_TYPE_UINT32, 1},
+        OHOS_CAMERA_PROPERTIES_START] = {"cameraControlMoonCaptureBoost", META_TYPE_BYTE, 1},
     [OHOS_STATUS_MOON_CAPTURE_DETECTION -
         OHOS_CAMERA_PROPERTIES_START] = {"cameraStatusMoonCaptureDetection", META_TYPE_UINT32, 1},
     [OHOS_CAMERA_USER_ID -
