@@ -60,7 +60,7 @@ enum WifiBand : unsigned int {
     BAND_5GHZ = 2,
     BAND_5GHZ_DFS = 4,
     BAND_5GHZ_WITH_DFS = 6,
-    BAND_24GHZ_5GHZ = 3,/
+    BAND_24GHZ_5GHZ = 3,
     BAND_24GHZ_5GHZ_WITH_DFS = 7
 };
 

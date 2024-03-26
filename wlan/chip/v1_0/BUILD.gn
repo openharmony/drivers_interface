@@ -22,12 +22,12 @@ if (defined(ohos_lite)) {
     module_name = "chip"
 
     sources = [
-      "IChipController.idl",
       "ChipTypes.idl",
-      "IConcreteChipCallback.idl",
-      "IConcreteChip.idl",
+      "IChipController.idl",
       "IChipControllerCallback.idl",
       "IChipIface.idl",
+      "IConcreteChip.idl",
+      "IConcreteChipCallback.idl",      
     ]
 
     language = "cpp"
