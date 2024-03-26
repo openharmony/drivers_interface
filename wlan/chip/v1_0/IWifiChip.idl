@@ -1,0 +1,58 @@
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2024. All rights reserved
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ 
+package ohos.hdi.wlan.chip.v1_0;
+
+import ohos.hdi.wlan.chip.v1_0.WlanTypesCommon;
+import ohos.hdi.wlan.chip.v1_0.IWifiIface;
+import ohos.hdi.wlan.chip.v1_0.IWifiChipEventCallback;
+
+interface IWifiChip {
+    GetChipId([out] int id);
+
+    RegisterWifiEventCallback([in] IWifiChipEventCallback chipEventcallback);
+
+    GetIfaceCap([out] unsigned int capabilities);
+
+    GetAvailableModes([out] struct ChipMode[] modes);
+
+    GetCurrentMode([out] unsigned int modeId);
+
+    CreateApIface([out] IWifiIface iface);
+
+    GetApIfaceNames([out] String[] ifnames);
+
+    GetApIface([in] String ifname, [out] IWifiIface iface);
+
+    RemoveApIface([in] String ifname);
+
+    CreateP2pIface([out] IWifiIface iface);
+
+    GetP2pIfaceNames([out] String[] ifnames);
+
+    GetP2pIface([in] String ifname, [out] IWifiIface iface);
+
+    RemoveP2pIface([in] String ifname);
+
+    CreateStaIface([out] IWifiIface iface);
+
+    GetStaIfaceNames([out] String[] ifnames);
+
+    GetStaIface([in] String ifname, [out] IWifiIface iface);
+
+    RemoveStaIface([in] String ifname);
+
+    SetChipMode([in] unsigned int modeId);
+};

@@ -26,6 +26,7 @@
       },
       "build": {
         "sub_component": [
+          "//drivers/interface/wlan/chip/v1_0:chip",
           "//drivers/interface/wlan/v1_1:wlan_idl_target",
           "//drivers/interface/wlan/v1_2:wlan_idl_target",
           "//drivers/interface/wlan/v1_3:wlan_idl_target",
@@ -153,6 +154,30 @@
               "header_files": [
               ],
               "header_base": "//drivers/interface/wlan/hostapd"
+            }
+          },
+          {
+            "name": "//drivers/interface/wlan/chip/v1_0:libchip_stub_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/wlan/chip"
+            }
+          },
+          {
+            "name": "//drivers/interface/wlan/chip/v1_0:chip_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/wlan/chip"
+            }
+          },
+          {
+            "name": "//drivers/interface/wlan/chip/v1_0:libchip_proxy_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/wlan/chip"
             }
           }
         ]
