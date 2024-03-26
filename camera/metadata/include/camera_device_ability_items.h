@@ -112,6 +112,7 @@ typedef enum camera_device_metadata_tag {
     OHOS_STATUS_MOON_CAPTURE_DETECTION,
     OHOS_ABILITY_CAPTURE_DURATION_SUPPORTED,
     OHOS_CAMERA_CUSTOM_SNAPSHOT_DURATION,
+    OHOS_ABILITY_MOVING_PHOTO,
     OHOS_CAMERA_PROPERTIES_END,
 
     OHOS_SENSOR_EXPOSURE_TIME = OHOS_CAMERA_SENSOR_START,
@@ -179,6 +180,7 @@ typedef enum camera_device_metadata_tag {
     OHOS_ABILITY_SENSOR_EXPOSURE_TIME_RANGE,
     OHOS_CONTROL_SENSOR_EXPOSURE_TIME,
     OHOS_STATUS_SENSOR_EXPOSURE_TIME,
+    OHOS_CONTROL_MOVING_PHOTO,
     OHOS_DEVICE_CONTROL_END,
 
     // Camera device image acquisition related
@@ -648,5 +650,17 @@ typedef enum camera_motion_detection_control_type {
     OHOS_CAMERA_MOTION_DETECTION_DISABLE = 0,
     OHOS_CAMERA_MOTION_DETECTION_ENABLE,
 } camera_motion_detection_control_type_t;
+
+// OHOS_ABILITY_MOVING_PHOTO
+typedef enum moving_photo_enum {
+    OHOS_CAMERA_MOVING_PHOTO_UNSUPPORT = 0,
+    OHOS_CAMERA_MOVING_PHOTO_SUPPORT,
+} moving_photo_enum_t;
+ 
+// OHOS_CONTROL_MOVING_PHOTO
+typedef enum control_moving_photo_enum {
+    OHOS_CAMERA_MOVING_PHOTO_OFF = 0,
+    OHOS_CAMERA_MOVING_PHOTO_ON,
+} control_moving_photo_enum_t;
 
 #endif
