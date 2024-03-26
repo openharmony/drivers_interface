@@ -30,7 +30,8 @@
           "//drivers/interface/location/lpfence/cellbatching/v1_0:lpfence_cellbatching_idl_target",
           "//drivers/interface/location/lpfence/cellfence/v1_0:lpfence_cellfence_idl_target",
           "//drivers/interface/location/lpfence/geofence/v1_0:lpfence_geofence_idl_target",
-          "//drivers/interface/location/lpfence/wififence/v1_0:lpfence_wififence_idl_target"
+          "//drivers/interface/location/lpfence/wififence/v1_0:lpfence_wififence_idl_target",
+          "//drivers/interface/location/lpfence/safe_location/v1_0:lpfence_safe_location_idl_target"
         ],
         "test": [
         ],
@@ -129,6 +130,30 @@
               "header_files": [
               ],
               "header_base": "//drivers/interface/location/lpfence/wififence"
+            }
+          },
+          {
+            "name": "//drivers/interface/location/lpfence/safe_location/v1_0:liblpfence_safe_location_stub_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/location/lpfence/safe_location"
+            }
+          },
+          {
+            "name": "//drivers/interface/location/lpfence/safe_location/v1_0:liblpfence_safe_location_proxy_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/location/lpfence/safe_location"
+            }
+          },
+          {
+            "name": "//drivers/interface/location/lpfence/safe_location/v1_0:lpfence_safe_location_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/location/lpfence/safe_location"
             }
           }
         ]
