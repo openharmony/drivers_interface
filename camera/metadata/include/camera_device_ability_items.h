@@ -107,6 +107,9 @@ typedef enum camera_device_metadata_tag {
     OHOS_CAMERA_MESURE_EXPOSURE_TIME,
     OHOS_CAMERA_EXPOSURE_MODE_PREVIEW_STATE,
     OHOS_CAMERA_USER_ID,
+    OHOS_ABILITY_MOON_CAPTURE_BOOST,
+    OHOS_CONTROL_MOON_CAPTURE_BOOST,
+    OHOS_STATUS_MOON_CAPTURE_DETECTION,
     OHOS_CAMERA_PROPERTIES_END,
 
     OHOS_SENSOR_EXPOSURE_TIME = OHOS_CAMERA_SENSOR_START,
@@ -236,6 +239,7 @@ typedef enum camera_device_metadata_tag {
 
     OHOS_ABILITY_VIDEO_STABILIZATION_MODES = OHOS_STREAM_VIDEO_START,
     OHOS_CONTROL_VIDEO_STABILIZATION_MODE,
+    OHOS_CONTROL_VIDEO_DEBUG_SWITCH,
     OHOS_STREAM_VIDEO_END,
 
     // camera effects & algorithms
@@ -261,6 +265,8 @@ typedef enum camera_device_metadata_tag {
     OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE,
     OHOS_CONTROL_CAMERA_PHYSICAL_APERTURE_VALUE,
     OHOS_DEVICE_EXITCAMERA_EVENT,
+    OHOS_CONTROL_SUPER_SLOW_CHECK_AREA,
+    OHOS_STATUS_SUPER_SLOW_MOTION,
     OHOS_CAMERA_EFFECT_END,
 
     // camera secure related
@@ -277,6 +283,12 @@ typedef enum camera_device_metadata_tag {
     OHOS_CONTROL_SUPPORTED_COLOR_MODES,
     OHOS_XMAGE_COLOR_MODES_END,
 } camera_device_metadata_tag_t;
+
+// switch type tag enumeration values
+typedef enum camera_switch_enum {
+    OHOS_CAMERA_SWTICH_OFF = 0,
+    OHOS_CAMERA_SWTICH_ON,
+} camera_switch_enum_t;
 
 // OHOS_ABILITY_CAMERA_POSITION enumeration values
 typedef enum camera_position_enum {
@@ -570,10 +582,25 @@ typedef enum camera_macro_status_control_type {
     OHOS_CAMERA_MACRO_ENABLE,
 } camera_macro_status_control_type_t;
 
+// OHOS_CONTROL_MOON_CAPTURE_BOOST enumeration values
+typedef enum camera_moon_capture_boost_control_type {
+    OHOS_CAMERA_MOON_CAPTURE_BOOST_DISABLE = 0,
+    OHOS_CAMERA_MOON_CAPTURE_BOOST_ENABLE,
+} camera_moon_capture_boost_control_type_t;
+
 // OHOS_CONTROL_PREPARE_ZOOM enumeration values
 typedef enum camera_zoomsmooth_control_type {
     OHOS_CAMERA_ZOOMSMOOTH_PREPARE_DISABLE = 0,
     OHOS_CAMERA_ZOOMSMOOTH_PREPARE_ENABLE,
 } camera_zoomsmooth_control_type_t;
+
+// OHOS_STATUS_SUPER_SLOW_MOTION enumeration values
+typedef enum camera_super_slow_motion_status_type {
+    OHOS_CAMERA_SUPER_SLOW_MOTION_DISABLE = 0,
+    OHOS_CAMERA_SUPER_SLOW_MOTION_READY,
+    OHOS_CAMERA_SUPER_SLOW_MOTION_VIDEO_DONE,
+    OHOS_CAMERA_SUPER_SLOW_MOTION_FINISH,
+    OHOS_CAMERA_SUPER_SLOW_MOTION_VIDEO_START,
+} camera_super_slow_motion_status_type_t;
 
 #endif

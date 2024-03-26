@@ -48,7 +48,8 @@
         "//drivers/interface/display/composer/v1_0:libdisplay_composer_hdi_impl",
         "//drivers/interface/display/composer/v1_1:display_composer_idl_target",
         "//drivers/interface/display/composer/v1_1:libdisplay_composer_hdi_impl_1.1",
-        "//drivers/interface/display/graphic/common/v1_0:display_commontype_idl_target"
+        "//drivers/interface/display/graphic/common/v1_0:display_commontype_idl_target",
+        "//drivers/interface/display/graphic/common/v1_1:display_commontype_idl_target"
       ],
       "inner_kits": [
         {
@@ -215,6 +216,22 @@
         },
         {
           "name": "//drivers/interface/display/graphic/common/v1_0:display_commontype_idl_headers",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/display/graphic/common"
+          }
+        },
+        {
+          "name": "//drivers/interface/display/graphic/common/v1_0:display_commontype_idl_headers_1.0",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/display/graphic/common"
+          }
+        },
+        {
+          "name": "//drivers/interface/display/graphic/common/v1_1:display_commontype_idl_headers_1.1",
           "header": {
             "header_files": [
             ],
