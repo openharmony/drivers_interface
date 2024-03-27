@@ -13,11 +13,39 @@
  * limitations under the License.
  */
 
+/**
+ * @addtogroup Distributed Audio
+ * @{
+ *
+ * @brief Provides APIs for communication between drivers and SA of distributed audio.
+ *
+ * The Distributed Audio module includes operations on distributed audio devices,
+ * stream operations, and various callbacks. Communicate with Source SA through the IDAudioCallback
+ * and IDAudioManager interfaces to achieve distributed functionality.
+ *
+ * @since 5.0
+ * @version 2.0
+ */
+
 package ohos.hdi.distributed_audio.audioext.v2_0;
+
+/**
+ * @brief Enumerates the mode of port operation.
+ *
+ * @since 5.0
+ * @version 2.0
+ */
 enum PortOperationMode {
     NORMAL_MODE = 0,
     MMAP_MODE = 1,
 };
+
+/**
+ * @brief Enumerates the audio parameters.
+ *
+ * @since 5.0
+ * @version 2.0
+ */
 struct AudioParameter {
     unsigned int format;
     unsigned int channelCount;
@@ -29,14 +57,35 @@ struct AudioParameter {
     enum PortOperationMode capturerFlags;
     String ext;
 };
+
+/**
+ * @brief Defines audio frame data.
+ *
+ * @since 5.0
+ * @version 2.0
+ */
 struct AudioData {
     struct AudioParameter param;
     byte[] data;
 };
+
+/**
+ * @brief Defines the notification event of distributed audio.
+ *
+ * @since 5.0
+ * @version 2.0
+ */
 struct DAudioEvent {
     int type;
     String content;
 };
+
+/**
+ * @brief Defines the timestamp of distributed audio.
+ *
+ * @since 5.0
+ * @version 2.0
+ */
 struct CurrentTime {
     long tvSec;
     long tvNSec;
