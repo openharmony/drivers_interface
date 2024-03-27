@@ -22,7 +22,5 @@ interface IChipIface {
 
     GetIfaceName([out] String name);
 
-    GetIfaceCap([out] unsigned int capabilities);
-
-    GetSupportFreqs([in] enum WifiBand band, [out] unsigned int[] frequencies);
+    GetSupportFreqs([in] enum BandType band, [out] unsigned int[] frequencies);
 };

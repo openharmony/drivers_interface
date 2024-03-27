@@ -27,7 +27,7 @@ if (defined(ohos_lite)) {
       "IChipControllerCallback.idl",
       "IChipIface.idl",
       "IConcreteChip.idl",
-      "IConcreteChipCallback.idl",      
+      "IConcreteChipCallback.idl",
     ]
 
     language = "cpp"

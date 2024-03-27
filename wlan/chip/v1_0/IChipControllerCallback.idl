@@ -18,5 +18,5 @@ package ohos.hdi.wlan.chip.v1_0;
 import ohos.hdi.wlan.chip.v1_0.ChipTypes;
 
 [callback] interface IChipControllerCallback {
-    [oneway] OnSubsystemRestart([in] WifiStatus status);
+    [oneway] OnSubsystemRestart([in] ErrorCode code);
 };
