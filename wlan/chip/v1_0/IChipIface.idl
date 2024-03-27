@@ -13,14 +13,78 @@
  * limitations under the License.
  */
 
+/**
+ * @addtogroup CHIP
+ * @{
+ *
+ * @brief Provides APIs for the upper-layer WLAN service.
+ *
+ * You can use the APIs to manager the wifi chip, init and release the wifi chip, create and remove iface, register callback
+ * get the name and type of the iface, get the support frequencies and set the mode of chip.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+
+/**
+ * @file IChipIface.idl
+ *
+ * @brief Provides APIs to obtaon the message of iface, include type, name and support frequencies.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+
+/**
+ * @brief Defines the package path of the chip module interface.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+
 package ohos.hdi.wlan.chip.v1_0;
 
 import ohos.hdi.wlan.chip.v1_0.ChipTypes;
 
 interface IChipIface {
+    /**
+     * @brief Obtains the type of the iface.
+     *
+     * @param type Indicates the type of the interface service object.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
     GetIfaceType([out] enum IfaceType type);
 
+    /**
+     * @brief Obtains the name of the iface.
+     *
+     * @param name Indicates the name of the interface service object.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
     GetIfaceName([out] String name);
 
+    /**
+     * @brief Obtains the frequencies supported by the corresponding band.
+     *
+     * @param band Indicates the wifi band.
+     * @param frequencies Indicates the supported frequencies.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
     GetSupportFreqs([in] enum BandType band, [out] unsigned int[] frequencies);
 };
+/** @} */

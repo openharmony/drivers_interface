@@ -12,9 +12,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
+/**
+ * @addtogroup CHIP
+ * @{
+ *
+ * @brief Provides APIs for the upper-layer WLAN service.
+ *
+ * You can use the APIs to manager the wifi chip, init and release the wifi chip, create and remove iface, register callback
+ * get the name and type of the iface, get the support frequencies and set the mode of chip.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+
+/**
+ * @file IConcreteChipCallback.idl
+ *
+ * @brief Provides APIs to concrete the chip of the chip.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+
+/**
+ * @brief Defines the package path of the chip module interface.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+
 package ohos.hdi.wlan.chip.v1_0;
 
 import ohos.hdi.wlan.chip.v1_0.ChipTypes;
 
 [callback] interface IConcreteChipCallback {};
+/** @} */

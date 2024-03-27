@@ -13,10 +13,51 @@
  * limitations under the License.
  */
 
+/**
+ * @addtogroup CHIP
+ * @{
+ *
+ * @brief Provides APIs for the upper-layer WLAN service.
+ *
+ * You can use the APIs to manager the wifi chip, init and release the wifi chip, create and remove iface, register callback
+ * get the name and type of the iface, get the support frequencies and set the mode of chip.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+
+/**
+ * @file IChipControllerCallback.idl
+ *
+ * @brief Provides APIs to controller callbcak of the wifi chip
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+
+/**
+ * @brief Defines the package path of the chip module interface.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+
 package ohos.hdi.wlan.chip.v1_0;
 
 import ohos.hdi.wlan.chip.v1_0.ChipTypes;
 
 [callback] interface IChipControllerCallback {
-    [oneway] OnSubsystemRestart([in] ErrorCode code);
+    /**
+     * @brief Obtains the callback for the subsystem restart.
+     *
+     * @param code Indicates the errorcode of the subsystem when it is restarted.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    [oneway] OnVendorHalRestart([in] ErrorCode code);
 };
+/** @} */
