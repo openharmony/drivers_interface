@@ -24,6 +24,7 @@
           "ipc",
           "hdf_core",
           "hilog",
+          "hilog_lite",
           "c_utils"
         ],
         "third_party": []
