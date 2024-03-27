@@ -181,6 +181,8 @@ typedef enum camera_device_metadata_tag {
     OHOS_CONTROL_SENSOR_EXPOSURE_TIME,
     OHOS_STATUS_SENSOR_EXPOSURE_TIME,
     OHOS_CONTROL_MOVING_PHOTO,
+    OHOS_ABILITY_SENSOR_WB_VALUES,
+    OHOS_CONTROL_SENSOR_WB_VALUE,
     OHOS_DEVICE_CONTROL_END,
 
     // Camera device image acquisition related
