@@ -1,0 +1,131 @@
+/*
+ * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @file Types.h
+ *
+ * @brief Declares data types
+ * used by the Hardware Driver Interfaces (HDIs) of this module.
+ *
+ * @since 3.2
+ * @version 1.3
+ */
+
+package ohos.hdi.camera.v1_3;
+
+import ohos.hdi.camera.v1_2.Types;
+
+sequenceable ohos.hdi.camera.v1_0.BufferHandleSequenceable;
+sequenceable ohos.hdi.camera.v1_0.MapDataSequenceable;
+
+/**
+ * @brief Enumerates stream operation modes.
+ * @since 3.2
+ * @version 1.3
+ */
+enum OperationMode : ohos.hdi.camera.v1_2.OperationMode_V1_2 {
+
+    /**
+     * Professional mode, which dedicated to professional photo scene
+     * Abandoned, use the new operationMode below
+     */
+    PROFESSIONAL_V1_3 = PROFESSIONAL,
+
+    /**
+     * Professional mode, which dedicated to capture code
+     */
+    PROFESSIONAL_PHOTO = 11,
+
+    /**
+     * Professional mode, which dedicated to video code
+     */
+    PROFESSIONAL_VIDEO = 12,
+
+    /**
+     * Slow motion mode, which dedicated to video recording slow motion 
+     */
+    HIGH_FRAME_RATE = 13,
+};
+
+/**
+ * @brief Enumerates types of the extended stream information.
+ * @since 4.0
+ * @version 1.2
+ */
+enum ExtendedStreamInfoType : ohos.hdi.camera.v1_2.ExtendedStreamInfoType_V1_2 {
+
+    /**
+     * Slow motion mode, which dedicated to video recording slow motion
+     */
+    EXTENDED_STREAM_INFO_RAW = 2,
+
+    /**
+     * Extended stream information of depth.
+     */
+    EXTENDED_STREAM_INFO_DEPTH = 3,
+
+    /**
+     * Extended stream information of meta.
+     */
+    EXTENDED_STREAM_INFO_META = 4,
+    
+    /**
+     * Extended stream information of secure.
+     */
+    EXTENDED_STREAM_INFO_SECURE = 5,
+};
+
+/**
+ * @brief Enumerates stream types.
+ * @since 5.0
+ * @version 1.0
+ */
+enum StreamType {
+
+    /**
+     * Preview streams, indicating that stream data is used for preview
+     */
+    STREAM_TYPE_PREVIEW = 0,
+
+    /**
+     * Video streams, indicating that stream data is used to encode and generate videos
+     */
+    STREAM_TYPE_VIDEO = 1,
+
+    /**
+     * Photographing streams, indicating that stream data is used to encode and generate images
+     */
+    STREAM_TYPE_STILL_CAPTURE = 2,
+
+    /**
+     * Stream data that is used to store thumbnails
+     */
+    STREAM_TYPE_POST_VIEW = 3,
+
+    /**
+     * Stream data that is used for image analysis
+     */
+    STREAM_TYPE_ANALYZE = 4,
+
+    /**
+     * Custom type
+     */
+    STREAM_TYPE_CUSTOM = 5,
+
+    /**
+     * Depth type
+     */
+    STREAM_TYPE_DEPTH = 6,
+};

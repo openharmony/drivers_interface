@@ -42,6 +42,9 @@ const std::vector<uint32_t> g_metadataTags = {
     OHOS_ABILITY_MOON_CAPTURE_BOOST,
     OHOS_CONTROL_MOON_CAPTURE_BOOST,
     OHOS_STATUS_MOON_CAPTURE_DETECTION,
+    OHOS_ABILITY_CAPTURE_DURATION_SUPPORTED,
+    OHOS_CAMERA_CUSTOM_SNAPSHOT_DURATION,
+    OHOS_ABILITY_MOVING_PHOTO,
 
     OHOS_SENSOR_EXPOSURE_TIME,
     OHOS_SENSOR_COLOR_CORRECTION_GAINS,
@@ -85,6 +88,8 @@ const std::vector<uint32_t> g_metadataTags = {
     OHOS_CONTROL_AE_AVAILABLE_TARGET_FPS_RANGES,
     OHOS_CONTROL_AE_COMPENSATION_RANGE,
     OHOS_CONTROL_AE_COMPENSATION_STEP,
+    OHOS_ABILITY_AE_COMPENSATION_RANGE,
+    OHOS_ABILITY_AE_COMPENSATION_STEP,
     OHOS_CONTROL_AF_AVAILABLE_MODES,
     OHOS_CONTROL_AWB_AVAILABLE_MODES,
     OHOS_CONTROL_CAPTURE_MIRROR_SUPPORTED,
@@ -93,6 +98,13 @@ const std::vector<uint32_t> g_metadataTags = {
     OHOS_CONTROL_METER_POINT,
     OHOS_CONTROL_METER_MODE,
     OHOS_CONTROL_EXPOSURE_STATE,
+    OHOS_ABILITY_ISO_VALUES,
+    OHOS_CONTROL_ISO_VALUE,
+    OHOS_STATUS_ISO_VALUE,
+    OHOS_ABILITY_SENSOR_EXPOSURE_TIME_RANGE,
+    OHOS_CONTROL_SENSOR_EXPOSURE_TIME,
+    OHOS_STATUS_SENSOR_EXPOSURE_TIME,
+    OHOS_CONTROL_MOVING_PHOTO,
 
     // Camera device image acquisition related
     OHOS_ABILITY_DEVICE_AVAILABLE_EXPOSUREMODES,
@@ -106,6 +118,10 @@ const std::vector<uint32_t> g_metadataTags = {
     OHOS_ABILITY_FOCUS_MODES,
     OHOS_CONTROL_FOCUS_MODE,
     OHOS_ABILITY_FOCAL_LENGTH,
+    OHOS_ABILITY_FOCUS_ASSIST_FLASH_SUPPORTED_MODES,
+    OHOS_CONTROL_FOCUS_ASSIST_FLASH_SUPPORTED_MODE,
+    OHOS_ABILITY_LENS_INFO_MINIMUM_FOCUS_DISTANCE,
+    OHOS_CONTROL_LENS_FOCUS_DISTANCE,
 
     OHOS_ABILITY_DEVICE_AVAILABLE_FLASHMODES,
     OHOS_CONTROL_FLASHMODE,
@@ -165,9 +181,16 @@ const std::vector<uint32_t> g_metadataTags = {
     OHOS_CONTROL_CAMERA_VIRTUAL_APERTURE_VALUE,
     OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE,
     OHOS_CONTROL_CAMERA_PHYSICAL_APERTURE_VALUE,
+    OHOS_STATUS_CAMERA_APERTURE_VALUE,
     OHOS_DEVICE_EXITCAMERA_EVENT,
-    OHOS_CONTROL_SUPER_SLOW_CHECK_AREA,
-    OHOS_STATUS_SUPER_SLOW_MOTION,
+    OHOS_CONTROL_MOTION_DETECTION_CHECK_AREA,
+    OHOS_STATUS_SLOW_MOTION_DETECTION,
+    OHOS_ABILITY_MOTION_DETECTION_SUPPORT,
+    OHOS_CONTROL_MOTION_DETECTION,
+    OHOS_ABILITY_EXPOSURE_HINT_SUPPORTED,
+    OHOS_CONTROL_EXPOSURE_HINT_MODE,
+    OHOS_STATUS_ALGO_MEAN_Y,
+    OHOS_STATUS_PREVIEW_PHYSICAL_CAMERA_ID,
 
     // camera secure related
     OHOS_CONTROL_SECURE_FACE_MODE,
@@ -773,10 +796,12 @@ int CameraMetadata::UpdateameraMetadataItemSize(camera_metadata_item_entry_t *it
 {
     size_t dataSize = CalculateCameraMetadataItemDataSize(item->data_type, dataCount);
     size_t dataPayloadSize = dataCount * OHOS_CAMERA_METADATA_TYPE_SIZE[item->data_type];
-
     size_t oldItemSize = CalculateCameraMetadataItemDataSize(item->data_type, item->count);
-
     int32_t ret = CAM_META_SUCCESS;
+    if (item == nullptr || dst == nullptr) {
+        METADATA_ERR_LOG("UpdateameraMetadataItemSize item is null or dst is null");
+        return CAM_META_FAILURE;
+    }
     if (dataSize != oldItemSize) {
         if (dst->data_capacity < (dst->data_count + dataSize - oldItemSize)) {
             METADATA_ERR_LOG("UpdateCameraMetadataItemByIndex data_capacity limit reached");
@@ -1011,6 +1036,10 @@ std::string U8ItemToString(int32_t item, const camera_metadata_item_t entry)
 {
     std::string st = {};
     uint32_t count = entry.count;
+    if (entry.data.u8 == nullptr) {
+        METADATA_ERR_LOG("U8ItemToString: entry.data.u8 is null!");
+        return st;
+    }
     std::string dataStr = std::to_string(*(entry.data.u8));
     for (uint32_t i = 1; i < count; i++) {
         if ((i % WRAP_LENGTH) == 0) {
@@ -1037,6 +1066,10 @@ std::string I32ItemToString(int32_t item, const camera_metadata_item_t entry)
 {
     std::string st = {};
     uint32_t count = entry.count;
+    if (entry.data.i32 == nullptr) {
+        METADATA_ERR_LOG("I32ItemToString: entry.data.i32 is null!");
+        return st;
+    }
     std::string dataStr = std::to_string(*(entry.data.i32));
     for (uint32_t i = 1; i < count; i++) {
         if ((i % WRAP_LENGTH) == 0) {
@@ -1063,6 +1096,10 @@ std::string U32ItemToString(int32_t item, const camera_metadata_item_t entry)
 {
     std::string st = {};
     uint32_t count = entry.count;
+    if (entry.data.ui32 == nullptr) {
+        METADATA_ERR_LOG("U32ItemToString: entry.data.ui32 is null!");
+        return st;
+    }
     std::string dataStr = std::to_string(*(entry.data.ui32));
     for (uint32_t i = 1; i < count; i++) {
         if ((i % WRAP_LENGTH) == 0) {
@@ -1089,6 +1126,10 @@ std::string I64ItemToString(int32_t item, const camera_metadata_item_t entry)
 {
     std::string st = {};
     uint32_t count = entry.count;
+    if (entry.data.i64 == nullptr) {
+        METADATA_ERR_LOG("I64ItemToString: entry.data.i64 is null!");
+        return st;
+    }
     std::string dataStr = std::to_string(*(entry.data.i64));
     for (uint32_t i = 1; i < count; i++) {
         if ((i % WRAP_LENGTH) == 0) {
@@ -1115,6 +1156,10 @@ std::string FloatItemToString(int32_t item, const camera_metadata_item_t entry)
 {
     std::string st = {};
     uint32_t count = entry.count;
+    if (entry.data.f == nullptr) {
+        METADATA_ERR_LOG("FloatItemToString: entry.data.f is null!");
+        return st;
+    }
     std::string dataStr = std::to_string(*(entry.data.f));
     for (uint32_t i = 1; i < count; i++) {
         if ((i % WRAP_LENGTH) == 0) {
@@ -1141,6 +1186,10 @@ std::string DoubleItemToString(int32_t item, const camera_metadata_item_t entry)
 {
     std::string st = {};
     uint32_t count = entry.count;
+    if (entry.data.d == nullptr) {
+        METADATA_ERR_LOG("DoubleItemToString: entry.data.d is null!");
+        return st;
+    }
     std::string dataStr = std::to_string(*(entry.data.d));
     for (uint32_t i = 1; i < count; i++) {
         if ((i % WRAP_LENGTH) == 0) {
@@ -1167,6 +1216,10 @@ std::string RationalItemToString(int32_t item, const camera_metadata_item_t entr
 {
     std::string st = {};
     uint32_t count = entry.count;
+    if (entry.data.r == nullptr) {
+        METADATA_ERR_LOG("RationalItemToString: entry.data.r is null!");
+        return st;
+    }
     std::string dataStr = std::to_string((*(entry.data.r)).numerator) + "/" +
         std::to_string((*(entry.data.r)).denominator);
     for (uint32_t i = 1; i < count; i++) {

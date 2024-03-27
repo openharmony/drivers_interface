@@ -142,7 +142,7 @@ struct AddFusion
  *
  * Output:
  *
- * * First <b>K</b> indices or values before the maximum input tensor on the axis.
+ * * 1-dimension or n-dimension tensor with boolean data type.
  *
  * @since 5.0
  * @version 2.1
@@ -197,14 +197,14 @@ struct ArgMaxFusion
  *
  * Output:
  *
- * * Tensor after average pooling.
+ * * Result value judged by condition. If the condition is not true, an Error is returned.
  *
  * @since 5.0
  * @version 2.1
  */
 struct Assert
 {
-    /** Print this many entries of each tensor. */
+    /** The number of entries for each tensor is printed. */
     long summarize;
 };
 
@@ -258,7 +258,7 @@ struct AvgPoolFusion
 };
 
 /**
- * @brief Divides the batch dimension of a 4D tensor into small blocks by <b>block_shape</b>, and interleaves these blocks\n
+ * @brief Divides the batch dimension of a 4D tensor into small blocks by <b>blockShape</b>, and interleaves these blocks\n
  * back into the spatial dimension.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_BATCH_TO_SPACE_ND</b>.
@@ -270,9 +270,9 @@ struct AvgPoolFusion
  * Output:
  *
  * * Output tensor. Assume that the shape of <b>x</b> is (n,h,w,c) and the shape of output is (n',h',w',c'):
- * \f$ n' = n / (block_shape[0] * block_shape[1])\f$<br>
- * \f$ h' = h * block_shape[0] - crops[0][0] - crops[0][1] \f$<br>
- * \f$ w' = w * block_shape[1] - crops[1][0] - crops[1][1] \f$<br>
+ * \f$ n' = n / (blockShape[0] * blockShape[1])\f$<br>
+ * \f$ h' = h * blockShape[0] - crops[0][0] - crops[0][1] \f$<br>
+ * \f$ w' = w * blockShape[1] - crops[1][0] - crops[1][1] \f$<br>
  * \f$ c'= c \f$
  *
  * @since 3.2
@@ -470,9 +470,9 @@ struct Conv2DFusion
     /**
      * Splits <b>x</b> into groups by <b>inChannel</b>. The <b>group</b> value is of the int type.
      * If <b>group</b> is <b>1</b>, it is a conventional convolution.
-     * If <b>group</b> is <b>inChannel</b>, it is depthwiseConv2d. In this case, group==in_channel==out_channel.
+     * If <b>group</b> is <b>inChannel</b>, it is depthwiseConv2d. In this case, group==inChannel==outChannel.
      * If <b>group</b> is greater than <b>1</b> and less than <b>inChannel</b>, it is group convolution.\n
-     * In this case, out_channel==group.
+     * In this case, outChannel==group.
      */
     long group;
     /** Number of input channels. */
@@ -584,7 +584,7 @@ struct Cos
 struct ConstantOfShape
 {
     /** The data type of output elements. */
-    long data_type;
+    long dataType;
     /** The value of the output elements. Should be a one-element tensor. */
     float[] value;
 };
@@ -615,47 +615,27 @@ struct Crop
 };
 
 /**
- * @brief Shift and scale inputs into a distribution centered around 0 with standard deviation 1.
- * It accomplishes this by precomputing the mean and variance of the data, and calling\n
- * <b>(x - mean) / sqrt(var)</b> at runtime.
- *
- * The {@link NodeType} of this operator is <b>NODE_TYPE_CUSTOM_NORMALIZE</b>.
- *
- * Input:
- *
- * * <b>x</b>, an n-dimensional tensor.
- *
- * Output:
- *
- * * Normalized output tensor.
- *
- * @since 5.0
- * @version 2.1
- */
-struct CustomNormalize
-{
-};
-
-/**
- * @brief Generate the real coordinates of the prediction box relative to the original image,
- * and filter all the prediction boxes to obtain the final object detection result.
- * The information of each prediction box output includes image id, lable, confidence, and four coordinate values.
- * <b>(x - mean) / sqrt(var)</b> at runtime.
+ * @brief The output of the object detection model is post-processed, including decoding the bounding box,
+ * class probability and score of the model output, and then performing non-maximum suppression (NMS) to remove
+ * the overlapping bounding box, and finally outputting the detection result.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_DETECTION_POST_PROCESS</b>.
  *
  * Input:
  *
- * * <b>bbox</b>, boxes to be predicted.
- * * <b>scores</b>, socres of all boxes.
- * * <b>anchors</b>, information of boxes, includes box, variance and coordinates.
+ * * <b>bbox</b>, bounding box for model output.
+ * * <b>scores</b>, probability of class score for model output.
+ * * <b>anchors</b>, The coordinates and size information of the candidate boxes used to generate the detection box.
  *
  * Output:
  *
- * * <b>image_id</b>, the image ID of target detected bboxes.
- * * <b>label</b>, the label of target detected bboxes.
- * * <b>confidence</b>, the score of target detected bboxes.
- * * <b>coordinates</b>, the coordinate of target detected bboxes.
+ * * <b>bboxes</b>, 3-dimensional tensor with an inner array representing the coordinate values of the object
+ * *     detection box.
+ * * <b>classes</b>,2-dimensional tensor with an internal numeric value representing the classification index
+ * *     corresponding to each detection box.
+ * * <b>confidences</b>, 2-dimensional tensor with an internal numerical value indicating the confidence level
+ * *     of the detected object.
+ * * <b>numDetections</b>, 1-dimensional tensor, the number of test results.
  *
  * @since 5.0
  * @version 2.1
@@ -665,7 +645,7 @@ struct DetectionPostProcess
     /** Format of input tensor, default NCHW. */
     enum Format format;
     /** The size of the input tensor. */
-    long input_size;
+    long inputSize;
     /** The scaling factor used to convert the output from the normalized form to the original image coordinates. */
     float[] scale;
     /** The threshold of overlapping region during NMS. */
@@ -702,16 +682,16 @@ struct DetectionPostProcess
  *
  * Output:
  *
- * * Output tensor of [N, H * blocksize, W * blocksize, C/(blocksize * blocksize)] for NHWC format\n
- *   or [N, C/(blocksize * blocksize), H * blocksize, W * blocksize] for NCHW format.
+ * * Output tensor of [N, H * blockSize, W * blockSize, C/(blockSize * blockSize)] for NHWC format\n
+ *   or [N, C/(blockSize * blockSize), H * blockSize, W * blockSize] for NCHW format.
  *
  * @since 5.0
  * @version 2.1
  */
 struct DepthToSpace
 {
-    /** Blocks of [blocksize, blocksize] are moved. */
-    long block_size;
+    /** Blocks of [blockSize, blockSize] are moved. */
+    long blockSize;
     /** Format of input tensor, default NCHW. */
     enum Format format;
     /** DCR (default) for depth-column-row order re-arrangement. Use CRD for column-row-depth order. */
@@ -1016,7 +996,7 @@ struct Greater
 };
 
 /**
- * @brief Returns the tensor resulted from performing the greater_equal logical operation elementwise\n
+ * @brief Returns the tensor resulted from performing the greater-equal logical operation elementwise\n
  * on the input tensors <b>x1</b> and <b>x2</b>.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_GREATER_EQUAL</b>.
@@ -1118,7 +1098,7 @@ struct LayerNormFusion
 struct LeakyRelu
 {
     /** Coefficient of leakage. */
-    float negative_slope;
+    float negativeSlope;
 };
 
 /**
@@ -1187,7 +1167,7 @@ struct Log
 };
 
 /**
- * @brief Calculates the truth value of <b>x1</b> AND <b>x2</b> element-wise.
+ * @brief Calculates the logical value of <b>x1</b> AND <b>x2</b> element-wise.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_LOGICAL_AND</b>.
  *
@@ -1208,7 +1188,7 @@ struct LogicalAnd
 };
 
 /**
- * @brief Calculates the truth value of NOT <b>x</b> element-wise.
+ * @brief Calculates the logical value of NOT <b>x</b> element-wise.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_LOGICAL_NOT</b>.
  *
@@ -1228,7 +1208,7 @@ struct LogicalNot
 };
 
 /**
- * @brief Calculates the truth value of <b>x1</b> OR <b>x2</b> element-wise.
+ * @brief Calculates the logical value of <b>x1</b> OR <b>x2</b> element-wise.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_LOGICAL_OR</b>.
  *
@@ -1299,7 +1279,7 @@ struct L2NormalizeFusion
     /** The axis on which to apply normalization, -1 means last axis, default: 0.*/
     long[] axis;
     /** Value added for numerical stability. default: 1e-4; */
-    float epslion;
+    float epsilon;
     /** Activation function type. For details, see {@link ActivationType}. */
     enum ActivationType activationType;
 };
@@ -1311,50 +1291,50 @@ struct L2NormalizeFusion
  *
  * Input:
  *
- * * <b>input</b>, input tensor, shape is [seq_len, batch_size, input_size].
- * * <b>weight_ih</b>, weight tensor of input-layer to hidden-layer,
- *   shape is [num_directions* num_layers, 4 * hidden_size, input_size].
- * * <b>weight_hh</b>, weight tensor of hidden-layer to hidden-layer,
- *   shape is [num_directions* num_layers, 4 * hidden_size, hidden_size].
+ * * <b>input</b>, input tensor, shape is [seqLen, batchSize, inputSize].
+ * * <b>weightIh</b>, weight tensor of input-layer to hidden-layer,
+ *   shape is [numDirections * numLayers, 4 * hiddenSize, inputSize].
+ * * <b>weightHh</b>, weight tensor of hidden-layer to hidden-layer,
+ *   shape is [numDirections * numLayers, 4 * hiddenSize, hiddenSize].
  * * <b>bias</b>, bias tensor of input-layer and hidden-layer to hidden-layer,
- *   shape is [num_directions* num_layers, 8 * hidden_size].
- * * <b>hidden_state</b>, init state of hidden-layer, shape is [num_directions * num_layers, batch_size, hidden_size].
- * * <b>cell_state</b>, init state of cell, shape is [num_directions * num_layers, batch_size, hidden_size].
+ *   shape is [numDirections * numLayers, 8 * hiddenSize].
+ * * <b>hiddenState</b>, init state of hidden-layer, shape is [numDirections * numLayers, batchSize, hiddenSize].
+ * * <b>cellState</b>, init state of cell, shape is [numDirections * numLayers, batchSize, hiddenSize].
  *
  * Output:
  *
  * * <b>output</b>, a tensor that concats all the intermediate output tensor of the hidden,
- *   shape is [seq_len, batch_size, num_directions * real_hidden_size].
- * * <b>hidden_state</b>, the last output tensor of the hidden-layer,
- *   shape is [num_directions * num_layers, batch_size, real_hidden_size].
- * * <b>cell_state</b>, the last output tensor of the cell,
- *   shape is [num_directions * num_layers, batch_size, hidden_size].
+ *   shape is [seqLen, batchSize, numDirections * realHiddenSize].
+ * * <b>hiddenState</b>, the last output tensor of the hidden-layer,
+ *   shape is [numDirections * numLayers, batchSize, realHiddenSize].
+ * * <b>cellState</b>, the last output tensor of the cell,
+ *   shape is [numDirections * numLayers, batchSize, hiddenSize].
  *
  * @since 5.0
  * @version 2.1
  */
 struct LSTM
 {
-    /** Whether the LSTM operation is bidirectional. */
+    /** Whether the LSTM operation is bi-directional. */
     boolean bidirectional;
     /** Whether the operation contains bias. */
-    boolean has_bias;
+    boolean hasBias;
     /** Size of input tensor. */
-    long input_size;
+    long inputSize;
     /** Size of hidden state tensor. */
-    long hidden_size;
+    long hiddenSize;
     /** Layers of LSTM network. */
-    long num_layers;
+    long numLayers;
     /** Number of directions, value is 2 if direction == bidirectional else 1. */
-    long num_directions;
+    long numDirections;
     /** Dropout probalility of each layer except first-layer. */
     float dropout;
     /** Probalility that the cell state retains the previous state. Default: 0. */
-    float zoneout_cell;
+    float zoneoutCell;
     /** Probalility that the hidden state retains the previous state. Default: 0. */
-    float zoneout_hidden;
-    /** If proj_size > 0, will use LSTM with projections of corresponding size. Default: 0. */
-    long proj_size;
+    float zoneoutHidden;
+    /** If projSize > 0, will use LSTM with projections of corresponding size. Default: 0. */
+    long projSize;
 };
 
 /**
@@ -1533,7 +1513,7 @@ struct MulFusion
 };
 
 /**
- * @brief Returns a tensor with negative values of the input tensor element-wise.
+ * @brief Calculate the opposite value of the input tensor element-wise.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_NEG</b>.
  *
@@ -1553,7 +1533,7 @@ struct Neg
 };
 
 /**
- * @brief Returns the tensor resulted from performing the not_equal logical operation elementwise\n
+ * @brief Returns the tensor resulted from performing the not-equal logical operation elementwise\n
  * on the input tensors <b>x1</b> and <b>x2</b>.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_NOT_EQUAL</b>.
@@ -1577,19 +1557,19 @@ struct NotEqual
 /**
  * @brief Generates a one-hot tensor based on the specified locations.
  *
- * The locations specified by <b>indices</b> are determined by <b>on_value</b>, and other locations are determined\n
- * by <b>off_value</b>.
+ * The locations specified by <b>indices</b> are determined by <b>onValue</b>, and other locations are determined\n
+ * by <b>offValue</b>.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_ONE_HOT</b>.
  *
  * Input:
  *
- * * <b>indices</b>, an n-dimensional tensor. Each element in <b>indices</b> determines the location of <b>on_value</b>\n
+ * * <b>indices</b>, an n-dimensional tensor. Each element in <b>indices</b> determines the location of <b>onValue</b>\n
  *   in each one-hot vector.
  * * <b>depth</b>, an integer scalar that determines the depth of the one-hot vector. The value of <b>depth</b> must be\n
  *   greater than <b>0</b>.
- * * <b>on_value</b>, a scalar that specifies a valid value in the one-hot vector.
- * * <b>off_value</b>, a scalar that specifies the values of other locations in the one-hot vector except the valid value.
+ * * <b>onValue</b>, a scalar that specifies a valid value in the one-hot vector.
+ * * <b>offValue</b>, a scalar that specifies the values of other locations in the one-hot vector except the valid value.
  *
  * Output:
  *
@@ -1788,7 +1768,7 @@ struct Rank
 struct Range
 {
     /** Reserved dataType parameter. */
-    long d_type;
+    long dataType;
     /** Scalar. First entry for the range of output values. */
     long start;
     /** Scalar. Exclusive upper limit for the range of output values. */
@@ -1842,7 +1822,7 @@ struct RealDiv
  * @brief Reduces the dimensions of a tensor.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_REDUCE_FUSION</b>.
- * If <b>mode</b> is <b>REDUCE_ALL</b>, <b>REDUCE_PROD</b>, or <b>REDUCE_MEAN</b> and <b>reduce_to_end</b>
+ * If <b>mode</b> is <b>REDUCE_ALL</b>, <b>REDUCE_PROD</b>, or <b>REDUCE_MEAN</b> and <b>reduceToEnd</b>
  * is <b>true</b>, the output is the reduced value multiplied by <b>coeff</b>.
  *
  * Input:
@@ -2161,10 +2141,10 @@ struct SpaceToBatchND
 /**
  * @brief Rearrange blocks of spatial data into depth.
  *
- * The output tensor’s height dimension is height / blocksize;
- * The output tensor’s weight dimension is weight / blocksize;
- * The depth of output tensor is blocksize * blocksize * inputDepth;
- * The input tensor’s height and width must be divisible by blocksize.
+ * The output tensor’s height dimension is height / blockSize;
+ * The output tensor’s weight dimension is weight / blockSize;
+ * The depth of output tensor is blockSize * blockSize * inputDepth;
+ * The input tensor’s height and width must be divisible by blockSize.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_SPACE_TO_DEPTH</b>.
  *
@@ -2174,7 +2154,7 @@ struct SpaceToBatchND
  *
  * Output:
  *
- * * Result tensor with the same data_type as the input <b>x</b>.
+ * * Result tensor with the same dataType as the input <b>x</b>.
  *
  * @since 5.0
  * @version 2.1
@@ -2182,7 +2162,7 @@ struct SpaceToBatchND
 struct SpaceToDepth
 {
     /** The block size used to divide spatial data. It must be >= 2. */
-    long blocksize;
+    long blockSize;
     /** Format of the tensor data. For details, see {@link Format}. */
     enum Format format;
 };
@@ -2234,9 +2214,9 @@ struct Split
     long outputNum;
     /**
      * Size of each tensor to output.
-     * If <b>size_splits</b> is empty, <b>x</b> will be evenly split into tensors of the same size.
+     * If <b>sizeSplits</b> is empty, <b>x</b> will be evenly split into tensors of the same size.
      * In this case, x.shape[axis] must be an integer multiple of <b>outputNum</b>.
-     * If <b>size_splits</b> is not empty, the sum of all elements must be equal to x.shape[axis].
+     * If <b>sizeSplits</b> is not empty, the sum of all elements must be equal to x.shape[axis].
      */
     long[] sizeSplits;
     /** Target axis on which <b>x</b> is split. The data type is int. */
@@ -2396,7 +2376,7 @@ struct StridedSlice
      */
     long beginMask;
     /**
-     * Mask of <b>end</b>. The parameter is similar to <b>begin_mask</b>.
+     * Mask of <b>end</b>. The parameter is similar to <b>beginMask</b>.
      * <b>endMask</b> identifies different dimensions of <b>x</b> in binary code. For example, if bit i of <b>endMask</b> is
      * set to <b>1</b>, the setting of <b>end</b> in the ith dimension will be invalid, which means the tensor will be
      * sliced till the end in that dimension. The default value is <b>0</b>.
@@ -2675,6 +2655,34 @@ struct Erf
 struct LogSoftmax
 {
     /** The axis to apply LogSoftmax operation, -1 means the last dimension. */
+    long axis;
+};
+
+/**
+ * @brief Converts the data type.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_QUANT_DTYPE_CAST_V2</b>.
+ * The v1 version {@link NodeType} of this operator is <b>NODE_TYPE_QUANT_DTYPE_CAST</b>,
+ * and the corresponding NodeAttrType is {@link QuantDTypeCast}.
+ *
+ * Input:
+ *
+ * * <b>x</b>, an n-dimensional tensor.
+ *
+ * Output:
+ *
+ * * Tensor after the data type conversion.
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct QuantDTypeCastV2
+{
+    /** Data type of the input tensor. */
+    long srcT;
+    /** Data type of the output tensor. */
+    long dstT;
+    /** The axis to apply QuantDTypeCastV2 operation. */
     long axis;
 };
 

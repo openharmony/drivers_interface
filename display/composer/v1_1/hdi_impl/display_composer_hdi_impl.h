@@ -42,12 +42,12 @@ public:
     {
         sptr<CompHdi> hdi;
         std::shared_ptr<CmdReq> req = nullptr;
-
+        HDF_LOGI("%{public}s: hdi v1_1 start", __func__);
         while ((hdi = CompHdi::Get()) == nullptr) {
             // Waiting for display composer service ready
             usleep(WAIT_TIME_INTERVAL);
         }
-
+        HDF_LOGI("%{public}s: hdi v1_1 end", __func__);
         if (needSMQ) {
             req = CmdReq::Create(hdi);
             if (req == nullptr) {

@@ -361,4 +361,15 @@ import ohos.hdi.wlan.wpa.v1_0.WpaTypes;
    * @version 1.0
    */
    OnEventStaNotify([in] String notifyParam, [in] String ifName);
+
+  /**
+   * Used to Reporting WPA Information
+   *
+   * @param wpaMsgForCbInfo  Parameters for reporting WPA information
+   * @param ifName Indicates the NIC name.
+   *
+   * @since 4.1
+   * @version 1.0
+   */
+   OnEventVendorCb([in] WpaVendorInfo wpaVendorInfo, [in] String ifName);
 }
