@@ -171,11 +171,12 @@ public:
         return ToDispErrCode(hdi_v1_1_->GetHDRCapabilityInfos(devId, info));
     }
 
-    private:
+    protected:
     using BaseType1_0 = V1_0::DisplayComposerHdiImpl<Interface, CompHdi, CmdReq>;
     using BaseType1_0::WAIT_TIME_INTERVAL;
     using BaseType1_0::ToDispErrCode;
     sptr<CompHdi> hdi_v1_1_;
+    private:
     SeamlessChangeCallback seamlessChangeCb_;
     RefreshCallback refreshCb_;
     void *seamlessChangeCbData_;
