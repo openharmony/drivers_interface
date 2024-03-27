@@ -293,7 +293,7 @@ void MetadataUtils::ConvertVecToMetadata(const std::vector<uint8_t>& cameraAbili
         ReadData<uint32_t>(item.data_type, index, cameraAbility);
         ReadData<uint32_t>(item.count, index, cameraAbility);
         if (item.count > MAX_SUPPORTED_ITEMS) {
-            METADATA_ERR_LOG("MetadataUtils::DecodeCameraMetadata item.count out of range:%u", item.count);
+            METADATA_ERR_LOG("MetadataUtils::ConvertVecToMetadata item.count out of range:%u", item.count);
             return;
         }
         ReadMetadataDataFromVec(index, item, cameraAbility);
