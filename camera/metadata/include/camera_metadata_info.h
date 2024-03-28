@@ -48,6 +48,10 @@ private:
         common_metadata_header_t *dst, const void *data);
     static int AddCameraMetadataItemVerify(common_metadata_header_t *dst,
         uint32_t item, const void *data, size_t dataCount, uint32_t *dataType);
+    static int moveMetadataMemery(common_metadata_header_t *dst,
+        camera_metadata_item_entry_t *itemToDelete, size_t dataBytes);
+    static int copyMetadataMemory(common_metadata_header_t *dst, camera_metadata_item_entry_t *item,
+        size_t dataPayloadSize, const void *data);
 
 public:
     // Allocate a new camera metadata buffer and return the metadata header
