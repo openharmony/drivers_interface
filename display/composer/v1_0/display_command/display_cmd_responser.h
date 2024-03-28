@@ -413,6 +413,9 @@ EXIT:
 
             ret = devCache->SetDisplayClientBuffer(data.buffer, data.seqNo, needFreeBuffer,
                 [&](const BufferHandle& handle)->int32_t {
+#ifdef DISPLAY_COMSPOER_DEBUG_DUMP
+                DumpLayerBuffer(data.devId, data.seqNo, data.fence, handle, "client_");
+#endif
                 int rc = impl_->SetDisplayClientBuffer(data.devId, handle, fdParcel.GetFd());
                 DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
                 return HDF_SUCCESS;
@@ -810,7 +813,7 @@ EXIT:
             ret = layerCache->SetLayerBuffer(data.buffer, data.seqNo, needFreeBuffer, deletingList,
                 [&](const BufferHandle& handle)->int32_t {
 #ifdef DISPLAY_COMSPOER_DEBUG_DUMP
-                DumpLayerBuffer(data.devId, data.layerId, data.fence, handle);
+                DumpLayerBuffer(data.devId, data.layerId, data.fence, handle, "layer_");
 #endif
                 int rc = impl_->SetLayerBuffer(data.devId, data.layerId, handle, fdParcel.GetFd());
                 DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
@@ -959,7 +962,8 @@ EXIT:
         return strStream.str();
     }
 #ifdef DISPLAY_COMSPOER_DEBUG_DUMP
-    static void DumpLayerBuffer(uint32_t devId, uint32_t layerId, int32_t fence, const BufferHandle& buffer)
+    static void DumpLayerBuffer(uint32_t devId, uint32_t layerId, int32_t fence, const BufferHandle& buffer,
+        std::string tag)
     {
         const std::string SWITCH_ON = "on";
         const uint32_t DUMP_BUFFER_SWITCH_LEN = 4;
@@ -987,7 +991,7 @@ EXIT:
 
         const std::string PATH_PREFIX = "/data/local/traces/";
         std::stringstream filePath;
-        filePath << PATH_PREFIX << fileName;
+        filePath << PATH_PREFIX << tag << fileName;
         std::ofstream rawDataFile(filePath.str(), std::ofstream::binary);
         DISPLAY_CHECK((!rawDataFile.good()), HDF_LOGE("open file failed, %{public}s",
             std::strerror(errno)));
