@@ -2659,6 +2659,27 @@ struct LogSoftmax
 };
 
 /**
+ * @brief Gathers slices from a tensor by indices.
+ *
+ * The {@link NodeType} of this operator is <b>NODE_TYPE_GATHER_ND</b>.
+ *
+ * Input:
+ *
+ * * <b>x</b>, the target tensor to gather values.
+ * * <b>indices</b>, the index tensor with int32 or int64 data type.
+ *
+ * Output:
+ *
+ * * Sliced tensor. Has the same type as input_x and the shape is indices_shape[:-1] + x_shape[indices_shape[-1]:].
+ *
+ * @since 5.0
+ * @version 2.1
+ */
+struct GatherNd
+{
+};
+
+/**
  * @brief Converts the data type.
  *
  * The {@link NodeType} of this operator is <b>NODE_TYPE_QUANT_DTYPE_CAST_V2</b>.
