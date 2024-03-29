@@ -451,9 +451,8 @@ std::string MetadataUtils::EncodeToString(std::shared_ptr<CameraMetadata> metada
     }
             
     if (meta->data_count != 0) {
-        ret = memcpy_s(encodeData, encodeDataLen, GetMetadataData(meta), meta->data_count);
-        if (ret != EOK) {
-            METADATA_ERR_LOG("MetadataUtils::EncodeToString Failed to copy memory for data");
+        ret = copyEncodeToStringMem(meta, encodeData, encodeDataLen);
+        if (ret != CAM_META_SUCCESS) {
             return {};
         }
         encodeData += meta->data_count;
@@ -462,6 +461,22 @@ std::string MetadataUtils::EncodeToString(std::shared_ptr<CameraMetadata> metada
                        s.capacity(), (encodeData - &s[0]));
 
     return s;
+}
+
+int MetadataUtils::copyEncodeToStringMem(common_metadata_header_t *meta, char *encodeData, int32_t encodeDataLen)
+{
+    uint8_t *metaMetadataData = GetMetadataData(meta);
+    int32_t ret = CAM_META_SUCCESS;
+    if (metaMetadataData == nullptr) {
+        METADATA_ERR_LOG("MetadataUtils::EncodeToString GetMetadataData failed");
+        return CAM_META_FAILURE;
+    }
+    ret = memcpy_s(encodeData, encodeDataLen, metaMetadataData, meta->data_count);
+    if (ret != EOK) {
+        METADATA_ERR_LOG("MetadataUtils::EncodeToString Failed to copy memory for data");
+        return CAM_META_FAILURE;
+    }
+    return CAM_META_SUCCESS;
 }
 
 std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string setting)
@@ -514,16 +529,31 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
     if (meta->data_count != 0) {
         IF_COND_PRINT_MSG_AND_RETURN(totalLen < static_cast<uint32_t>(((decodeData - &setting[0]) + meta->data_count)),
             "MetadataUtils::DecodeFromString Failed at data copy")
-        ret = memcpy_s(GetMetadataData(meta), meta->data_count, decodeData, meta->data_count);
-
-        IF_COND_PRINT_MSG_AND_RETURN(ret != EOK,
-            "MetadataUtils::DecodeFromString Failed to copy memory for item data field")
-        decodeData += meta->data_count;
+        ret = copyDecodeFromStringMem(meta, decodeData);
+        if (ret != CAM_META_SUCCESS) {
+            return {};
+        }
     }
 
     METADATA_DEBUG_LOG("MetadataUtils::DecodeFromString String length: %{public}zu, Decoded length: %{public}zu",
                        setting.capacity(), (decodeData - &setting[0]));
     return metadata;
+}
+
+int MetadataUtils::copyDecodeFromStringMem(common_metadata_header_t *meta, char *decodeData)
+{
+    uint8_t *metaMetadataData = GetMetadataData(meta);
+    uint32_t ret;
+    if (metaMetadataData == nullptr) {
+        METADATA_ERR_LOG("MetadataUtils::DecodeFromString GetMetadataData failed");
+        return CAM_META_FAILURE;
+    }
+    ret = memcpy_s(metaMetadataData, meta->data_count, decodeData, meta->data_count);
+
+    IF_COND_PRINT_MSG_AND_RETURN(ret != EOK,
+        "MetadataUtils::DecodeFromString Failed to copy memory for item data field")
+    decodeData += meta->data_count;
+    return CAM_META_SUCCESS;
 }
 
 static void ReadMetadataUInt8(camera_metadata_item_t &entry, MessageParcel &data)
