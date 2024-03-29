@@ -36,6 +36,27 @@ public:
      * @version 1.2
      */
     static IDisplayComposerInterface* Get(bool needSMQ = true);
+
+    /**
+     * @brief Commits the request for composition and display.
+     *        Obtains the fences of the display layers after the commit operation.
+     * If there is a hardware composition layer, the composition is performed and the composition result is sent to
+     * the hardware for display.
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param fence Indicates the pointer to the start address of the fence.
+     * @param skipState Indicates the state of the skip validate feature.
+     * @param needFlush Indicates the pointer that specifies whether the graphics service needs to reset the display
+     * framebuffer by using <b>SetDisplayClientBuffer</b> before the commit operation.
+     * The value <b>true</b> means that the framebuffer needs to be reset, and <b>false</b> means the opposite.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 5.0
+     * @version 1.2
+     */
+    virtual int32_t CommitAndGetReleaseFence(uint32_t devId, int32_t& fence,
+        int32_t& skipState, bool& needFlush) = 0;
 };
 } // V1_2
 } // Composer
