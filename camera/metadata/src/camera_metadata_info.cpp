@@ -193,6 +193,7 @@ const std::vector<uint32_t> g_metadataTags = {
     OHOS_CONTROL_EXPOSURE_HINT_MODE,
     OHOS_STATUS_ALGO_MEAN_Y,
     OHOS_STATUS_PREVIEW_PHYSICAL_CAMERA_ID,
+    OHOS_ABILITY_EQUIVALENT_FOCUS,
 
     // camera secure related
     OHOS_CONTROL_SECURE_FACE_MODE,
