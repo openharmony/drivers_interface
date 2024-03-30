@@ -17,10 +17,10 @@
  * @addtogroup HdiGnss
  * @{
  *
- * @brief Provides unified APIs for gnss services to access gnss drivers.
+ * @brief Provides unified APIs for GNSS services to access GNSS drivers.
  *
- * A gnss service can obtain a gnss driver object or agent and then call APIs provided by this object or agent to
- * access gnss devices, thereby Start the GNSS chip, start the navigation,
+ * A GNSS service can obtain a GNSS driver object or agent and then call APIs provided by this object or agent to
+ * access GNSS devices, thereby Start the GNSS chip, start the navigation,
  * set the GNSS working mode, inject reference information, obtain the positioning result, obtain the nmea,
  * obtain the satellite status information, and obtain the cache location information.
  *
@@ -30,7 +30,7 @@
 /*
  * @file GnssTypes.idl
  *
- * @brief Defines the data structure used by the agnss module..
+ * @brief Defines the data structure used by the GNSS module.
  *
  * @since 3.2
  * @version 1.0
@@ -45,8 +45,7 @@ package ohos.hdi.location.gnss.v1_0;
  *
  * @since 3.2
  */
-enum GnssWorkingMode
-{
+enum GnssWorkingMode {
     /* GNSS standalone (no assistance) */
     GNSS_WORKING_MODE_STANDALONE = 1,
 
@@ -72,7 +71,7 @@ enum GnssStartType {
 };
 
 /*
- * @brief Defines the gnss reference information type.
+ * @brief Defines the GNSS reference information type.
  *
  * The reference information includes the reference time, reference location, and best location.
  *
@@ -142,7 +141,7 @@ enum GnssCapabilities {
     /* GNSS supports Geofencing  */
     GNSS_CAP_SUPPORT_GEOFENCING = 4,
 
-    /* GNSS supports Measurements for at least GPS. */
+    /* GNSS supports Measurements. */
     GNSS_CAP_SUPPORT_MEASUREMENTS = 8,
 
     /* GNSS supports Navigation Messages */
@@ -203,10 +202,10 @@ enum SatellitesStatusFlag {
 struct SatelliteStatusInfo {
     unsigned int satellitesNumber;
 
-    /* Pseudo-random or satellite ID number for the satellite. */
+    /* Satellite ID number for the satellite. */
     short[] satelliteIds;
 
-    /* Defines the constellation of the given SV. */
+    /* Defines the constellation type of the given satellite. */
     enum GnssConstellationType[] constellation;
 
     /* Carrier-to-noise density in dB-Hz. */
@@ -230,7 +229,7 @@ struct SatelliteStatusInfo {
  * @since 3.2
  */
 struct GnssBasicConfig {
-    /* min interval between locations in ms */
+    /* Minimus interval between locations in millisecond */
     unsigned int minInterval;
 
     /* expected accuracy in meters */
@@ -250,7 +249,7 @@ struct GnssBasicConfig {
  * @since 3.2
  */
 struct GnssCachingConfig {
-    /* min interval between locations in ms */
+    /* Minimus interval between locations in millisecond */
     unsigned int interval;
 
     /* If the value is true, the cached locations are reported
