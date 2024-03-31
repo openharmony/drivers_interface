@@ -26,14 +26,13 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/fingerprint_auth/v1_0:fingerprint_auth_idl_target",
-          "//drivers/interface/fingerprint_auth/v1_2:fingerprint_auth_idl_target"
+          "//drivers/interface/fingerprint_auth/v2_0:fingerprint_auth_idl_target"
         ],
         "test": [
         ],
         "inner_kits": [
           {
-            "name": "//drivers/interface/fingerprint_auth/v1_0:libfingerprint_auth_proxy_1.0",
+            "name": "//drivers/interface/fingerprint_auth/v2_0:libfingerprint_auth_proxy_2.0",
             "header": {
               "header_files": [
               ],
@@ -41,7 +40,7 @@
             }
           },
           {
-            "name": "//drivers/interface/fingerprint_auth/v1_0:libfingerprint_auth_stub_1.0",
+            "name": "//drivers/interface/fingerprint_auth/v2_0:libfingerprint_auth_stub_2.0",
             "header": {
               "header_files": [
               ],
@@ -49,31 +48,7 @@
             }
           },
           {
-            "name": "//drivers/interface/fingerprint_auth/v1_0:fingerprint_auth_idl_headers_1.0",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interface/fingerprint_auth"
-            }
-          },
-          {
-            "name": "//drivers/interface/fingerprint_auth/v1_2:libfingerprint_auth_proxy_1.2",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interface/fingerprint_auth"
-            }
-          },
-          {
-            "name": "//drivers/interface/fingerprint_auth/v1_2:libfingerprint_auth_stub_1.2",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interface/fingerprint_auth"
-            }
-          },
-          {
-            "name": "//drivers/interface/fingerprint_auth/v1_2:fingerprint_auth_idl_headers_1.2",
+            "name": "//drivers/interface/fingerprint_auth/v2_0:fingerprint_auth_idl_headers",
             "header": {
               "header_files": [
               ],
