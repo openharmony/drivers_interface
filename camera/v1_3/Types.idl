@@ -57,6 +57,12 @@ enum OperationMode : ohos.hdi.camera.v1_2.OperationMode_V1_2 {
      * Slow motion mode, which dedicated to video recording slow motion 
      */
     HIGH_FRAME_RATE = 13,
+
+    /**
+     * High resolution photo mode, which dedicated to capture recording high frame rate
+     */
+    HIGH_RESOLUTION_PHOTO = 14,
+
 };
 
 /**
