@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -23,7 +23,7 @@
  * setting codec parameters, and controlling and transferring data.
  *
  * @since 4.1
- * @version 2.0
+ * @version 3.0
  */
 
 /**
@@ -43,10 +43,13 @@
  * @since 4.1
  * @version 2.0
  */
-package ohos.hdi.codec.v2_0;
+package ohos.hdi.codec.v3_0;
 
 /**
  * @brief Enumerates the codec types.
+  
+ * @since 4.1
+ * @version 2.0
  */
 enum CodecType {
     VIDEO_DECODER, /**< Video decoder. */
@@ -58,6 +61,9 @@ enum CodecType {
 
 /**
  * @brief Enumerates the types of audio and video that can be encoded or decoded.
+  
+ * @since 4.1
+ * @version 2.0
  */
 enum AvCodecRole {
     MEDIA_ROLETYPE_IMAGE_JPEG = 0,        /**< JPEG image. */
@@ -75,6 +81,9 @@ enum AvCodecRole {
 
 /**
  * @brief Enumerates the codec profiles.
+  
+ * @since 4.1
+ * @version 2.0
  */
 enum Profile {
     INVALID_PROFILE = 0,           /**< Invalid profile. */
@@ -95,6 +104,9 @@ enum Profile {
 
 /**
  * @brief Enumerates the playback capabilities.
+  
+ * @since 4.1
+ * @version 2.0
  */
 enum CodecCapsMask {
     CODEC_CAP_ADAPTIVE_PLAYBACK = 0x1, /**< Adaptive playback. */
@@ -105,6 +117,9 @@ enum CodecCapsMask {
 
 /**
  * @brief Enumerates the audio sampling rates.
+  
+ * @since 4.1
+ * @version 2.0
  */
 enum AudioSampleRate {
     AUD_SAMPLE_RATE_8000 = 8000,   /**< 8000 */
@@ -126,6 +141,9 @@ enum AudioSampleRate {
  *
  * For the planar sampling format, the data of each channel is independently stored in <b>data</b>.
  * For the packed sampling format, only the first data is used, and the data of each channel is interleaved.
+  
+ * @since 4.1
+ * @version 2.0
  */
 enum CodecAudioSampleFormat {
     AUDIO_SAMPLE_FMT_U8 = 0,  /**< Unsigned 8-bit integer, packed. */
@@ -143,6 +161,9 @@ enum CodecAudioSampleFormat {
 
 /**
  * @brief Enumerates the codec processing modes.
+  
+ * @since 4.1
+ * @version 2.0
  */
 enum CodecProcessMode {
     PROCESS_BLOCKING_INPUT_BUFFER = 0x1,       /**< Input buffer in sync mode. */
@@ -155,6 +176,9 @@ enum CodecProcessMode {
 
 /**
  * @brief Enumerates the shared memory types.
+  
+ * @since 4.1
+ * @version 2.0
  */
 enum ShareMemTypes {
     READ_WRITE_TYPE = 0x1, /**< Shared memory that is readable and writable. */
@@ -163,6 +187,9 @@ enum ShareMemTypes {
 
 /**
  * @brief Enumerates the bit rate modes.
+  
+ * @since 4.1
+ * @version 2.0
  */
 enum BitRateMode {
     BIT_RATE_MODE_INVALID, /**< Invalid value. */
@@ -175,6 +202,9 @@ enum BitRateMode {
 
 /**
  * @brief Enumerates the component states.
+  
+ * @since 4.1
+ * @version 2.0
  */
 enum CodecEventType {
     CODEC_EVENT_CMD_COMPLETE,                     /**< The component has completed a command. */
@@ -196,6 +226,9 @@ enum CodecEventType {
 
 /**
  * @brief Enumerates the cmd parameters of the <b>SendCommand</b> API in <b>ICodecComponent</b>.
+  
+ * @since 4.1
+ * @version 2.0
  */
 enum CodecCommandType
 {
@@ -211,6 +244,9 @@ enum CodecCommandType
 
 /**
  * @brief Enuerates the component states.
+  
+ * @since 4.1
+ * @version 2.0
  */
 enum CodecStateType
 {
@@ -234,6 +270,9 @@ enum CodecStateType
 
 /**
  * @brief Enuerates the port supplier preferences when establishing a tunnel between two ports.
+  
+ * @since 4.1
+ * @version 2.0
  */
 enum CodecBufferSupplierType
 {
@@ -248,6 +287,9 @@ enum CodecBufferSupplierType
 
 /**
  * @brief Defines the alignment structure.
+  
+ * @since 4.1
+ * @version 2.0
  */
 struct Alignment {
     int widthAlignment;  /**< Alignment value of the width. */
@@ -256,6 +298,9 @@ struct Alignment {
 
 /**
  * @brief Defines a rectangle.
+  
+ * @since 4.1
+ * @version 2.0
  */
 struct Rect {
     int width;  /**< Width of the rectangle. */
@@ -264,6 +309,9 @@ struct Rect {
 
 /**
  * @brief Defines a value range.
+  
+ * @since 4.1
+ * @version 2.0
  */
 struct RangeValue {
     int min; /**< Minimum value. */
@@ -272,6 +320,9 @@ struct RangeValue {
 
 /**
  * @brief Defines the video encoding and decoding capabilities.
+  
+ * @since 4.1
+ * @version 3.0
  */
 struct CodecVideoPortCap {
     struct Rect minSize;               /**< Minimum resolution supported. */
@@ -286,10 +337,17 @@ struct CodecVideoPortCap {
                                             For details, see {@link BitRateMode}. */
     struct RangeValue frameRate;       /**< Frame rate range. */
     int[] measuredFrameRate;           /**< Frame rate measured. */
+    boolean isSupportLowLatency;       /**< Whether supports low-latency feature */
+    boolean isSupportTSVC;	           /**< Whether supports temporal level scale feature */
+    boolean isSupportLTR;	           /**< Whether supports long-term reference feature */
+    int maxLTRFrameNum;	               /**< Maximum long-term reference frame numbers supported */
 };
 
 /**
  * @brief Defines the audio encoding and decoding capabilities.
+  
+ * @since 4.1
+ * @version 2.0
  */
 struct CodecAudioPortCap {
     int[] sampleFormats;  /**< Supported audio sampling formats. For details, see {@link AudioSampleFormat}. */
@@ -301,6 +359,9 @@ struct CodecAudioPortCap {
 
 /**
  * @brief Defines the audio and video encoding and decoding capabilities.
+  
+ * @since 4.1
+ * @version 2.0
  */
 struct PortCap {
     struct CodecVideoPortCap video; /**< Video encoding and decoding capabilities. */
@@ -309,6 +370,9 @@ struct PortCap {
 
 /**
  * @brief Defines the version type of a component.
+  
+ * @since 4.1
+ * @version 2.0
  */
 struct CodecVerType {
     unsigned char majorVersion; /**< Major version accessor element. */
@@ -319,6 +383,9 @@ struct CodecVerType {
 
 /**
  * @brief Defines the component version information.
+  
+ * @since 4.1
+ * @version 2.0
  */
 union CodecVersionType {
     struct CodecVerType version; /**< Component version. */
@@ -328,6 +395,9 @@ union CodecVersionType {
 
 /**
  * @brief Defines the codec capabilities.
+  
+ * @since 4.1
+ * @version 2.0
  */
 struct CodecCompCapability {
     enum AvCodecRole role;      /**< Media type. */
@@ -347,6 +417,9 @@ struct CodecCompCapability {
 
 /**
  * @brief Defines the codec buffer information.
+  
+ * @since 4.1
+ * @version 2.0
  */
 struct OmxCodecBuffer {
     unsigned int bufferId;          /**< Buffer ID. */
@@ -368,6 +441,9 @@ struct OmxCodecBuffer {
 
 /**
  * @brief Defines the structure that is used to pass data from an output port to an input port.
+  
+ * @since 4.1
+ * @version 2.0
  */
 struct CodecTunnelSetupType {
     unsigned int tunnelFlags;              /**< Bit flags for tunneling. */
@@ -376,6 +452,9 @@ struct CodecTunnelSetupType {
 
 /**
  * @brief Defines the component information.
+  
+ * @since 4.1
+ * @version 2.0
  */
 struct CompVerInfo {
     String compName;                    /**< Component name. */
@@ -386,6 +465,9 @@ struct CompVerInfo {
 
 /**
  * @brief Defines the event information to report.
+  
+ * @since 4.1
+ * @version 2.0
  */
 struct EventInfo {
     long appData;       /**< Upper-layer instance passed in when the callback is invoked. */
