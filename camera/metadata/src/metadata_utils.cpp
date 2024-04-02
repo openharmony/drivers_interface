@@ -481,7 +481,7 @@ int MetadataUtils::copyEncodeToStringMem(common_metadata_header_t *meta, char *e
 
 std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string setting)
 {
-    uint32_t ret;
+    int32_t ret;
     uint32_t totalLen = setting.capacity();
     const uint32_t headerLength = sizeof(common_metadata_header_t);
     const uint32_t itemLen = sizeof(camera_metadata_item_entry_t);
@@ -543,7 +543,7 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
 int MetadataUtils::copyDecodeFromStringMem(common_metadata_header_t *meta, char *decodeData)
 {
     uint8_t *metaMetadataData = GetMetadataData(meta);
-    uint32_t ret;
+    int32_t ret;
     if (metaMetadataData == nullptr) {
         METADATA_ERR_LOG("MetadataUtils::DecodeFromString GetMetadataData failed");
         return CAM_META_FAILURE;
