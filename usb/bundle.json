@@ -115,7 +115,7 @@
           }
         },
         {
-          "name": "//drivers/interface/usb/v1_1:usb_idl_headers",
+          "name": "//drivers/interface/usb/v1_1:usb_idl_headers_1.1",
           "header": {
             "header_files": [],
             "header_base": "//drivers/interface/usb"

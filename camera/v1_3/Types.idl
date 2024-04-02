@@ -19,7 +19,7 @@
  * @brief Declares data types
  * used by the Hardware Driver Interfaces (HDIs) of this module.
  *
- * @since 5.0
+ * @since 3.2
  * @version 1.3
  */
 
@@ -32,65 +32,16 @@ sequenceable ohos.hdi.camera.v1_0.MapDataSequenceable;
 
 /**
  * @brief Enumerates stream operation modes.
+ * @since 3.2
+ * @version 1.3
  */
-enum OperationMode_V1_3 {
-    /**
-     * Normal mode, which supports both photo and video scenes
-     */
-    NORMAL = 0,
-
-    /**
-     * Capture mode, which dedicated to photo scene
-     * IF this mode is implemented, then the NORMAL mode should no longer be implemented
-     */
-    CAPTURE = 1,
-
-    /**
-     * Video mode, which dedicated to video secne
-     * IF this mode is implemented, then the NORMAL mode should no longer be implemented
-     */
-    VIDEO = 2,
-
-    /**
-     * Portrait mode, which dedicated to portrait photo secne
-     */
-    PORTRAIT = 3,
-
-    /**
-     * Night mode, which dedicated to night shooting scene
-     */
-    NIGHT = 4,
+enum OperationMode : ohos.hdi.camera.v1_2.OperationMode_V1_2 {
 
     /**
      * Professional mode, which dedicated to professional photo scene
      * Abandoned, use the new operationMode below
      */
-    PROFESSIONAL = 5,
-
-    /**
-     * Slow motion mode, which dedicated to capturing slow motion
-     */
-    SLOW_MOTION = 6,
-
-    /**
-     * Scan mode, which dedicated to scan code
-     */
-    SCAN_CODE = 7,
-
-    /**
-     * Macro mode, which dedicated to capture code
-     */
-    CAPTURE_MACRO = 8,
-
-    /**
-     * Macro mode, which dedicated to video code
-     */
-    VIDEO_MACRO = 9,
-
-    /**
-     * Super stabilization mode, which dedicated to use Suprt stabilization mode
-     */
-    SUPER_STAB = 10,
+    PROFESSIONAL_V1_3 = PROFESSIONAL,
 
     /**
      * Professional mode, which dedicated to capture code
@@ -103,12 +54,78 @@ enum OperationMode_V1_3 {
     PROFESSIONAL_VIDEO = 12,
 
     /**
-     * Slow motion mode, which dedicated to video recording slow motion
+     * Slow motion mode, which dedicated to video recording slow motion 
      */
     HIGH_FRAME_RATE = 13,
+};
+
+/**
+ * @brief Enumerates types of the extended stream information.
+ * @since 4.0
+ * @version 1.2
+ */
+enum ExtendedStreamInfoType : ohos.hdi.camera.v1_2.ExtendedStreamInfoType_V1_2 {
 
     /**
-     * Operation mode max
+     * Slow motion mode, which dedicated to video recording slow motion
      */
-    OPERATION_MODE_MAX,
+    EXTENDED_STREAM_INFO_RAW = 2,
+
+    /**
+     * Extended stream information of depth.
+     */
+    EXTENDED_STREAM_INFO_DEPTH = 3,
+
+    /**
+     * Extended stream information of meta.
+     */
+    EXTENDED_STREAM_INFO_META = 4,
+    
+    /**
+     * Extended stream information of secure.
+     */
+    EXTENDED_STREAM_INFO_SECURE = 5,
+};
+
+/**
+ * @brief Enumerates stream types.
+ * @since 5.0
+ * @version 1.0
+ */
+enum StreamType {
+
+    /**
+     * Preview streams, indicating that stream data is used for preview
+     */
+    STREAM_TYPE_PREVIEW = 0,
+
+    /**
+     * Video streams, indicating that stream data is used to encode and generate videos
+     */
+    STREAM_TYPE_VIDEO = 1,
+
+    /**
+     * Photographing streams, indicating that stream data is used to encode and generate images
+     */
+    STREAM_TYPE_STILL_CAPTURE = 2,
+
+    /**
+     * Stream data that is used to store thumbnails
+     */
+    STREAM_TYPE_POST_VIEW = 3,
+
+    /**
+     * Stream data that is used for image analysis
+     */
+    STREAM_TYPE_ANALYZE = 4,
+
+    /**
+     * Custom type
+     */
+    STREAM_TYPE_CUSTOM = 5,
+
+    /**
+     * Depth type
+     */
+    STREAM_TYPE_DEPTH = 6,
 };

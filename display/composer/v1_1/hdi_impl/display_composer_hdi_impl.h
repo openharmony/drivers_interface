@@ -42,12 +42,12 @@ public:
     {
         sptr<CompHdi> hdi;
         std::shared_ptr<CmdReq> req = nullptr;
-
+        HDF_LOGI("%{public}s: hdi v1_1 start", __func__);
         while ((hdi = CompHdi::Get()) == nullptr) {
             // Waiting for display composer service ready
             usleep(WAIT_TIME_INTERVAL);
         }
-
+        HDF_LOGI("%{public}s: hdi v1_1 end", __func__);
         if (needSMQ) {
             req = CmdReq::Create(hdi);
             if (req == nullptr) {
@@ -171,11 +171,12 @@ public:
         return ToDispErrCode(hdi_v1_1_->GetHDRCapabilityInfos(devId, info));
     }
 
-    private:
+    protected:
     using BaseType1_0 = V1_0::DisplayComposerHdiImpl<Interface, CompHdi, CmdReq>;
     using BaseType1_0::WAIT_TIME_INTERVAL;
     using BaseType1_0::ToDispErrCode;
     sptr<CompHdi> hdi_v1_1_;
+    private:
     SeamlessChangeCallback seamlessChangeCb_;
     RefreshCallback refreshCb_;
     void *seamlessChangeCbData_;
