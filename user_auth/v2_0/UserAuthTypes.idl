@@ -472,4 +472,30 @@ struct ReuseUnlockInfo {
     EnrolledState enrolledState;
 };
 
+/**
+ * @brief Global config type.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+enum GlobalConfigType : uint32_t {
+    /** Pin expired period */
+    PIN_EXPIRED_PERIOD = 1,
+};
+
+/**
+ * @brief Global config param.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+struct GlobalConfigParam {
+    /** Global config type. See @{GlobalConfigType}*/
+    GlobalConfigType type;
+    union {
+        /** Pin expired period value. When pinExpiredPeriod equals to 0, userAuth won't check pin expired period. */
+        uint64_t pinExpiredPeriod;
+    }
+}
+
 /** @} */

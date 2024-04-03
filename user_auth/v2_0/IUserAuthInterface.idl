@@ -457,5 +457,12 @@ interface IUserAuthInterface {
      */
     GetSignedExecutorInfo([in] int[] authTypes, [in] int executorRole, [in] unsigned char[] remoteDeviceId,
         [out] unsigned char[] signedExecutorInfo);
+    /**
+     * @brief Set global config param.
+     *
+     * @param param The value of global config parameter. See @{GlobalConfigParam}.
+     * @return Return set result(0:success; other:failed).
+     */
+    SetGlobalConfigParam([in] GlobalConfigParam param);
 }
 /** @} */
