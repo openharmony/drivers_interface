@@ -65,6 +65,7 @@ public:
 
     uint32_t Size() const
     {
+        std::lock_guard<std::mutex> lock(mutex_);
         return caches_.size();
     }
 
@@ -100,6 +101,7 @@ public:
 
     CacheType* SearchCache(IdType id) const
     {
+        std::lock_guard<std::mutex> lock(mutex_);
         auto cacheItem = caches_.find(id);
         if (cacheItem == caches_.end()) {
             return nullptr;
@@ -110,6 +112,7 @@ public:
 
     void TravelCaches(std::function<void (IdType id, const CacheType& cache)> func) const
     {
+        std::lock_guard<std::mutex> lock(mutex_);
         for (auto const& [key, value] : caches_) {
             func(key, *value.get());
         }
