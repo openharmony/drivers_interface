@@ -669,10 +669,16 @@ typedef enum control_moving_photo_enum {
     OHOS_CAMERA_MOVING_PHOTO_ON,
 } control_moving_photo_enum_t;
 
-//  OHOS_STATUS_AMBIENT_BRIGHTNESS enumeration values
+// OHOS_STATUS_AMBIENT_BRIGHTNESS enumeration values
 typedef enum camera_ambient_brightness_status_type {
     OHOS_CAMERA_AMBIENT_BRIGHTNESS_DARK = 0,
     OHOS_CAMERA_AMBIENT_BRIGHTNESS_LIGHT,
-}camera_ambient_brightness_status_type_t;
+} camera_ambient_brightness_status_type_t;
+
+// OHOS_ABILITY_AMBIENT_BRIGHTNESS_STATUS enumeration values
+typedef enum camera_supported_enum {
+    OHOS_CAMERA_NOT_SUPPORTED = 0,
+    OHOS_CAMERA_SUPPORTED,
+} camera_supported_enum_t;
 
 #endif
