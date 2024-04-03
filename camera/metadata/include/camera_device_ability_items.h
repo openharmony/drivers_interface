@@ -113,6 +113,9 @@ typedef enum camera_device_metadata_tag {
     OHOS_ABILITY_CAPTURE_DURATION_SUPPORTED,
     OHOS_CAMERA_CUSTOM_SNAPSHOT_DURATION,
     OHOS_ABILITY_MOVING_PHOTO,
+    OHOS_ABILITY_AMBIENT_BRIGHTNESS_STATUS,
+    OHOS_CONTROL_AMBIENT_BRIGHTNESS_STATUS_REPORT_SWITCH,
+    OHOS_STATUS_AMBIENT_BRIGHTNESS,
     OHOS_CAMERA_PROPERTIES_END,
 
     OHOS_SENSOR_EXPOSURE_TIME = OHOS_CAMERA_SENSOR_START,
@@ -665,5 +668,17 @@ typedef enum control_moving_photo_enum {
     OHOS_CAMERA_MOVING_PHOTO_OFF = 0,
     OHOS_CAMERA_MOVING_PHOTO_ON,
 } control_moving_photo_enum_t;
+
+// OHOS_STATUS_AMBIENT_BRIGHTNESS enumeration values
+typedef enum camera_ambient_brightness_status_type {
+    OHOS_CAMERA_AMBIENT_BRIGHTNESS_DARK = 0,
+    OHOS_CAMERA_AMBIENT_BRIGHTNESS_LIGHT,
+} camera_ambient_brightness_status_type_t;
+
+// OHOS_ABILITY_AMBIENT_BRIGHTNESS_STATUS enumeration values
+typedef enum camera_supported_enum {
+    OHOS_CAMERA_NOT_SUPPORTED = 0,
+    OHOS_CAMERA_SUPPORTED,
+} camera_supported_enum_t;
 
 #endif
