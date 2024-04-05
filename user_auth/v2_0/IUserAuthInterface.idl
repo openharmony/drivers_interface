@@ -462,6 +462,9 @@ interface IUserAuthInterface {
      *
      * @param param The value of global config parameter. See @{GlobalConfigParam}.
      * @return Return set result(0:success; other:failed).
+     *
+     * @since 5.0
+     * @version 1.0
      */
     SetGlobalConfigParam([in] GlobalConfigParam param);
 }
