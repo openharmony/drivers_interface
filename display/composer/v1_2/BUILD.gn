@@ -60,7 +60,7 @@ ohos_shared_library("libdisplay_composer_hdi_impl_1.2") {
     "init:libbegetutil",
     "ipc:ipc_single",
   ]
-  
+
   sanitize = {
     cfi = true
     cfi_cross_dso = true

@@ -32,7 +32,7 @@ ohos_shared_library("libcomposer_buffer_cache") {
     "hilog:libhilog",
     "ipc:ipc_single",
   ]
-  
+
   sanitize = {
     cfi = true
     cfi_cross_dso = true
