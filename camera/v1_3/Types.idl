@@ -40,26 +40,36 @@ enum OperationMode : ohos.hdi.camera.v1_2.OperationMode_V1_2 {
     /**
      * Professional mode, which dedicated to professional photo scene
      * Abandoned, use the new operationMode below
+     * @since 3.2
+     * @version 1.3
      */
     PROFESSIONAL_V1_3 = PROFESSIONAL,
 
     /**
      * Professional mode, which dedicated to capture code
+     * @since 3.2
+     * @version 1.3
      */
     PROFESSIONAL_PHOTO = 11,
 
     /**
      * Professional mode, which dedicated to video code
+     * @since 3.2
+     * @version 1.3
      */
     PROFESSIONAL_VIDEO = 12,
 
     /**
-     * Slow motion mode, which dedicated to video recording slow motion 
+     * Slow motion mode, which dedicated to video recording slow motion
+     * @since 3.2
+     * @version 1.3 
      */
     HIGH_FRAME_RATE = 13,
 
     /**
      * High resolution photo mode, which dedicated to capture recording high pixel
+     * @since 3.2
+     * @version 1.3
      */
     HIGH_RESOLUTION_PHOTO = 14,
 
