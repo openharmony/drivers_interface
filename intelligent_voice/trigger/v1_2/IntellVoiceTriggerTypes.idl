@@ -45,7 +45,7 @@ import ohos.hdi.intelligent_voice.trigger.v1_0.IntellVoiceTriggerTypes;
 /**
  * @brief Enumerates intelligent voice trigger model types.
  *
- * @since 5.0
+ * @since 4.0
  * @version 1.2
  */
 enum IntellVoiceTriggerModelType : ohos.hdi.intelligent_voice.trigger.v1_0.IntellVoiceTriggerModelType {
