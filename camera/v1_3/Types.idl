@@ -59,6 +59,7 @@ enum OperationMode : ohos.hdi.camera.v1_2.OperationMode_V1_2 {
      *
      * @since 5.0
      * @version 1.0
+     */
     PROFESSIONAL_VIDEO = 12,
 
     /**
