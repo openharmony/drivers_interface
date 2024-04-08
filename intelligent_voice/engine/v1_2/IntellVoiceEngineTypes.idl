@@ -40,6 +40,30 @@
 
 package ohos.hdi.intelligent_voice.engine.v1_2;
 
+import ohos.hdi.intelligent_voice.engine.v1_0.IntellVoiceEngineTypes;
+
+/**
+ * @brief Enumerates intelligent voice engine content types.
+ *
+ * @since 5.0
+ * @version 1.2
+ */
+enum ContentType : ohos.hdi.intelligent_voice.engine.v1_0.ContentType {
+    DEFAULT_DSP_MODLE = 0,    /**< Default dsp model */
+    SHORT_WORD_DSP_MODEL = 1,  /**< Short word dsp model */
+};
+
+/**
+ * @brief Enumerates intelligent voice engine message types.
+ *
+ * @since 5.0
+ * @version 1.2
+ */
+enum IntellVoiceEngineMessageType : ohos.hdi.intelligent_voice.engine.v1_0.IntellVoiceEngineMessageType {
+    INTELL_VOICE_ENGINE_MSG_RECONFIRM_RECOGNITION_COMPLETE = 5, /**< Reconfirm recognition complete */
+    INTELL_VOICE_ENGINE_MSG_HEADSET_RECOGNIZE_COMPLETE = 6,     /**< Headset recognize complete */
+};
+
 /**
  * @brief Enumerates upload hdi file types.
  *
