@@ -25,7 +25,7 @@
  * starting or stopping the intelligent voice engine, setting parameter to or getting parameter from the intelligent voice engine, 
  * writing audio or reading files from the intelligent voice engine, subscribing callback to the intelligent voice engine.
  *
- * @since 5.0
+ * @since 4.0
  * @version 1.2
  */
 
