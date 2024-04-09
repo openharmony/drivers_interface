@@ -297,6 +297,7 @@ typedef enum camera_device_metadata_tag {
     OHOS_STATUS_ALGO_MEAN_Y,
     OHOS_STATUS_PREVIEW_PHYSICAL_CAMERA_ID,
     OHOS_ABILITY_CAPTURE_EXPECT_TIME,
+    OHOS_CONTROL_FOCUS_DISTANCE,
     OHOS_CAMERA_EFFECT_END,
 
     // camera secure related
