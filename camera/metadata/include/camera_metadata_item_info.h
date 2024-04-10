@@ -351,6 +351,8 @@ static item_info_t g_ohosPostProcess[OHOS_CAMERA_EFFECT_END - OHOS_CAMERA_EFFECT
         OHOS_CAMERA_EFFECT_START] = {"previewPhysicalCameraId", META_TYPE_BYTE, 1},
     [OHOS_ABILITY_CAPTURE_EXPECT_TIME -
         OHOS_CAMERA_EFFECT_START] = {"captureExpectTime", META_TYPE_UINT32, -1},
+    [OHOS_CONTROL_FOCUS_DISTANCE -
+        OHOS_CAMERA_EFFECT_START] = {"macroFocusDistance", META_TYPE_FLOAT, 1},
 };
 
 static item_info_t g_ohosCameraSecure[OHOS_CAMERA_SECURE_END - OHOS_CAMERA_SECURE_START] = {
