@@ -309,11 +309,17 @@ protected:
 
         int32_t ret = unpacker->ReadUint32(devId) ? HDF_SUCCESS : HDF_FAILURE;
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+        {
+            HdfTrace traceVdi("PrepareDisplayLayers", "HDI:DISP:HARDWARE");
+            ret = impl_->PrepareDisplayLayers(devId, needFlush);
+        }
 
-        ret = impl_->PrepareDisplayLayers(devId, needFlush);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+        {
+            HdfTrace traceVdi("GetDisplayCompChange", "HDI:DISP:HARDWARE");
+            ret = impl_->GetDisplayCompChange(devId, layers, types);
+        }
 
-        ret = impl_->GetDisplayCompChange(devId, layers, types);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
         ret = CmdUtils::StartSection(REPLY_CMD_PREPARE_DISPLAY_LAYERS, replyPacker_);
@@ -391,11 +397,7 @@ EXIT:
         bool needFreeBuffer = false;
         int32_t ret = UnpackDisplayClientBufferInfo(unpacker, inFds, data);
         HdifdParcelable fdParcel(data.fence);
-
-        if (ret != HDF_SUCCESS) {
-            goto EXIT;
-        }
-
+        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
         {
             if (cacheMgr_ == nullptr) {
                 ret = HDF_FAILURE;
@@ -416,6 +418,7 @@ EXIT:
 #ifdef DISPLAY_COMSPOER_DEBUG_DUMP
                 DumpLayerBuffer(data.devId, data.seqNo, data.fence, handle, "client_");
 #endif
+                HdfTrace traceVdi("SetDisplayClientBuffer", "HDI:DISP:HARDWARE");
                 int rc = impl_->SetDisplayClientBuffer(data.devId, handle, fdParcel.GetFd());
                 DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
                 return HDF_SUCCESS;
@@ -464,10 +467,11 @@ EXIT:
                 }
             }
         }
-        DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, impl_->SetDisplayClientDamage(devId, rects),
-            HDF_LOGE("%{public}s, SetDisplayClientDamage error", __func__));
-
-        if (ret != HDF_SUCCESS) {
+        if (ret == HDF_SUCCESS) {
+            HdfTrace traceVdi("SetDisplayClientDamage", "HDI:DISP:HARDWARE");
+            impl_->SetDisplayClientDamage(devId, rects);
+        } else {
+            HDF_LOGE("%{public}s, SetDisplayClientDamage error", __func__);
             errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CLIENT_DAMAGE, ret);
         }
         return;
@@ -496,7 +500,10 @@ EXIT:
             goto REPLY;
         }
 
-        ret = impl_->Commit(devId, fence);
+        {
+            HdfTrace traceVdi("Commit", "HDI:DISP:HARDWARE");
+            ret = impl_->Commit(devId, fence);
+        }
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("%{public}s, commit failed with ret = %{public}d", __func__, ret);
         }
@@ -552,7 +559,10 @@ REPLY:
         retBool = unpacker->ReadUint8(alpha.gAlpha);
         DISPLAY_CHECK(retBool == false, goto EXIT);
 
-        ret = impl_->SetLayerAlpha(devId, layerId, alpha);
+        {
+            HdfTrace traceVdi("SetLayerAlpha", "HDI:DISP:HARDWARE");
+            ret = impl_->SetLayerAlpha(devId, layerId, alpha);
+        }
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
 EXIT:
@@ -576,7 +586,10 @@ EXIT:
         ret = CmdUtils::RectUnpack(unpacker, rect);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = impl_->SetLayerRegion(devId, layerId, rect);
+        {
+            HdfTrace traceVdi("SetLayerRegion", "HDI:DISP:HARDWARE");
+            ret = impl_->SetLayerRegion(devId, layerId, rect);
+        }
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 EXIT:
         if (ret != HDF_SUCCESS) {
@@ -599,7 +612,10 @@ EXIT:
         ret = CmdUtils::RectUnpack(unpacker, rect);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = impl_->SetLayerCrop(devId, layerId, rect);
+        {
+            HdfTrace traceVdi("SetLayerCrop", "HDI:DISP:HARDWARE");
+            ret = impl_->SetLayerCrop(devId, layerId, rect);
+        }
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 EXIT:
         if (ret != HDF_SUCCESS) {
@@ -622,7 +638,10 @@ EXIT:
         ret = unpacker->ReadUint32(zorder) ? HDF_SUCCESS : HDF_FAILURE;
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = impl_->SetLayerZorder(devId, layerId, zorder);
+        {
+            HdfTrace traceVdi("SetLayerZorder", "HDI:DISP:HARDWARE");
+            ret = impl_->SetLayerZorder(devId, layerId, zorder);
+        }
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 EXIT:
         if (ret != HDF_SUCCESS) {
@@ -645,7 +664,10 @@ EXIT:
         ret = unpacker->ReadBool(preMulti) ? HDF_SUCCESS : HDF_FAILURE;
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = impl_->SetLayerPreMulti(devId, layerId, preMulti);
+        {
+            HdfTrace traceVdi("SetLayerPreMulti", "HDI:DISP:HARDWARE");
+            ret = impl_->SetLayerPreMulti(devId, layerId, preMulti);
+        }
         DISPLAY_CHECK(ret != HDF_SUCCESS && ret != DISPLAY_NOT_SUPPORT && ret != HDF_ERR_NOT_SUPPORT, goto EXIT);
 EXIT:
         if (ret != HDF_SUCCESS) {
@@ -668,7 +690,10 @@ EXIT:
         ret = unpacker->ReadInt32(type) ? HDF_SUCCESS : HDF_FAILURE;
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = impl_->SetLayerTransformMode(devId, layerId, static_cast<TransformType>(type));
+        {
+            HdfTrace traceVdi("SetLayerTransformMode", "HDI:DISP:HARDWARE");
+            ret = impl_->SetLayerTransformMode(devId, layerId, static_cast<TransformType>(type));
+        }
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 EXIT:
         if (ret != HDF_SUCCESS) {
@@ -703,11 +728,11 @@ EXIT:
                 }
             }
         }
-
-        DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, impl_->SetLayerDirtyRegion(devId, layerId, rects),
-            HDF_LOGE("%{public}s, SetLayerDirtyRegion error", __func__));
-
-        if (ret != HDF_SUCCESS) {
+        if (ret == HDF_SUCCESS) {
+            HdfTrace traceVdi("SetLayerDirtyRegion", "HDI:DISP:HARDWARE");
+            impl_->SetLayerDirtyRegion(devId, layerId, rects);
+        } else {
+            HDF_LOGE("%{public}s, SetLayerDirtyRegion error", __func__);
             errMaps_.emplace(REQUEST_CMD_SET_LAYER_DIRTY_REGION, ret);
         }
         return;
@@ -738,11 +763,11 @@ EXIT:
                 }
             }
         }
-
-        DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, impl_->SetLayerVisibleRegion(devId, layerId, rects),
-            HDF_LOGE("%{public}s, SetLayerDirtyRegion error", __func__));
-
-        if (ret != HDF_SUCCESS) {
+        if (ret == HDF_SUCCESS) {
+            HdfTrace traceVdi("SetLayerVisibleRegion", "HDI:DISP:HARDWARE");
+            impl_->SetLayerVisibleRegion(devId, layerId, rects);
+        } else {
+            HDF_LOGE("%{public}s, SetLayerDirtyRegion error", __func__);
             errMaps_.emplace(REQUEST_CMD_SET_LAYER_VISIBLE_REGION, ret);
         }
         return;
@@ -815,6 +840,7 @@ EXIT:
 #ifdef DISPLAY_COMSPOER_DEBUG_DUMP
                 DumpLayerBuffer(data.devId, data.layerId, data.fence, handle, "layer_");
 #endif
+                HdfTrace traceVdi("SetLayerBuffer", "HDI:DISP:HARDWARE");
                 int rc = impl_->SetLayerBuffer(data.devId, data.layerId, handle, fdParcel.GetFd());
                 DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
                 return HDF_SUCCESS;
@@ -855,7 +881,10 @@ EXIT:
         ret = unpacker->ReadInt32(type) ? HDF_SUCCESS : HDF_FAILURE;
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = impl_->SetLayerCompositionType(devId, layerId, static_cast<CompositionType>(type));
+        {
+            HdfTrace traceVdi("SetLayerCompositionType", "HDI:DISP:HARDWARE");
+            ret = impl_->SetLayerCompositionType(devId, layerId, static_cast<CompositionType>(type));
+        }
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 EXIT:
         if (ret != HDF_SUCCESS) {
@@ -877,7 +906,10 @@ EXIT:
         ret = unpacker->ReadInt32(type) ? HDF_SUCCESS : HDF_FAILURE;
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = impl_->SetLayerBlendType(devId, layerId, static_cast<BlendType>(type));
+        {
+            HdfTrace traceVdi("SetLayerBlendType", "HDI:DISP:HARDWARE");
+            ret = impl_->SetLayerBlendType(devId, layerId, static_cast<BlendType>(type));
+        }
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 EXIT:
         if (ret != HDF_SUCCESS) {
@@ -900,7 +932,10 @@ EXIT:
         ret = unpacker->ReadUint32(maskInfo) ? HDF_SUCCESS : HDF_FAILURE;
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = impl_->SetLayerMaskInfo(devId, layerId, static_cast<MaskInfo>(maskInfo));
+        {
+            HdfTrace traceVdi("SetLayerMaskInfo", "HDI:DISP:HARDWARE");
+            ret = impl_->SetLayerMaskInfo(devId, layerId, static_cast<MaskInfo>(maskInfo));
+        }
         DISPLAY_CHECK(ret != HDF_SUCCESS && ret != DISPLAY_NOT_SUPPORT && ret != HDF_ERR_NOT_SUPPORT, goto EXIT);
 EXIT:
         if (ret != HDF_SUCCESS) {
@@ -923,7 +958,10 @@ EXIT:
         ret = CmdUtils::LayerColorUnpack(unpacker, layerColor);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = impl_->SetLayerColor(devId, layerId, layerColor);
+        {
+            HdfTrace traceVdi("SetLayerColor", "HDI:DISP:HARDWARE");
+            ret = impl_->SetLayerColor(devId, layerId, layerColor);
+        }
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 EXIT:
         if (ret != HDF_SUCCESS) {

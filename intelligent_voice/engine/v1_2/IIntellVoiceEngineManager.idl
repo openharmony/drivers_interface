@@ -25,7 +25,7 @@
  * starting or stopping the intelligent voice engine, setting parameter to or getting parameter from the intelligent voice engine, 
  * writing audio or reading files from the intelligent voice engine, subscribing callback to the intelligent voice engine.
  *
- * @since 5.0
+ * @since 4.0
  * @version 1.2
  */
 
@@ -51,7 +51,7 @@ import ohos.hdi.intelligent_voice.engine.v1_2.IIntellVoiceEngineAdapter;
  *
  * The operations include obtaining or sending intelligent voice engine information, creating or releasing an intelligent voice engine adapter.
  *
- * @since 5.0
+ * @since 4.0
  * @version 1.2
  */
 interface IIntellVoiceEngineManager extends ohos.hdi.intelligent_voice.engine.v1_1.IIntellVoiceEngineManager {

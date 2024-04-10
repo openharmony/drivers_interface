@@ -1,4 +1,4 @@
-# Copyright (C) 2023 Huawei Device Co., Ltd.
+# Copyright (c) 2024 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,35 +11,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//build/ohos.gni")
-
-ohos_shared_library("libcomposer_buffer_cache") {
+import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
+hdi("daudioext") {
+  module_name = "daudioext"
   sources = [
-    "device_cache.cpp",
-    "device_cache_manager.cpp",
-    "layer_cache.cpp",
+    "IDAudioCallback.idl",
+    "IDAudioManager.idl",
+    "Types.idl",
   ]
-
-  include_dirs = [
-    "./",
-    "../",
-  ]
-
-  external_deps = [
-    "c_utils:utils",
-    "hdf_core:libhdi",
-    "hdf_core:libpub_utils",
-    "hilog:libhilog",
-    "ipc:ipc_single",
-  ]
-
-  sanitize = {
-    cfi = true
-    cfi_cross_dso = true
-    debug = false
-  }
-
-  install_images = [ chipset_base_dir ]
+  language = "cpp"
+  root = "ohos.hdi://drivers/interface/"
   subsystem_name = "hdf"
-  part_name = "drivers_interface_display"
+  part_name = "drivers_interface_distributed_audio"
 }
