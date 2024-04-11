@@ -25,7 +25,7 @@
  * setting parameters to or getting parameters from intelligent voice trigger adapter.
  *
  * @since 4.0
- * @version 1.0
+ * @version 1.2
  */
 
 /**
@@ -35,7 +35,7 @@
  * intelligent voice trigger adapter dsecriptor, intelligent voice trigger properties, intelligent voice trigger model, intelligent voice recognition event.
  *
  * @since 4.0
- * @version 1.0
+ * @version 1.2
  */
 
 package ohos.hdi.intelligent_voice.trigger.v1_2;
@@ -45,7 +45,7 @@ import ohos.hdi.intelligent_voice.trigger.v1_0.IntellVoiceTriggerTypes;
 /**
  * @brief Enumerates intelligent voice trigger model types.
  *
- * @since 5.0
+ * @since 4.0
  * @version 1.2
  */
 enum IntellVoiceTriggerModelType : ohos.hdi.intelligent_voice.trigger.v1_0.IntellVoiceTriggerModelType {

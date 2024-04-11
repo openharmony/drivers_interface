@@ -482,6 +482,8 @@ public:
     // Callback implement
     virtual int32_t OnHotPlug(uint32_t outputId, bool connected) override
     {
+        DISPLAY_TRACE;
+        
         HDF_LOGI("OnHotPlug(%{public}u, %{public}u)", outputId, connected);
         int32_t ret = HDF_SUCCESS;
         if (hotPlugCb_ != nullptr) {

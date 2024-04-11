@@ -71,6 +71,8 @@ public:
 
     virtual int32_t OnSeamlessChange(uint32_t outputId) override
     {
+        DISPLAY_TRACE;
+
         HDF_LOGD("OnSeamlessChange(%{public}u)", outputId);
         int32_t ret = HDF_SUCCESS;
         if (seamlessChangeCb_) {
@@ -98,6 +100,8 @@ public:
 
     virtual int32_t OnMode(uint32_t modeId, uint64_t vBlankPeriod) override
     {
+        DISPLAY_TRACE;
+
         HDF_LOGD("OnMode(%{public}u, %{public}" PRIu64 ")", modeId, vBlankPeriod);
         int32_t ret = HDF_SUCCESS;
         if (modeCb_) {
@@ -140,6 +144,8 @@ public:
 
     virtual int32_t OnRefresh(uint32_t devId) override
     {
+        DISPLAY_TRACE;
+        
         HDF_LOGD("OnRefresh(%{public}u)", devId);
         int32_t ret = HDF_SUCCESS;
         if (refreshCb_ != nullptr) {

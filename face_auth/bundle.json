@@ -28,14 +28,13 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/face_auth/v1_0:face_auth_idl_target",
-          "//drivers/interface/face_auth/v1_1:face_auth_idl_target"
+          "//drivers/interface/face_auth/v2_0:face_auth_idl_target"
         ],
         "test": [
         ],
         "inner_kits": [
           {
-            "name": "//drivers/interface/face_auth/v1_0:libface_auth_proxy_1.0",
+            "name": "//drivers/interface/face_auth/v2_0:libface_auth_proxy_2.0",
             "header": {
               "header_files": [
               ],
@@ -43,7 +42,7 @@
             }
           },
           {
-            "name": "//drivers/interface/face_auth/v1_0:libface_auth_stub_1.0",
+            "name": "//drivers/interface/face_auth/v2_0:libface_auth_stub_2.0",
             "header": {
               "header_files": [
               ],
@@ -51,31 +50,7 @@
             }
           },
           {
-            "name": "//drivers/interface/face_auth/v1_0:face_auth_idl_headers",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interface/face_auth"
-            }
-          },
-          {
-            "name": "//drivers/interface/face_auth/v1_1:libface_auth_proxy_1.1",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interface/face_auth"
-            }
-          },
-          {
-            "name": "//drivers/interface/face_auth/v1_1:libface_auth_stub_1.1",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interface/face_auth"
-            }
-          },
-          {
-            "name": "//drivers/interface/face_auth/v1_1:face_auth_idl_headers",
+            "name": "//drivers/interface/face_auth/v2_0:face_auth_idl_headers",
             "header": {
               "header_files": [
               ],
