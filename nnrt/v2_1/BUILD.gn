@@ -22,6 +22,12 @@ hdi("nnrt") {
     "NodeAttrTypes.idl",
   ]
 
+  cflags = [ "-fstack-protector-all" ]
+  cflags_cc = [
+    "-fexceptions",
+    "-fstack-protector-all"
+  ]
+
   language = "cpp"
   innerapi_tags = [ "platformsdk" ]
   subsystem_name = "hdf"
