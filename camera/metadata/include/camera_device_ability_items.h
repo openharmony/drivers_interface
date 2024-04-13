@@ -677,7 +677,7 @@ typedef enum camera_flash_suggestion_surported_enum {
     OHOS_CAMERA_FLASH_SUGGESTION_SUPPORTED_OPEN,
 } camera_flash_suggestion_surported_enum_t;
 
-// OHOS_ABILITY_AMBIENT_BRIGHTNESS_STATUS enumeration values
+// ABILITY_SUPPORTED_TAGS enumeration values enumeration values
 typedef enum camera_supported_enum {
     OHOS_CAMERA_NOT_SUPPORTED = 0,
     OHOS_CAMERA_SUPPORTED,
