@@ -672,10 +672,10 @@ typedef enum control_moving_photo_enum {
 } control_moving_photo_enum_t;
 
 // OHOS_STATUS_FLASH_SUGGESTION enumeration values
-typedef enum camera_flash_suggestion_surported_enum {
+typedef enum camera_flash_suggestion_surpported_enum {
     OHOS_CAMERA_FLASH_SUGGESTION_SUPPORTED_CLOSE = 0,
     OHOS_CAMERA_FLASH_SUGGESTION_SUPPORTED_OPEN,
-} camera_flash_suggestion_surported_enum_t;
+} camera_flash_suggestion_surpported_enum_t;
 
 // ABILITY_SUPPORTED_TAGS enumeration values enumeration values
 typedef enum camera_supported_enum {
