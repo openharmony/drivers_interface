@@ -88,12 +88,12 @@ static item_info_t g_ohosCameraProperties[OHOS_CAMERA_PROPERTIES_END - OHOS_CAME
         OHOS_CAMERA_PROPERTIES_START] = {"customSnapshotDuration", META_TYPE_UINT32, 1},
     [OHOS_ABILITY_MOVING_PHOTO -
         OHOS_CAMERA_PROPERTIES_START] = {"cameraAbilityMovingPhoto", META_TYPE_INT32, -1},
-    [OHOS_ABILITY_AMBIENT_BRIGHTNESS_STATUS -
-        OHOS_CAMERA_PROPERTIES_START] = {"cameraAbilityAmbientBrightnessStatus", META_TYPE_UINT32, -1},
-    [OHOS_CONTROL_AMBIENT_BRIGHTNESS_STATUS_REPORT_SWITCH -
-        OHOS_CAMERA_PROPERTIES_START] = {"cameraControlAmbientBrightnessStatusReportSwitch", META_TYPE_BYTE, 1},
-    [OHOS_STATUS_AMBIENT_BRIGHTNESS -
-        OHOS_CAMERA_PROPERTIES_START] = {"cameraStatusAmbientBrightness", META_TYPE_UINT32, 1},
+    [OHOS_ABILITY_FLASH_SUGGESTION_SUPPORTED -
+        OHOS_CAMERA_PROPERTIES_START] = {"cameraAbilityFlashSuggestionSupported", META_TYPE_UINT32, -1},
+    [OHOS_CONTROL_FLASH_SUGGESTION_SWITCH -
+        OHOS_CAMERA_PROPERTIES_START] = {"cameraControlFlashSuggestionSwitch", META_TYPE_BYTE, 1},
+    [OHOS_STATUS_FLASH_SUGGESTION -
+        OHOS_CAMERA_PROPERTIES_START] = {"cameraStatusFlashSuggestion", META_TYPE_UINT32, 1},
 };
 
 static item_info_t g_ohosCameraSensor[OHOS_CAMERA_SENSOR_END - OHOS_CAMERA_SENSOR_START] = {
