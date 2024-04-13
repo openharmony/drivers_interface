@@ -116,6 +116,7 @@ typedef enum camera_device_metadata_tag {
     OHOS_ABILITY_FLASH_SUGGESTION_SUPPORTED,
     OHOS_CONTROL_FLASH_SUGGESTION_SWITCH,
     OHOS_STATUS_FLASH_SUGGESTION,
+    OHOS_ABILITY_HIGH_QUALITY_SUPPORT,
     OHOS_CAMERA_PROPERTIES_END,
 
     OHOS_SENSOR_EXPOSURE_TIME = OHOS_CAMERA_SENSOR_START,
@@ -186,6 +187,7 @@ typedef enum camera_device_metadata_tag {
     OHOS_CONTROL_MOVING_PHOTO,
     OHOS_ABILITY_SENSOR_WB_VALUES,
     OHOS_CONTROL_SENSOR_WB_VALUE,
+    OHOS_CONTROL_HIGH_QUALITY_MODE,
     OHOS_DEVICE_CONTROL_END,
 
     // Camera device image acquisition related
@@ -677,10 +679,16 @@ typedef enum camera_flash_suggestion_surported_enum {
     OHOS_CAMERA_FLASH_SUGGESTION_SUPPORTED_OPEN,
 } camera_flash_suggestion_surported_enum_t;
 
-// ABILITY_SUPPORTED_TAGS enumeration values enumeration values
+// ABILITY_SUPPORTED_TAGS enumeration values
 typedef enum camera_supported_enum {
     OHOS_CAMERA_NOT_SUPPORTED = 0,
     OHOS_CAMERA_SUPPORTED,
 } camera_supported_enum_t;
+
+// OHOS_CONTROL_HIGH_QUALITY_MODE
+typedef enum ControlHighQualityModeEnum {
+    OHOS_CONTROL_HIGH_QUALITY_MODE_OFF = 0,
+    OHOS_CONTROL_HIGH_QUALITY_MODE_ON,
+} ControlHighQualityModeEnumT;
 
 #endif
