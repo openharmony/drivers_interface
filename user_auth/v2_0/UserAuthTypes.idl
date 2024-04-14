@@ -332,8 +332,6 @@ struct ScheduleInfo {
     unsigned char[][] executorMessages;
     /**< Remote message. */
     unsigned char[] remoteMessage;
-    /**< Expired rtc time. */
-    unsigned long expiredRtcTime;
 };
 
 /**

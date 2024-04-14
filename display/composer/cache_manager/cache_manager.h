@@ -63,8 +63,9 @@ public:
         return ret;
     }
 
-    uint32_t Size() const
+    uint32_t Size()
     {
+        std::lock_guard<std::mutex> lock(mutex_);
         return caches_.size();
     }
 
@@ -98,8 +99,9 @@ public:
         return ret;
     }
 
-    CacheType* SearchCache(IdType id) const
+    CacheType* SearchCache(IdType id)
     {
+        std::lock_guard<std::mutex> lock(mutex_);
         auto cacheItem = caches_.find(id);
         if (cacheItem == caches_.end()) {
             return nullptr;
@@ -108,8 +110,9 @@ public:
         return cacheItem->second.get();
     }
 
-    void TravelCaches(std::function<void (IdType id, const CacheType& cache)> func) const
+    void TravelCaches(std::function<void (IdType id, const CacheType& cache)> func)
     {
+        std::lock_guard<std::mutex> lock(mutex_);
         for (auto const& [key, value] : caches_) {
             func(key, *value.get());
         }
