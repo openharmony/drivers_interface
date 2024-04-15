@@ -244,7 +244,7 @@ public:
         }
 
         HDF_LOGD("%{public}s, first commit with skipRet = %{public}d, fence = %{public}d, needFlush = %{public}d",
-                __func__, skipRet, fence, needFlush);
+            __func__, skipRet, fence, needFlush);
 				
         ret = impl_->GetDisplayReleaseFence(devId, layers, fences);
         if (ret != HDF_SUCCESS) {
