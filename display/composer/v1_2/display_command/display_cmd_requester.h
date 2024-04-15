@@ -99,7 +99,8 @@ EXIT:
     }
 
     int32_t OnReplyCommitAndGetReleaseFence(std::shared_ptr<CommandDataUnpacker> replyUnpacker,
-        std::vector<HdifdInfo> replyFds, int32_t &fenceFd, int32_t &skipState, bool &needFlush, std::vector<uint32_t>& layers, std::vector<int32_t>& fences)
+        std::vector<HdifdInfo> replyFds, int32_t &fenceFd, int32_t &skipState,
+        bool &needFlush, std::vector<uint32_t>& layers, std::vector<int32_t>& fences)
     {
         uint32_t devId = 0;
         int32_t ret = CmdUtils::FileDescriptorUnpack(replyUnpacker, replyFds, fenceFd);
