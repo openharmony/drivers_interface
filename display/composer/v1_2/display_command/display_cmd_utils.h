@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-#ifndef OHOS_HDI_DISPLAY_V1_1_DISPLAY_CMD_UTILS_H
-#define OHOS_HDI_DISPLAY_V1_1_DISPLAY_CMD_UTILS_H
+#ifndef OHOS_HDI_DISPLAY_V1_2_DISPLAY_CMD_UTILS_H
+#define OHOS_HDI_DISPLAY_V1_2_DISPLAY_CMD_UTILS_H
 
 #include "v1_1/display_command/display_cmd_utils.h"
 #include "v1_2/display_composer_type.h"
@@ -31,6 +31,8 @@ namespace Composer {
 namespace V1_2 {
 
 class DisplayCmdUtils : public V1_1::DisplayCmdUtils {
+public:
+    #define SWITCHCASE(x) case (x): {return #x;}
     static const char *CommandToString(int32_t cmdId)
     {
         switch (cmdId) {

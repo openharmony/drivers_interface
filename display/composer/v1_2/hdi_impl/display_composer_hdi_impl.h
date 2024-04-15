@@ -60,9 +60,31 @@ public:
     DisplayComposerHdiImpl(sptr<CompHdi> hdi, std::shared_ptr<CmdReq> req)
         : BaseType1_1(hdi, req),
         req_v1_2_(req),
-        hdi_v1_2_(hdi) {}
+        hdi_v1_2_(hdi),
+        isSupportSkipValidate_(0) {}
 
     virtual ~DisplayComposerHdiImpl() {}
+
+    virtual int32_t CommitAndGetReleaseFence(uint32_t devId, int32_t& fence, int32_t& skipState,
+        bool& needFlush) override
+    {
+        COMPOSER_CHECK_NULLPTR(req_v1_2_);
+        bool isSupportSkipValidate = (isSupportSkipValidate_ == 1) ? 1 : 0;
+        return ToDispErrCode(req_v1_2_->CommitAndGetReleaseFence(devId, fence, isSupportSkipValidate, skipState,
+            needFlush));
+    }
+
+    virtual int32_t GetDisplayProperty(uint32_t devId, uint32_t id, uint64_t& value) override
+    {
+        COMPOSER_CHECK_NULLPTR(hdi_v1_2_);
+        value = 0;
+        int32_t ret = ToDispErrCode(hdi_v1_2_->GetDisplayProperty(devId, id, value));
+        if (ret == DISPLAY_SUCCESS) {
+            isSupportSkipValidate_ = value;
+        }
+
+        return ret;
+    }
 
     protected:
     using BaseType1_1 = V1_1::DisplayComposerHdiImpl<Interface, CompHdi, CmdReq>;
@@ -70,6 +92,7 @@ public:
     using BaseType1_1::ToDispErrCode;
     std::shared_ptr<CmdReq> req_v1_2_;
     sptr<CompHdi> hdi_v1_2_;
+    uint64_t isSupportSkipValidate_;
 };
 using HdiDisplayComposer = DisplayComposerHdiImpl<IDisplayComposerInterface, IDisplayComposer, HdiDisplayCmdRequester>;
 } // namespace V1_2
