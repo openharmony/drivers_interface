@@ -87,6 +87,8 @@ enum AudioCategory {
     AUDIO_OFFLOAD          = 5, /**< Offload */
     AUDIO_MULTI_CHANNEL    = 6, /**< Multi channel */
     AUDIO_DP               = 7, /**< Audio dp */
+    AUDIO_MMAP_VOIP        = 8, /**< Audio voip */
+    AUDIO_IN_NAVIGATION    = 9, /**< Audio navigation */
 };
 
 /**
