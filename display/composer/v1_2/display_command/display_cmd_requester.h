@@ -48,7 +48,7 @@ public:
     }
 
     int32_t CommitAndGetReleaseFence(uint32_t devId, int32_t &fence, bool isSupportSkipValidate,
-        int32_t &skipState, bool &needFlush)
+        int32_t &skipState, bool &needFlush, std::vector<uint32_t>& layers, std::vector<int32_t>& fences)
     {
         uint32_t replyEleCnt = 0;
         std::vector<HdifdInfo> outFds;
