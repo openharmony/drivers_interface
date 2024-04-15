@@ -75,7 +75,7 @@ public:
         ret = DoReplyResults(replyEleCnt, outFds, replyData, [&](void *data) -> int32_t {
             // fence = *(reinterpret_cast<int32_t *>(data));
             FenceData *fenceData = (reinterpret_cast<struct FenceData *>(data));
-            if(fenceData == nullptr){
+            if (fenceData == nullptr) {
                 fence = -1;
                 skipState = -1;
                 needFlush = false;
