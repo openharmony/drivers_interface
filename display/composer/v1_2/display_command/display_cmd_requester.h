@@ -73,7 +73,6 @@ public:
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
         ret = DoReplyResults(replyEleCnt, outFds, replyData, [&](void *data) -> int32_t {
-            // fence = *(reinterpret_cast<int32_t *>(data));
             FenceData *fenceData = (reinterpret_cast<struct FenceData *>(data));
             if (fenceData == nullptr) {
                 fence = -1;
@@ -140,7 +139,6 @@ EXIT:
                 DISPLAY_CHK_RETURN(replyUnpacker->ReadInt32(compChangeTypes_[devId][i]) == false, HDF_FAILURE,
                     HDF_LOGE("%{public}s: HDI 1.2 read composition type vector failed", __func__));
             }
-
         }
 
         // unpack layers vector
@@ -182,8 +180,8 @@ EXIT:
             std::unordered_map<int32_t, int32_t> errMaps;
             switch (unpackCmd) {
                 case REPLY_CMD_COMMIT_AND_GET_RELEASE_FENCE:
-                    ret = OnReplyCommitAndGetReleaseFence(replyUnpacker, replyFds, fenceData.fence_, fenceData.skipValidateState_,
-                        fenceData.needFlush_, fenceData.layers, fenceData.fences);
+                    ret = OnReplyCommitAndGetReleaseFence(replyUnpacker, replyFds, fenceData.fence_,
+                        fenceData.skipValidateState_, fenceData.needFlush_, fenceData.layers, fenceData.fences);
                     DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
                         HDF_LOGE("%{public}s: OnReplyCommit failed unpackCmd=%{public}s",
                         __func__, CmdUtils::CommandToString(unpackCmd)));
