@@ -89,6 +89,8 @@ enum HdfMotionTypeTag {
     HDF_MOTION_TYPE_TOUCH_LINK,
     /** Reserved */
     HDF_MOTION_TYPE_RESERVED,
+    /** Reserved */
+    HDF_MOTION_TYPE_AOD,
     /** Maximum motion type */
     HDF_MOTION_TYPE_MAX,
 };
