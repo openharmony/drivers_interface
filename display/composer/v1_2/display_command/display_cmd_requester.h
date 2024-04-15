@@ -48,7 +48,7 @@ public:
     }
 
     int32_t CommitAndGetReleaseFence(uint32_t devId, int32_t &fence, bool isSupportSkipValidate,
-        int32_t& skipState, bool& needFlush, std::vector<uint32_t>& layers, std::vector<int32_t>& fences)
+        int32_t &skipState, bool &needFlush)
     {
         uint32_t replyEleCnt = 0;
         std::vector<HdifdInfo> outFds;
@@ -83,9 +83,9 @@ public:
                 fences.clear();
                 return HDF_FAILURE;
             }
+            fence = fenceData->fence_;
             skipState = fenceData->skipValidateState_;
             needFlush = fenceData->needFlush_;
-            fence = fenceData->fence;
             layers = fenceData->layers;
             fences = fenceData->fences;
             return HDF_SUCCESS;
@@ -93,6 +93,7 @@ public:
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("DoReplyResults failure, ret=%{public}d", ret);
         }
+
 EXIT:
         return PeriodDataReset() == HDF_SUCCESS ? ret : HDF_FAILURE;
     }
@@ -180,7 +181,7 @@ EXIT:
             std::unordered_map<int32_t, int32_t> errMaps;
             switch (unpackCmd) {
                 case REPLY_CMD_COMMIT_AND_GET_RELEASE_FENCE:
-                    ret = OnReplyCommitAndGetReleaseFence(replyUnpacker, replyFds, fenceData.fence, fenceData.skipValidateState_, fenceData.needFlush_, fenceData.layers, fenceData.fences);
+                    ret = OnReplyCommitAndGetReleaseFence(replyUnpacker, replyFds, fenceData.fence_, fenceData.skipValidateState_, fenceData.needFlush_, fenceData.layers, fenceData.fences);
                     DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
                         HDF_LOGE("%{public}s: OnReplyCommit failed unpackCmd=%{public}s",
                         __func__, CmdUtils::CommandToString(unpackCmd)));
@@ -241,8 +242,9 @@ private:
     // Composition layers/types changed
     using BaseType1_1::compChangeLayers_;
     using BaseType1_1::compChangeTypes_;
+    // CommitAndGetReleaseFence
     struct FenceData {
-        int32_t fence = -1;
+        int32_t fence_ = -1;
         int32_t skipValidateState_ = -1;
         bool needFlush_ = false;
         std::vector<uint32_t> layers;

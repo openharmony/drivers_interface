@@ -65,11 +65,13 @@ public:
 
     virtual ~DisplayComposerHdiImpl() {}
 
-    virtual int32_t CommitAndGetReleaseFence(uint32_t devId, int32_t& fence, int32_t& skipState, bool& needFlush, std::vector<uint32_t>& layers, std::vector<int32_t>& fences) override
+    virtual int32_t CommitAndGetReleaseFence(uint32_t devId, int32_t& fence, int32_t& skipState,
+        bool& needFlush, std::vector<uint32_t>& layers, std::vector<int32_t>& fences) override
     {
         COMPOSER_CHECK_NULLPTR(req_v1_2_);
         bool isSupportSkipValidate = (isSupportSkipValidate_ == 1) ? 1 : 0;
-        return ToDispErrCode(req_v1_2_->CommitAndGetReleaseFence(devId, fence, isSupportSkipValidate, skipState, needFlush, layers, fences));
+        return ToDispErrCode(req_v1_2_->CommitAndGetReleaseFence(devId, fence,
+            isSupportSkipValidate, skipState, needFlush, layers, fences));
     }
 
     virtual int32_t GetDisplayProperty(uint32_t devId, uint32_t id, uint64_t& value) override
