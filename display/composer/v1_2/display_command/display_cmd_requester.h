@@ -181,7 +181,8 @@ EXIT:
             std::unordered_map<int32_t, int32_t> errMaps;
             switch (unpackCmd) {
                 case REPLY_CMD_COMMIT_AND_GET_RELEASE_FENCE:
-                    ret = OnReplyCommitAndGetReleaseFence(replyUnpacker, replyFds, fenceData.fence_, fenceData.skipValidateState_, fenceData.needFlush_, fenceData.layers, fenceData.fences);
+                    ret = OnReplyCommitAndGetReleaseFence(replyUnpacker, replyFds, fenceData.fence_, fenceData.skipValidateState_,
+                        fenceData.needFlush_, fenceData.layers, fenceData.fences);
                     DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
                         HDF_LOGE("%{public}s: OnReplyCommit failed unpackCmd=%{public}s",
                         __func__, CmdUtils::CommandToString(unpackCmd)));
