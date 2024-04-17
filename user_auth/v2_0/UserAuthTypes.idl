@@ -238,7 +238,7 @@ struct AuthResultInfo {
     /**< Credential ID. */
     unsigned long credentialId;
     /**< Pin expired info. */
-    int pinExpiredInfo;
+    long pinExpiredInfo;
 };
 
 /**
@@ -493,7 +493,7 @@ enum GlobalConfigType : int {
  */
 union GlobalConfigValue {
     /** Pin expired period value. When pinExpiredPeriod equals to 0, userAuth won't check pin expired period. */
-    unsigned long pinExpiredPeriod;
+    long pinExpiredPeriod;
 };
 
 /**
