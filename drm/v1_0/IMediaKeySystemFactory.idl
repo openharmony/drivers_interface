@@ -46,5 +46,5 @@ interface IMediaKeySystemFactory {
      * @since 5.0
      * @version 1.0
      */
-    GetMediaKeySystemName([out] String name, [out] String uuid);
+    GetMediaKeySystemDescription([out] String name, [out] String uuid);
 };
