@@ -94,6 +94,8 @@ static item_info_t g_ohosCameraProperties[OHOS_CAMERA_PROPERTIES_END - OHOS_CAME
         OHOS_CAMERA_PROPERTIES_START] = {"cameraControlFlashSuggestionSwitch", META_TYPE_BYTE, 1},
     [OHOS_STATUS_FLASH_SUGGESTION -
         OHOS_CAMERA_PROPERTIES_START] = {"cameraStatusFlashSuggestion", META_TYPE_UINT32, 1},
+    [OHOS_ABILITY_HIGH_QUALITY_SUPPORT -
+        OHOS_CAMERA_PROPERTIES_START] = {"cameraAbilityHighQualitySupport", META_TYPE_BYTE, 1},
 };
 
 static item_info_t g_ohosCameraSensor[OHOS_CAMERA_SENSOR_END - OHOS_CAMERA_SENSOR_START] = {
@@ -188,6 +190,7 @@ static item_info_t g_ohosCameraControl[OHOS_DEVICE_CONTROL_END - OHOS_DEVICE_CON
     [OHOS_ABILITY_SENSOR_WB_VALUES -
         OHOS_DEVICE_CONTROL_START] = {"supportedSensorWbValues", META_TYPE_INT32, -1},
     [OHOS_CONTROL_SENSOR_WB_VALUE - OHOS_DEVICE_CONTROL_START] = {"sensorWbValue", META_TYPE_INT32, 1},
+    [OHOS_CONTROL_HIGH_QUALITY_MODE - OHOS_DEVICE_CONTROL_START] = {"highQualityMode", META_TYPE_BYTE, 1},
 };
 
 static item_info_t g_ohosDeviceExposure[OHOS_DEVICE_EXPOSURE_END - OHOS_DEVICE_EXPOSURE_START] = {
