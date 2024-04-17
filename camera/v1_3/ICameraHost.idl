@@ -46,4 +46,22 @@ interface ICameraHost extends ohos.hdi.camera.v1_2.ICameraHost {
      * @version 1.3
      */
     OpenCamera_V1_3([in] String cameraId, [in] ICameraDeviceCallback callbackObj, [out] ICameraDevice device);
+
+    /**
+     * @brief Opens a camera device in secure mode.
+     *
+     * By calling this function, you can obtain the <b>ICameraDevice</b> instance and operate the
+     * specific camera device mapping to the instance.
+     *
+     * @param cameraId Indicates the ID of the camera device, which can be obtained by calling {@link GetCameraIds}.
+     * @param callback Indicates the callback related to the camera. For details, see {@link ICameraDeviceCallback}.
+     * @param device Indicates the <b>ICameraDevice</b> instance corresponding to the ID of the camera device.
+     *
+     * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
+     * in {@link CamRetCode} otherwise.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    OpenSecureCamera([in] String cameraId, [in] ICameraDeviceCallback callbackObj, [out] ICameraDevice device);
 }

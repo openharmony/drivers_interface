@@ -78,6 +78,13 @@ enum OperationMode : ohos.hdi.camera.v1_2.OperationMode_V1_2 {
      */
     HIGH_RESOLUTION_PHOTO = 14,
 
+    /**
+    * Secure mode, which dedicated to secure mode
+    * @since 5.0
+    * @version 1.0
+    */
+    SECURE = 15,
+
 };
 
 /**
