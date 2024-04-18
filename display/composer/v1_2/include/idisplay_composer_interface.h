@@ -56,7 +56,7 @@ public:
      * @version 1.2
      */
     virtual int32_t CommitAndGetReleaseFence(uint32_t devId, int32_t& fence,
-        int32_t& skipState, bool& needFlush) = 0;
+        int32_t& skipState, bool& needFlush, std::vector<uint32_t>& layers, std::vector<int32_t>& fences) = 0;
 };
 } // V1_2
 } // Composer

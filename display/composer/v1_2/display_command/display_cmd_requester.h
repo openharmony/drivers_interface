@@ -48,7 +48,7 @@ public:
     }
 
     int32_t CommitAndGetReleaseFence(uint32_t devId, int32_t &fence, bool isSupportSkipValidate,
-        int32_t &skipState, bool &needFlush)
+        int32_t &skipState, bool &needFlush, std::vector<uint32_t>& layers, std::vector<int32_t>& fences)
     {
         uint32_t replyEleCnt = 0;
         std::vector<HdifdInfo> outFds;
@@ -73,16 +73,20 @@ public:
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
         ret = DoReplyResults(replyEleCnt, outFds, replyData, [&](void *data) -> int32_t {
-            FenceData *fenceData = reinterpret_cast<struct FenceData*>(data);
+            FenceData *fenceData = (reinterpret_cast<struct FenceData *>(data));
             if (fenceData == nullptr) {
                 fence = -1;
                 skipState = -1;
                 needFlush = false;
+                layers.clear();
+                fences.clear();
                 return HDF_FAILURE;
             }
             fence = fenceData->fence_;
             skipState = fenceData->skipValidateState_;
             needFlush = fenceData->needFlush_;
+            layers = fenceData->layers;
+            fences = fenceData->fences;
             return HDF_SUCCESS;
         });
         if (ret != HDF_SUCCESS) {
@@ -94,7 +98,8 @@ EXIT:
     }
 
     int32_t OnReplyCommitAndGetReleaseFence(std::shared_ptr<CommandDataUnpacker> replyUnpacker,
-        std::vector<HdifdInfo> replyFds, int32_t &fenceFd, int32_t &skipState, bool &needFlush)
+        std::vector<HdifdInfo> replyFds, int32_t &fenceFd, int32_t &skipState,
+        bool &needFlush, std::vector<uint32_t>& layers, std::vector<int32_t>& fences)
     {
         uint32_t devId = 0;
         int32_t ret = CmdUtils::FileDescriptorUnpack(replyUnpacker, replyFds, fenceFd);
@@ -135,6 +140,29 @@ EXIT:
                     HDF_LOGE("%{public}s: HDI 1.2 read composition type vector failed", __func__));
             }
         }
+
+        // unpack layers vector
+            uint32_t vectSize = 0;
+            DISPLAY_CHK_RETURN(true != replyUnpacker->ReadUint32(vectSize), HDF_FAILURE,
+                HDF_LOGE("%{public}s: HDI 1.2 read vect size failed", __func__));
+
+            layers.resize(vectSize);
+            for (uint32_t i = 0; i < vectSize; i++) {
+                DISPLAY_CHK_RETURN(replyUnpacker->ReadUint32(layers[i]) == false, HDF_FAILURE,
+                    HDF_LOGE("%{public}s: HDI 1.2 read layer vector failed", __func__));
+            }
+
+            // unpack layers vector
+            vectSize = 0;
+            DISPLAY_CHK_RETURN(true != replyUnpacker->ReadUint32(vectSize), HDF_FAILURE,
+                HDF_LOGE("%{public}s: HDI 1.2 read vect size failed", __func__));
+
+            fences.resize(vectSize);
+            for (uint32_t i = 0; i < vectSize; i++) {
+                ret = CmdUtils::FileDescriptorUnpack(replyUnpacker, replyFds, fences[i]);
+                DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
+                    HDF_LOGE("%{public}s: HDI 1.2 FileDescriptorUnpack failed", __func__));
+            }
         return HDF_SUCCESS;
     }
 
@@ -148,11 +176,12 @@ EXIT:
                 HDF_LOGE("%{public}s: BeginSection failed", __func__));
 
             FenceData fenceData;
+
             std::unordered_map<int32_t, int32_t> errMaps;
             switch (unpackCmd) {
                 case REPLY_CMD_COMMIT_AND_GET_RELEASE_FENCE:
                     ret = OnReplyCommitAndGetReleaseFence(replyUnpacker, replyFds, fenceData.fence_,
-                        fenceData.skipValidateState_, fenceData.needFlush_);
+                        fenceData.skipValidateState_, fenceData.needFlush_, fenceData.layers, fenceData.fences);
                     DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
                         HDF_LOGE("%{public}s: OnReplyCommit failed unpackCmd=%{public}s",
                         __func__, CmdUtils::CommandToString(unpackCmd)));
@@ -218,6 +247,8 @@ private:
         int32_t fence_ = -1;
         int32_t skipValidateState_ = -1;
         bool needFlush_ = false;
+        std::vector<uint32_t> layers;
+        std::vector<int32_t> fences;
     };
 };
 using HdiDisplayCmdRequester = V1_2::DisplayCmdRequester<SharedMemQueue<int32_t>, V1_2::IDisplayComposer>;

@@ -49,6 +49,8 @@ public:
         const std::vector<HdifdInfo>& inFds, std::vector<HdifdInfo>& outFds)
     {
         int32_t ret = HDF_SUCCESS;
+        std::vector<uint32_t> layers;
+        std::vector<int32_t> fences;
         HDF_LOGD("%{public}s: HDI 1.2 PackSection, cmd-[%{public}d] = %{public}s",
             __func__, cmd, CmdUtils::CommandToString(cmd));
         switch (cmd) {
@@ -107,7 +109,7 @@ public:
                 OnSetLayerColor(unpacker);
                 break;
             case REQUEST_CMD_COMMIT_AND_GET_RELEASE_FENCE:
-                OnCommitAndGetReleaseFence(unpacker, outFds);
+                OnCommitAndGetReleaseFence(unpacker, outFds, layers, fences);
                 break;
             default:
                 HDF_LOGE("%{public}s: not support this cmd, unpacked cmd = %{public}d", __func__, cmd);
@@ -118,7 +120,8 @@ public:
     }
 
     void ReplyCommitAndGetReleaseFence(std::vector<HdifdInfo>& outFds, uint32_t& devId, int32_t& fence,
-        int32_t& skipRet, std::vector<uint32_t>& compLayers, std::vector<int32_t>& compTypes, bool& needFlush)
+        int32_t& skipRet, std::vector<uint32_t>& compLayers, std::vector<int32_t>& compTypes, bool& needFlush,
+            std::vector<uint32_t>& layers, std::vector<int32_t>& fences)
     {
         int32_t ret = HDF_SUCCESS;
         uint32_t vectSize = 0;
@@ -159,6 +162,28 @@ public:
                     HDF_LOGE("%{public}s, write compTypes error", __func__));
             }
         }
+
+            // Write layers vector
+            vectSize = static_cast<uint32_t>(layers.size());
+            DISPLAY_CHECK(replyPacker_->WriteUint32(vectSize) == false,
+                HDF_LOGE("%{public}s, write layers.size error", __func__));
+
+            for (uint32_t i = 0; i < vectSize; i++) {
+                DISPLAY_CHECK(replyPacker_->WriteUint32(compLayers[i]) == false,
+                    HDF_LOGE("%{public}s, write layers error", __func__));
+            }
+
+            // Write fences vector
+            vectSize = static_cast<uint32_t>(fences.size());
+            DISPLAY_CHECK(replyPacker_->WriteUint32(vectSize) == false,
+                HDF_LOGE("%{public}s, write fences.size error", __func__));
+
+            for (uint32_t i = 0; i < vectSize; i++) {
+                ret = CmdUtils::FileDescriptorPack(fences[i], replyPacker_, outFds);
+                DISPLAY_CHECK(ret != HDF_SUCCESS,
+                    HDF_LOGE("%{public}s, write fences error", __func__));
+            }
+
         DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::EndSection(replyPacker_),
             HDF_LOGE("%{public}s, EndSection error", __func__));
 
@@ -174,7 +199,7 @@ public:
     }
 
     void OnCommitAndGetReleaseFence(std::shared_ptr<CommandDataUnpacker> unpacker,
-        std::vector<HdifdInfo>& outFds)
+        std::vector<HdifdInfo>& outFds, std::vector<uint32_t>& layers, std::vector<int32_t>& fences)
     {
         DISPLAY_TRACE;
 
@@ -216,13 +241,18 @@ public:
 
             ret = impl_->GetDisplayCompChange(devId, compLayers, compTypes);
             DISPLAY_CHECK(ret != HDF_SUCCESS, goto REPLY);
+        }
 
-            HDF_LOGD("%{public}s, first commit with skipRet = %{public}d, fence = %{public}d, needFlush = %{public}d",
-                __func__, skipRet, fence, needFlush);
+        HDF_LOGD("%{public}s, first commit with skipRet = %{public}d, fence = %{public}d, needFlush = %{public}d",
+            __func__, skipRet, fence, needFlush);
+				
+        ret = impl_->GetDisplayReleaseFence(devId, layers, fences);
+        if (ret != HDF_SUCCESS) {
+            HDF_LOGE("%{public}s, GetDisplayReleaseFence failed with ret = %{public}d", __func__, ret);
         }
 
 REPLY:
-        ReplyCommitAndGetReleaseFence(outFds, devId, fence, skipRet, compLayers, compTypes, needFlush);
+        ReplyCommitAndGetReleaseFence(outFds, devId, fence, skipRet, compLayers, compTypes, needFlush, layers, fences);
         return;
     }
 
