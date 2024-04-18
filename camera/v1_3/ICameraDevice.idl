@@ -45,4 +45,17 @@ interface ICameraDevice extends ohos.hdi.camera.v1_2.ICameraDevice {
      * @version 1.3
      */
     GetStreamOperator_V1_3([in] IStreamOperatorCallback callbackObj, [out] IStreamOperator streamOperator);
+
+    /**
+     * @brief Obtains the SeqId of the Secure camera.
+     *
+     * @param SeqId Indicates the SeqId of the secure camera. If the SeqId equals 0, means not a secure camera.
+     * 
+     * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
+     * in {@link CamRetCode} otherwise.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    GetSecureCameraSeq([out] unsigned long SeqId);
 }
