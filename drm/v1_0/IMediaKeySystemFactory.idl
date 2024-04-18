@@ -38,4 +38,13 @@ import ohos.hdi.drm.v1_0.IMediaKeySystem;
 interface IMediaKeySystemFactory {
     IsMediaKeySystemSupported([in] String name, [in] String mimeType, [in] enum ContentProtectionLevel level, [out] boolean isSupported);
     CreateMediaKeySystem([out] IMediaKeySystem mediaKeySystem);
+    /**
+     * @brief Get DRM name and uuid supported by DRM plugin. 
+     * @param name DRM name.
+     * @param uuid DRM uuid.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    GetMediaKeySystemDescription([out] String name, [out] String uuid);
 };
