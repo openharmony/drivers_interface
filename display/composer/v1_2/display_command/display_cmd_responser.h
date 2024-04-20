@@ -169,7 +169,7 @@ public:
                 HDF_LOGE("%{public}s, write layers.size error", __func__));
 
             for (uint32_t i = 0; i < vectSize; i++) {
-                DISPLAY_CHECK(replyPacker_->WriteUint32(compLayers[i]) == false,
+                DISPLAY_CHECK(replyPacker_->WriteUint32(layers[i]) == false,
                     HDF_LOGE("%{public}s, write layers error", __func__));
             }
 
