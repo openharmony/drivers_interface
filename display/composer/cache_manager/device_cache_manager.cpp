@@ -133,7 +133,7 @@ void DeviceCacheManager::Dump() const
     HDF_LOGE("********************************");
 }
 
-int32_t DeviceCacheManager::AddCacheInternal(uint32_t deviceId, const DeviceCache::DeviceType type)
+int32_t DeviceCacheManager::AddCacheInternal(uint32_t deviceId, DeviceCache::DeviceType type)
 {
     DeviceCache* device = DeviceCache::Create(deviceId, type);
     DISPLAY_CHK_RETURN(device == nullptr, HDF_FAILURE, HDF_LOGE("%{public}s: Create cache failed", __func__));
