@@ -106,19 +106,76 @@ struct UsableMode {
 };
 
 /**
- * @brief Enumerates the types of band.
+ * @brief Defines the scan param.
  *
  * @since 5.0
  * @version 1.0
  */
-enum BandType : unsigned int {
-    UNSPECIFIED = 0,
-    TYPE_24GHZ = 1,
-    TYPE_5GHZ = 2,
-    TYPE_24GHZ_AND_5GHZ = 3,
-    TYPE_DFS = 4,
-    TYPE_24GHZ_AND_DFS = 5,
-    TYPE_5GHZ_AND_DFS = 6,
-    ALL_BAND = 7
+struct ScanParams {
+    String[] ssids;
+    int[] freqs;
+    String extraIes;
+    String bssid;
+    unsigned char prefixSsidScanFlag;
+    unsigned char fastConnectFlag;
+};
+
+/**
+ * @brief Defines the scan result info.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+struct ScanResultsInfo {
+    unsigned int flags;
+    String bssid;
+    unsigned short caps;
+    unsigned int freq;
+    unsigned short beaconInterval;
+    int qual;
+    int level;
+    unsigned int age;
+    unsigned long tsf;
+    unsigned char[] variable;
+    unsigned char[] ie;
+    unsigned char[] beaconIe;
+};
+
+/**
+ * @brief Defines the pno scan info.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+struct PnoScanParams {
+    int min2gRssi;
+    int min5gRssi;
+    int scanIntervalMs;
+    int scanIterations;
+    String[] hiddenssids;
+    String[] savedssids;
+    int[] freqs;
+};
+
+/**
+ * @brief Defines the signal info.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+struct SignalPollResult {
+    int currentRssi;
+    int associatedFreq;
+    int txBitrate;
+    int rxBitrate;
+    int currentNoise;
+    int currentSnr;
+    int currentChload;
+    int currentUlDelay;
+    int currentTxBytes;
+    int currentRxBytes;
+    int currentTxFailed;
+    int currentTxPackets;
+    int currentRxPackets;
 };
 /** @} */
