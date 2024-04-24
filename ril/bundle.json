@@ -97,14 +97,6 @@
                     "header_files": [],
                     "header_base": "//drivers/interface/ril"
                   }
-                },
-                {
-                    "type": "so",
-                    "name": "//base/telephony/ril_adapter/interfaces/innerkits:hril_innerkits",
-                    "header": {
-                        "header_files": [],
-                        "header_base": "//base/telephony/ril_adapter/interfaces/innerkits/include"
-                    }
                 }
             ]
         }
