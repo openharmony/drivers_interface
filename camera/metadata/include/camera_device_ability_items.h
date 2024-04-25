@@ -93,28 +93,28 @@ typedef enum camera_device_metadata_tag {
      * ohos.ability.cameraPositon [static, enum, public]
      *
      * camera property, report current camera position
-     * (i.e. front camera, rear camera, or other positions camera)
+     * (i.e. enum front camera, rear camera, or other positions camera)
      */
     OHOS_ABILITY_CAMERA_POSITION = OHOS_CAMERA_PROPERTIES_START,
     /**
      * ohos.ability.cameraType [static, enum, public]
      *
      * camera property, report current camera type
-     * (i.e. wide-angle lens, Ultra-wide camera or others)
+     * (i.e. enum wide-angle lens, Ultra-wide camera or others)
      */
     OHOS_ABILITY_CAMERA_TYPE,
     /**
      * ohos.ability.cameraConnectionType [static, enum, public]
      *
      * camera property, report current camera connection type
-     * (i.e. system camera, usb camera, remote camera)
+     * (i.e. enum system camera, usb camera, remote camera)
      */
     OHOS_ABILITY_CAMERA_CONNECTION_TYPE,
     /**
      * ohos.ability.memoryType [static, enum, public]
      *
      * camera property, report current camera memory type
-     * (i.e. mmap, userptr, overlay, dmabuf)
+     * (i.e. enum mmap, userptr, overlay, dmabuf)
      */
     OHOS_ABILITY_MEMORY_TYPE,
     /**
@@ -128,21 +128,21 @@ typedef enum camera_device_metadata_tag {
      * ohos.ability.flashAvailable [static, enum, public]
      *
      * camera property, report current camera flash on/off available
-     * (i.e. fasle true)
+     * (i.e. enum false true)
      */
     OHOS_ABILITY_FLASH_AVAILABLE,
     /**
      * ohos.camera.streamId [static, enum, public]
      *
      * camera property, set current camera stream id
-     * (i.e. stream id)
+     * (i.e. enum stream id)
      */
     OHOS_CAMERA_STREAM_ID,
     /**
      * ohos.ability.prelaunchAvailable [static, enum, public]
      *
      * camera property, report current camera device prelaunch supported
-     * (i.e. enable 1..)
+     * (i.e. enum enable 1..)
      */
     OHOS_ABILITY_PRELAUNCH_AVAILABLE,
     /**
@@ -156,56 +156,56 @@ typedef enum camera_device_metadata_tag {
      * ohos.ability.cameraModes [static, enum[], public]
      *
      * camera property, report current camera support camera mode
-     * (i.e. capture, video ...)
+     * (i.e. enum[] capture, video ...)
      */
     OHOS_ABILITY_CAMERA_MODES,
     /**
      * ohos.ability.sketchEnableRatio [static, float[], public]
      *
      * camera property, report current camera device sketch camera mode support ratio
-     * (i.e. mode ratio ...)
+     * (i.e. float[] mode ratio ...)
      */
     OHOS_ABILITY_SKETCH_ENABLE_RATIO,
     /**
      * ohos.ability.sketchReferenceFovRatio [static, float[], public]
      *
      * camera property, report current camera device sketch camera mode enable ratio
-     * (i.e. mode ratio ...)
+     * (i.e. float[] mode ratio ...)
      */
     OHOS_ABILITY_SKETCH_REFERENCE_FOV_RATIO,
     /**
      * ohos.ability.cameraFoldScreen [static, enum, public]
      *
      * camera property, report current camera device flod screen
-     * (i.e. other inner outer ...)
+     * (i.e. enum other inner outer ...)
      */
     OHOS_ABILITY_CAMERA_FOLDSCREEN_TYPE,
     /**
      * ohos.ability.availableColorSpaces [static, int32[], public]
      *
      * camera property, report current camera device support color spaces
-     * (i.e. mode colorSpaces endChar mode colorSpaces endChar endChar ...)
+     * (i.e. int32[] mode colorSpaces endChar mode colorSpaces endChar endChar ...)
      */
     OHOS_ABILITY_AVAILABLE_COLOR_SPACES,
     /**
      * ohos.ability.nightModeSupportedExposureTime [static, int32[], public]
      *
      * camera property, report current camera device the shutter duration supported by the night mode
-     * (i.e. time millisecond ...)
+     * (i.e. int32[] time millisecond ...)
      */
     OHOS_ABILITY_NIGHT_MODE_SUPPORTED_EXPOSURE_TIME,
     /**
-     * ohos.camera.mesureExposureTime [static, uint32_t, public]
+     * ohos.camera.mesureExposureTime [static, uint32, public]
      *
      * camera property, report current camera device long exposure time by the night mode
-     * (i.e. time millisecond ...)
+     * (i.e. uint32 time millisecond ...)
      */
     OHOS_CAMERA_MESURE_EXPOSURE_TIME,
     /**
-     * ohos.camera.exposureModePreviewState [static, uint32_t, public]
+     * ohos.camera.exposureModePreviewState [static, uint32, public]
      *
      * camera property, report current camera device exposure mode perview state by the night mode
-     * (i.e. ...)
+     * (i.e. uint32 ...)
      */
     OHOS_CAMERA_EXPOSURE_MODE_PREVIEW_STATE,
     /**
@@ -214,14 +214,14 @@ typedef enum camera_device_metadata_tag {
      * camera property, set userIds can be delivered during stream creation
      * to identify the user whose images are stored
      * (User IDs are bound when original images are flushed to disks.)
-     * (i.e. ..)
+     * (i.e. int32[] ...)
      */
     OHOS_CAMERA_USER_ID,
     /**
      * ohos.ability.moonCaptureBoost [static, uint32[], public]
      *
      * camera property, report current camera device moon-gazing mode
-     * (i.e. time millisecond ...)
+     * (i.e. uint32[] time millisecond ...)
      */
     OHOS_ABILITY_MOON_CAPTURE_BOOST,
     /**
@@ -235,21 +235,21 @@ typedef enum camera_device_metadata_tag {
      * ohos.status.moonCaptureDetection [static, uint32, public]
      *
      * camera property, query current camera device detection moon-gazing mode status
-     * (i.e. uint32  ...)
+     * (i.e. uint32 ...)
      */
     OHOS_STATUS_MOON_CAPTURE_DETECTION,
     /**
      * ohos.ability.captureDurationSupported [static, byte, public]
      *
      * camera property, report current camera device
-     * (i.e. byte  ...)
+     * (i.e. byte ...)
      */
     OHOS_ABILITY_CAPTURE_DURATION_SUPPORTED,
     /**
      * ohos.camera.customSnapshotDuration [static, uint32, public]
      *
      * camera property, query current camera device
-     * (i.e. uint32  ...)
+     * (i.e. uint32 ...)
      */
     OHOS_CAMERA_CUSTOM_SNAPSHOT_DURATION,
     /**
