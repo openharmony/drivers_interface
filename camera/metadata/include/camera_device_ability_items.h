@@ -283,126 +283,126 @@ typedef enum camera_device_metadata_tag {
     OHOS_ABILITY_BEAUTY_SKIN_SMOOTH_VALUES,
     OHOS_CONTROL_BEAUTY_SKIN_SMOOTH_VALUE,
     /**
-     * ohos.ability.camera [static, enum, ndk_public]
+     * ohos.ability.camera [static, enum, public]
      * 
      * camera property, report current camera macro
      * (i.e. enum camera supported/nosupported)
      */
     OHOS_ABILITY_CAMERA_MACRO_SUPPORTED,
     /**
-     * ohos.status.camera [static, enum, ndk_public]
+     * ohos.status.camera [static, enum, public]
      * 
      * camera property, report current camera macro
      * (i.e. enum camera disbale/enable)
      */
     OHOS_CAMERA_MACRO_STATUS,
     /**
-     * ohos.control.camera [static, enum, ndk_public]
+     * ohos.control.camera [static, enum, public]
      * 
      * camera property, report current camera macro
      * (i.e. enum camera disbale/enable)
      */
     OHOS_CONTROL_CAMERA_MACRO,
     /**
-     * ohos.ability.camera [static, float[], ndk_public]
+     * ohos.ability.camera [static, float[], public]
      * 
      * camera property, report current camera virtual aperture range
      * (i.e. float[] camera device supported frame)
      */
     OHOS_ABILITY_CAMERA_VIRTUAL_APERTURE_RANGE,
     /**
-     * ohos.control.camera [static, float, ndk_public]
+     * ohos.control.camera [static, float, public]
      * 
      * camera property, report current camera virtual aperture value
      * (i.e. float camera device supported frame)
      */
     OHOS_CONTROL_CAMERA_VIRTUAL_APERTURE_VALUE,
     /**
-     * ohos.control.camera [static, float[], ndk_public]
+     * ohos.control.camera [static, float[], public]
      * 
      * camera property, report current camera physical aprtture range
      * (i.e. float[] camera device supported frame)
      */
     OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE,
     /**
-     * ohos.control.camera [static, float, ndk_public]
+     * ohos.control.camera [static, float, public]
      * 
      * camera property, report current camera physical aprtture value
      * (i.e. float camera device supported frame)
      */
     OHOS_CONTROL_CAMERA_PHYSICAL_APERTURE_VALUE,
     /**
-     * ohos.status.camera [static, float, ndk_public]
+     * ohos.status.camera [static, float, public]
      * 
      * camera property, report current camera physical aperture value
      * (i.e. float camera device supported frame)
      */
     OHOS_STATUS_CAMERA_APERTURE_VALUE,
     /**
-     * ohos.status.exitcamera [static, byte, ndk_public]
+     * ohos.status.exitcamera [static, byte, public]
      * 
      * camera property, report current camera exitcamera event
      * (i.e. byte camera device exitcamera event)
      */
     OHOS_DEVICE_EXITCAMERA_EVENT,
     /**
-     * ohos.control.motion [static, float, ndk_public]
+     * ohos.control.motion [static, float, public]
      * 
      * camera property, report current camera phone screen ratio
      * (i.e. float camera device phone screen ratio)
      */
     OHOS_CONTROL_MOTION_DETECTION_CHECK_AREA,
     /**
-     * ohos.status.motion [static, enum, ndk_public]
+     * ohos.status.motion [static, enum, public]
      * 
      * camera property, report current camera slow motion recording status
      * (i.e. enum camera disable/ready/start/recording/finish)
      */
     OHOS_STATUS_SLOW_MOTION_DETECTION,
     /**
-     * ohos.ability.motion [static, enum, ndk_public]
+     * ohos.ability.motion [static, enum, public]
      * 
      * camera property, report current camera motion detection
      * (i.e. enum camera device support/nosupport)
      */
     OHOS_ABILITY_MOTION_DETECTION_SUPPORT,
     /**
-     * ohos.control.motion [static, enum, ndk_public]
+     * ohos.control.motion [static, enum, public]
      * 
      * camera property, report current camera Operation status detection switch
      * (i.e. enum camera device disable/enable)
      */
     OHOS_CONTROL_MOTION_DETECTION,
     /**
-     * ohos.ability.exposure [static, byte, ndk_public]
+     * ohos.ability.exposure [static, byte, public]
      * 
      * camera property, report current camera screen exposure
      * (i.e. byte camera device supported frame)
      */
     OHOS_ABILITY_EXPOSURE_HINT_SUPPORTED,
     /**
-     * ohos.control.exposure [static, byte, ndk_public]
+     * ohos.control.exposure [static, byte, public]
      * 
      * camera property, report current camera screen exposure
      * (i.e. byte camera device supported frame)
      */
     OHOS_CONTROL_EXPOSURE_HINT_MODE,
     /**
-     * ohos.status.exposure [static, uint32, ndk_public]
+     * ohos.status.exposure [static, uint32, public]
      * 
      * camera property, report current camera screen exposure
      * (i.e. uint32 camera device supported frame)
      */
     OHOS_STATUS_ALGO_MEAN_Y,
     /**
-     * ohos.status.preview [static, byte, ndk_public]
+     * ohos.status.preview [static, byte, public]
      * 
      * camera property, report current camera preview shot id
      * (i.e. byte camera device supported frame)
      */
     OHOS_STATUS_PREVIEW_PHYSICAL_CAMERA_ID,
     /**
-     * ohos.ability.capture [static, uint32[], ndk_public]
+     * ohos.ability.capture [static, uint32[], public]
      * 
      * camera property, report current camera expect time
      * (i.e. uint32[] camera device supported frame)
@@ -417,42 +417,42 @@ typedef enum camera_device_metadata_tag {
 
     // camera secure related
     /**
-     * ohos.control.secure [static, uint32, ndk_public]
+     * ohos.control.secure [static, uint32, public]
      * 
      * camera property, report current camera secure face mode
      * (i.e. uint32 camera device supported frame)
      */
     OHOS_CONTROL_SECURE_FACE_MODE = OHOS_CAMERA_SECURE_START,
     /**
-     * ohos.control.secure [static, uint32[], ndk_public]
+     * ohos.control.secure [static, uint32[], public]
      * 
      * camera property, report current camera secure facSe info
      * (i.e. uint32[] camera device supported frame)
      */
     OHOS_CONTROL_SECURE_FACE_INFO,
     /**
-     * ohos.control.secure [static, uint32, ndk_public]
+     * ohos.control.secure [static, uint32, public]
      * 
      * camera property, report current camera face auth resuilt
      * (i.e. uint32 camera device supported frame)
      */
     OHOS_CONTROL_SECURE_FACE_AUTH_RESULT,
     /**
-     * ohos.control.secure [static, uint32[], ndk_public]
+     * ohos.control.secure [static, uint32[], public]
      * 
      * camera property, report current camera secure flash seq
      * (i.e. uint32[] camera device supported frame)
      */
     OHOS_CONTROL_SECURE_FLASH_SEQ,
     /**
-     * ohos.control.secure [static, byte, ndk_public]
+     * ohos.control.secure [static, byte, public]
      * 
      * camera property, report current camera IR lens
      * (i.e. byte camera device supported frame)
      */
     OHOS_CONTROL_SECURE_IR_LED_SWITCH,
     /**
-     * ohos.control.secure [static, byte, ndk_public]
+     * ohos.control.secure [static, byte, public]
      * 
      * camera property, report current camera IR lens lockae
      * (i.e. byte camera device supported frame)
@@ -467,14 +467,14 @@ typedef enum camera_device_metadata_tag {
 
     //XMAGE MODE
     /**
-     * ohos.control.supported [static, byte, ndk_public]
+     * ohos.control.supported [static, byte, public]
      * 
      * camera property, report current camera color modes
      * (i.e. byte camera device normal/bright/soft/mono)
      */
     OHOS_ABILITY_SUPPORTED_COLOR_MODES = OHOS_XMAGE_COLOR_MODES_START,
     /**
-     * ohos.control.supported [static, byte, ndk_public]
+     * ohos.control.supported [static, byte, public]
      * 
      * camera property, report current camera color modes
      * (i.e. byte camera device normal/bright/soft/mono)
