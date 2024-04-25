@@ -42,9 +42,9 @@ package ohos.hdi.location.geofence.v2_0;
  * @since 5.0
  */
 enum GeofenceEvent {
-    GEOFENCE_EVENT_UNCERTAIN = 1,
-    GEOFENCE_EVENT_ENTERED = 2,
-    GEOFENCE_EVENT_EXITED = 4,
+    GEOFENCE_EVENT_ENTERED = 1,
+    GEOFENCE_EVENT_EXITED = 2,
+    GEOFENCE_EVENT_DWELLED = 4,
 };
 
 /*
