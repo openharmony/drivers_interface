@@ -100,21 +100,21 @@ typedef enum camera_device_metadata_tag {
      * ohos.ability.cameraType [static, enum, public]
      *
      * camera property, report current camera type
-     * (i.e. enum wide-angle lens, Ultra-wide camera or others)
+     * (i.e. enum wide-angle lens/Ultra-wide camera/others)
      */
     OHOS_ABILITY_CAMERA_TYPE,
     /**
      * ohos.ability.cameraConnectionType [static, enum, public]
      *
      * camera property, report current camera connection type
-     * (i.e. enum system camera, usb camera, remote camera)
+     * (i.e. enum system camera/usb camera/remote camera)
      */
     OHOS_ABILITY_CAMERA_CONNECTION_TYPE,
     /**
      * ohos.ability.memoryType [static, enum, public]
      *
      * camera property, report current camera memory type
-     * (i.e. enum mmap, userptr, overlay, dmabuf)
+     * (i.e. enum mmap/userptr/overlay/dmabuf)
      */
     OHOS_ABILITY_MEMORY_TYPE,
     /**
@@ -128,21 +128,21 @@ typedef enum camera_device_metadata_tag {
      * ohos.ability.flashAvailable [static, enum, public]
      *
      * camera property, report current camera flash on/off available
-     * (i.e. enum false true)
+     * (i.e. enum false/true)
      */
     OHOS_ABILITY_FLASH_AVAILABLE,
     /**
-     * ohos.camera.streamId [static, enum, public]
+     * ohos.camera.streamId [static, int32[], public]
      *
      * camera property, set current camera stream id
-     * (i.e. enum stream id)
+     * (i.e. int32[] stream id)
      */
     OHOS_CAMERA_STREAM_ID,
     /**
      * ohos.ability.prelaunchAvailable [static, enum, public]
      *
      * camera property, report current camera device prelaunch supported
-     * (i.e. enum enable 1..)
+     * (i.e. enum enable/disable..)
      */
     OHOS_ABILITY_PRELAUNCH_AVAILABLE,
     /**
@@ -177,7 +177,7 @@ typedef enum camera_device_metadata_tag {
      * ohos.ability.cameraFoldScreen [static, enum, public]
      *
      * camera property, report current camera device flod screen
-     * (i.e. enum other inner outer ...)
+     * (i.e. enum other/inner/outer ...)
      */
     OHOS_ABILITY_CAMERA_FOLDSCREEN_TYPE,
     /**
@@ -263,28 +263,28 @@ typedef enum camera_device_metadata_tag {
      * ohos.ability.flashSuggestionSupported [static, uint32[], public]
      *
      * camera property, report current camera whether support flash suggestion
-     * (i.e. uint32[] open close ...)
+     * (i.e. uint32[] open/close ...)
      */
     OHOS_ABILITY_FLASH_SUGGESTION_SUPPORTED,
     /**
      * ohos.control.flashSuggestionSwitch [static, enum, public]
      *
      * camera property, set current camera whether support flash suggestion
-     * (i.e. enum support notSupport ...)
+     * (i.e. enum support/notSupport ...)
      */
     OHOS_CONTROL_FLASH_SUGGESTION_SWITCH,
     /**
      * ohos.status.flashSuggestion [static, enum, public]
      *
      * camera property, query current camera whether support flash suggestion
-     * (i.e. enum support notSupport ...)
+     * (i.e. enum support/notSupport ...)
      */
     OHOS_STATUS_FLASH_SUGGESTION,
     /**
      * ohos.ability.highQualitySupport [static, byte, public]
      *
      * camera property, report current camera whether support high quality
-     * (i.e. byte support notSupport ...)
+     * (i.e. byte support/notSupport ...)
      */
     OHOS_ABILITY_HIGH_QUALITY_SUPPORT,
     /**
