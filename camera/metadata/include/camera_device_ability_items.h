@@ -319,14 +319,14 @@ typedef enum camera_device_metadata_tag {
      * ohos.ability.muteModes [static, enum[], public]
      *
      * camera device property, report current camera mute modes
-     * (i.e. enum[] OFF solidColorBlack...)
+     * (i.e. enum[] OFF, solidColorBlack...)
      */
     OHOS_ABILITY_MUTE_MODES,
     /**
      * ohos.control.muteMode [static, enum, public]
      *
      * camera device property, set current camera mute mode
-     * (i.e. enum OFF solidColorBlack ...)
+     * (i.e. enum OFF/solidColorBlack ...)
      */
     OHOS_CONTROL_MUTE_MODE,
     /**
