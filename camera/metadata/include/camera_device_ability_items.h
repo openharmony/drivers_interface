@@ -89,41 +89,251 @@ typedef enum camera_device_metadata_section_start {
 
 typedef enum camera_device_metadata_tag {
     // Camera attribute related item
+    /**
+     * ohos.ability.cameraPositon [static, enum, public]
+     *
+     * camera property, report current camera position
+     * (i.e. front camera, rear camera, or other positions camera)
+     */
     OHOS_ABILITY_CAMERA_POSITION = OHOS_CAMERA_PROPERTIES_START,
+    /**
+     * ohos.ability.cameraType [static, enum, public]
+     *
+     * camera property, report current camera type
+     * (i.e. wide-angle lens, Ultra-wide camera or others)
+     */
     OHOS_ABILITY_CAMERA_TYPE,
+    /**
+     * ohos.ability.cameraConnectionType [static, enum, public]
+     *
+     * camera property, report current camera connection type
+     * (i.e. system camera, usb camera, remote camera)
+     */
     OHOS_ABILITY_CAMERA_CONNECTION_TYPE,
+    /**
+     * ohos.ability.memoryType [static, enum, public]
+     *
+     * camera property, report current camera memory type
+     * (i.e. mmap, userptr, overlay, dmabuf)
+     */
     OHOS_ABILITY_MEMORY_TYPE,
+    /**
+     * ohos.ability.fpsRanges [static, int32[], public]
+     *
+     * camera property, report current camera support frame/second range
+     * (i.e. int32[] camera device supported frame)
+     */
     OHOS_ABILITY_FPS_RANGES,
+    /**
+     * ohos.ability.flashAvailable [static, enum, public]
+     *
+     * camera property, report current camera flash on/off available
+     * (i.e. fasle true)
+     */
     OHOS_ABILITY_FLASH_AVAILABLE,
+    /**
+     * ohos.camera.streamId [static, enum, public]
+     *
+     * camera property, set current camera stream id
+     * (i.e. stream id)
+     */
     OHOS_CAMERA_STREAM_ID,
+    /**
+     * ohos.ability.prelaunchAvailable [static, enum, public]
+     *
+     * camera property, report current camera device prelaunch supported
+     * (i.e. enable 1..)
+     */
     OHOS_ABILITY_PRELAUNCH_AVAILABLE,
+    /**
+     * ohos.ability.customVideoFps [static, int32[], public]
+     *
+     * camera property, report current camera support custom opreationMode video fps range
+     * (i.e. int32[] ... )
+     */
     OHOS_ABILITY_CUSTOM_VIDEO_FPS,
+    /**
+     * ohos.ability.cameraModes [static, enum[], public]
+     *
+     * camera property, report current camera support camera mode
+     * (i.e. capture, video ...)
+     */
     OHOS_ABILITY_CAMERA_MODES,
+    /**
+     * ohos.ability.sketchEnableRatio [static, float[], public]
+     *
+     * camera property, report current camera device sketch camera mode support ratio
+     * (i.e. mode ratio ...)
+     */
     OHOS_ABILITY_SKETCH_ENABLE_RATIO,
+    /**
+     * ohos.ability.sketchReferenceFovRatio [static, float[], public]
+     *
+     * camera property, report current camera device sketch camera mode enable ratio
+     * (i.e. mode ratio ...)
+     */
     OHOS_ABILITY_SKETCH_REFERENCE_FOV_RATIO,
+    /**
+     * ohos.ability.cameraFoldScreen [static, enum, public]
+     *
+     * camera property, report current camera device flod screen
+     * (i.e. other inner outer ...)
+     */
     OHOS_ABILITY_CAMERA_FOLDSCREEN_TYPE,
+    /**
+     * ohos.ability.availableColorSpaces [static, int32[], public]
+     *
+     * camera property, report current camera device support color spaces
+     * (i.e. mode colorSpaces endChar mode colorSpaces endChar endChar ...)
+     */
     OHOS_ABILITY_AVAILABLE_COLOR_SPACES,
+    /**
+     * ohos.ability.nightModeSupportedExposureTime [static, int32[], public]
+     *
+     * camera property, report current camera device the shutter duration supported by the night mode
+     * (i.e. time millisecond ...)
+     */
     OHOS_ABILITY_NIGHT_MODE_SUPPORTED_EXPOSURE_TIME,
+    /**
+     * ohos.camera.mesureExposureTime [static, uint32_t, public]
+     *
+     * camera property, report current camera device long exposure time by the night mode
+     * (i.e. time millisecond ...)
+     */
     OHOS_CAMERA_MESURE_EXPOSURE_TIME,
+    /**
+     * ohos.camera.exposureModePreviewState [static, uint32_t, public]
+     *
+     * camera property, report current camera device exposure mode perview state by the night mode
+     * (i.e. ...)
+     */
     OHOS_CAMERA_EXPOSURE_MODE_PREVIEW_STATE,
+    /**
+     * ohos.camera.userId [static, int32[], public]
+     *
+     * camera property, set userIds can be delivered during stream creation
+     * to identify the user whose images are stored
+     * (User IDs are bound when original images are flushed to disks.)
+     * (i.e. ..)
+     */
     OHOS_CAMERA_USER_ID,
+    /**
+     * ohos.ability.moonCaptureBoost [static, uint32[], public]
+     *
+     * camera property, report current camera device moon-gazing mode
+     * (i.e. time millisecond ...)
+     */
     OHOS_ABILITY_MOON_CAPTURE_BOOST,
+    /**
+     * ohos.control.moonCaptureBoost [static, uint32, public]
+     *
+     * camera property, set current camera device moon-gazing mode
+     * (i.e. uint32 disable enable ...)
+     */
     OHOS_CONTROL_MOON_CAPTURE_BOOST,
+    /**
+     * ohos.status.moonCaptureDetection [static, uint32, public]
+     *
+     * camera property, query current camera device detection moon-gazing mode status
+     * (i.e. uint32  ...)
+     */
     OHOS_STATUS_MOON_CAPTURE_DETECTION,
+    /**
+     * ohos.ability.captureDurationSupported [static, byte, public]
+     *
+     * camera property, report current camera device
+     * (i.e. byte  ...)
+     */
     OHOS_ABILITY_CAPTURE_DURATION_SUPPORTED,
+    /**
+     * ohos.camera.customSnapshotDuration [static, uint32, public]
+     *
+     * camera property, query current camera device
+     * (i.e. uint32  ...)
+     */
     OHOS_CAMERA_CUSTOM_SNAPSHOT_DURATION,
+    /**
+     * ohos.ability.movingPhoto [static, int32[], public]
+     *
+     * camera property, report  current camera device different mode whether support living photo
+     * (i.e. int32[] mode value endChar ...)
+     */
     OHOS_ABILITY_MOVING_PHOTO,
+    /**
+     * ohos.ability.flashSuggestionSupported [static, uint32[], public]
+     *
+     * camera property, report current camera whether support flash suggestion
+     * (i.e. uint32[] open close ...)
+     */
     OHOS_ABILITY_FLASH_SUGGESTION_SUPPORTED,
+    /**
+     * ohos.control.flashSuggestionSwitch [static, enum, public]
+     *
+     * camera property, set current camera whether support flash suggestion
+     * (i.e. enum support notSupport ...)
+     */
     OHOS_CONTROL_FLASH_SUGGESTION_SWITCH,
+    /**
+     * ohos.status.flashSuggestion [static, enum, public]
+     *
+     * camera property, query current camera whether support flash suggestion
+     * (i.e. enum support notSupport ...)
+     */
     OHOS_STATUS_FLASH_SUGGESTION,
+    /**
+     * ohos.ability.highQualitySupport [static, byte, public]
+     *
+     * camera property, report current camera whether support high quality
+     * (i.e. byte support notSupport ...)
+     */
     OHOS_ABILITY_HIGH_QUALITY_SUPPORT,
+    /**
+     * ohos.camera.propertiesEnd
+     *
+     * camera property end
+     */
     OHOS_CAMERA_PROPERTIES_END,
 
+    /**
+     * ohos.sensor.exposureTime [static, int64, public]
+     *
+     * camera device property, query current camera exposure time
+     * (i.e. int64 ...)
+     */
     OHOS_SENSOR_EXPOSURE_TIME = OHOS_CAMERA_SENSOR_START,
+    /**
+     * ohos.sensor.colorCorrectionGains [static, float, public]
+     *
+     * camera device property, query current camera color correction gains
+     * (i.e. float ...)
+     */
     OHOS_SENSOR_COLOR_CORRECTION_GAINS,
+    /**
+     * ohos.sensor.orientation [static, int32, public]
+     *
+     * camera device property, query current camera orientation
+     * (i.e. int32 ...)
+     */
     OHOS_SENSOR_ORIENTATION,
+    /**
+     * ohos.ability.muteModes [static, enum[], public]
+     *
+     * camera device property, report current camera mute modes
+     * (i.e. enum[] OFF solidColorBlack...)
+     */
     OHOS_ABILITY_MUTE_MODES,
+    /**
+     * ohos.control.muteMode [static, enum, public]
+     *
+     * camera device property, set current camera mute mode
+     * (i.e. enum OFF solidColorBlack ...)
+     */
     OHOS_CONTROL_MUTE_MODE,
+    /**
+     * ohos.camera.sensorEnd
+     *
+     * camera sensor endChar
+     */
     OHOS_CAMERA_SENSOR_END,
 
     OHOS_SENSOR_INFO_ACTIVE_ARRAY_SIZE = OHOS_CAMERA_SENSOR_INFO_START,
