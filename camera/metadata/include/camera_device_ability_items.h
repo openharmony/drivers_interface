@@ -228,7 +228,7 @@ typedef enum camera_device_metadata_tag {
      * ohos.control.moonCaptureBoost [static, uint32, public]
      *
      * camera property, set current camera device moon-gazing mode
-     * (i.e. uint32 disable enable ...)
+     * (i.e. uint32 disable/enable ...)
      */
     OHOS_CONTROL_MOON_CAPTURE_BOOST,
     /**
