@@ -632,7 +632,7 @@ static void ReadMetadataRational(camera_metadata_item_t &entry, MessageParcel &d
 {
     std::vector<int32_t> buffers;
     data.ReadInt32Vector(&buffers);
-     if (buffers.size() < 1) {
+    if (buffers.size() < 1) {
         METADATA_ERR_LOG("MetadataUtils::ReadMetadataRational the buffers size < 1");
         return;
     }
