@@ -39,8 +39,6 @@
 #include "parameter.h"
 #include "v1_0/display_composer_type.h"
 #include "v1_0/mapper_stub.h"
-#include "v1_1/imetadata.h"
-
 
 #define DISPLAY_TRACE HdfTrace trace(__func__, "HDI:DISP:")
 
@@ -386,11 +384,7 @@ EXIT:
             HDF_LOGE("%{public}s, FileDescriptorUnpack error", __func__);
             return HDF_FAILURE;
         }
-        if (data.buffer != nullptr) {
-            int32_t ret = RegisterBuffer(data.buffer);
-            DISPLAY_CHK_RETURN(ret != HDF_SUCCESS && ret != DISPLAY_NOT_SUPPORT, HDF_FAILURE,
-                HDF_LOGE("%{public}s, RegisterBuffer error", __func__));
-        }
+
         return HDF_SUCCESS;
     }
 
@@ -804,11 +798,7 @@ EXIT:
 
         DISPLAY_CHK_RETURN(HDF_SUCCESS != CmdUtils::FileDescriptorUnpack(unpacker, inFds, data->fence), HDF_FAILURE,
             HDF_LOGE("%{public}s, FileDescriptorUnpack error", __func__));
-        if (data->buffer != nullptr) {
-            int32_t ret = RegisterBuffer(data->buffer);
-            DISPLAY_CHK_RETURN(ret != HDF_SUCCESS && ret != DISPLAY_NOT_SUPPORT, HDF_FAILURE,
-                HDF_LOGE("%{public}s, RegisterBuffer error", __func__));
-        }
+
         // unpack deletingList
         uint32_t vectSize = 0;
         DISPLAY_CHK_RETURN(true != unpacker->ReadUint32(vectSize), HDF_FAILURE,
@@ -1108,33 +1098,6 @@ EXIT:
     }
 
 protected:
-    static sptr<Buffer::V1_1::IMetadata> GetMetaService()
-    {
-        static sptr<Buffer::V1_1::IMetadata> metaService_;
-        if (metaService_ == nullptr) {
-            metaService_  = Buffer::V1_1::IMetadata::Get(true);
-        }
-        return metaService_;
-    }
-
-    static int32_t RegisterBuffer(BufferHandle* buffer)
-    {
-        auto metaService = GetMetaService();
-        if (metaService == nullptr) {
-            return HDF_FAILURE;
-        }
-
-        sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
-        if (hdiBuffer == nullptr) {
-            HDF_LOGE("new NativeBuffer() failed");
-            return HDF_FAILURE;
-        }
-        hdiBuffer->SetBufferHandle(buffer, false);
-        int32_t ret = metaService->RegisterBuffer(hdiBuffer);
-        HDF_LOGI("RegisterBuffer return %{public}d", ret);
-        return ret;
-    }
-    
     VdiImpl* impl_ = nullptr;
     std::shared_ptr<DeviceCacheManager> cacheMgr_;
     std::shared_ptr<Transfer> request_;
