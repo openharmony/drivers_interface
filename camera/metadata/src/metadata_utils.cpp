@@ -496,8 +496,6 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
 
     IF_COND_PRINT_MSG_AND_RETURN(ret != EOK,
         "MetadataUtils::DecodeFromString Failed to copy memory for metadata header")
-    IF_COND_PRINT_MSG_AND_RETURN((header.item_capacity * ),
-        "MetadataUtils::DecodeFromString Failed to copy memory for metadata header")
     std::shared_ptr<CameraMetadata> metadata
         = std::make_shared<CameraMetadata>(header.item_capacity, header.data_capacity);
     common_metadata_header_t *meta = metadata->get();
