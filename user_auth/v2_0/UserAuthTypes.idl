@@ -237,6 +237,8 @@ struct AuthResultInfo {
     int userId;
     /**< Credential ID. */
     unsigned long credentialId;
+    /**< Pin expired info. */
+    long pinExpiredInfo;
 };
 
 /**
@@ -470,6 +472,41 @@ struct ReuseUnlockInfo {
     unsigned char[] token;
     /**< Enrolled state. See @{EnrolledState}. */
     EnrolledState enrolledState;
+};
+
+/**
+ * @brief Global config type.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+enum GlobalConfigType : int {
+    /** Pin expired period */
+    PIN_EXPIRED_PERIOD = 1,
+};
+
+/**
+ * @brief Global config value.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+union GlobalConfigValue {
+    /** Pin expired period value. When pinExpiredPeriod equals to 0, userAuth won't check pin expired period. */
+    long pinExpiredPeriod;
+};
+
+/**
+ * @brief Global config param.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+struct GlobalConfigParam {
+    /** Global config type. See @{GlobalConfigType}*/
+    int type;
+    /** Global config value. See @{GlobalConfigValue}*/
+    GlobalConfigValue value;
 };
 
 /** @} */
