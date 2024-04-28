@@ -30,6 +30,7 @@
           "//drivers/interface/wlan/v1_2:wlan_idl_target",
           "//drivers/interface/wlan/v1_3:wlan_idl_target",
           "//drivers/interface/wlan/wpa/v1_0:wpa_idl_target",
+          "//drivers/interface/wlan/wpa/v1_1:wpa_idl_target",
           "//drivers/interface/wlan/hostapd/v1_0:hostapd_idl_target",
           "//drivers/interface/wlan/chip/v1_0:chip_idl_target"
         ],
@@ -126,6 +127,30 @@
           },
           {
             "name": "//drivers/interface/wlan/wpa/v1_0:libwpa_stub_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/wlan/wpa"
+            }
+          },
+          {
+            "name": "//drivers/interface/wlan/wpa/v1_1:libwpa_proxy_1.1",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/wlan/wpa"
+            }
+          },
+          {
+            "name": "//drivers/interface/wlan/wpa/v1_1:wpa_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/wlan/wpa"
+            }
+          },
+          {
+            "name": "//drivers/interface/wlan/wpa/v1_1:libwpa_stub_1.1",
             "header": {
               "header_files": [
               ],
