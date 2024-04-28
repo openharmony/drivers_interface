@@ -89,6 +89,19 @@ interface IConcreteChip {
     GetChipModes([out] struct UsableMode[] modes);
 
     /**
+     * @brief Get chip capabilities from wifi driver.
+     *
+     * @param capabilities Indicates the chip capabilities.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    GetChipCaps([out] unsigned int capabilities);
+
+    /**
      * @brief Obtains the mode of the chip id.
      *
      * @param modeId Indicates the mode of the current chip id.

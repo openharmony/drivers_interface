@@ -26,6 +26,7 @@ if (defined(ohos_lite)) {
       "IChipController.idl",
       "IChipControllerCallback.idl",
       "IChipIface.idl",
+      "IChipIfaceCallback.idl",
       "IConcreteChip.idl",
       "IConcreteChipCallback.idl",
     ]
