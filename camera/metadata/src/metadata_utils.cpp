@@ -66,6 +66,8 @@ void MetadataUtils::WriteMetadataDataToVec(const camera_metadata_item_t &entry, 
 bool MetadataUtils::ConvertMetadataToVec(const std::shared_ptr<CameraMetadata> &metadata,
     std::vector<uint8_t>& cameraAbility)
 {
+    cameraAbility.clear();
+
     if (metadata == nullptr) {
         METADATA_ERR_LOG("MetadataUtils::ConvertMetadataToVec: metadata is null!");
         return false;
