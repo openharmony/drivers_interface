@@ -169,7 +169,7 @@ enum ReuseMode : int {
  * @brief Defines executor registration information.
  *
  * @since 4.0
- * @version 1.0
+ * @version 2.0
  */
 struct ExecutorRegisterInfo {
     /**< Authentication type. See @{AuthType}. */
@@ -182,6 +182,8 @@ struct ExecutorRegisterInfo {
     unsigned int executorMatcher;
     /**< Executor secure level. See @{ExecutorSecureLevel}. */
     int esl;
+    /**< Indicates the max acl of template.*/
+    unsigned int maxTemplateAcl;
     /**< Public key of the executor. */
     unsigned char[] publicKey;
 };
