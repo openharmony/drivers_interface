@@ -22,6 +22,7 @@
 #include "base/native_buffer.h"
 #include "cache_manager.h"
 #include "nocopyable.h"
+#include <mutex>
 
 namespace OHOS {
 namespace HDI {
@@ -42,6 +43,7 @@ private:
 
     uint32_t layerId_;
     std::shared_ptr<CacheManager<uint32_t, NativeBuffer>> bufferCaches_;
+    std::mutex mutex_;
 };
 } // namespace Composer
 } // namespace Display

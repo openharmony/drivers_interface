@@ -76,22 +76,22 @@ public:
         }
     }
 
-    static int32_t StartPack(int32_t cmdId, std::shared_ptr<CommandDataPacker> packer)
+    static int32_t StartPack(int32_t cmdId, std::shared_ptr<CommandDataPacker>& packer)
     {
         return packer->PackBegin(cmdId) ? HDF_SUCCESS : HDF_FAILURE;
     }
 
-    static int32_t EndPack(std::shared_ptr<CommandDataPacker> packer)
+    static int32_t EndPack(std::shared_ptr<CommandDataPacker>& packer)
     {
         return packer->PackEnd(CONTROL_CMD_REQUEST_END) ? HDF_SUCCESS : HDF_FAILURE;
     }
 
-    static int32_t StartSection(int32_t cmdId, std::shared_ptr<CommandDataPacker> packer)
+    static int32_t StartSection(int32_t cmdId, std::shared_ptr<CommandDataPacker>& packer)
     {
         return packer->BeginSection(cmdId) ? HDF_SUCCESS : HDF_FAILURE;
     }
 
-    static int32_t SetupDevice(uint32_t devId, uint32_t layerId, std::shared_ptr<CommandDataPacker> packer)
+    static int32_t SetupDevice(uint32_t devId, uint32_t layerId, std::shared_ptr<CommandDataPacker>& packer)
     {
         DISPLAY_CHK_RETURN(packer->WriteUint32(devId) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write devId error", __func__));
@@ -100,7 +100,7 @@ public:
         return HDF_SUCCESS;
     }
 
-    static int32_t EndSection(std::shared_ptr<CommandDataPacker> packer)
+    static int32_t EndSection(std::shared_ptr<CommandDataPacker>& packer)
     {
         return packer->EndSection() ? HDF_SUCCESS : HDF_FAILURE;
     }
@@ -132,7 +132,7 @@ public:
         return false;
     }
 
-    static int32_t RectPack(const IRect& rect, std::shared_ptr<CommandDataPacker> packer)
+    static int32_t RectPack(const IRect& rect, std::shared_ptr<CommandDataPacker>& packer)
     {
         DISPLAY_CHK_RETURN(packer->WriteInt32(rect.x) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write rect.x error", __func__));
@@ -145,7 +145,7 @@ public:
         return HDF_SUCCESS;
     }
 
-    static int32_t LayerColorPack(const LayerColor& layerColor, std::shared_ptr<CommandDataPacker> packer)
+    static int32_t LayerColorPack(const LayerColor& layerColor, std::shared_ptr<CommandDataPacker>& packer)
     {
         DISPLAY_CHK_RETURN(packer->WriteUint8(layerColor.r) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write layerColor.r error", __func__));
@@ -159,7 +159,7 @@ public:
     }
 
     static int32_t FileDescriptorPack(
-        const int32_t fd, std::shared_ptr<CommandDataPacker> packer, std::vector<HdifdInfo>& hdiFds)
+        const int32_t fd, std::shared_ptr<CommandDataPacker>& packer, std::vector<HdifdInfo>& hdiFds)
     {
         HdifdInfo hdifdInfo;
         hdifdInfo.id = GenerateHdifdSeqid();
@@ -181,7 +181,7 @@ public:
         return HDF_SUCCESS;
     }
 
-    static int32_t BufferHandlePack(const BufferHandle* buffer, std::shared_ptr<CommandDataPacker> packer,
+    static int32_t BufferHandlePack(const BufferHandle* buffer, std::shared_ptr<CommandDataPacker>& packer,
         std::vector<HdifdInfo>& hdiFds)
     {
         if (buffer == nullptr) {
@@ -228,7 +228,7 @@ public:
         return HDF_SUCCESS;
     }
 
-    static int32_t SetupDeviceUnpack(std::shared_ptr<CommandDataUnpacker> unpacker, uint32_t& devId, uint32_t& layerId)
+    static int32_t SetupDeviceUnpack(std::shared_ptr<CommandDataUnpacker>& unpacker, uint32_t& devId, uint32_t& layerId)
     {
         DISPLAY_CHK_RETURN(unpacker->ReadUint32(devId) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, read devId failed", __func__));
@@ -237,7 +237,7 @@ public:
         return HDF_SUCCESS;
     }
 
-    static int32_t RectUnpack(std::shared_ptr<CommandDataUnpacker> unpacker, IRect& rect)
+    static int32_t RectUnpack(std::shared_ptr<CommandDataUnpacker>& unpacker, IRect& rect)
     {
         DISPLAY_CHK_RETURN(unpacker->ReadInt32(rect.x) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, read rect.x failed", __func__));
@@ -251,7 +251,7 @@ public:
     }
 
     static int32_t FileDescriptorUnpack(
-        std::shared_ptr<CommandDataUnpacker> unpacker, const std::vector<HdifdInfo>& hdiFds, int32_t& fd)
+        std::shared_ptr<CommandDataUnpacker>& unpacker, const std::vector<HdifdInfo>& hdiFds, int32_t& fd)
     {
         int32_t fdId = -1;
         DISPLAY_CHK_RETURN(unpacker->ReadInt32(fdId) == false, HDF_FAILURE,
@@ -263,7 +263,7 @@ public:
         return HDF_SUCCESS;
     }
 
-    static bool UnpackBasicInfo(std::shared_ptr<CommandDataUnpacker> unpacker, const std::vector<HdifdInfo>& hdiFds,
+    static bool UnpackBasicInfo(std::shared_ptr<CommandDataUnpacker>& unpacker, const std::vector<HdifdInfo>& hdiFds,
         BufferHandle *handle)
     {
         int32_t ret = FileDescriptorUnpack(unpacker, hdiFds, handle->fd);
@@ -285,7 +285,7 @@ public:
         return retVal;
     }
 
-    static bool UnpackExtraInfo(std::shared_ptr<CommandDataUnpacker> unpacker, const std::vector<HdifdInfo>& hdiFds,
+    static bool UnpackExtraInfo(std::shared_ptr<CommandDataUnpacker>& unpacker, const std::vector<HdifdInfo>& hdiFds,
         BufferHandle *handle)
     {
         bool retVal = true;
@@ -308,7 +308,7 @@ public:
         return retVal;
     }
 
-    static int32_t BufferHandleUnpack(std::shared_ptr<CommandDataUnpacker> unpacker,
+    static int32_t BufferHandleUnpack(std::shared_ptr<CommandDataUnpacker>& unpacker,
         const std::vector<HdifdInfo>& hdiFds, BufferHandle*& buffer)
     {
         uint32_t fdsNum = 0;
@@ -340,7 +340,7 @@ public:
         return retVal ? HDF_SUCCESS : HDF_FAILURE;
     }
 
-    static int32_t LayerColorUnpack(std::shared_ptr<CommandDataUnpacker> unpacker, LayerColor& layerColor)
+    static int32_t LayerColorUnpack(std::shared_ptr<CommandDataUnpacker>& unpacker, LayerColor& layerColor)
     {
         DISPLAY_CHK_RETURN(unpacker->ReadUint8(layerColor.r) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, read layerColor.r failed", __func__));
