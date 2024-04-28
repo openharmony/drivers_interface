@@ -25,9 +25,9 @@
 
 package ohos.hdi.wlan.wpa.v1_1;
 
-import ohos.hdi.wlan.wpa.v1_1.IWpaInterface;
+import ohos.hdi.wlan.wpa.v1_0.IWpaInterface;
 
-interface IWpaInterface extends ohos.hdi.wlan.wpa.v1_1.IWpaInterface {
+interface IWpaInterface extends ohos.hdi.wlan.wpa.v1_0.IWpaInterface {
     /**
      * @brief send p2p data to wpa.
      *
