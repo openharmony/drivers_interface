@@ -186,6 +186,10 @@ struct ExecutorRegisterInfo {
     unsigned int maxTemplateAcl;
     /**< Public key of the executor. */
     unsigned char[] publicKey;
+    /**< Device udid. */
+    String deviceUdid;
+    /**< signed remote executor info. */
+    unsigned char[] signedRemoteExecutorInfo;
 };
 
 /**

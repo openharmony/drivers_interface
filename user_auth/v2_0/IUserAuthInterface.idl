@@ -281,7 +281,7 @@ interface IUserAuthInterface {
      * @since 5.0
      * @version 1.0
      */
-    GetAvaliableStatus([in] int userId, [in] int authType, [in] unsigned int authTrustLevel, [out] int checkResult);
+    GetAvailableStatus([in] int userId, [in] int authType, [in] unsigned int authTrustLevel, [out] int checkResult);
     /**
      * @brief Obtains the valid authentication methods under the current authentication trust level.
      *
