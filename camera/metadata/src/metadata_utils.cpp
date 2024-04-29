@@ -504,10 +504,14 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
 
     IF_COND_PRINT_MSG_AND_RETURN(!meta,
         "MetadataUtils::DecodeFromString Failed to get metadata header")
+    uint32_t actualMemSize = meta->size;
     ret = memcpy_s(meta, headerLength, &header, headerLength);
 
     IF_COND_PRINT_MSG_AND_RETURN(ret != EOK,
         "MetadataUtils::DecodeFromString Failed to copy memory for metadata header")
+    IF_COND_PRINT_MSG_AND_RETURN(meta->items_start >= actualMemSize
+        || (actualMemSize - meta->items_start) < (uint64_t)meta->item_count * itemLen,
+        "MetadataUtils::DecodeFromString invalid item_start")
     decodeData += headerLength;
     camera_metadata_item_entry_t *item = GetMetadataItems(meta);
     for (uint32_t index = 0; index < meta->item_count; index++, item++) {
@@ -636,6 +640,7 @@ static void ReadMetadataRational(camera_metadata_item_t &entry, MessageParcel &d
     data.ReadInt32Vector(&buffers);
     if (buffers.size() < 1) {
         METADATA_ERR_LOG("MetadataUtils::ReadMetadataRational the buffers size < 1");
+        entry.data.r = nullptr;
         return;
     }
     entry.data.r = new(std::nothrow) camera_rational_t[entry.count];

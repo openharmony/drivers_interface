@@ -281,7 +281,7 @@ interface IUserAuthInterface {
      * @since 5.0
      * @version 1.0
      */
-    GetAvailableStatus([in] int userId, [in] int authType, [in] unsigned int authTrustLevel, [out] int checkResult);
+    GetAvaliableStatus([in] int userId, [in] int authType, [in] unsigned int authTrustLevel, [out] int checkResult);
     /**
      * @brief Obtains the valid authentication methods under the current authentication trust level.
      *
@@ -458,5 +458,15 @@ interface IUserAuthInterface {
      */
     GetSignedExecutorInfo([in] int[] authTypes, [in] int executorRole, [in] unsigned char[] remoteDeviceId,
         [out] unsigned char[] signedExecutorInfo);
+    /**
+     * @brief Set global config param.
+     *
+     * @param param The value of global config parameter. See @{GlobalConfigParam}.
+     * @return Return set result(0:success; other:failed).
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    SetGlobalConfigParam([in] GlobalConfigParam param);
 }
 /** @} */

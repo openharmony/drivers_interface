@@ -45,6 +45,7 @@
 package ohos.hdi.wlan.chip.v1_0;
 
 import ohos.hdi.wlan.chip.v1_0.ChipTypes;
+import ohos.hdi.wlan.chip.v1_0.IChipIfaceCallback;
 
 interface IChipIface {
     /**
@@ -74,6 +75,19 @@ interface IChipIface {
     GetIfaceName([out] String name);
 
     /**
+     * @brief get iface featureset from wifi driver.
+     *
+     * @param capabilities Indicates the iface featureset.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    GetIfaceCap([out] unsigned int capabilities);
+
+    /**
      * @brief Obtains the frequencies supported by the corresponding band.
      *
      * @param band Indicates the wifi band.
@@ -85,6 +99,175 @@ interface IChipIface {
      * @since 5.0
      * @version 1.0
      */
-    GetSupportFreqs([in] enum BandType band, [out] unsigned int[] frequencies);
+    GetSupportFreqs([in] int band, [out] unsigned int[] frequencies);
+
+    /**
+     * @brief Set mac to driver, change iface mac.
+     *
+     * @param mac Indicates the mac.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    SetMacAddress([in] String mac);
+
+    /**
+     * @brief Set countrycode to driver, change iface countrycode.
+     *
+     * @param code Indicates the countrycode.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    SetCountryCode([in] String code);
+
+    /**
+     * @brief Get iface current powermode.
+     *
+     * @param powerMode Indicates the current powermode.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    GetPowerMode([out] int powerMode);
+
+    /**
+     * @brief Set powermode to driver, change iface powermode.
+     *
+     * @param powerMode Indicates the set powermode.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    SetPowerMode([in] int powerMode);
+
+    /**
+     * @brief Register callback to iface.
+     *
+     * @param chipIfaceCallback Indicates the listener callback.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    RegisterChipIfaceCallBack([in] IChipIfaceCallback chipIfaceCallback);
+
+    /**
+     * @brief Unregister callback to iface.
+     *
+     * @param chipIfaceCallback Indicates the listener callback.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    UnRegisterChipIfaceCallBack([in] IChipIfaceCallback chipIfaceCallback);
+
+    /**
+     * @brief Start iface scan.
+     *
+     * @param scanParam Indicates the scan param.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    StartScan([in] struct ScanParams scanParam);
+
+    /**
+     * @brief Get iface scan results.
+     *
+     * @param scanResultsInfo Indicates the scan result.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    GetScanInfos([out] struct ScanResultsInfo[] scanResultsInfo);
+
+    /**
+     * @brief Start iface pno scan.
+     *
+     * @param pnoParams Indicates the pno scan param.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    StartPnoScan([in] struct PnoScanParams pnoParams);
+
+    /**
+     * @brief Stop iface pno scan.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    StopPnoScan();
+
+    /**
+     * @brief Get wifi signal info from driver.
+     *
+     * @param signalPollResult Indicates the signal info.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    GetSignalPollInfo([out] struct SignalPollResult signalPollresult);
+
+    /**
+     * @brief Enable power mode for iface.
+     *
+     * @param mode Indicates the power mode.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    EnablePowerMode([in] int mode);
+
+    /**
+     * @brief Set dpi rules.
+     *
+     * @param uid Indicates the current uid.
+     * @param protocol Indicates the rule.
+     * @param enable Indicates the mode.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    SetDpiMarkRule([in] int uid, [in] int protocol, [in] int enable);
 };
 /** @} */
