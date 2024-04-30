@@ -22,6 +22,7 @@
 #include "base/native_buffer.h"
 #include "cache_manager.h"
 #include "nocopyable.h"
+#include "v1_2/mapper_stub.h"
 
 namespace OHOS {
 namespace HDI {
@@ -36,9 +37,14 @@ public:
         const std::vector<uint32_t>& deletingList, std::function<int32_t (const BufferHandle&)> realFunc);
     int32_t SetBufferCacheMaxCount(uint32_t cacheCount);
     void Dump() const;
+    static void NativeBufferInit(std::unique_ptr<NativeBuffer>& buffer);
+    static void NativeBufferCleanUp(std::unique_ptr<NativeBuffer>& buffer);
 private:
     explicit LayerCache(uint32_t id);
     int32_t Init();
+    static sptr<Buffer::V1_2::IMapper> GetMapperService();
+    static int32_t Mmap(std::unique_ptr<NativeBuffer>& buffer);
+    static int32_t Unmap(std::unique_ptr<NativeBuffer>& buffer);
 
     uint32_t layerId_;
     std::shared_ptr<CacheManager<uint32_t, NativeBuffer>> bufferCaches_;
