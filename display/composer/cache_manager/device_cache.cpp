@@ -58,10 +58,15 @@ int32_t DeviceCache::Init()
     DISPLAY_CHK_RETURN(clientBufferCaches_ == nullptr, HDF_FAILURE,
         HDF_LOGE("%{public}s: create client buffer caches failed", __func__));
 
+    clientBufferCaches_->SetInitFunc(LayerCache::NativeBufferInit);
+    clientBufferCaches_->SetCleanUpFunc(LayerCache::NativeBufferCleanUp);
+
     outputBufferCaches_.reset(new CacheManager<uint32_t, NativeBuffer>());
     DISPLAY_CHK_RETURN(outputBufferCaches_ == nullptr, HDF_FAILURE,
         HDF_LOGE("%{public}s: create output buffer caches failed", __func__));
 
+    outputBufferCaches_->SetInitFunc(LayerCache::NativeBufferInit);
+    outputBufferCaches_->SetCleanUpFunc(LayerCache::NativeBufferCleanUp);
     return HDF_SUCCESS;
 }
 
