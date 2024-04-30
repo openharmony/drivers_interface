@@ -50,6 +50,7 @@ DeviceCache::~DeviceCache()
 
 int32_t DeviceCache::Init()
 {
+    std::lock_guard<std::mutex> lock(mutex_);
     layerCaches_.reset(new CacheManager<uint32_t, LayerCache>());
     DISPLAY_CHK_RETURN(layerCaches_ == nullptr, HDF_FAILURE,
         HDF_LOGE("%{public}s: create layer caches failed", __func__));
@@ -100,6 +101,7 @@ int32_t DeviceCache::RemoveLayerCache(uint32_t id)
 int32_t DeviceCache::SetDisplayClientBuffer(const BufferHandle* buffer, uint32_t seqNo, bool &needFreeBuffer,
     std::function<int32_t (const BufferHandle&)> realFunc)
 {
+    std::lock_guard<std::mutex> lock(mutex_);
     BufferHandle* handle = BufferCacheUtils::NativeBufferCache(clientBufferCaches_,
         const_cast<BufferHandle*>(buffer), seqNo, deviceId_, needFreeBuffer);
     DISPLAY_CHK_RETURN(handle == nullptr, HDF_FAILURE,
@@ -113,6 +115,7 @@ int32_t DeviceCache::SetDisplayClientBuffer(const BufferHandle* buffer, uint32_t
 int32_t DeviceCache::SetVirtualDisplayBuffer(const BufferHandle* buffer, uint32_t seqNo, bool &needFreeBuffer,
     std::function<int32_t (const BufferHandle&)> realFunc)
 {
+    std::lock_guard<std::mutex> lock(mutex_);
     int32_t ret = HDF_FAILURE;
     if (CacheType() == DEVICE_TYPE_VIRTUAL) {
         BufferHandle* handle = BufferCacheUtils::NativeBufferCache(outputBufferCaches_,

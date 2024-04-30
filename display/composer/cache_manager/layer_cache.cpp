@@ -50,6 +50,7 @@ LayerCache::~LayerCache()
 
 int32_t LayerCache::Init()
 {
+    std::lock_guard<std::mutex> lock(mutex_);
     bufferCaches_.reset(new CacheManager<uint32_t, NativeBuffer>());
     DISPLAY_CHK_RETURN(bufferCaches_ == nullptr, HDF_FAILURE,
         HDF_LOGE("%{public}s: create buffer caches failed", __func__));
@@ -67,6 +68,7 @@ int32_t LayerCache::SetBufferCacheMaxCount(uint32_t cacheCount)
 int32_t LayerCache::SetLayerBuffer(const BufferHandle* buffer, uint32_t seqNo, bool &needFreeBuffer,
     const std::vector<uint32_t>& deletingList, std::function<int32_t (const BufferHandle&)> realFunc)
 {
+    std::lock_guard<std::mutex> lock(mutex_);
     for (auto num : deletingList) {
         bool result = bufferCaches_->EraseCache(num);
         DISPLAY_CHECK(!result, HDF_LOGE("%{public}s: warning, erase buffer cache fail, num: %{public}u",

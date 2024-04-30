@@ -71,26 +71,29 @@ public:
 
     bool InsertCache(IdType id, CacheType* cache)
     {
-        if (SearchCache(id) != nullptr) {
+        std::lock_guard<std::mutex> lock(mutex_);
+        auto cacheItem = caches_.find(id);
+        if (cacheItem != caches_.end()) {
             HDF_LOGI("%{public}s: intend to insert a existing cache, SeqNo=%{public}d", __func__, id);
         } else {
-            if (cacheCountMax_ != 0 && Size() >= cacheCountMax_) {
+            if (cacheCountMax_ != 0 && caches_.size() >= cacheCountMax_) {
                 HDF_LOGE("%{public}s: Caches is full, new seqNo:%{public}d can't be inserted", __func__, id);
                 return false;
             }
         }
-        std::lock_guard<std::mutex> lock(mutex_);
-        caches_[id] = std::move(*(new std::unique_ptr<CacheType>(cache)));
+        std::unique_ptr<CacheType> ptr(cache);
+        caches_[id] = std::move(ptr);
 
         return true;
     }
 
     bool EraseCache(IdType id)
     {
+        std::lock_guard<std::mutex> lock(mutex_);
         bool ret = false;
-        if (SearchCache(id) != nullptr) {
-            std::lock_guard<std::mutex> lock(mutex_);
-            caches_.erase(id);
+        auto cacheItem = caches_.find(id);
+        if (cacheItem  != caches_.end()) {
+            caches_.erase(cacheItem);
             ret = true;
         } else {
             HDF_LOGE("%{public}s: Cache %{public}d is not existing\n", __func__, id);
