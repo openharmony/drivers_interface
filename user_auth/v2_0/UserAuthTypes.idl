@@ -224,7 +224,7 @@ struct ExecutorSendMsg {
  * @brief Defines authentication result information.
  *
  * @since 4.0
- * @version 1.0
+ * @version 2.0
  */
 struct AuthResultInfo {
     /**< Authentication result. */
@@ -245,6 +245,8 @@ struct AuthResultInfo {
     unsigned long credentialId;
     /**< Pin expired info. */
     long pinExpiredInfo;
+    /**< Remote auth result message. */
+    unsigned char[] remoteAuthResultMsg;
 };
 
 /**
@@ -332,12 +334,10 @@ struct ScheduleInfo {
     unsigned int executorMatcher;
     /**< Operation to perform. See @{scheduleMode}*/
     int scheduleMode;
-    /**< Executor information. See @{ExecutorInfo}. */
-    struct ExecutorInfo[] executors;
+    /**< Executor indexes. */
+    unsigned long [] executorIndexes;
     /**< Executor messages. */
     unsigned char[][] executorMessages;
-    /**< Remote message. */
-    unsigned char[] remoteMessage;
 };
 
 /**
@@ -406,10 +406,8 @@ struct AuthParam {
     int authIntent;
     /**< Is os account verified. */
     boolean isOsAccountVerified;
-    /**< Remote device id. */
-    unsigned char[] remoteDeviceId;
-    /**< Remote executor info. */
-    unsigned char[] remoteExecutorInfo;
+    /**< Collector udid. */
+    String collectorUdid;
 };
 
 /**

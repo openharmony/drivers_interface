@@ -51,13 +51,15 @@ interface IUserAuthInterface {
     /**
      * @brief Initializes the cache information of the user_auth driver.
      *
+     * @param deviceUdid Indicates the device udid.
+     *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 2.0
      */
-    Init();
+    Init([in] String deviceUdid);
     /**
      * @brief Adds an authentication executor to obtain the authentication capability.
      *
@@ -428,9 +430,21 @@ interface IUserAuthInterface {
      */
     RegisterMessageCallback([in] IMessageCallback messageCallback);
     /**
+     * @brief Prepare remote auth.
+     *
+     * @param remoteUdid Indicates the remote device udid.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    PrepareRemoteAuth([in] String remoteUdid);
+    /**
      * @brief Get local schedule from message.
      *
-     * @param remoteDeviceId Indicates the remote device id.
+     * @param remoteUdid Indicates the remote device udid.
      * @param message is message received.
      * @param scheduleInfo is schedule info. See {@link ScheduleInfo}.
      *
@@ -440,14 +454,13 @@ interface IUserAuthInterface {
      * @since 5.0
      * @version 1.0
      */
-    GetLocalScheduleFromMessage([in] unsigned char[] remoteDeviceId, [in] unsigned char[] message,
-        [out] ScheduleInfo scheduleInfo);
+    GetLocalScheduleFromMessage([in] String remoteUdid, [in] unsigned char[] message, [out] ScheduleInfo scheduleInfo);
     /**
      * @brief Get signed executor info.
      *
      * @param authTypes Indicates the auth types. See @{AuthType}.
      * @param executorRole Indicates the role of executor. See {@link ExecutorRole}.
-     * @param remoteDeviceId Indicates the remote device id.
+     * @param remoteUdid Indicates the remote device udid.
      * @param signedExecutorInfo Indicates the signed executor info.
      *
      * @return Returns <b>0</b> if the operation is successful.
@@ -456,8 +469,22 @@ interface IUserAuthInterface {
      * @since 5.0
      * @version 1.0
      */
-    GetSignedExecutorInfo([in] int[] authTypes, [in] int executorRole, [in] unsigned char[] remoteDeviceId,
+    GetSignedExecutorInfo([in] int[] authTypes, [in] int executorRole, [in] String remoteUdid,
         [out] unsigned char[] signedExecutorInfo);
+    /**
+     * @brief Get auth result from message.
+     *
+     * @param remoteUdid Indicates the remote device udid.
+     * @param message is message received.
+     * @param authResultInfo Indicates authentication result information. See {@link AuthResultInfo}.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+     GetAuthResultFromMessage([in] String remoteUdid, [in] unsigned char[] message, [out] struct AuthResultInfo authResultInfo);
     /**
      * @brief Set global config param.
      *
