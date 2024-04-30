@@ -87,6 +87,7 @@ int32_t LayerCache::SetLayerBuffer(const BufferHandle* buffer, uint32_t seqNo, b
 
 void LayerCache::NativeBufferInit(std::unique_ptr<NativeBuffer>& buffer)
 {
+#ifndef DISPLAY_COMMUNITY
     if (buffer == nullptr) {
         HDF_LOGW("NativeBufferInit buffer nullptr!");
         return;
@@ -95,10 +96,12 @@ void LayerCache::NativeBufferInit(std::unique_ptr<NativeBuffer>& buffer)
     if (ret != HDF_SUCCESS) {
         HDF_LOGE("%{public}s: Mmap failed with %{public}d!", __func__, ret);
     }
+#endif
 }
 
 void LayerCache::NativeBufferCleanUp(std::unique_ptr<NativeBuffer>& buffer)
 {
+#ifndef DISPLAY_COMMUNITY
     if (buffer == nullptr) {
         HDF_LOGW("NativeBufferCleanUp buffer nullptr!");
         return;
@@ -107,6 +110,7 @@ void LayerCache::NativeBufferCleanUp(std::unique_ptr<NativeBuffer>& buffer)
     if (ret != HDF_SUCCESS) {
         HDF_LOGE("%{public}s: Unmap failed with %{public}d!", __func__, ret);
     }
+#endif
 }
 
 sptr<Buffer::V1_2::IMapper> LayerCache::GetMapperService()
