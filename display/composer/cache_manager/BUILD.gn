@@ -25,10 +25,6 @@ ohos_shared_library("libcomposer_buffer_cache") {
     "../",
   ]
 
-  if (drivers_peripheral_display_community) {
-    display_defines = [ "DISPLAY_COMMUNITY" ]
-  }
-
   deps = [
     "//drivers/interface/display/buffer/v1_0:libdisplay_buffer_stub_1.0",
     "//drivers/interface/display/buffer/v1_2:libdisplay_buffer_stub_1.2",
