@@ -87,7 +87,7 @@ int32_t LayerCache::SetLayerBuffer(const BufferHandle* buffer, uint32_t seqNo, b
 
 void LayerCache::NativeBufferInit(std::unique_ptr<NativeBuffer>& buffer)
 {
-#ifndef DISPLAY_COMMUNITY
+#ifdef DISPLAY_COMMUNITY
     if (buffer == nullptr) {
         HDF_LOGW("NativeBufferInit buffer nullptr!");
         return;
@@ -101,7 +101,7 @@ void LayerCache::NativeBufferInit(std::unique_ptr<NativeBuffer>& buffer)
 
 void LayerCache::NativeBufferCleanUp(std::unique_ptr<NativeBuffer>& buffer)
 {
-#ifndef DISPLAY_COMMUNITY
+#ifdef DISPLAY_COMMUNITY
     if (buffer == nullptr) {
         HDF_LOGW("NativeBufferCleanUp buffer nullptr!");
         return;
