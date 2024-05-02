@@ -36,13 +36,20 @@ namespace Composer {
 template <typename IdType, typename CacheType>
 class CacheManager : public NoCopyable {
 public:
-    CacheManager() : cacheCountMax_(0)
-    {
-    }
+    CacheManager()
+        : cacheCountMax_ { 0 },
+          cleanUpFunc_ { nullptr },
+          initFunc_ { nullptr }
+    {}
 
     virtual ~CacheManager()
     {
         std::lock_guard<std::mutex> lock(mutex_);
+        if (cleanUpFunc_) {
+            for (auto& cache : caches_) {
+                cleanUpFunc_(cache.second);
+            }
+        }
         caches_.clear();
     }
 
@@ -71,32 +78,39 @@ public:
 
     bool InsertCache(IdType id, CacheType* cache)
     {
-        if (SearchCache(id) != nullptr) {
+        std::lock_guard<std::mutex> lock(mutex_);
+        auto cacheItem = caches_.find(id);
+        if (cacheItem != caches_.end()) {
             HDF_LOGI("%{public}s: intend to insert a existing cache, SeqNo=%{public}d", __func__, id);
+            cacheItem->second.reset(cache);
         } else {
-            if (cacheCountMax_ != 0 && Size() >= cacheCountMax_) {
+            if (cacheCountMax_ != 0 && caches_.size() >= cacheCountMax_) {
                 HDF_LOGE("%{public}s: Caches is full, new seqNo:%{public}d can't be inserted", __func__, id);
                 return false;
             }
+            caches_[id] = std::move(std::unique_ptr<CacheType>(cache));
         }
-        std::lock_guard<std::mutex> lock(mutex_);
-        caches_[id] = std::move(*(new std::unique_ptr<CacheType>(cache)));
-
+        if (initFunc_) {
+            initFunc_(caches_[id]);
+        }
         return true;
     }
 
     bool EraseCache(IdType id)
     {
-        bool ret = false;
-        if (SearchCache(id) != nullptr) {
-            std::lock_guard<std::mutex> lock(mutex_);
-            caches_.erase(id);
-            ret = true;
-        } else {
+        std::lock_guard<std::mutex> lock(mutex_);
+        auto cacheItem = caches_.find(id);
+        if (cacheItem == caches_.end() || cacheItem->second == nullptr) {
             HDF_LOGE("%{public}s: Cache %{public}d is not existing\n", __func__, id);
+            return false;
         }
 
-        return ret;
+        if (cleanUpFunc_) {
+            cleanUpFunc_(cacheItem->second);
+        }
+
+        caches_.erase(cacheItem);
+        return true;
     }
 
     CacheType* SearchCache(IdType id)
@@ -118,9 +132,21 @@ public:
         }
     }
 
+    void SetCleanUpFunc(void (*func)(std::unique_ptr<CacheType>&))
+    {
+        cleanUpFunc_ = func;
+    }
+
+    void SetInitFunc(void (*func)(std::unique_ptr<CacheType>&))
+    {
+        initFunc_ = func;
+    }
+
 private:
     uint32_t cacheCountMax_;
     std::unordered_map<IdType, std::unique_ptr<CacheType>> caches_;
+    void (*cleanUpFunc_)(std::unique_ptr<CacheType>&);
+    void (*initFunc_)(std::unique_ptr<CacheType>&);
     std::mutex mutex_;
 };
 } // namespace Composer
