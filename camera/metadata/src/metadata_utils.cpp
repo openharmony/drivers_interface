@@ -532,7 +532,7 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
         decodeData += dataLen;
     }
 
-    ret = copyDecodeFromStringMem(meta, decodeData);
+    ret = copyDecodeFromStringMem(meta, decodeData, setting);
     if (ret != CAM_META_SUCCESS) {
         return {};
     }
