@@ -77,6 +77,11 @@ int FindCameraMetadataItem(const common_metadata_header_t *src, uint32_t item, c
     return CameraMetadata::FindCameraMetadataItem(src, item, metadataItem);
 }
 
+bool IsCameraMetadataItemExist(const common_metadata_header_t *src, uint32_t item)
+{
+    return CameraMetadata::IsCameraMetadataItemExist(src, item);
+}
+
 int MetadataExpandItemMem(common_metadata_header_t *dst, camera_metadata_item_entry_t *item,
     size_t oldItemSize)
 {

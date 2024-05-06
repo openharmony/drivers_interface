@@ -155,6 +155,9 @@ namespace OHOS::Camera {
 // Allocate a new camera metadata buffer and return the metadata header
 common_metadata_header_t *AllocateCameraMetadataBuffer(uint32_t item_capacity, uint32_t data_capacity);
 
+// Is camera metadata item exist
+bool IsCameraMetadataItemExist(const common_metadata_header_t *src, uint32_t item);
+
 // Find camera metadata item and fill the found item
 int FindCameraMetadataItem(const common_metadata_header_t *src, uint32_t item,
     camera_metadata_item_t *metadataItem);

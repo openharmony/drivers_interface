@@ -532,13 +532,9 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
         decodeData += dataLen;
     }
 
-    if (meta->data_count != 0) {
-        IF_COND_PRINT_MSG_AND_RETURN(totalLen < static_cast<uint32_t>(((decodeData - &setting[0]) + meta->data_count)),
-            "MetadataUtils::DecodeFromString Failed at data copy")
-        ret = copyDecodeFromStringMem(meta, decodeData);
-        if (ret != CAM_META_SUCCESS) {
-            return {};
-        }
+    ret = copyDecodeFromStringMem(meta, decodeData, setting);
+    if (ret != CAM_META_SUCCESS) {
+        return {};
     }
 
     METADATA_DEBUG_LOG("MetadataUtils::DecodeFromString String length: %{public}zu, Decoded length: %{public}zu",
@@ -546,19 +542,25 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
     return metadata;
 }
 
-int MetadataUtils::copyDecodeFromStringMem(common_metadata_header_t *meta, char *decodeData)
+int MetadataUtils::copyDecodeFromStringMem(common_metadata_header_t *meta, char *decodeData, std::string setting)
 {
-    uint8_t *metaMetadataData = GetMetadataData(meta);
-    int32_t ret;
-    if (metaMetadataData == nullptr) {
-        METADATA_ERR_LOG("MetadataUtils::DecodeFromString GetMetadataData failed");
-        return CAM_META_FAILURE;
-    }
-    ret = memcpy_s(metaMetadataData, meta->data_count, decodeData, meta->data_count);
+    uint32_t totalLen = setting.capacity();
+    if (meta->data_count != 0) {
+        IF_COND_PRINT_MSG_AND_RETURN(totalLen < static_cast<uint32_t>(((decodeData - &setting[0]) + meta->data_count)),
+            "MetadataUtils::DecodeFromString Failed at data copy")
+        uint8_t *metaMetadataData = GetMetadataData(meta);
+        int32_t ret;
+        if (metaMetadataData == nullptr) {
+            METADATA_ERR_LOG("MetadataUtils::DecodeFromString GetMetadataData failed");
+            return CAM_META_FAILURE;
+        }
+        ret = memcpy_s(metaMetadataData, meta->data_count, decodeData, meta->data_count);
 
-    IF_COND_PRINT_MSG_AND_RETURN(ret != EOK,
-        "MetadataUtils::DecodeFromString Failed to copy memory for item data field")
-    decodeData += meta->data_count;
+        IF_COND_PRINT_MSG_AND_RETURN(ret != EOK,
+            "MetadataUtils::DecodeFromString Failed to copy memory for item data field")
+        decodeData += meta->data_count;
+        return CAM_META_SUCCESS;
+    }
     return CAM_META_SUCCESS;
 }
 
