@@ -560,6 +560,7 @@ int MetadataUtils::copyDecodeFromStringMem(common_metadata_header_t *meta, char 
         decodeData += meta->data_count;
         return CAM_META_SUCCESS;
     }
+    return CAM_META_SUCCESS;
 }
 
 static void ReadMetadataUInt8(camera_metadata_item_t &entry, MessageParcel &data)
