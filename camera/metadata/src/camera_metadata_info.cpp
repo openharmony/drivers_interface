@@ -731,7 +731,7 @@ int CameraMetadata::GetCameraMetadataItem(const common_metadata_header_t *src, u
     return CAM_META_SUCCESS;
 }
 
-int CameraMetadata::FindCameraMetadataItemIndex(const common_metadata_header_t *src, uint32_t item, uint32_t *idx, 
+int CameraMetadata::FindCameraMetadataItemIndex(const common_metadata_header_t *src, uint32_t item, uint32_t *idx,
     bool isPrintLog)
 {
     METADATA_DEBUG_LOG("FindCameraMetadataItemIndex start");
@@ -779,7 +779,7 @@ int CameraMetadata::FindCameraMetadataItem(const common_metadata_header_t *src, 
     return GetCameraMetadataItem(src, index, metadataItem);
 }
 
-bool CameraMetadata::IsCameraMetadataExist(const common_metadata_header_t *src, uint32_t item)
+bool CameraMetadata::IsCameraMetadataItemExist(const common_metadata_header_t *src, uint32_t item)
 {
     uint32_t index = 0;
     int ret = FindCameraMetadataItemIndex(src, item, &index, false);

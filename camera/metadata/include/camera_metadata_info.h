@@ -65,7 +65,7 @@ public:
         camera_metadata_item_t *metadataItem);
 
     // Find camera metadata item index if the item exists
-    static int FindCameraMetadataItemIndex(const common_metadata_header_t *src, uint32_t item, uint32_t *index, 
+    static int FindCameraMetadataItemIndex(const common_metadata_header_t *src, uint32_t item, uint32_t *index,
         bool isPrintLog = true);
 
     // Get camera metadata item name
