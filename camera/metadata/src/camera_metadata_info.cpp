@@ -439,6 +439,11 @@ common_metadata_header_t *CameraMetadata::AllocateCameraMetadataBuffer(uint32_t 
     METADATA_DEBUG_LOG("AllocateCameraMetadataBuffer start");
     METADATA_DEBUG_LOG("AllocateCameraMetadataBuffer item_capacity: %{public}u, data_capacity: %{public}u",
         item_capacity, data_capacity);
+    uint32_t maxValue = std::numeric_limits<uint32_t>::max();
+    if (item_capacity > maxValue/sizeof(camera_metadata_item_entry_t) || data_capacity > maxValue/sizeof(uint8_t)) {
+        METADATA_ERR_LOG("AllocateCameraMetadataBuffer invalid item_capacity or data_capacity");
+        return nullptr;
+    }
     size_t memoryRequired = CalculateCameraMetadataMemoryRequired(item_capacity, data_capacity);
     void *buffer = calloc(1, memoryRequired);
     if (buffer == nullptr) {
