@@ -27,7 +27,7 @@ ohos_shared_library("metadata") {
   ]
   ldflags = [ "--coverage" ]
   cflags_cc = cflags
-  all_dependent_configs = [ ":camera_metadata_config" ]
+  # all_dependent_configs = [ ":camera_metadata_config" ]
   if (defined(ohos_lite)) {
     sources = [
       "src/camera_metadata_info.cpp",
@@ -59,6 +59,8 @@ ohos_shared_library("metadata") {
     "chipsetsdk",
     "platformsdk_indirect",
   ]
+
+  public_configs = [ ":camera_sequenceable_config" ]
   part_name = "drivers_interface_camera"
   subsystem_name = "hdf"
 }

@@ -24,7 +24,7 @@ config("map_data_sequenceable_config") {
 ohos_shared_library("libmap_data_sequenceable_1.0") {
   sources = [ "map_data_sequenceable.cpp" ]
 
-  all_dependent_configs = [ ":map_data_sequenceable_config" ]
+  # all_dependent_configs = [ ":map_data_sequenceable_config" ]
 
   external_deps = [
     "c_utils:utils",
@@ -37,6 +37,8 @@ ohos_shared_library("libmap_data_sequenceable_1.0") {
   ldflags = [ "--coverage" ]
   install_images = [ system_base_dir ]
   relative_install_dir = "chipset-sdk"
+    
+  public_configs = [ ":camera_sequenceable_config" ]
   subsystem_name = "hdf"
   innerapi_tags = [ "chipsetsdk" ]
   part_name = "drivers_interface_camera"
