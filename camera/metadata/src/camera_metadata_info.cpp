@@ -788,11 +788,7 @@ bool CameraMetadata::IsCameraMetadataItemExist(const common_metadata_header_t *s
 {
     uint32_t index = 0;
     int ret = FindCameraMetadataItemIndex(src, item, &index, false);
-    if (ret != CAM_META_SUCCESS) {
-        return false;
-    }
-
-    return true;
+    return ret == CAM_META_SUCCESS;
 }
 
 void SetOffset(camera_metadata_item_entry_t *metadataItems, camera_metadata_item_entry_t *item, size_t oldItemSize)
