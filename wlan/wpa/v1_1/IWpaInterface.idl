@@ -42,5 +42,5 @@ interface IWpaInterface extends ohos.hdi.wlan.wpa.v1_0.IWpaInterface {
      * @since 5.0
      * @version 1.1
      */
-    DeliverP2pData([in] String ifName, [in] int cmdType, [in] int dataType, [in] string carryData);
+    DeliverP2pData([in] String ifName, [in] int cmdType, [in] int dataType, [in] String carryData);
 }
