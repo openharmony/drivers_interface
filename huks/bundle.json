@@ -40,12 +40,7 @@
             }
           },
           {
-            "name": "//drivers/interface/huks/v1_0:huks_idl_headers",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interfaces/huks"
-            }
+            "name": "//drivers/interface/huks/v1_0:huks_idl_headers"
           }
         ]
       }
