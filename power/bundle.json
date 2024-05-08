@@ -30,7 +30,7 @@
       "build": {
         "sub_component": [
           "//drivers/interface/power/v1_0:power_idl_target",
-          "//drivers/interface/power/v1_1:power_idl_target"
+          "//drivers/interface/power/v1_2:power_idl_target"
         ],
         "test": [
         ],
@@ -60,7 +60,7 @@
             }
           },
           {
-            "name": "//drivers/interface/power/v1_1:libpower_proxy_1.1",
+            "name": "//drivers/interface/power/v1_2:libpower_proxy_1.2",
             "header": {
               "header_files": [
               ],
@@ -68,7 +68,7 @@
             }
           },
           {
-            "name": "//drivers/interface/power/v1_1:libpower_stub_1.1",
+            "name": "//drivers/interface/power/v1_2:libpower_stub_1.2",
             "header": {
               "header_files": [
               ],
@@ -76,7 +76,7 @@
             }
           },
           {
-            "name": "//drivers/interface/power/v1_1:power_idl_headers",
+            "name": "//drivers/interface/power/v1_2:power_idl_headers",
             "header": {
               "header_files": [
               ],
