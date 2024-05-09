@@ -157,3 +157,15 @@ enum StreamType {
      */
     STREAM_TYPE_DEPTH = 6,
 };
+
+/**
+ * @brief Enumerates types of the execution modes.
+ * @since 4.1
+ * @version 1.3
+ */
+enum ExecutionMode : ohos.hdi.camera.v1_2.ExecutionMode {
+    /**
+     * Default mode.
+     */
+    DEFAULT = 3,
+};
