@@ -87,6 +87,8 @@ enum HdfMotionTypeTag {
     HDF_MOTION_TYPE_STEP_COUNTER,
     /** Touch Between Devices */
     HDF_MOTION_TYPE_TOUCH_LINK,
+    /** hover status */
+    HDF_MOTION_TYPE_HOVER,
     /** Reserved */
     HDF_MOTION_TYPE_RESERVED,
     /** Maximum motion type */
