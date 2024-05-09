@@ -395,6 +395,7 @@ EXIT:
         ClientBufferData data = {0};
         data.fence = -1;
         bool needFreeBuffer = false;
+        bool needMoveFd = false;
         int32_t ret = UnpackDisplayClientBufferInfo(unpacker, inFds, data);
         HdifdParcelable fdParcel(data.fence);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
@@ -419,6 +420,7 @@ EXIT:
                 DumpLayerBuffer(data.devId, data.seqNo, data.fence, handle, "client_");
 #endif
                 HdfTrace traceVdi("SetDisplayClientBuffer", "HDI:DISP:HARDWARE");
+                needMoveFd = true;
                 int rc = impl_->SetDisplayClientBuffer(data.devId, handle, fdParcel.GetFd());
                 DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
                 return HDF_SUCCESS;
@@ -431,7 +433,9 @@ EXIT:
             data.buffer = nullptr;
             data.isValidBuffer = false;
         }
-        fdParcel.Move();
+        if (needMoveFd) {
+            fdParcel.Move();
+        }
 #endif // DISPLAY_COMMUNITY
 EXIT:
         if (ret != HDF_SUCCESS) {
