@@ -409,7 +409,7 @@ EXIT:
 #endif
             HdfTrace traceVdi("SetDisplayClientBuffer", "HDI:DISP:HARDWARE");
             needMoveFd = true;
-            int rc = impl_->SetDisplayClientBuffer(data.devId, handle, fdParcel.GetFd());
+            int rc = impl_->SetDisplayClientBuffer(data.devId, handle, fd);
             DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
             return HDF_SUCCESS;
         });
@@ -817,7 +817,8 @@ EXIT:
         return HDF_SUCCESS;
     }
 
-    int32_t SetLayerBuffer(LayerBufferData data, bool &needFreeBuffer, bool &needMoveFd, int fd)
+    int32_t SetLayerBuffer(LayerBufferData data, std::vector<uint32_t> &deletingList,
+        bool &needFreeBuffer, bool &needMoveFd, int fd)
     {
         DISPLAY_CHECK(cacheMgr_ == nullptr, return HDF_FAILURE);
         std::lock_guard<std::mutex> lock(cacheMgr_->GetCacheMgrMutex());
@@ -855,7 +856,7 @@ EXIT:
         bool needMoveFd = false;
 
         if (ret == HDF_SUCCESS) {
-            ret = SetLayerBuffer(data, needFreeBuffer, needMoveFd, fd);
+            ret = SetLayerBuffer(data, deletingList, needFreeBuffer, needMoveFd, fd);
         }
 #ifndef DISPLAY_COMMUNITY
         // fix fd leak
