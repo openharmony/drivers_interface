@@ -49,7 +49,8 @@ private:
     static void ReadMetadataDataFromVec(int32_t &index, camera_metadata_item_t &entry,
         const std::vector<uint8_t>& cameraAbility);
     static int copyEncodeToStringMem(common_metadata_header_t *meta, char *encodeData, int32_t encodeDataLen);
-    static int copyDecodeFromStringMem(common_metadata_header_t *meta, char *decodeData, std::string setting);
+    static int copyDecodeFromStringMem(common_metadata_header_t *meta, char *decodeData,
+        char *decodeMetadataData, uint32_t totalLen);
 };
 
 template <class T>

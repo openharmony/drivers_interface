@@ -510,7 +510,8 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
     IF_COND_PRINT_MSG_AND_RETURN(ret != EOK,
         "MetadataUtils::DecodeFromString Failed to copy memory for metadata header")
     IF_COND_PRINT_MSG_AND_RETURN(meta->items_start >= actualMemSize
-        || (actualMemSize - meta->items_start) < (uint64_t)meta->item_count * itemLen,
+        || (actualMemSize - meta->items_start) < (uint64_t)meta->item_count * itemLen ||
+        meta->data_start >= actualMemSize || (actualMemSize - meta->data_start) < meta->data_count,
         "MetadataUtils::DecodeFromString invalid item_start")
     decodeData += headerLength;
     camera_metadata_item_entry_t *item = GetMetadataItems(meta);
@@ -532,7 +533,8 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
         decodeData += dataLen;
     }
 
-    ret = copyDecodeFromStringMem(meta, decodeData, setting);
+    char *decodeMetadataData = &setting[0];
+    ret = copyDecodeFromStringMem(meta, decodeData, decodeMetadataData, totalLen);
     if (ret != CAM_META_SUCCESS) {
         return {};
     }
@@ -542,11 +544,11 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
     return metadata;
 }
 
-int MetadataUtils::copyDecodeFromStringMem(common_metadata_header_t *meta, char *decodeData, std::string setting)
+int MetadataUtils::copyDecodeFromStringMem(common_metadata_header_t *meta, char *decodeData,
+    char *decodeMetadataData, uint32_t totalLen)
 {
-    uint32_t totalLen = setting.capacity();
     if (meta->data_count != 0) {
-        IF_COND_PRINT_MSG_AND_RETURN(totalLen < static_cast<uint32_t>(((decodeData - &setting[0]) + meta->data_count)),
+        IF_COND_PRINT_MSG_AND_RETURN(totalLen < static_cast<uint32_t>(((decodeData - decodeMetadataData) + meta->data_count)),
             "MetadataUtils::DecodeFromString Failed at data copy")
         uint8_t *metaMetadataData = GetMetadataData(meta);
         int32_t ret;
