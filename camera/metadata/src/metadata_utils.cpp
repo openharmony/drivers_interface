@@ -548,7 +548,8 @@ int MetadataUtils::copyDecodeFromStringMem(common_metadata_header_t *meta, char 
     char *decodeMetadataData, uint32_t totalLen)
 {
     if (meta->data_count != 0) {
-        IF_COND_PRINT_MSG_AND_RETURN(totalLen < static_cast<uint32_t>(((decodeData - decodeMetadataData) + meta->data_count)),
+        IF_COND_PRINT_MSG_AND_RETURN(
+            totalLen < static_cast<uint32_t>(((decodeData - decodeMetadataData) + meta->data_count)),
             "MetadataUtils::DecodeFromString Failed at data copy")
         uint8_t *metaMetadataData = GetMetadataData(meta);
         int32_t ret;
