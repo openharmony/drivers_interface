@@ -856,7 +856,7 @@ EXIT:
         bool needMoveFd = false;
 
         if (ret == HDF_SUCCESS) {
-            ret = SetLayerBuffer(data, deletingList, needFreeBuffer, needMoveFd, fd);
+            ret = SetLayerBuffer(data, deletingList, needFreeBuffer, needMoveFd, fdParcel.GetFd());
         }
 #ifndef DISPLAY_COMMUNITY
         // fix fd leak
