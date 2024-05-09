@@ -429,13 +429,6 @@ EXIT:
         if (ret == HDF_SUCCESS) {
             ret = SetDisplayClientBuffer(data, needFreeBuffer, needMoveFd, fdParcel.GetFd());
         }
-        if (ret != HDF_SUCCESS) {
-            HDF_LOGE("%{public}s, SetDisplayClientBuffer error", __func__);
-            if (data.isValidBuffer) {
-                FreeBufferHandle(data.buffer);
-            }
-            errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, ret);
-        }
 #ifndef DISPLAY_COMMUNITY
         // fix fd leak
         if (data.buffer != nullptr && needFreeBuffer) {
@@ -447,6 +440,13 @@ EXIT:
             fdParcel.Move();
         }
 #endif // DISPLAY_COMMUNITY
+        if (ret != HDF_SUCCESS) {
+            HDF_LOGE("%{public}s, SetDisplayClientBuffer error", __func__);
+            if (data.isValidBuffer) {
+                FreeBufferHandle(data.buffer);
+            }
+            errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, ret);
+        }
     }
 
     void OnSetDisplayClientDamage(std::shared_ptr<CommandDataUnpacker> unpacker)
@@ -857,13 +857,6 @@ EXIT:
         if (ret == HDF_SUCCESS) {
             ret = SetLayerBuffer(data, needFreeBuffer, needMoveFd, fd);
         }
-        if (ret != HDF_SUCCESS) {
-            HDF_LOGE("%{public}s, SetLayerBuffer error", __func__);
-            if (data.isValidBuffer) {
-                FreeBufferHandle(data.buffer);
-            }
-            errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, ret);
-        }
 #ifndef DISPLAY_COMMUNITY
         // fix fd leak
         if (data.buffer != nullptr && needFreeBuffer) {
@@ -875,6 +868,14 @@ EXIT:
             fdParcel.Move();
         }
 #endif // DISPLAY_COMMUNITY
+        if (ret != HDF_SUCCESS) {
+            HDF_LOGE("%{public}s, SetLayerBuffer error", __func__);
+            if (data.isValidBuffer) {
+                FreeBufferHandle(data.buffer);
+            }
+            errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, ret);
+        }
+
         return;
     }
 
