@@ -388,6 +388,34 @@ EXIT:
         return HDF_SUCCESS;
     }
 
+    int32_t SetDisplayClientBuffer(ClientBufferData data, bool &needFreeBuffer, bool &needMoveFd, int fd)
+    {
+        if (cacheMgr_ == nullptr) {
+            HDF_LOGE("%{public}s, get cache manager error", __func__);
+            return HDF_FAILURE;
+        }
+        std::lock_guard<std::mutex> lock(cacheMgr_->GetCacheMgrMutex());
+
+        DeviceCache* devCache = cacheMgr_->DeviceCacheInstance(data.devId);
+        if (devCache == nullptr) {
+            HDF_LOGE("%{public}s, get device cache error", __func__);
+            return HDF_FAILURE;
+        }
+
+        int32_t ret = devCache->SetDisplayClientBuffer(data.buffer, data.seqNo, needFreeBuffer,
+            [&](const BufferHandle& handle)->int32_t {
+#ifdef DISPLAY_COMSPOER_DEBUG_DUMP
+            DumpLayerBuffer(data.devId, data.seqNo, data.fence, handle, "client_");
+#endif
+            HdfTrace traceVdi("SetDisplayClientBuffer", "HDI:DISP:HARDWARE");
+            needMoveFd = true;
+            int rc = impl_->SetDisplayClientBuffer(data.devId, handle, fdParcel.GetFd());
+            DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
+            return HDF_SUCCESS;
+        });
+        return ret;
+    }
+
     void OnSetDisplayClientBuffer(std::shared_ptr<CommandDataUnpacker> unpacker, const std::vector<HdifdInfo>& inFds)
     {
         DISPLAY_TRACE;
@@ -398,33 +426,15 @@ EXIT:
         bool needMoveFd = false;
         int32_t ret = UnpackDisplayClientBufferInfo(unpacker, inFds, data);
         HdifdParcelable fdParcel(data.fence);
-        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
-        {
-            if (cacheMgr_ == nullptr) {
-                ret = HDF_FAILURE;
-                HDF_LOGE("%{public}s, get cache manager error", __func__);
-                goto EXIT;
+        if (ret == HDF_SUCCESS) {
+            ret = SetDisplayClientBuffer(data, needFreeBuffer, needMoveFd, fdParcel.GetFd());
+        }
+        if (ret != HDF_SUCCESS) {
+            HDF_LOGE("%{public}s, SetDisplayClientBuffer error", __func__);
+            if (data.isValidBuffer) {
+                FreeBufferHandle(data.buffer);
             }
-            std::lock_guard<std::mutex> lock(cacheMgr_->GetCacheMgrMutex());
-
-            DeviceCache* devCache = cacheMgr_->DeviceCacheInstance(data.devId);
-            if (devCache == nullptr) {
-                ret = HDF_FAILURE;
-                HDF_LOGE("%{public}s, get device cache error", __func__);
-                goto EXIT;
-            }
-
-            ret = devCache->SetDisplayClientBuffer(data.buffer, data.seqNo, needFreeBuffer,
-                [&](const BufferHandle& handle)->int32_t {
-#ifdef DISPLAY_COMSPOER_DEBUG_DUMP
-                DumpLayerBuffer(data.devId, data.seqNo, data.fence, handle, "client_");
-#endif
-                HdfTrace traceVdi("SetDisplayClientBuffer", "HDI:DISP:HARDWARE");
-                needMoveFd = true;
-                int rc = impl_->SetDisplayClientBuffer(data.devId, handle, fdParcel.GetFd());
-                DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
-                return HDF_SUCCESS;
-            });
+            errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, ret);
         }
 #ifndef DISPLAY_COMMUNITY
         // fix fd leak
@@ -437,14 +447,6 @@ EXIT:
             fdParcel.Move();
         }
 #endif // DISPLAY_COMMUNITY
-EXIT:
-        if (ret != HDF_SUCCESS) {
-            HDF_LOGE("%{public}s, SetDisplayClientBuffer error", __func__);
-            if (data.isValidBuffer) {
-                FreeBufferHandle(data.buffer);
-            }
-            errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, ret);
-        }
     }
 
     void OnSetDisplayClientDamage(std::shared_ptr<CommandDataUnpacker> unpacker)
@@ -815,6 +817,31 @@ EXIT:
         return HDF_SUCCESS;
     }
 
+    int32_t SetLayerBuffer(LayerBufferData data, bool &needFreeBuffer, bool &needMoveFd, int fd)
+    {
+        DISPLAY_CHECK(cacheMgr_ == nullptr, return HDF_FAILURE);
+        std::lock_guard<std::mutex> lock(cacheMgr_->GetCacheMgrMutex());
+        DeviceCache* devCache = nullptr;
+        LayerCache* layerCache = nullptr;
+        devCache = cacheMgr_->DeviceCacheInstance(data.devId);
+        DISPLAY_CHECK(devCache == nullptr, return HDF_FAILURE);
+        layerCache = devCache->LayerCacheInstance(data.layerId);
+        DISPLAY_CHECK(layerCache == nullptr, return HDF_FAILURE);
+
+        int32_t ret = layerCache->SetLayerBuffer(data.buffer, data.seqNo, needFreeBuffer, deletingList,
+            [&](const BufferHandle& handle)->int32_t {
+#ifdef DISPLAY_COMSPOER_DEBUG_DUMP
+            DumpLayerBuffer(data.devId, data.layerId, data.fence, handle, "layer_");
+#endif
+            HdfTrace traceVdi("SetLayerBuffer", "HDI:DISP:HARDWARE");
+            needMoveFd = true;
+            int rc = impl_->SetLayerBuffer(data.devId, data.layerId, handle, fd);
+            DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
+            return HDF_SUCCESS;
+        });
+        return ret;
+    }
+
     void OnSetLayerBuffer(std::shared_ptr<CommandDataUnpacker> unpacker, const std::vector<HdifdInfo>& inFds)
     {
         DISPLAY_TRACE;
@@ -827,32 +854,16 @@ EXIT:
         bool needFreeBuffer = false;
         bool needMoveFd = false;
 
+        if (ret == HDF_SUCCESS) {
+            ret = SetLayerBuffer(data, needFreeBuffer, needMoveFd, fd);
+        }
         if (ret != HDF_SUCCESS) {
-            goto EXIT;
+            HDF_LOGE("%{public}s, SetLayerBuffer error", __func__);
+            if (data.isValidBuffer) {
+                FreeBufferHandle(data.buffer);
+            }
+            errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, ret);
         }
-        {
-            DISPLAY_CHECK(cacheMgr_ == nullptr, goto EXIT);
-            std::lock_guard<std::mutex> lock(cacheMgr_->GetCacheMgrMutex());
-            DeviceCache* devCache = nullptr;
-            LayerCache* layerCache = nullptr;
-            devCache = cacheMgr_->DeviceCacheInstance(data.devId);
-            DISPLAY_CHECK(devCache == nullptr, goto EXIT);
-            layerCache = devCache->LayerCacheInstance(data.layerId);
-            DISPLAY_CHECK(layerCache == nullptr, goto EXIT);
-
-            ret = layerCache->SetLayerBuffer(data.buffer, data.seqNo, needFreeBuffer, deletingList,
-                [&](const BufferHandle& handle)->int32_t {
-#ifdef DISPLAY_COMSPOER_DEBUG_DUMP
-                DumpLayerBuffer(data.devId, data.layerId, data.fence, handle, "layer_");
-#endif
-                HdfTrace traceVdi("SetLayerBuffer", "HDI:DISP:HARDWARE");
-                needMoveFd = true;
-                int rc = impl_->SetLayerBuffer(data.devId, data.layerId, handle, fdParcel.GetFd());
-                DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
-                return HDF_SUCCESS;
-            });
-        }
-
 #ifndef DISPLAY_COMMUNITY
         // fix fd leak
         if (data.buffer != nullptr && needFreeBuffer) {
@@ -864,15 +875,6 @@ EXIT:
             fdParcel.Move();
         }
 #endif // DISPLAY_COMMUNITY
-EXIT:
-        if (ret != HDF_SUCCESS) {
-            HDF_LOGE("%{public}s, SetLayerBuffer error", __func__);
-            if (data.isValidBuffer) {
-                FreeBufferHandle(data.buffer);
-            }
-            errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, ret);
-        }
-
         return;
     }
 
