@@ -40,7 +40,7 @@ using namespace OHOS::HDI::Display::Composer::V1_0;
 
 #define DISPLAY_TRACE HdfTrace trace(__func__, "HDI:DISP:")
 
-#define COMPOSER_CHECK_NULLPTR_RETURN(ptr)                                                         \
+#define COMPOSER_CHECK_NULLPTR_RETURN(ptr)                                                  \
     if ((ptr) == nullptr) {                                                                 \
         HDF_LOGE("%{public}d@%{public}s nullptr error", __LINE__, __func__);                \
         return DISPLAY_NULL_PTR;                                                            \
