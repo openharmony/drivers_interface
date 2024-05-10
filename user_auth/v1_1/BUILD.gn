@@ -12,6 +12,8 @@
 # limitations under the License.
 
 import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
+import("../config.gni")
+
 hdi("user_auth") {
   module_name = "drivers_peripheral_user_auth"
   imports = [ "ohos.hdi.user_auth.v1_0:user_auth" ]

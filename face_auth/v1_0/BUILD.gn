@@ -12,6 +12,8 @@
 # limitations under the License.
 
 import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
+import("../config.gni")
+
 hdi("face_auth") {
   module_name = "drivers_peripheral_face_auth"
   sources = [

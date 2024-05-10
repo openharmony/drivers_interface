@@ -12,6 +12,8 @@
 # limitations under the License.
 
 import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
+import("../config.gni")
+
 hdi("pin_auth") {
   module_name = "drivers_peripheral_pin_auth"
   sources = [
