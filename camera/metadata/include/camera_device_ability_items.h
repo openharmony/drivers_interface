@@ -176,7 +176,7 @@ typedef enum camera_device_metadata_tag {
     /**
      * ohos.ability.cameraFoldScreen [static, enum, public]
      *
-     * camera device property, report current camera device flod screen
+     * camera device property, report current camera device fold screen
      * (i.e. enum: other/inner/outer ...)
      */
     OHOS_ABILITY_CAMERA_FOLDSCREEN_TYPE,
@@ -1410,14 +1410,14 @@ typedef enum camera_device_metadata_tag {
     /**
      * ohos.status.slowMotionDetection [static, enum, public]
      *
-     * camera property, query current camera slow motion recording status
+     * camera device property, query current camera slow motion recording status
      * (i.e. enum: disable/ready/start/recording/finish ...)
      */
     OHOS_STATUS_SLOW_MOTION_DETECTION,
     /**
      * ohos.ability.motionDetectionSupport [static, enum, public]
      *
-     * camera property, report current camera motion detection
+     * camera device property, report current camera motion detection
      * (i.e. enum: support/nosupport ...)
      */
     OHOS_ABILITY_MOTION_DETECTION_SUPPORT,
@@ -1481,14 +1481,14 @@ typedef enum camera_device_metadata_tag {
     /**
      * ohos.control.secureFaceInfo [static, uint32[], public]
      *
-     * camera property, set current camera secure facSe info
+     * camera property, set current camera secure face info
      * (i.e. uint32[] ...)
      */
     OHOS_CONTROL_SECURE_FACE_INFO,
     /**
      * ohos.control.secureFaceAuthResult [static, uint32, public]
      *
-     * camera property, set current camera face auth resuilt
+     * camera property, set current camera face auth result
      * (i.e. uint32 ...)
      */
     OHOS_CONTROL_SECURE_FACE_AUTH_RESULT,
