@@ -54,6 +54,9 @@ public:
         HDF_LOGD("%{public}s: HDI 1.2 PackSection, cmd-[%{public}d] = %{public}s",
             __func__, cmd, CmdUtils::CommandToString(cmd));
         switch (cmd) {
+            case REQUEST_CMD_COMMIT_AND_GET_RELEASE_FENCE:
+                OnCommitAndGetReleaseFence(unpacker, outFds, layers, fences);
+                break;
             case REQUEST_CMD_PREPARE_DISPLAY_LAYERS:
                 OnPrepareDisplayLayers(unpacker);
                 break;
@@ -107,9 +110,6 @@ public:
                 break;
             case REQUEST_CMD_SET_LAYER_COLOR:
                 OnSetLayerColor(unpacker);
-                break;
-            case REQUEST_CMD_COMMIT_AND_GET_RELEASE_FENCE:
-                OnCommitAndGetReleaseFence(unpacker, outFds, layers, fences);
                 break;
             default:
                 HDF_LOGE("%{public}s: not support this cmd, unpacked cmd = %{public}d", __func__, cmd);
@@ -233,20 +233,31 @@ public:
         }
 
         if (isSupportSkipValidate) {
+            HdfTrace traceVdi("Commit", "HDI:DISP:HARDWARE");
             skipRet = impl_->Commit(devId, fence);
         }
         if (skipRet != HDF_SUCCESS) {
-            ret = impl_->PrepareDisplayLayers(devId, needFlush);
+            {
+                HdfTrace traceVdi("PrepareDisplayLayers", "HDI:DISP:HARDWARE");
+                ret = impl_->PrepareDisplayLayers(devId, needFlush);
+            }
             DISPLAY_CHECK(ret != HDF_SUCCESS, goto REPLY);
 
-            ret = impl_->GetDisplayCompChange(devId, compLayers, compTypes);
+            {
+                HdfTrace traceVdi("GetDisplayCompChange", "HDI:DISP:HARDWARE");
+                ret = impl_->GetDisplayCompChange(devId, compLayers, compTypes);
+            }
             DISPLAY_CHECK(ret != HDF_SUCCESS, goto REPLY);
         }
 
         HDF_LOGD("%{public}s, first commit with skipRet = %{public}d, fence = %{public}d, needFlush = %{public}d",
             __func__, skipRet, fence, needFlush);
-				
-        ret = impl_->GetDisplayReleaseFence(devId, layers, fences);
+		
+        {
+            HdfTrace traceVdi("GetDisplayReleaseFence", "HDI:DISP:HARDWARE");
+            ret = impl_->GetDisplayReleaseFence(devId, layers, fences);
+        }
+        
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("%{public}s, GetDisplayReleaseFence failed with ret = %{public}d", __func__, ret);
         }
