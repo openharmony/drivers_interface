@@ -16,6 +16,7 @@
 #ifndef OHOS_HDI_DISPLAY_V1_2_DISPLAY_CMD_REQUESTER_H
 #define OHOS_HDI_DISPLAY_V1_2_DISPLAY_CMD_REQUESTER_H
 
+#include "v1_0/display_command/display_cmd_responser.h"
 #include "v1_1/display_command/display_cmd_responser.h"
 #include "v1_2/display_composer_type.h"
 #include "v1_2/display_command/display_cmd_utils.h"
@@ -63,7 +64,7 @@ public:
         if (cmd == REQUEST_CMD_COMMIT_AND_GET_RELEASE_FENCE) {
             OnCommitAndGetReleaseFence(unpacker, outFds);
         } else {
-            return V1_1::DisplayCmdResponser::ProcessRequestCmd(unpacker, cmd, inFds, outFds);
+            return V1_0::HdiDisplayCmdRequester::ProcessRequestCmd(unpacker, cmd, inFds, outFds);
         }
         return HDF_SUCCESS;
     }
