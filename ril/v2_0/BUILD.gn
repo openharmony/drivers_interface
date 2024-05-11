@@ -21,7 +21,6 @@ if (defined(ohos_lite)) {
 } else {
   hdi("ril") {
     module_name = "ril_service"
-    imports = [ "ohos.hdi.ril.v1_3:ril" ]
     sources = [
       "IRil.idl",
       "IRilCallback.idl",
