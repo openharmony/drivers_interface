@@ -23,11 +23,6 @@ if (cond) { \
     return {}; \
 }
 
-static constexpr uint32_t MAX_SUPPORTED_TAGS = 1000;
-static constexpr uint32_t MAX_SUPPORTED_ITEMS = (12000 * 2);
-static constexpr uint32_t MAX_ITEM_CAPACITY = (1000 * 10);
-static constexpr uint32_t MAX_DATA_CAPACITY = (1000 * 10 * 10 * 10);
-
 namespace OHOS::Camera {
 void MetadataUtils::WriteMetadataDataToVec(const camera_metadata_item_t &entry, std::vector<uint8_t>& cameraAbility)
 {
