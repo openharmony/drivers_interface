@@ -70,30 +70,30 @@ public:
 
     void ReplyNotSkipInfo(uint32_t& devId, CommitInfo& commitInfo)
     {
-		    DISPLAY_CHECK(replyPacker_->WriteUint32(devId) == false,
+        DISPLAY_CHECK(replyPacker_->WriteUint32(devId) == false,
             HDF_LOGE("%{public}s, write devId error", __func__));
 
-		    DISPLAY_CHECK(replyPacker_->WriteBool(commitInfo.needFlush) == false,
+        DISPLAY_CHECK(replyPacker_->WriteBool(commitInfo.needFlush) == false,
             HDF_LOGE("%{public}s, write needFlush error", __func__));
 
       // Write compLayers vector
-		    vectSize = static_cast<uint32_t>(commitInfo.compLayers.size());
-		    DISPLAY_CHECK(replyPacker_->WriteUint32(vectSize) == false,
+        vectSize = static_cast<uint32_t>(commitInfo.compLayers.size());
+        DISPLAY_CHECK(replyPacker_->WriteUint32(vectSize) == false,
             HDF_LOGE("%{public}s, write compLayers.size error", __func__));
 
-		    for (uint32_t i = 0; i < vectSize; i++) {
+        for (uint32_t i = 0; i < vectSize; i++) {
             DISPLAY_CHECK(replyPacker_->WriteUint32(commitInfo.compLayers[i]) == false,
                 HDF_LOGE("%{public}s, write compLayers error", __func__));
-		    }
+        }
       // Write compTypes vector
-		    vectSize = static_cast<uint32_t>(commitInfo.compTypes.size());
-		    DISPLAY_CHECK(replyPacker_->WriteUint32(vectSize) == false,
+        vectSize = static_cast<uint32_t>(commitInfo.compTypes.size());
+        DISPLAY_CHECK(replyPacker_->WriteUint32(vectSize) == false,
             HDF_LOGE("%{public}s, write compTypes.size error", __func__));
 
-		    for (uint32_t i = 0; i < vectSize; i++) {
+        for (uint32_t i = 0; i < vectSize; i++) {
             DISPLAY_CHECK(replyPacker_->WriteUint32(commitInfo.compTypes[i]) == false,
                 HDF_LOGE("%{public}s, write compTypes error", __func__));
-		    }
+        }
     }
 
     void ReplyCommitAndGetReleaseFence(std::vector<HdifdInfo>& outFds, uint32_t& devId, CommitInfo& commitInfo)
@@ -167,9 +167,7 @@ public:
         std::vector<HdifdInfo>& outFds)
     {
         DISPLAY_TRACE;
-
         uint32_t devId = 0;
-        
         bool isSupportSkipValidate = false;
         int32_t ret = HDF_SUCCESS;
         CommitInfo commitInfo;
@@ -218,7 +216,6 @@ public:
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("%{public}s, GetDisplayReleaseFence failed with ret = %{public}d", __func__, ret);
         }
-
 REPLY:
         ReplyCommitAndGetReleaseFence(outFds, devId, commitInfo);
         return;
