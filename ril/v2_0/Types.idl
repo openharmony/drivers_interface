@@ -21,7 +21,7 @@
  * The radio interface layer (RIL) module provides APIs and callbacks for upper-layer telephony services,
  * including call, SMS, MMS, network search, and SIM card services.
  *
- * @since 4.1
+ * @since 5.0
  * @version 2.0
  */
 

@@ -22,7 +22,7 @@
  * The radio interface layer (RIL) module provides APIs and callbacks for upper-layer
  * telephony services, including call, SMS, MMS, network search, and SIM card services.
  *
- * @since 4.1
+ * @since 5.0
  * @version 2.0
  */
 
@@ -31,14 +31,14 @@
  *
  * @brief Declares the request API of the RIL module.
  *
- * @since 4.1
+ * @since 5.0
  * @version 2.0
  */
 
 /**
  * @brief Defines the path for the package of the RIL module APIs.
  *
- * @since 4.1
+ * @since 5.0
  * @version 2.0
  */
 package ohos.hdi.ril.v2_0;
@@ -52,7 +52,7 @@ import ohos.hdi.ril.v2_0.Types;
  * Request APIs are called to make calls, send SMS and MMS messages, activate SIM cards,
  * and access the Internet.
  *
- * @since 4.1
+ * @since 5.0
  * @version 2.0
  */
 interface IRil {

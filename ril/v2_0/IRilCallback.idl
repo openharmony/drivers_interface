@@ -22,7 +22,7 @@
  * The radio interface layer (RIL) module provides APIs and callbacks for upper-layer telephony services,
  * including call, SMS, MMS, network search, and SIM card services.
  *
- * @since 4.1
+ * @since 5.0
  * @version 2.0
  */
 
@@ -31,14 +31,14 @@
  *
  * @brief Declares callback APIs of the RIL module.
  *
- * @since 4.1
+ * @since 5.0
  * @version 2.0
  */
 
 /**
  * @brief Defines the path for the package of the RIL module APIs.
  *
- * @since 4.1
+ * @since 5.0
  * @version 2.0
  */
 package ohos.hdi.ril.v2_0;
@@ -51,7 +51,7 @@ import ohos.hdi.ril.v2_0.Types;
  * These APIs provide the callback functions for making calls, sending SMS and MMS messages,
  * activating SIM cards, and accessing the Internet. The caller needs to implement these callbacks.
  *
- * @since 4.1
+ * @since 5.0
  * @version 2.0
  */
 [callback] interface IRilCallback {
@@ -74,7 +74,7 @@ import ohos.hdi.ril.v2_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      * @param setupDataCallResultInfo Data service activation result. For details, see {@link SetupDataCallResultInfo}.
      *
-     * @since 3.2
+     * @since 5.0
      * @version 2.0
      */
     ActivatePdpContextWithSliceInfoResponse([in] struct RilRadioResponseInfo responseInfo,
