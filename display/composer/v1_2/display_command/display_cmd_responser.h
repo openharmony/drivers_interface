@@ -63,7 +63,7 @@ public:
         if (cmd == REQUEST_CMD_COMMIT_AND_GET_RELEASE_FENCE) {
             OnCommitAndGetReleaseFence(unpacker, outFds);
         } else {
-            return V1_1::DisplayCmdResponser<Transfer, VdiImpl>::DisplayCmdResponser(unpacker, cmd, inFds, outFds);
+            return V1_1::DisplayCmdResponser::DisplayCmdResponser(unpacker, cmd, inFds, outFds);
         }
         return HDF_SUCCESS;
     }
