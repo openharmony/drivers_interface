@@ -1,7 +1,7 @@
 {
     "name": "@ohos/drivers_interface_connected_nfc_tag",
     "description": "drivers interface connected nfc tag",
-    "version": "3.2",
+    "version": "5.0",
     "license": "Apache License 2.0",
     "segment": {
       "destPath": "drivers/interface/connected_nfc_tag"
@@ -9,8 +9,7 @@
     "component": {
       "name": "drivers_interface_connected_nfc_tag",
       "subsystem": "hdf",
-      "syscap": [""],
-      "adapter_system_type": ["standard"],
+      "adapted_system_type": ["standard"],
       "rom": "675KB",
       "ram": "1024KB",
       "deps": {
@@ -24,7 +23,9 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/connected_nfc_tag/v1_0:connected_nfc_tag_idl_target"
+          "//drivers/interface/connected_nfc_tag/v1_0:connected_nfc_tag_idl_target",
+          "//drivers/interface/connected_nfc_tag/v1_1:connected_nfc_tag_idl_target",
+          "//drivers/interface/connected_nfc_tag/v1_1:libconnected_nfc_tag_stub_1.1"
         ],
         "test": [
         ],
@@ -38,7 +39,31 @@
             }
           },
           {
+            "name": "//drivers/interface/connected_nfc_tag/v1_1:libconnected_nfc_tag_proxy_1.1",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/connected_nfc_tag"
+            }
+          },
+          {
+            "name": "//drivers/interface/connected_nfc_tag/v1_1:libconnected_nfc_tag_stub_1.1",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/connected_nfc_tag"
+            }
+          },
+          {
             "name": "//drivers/interface/connected_nfc_tag/v1_0:connected_nfc_tag_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/connected_nfc_tag"
+            }
+          },
+          {
+            "name": "//drivers/interface/connected_nfc_tag/v1_1:connected_nfc_tag_idl_headers",
             "header": {
               "header_files": [
               ],
