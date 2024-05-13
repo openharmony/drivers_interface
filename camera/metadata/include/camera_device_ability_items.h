@@ -1424,42 +1424,42 @@ typedef enum camera_device_metadata_tag {
     /**
      * ohos.control.motionDetection [static, enum, public]
      *
-     * camera property, set current camera Operation status detection switch
+     * camera device property, set current camera Operation status detection switch
      * (i.e. enum: disable/enable ...)
      */
     OHOS_CONTROL_MOTION_DETECTION,
     /**
      * ohos.ability.exposureHintSupported [static, byte, public]
      *
-     * camera property, report current camera screen exposure
+     * camera device property, report current camera screen exposure
      * (i.e. byte ...)
      */
     OHOS_ABILITY_EXPOSURE_HINT_SUPPORTED,
     /**
      * ohos.control.exposureHintMode [static, byte, public]
      *
-     * camera property, set current camera screen exposure
+     * camera device property, set current camera screen exposure
      * (i.e. byte ...)
      */
     OHOS_CONTROL_EXPOSURE_HINT_MODE,
     /**
      * ohos.status.algoMeanY [static, uint32, public]
      *
-     * camera property, query current camera screen exposure
+     * camera device property, query current camera screen exposure
      * (i.e. uint32 ...)
      */
     OHOS_STATUS_ALGO_MEAN_Y,
     /**
      * ohos.status.previewPhysicalCameraId [static, byte, public]
      *
-     * camera property, query current camera preview shot id
+     * camera device property, query current camera preview shot id
      * (i.e. byte ...)
      */
     OHOS_STATUS_PREVIEW_PHYSICAL_CAMERA_ID,
     /**
      * ohos.ability.captureExpectTime [static, uint32[], public]
      *
-     * camera property, report current camera expect time
+     * camera device property, report current camera expect time
      * (i.e. uint32[] ...)
      */
     OHOS_ABILITY_CAPTURE_EXPECT_TIME,
@@ -1474,42 +1474,42 @@ typedef enum camera_device_metadata_tag {
     /**
      * ohos.control.secureFaceMode [static, uint32, public]
      *
-     * camera property, set current camera secure face mode
+     * camera device property, set current camera secure face mode
      * (i.e. uint32 ...)
      */
     OHOS_CONTROL_SECURE_FACE_MODE = OHOS_CAMERA_SECURE_START,
     /**
      * ohos.control.secureFaceInfo [static, uint32[], public]
      *
-     * camera property, set current camera secure face info
+     * camera device property, set current camera secure face info
      * (i.e. uint32[] ...)
      */
     OHOS_CONTROL_SECURE_FACE_INFO,
     /**
      * ohos.control.secureFaceAuthResult [static, uint32, public]
      *
-     * camera property, set current camera face auth result
+     * camera device property, set current camera face auth result
      * (i.e. uint32 ...)
      */
     OHOS_CONTROL_SECURE_FACE_AUTH_RESULT,
     /**
      * ohos.control.secureFlashSeq [static, uint32[], public]
      *
-     * camera property, set current camera secure flash seq
+     * camera device property, set current camera secure flash seq
      * (i.e. uint32[] ...)
      */
     OHOS_CONTROL_SECURE_FLASH_SEQ,
     /**
      * ohos.control.secureIrLedSwitch [static, byte, public]
      *
-     * camera property, set current camera IR lens
+     * camera device property, set current camera IR lens
      * (i.e. byte ...)
      */
     OHOS_CONTROL_SECURE_IR_LED_SWITCH,
     /**
      * ohos.control.secureIrLockAeSwitch [static, byte, public]
      *
-     * camera property, set current camera IR lens lockae
+     * camera device property, set current camera IR lens lockae
      * (i.e. byte ...)
      */
     OHOS_CONTROL_SECURE_IR_LOCKAE_SWITCH,
