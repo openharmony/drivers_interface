@@ -63,12 +63,13 @@ enum CodecType {
  * @brief Enumerates the types of audio and video that can be encoded or decoded.
   
  * @since 4.1
- * @version 2.0
+ * @version 2.1
  */
 enum AvCodecRole {
     MEDIA_ROLETYPE_IMAGE_JPEG = 0,        /**< JPEG image. */
     MEDIA_ROLETYPE_VIDEO_AVC,             /**< H.264 video. */
     MEDIA_ROLETYPE_VIDEO_HEVC,            /**< H.265 video. */
+    MEDIA_ROLETYPE_VIDEO_VVC,             /**< H.266 video. */
     MEDIA_ROLETYPE_AUDIO_FIRST = 0x10000, /**< Audio. */
     MEDIA_ROLETYPE_AUDIO_AAC = 0x10000,   /**< Advanced Audio Coding (AAC). */
     MEDIA_ROLETYPE_AUDIO_G711A,           /**< G.711 a-law audio. */
@@ -189,7 +190,7 @@ enum ShareMemTypes {
  * @brief Enumerates the bit rate modes.
   
  * @since 4.1
- * @version 2.0
+ * @version 2.1
  */
 enum BitRateMode {
     BIT_RATE_MODE_INVALID, /**< Invalid value. */
@@ -198,6 +199,7 @@ enum BitRateMode {
     BIT_RATE_MODE_CQ,      /**< Constant quality. */
     BIT_RATE_MODE_VCBR,    /**< Constrained variable bit rate. */
     BIT_RATE_MODE_ABR,     /**< Average bit rate. */
+    BIT_RATE_MODE_CBR_Rlambda, /**< Constant bit rate with rlambda. */
 };
 
 /**
@@ -322,7 +324,7 @@ struct RangeValue {
  * @brief Defines the video encoding and decoding capabilities.
   
  * @since 4.1
- * @version 3.0
+ * @version 3.1
  */
 struct CodecVideoPortCap {
     struct Rect minSize;               /**< Minimum resolution supported. */
@@ -341,6 +343,7 @@ struct CodecVideoPortCap {
     boolean isSupportTSVC;	           /**< Whether supports temporal level scale feature */
     boolean isSupportLTR;	           /**< Whether supports long-term reference feature */
     int maxLTRFrameNum;	               /**< Maximum long-term reference frame numbers supported */
+    boolean isSupportWaterMark;	       /**< Whether supports WaterMark feature */
 };
 
 /**

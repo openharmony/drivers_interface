@@ -462,4 +462,30 @@ interface ICodecComponent {
      * @version 2.0
      */
     ComponentRoleEnum([out] unsigned char[] role, [in] unsigned int index);
+
+    /**
+     * @brief Sets parameters for this component, that is, sends an initialization
+     * parameter structure to the component.
+     *
+     * You can use this API to set component parameters when:
+     * - The component is in the OMX_StateLoaded state (the component has been loaded).
+     * - The component is in the OMX_StateWaitForResources state (the component is waiting for required resources).
+     * - The component or port is disabled.
+     * For details about the component states, see {@link OMX_STATETYPE}.
+     *
+     * @param index Indicates the index of the structure to set. For details, see <b>OMX_INDEXTYPE</b> defined by OMX IL.
+     * @param paramStruct Indicates the pointer to the application allocated structure used to set
+     * parameters for this component.
+     * @param inBuffer indicates the buffer used to be set to component.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_ERR_INVALID_PARAM</b> if the operation fails due to invalid parameters.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     * @return Returns other values if the underlying layer returns a failure. For details about the error codes,
+     * see <b>OMX_ERRORTYPE</b> defined by OpenMAX IL.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    SetParameterWithBuffer([in] unsigned int index, [in] byte[] paramStruct, [in] struct OmxCodecBuffer inBuffer);
 }
