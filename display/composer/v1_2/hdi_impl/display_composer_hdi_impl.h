@@ -68,7 +68,7 @@ public:
     virtual int32_t CommitAndGetReleaseFence(uint32_t devId, int32_t& fence, int32_t& skipState,
         bool& needFlush, std::vector<uint32_t>& layers, std::vector<int32_t>& fences) override
     {
-        COMPOSER_CHECK_NULLPTR(req_v1_2_);
+        COMPOSER_CHECK_NULLPTR_RETURN(req_v1_2_);
         bool isSupportSkipValidate = (isSupportSkipValidate_ == 1) ? 1 : 0;
         return ToDispErrCode(req_v1_2_->CommitAndGetReleaseFence(devId, fence,
             isSupportSkipValidate, skipState, needFlush, layers, fences));
@@ -76,7 +76,7 @@ public:
 
     virtual int32_t GetDisplayProperty(uint32_t devId, uint32_t id, uint64_t& value) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_v1_2_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_2_);
         value = 0;
         int32_t ret = ToDispErrCode(hdi_v1_2_->GetDisplayProperty(devId, id, value));
         if (ret == DISPLAY_SUCCESS) {

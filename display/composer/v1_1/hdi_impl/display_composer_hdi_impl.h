@@ -88,13 +88,13 @@ public:
     {
         seamlessChangeCb_ = cb;
         seamlessChangeCbData_ = data;
-        COMPOSER_CHECK_NULLPTR(hdi_v1_1_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_1_);
         return ToDispErrCode(hdi_v1_1_->RegSeamlessChangeCallback(this));
     }
 
     virtual int32_t GetDisplaySupportedModesExt(unsigned int devId, std::vector<DisplayModeInfoExt> &modes) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_v1_1_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_1_);
         return ToDispErrCode(hdi_v1_1_->GetDisplaySupportedModesExt(devId, modes));
     }
 
@@ -116,13 +116,13 @@ public:
     virtual int32_t SetDisplayModeAsync(uint32_t devId, uint32_t modeId, ModeCallback cb) override
     {
         modeCb_ = cb;
-        COMPOSER_CHECK_NULLPTR(hdi_v1_1_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_1_);
         return ToDispErrCode(hdi_v1_1_->SetDisplayModeAsync(devId, modeId, this));
     }
 
     virtual int32_t GetDisplayVBlankPeriod(uint32_t devId, uint64_t &period) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_v1_1_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_1_);
         return ToDispErrCode(hdi_v1_1_->GetDisplayVBlankPeriod(devId, period));
     }
 
@@ -161,19 +161,19 @@ public:
     {
         refreshCb_ = cb;
         refreshCbData_ = data;
-        COMPOSER_CHECK_NULLPTR(hdi_v1_1_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_1_);
         return ToDispErrCode(hdi_v1_1_->RegRefreshCallback(this));
     }
 
     virtual int32_t GetDisplaySupportedColorGamuts(uint32_t devId, std::vector<ColorGamut>& gamuts) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_v1_1_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_1_);
         return ToDispErrCode(hdi_v1_1_->GetDisplaySupportedColorGamuts(devId, gamuts));
     }
 
     virtual int32_t GetHDRCapabilityInfos(uint32_t devId, HDRCapability& info) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_v1_1_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_1_);
         return ToDispErrCode(hdi_v1_1_->GetHDRCapabilityInfos(devId, info));
     }
 
