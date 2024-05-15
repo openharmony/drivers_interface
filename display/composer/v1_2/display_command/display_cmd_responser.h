@@ -63,6 +63,8 @@ public:
             __func__, cmd, CmdUtils::CommandToString(cmd));
         if (cmd == REQUEST_CMD_COMMIT_AND_GET_RELEASE_FENCE) {
             OnCommitAndGetReleaseFence(unpacker, outFds);
+        } else if (cmd == REQUEST_CMD_SET_DISPLAY_CONSTRAINT) {
+            OnSetDisplayConstraint(unpacker);
         } else {
             return V1_0::DisplayCmdResponser<Transfer, VdiImpl>::ProcessRequestCmd(unpacker, cmd, inFds, outFds);
         }
@@ -278,6 +280,40 @@ REPLY:
         return (ret == HDF_SUCCESS ? ec : ret);
     }
 
+    int32_t OnSetDisplayConstraint(std::shared_ptr<CommandDataUnpacker> unpacker)
+    {
+        DISPLAY_TRACE;
+        uint32_t devId = 0;
+        uint64_t frameID = 0;
+        uint64_t ns = 0;
+        uint32_t type = 0;
+
+        int32_t ret = unpacker->ReadUint32(devId) ? HDF_SUCCESS : HDF_FAILURE;
+        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+
+        ret = unpacker->ReadUint64(frameID) ? HDF_SUCCESS : HDF_FAILURE;
+        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+
+        ret = unpacker->ReadUint64(ns) ? HDF_SUCCESS : HDF_FAILURE;
+        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+
+        ret = unpacker->ReadUint32(type) ? HDF_SUCCESS : HDF_FAILURE;
+        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+
+#ifdef DISPLAY_COMMUNITY
+        return HDF_ERR_NOT_SUPPORT;
+#else
+        ret = impl_->SetDisplayConstraint(devId, frameID, ns, type);
+        DISPLAY_CHECK(ret != HDF_SUCCESS && ret != DISPLAY_NOT_SUPPORT && ret != HDF_ERR_NOT_SUPPORT, goto EXIT);
+#endif
+
+EXIT:
+        if (ret != HDF_SUCCESS) {
+            errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CONSTRAINT, ret);
+        }
+        return ret;
+    }
+
 private:
     using BaseType1_1 = V1_1::DisplayCmdResponser<Transfer, VdiImpl>;
     using BaseType1_1::replyPacker_;
@@ -307,7 +343,11 @@ private:
     using BaseType1_1::OnRequestEnd;
     using BaseType1_1::OnSetLayerColor;
 };
+#ifdef DISPLAY_COMMUNITY
 using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, IDisplayComposerVdi>;
+#else
+using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, IDisplayComposerVdiV1_1>;
+#endif
 } // namespace V1_2
 } // namespace Composer
 } // namespace Display

@@ -35,7 +35,8 @@ namespace Composer {
 namespace V1_2 {
 
 template <typename Interface, typename CompHdi, typename CmdReq>
-class DisplayComposerHdiImpl : public V1_1::DisplayComposerHdiImpl<Interface, CompHdi, CmdReq> {
+class DisplayComposerHdiImpl : public V1_1::DisplayComposerHdiImpl<Interface, CompHdi, CmdReq>,
+    public IVBlankIdleCallback {
 public:
     static IDisplayComposerInterface* Create(bool needSMQ)
     {
@@ -61,7 +62,9 @@ public:
         : BaseType1_1(hdi, req),
         req_v1_2_(req),
         hdi_v1_2_(hdi),
-        isSupportSkipValidate_(0) {}
+        isSupportSkipValidate_(0),
+        VBlankIdleCb_(nullptr),
+        VBlankIdleCbData_(nullptr) {}
 
     virtual ~DisplayComposerHdiImpl() {}
 
@@ -86,13 +89,42 @@ public:
         return ret;
     }
 
-    protected:
+    virtual int32_t RegDisplayVBlankIdleCallback(VBlankIdleCallback cb, void *data) override
+    {
+        VBlankIdleCb_ = cb;
+        VBlankIdleCbData_ = data;
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_2_);
+        return ToDispErrCode(hdi_v1_2_->RegDisplayVBlankIdleCallback(this));
+    }
+
+    virtual int32_t SetDisplayConstraint(uint32_t devId, uint64_t frameID, uint64_t ns, uint32_t type) override
+    {
+        COMPOSER_CHECK_NULLPTR_RETURN(req_v1_2_);
+        return ToDispErrCode(req_v1_2_->SetDisplayConstraint(devId, frameID, ns, type));
+    }
+
+    virtual int32_t OnVBlankIdleCallback(uint32_t devId, uint64_t ns) override
+    {
+        int32_t ret = HDF_SUCCESS;
+        if (VBlankIdleCb_ != nullptr) {
+            VBlankIdleCb_(devId, ns, VBlankIdleCbData_);
+        } else {
+            HDF_LOGE("error: VBlankIdle is nullptr");
+            ret = HDF_FAILURE;
+        }
+        return ret;
+    }
+
+protected:
     using BaseType1_1 = V1_1::DisplayComposerHdiImpl<Interface, CompHdi, CmdReq>;
     using BaseType1_1::WAIT_TIME_INTERVAL;
     using BaseType1_1::ToDispErrCode;
     std::shared_ptr<CmdReq> req_v1_2_;
     sptr<CompHdi> hdi_v1_2_;
     uint64_t isSupportSkipValidate_;
+private:
+    VBlankIdleCallback VBlankIdleCb_;
+    void *VBlankIdleCbData_;
 };
 using HdiDisplayComposer = DisplayComposerHdiImpl<IDisplayComposerInterface, IDisplayComposer, HdiDisplayCmdRequester>;
 } // namespace V1_2
