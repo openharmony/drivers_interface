@@ -20,7 +20,8 @@
  * @brief Provides APIs for the upper-layer WLAN service.
  *
  * You can use the APIs to manager the wifi chip, init and release the wifi chip, create and remove iface, register callback
- * get the name and type of the iface, get the support frequencies and set the mode of chip.
+ * get the name and type of the iface, get the support frequencies and set the mode of chip. The interface of the current path
+ * is used perferentially. The interface of the wlan/v1_0, wlan/v1_1, wlan/v1_2 path will be distributed later.
  *
  * @since 5.0
  * @version 1.0
@@ -121,14 +122,14 @@ struct ScanParams {
 };
 
 /**
- * @brief Defines the scan result info.
+ * @brief Defines the scan result info, This interface is preferentially used to communicate with the Wi-Fi service.
  *
  * @since 5.0
  * @version 1.0
  */
 struct ScanResultsInfo {
     unsigned int flags;
-    String bssid;
+    unsigned char[] bssid;
     unsigned short caps;
     unsigned int freq;
     unsigned short beaconInterval;
@@ -158,7 +159,7 @@ struct PnoScanParams {
 };
 
 /**
- * @brief Defines the signal info.
+ * @brief Defines the signal info, This interface is preferentially used to communicate with the Wi-Fi service.
  *
  * @since 5.0
  * @version 1.0
@@ -177,5 +178,9 @@ struct SignalPollResult {
     int currentTxFailed;
     int currentTxPackets;
     int currentRxPackets;
+    unsigned short chloadSelf;
+    int c0Rssi;
+    int c1Rssi;
+    unsigned char[] ext;
 };
 /** @} */
