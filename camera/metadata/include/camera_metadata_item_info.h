@@ -168,7 +168,7 @@ static item_info_t g_ohosCameraControl[OHOS_DEVICE_CONTROL_END - OHOS_DEVICE_CON
     [OHOS_CONTROL_AWB_AVAILABLE_MODES -
         OHOS_DEVICE_CONTROL_START] = {"awbAvailableModes",           META_TYPE_BYTE,     -1},
     [OHOS_CONTROL_CAPTURE_MIRROR_SUPPORTED -
-        OHOS_DEVICE_CONTROL_START] = {"mirrorSupported",             META_TYPE_BYTE,     1 },
+        OHOS_DEVICE_CONTROL_START] = {"mirrorSupported",             META_TYPE_BYTE,     -1 },
     [OHOS_CONTROL_CAPTURE_MIRROR - OHOS_DEVICE_CONTROL_START] = {"mirror",                      META_TYPE_BYTE,     1 },
     [OHOS_CONTROL_FOCUS_STATE - OHOS_DEVICE_CONTROL_START] = {"focusState",                  META_TYPE_BYTE,     1 },
     [OHOS_CONTROL_METER_POINT - OHOS_DEVICE_CONTROL_START] = {"meterPoint",                  META_TYPE_INT32,    -1},
