@@ -219,5 +219,21 @@ interface IPowerInterface {
      * @since 5.0
      */
     Hibernate();
+
+    /**
+     * @brief Set suspend tag before suspend.
+     * The special sleep mode supported by the kernel and hardware is triggered by setting a special
+     * suspend tag and then triggering suspend. If the suspend tag is not set, the standard S3 sleep
+     * mode is triggered when suspend.
+     *
+     * @param tag Suspend tag.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 5.0
+     *
+     * @version 1.0
+     */
+    SetSuspendTag([in] String tag);
 }
 /** @} */
