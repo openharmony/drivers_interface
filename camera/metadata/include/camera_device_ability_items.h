@@ -1742,12 +1742,18 @@ typedef enum camera_exposure_state {
     OHOS_CAMERA_EXPOSURE_STATE_CONVERGED,
 } camera_exposure_state_t;
 
-// OHOS_CONTROL_CAPTURE_MIRROR
-// and OHOS_CONTROL_CAPTURE_MIRROR_SUPPORTED enumeration values
+// OHOS_CONTROL_CAPTURE_MIRROR enumeration values
 typedef enum camera_mirror {
     OHOS_CAMERA_MIRROR_OFF = 0,
     OHOS_CAMERA_MIRROR_ON,
 } camera_mirror_t;
+
+// OHOS_CONTROL_CAPTURE_MIRROR_SUPPORTED
+typedef enum camera_mirror_support {
+    OHOS_CAMERA_MIRROR_NOT_SUPPORT = 0,
+    OHOS_CAMERA_MIRROR_CAPTURE,
+    OHOS_CAMERA_MIRROR_CAPTURE_VIDEO,
+} camera_mirror_support_t;
 
 // OHOS_JPEG_ORIENTATION enumeration values
 typedef enum camera_jpeg_orientation {
