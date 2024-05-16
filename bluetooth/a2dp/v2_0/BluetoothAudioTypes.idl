@@ -94,3 +94,13 @@ struct StartSessionParams {
     /** audio pcm encoding config */
     struct CodecParam codecParam;
 };
+
+/**
+ * @brief Defines the bluetooth timestamp.
+ *
+ * @since 5.0
+ */
+ struct BluetoothTimeStamp {
+    long tvSec;  /**< Seconds */
+    long tvNSec; /**< Nanoseconds */
+};
