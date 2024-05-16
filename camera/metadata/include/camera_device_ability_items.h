@@ -1752,7 +1752,7 @@ typedef enum camera_mirror {
 typedef enum camera_mirror_support {
     OHOS_CAMERA_MIRROR_NOT_SUPPORT = 0,
     OHOS_CAMERA_MIRROR_CAPTURE,
-    OHOS_CAMERA_MIRROR_CAPTURE_VEDIO,
+    OHOS_CAMERA_MIRROR_CAPTURE_VIDEO,
 } camera_mirror_support_t;
 
 // OHOS_JPEG_ORIENTATION enumeration values
