@@ -215,7 +215,7 @@ struct AudioL2HCParam {
  * @brief Enumerates the extended codec indexes.
  
  * @since 4.1
- * @version 3.0
+ * @version 3.1
  */
 enum CodecIndexExType {
     /** Extended BufferType index, value = Codec_IndexExtBufferTypeStartUnused + 0x00a00000 */
@@ -240,6 +240,8 @@ enum CodecIndexExType {
     Codec_IndexParamProcessName,
     /** AudioL2HCParam */
     Codec_IndexParamAudioL2HC,
+    /** OverlayBuffer */
+    Codec_IndexParamOverlayBuffer,
 };
 
 /**
@@ -356,4 +358,20 @@ struct CodecVideoColorspace {
     unsigned int pixeFormat;
     unsigned int dataSpace;
     struct ColorAspects aspects;
+};
+
+/**
+ * @brief Structure for controlling overlay
+ 
+ * @since 5.0
+ * @version 1.0
+ */
+struct CodecParamOverlay {
+    unsigned int size;                /** Size of the structure */
+    union CodecVersionType version;   /** Component version */
+    boolean enable;                   /** enable overlay */
+    unsigned int dstX;                /** the overlay image will be put on dstX of input image */
+    unsigned int dstY;                /** the overlay image will be put on dstY of input image */
+    unsigned int dstW;                /** the overlay image will be scaled to dstW */
+    unsigned int dstH;                /** the overlay image will be scaled to dstH */
 };
