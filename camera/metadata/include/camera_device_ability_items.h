@@ -1749,11 +1749,11 @@ typedef enum camera_mirror {
 } camera_mirror_t;
 
 // OHOS_CONTROL_CAPTURE_MIRROR_SUPPORTED
-typedef enum camera_mirror_support {
+enum CameraMirrorSupport {
     OHOS_CAMERA_MIRROR_NOT_SUPPORT = 0,
     OHOS_CAMERA_MIRROR_CAPTURE,
     OHOS_CAMERA_MIRROR_CAPTURE_VIDEO,
-} camera_mirror_support_t;
+};
 
 // OHOS_JPEG_ORIENTATION enumeration values
 typedef enum camera_jpeg_orientation {
