@@ -99,7 +99,7 @@ struct StartSessionParams {
  * @brief Defines the bluetooth timestamp.
  *
  * @since 12
- * @version 2.0
+ * @version 1.0
  */
 struct BluetoothTimeStamp {
     long tvSec;  /* Seconds */
