@@ -24,7 +24,6 @@ config("camera_sequenceable_config") {
 
 ohos_shared_library("libbuffer_producer_sequenceable_1.0") {
   sources = [ "buffer_producer_sequenceable.cpp" ]
-
   public_configs = [ ":camera_sequenceable_config" ]
 
   external_deps = [
