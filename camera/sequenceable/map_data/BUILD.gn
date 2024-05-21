@@ -23,8 +23,6 @@ config("map_data_sequenceable_config") {
 
 ohos_shared_library("libmap_data_sequenceable_1.0") {
   sources = [ "map_data_sequenceable.cpp" ]
-
-  # all_dependent_configs = [ ":map_data_sequenceable_config" ]
   public_configs = [ ":map_data_sequenceable_config" ]
 
   external_deps = [
