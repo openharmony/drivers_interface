@@ -98,7 +98,7 @@ struct StartSessionParams {
 /**
  * @brief Defines the bluetooth timestamp.
  *
- * @since 12
+ * @since 5.0
  * @version 1.0
  */
 struct BluetoothTimeStamp {
