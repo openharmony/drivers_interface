@@ -93,7 +93,7 @@ import ohos.hdi.bluetooth.a2dp.v2_0.BluetoothAudioTypes;
      * @param time Indicates the pointer to the timestamp associated with the frame.
      * @return Returns <b>0</b> if the last number is obtained; returns a negative value otherwise.
      *
-     * @since 12
+     * @since 5.0
      * @version 1.0
      */
      GetRenderPosition([out] unsigned long latencyNs, [out] unsigned long frames, [out] struct BluetoothTimeStamp time);
