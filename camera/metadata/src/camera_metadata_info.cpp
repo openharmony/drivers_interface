@@ -443,6 +443,8 @@ common_metadata_header_t *CameraMetadata::FillCameraMetadata(common_metadata_hea
         metadataHeader->item_capacity) - reinterpret_cast<uint8_t *>(metadataHeader);
     metadataHeader->data_start = AlignTo(dataUnaligned, DATA_ALIGNMENT);
 
+    METADATA_INFO_LOG("MetadataHeader ItemCapacity Size = %{public}u", metadataHeader->item_capacity);
+    METADATA_INFO_LOG("MetadataHeader DataCapacity Size = %{public}u", metadataHeader->data_capacity);
     METADATA_DEBUG_LOG("FillCameraMetadata end");
     return metadataHeader;
 }
@@ -1109,7 +1111,7 @@ int32_t CameraMetadata::CopyCameraMetadataItems(common_metadata_header_t *newMet
 
     int32_t ret;
     if (oldMetadata->item_count != 0) {
-        ret = memcpy_s(GetMetadataItems(newMetadata), sizeof(camera_metadata_item_entry_t[oldMetadata->item_count]),
+        ret = memcpy_s(GetMetadataItems(newMetadata), sizeof(camera_metadata_item_entry_t[newMetadata->item_capacity]),
             GetMetadataItems(oldMetadata), sizeof(camera_metadata_item_entry_t[oldMetadata->item_count]));
         if (ret != EOK) {
             METADATA_ERR_LOG("CopyCameraMetadataItems memory copy failed");
@@ -1124,7 +1126,7 @@ int32_t CameraMetadata::CopyCameraMetadataItems(common_metadata_header_t *newMet
             METADATA_ERR_LOG("UpdateameraMetadataItemSize GetMetadataData failed");
             return CAM_META_FAILURE;
         }
-        ret = memcpy_s(newMetadataData, sizeof(uint8_t[oldMetadata->data_count]), oldMetadataData,
+        ret = memcpy_s(newMetadataData, sizeof(uint8_t[newMetadata->data_capacity]), oldMetadataData,
             sizeof(uint8_t[oldMetadata->data_count]));
         if (ret != EOK) {
             METADATA_ERR_LOG("CopyCameraMetadataItems memory copy failed");
