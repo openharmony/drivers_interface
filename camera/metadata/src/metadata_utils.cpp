@@ -514,7 +514,7 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
     camera_metadata_item_entry_t *item = GetMetadataItems(meta);
     for (uint32_t index = 0; index < meta->item_count; index++, item++) {
         if (totalLen < ((decodeData - &setting[0]) + itemLen)) {
-            METADATA_ERR_LOG("MetadataUtils::DecodeFromString Failed at item index: %{public}d", index);
+            METADATA_ERR_LOG("MetadataUtils::DecodeFromString Failed at item index: %{public}u", index);
             return {};
         }
         ret = memcpy_s(item, itemFixedLen, decodeData, itemFixedLen);
