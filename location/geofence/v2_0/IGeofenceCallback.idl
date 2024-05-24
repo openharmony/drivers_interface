@@ -38,7 +38,6 @@
 package ohos.hdi.location.geofence.v2_0;
 
 import ohos.hdi.location.geofence.v2_0.GeofenceTypes;
-import ohos.hdi.location.gnss.v2_0.GnssTypes;
 
 /*
  * @brief Defines the geofence callback interface for reporting geofence service availability, geofence events,
