@@ -314,6 +314,15 @@
             ],
             "header_base": "//drivers/interface/display/graphic/common"
           }
+        },
+        {
+          "name": "//drivers/interface/display/v1_0:libdisplay_gralloc",
+          "header": {
+            "header_files": [
+              "libdisplay_gralloc.stub.json"
+            ],
+            "header_base": "//drivers/interface/display/v1_0/stub"
+          }
         }
       ]
     }
