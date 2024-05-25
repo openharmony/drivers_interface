@@ -26,6 +26,7 @@
 package ohos.hdi.wlan.wpa.v1_1;
 
 import ohos.hdi.wlan.wpa.v1_0.IWpaInterface;
+import ohos.hdi.wlan.wpa.v1_1.IWpaCallback;
 
 interface IWpaInterface extends ohos.hdi.wlan.wpa.v1_0.IWpaInterface {
     /**
@@ -43,4 +44,32 @@ interface IWpaInterface extends ohos.hdi.wlan.wpa.v1_0.IWpaInterface {
      * @version 1.1
      */
     DeliverP2pData([in] String ifName, [in] int cmdType, [in] int dataType, [in] String carryData);
+
+     /**
+     * @brief Registers a callback to listen for asynchronous events.
+     *
+     * @param cbFunc Indicates the callback to register.
+     * @param ifName Indicates the NIC name.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.1
+     */
+    RegisterWpaEventCallback([in] IWpaCallback cbFunc, [in] String ifName);
+ 
+    /**
+     * @brief Unregisters a callback.
+     *
+     * @param cbFunc Indicates the callback to unregister.
+     * @param ifName Indicates the NIC name.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.1
+     */
+    UnregisterWpaEventCallback([in] IWpaCallback cbFunc, [in] String ifName);
 }

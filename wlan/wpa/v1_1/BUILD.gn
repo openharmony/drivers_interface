@@ -21,7 +21,11 @@ if (defined(ohos_lite)) {
   hdi("wpa") {
     module_name = "wpa_service"
 
-    sources = [ "IWpaInterface.idl" ]
+    sources = [
+      "IWpaCallback.idl",
+      "IWpaInterface.idl",
+      "WpaTypes.idl",
+    ]
 
     language = "c"
     subsystem_name = "hdf"
