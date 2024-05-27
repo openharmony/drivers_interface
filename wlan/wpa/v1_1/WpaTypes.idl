@@ -23,7 +23,7 @@
  * manage WLAN chips, network devices, and power, and apply for, release, and move network data buffers.
  *
  * @since 5.0
- * @version 1.1
+ * @version 1.0
  */
 
  /**
@@ -35,14 +35,14 @@
  * scan information, and network device information.
  *
  * @since 5.0
- * @version 1.1
+ * @version 1.0
  */
 
 /**
  * @brief Defines the package path of the WLAN module interface.
  *
  * @since 5.0
- * @version 1.1
+ * @version 1.0
  */
 package ohos.hdi.wlan.wpa.v1_1;
 
