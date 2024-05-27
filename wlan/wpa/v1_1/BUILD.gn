@@ -24,7 +24,7 @@ if (defined(ohos_lite)) {
     sources = [
       "IWpaCallback.idl",
       "IWpaInterface.idl",
-      "WpaTypes.idl"
+      "WpaTypes.idl",
     ]
 
     language = "c"
