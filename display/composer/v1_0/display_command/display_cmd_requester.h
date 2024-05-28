@@ -581,7 +581,11 @@ protected:
         // unpack layers vector
         uint32_t vectSize = 0;
         retBool = replyUnpacker->ReadUint32(vectSize);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE, HDF_LOGE("%{public}s: read vect size failed", __func__));
+        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE, HDF_LOGE("%{public}s: read vect size failed", __func__)); 
+        if (vectSize > 10 * 1024 * 1024) {
+            HDF_LOGE("%{public}s: layers vectSize:%{public}u is too large", __func__, vectSize);
+            return HDF_FAILURE;
+        }
 
         compChangeLayers_[devId].resize(vectSize);
         for (uint32_t i = 0; i < vectSize; i++) {
@@ -592,6 +596,10 @@ protected:
         vectSize = 0;
         retBool = replyUnpacker->ReadUint32(vectSize);
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE, HDF_LOGE("%{public}s: read vect size failed", __func__));
+        if (vectSize > 10 * 1024 * 1024) {
+            HDF_LOGE("%{public}s: types vectSize:%{public}u is too large", __func__, vectSize);
+            return HDF_FAILURE;
+        }
 
         compChangeTypes_[devId].resize(vectSize);
         for (uint32_t i = 0; i < vectSize; i++) {
