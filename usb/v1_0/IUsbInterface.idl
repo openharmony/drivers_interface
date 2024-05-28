@@ -128,7 +128,7 @@ interface IUsbInterface {
      * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
      * @since 3.2
      */
-    GetFileDescriptor([in] struct UsbDev dev, [out] int fd);
+    GetFileDescriptor([in] struct UsbDev dev, [out] FileDescriptor fd);
 
     /* *
      * @brief Sets the configuration information of a USB device.
