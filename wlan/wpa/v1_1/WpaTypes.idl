@@ -46,6 +46,12 @@
  */
 package ohos.hdi.wlan.wpa.v1_1;
 
+/**
+ * @brief Defines p2p group info parameter.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
 struct HdiP2pGroupInfoStartedParam {
     int isGo;
     int isPersistent;

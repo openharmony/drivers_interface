@@ -55,7 +55,7 @@ interface IWpaInterface extends ohos.hdi.wlan.wpa.v1_0.IWpaInterface {
      * @return Returns a negative value if the operation fails.
      *
      * @since 5.0
-     * @version 1.1
+     * @version 1.0
      */
     RegisterWpaEventCallback([in] IWpaCallback cbFunc, [in] String ifName);
  
@@ -69,7 +69,7 @@ interface IWpaInterface extends ohos.hdi.wlan.wpa.v1_0.IWpaInterface {
      * @return Returns a negative value if the operation fails.
      *
      * @since 5.0
-     * @version 1.1
+     * @version 1.0
      */
     UnregisterWpaEventCallback([in] IWpaCallback cbFunc, [in] String ifName);
 }

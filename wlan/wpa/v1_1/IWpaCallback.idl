@@ -20,7 +20,7 @@
  * or a Netlink message is received.
  *
  * @since 5.0
- * @version 1.1
+ * @version 1.0
  */
  
 package ohos.hdi.wlan.wpa.v1_1;
@@ -37,7 +37,7 @@ import ohos.hdi.wlan.wpa.v1_1.WpaTypes;
    * @param ranmdomMac Indicates p2p-p2p0-x mac.
    *
    * @since 5.0
-   * @version 1.1
+   * @version 1.0
    */
    OnEventGroupInfoStarted([in] struct HdiP2pGroupInfoStartedParam groupStartedParam, [in] String ifName);
 }
