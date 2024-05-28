@@ -169,10 +169,10 @@ public:
         if (fd >= 0) {
             // A normal fd is transfered by binder, here just write id for unpacking to match fd.
             DISPLAY_CHK_RETURN(hdifdInfo.hdiFd->Init(fd) == false, HDF_FAILURE,
-                HDF_LOGE("%{public}s, hdiFd init failed", __func__));
+                HDF_LOGE("%{public}s, hdiFd init failed, fd:%{public}d", __func__, fd));
             hdiFds.push_back(hdifdInfo);
             DISPLAY_CHK_RETURN(packer->WriteInt32(hdifdInfo.id) == false, HDF_FAILURE,
-                HDF_LOGE("%{public}s, hdiFd init failed", __func__));
+                HDF_LOGE("%{public}s, write hdifdInfo.id failed", __func__));
         } else {
             // A illegal fd is transfered by smq directly.
             DISPLAY_CHK_RETURN(packer->WriteInt32(fd) == false, HDF_FAILURE,
