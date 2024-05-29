@@ -714,7 +714,7 @@ EXIT:
         if (ret != HDF_SUCCESS) {
             errMaps_.emplace(REQUEST_CMD_SET_LAYER_TRANSFORM_MODE, ret);
         }
-
+    
         return;
     }
 
@@ -863,7 +863,7 @@ EXIT:
 
         struct LayerBufferData data;
         std::vector<uint32_t> deletingList;
-
+        
         int32_t ret = UnPackLayerBufferInfo(unpacker, inFds, &data, deletingList);
         HdifdParcelable fdParcel(data.fence);
         bool needFreeBuffer = false;
