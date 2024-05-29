@@ -195,7 +195,7 @@ public:
     int32_t CmdRequest(uint32_t inEleCnt, const std::vector<HdifdInfo>& inFds, uint32_t& outEleCnt,
         std::vector<HdifdInfo>& outFds)
     {
-        if (inEleCnt > 100000) {
+        if (inEleCnt > CmdUtils::MAX_ELE_COUNT) {
             HDF_LOGE("%{public}s: inEleCnt:%{public}u is too large", __func__, inEleCnt);
             return HDF_FAILURE;
         }
@@ -255,9 +255,9 @@ public:
 protected:
     int32_t InitReply(uint32_t size)
     {
-        if (size > 10 * 1024 * 1024) {
+        if (size > CmdUtils::MAX_MEMORY) {
             HDF_LOGE("%{public}s: size:%{public}u is too large", __func__, size);
-            return HDF_FAILURE;    
+            return HDF_FAILURE;
         }
 
         reply_ = std::make_shared<Transfer>(size, SmqType::SYNCED_SMQ);
@@ -714,7 +714,7 @@ EXIT:
         if (ret != HDF_SUCCESS) {
             errMaps_.emplace(REQUEST_CMD_SET_LAYER_TRANSFORM_MODE, ret);
         }
-    
+
         return;
     }
 
@@ -818,7 +818,7 @@ EXIT:
         uint32_t vectSize = 0;
         DISPLAY_CHK_RETURN(true != unpacker->ReadUint32(vectSize), HDF_FAILURE,
             HDF_LOGE("%{public}s, read vectSize error", __func__));
-        if (vectSize > 10 * 1024 * 1024) {
+        if (vectSize > CmdUtils::MAX_MEMORY) {
             HDF_LOGE("%{public}s: vectSize:%{public}u is too large", __func__, vectSize);
             return HDF_FAILURE;
         }
@@ -863,7 +863,7 @@ EXIT:
 
         struct LayerBufferData data;
         std::vector<uint32_t> deletingList;
-        
+
         int32_t ret = UnPackLayerBufferInfo(unpacker, inFds, &data, deletingList);
         HdifdParcelable fdParcel(data.fence);
         bool needFreeBuffer = false;
