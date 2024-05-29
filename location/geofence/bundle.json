@@ -35,30 +35,6 @@
         ],
         "inner_kits": [
           {
-            "name": "//drivers/interface/location/geofence/v1_0:liblocation_geofence_proxy_1.0",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interface/location/geofence"
-            }
-          },
-          {
-            "name": "//drivers/interface/location/geofence/v1_0:location_geofence_idl_headers",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interface/location/geofence"
-            }
-          },
-          {
-            "name": "//drivers/interface/location/geofence/v1_0:liblocation_geofence_stub_1.0",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interface/location/geofence"
-            }
-          },
-          {
             "name": "//drivers/interface/location/geofence/v2_0:liblocation_geofence_proxy_2.0",
             "header": {
               "header_files": [
