@@ -52,7 +52,8 @@ public:
         return std::make_unique<DisplayCmdResponser>(impl, cacheMgr);
     }
 
-    static std::unique_ptr<DisplayCmdResponser> CreateV1_1(VdiImpl1_1* impl, std::shared_ptr<DeviceCacheManager> cacheMgr)
+    static std::unique_ptr<DisplayCmdResponser> CreateV1_1(
+        VdiImpl1_1* impl, std::shared_ptr<DeviceCacheManager> cacheMgr)
     {
         DISPLAY_CHK_RETURN(impl == nullptr, nullptr,
             HDF_LOGE("%{public}s: error, VdiImpl is nullptr", __func__));
@@ -314,7 +315,7 @@ REPLY:
         ret = unpacker->ReadUint32(type) ? HDF_SUCCESS : HDF_FAILURE;
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
         if (vdiImpl1_1_ != nullptr) {
-            ret = vdiImpl1_1_->SetDisplayConstraint(devId, frameID, ns, type);    
+            ret = vdiImpl1_1_->SetDisplayConstraint(devId, frameID, ns, type);
         }
         DISPLAY_CHECK(ret != HDF_SUCCESS && ret != DISPLAY_NOT_SUPPORT && ret != HDF_ERR_NOT_SUPPORT, goto EXIT);
 EXIT:
