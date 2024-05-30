@@ -55,6 +55,7 @@ enum AudioPortPin {
     PIN_OUT_DAUDIO_DEFAULT       = 1 << 7,            /**< Daudio default output pin */
     PIN_OUT_HEADPHONE            = 1 << 8,            /**< Wired headphone output pin*/
     PIN_OUT_USB_HEADSET          = 1 << 9,            /**< ARM USB out pin */
+    PIN_OUT_BLUETOOTH_A2DP       = 1 << 10,           /**< Bluetooth a2dp output pin */
     PIN_IN_MIC                   = 1 << 27 | 1 << 0,  /**< Microphone input pin */
     PIN_IN_HS_MIC                = 1 << 27 | 1 << 1,  /**< Wired headset microphone pin for input */
     PIN_IN_LINEIN                = 1 << 27 | 1 << 2,  /**< Line-in pin */
