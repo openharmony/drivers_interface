@@ -353,7 +353,7 @@ private:
     using BaseType1_1::OnSetLayerMaskInfo;
     using BaseType1_1::OnRequestEnd;
     using BaseType1_1::OnSetLayerColor;
-    VdiImpl1_1 vdiImpl1_1_ = nullptr;
+    VdiImpl1_1* vdiImpl1_1_ = nullptr;
 };
 
 using HdiDisplayCmdResponser =
