@@ -65,7 +65,7 @@ public:
 
     DisplayCmdResponser(std::shared_ptr<DeviceCacheManager> cacheMgr, VdiImpl1_1* impl)
         : BaseType1_1(impl, cacheMgr),
-          VDIiMPL1_1_(impl)
+          vdiImpl1_1_(impl)
         {}
 
     virtual ~DisplayCmdResponser() {}
@@ -352,6 +352,7 @@ private:
     using BaseType1_1::OnSetLayerMaskInfo;
     using BaseType1_1::OnRequestEnd;
     using BaseType1_1::OnSetLayerColor;
+    VdiImpl1_1 vdiImpl1_1_ = nullptr;
 };
 
 using HdiDisplayCmdResponser =
