@@ -75,7 +75,6 @@ interface IUsbInterface {
 
     /* *
      * @brief Obtains the USB device descriptor.
-     * Abandoned, use the new interface {@link GetDeviceFileDescriptor}.
      *
      * @param dev Indicates the USB device address.
      * @param descriptor Indicates the USB device descriptor.
@@ -122,6 +121,7 @@ interface IUsbInterface {
 
     /* *
      * @brief Obtains the file descriptor.
+     * Abandoned, use the new interface {@link GetDeviceFileDescriptor}.
      *
      * @param dev Indicates the USB device address.
      * @param fd USB device file descriptor
