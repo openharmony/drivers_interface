@@ -314,7 +314,7 @@ REPLY:
         ret = unpacker->ReadUint32(type) ? HDF_SUCCESS : HDF_FAILURE;
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
         if (vdiImpl1_1_ != nullptr) {
-            ret = impl_->SetDisplayConstraint(devId, frameID, ns, type);    
+            ret = vdiImpl1_1_->SetDisplayConstraint(devId, frameID, ns, type);    
         }
         DISPLAY_CHECK(ret != HDF_SUCCESS && ret != DISPLAY_NOT_SUPPORT && ret != HDF_ERR_NOT_SUPPORT, goto EXIT);
 EXIT:
