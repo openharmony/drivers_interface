@@ -121,13 +121,14 @@ interface IUsbInterface {
 
     /* *
      * @brief Obtains the file descriptor.
-     * Abandoned, use the new interface {@link GetDeviceFileDescriptor}.
      *
      * @param dev Indicates the USB device address.
      * @param fd USB device file descriptor
      *
      * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
      * @since 3.2
+     * @deprecated since 5.0
+     * @useinstead ohos.hdi.usb.v1_1.IUsbInterface.GetDeviceFileDescriptor
      */
     GetFileDescriptor([in] struct UsbDev dev, [out] int fd);
 
