@@ -269,5 +269,18 @@ interface IChipIface {
      * @version 1.0
      */
     SetDpiMarkRule([in] int uid, [in] int protocol, [in] int enable);
+
+    /**
+     * @brief Set tx power,This interface is preferentially used to communicate with the Wi-Fi service.
+     *
+     * @param power Indicates the power value.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+     SetTxPower([in] int power);
 };
 /** @} */
