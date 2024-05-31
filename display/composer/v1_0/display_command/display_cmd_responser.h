@@ -195,6 +195,10 @@ public:
     int32_t CmdRequest(uint32_t inEleCnt, const std::vector<HdifdInfo>& inFds, uint32_t& outEleCnt,
         std::vector<HdifdInfo>& outFds)
     {
+        if (inEleCnt > CmdUtils::MAX_ELE_COUNT) {
+            HDF_LOGE("%{public}s: inEleCnt:%{public}u is too large", __func__, inEleCnt);
+            return HDF_FAILURE;
+        }
         std::shared_ptr<char> requestData(new char[inEleCnt * CmdUtils::ELEMENT_SIZE], std::default_delete<char[]>());
         int32_t ret = request_->Read(reinterpret_cast<int32_t *>(requestData.get()), inEleCnt,
             CmdUtils::TRANSFER_WAIT_TIME);
@@ -251,6 +255,11 @@ public:
 protected:
     int32_t InitReply(uint32_t size)
     {
+        if (size > CmdUtils::MAX_MEMORY) {
+            HDF_LOGE("%{public}s: size:%{public}u is too large", __func__, size);
+            return HDF_FAILURE;
+        }
+
         reply_ = std::make_shared<Transfer>(size, SmqType::SYNCED_SMQ);
         DISPLAY_CHK_RETURN(reply_ == nullptr, HDF_FAILURE,
             HDF_LOGE("%{public}s: reply_ construct failed", __func__));
@@ -809,6 +818,11 @@ EXIT:
         uint32_t vectSize = 0;
         DISPLAY_CHK_RETURN(true != unpacker->ReadUint32(vectSize), HDF_FAILURE,
             HDF_LOGE("%{public}s, read vectSize error", __func__));
+        if (vectSize > CmdUtils::MAX_MEMORY) {
+            HDF_LOGE("%{public}s: vectSize:%{public}u is too large", __func__, vectSize);
+            return HDF_FAILURE;
+        }
+
         deletingList.resize(vectSize);
         for (uint32_t i = 0; i < vectSize; i++) {
             DISPLAY_CHK_RETURN(true != unpacker->ReadUint32(deletingList[i]), HDF_FAILURE,

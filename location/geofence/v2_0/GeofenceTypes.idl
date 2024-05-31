@@ -81,4 +81,73 @@ struct GeofenceInfo {
     double longitude;
     double radius;
 };
+
+/*
+ * @brief Defines the GNSS location validity flag.
+ * 
+ * @since 5.0
+ * @version 1.0
+ */
+enum GnssLocationValidity {
+    GNSS_LOCATION_LAT_VALID = 1,
+    GNSS_LOCATION_LONG_VALID = 2,
+    GNSS_LOCATION_ALTITUDE_VALID = 4,
+    GNSS_LOCATION_SPEED_VALID = 8,
+    GNSS_LOCATION_BEARING_VALID = 16,
+    GNSS_LOCATION_HORIZONTAL_ACCURACY_VALID = 32,
+    GNSS_LOCATION_VERTICAL_ACCURACY_VALID = 64,
+    GNSS_LOCATION_SPEED_ACCURACY_VALID = 128,
+    GNSS_LOCATION_BEARING_ACCURACY_VALID = 256,
+    GNSS_LOCATION_TIME_VALID = 512,
+    GNSS_LOCATION_TIME_SINCE_BOOT_VALID = 1024,
+    GNSS_LOCATION_TIME_UNCERTAINTY_VALID = 2048,
+};
+
+/*
+ * @brief Defines the GNSS positioning result structure.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+struct LocationInfo {
+    /*
+     * Identifies which field is valid.
+     * See GnssLocationValidity for the definition of fieldValidity.
+     */
+    unsigned int fieldValidity;
+
+    double latitude;
+
+    double longitude;
+
+    /* Altitude in meters. */
+    double altitude;
+
+    /* Speed in meters per second. */
+    float speed;
+
+    /* Heading in degrees. */
+    float bearing;
+
+    /* Horizontal position accuracy in meters. */
+    float horizontalAccuracy;
+
+    /* Vertical position accuracy in meters. */
+    float verticalAccuracy;
+
+    /* Speed accuracy in meter per seconds. */
+    float speedAccuracy;
+
+    /* Bearing accuracy in degrees. */
+    float bearingAccuracy;
+
+    /* Timestamp for the location fix. Number of milliseconds since January 1, 1970. */
+    long timeForFix;
+
+    /* Time since the system was booted, and include deep sleep. The unit is nanosecond. */
+    long timeSinceBoot;
+
+    /* Time uncertainty in nanosecond. */
+    long timeUncertainty;
+};
 /** @} */

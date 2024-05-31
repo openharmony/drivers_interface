@@ -15,7 +15,10 @@
       "features": [
         "drivers_interface_camera_feature_vendor_tag"
       ],
-      "adapted_system_type": ["standard"],
+      "adapted_system_type": [
+        "small",
+        "standard"
+      ],
       "rom": "675KB",
       "ram": "2322KB",
       "deps": {

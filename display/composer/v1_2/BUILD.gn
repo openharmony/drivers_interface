@@ -23,6 +23,7 @@ hdi("display_composer") {
   sources = [
     "DisplayComposerType.idl",
     "IDisplayComposer.idl",
+    "IVBlankIdleCallback.idl",
   ]
 
   sequenceable_pub_deps = [ "../hdifd_parcelable:libhdifd_parcelable" ]

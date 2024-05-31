@@ -22,8 +22,7 @@
           "ipc",
           "hdf_core",
           "hilog",
-          "c_utils",
-          "drivers_interface_location_gnss"
+          "c_utils"
         ],
         "third_party": []
       },

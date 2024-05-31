@@ -504,15 +504,17 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
 
     IF_COND_PRINT_MSG_AND_RETURN(ret != EOK,
         "MetadataUtils::DecodeFromString Failed to copy memory for metadata header")
-    IF_COND_PRINT_MSG_AND_RETURN(meta->items_start >= actualMemSize
-        || (actualMemSize - meta->items_start) < (uint64_t)meta->item_count * itemLen ||
-        meta->data_start >= actualMemSize || (actualMemSize - meta->data_start) < meta->data_count,
+    bool isItemsStartInvalid = meta->items_start >= actualMemSize || meta->items_start < headerLength;
+    bool isDataStartInvalid = meta->data_start >= actualMemSize || meta->data_start < headerLength;
+    bool isMetadataCountInvaild = (actualMemSize - meta->items_start) < (uint64_t)meta->item_count * itemLen ||
+        (actualMemSize - meta->data_start) < meta->data_count;
+    IF_COND_PRINT_MSG_AND_RETURN(isItemsStartInvalid || isDataStartInvalid || isMetadataCountInvaild,
         "MetadataUtils::DecodeFromString invalid item_start")
     decodeData += headerLength;
     camera_metadata_item_entry_t *item = GetMetadataItems(meta);
     for (uint32_t index = 0; index < meta->item_count; index++, item++) {
         if (totalLen < ((decodeData - &setting[0]) + itemLen)) {
-            METADATA_ERR_LOG("MetadataUtils::DecodeFromString Failed at item index: %{public}d", index);
+            METADATA_ERR_LOG("MetadataUtils::DecodeFromString Failed at item index: %{public}u", index);
             return {};
         }
         ret = memcpy_s(item, itemFixedLen, decodeData, itemFixedLen);

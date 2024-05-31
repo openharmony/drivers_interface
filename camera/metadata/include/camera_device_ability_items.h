@@ -1464,6 +1464,41 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_CAPTURE_EXPECT_TIME,
     /**
+     * ohos.ability.effectSuggestionSupported [static, int32[], public]
+     *
+     * camera device property, report current camera supported effect suggestion, report by mode
+     * (i.e. int32[] {mode1, effectNumber, enum, enum2, ..., -1, ...}...)
+     */
+    OHOS_ABILITY_EFFECT_SUGGESTION_SUPPORTED,
+    /**
+     * ohos.control.effectSuggestion [static, enum, public]
+     *
+     * camera device property, set current camera enable or disable effect suggestion, set by mode
+     * (i.e. enum 0(disable)/1(enable) ...)
+     */
+    OHOS_CONTROL_EFFECT_SUGGESTION,
+    /**
+     * ohos.control.effectSuggestionDetection [static, byte[], public]
+     *
+     * camera device property, init effect suggestion, set current camera enable or disable effect suggestion
+     * (i.e. byte[] [enum, 0(disable)/1(enable), enum2, 0(disable)/1(enable) ...] ...)
+     */
+    OHOS_CONTROL_EFFECT_SUGGESTION_DETECTION,
+    /**
+     * ohos.camera.effectSuggestionType [static, enum, public]
+     *
+     * camera device property, query current camera effect suggestion type
+     * (i.e. enum  NONE/PORTRAIT/FOOD/SKY/SUNRISE_SUNSET ...)
+     */
+    OHOS_CAMERA_EFFECT_SUGGESTION_TYPE,
+    /**
+     * ohos.control.effectSuggestionType [static, byte[], public]
+     *
+     * camera device property, set current effect suggestion enable or disable
+     * (i.e. byte[] [enum, 0(disable)/1(enable)] ...)
+     */
+    OHOS_CONTROL_EFFECT_SUGGESTION_TYPE,
+    /**
      * ohos.camera.effectEnd
      *
      * camera effect end
@@ -1749,11 +1784,11 @@ typedef enum camera_mirror {
 } camera_mirror_t;
 
 // OHOS_CONTROL_CAPTURE_MIRROR_SUPPORTED
-typedef enum camera_mirror_support {
+enum CameraMirrorSupport {
     OHOS_CAMERA_MIRROR_NOT_SUPPORT = 0,
     OHOS_CAMERA_MIRROR_CAPTURE,
     OHOS_CAMERA_MIRROR_CAPTURE_VIDEO,
-} camera_mirror_support_t;
+};
 
 // OHOS_JPEG_ORIENTATION enumeration values
 typedef enum camera_jpeg_orientation {
@@ -1922,5 +1957,14 @@ typedef enum ControlHighQualityModeEnum {
     OHOS_CONTROL_HIGH_QUALITY_MODE_OFF = 0,
     OHOS_CONTROL_HIGH_QUALITY_MODE_ON,
 } ControlHighQualityModeEnumT;
+
+// OHOS_CAMERA_EFFECT_SUGGESTION_TYPE
+enum CameraEffectSuggestionType {
+    OHOS_CAMERA_EFFECT_SUGGESTION_NONE = 0,
+    OHOS_CAMERA_EFFECT_SUGGESTION_PORTRAIT,
+    OHOS_CAMERA_EFFECT_SUGGESTION_FOOD,
+    OHOS_CAMERA_EFFECT_SUGGESTION_SKY,
+    OHOS_CAMERA_EFFECT_SUGGESTION_SUNRISE_SUNSET,
+};
 
 #endif

@@ -40,6 +40,8 @@ public:
     static constexpr uint32_t ELEMENT_SIZE = sizeof(int32_t);
     static constexpr uint32_t TRANSFER_WAIT_TIME = 100000000; // ms
     static constexpr uint32_t INIT_ELEMENT_COUNT = 32 * 1024;
+    static constexpr uint32_t MAX_MEMORY = 10485760; // 10M;
+    static constexpr uint32_t MAX_ELE_COUNT = 100000;
 
     #define SWITCHCASE(x) case (x): {return #x;}
     static const char *CommandToString(int32_t cmdId)
@@ -169,10 +171,10 @@ public:
         if (fd >= 0) {
             // A normal fd is transfered by binder, here just write id for unpacking to match fd.
             DISPLAY_CHK_RETURN(hdifdInfo.hdiFd->Init(fd) == false, HDF_FAILURE,
-                HDF_LOGE("%{public}s, hdiFd init failed", __func__));
+                HDF_LOGE("%{public}s, hdiFd init failed, fd:%{public}d", __func__, fd));
             hdiFds.push_back(hdifdInfo);
             DISPLAY_CHK_RETURN(packer->WriteInt32(hdifdInfo.id) == false, HDF_FAILURE,
-                HDF_LOGE("%{public}s, hdiFd init failed", __func__));
+                HDF_LOGE("%{public}s, write hdifdInfo.id failed", __func__));
         } else {
             // A illegal fd is transfered by smq directly.
             DISPLAY_CHK_RETURN(packer->WriteInt32(fd) == false, HDF_FAILURE,

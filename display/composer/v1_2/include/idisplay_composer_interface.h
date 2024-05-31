@@ -57,6 +57,10 @@ public:
      */
     virtual int32_t CommitAndGetReleaseFence(uint32_t devId, int32_t& fence,
         int32_t& skipState, bool& needFlush, std::vector<uint32_t>& layers, std::vector<int32_t>& fences) = 0;
+
+    virtual int32_t RegDisplayVBlankIdleCallback(VBlankIdleCallback cb, void* data) = 0;
+
+    virtual int32_t SetDisplayConstraint(uint32_t devId, uint64_t frameID, uint64_t ns, uint32_t type) = 0;
 };
 } // V1_2
 } // Composer

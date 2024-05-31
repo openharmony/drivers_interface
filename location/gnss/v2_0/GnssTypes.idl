@@ -421,4 +421,252 @@ struct GnssNiNotificationRequest {
     /* Notification text encoding format. */
     enum GnssNiRequestEncodingFormat notificationTextEncoding;
 };
+
+/*
+ * @brief Defines the GNSS measurement information of single satellite.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+struct GnssMeasurement {
+    /*
+     * Identifies which field is valid.
+     * See GnssMeasurementValidity for the definition of fieldValidFlags.
+     */
+    unsigned int fieldValidflags;
+
+    /*
+     * Satellite ID number.
+     * This is a mandatory value.
+     */
+    short satelliteId;
+
+    /*
+     * Defines the constellation category.
+     * See ConstellationCategory for the definition of constellationCategory.
+     */
+    short constellationCategory;
+
+    /*
+     * Measurement generation time offset in nanoseconds.
+     * This is a mandatory value.
+     * The formula for calculating the measurement time is as follows:
+     *     measurement time = GnssClockInfo::receiverClockTime + timeOffset
+     */
+    double timeOffset;
+
+    /*
+     * Satellite sync state. See SatelliteSyncState for the definition of syncState.
+     * This is a mandatory value.
+     */
+    unsigned int syncState;
+
+    /*
+     * The received satellite Time-of-Week in nanoseconds.
+     */
+    long receivedSatelliteTime;
+
+    /*
+     * Uncertainty of the received satellite Time-of-Week in nanoseconds.
+     */
+    long receivedSatelliteTimeUncertainty;
+
+    /*
+     * Carrier-to-noise density. The unit is dB-Hz.
+     * This is a mandatory value.
+     */
+    double cn0;
+
+    /*
+     * Pseudorange rate. The unit is m/s.
+     */
+    double pseudorangeRate;
+
+    /*
+     * Uncertainty of the pseudorangeRate. The unit is m/s.
+     * This is a mandatory value.
+     */
+    double pseudorangeRateUncertainty;
+
+    /*
+     * Accumulated delta range's state.
+     * See GnssAccumulatedDeltaRangeFlag for the definition.
+     * This is a mandatory value.
+     */
+    unsigned int accumulatedDeltaRangeFlag;
+
+    /*
+     * Accumulated delta range since the last channel reset. The unit is meters.
+     */
+    double accumulatedDeltaRange;
+
+    /*
+     * Uncertainty of the accumulated delta range. The unit is meters.
+     */
+    double accumulatedDeltaRangeUncertainty;
+
+    /*
+     * Carrier frequency at which codes and messages are modulated. The unit is Hz.
+     */
+    float carrierFrequency;
+
+    /*
+     * The count of carrier cycles between satellite and receiver.
+     */
+    long carrierCyclesCount;
+
+    /*
+     * Carrier phase, in the range [0.0, 1.0].
+     */
+    double carrierPhase;
+
+    /*
+     * Uncertainty of the carrierPhase.
+     */
+    double carrierPhaseUncertainty;
+
+    /*
+     * Indicates the 'multipath' flag.
+     * See GnssMultipathFlag for the definition of multipathFlag.
+     */
+    unsigned int multipathFlag;
+
+    /*
+     * Automatic gain control (AGC) level in dB.
+     */
+    double agcGain;
+
+    /*
+     * The category of code that is currently being tracked in the GNSS measurement.
+     * See GnssMeasurementTrackedCodeCategory for the definition of codeCategory.
+     */
+    unsigned int codeCategory;
+
+    /*
+     * Iono-correct value in meters.
+     */
+    double ionoCorrect;
+
+    /*
+     * Trop-correct value in meters.
+     */
+    double tropCorrect;
+
+    /*
+     * Satellite clock bias value in meters.
+     */
+    double satelliteClockBias;
+
+    /*
+     * Satellite clock drift bias value in meters.
+     */
+    double satelliteClockDriftBias;
+};
+
+/*
+ * @brief Definition of the GNSS clock information structure.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+struct GnssClockInfo {
+    /*
+     * Identifies which field is valid.
+     * See GnssClockValidity for the definition of fieldValidFlags.
+     */
+    unsigned short fieldValidFlags;
+
+    /*
+     * Leap second data.
+     */
+    short leapSecond;
+
+    /*
+     * Indicates the clock time of the GNSS receiver, the unit is nanosecond.
+     * This is a mandatory value.
+     */
+    long receiverClockTime;
+
+    /*
+     * Uncertainty of the receiverClockTime, the unit is nanosecond.
+     */
+    double timeUncertainty;
+
+    /*
+     * The difference between receiverClockTime and the true GPS time since 0000Z, January 6, 1980.
+     * the unit is nanosecond.
+     */
+    long rcvClockFullBias;
+
+    /*
+     * Sub-nanosecond bias of receiverClockTime.
+     */
+    double rcvClockSubBias;
+
+    /*
+     * Uncertainty of the local estimate of GPS time (clock bias 'rcvClockFullBias' and 'rcvClockSubBias' feild)
+     * in nanoseconds.
+     */
+    double biasUncertainty;
+
+    /*
+     * The clock's drift of receiver clock. the unit is nanosecond (per second).
+     */
+    double clockDrift;
+
+    /*
+     * The uncertainty of clockDrift. the unit is nanosecond (per second).
+     */
+    double clockDriftUncertainty;
+
+    /*
+     * Indicates hardware clock discontinuity count.
+     * This is a mandatory value.
+     */
+    unsigned int clockInterruptCnt;
+
+    /*
+     * Indicates clockJump threshold of hardware clock. the unit is nanosecond.
+     * the clock bias ('rcvClockFullBias' + 'rcvClockSubBias' should be less than clockJumpThreshold)
+     */
+    double clockJumpThreshold;
+
+    /*
+     * Indicates clockHWFreBias event, If the crystal oscillator(XO) has a frequency offset exception event,
+     * this enumeration field reports the state.
+     * If this field is frequently reported, check the environment or hardware status of the XO.
+     * See ClockHWFreBiasState for the definition of clockHWFreBiasIndicator.
+     */
+    unsigned int clockHWFreBiasIndicator;
+
+    /*
+     * Indicates clockHWFreDrift event, If the crystal oscillator(XO) has a frequency drift exception event,
+     * this enumeration field reports the state.
+     * If this field is frequently reported, check the environment or hardware status of the XO.
+     * See clockHWFreDriftState for the definition of clockHWFreDriftIndicator.
+     */
+    unsigned int clockHWFreDriftIndicator;
+};
+
+/*
+ * @brief Defines the GNSS measurement information structure.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+struct GnssMeasurementInfo {
+    struct GnssClockInfo gnssClock;
+
+    /* Time since the system was booted, and include deep sleep. The unit is nanoseconds. */
+    long elapsedRealtime;
+
+    /* This is uncertainty of elapsedRealtime. The unit is nanoseconds. */
+    long uncertainty;
+
+    /* Number of measurements. */
+    int measurementCount;
+
+    /* The array of measurements. */
+    struct GnssMeasurement[] measurements;
+};
 /** @} */
