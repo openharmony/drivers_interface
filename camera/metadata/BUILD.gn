@@ -14,9 +14,9 @@
 import("//build/ohos.gni")
 import("//drivers/interface/camera/camera.gni")
 
-config("camera_metadata_config") {
-  include_dirs = [ "./include" ]
-}
+# config("camera_metadata_config") {
+#   include_dirs = [ "./include" ]
+# }
 
 ohos_shared_library("metadata") {
   install_enable = true
@@ -27,7 +27,9 @@ ohos_shared_library("metadata") {
   ]
   ldflags = [ "--coverage" ]
   cflags_cc = cflags
-  all_dependent_configs = [ ":camera_metadata_config" ]
+  include_dirs = [ "./include" ]
+
+  # all_dependent_configs = [ ":camera_metadata_config" ]
   if (defined(ohos_lite)) {
     sources = [
       "src/camera_metadata_info.cpp",
