@@ -366,6 +366,12 @@ static item_info_t g_ohosPostProcess[OHOS_CAMERA_EFFECT_END - OHOS_CAMERA_EFFECT
         OHOS_CAMERA_EFFECT_START] = {"effectSuggestionType", META_TYPE_BYTE, 1},
     [OHOS_CONTROL_EFFECT_SUGGESTION_TYPE -
         OHOS_CAMERA_EFFECT_START] = {"controlEffectSuggestionType", META_TYPE_BYTE, 1},
+    [OHOS_ABILITY_AVAILABLE_PROFILE_LEVEL -
+        OHOS_CAMERA_EFFECT_START] = {"availableProfileLevel", META_TYPE_UINT32, -1},
+    [OHOS_ABILITY_AVAILABLE_CONFIGURATIONS -
+        OHOS_CAMERA_EFFECT_START] = {"availableConfigurations", META_TYPE_UINT32, -1},
+    [OHOS_ABILITY_CONFLICT_CONFIGURATIONS -
+        OHOS_CAMERA_EFFECT_START] = {"conflictConfigurations", META_TYPE_UINT32, -1},
 };
 
 static item_info_t g_ohosCameraSecure[OHOS_CAMERA_SECURE_END - OHOS_CAMERA_SECURE_START] = {

@@ -1499,6 +1499,27 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_EFFECT_SUGGESTION_TYPE,
     /**
+     * ohos.ability.availableProfileLevel [static, byte[], public]
+     *
+     * camera device property, report current camera available profile level
+     * (i.e. uint32[] ...)
+     */
+    OHOS_ABILITY_AVAILABLE_PROFILE_LEVEL
+    /**
+     * ohos.ability.availableConfigurations [static, byte[], public]
+     *
+     * camera device property, report current camera available configurations
+     * (i.e. uint32[] ...)
+     */
+    OHOS_ABILITY_AVAILABLE_CONFIGURATIONS
+    /**
+     * ohos.ability.conflictConfigurations [static, byte[], public]
+     *
+     * camera device property, report current camera conflict configurations
+     * (i.e. uint32[] ...)
+     */
+    OHOS_ABILITY_CONFLICT_CONFIGURATIONS
+    /**
      * ohos.camera.effectEnd
      *
      * camera effect end
