@@ -488,7 +488,7 @@ enum GlobalConfigType : int {
     /** Pin expired period */
     PIN_EXPIRED_PERIOD = 1,
     /** Enable specified authType capability. */
-    SET_ENABLE_STATUS = 2,
+    ENABLE_STATUS = 2,
 };
 
 /**
