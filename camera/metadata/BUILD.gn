@@ -61,6 +61,7 @@ ohos_shared_library("metadata") {
     "chipsetsdk",
     "platformsdk_indirect",
   ]
+  
   # public_configs = [ ":camera_metadata_config" ]
   part_name = "drivers_interface_camera"
   subsystem_name = "hdf"
