@@ -54,7 +54,7 @@ using HdifdSet = std::vector<std::shared_ptr<HdifdParcelable>>;
 
 static constexpr uint32_t TIME_BUFFER_MAX_LEN = 15;
 static constexpr uint32_t BUFFER_QUEUE_MAX_SIZE = 6;
-
+static constexpr unsigned int REDUCE_COUNT = 50;
 static sptr<IMapper> g_bufferServiceImpl = nullptr;
 
 static constexpr uint32_t COMMIT_PRINT_INTERVAL = 1200;
@@ -519,8 +519,14 @@ EXIT:
             HdfTrace traceVdi("Commit", "HDI:DISP:HARDWARE");
             ret = impl_->Commit(devId, fence);
         }
-        if (ret != HDF_SUCCESS) {
-            HDF_LOGE("%{public}s, commit failed with ret = %{public}d", __func__, ret);
+        static unsigned int count = 0;
+        if (ret == HDF_SUCCESS) {
+            count = 0;
+        } else {
+            if (++count > REDUCE_COUNT) {
+                HDF_LOGE("%{public}s, commit failed with ret = %{public}d", __func__, ret);
+                count = 0;
+            }
         }
 
 REPLY:
