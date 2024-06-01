@@ -24,8 +24,6 @@ if (defined(ohos_lite)) {
   config("libdisplay_exported_config") {
     visibility = [ ":*" ]
     include_dirs = [
-      "./../../../peripheral/base",
-      "./../../../peripheral/display/interfaces/include",
     ]
   }
 
