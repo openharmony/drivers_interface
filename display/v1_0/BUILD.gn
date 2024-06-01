@@ -23,8 +23,7 @@ if (defined(ohos_lite)) {
   #
   config("libdisplay_exported_config") {
     visibility = [ ":*" ]
-    include_dirs = [
-    ]
+    include_dirs = []
   }
 
   #
