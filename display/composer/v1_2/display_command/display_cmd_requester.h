@@ -47,9 +47,10 @@ public:
         return requester;
     }
 
-    int32_t CommitAndGetReleaseFence(uint32_t devId, int32_t &fence, bool isSupportSkipValidate,
-        int32_t &skipState, bool &needFlush, std::vector<uint32_t>& layers, std::vector<int32_t>& fences)
+    int32_t CommitAndGetReleaseFence(uint32_t devId, int32_t& fence, bool isSupportSkipValidate, int32_t& skipState,
+        bool& needFlush, std::vector<uint32_t>& layers, std::vector<int32_t>& fences, bool isValidated)
     {
+        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         uint32_t replyEleCnt = 0;
         std::vector<HdifdInfo> outFds;
         std::shared_ptr<char> replyData;
@@ -57,10 +58,13 @@ public:
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_COMMIT_AND_GET_RELEASE_FENCE, requestPacker_);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = requestPacker_->WriteUint32(devId) ? HDF_SUCCESS : HDF_FAILURE;
+        ret = requestPacker_.WriteUint32(devId) ? HDF_SUCCESS : HDF_FAILURE;
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = requestPacker_->WriteBool(isSupportSkipValidate) ? HDF_SUCCESS : HDF_FAILURE;
+        ret = requestPacker_.WriteBool(isSupportSkipValidate) ? HDF_SUCCESS : HDF_FAILURE;
+        DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+
+        ret = requestPacker_.WriteBool(isValidated) ? HDF_SUCCESS : HDF_FAILURE;
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
         ret = CmdUtils::EndSection(requestPacker_);
@@ -97,64 +101,71 @@ EXIT:
         return PeriodDataReset() == HDF_SUCCESS ? ret : HDF_FAILURE;
     }
 
-    int32_t OnReplyCommitAndGetReleaseFence(std::shared_ptr<CommandDataUnpacker> replyUnpacker,
-        std::vector<HdifdInfo> replyFds, int32_t &fenceFd, int32_t &skipState,
-        bool &needFlush, std::vector<uint32_t>& layers, std::vector<int32_t>& fences)
+    int32_t OnReplySkipStateFailed(CommandDataUnpacker& replyUnpacker, bool &needFlush)
     {
+        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         uint32_t devId = 0;
+        int32_t retBool = replyUnpacker.ReadUint32(devId);
+        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE, HDF_LOGE("%{public}s: read devId failed", __func__));
+
+        retBool = replyUnpacker.ReadBool(needFlush);
+        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE, HDF_LOGE("%{public}s: read needFlush failed", __func__));
+
+        // unpack layers vector
+        uint32_t vectSize = 0;
+        retBool = replyUnpacker.ReadUint32(vectSize);
+        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s: HDI 1.2 read vect size failed", __func__));
+
+        compChangeLayers_[devId].resize(vectSize);
+        for (uint32_t i = 0; i < vectSize; i++) {
+            DISPLAY_CHK_RETURN(replyUnpacker.ReadUint32(compChangeLayers_[devId][i]) == false, HDF_FAILURE,
+                HDF_LOGE("%{public}s: HDI 1.2 read layer vector failed", __func__));
+        }
+        // unpack types vector
+        vectSize = 0;
+        retBool = replyUnpacker.ReadUint32(vectSize);
+        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s: HDI 1.2 read vect size failed", __func__));
+
+        compChangeTypes_[devId].resize(vectSize);
+        for (uint32_t i = 0; i < vectSize; i++) {
+            DISPLAY_CHK_RETURN(replyUnpacker.ReadInt32(compChangeTypes_[devId][i]) == false, HDF_FAILURE,
+                HDF_LOGE("%{public}s: HDI 1.2 read composition type vector failed", __func__));
+        }
+        return HDF_SUCCESS;
+    }
+
+    int32_t OnReplyCommitAndGetReleaseFence(CommandDataUnpacker& replyUnpacker,
+        std::vector<HdifdInfo>& replyFds, int32_t& fenceFd, int32_t& skipState,
+        bool& needFlush, std::vector<uint32_t>& layers, std::vector<int32_t>& fences)
+    {
+        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::FileDescriptorUnpack(replyUnpacker, replyFds, fenceFd);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: FileDescriptorUnpack failed", __func__));
 
-        int32_t retBool = replyUnpacker->ReadInt32(skipState);
+        int32_t retBool = replyUnpacker.ReadInt32(skipState);
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
             HDF_LOGE("%{public}s: read skipValidateState failed", __func__));
 
         if (skipState != HDF_SUCCESS) {
-            retBool = replyUnpacker->ReadUint32(devId);
-            DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE, HDF_LOGE("%{public}s: read devId failed", __func__));
-
-            retBool = replyUnpacker->ReadBool(needFlush);
-            DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE, HDF_LOGE("%{public}s: read needFlush failed", __func__));
-
+            return OnReplySkipStateFailed(replyUnpacker, needFlush);
+        } else {
             // unpack layers vector
             uint32_t vectSize = 0;
-            retBool = replyUnpacker->ReadUint32(vectSize);
-            DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-                HDF_LOGE("%{public}s: HDI 1.2 read vect size failed", __func__));
-
-            compChangeLayers_[devId].resize(vectSize);
-            for (uint32_t i = 0; i < vectSize; i++) {
-                DISPLAY_CHK_RETURN(replyUnpacker->ReadUint32(compChangeLayers_[devId][i]) == false, HDF_FAILURE,
-                    HDF_LOGE("%{public}s: HDI 1.2 read layer vector failed", __func__));
-            }
-            // unpack types vector
-            vectSize = 0;
-            retBool = replyUnpacker->ReadUint32(vectSize);
-            DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-                HDF_LOGE("%{public}s: HDI 1.2 read vect size failed", __func__));
-
-            compChangeTypes_[devId].resize(vectSize);
-            for (uint32_t i = 0; i < vectSize; i++) {
-                DISPLAY_CHK_RETURN(replyUnpacker->ReadInt32(compChangeTypes_[devId][i]) == false, HDF_FAILURE,
-                    HDF_LOGE("%{public}s: HDI 1.2 read composition type vector failed", __func__));
-            }
-        }
-
-        // unpack layers vector
-            uint32_t vectSize = 0;
-            DISPLAY_CHK_RETURN(true != replyUnpacker->ReadUint32(vectSize), HDF_FAILURE,
+            DISPLAY_CHK_RETURN(true != replyUnpacker.ReadUint32(vectSize), HDF_FAILURE,
                 HDF_LOGE("%{public}s: HDI 1.2 read vect size failed", __func__));
 
             layers.resize(vectSize);
             for (uint32_t i = 0; i < vectSize; i++) {
-                DISPLAY_CHK_RETURN(replyUnpacker->ReadUint32(layers[i]) == false, HDF_FAILURE,
+                DISPLAY_CHK_RETURN(replyUnpacker.ReadUint32(layers[i]) == false, HDF_FAILURE,
                     HDF_LOGE("%{public}s: HDI 1.2 read layer vector failed", __func__));
             }
 
             // unpack layers vector
             vectSize = 0;
-            DISPLAY_CHK_RETURN(true != replyUnpacker->ReadUint32(vectSize), HDF_FAILURE,
+            DISPLAY_CHK_RETURN(true != replyUnpacker.ReadUint32(vectSize), HDF_FAILURE,
                 HDF_LOGE("%{public}s: HDI 1.2 read vect size failed", __func__));
 
             fences.resize(vectSize);
@@ -163,15 +174,18 @@ EXIT:
                 DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
                     HDF_LOGE("%{public}s: HDI 1.2 FileDescriptorUnpack failed", __func__));
             }
+        }
+
         return HDF_SUCCESS;
     }
 
-    int32_t ProcessUnpackCmd(std::shared_ptr<CommandDataUnpacker> replyUnpacker, int32_t unpackCmd,
-        std::vector<HdifdInfo> replyFds, std::function<int32_t(void *)> fn)
+    int32_t ProcessUnpackCmd(CommandDataUnpacker& replyUnpacker, int32_t unpackCmd,
+        std::vector<HdifdInfo>& replyFds, std::function<int32_t(void *)> fn)
     {
+        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = HDF_SUCCESS;
-        while (replyUnpacker->NextSection()) {
-            bool retBool = replyUnpacker->BeginSection(unpackCmd);
+        while (replyUnpacker.NextSection()) {
+            bool retBool = replyUnpacker.BeginSection(unpackCmd);
             DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
                 HDF_LOGE("%{public}s: BeginSection failed", __func__));
 
@@ -199,18 +213,17 @@ EXIT:
         return HDF_SUCCESS;
     }
 
-    int32_t DoReplyResults(uint32_t replyEleCnt, std::vector<HdifdInfo> replyFds, std::shared_ptr<char> replyData,
+    int32_t DoReplyResults(uint32_t replyEleCnt, std::vector<HdifdInfo>& replyFds, std::shared_ptr<char> replyData,
         std::function<int32_t(void *)> fn)
     {
-        std::shared_ptr<CommandDataUnpacker> replyUnpacker = std::make_shared<CommandDataUnpacker>();
-        DISPLAY_CHK_RETURN(replyUnpacker == nullptr, HDF_FAILURE,
-            HDF_LOGE("%{public}s: HDI 1.2 CommandDataUnpacker construct failed", __func__));
-        replyUnpacker->Init(replyData.get(), replyEleCnt * CmdUtils::ELEMENT_SIZE);
+        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
+        CommandDataUnpacker replyUnpacker;
+        replyUnpacker.Init(replyData.get(), replyEleCnt << CmdUtils::MOVE_SIZE);
 #ifdef DEBUG_DISPLAY_CMD_RAW_DATA
-        replyUnpacker->Dump();
+        replyUnpacker.Dump();
 #endif // DEBUG_DISPLAY_CMD_RAW_DATA
         int32_t unpackCmd = -1;
-        bool retBool = replyUnpacker->PackBegin(unpackCmd);
+        bool retBool = replyUnpacker.PackBegin(unpackCmd);
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
             HDF_LOGE("%{public}s: PackBegin failed", __func__));
         DISPLAY_CHK_RETURN(unpackCmd != CONTROL_CMD_REPLY_BEGIN, HDF_FAILURE,
@@ -219,7 +232,7 @@ EXIT:
             return HDF_FAILURE;
         }
 
-        retBool = replyUnpacker->PackEnd(unpackCmd);
+        retBool = replyUnpacker.PackEnd(unpackCmd);
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
             HDF_LOGE("%{public}s: PackEnd failed", __func__));
 
@@ -233,23 +246,24 @@ EXIT:
     // LTPO新增接口
     int32_t SetDisplayConstraint(uint32_t devId, uint64_t frameID, uint64_t ns, uint32_t type)
     {
+        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_DISPLAY_CONSTRAINT, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: StartSection failed", __func__));
 
-        bool retBool = requestPacker_->WriteUint32(devId);
+        bool retBool = requestPacker_.WriteUint32(devId);
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
             HDF_LOGE("%{public}s: write devId failed", __func__));
 
-        retBool = requestPacker_->WriteUint64(frameID);
+        retBool = requestPacker_.WriteUint64(frameID);
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
             HDF_LOGE("%{public}s: write frameID failed", __func__));
 
-        retBool = requestPacker_->WriteUint64(ns);
+        retBool = requestPacker_.WriteUint64(ns);
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
             HDF_LOGE("%{public}s: write ns failed", __func__));
 
-        retBool = requestPacker_->WriteUint32(type);
+        retBool = requestPacker_.WriteUint32(type);
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
             HDF_LOGE("%{public}s: write type failed", __func__));
 
