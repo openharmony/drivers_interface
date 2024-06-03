@@ -12,5 +12,5 @@
 # limitations under the License.
 
 declare_args() {
-  fingerprintauth_hdi_enabled = true
+  drivers_interface_fingerprint_auth_enabled = true
 }

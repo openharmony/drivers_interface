@@ -12,5 +12,5 @@
 # limitations under the License.
 
 declare_args() {
-  faceauth_hdi_enabled = true
+  drivers_interface_face_auth_enabled = true
 }
