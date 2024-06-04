@@ -511,14 +511,14 @@ union GlobalConfigValue {
  * @version 1.0
  */
 struct GlobalConfigParam {
-    /** Specified userIds. GlobalConfigParam will be effect for all userspaces when the array is empty. */
-    int[] userIds;
-    /** Specified authTypes, See @{AuthType}. GlobalConfigParam will be effect for all authTypes when the array is empty.*/
-    int[] authTypes;
     /** Global config type. See @{GlobalConfigType}*/
     int type;
     /** Global config value. See @{GlobalConfigValue}*/
     GlobalConfigValue value;
+    /** Specified userIds. GlobalConfigParam will be effect for all userspaces when the array is empty. */
+    int[] userIds;
+    /** Specified authTypes, See @{AuthType}. GlobalConfigParam will be effect for all authTypes when the array is empty.*/
+    int[] authTypes;
 };
 
 /** @} */
