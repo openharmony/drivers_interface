@@ -34,30 +34,6 @@
         ],
         "inner_kits": [
           {
-            "name": "//drivers/interface/location/agnss/v1_0:liblocation_agnss_proxy_1.0",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interface/location/agnss"
-            }
-          },
-          {
-            "name": "//drivers/interface/location/agnss/v1_0:location_agnss_idl_headers",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interface/location/agnss"
-            }
-          },
-          {
-            "name": "//drivers/interface/location/agnss/v1_0:liblocation_agnss_stub_1.0",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interface/location/agnss"
-            }
-          },
-          {
             "name": "//drivers/interface/location/agnss/v2_0:liblocation_agnss_proxy_2.0",
             "header": {
               "header_files": [

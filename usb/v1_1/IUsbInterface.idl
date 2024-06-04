@@ -76,4 +76,16 @@ interface IUsbInterface extends ohos.hdi.usb.v1_0.IUsbInterface{
      * @since 5.0
      */
     GetDeviceSpeed ([in] struct UsbDev dev, [out] unsigned char speed );
+
+    /* *
+     * @brief Obtains the file descriptor.
+     *
+     * @param dev Indicates the USB device address.
+     * @param fd USB device file descriptor
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
+     * @since 5.0
+     * @version 1.0
+     */
+    GetDeviceFileDescriptor([in] struct UsbDev dev, [out] FileDescriptor fd);
 }

@@ -133,8 +133,8 @@ enum AuthIntent : int {
     DEFUALT = 0,
     /**< The auth intent is unlock. */
     UNLOCK = 1,
-    /**< The auth intent is init. */
-    INIT = 2,
+    /**< The auth intent silent auth. */
+    SILENT_AUTH = 2,
 };
 
 /**
