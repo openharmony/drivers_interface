@@ -62,7 +62,6 @@ public:
 
     int32_t Init(uint32_t eleCnt)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         request_ = std::make_shared<Transfer>(eleCnt, SmqType::SYNCED_SMQ);
         DISPLAY_CHK_RETURN(request_ == nullptr, HDF_FAILURE,
             HDF_LOGE("%{public}s: request_ is nullptr", __func__));
@@ -93,7 +92,6 @@ public:
 
     int32_t PrepareDisplayLayers(uint32_t devId, bool &needFlushFb)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         uint32_t replyEleCnt;
         std::vector<HdifdInfo> outFds;
         std::shared_ptr<char> replyData;
@@ -128,7 +126,6 @@ EXIT:
     int32_t SetDisplayClientBuffer(uint32_t devId, const BufferHandle* buffer, uint32_t seqNo,
         int32_t fence)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: StartSection failed", __func__));
@@ -158,7 +155,6 @@ EXIT:
 
     int32_t SetDisplayClientDamage(uint32_t devId, std::vector<IRect> &rects)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_DISPLAY_CLIENT_DAMAGE, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: StartSection failed", __func__));
@@ -187,7 +183,6 @@ EXIT:
 
     int32_t Commit(uint32_t devId, int32_t &fence)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         uint32_t replyEleCnt = 0;
         std::vector<HdifdInfo> outFds;
         std::shared_ptr<char> replyData;
@@ -221,7 +216,6 @@ EXIT:
 
     int32_t SetLayerAlpha(uint32_t devId, uint32_t layerId, const LayerAlpha &alpha)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_ALPHA, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: StartSection failed", __func__));
@@ -259,7 +253,6 @@ EXIT:
 
     int32_t SetLayerRegion(uint32_t devId, uint32_t layerId, const IRect &rect)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_REGION, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: StartSection failed", __func__));
@@ -281,7 +274,6 @@ EXIT:
 
     int32_t SetLayerCrop(uint32_t devId, uint32_t layerId, const IRect &rect)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_CROP, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: StartSection failed", __func__));
@@ -303,7 +295,6 @@ EXIT:
 
     int32_t SetLayerZorder(uint32_t devId, uint32_t layerId, uint32_t zorder)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_ZORDER, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: StartSection failed", __func__));
@@ -325,7 +316,6 @@ EXIT:
 
     int32_t SetLayerPreMulti(uint32_t devId, uint32_t layerId, bool preMul)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_PREMULTI, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: StartSection failed", __func__));
@@ -347,7 +337,6 @@ EXIT:
 
     int32_t SetLayerTransformMode(uint32_t devId, uint32_t layerId, TransformType type)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_TRANSFORM_MODE, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: StartSection failed", __func__));
@@ -369,7 +358,6 @@ EXIT:
 
     int32_t SetLayerDirtyRegion(uint32_t devId, uint32_t layerId, const std::vector<IRect> &rects)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_DIRTY_REGION, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: StartSection failed", __func__));
@@ -397,7 +385,6 @@ EXIT:
 
     int32_t SetLayerVisibleRegion(uint32_t devId, uint32_t layerId, std::vector<IRect> &rects)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_VISIBLE_REGION, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: StartSection failed", __func__));
@@ -426,7 +413,6 @@ EXIT:
     int32_t SetLayerBuffer(uint32_t devId, uint32_t layerId, const BufferHandle* buffer, uint32_t seqNo,
         int32_t fence, const std::vector<uint32_t>& deletingList)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_BUFFER, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: StartSection failed", __func__));
@@ -467,7 +453,6 @@ EXIT:
 
     int32_t SetLayerCompositionType(uint32_t devId, uint32_t layerId, CompositionType type)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_COMPOSITION_TYPE, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: StartSection failed", __func__));
@@ -489,7 +474,6 @@ EXIT:
 
     int32_t SetLayerBlendType(uint32_t devId, uint32_t layerId, BlendType type)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_BLEND_TYPE, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: StartSection failed", __func__));
@@ -511,7 +495,6 @@ EXIT:
 
     int32_t SetLayerMaskInfo(uint32_t devId, uint32_t layerId, const MaskInfo maskInfo)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_MASK_INFO, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: StartSection failed", __func__));
@@ -533,7 +516,6 @@ EXIT:
 
     int32_t SetLayerColor(uint32_t devId, uint32_t layerId, const LayerColor& layerColor)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_COLOR, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: StartSection failed", __func__));
@@ -555,7 +537,6 @@ EXIT:
 
     int32_t GetDisplayCompChange(uint32_t devId, std::vector<uint32_t>& layers, std::vector<int32_t>& types)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         layers = compChangeLayers_[devId];
         types = compChangeTypes_[devId];
         compChangeLayers_.erase(devId);
@@ -565,7 +546,6 @@ EXIT:
 protected:
     int32_t OnReplySetError(CommandDataUnpacker& replyUnpacker, std::unordered_map<int32_t, int32_t> &errMaps)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         uint32_t errCnt = 0;
         bool retBool = replyUnpacker.ReadUint32(errCnt);
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
@@ -588,7 +568,6 @@ protected:
 
     int32_t OnReplyPrepareDisplayLayers(CommandDataUnpacker& replyUnpacker, bool &needFlushFb)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         uint32_t devId = 0;
         int32_t retBool = replyUnpacker.ReadUint32(devId);
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE, HDF_LOGE("%{public}s: read devId failed", __func__));
@@ -630,7 +609,6 @@ protected:
     int32_t OnReplyCommit(
         CommandDataUnpacker& replyUnpacker, std::vector<HdifdInfo>& replyFds, int32_t &fenceFd)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::FileDescriptorUnpack(replyUnpacker, replyFds, fenceFd);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: FileDescriptorUnpack failed", __func__));
@@ -640,7 +618,6 @@ protected:
     int32_t ProcessUnpackCmd(CommandDataUnpacker& replyUnpacker, int32_t unpackCmd,
         std::vector<HdifdInfo>& replyFds, std::function<int32_t(void *)> fn)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = HDF_SUCCESS;
         while (replyUnpacker.NextSection()) {
             bool retBool = replyUnpacker.BeginSection(unpackCmd);
@@ -690,7 +667,6 @@ protected:
     int32_t DoReplyResults(uint32_t replyEleCnt, std::vector<HdifdInfo>& replyFds, std::shared_ptr<char> replyData,
         std::function<int32_t(void *)> fn)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         CommandDataUnpacker replyUnpacker;
         replyUnpacker.Init(replyData.get(), replyEleCnt << CmdUtils::MOVE_SIZE);
 #ifdef DEBUG_DISPLAY_CMD_RAW_DATA
@@ -719,7 +695,6 @@ protected:
 
     int32_t DoRequest(uint32_t &replyEleCnt, std::vector<HdifdInfo> &outFds, std::shared_ptr<char> &replyData)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
 #ifdef DEBUG_DISPLAY_CMD_RAW_DATA
         requestPacker_.Dump();
 #endif // DEBUG_DISPLAY_CMD_RAW_DATA
@@ -748,7 +723,6 @@ protected:
 
     int32_t PeriodDataReset()
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         for (uint32_t i = 0; i < requestHdiFds_.size(); ++i) {
             int32_t fd = requestHdiFds_[i].hdiFd->Move();
             if (fd != -1) {

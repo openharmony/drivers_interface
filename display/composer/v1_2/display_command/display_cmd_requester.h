@@ -50,7 +50,6 @@ public:
     int32_t CommitAndGetReleaseFence(uint32_t devId, int32_t& fence, bool isSupportSkipValidate, int32_t& skipState,
         bool& needFlush, std::vector<uint32_t>& layers, std::vector<int32_t>& fences, bool isValidated)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         uint32_t replyEleCnt = 0;
         std::vector<HdifdInfo> outFds;
         std::shared_ptr<char> replyData;
@@ -103,7 +102,6 @@ EXIT:
 
     int32_t OnReplySkipStateFailed(CommandDataUnpacker& replyUnpacker, bool &needFlush)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         uint32_t devId = 0;
         int32_t retBool = replyUnpacker.ReadUint32(devId);
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE, HDF_LOGE("%{public}s: read devId failed", __func__));
@@ -140,7 +138,6 @@ EXIT:
         std::vector<HdifdInfo>& replyFds, int32_t& fenceFd, int32_t& skipState,
         bool& needFlush, std::vector<uint32_t>& layers, std::vector<int32_t>& fences)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::FileDescriptorUnpack(replyUnpacker, replyFds, fenceFd);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: FileDescriptorUnpack failed", __func__));
@@ -182,7 +179,6 @@ EXIT:
     int32_t ProcessUnpackCmd(CommandDataUnpacker& replyUnpacker, int32_t unpackCmd,
         std::vector<HdifdInfo>& replyFds, std::function<int32_t(void *)> fn)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = HDF_SUCCESS;
         while (replyUnpacker.NextSection()) {
             bool retBool = replyUnpacker.BeginSection(unpackCmd);
@@ -216,7 +212,6 @@ EXIT:
     int32_t DoReplyResults(uint32_t replyEleCnt, std::vector<HdifdInfo>& replyFds, std::shared_ptr<char> replyData,
         std::function<int32_t(void *)> fn)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         CommandDataUnpacker replyUnpacker;
         replyUnpacker.Init(replyData.get(), replyEleCnt << CmdUtils::MOVE_SIZE);
 #ifdef DEBUG_DISPLAY_CMD_RAW_DATA
@@ -246,7 +241,6 @@ EXIT:
     // LTPO新增接口
     int32_t SetDisplayConstraint(uint32_t devId, uint64_t frameID, uint64_t ns, uint32_t type)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_DISPLAY_CONSTRAINT, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: StartSection failed", __func__));

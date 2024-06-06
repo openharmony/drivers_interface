@@ -74,7 +74,7 @@ public:
     int32_t ProcessRequestCmd(CommandDataUnpacker& unpacker, int32_t cmd,
         const std::vector<HdifdInfo>& inFds, std::vector<HdifdInfo>& outFds)
     {
-        HDF_LOGI("%{public}s: HDI 1.2 PackSection, cmd-[%{public}d] = %{public}s",
+        HDF_LOGD("%{public}s: HDI 1.2 PackSection, cmd-[%{public}d] = %{public}s",
             __func__, cmd, CmdUtils::CommandToString(cmd));
         if (cmd == REQUEST_CMD_COMMIT_AND_GET_RELEASE_FENCE) {
             OnCommitAndGetReleaseFence(unpacker, outFds);
@@ -88,7 +88,6 @@ public:
 
     void ReplyNotSkipInfo(uint32_t& devId, CommitInfo& commitInfo)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         DISPLAY_CHECK(replyPacker_.WriteUint32(devId) == false,
             HDF_LOGE("%{public}s, write devId error", __func__));
 
@@ -117,7 +116,6 @@ public:
 
     void ReplyCommitAndGetReleaseFence(std::vector<HdifdInfo>& outFds, uint32_t& devId, CommitInfo& commitInfo)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         int32_t ret = HDF_SUCCESS;
         uint32_t vectSize = 0;
 
@@ -185,7 +183,6 @@ public:
 
     void OnCommitAndGetReleaseFence(CommandDataUnpacker& unpacker, std::vector<HdifdInfo>& outFds)
     {
-        HDF_LOGI("%{public}s, line:%{public}d", __func__, __LINE__);
         DISPLAY_TRACE;
         uint32_t devId = 0;
         bool isSupportSkipValidate = false;
@@ -210,8 +207,7 @@ public:
             HDF_LOGE("%{public}s, read isValidated error", __func__);
             goto REPLY;
         }
-        HDF_LOGI("%{public}s, line:%{public}d, ssk:%{public}d, isValidated:%{public}d", __func__, __LINE__, isSupportSkipValidate, isValidated);
-        if (isSupportSkipValidate) {
+        if (isSupportSkipValidate || isValidated) {
             HdfTrace traceVdi("Commit", "HDI:DISP:HARDWARE");
             commitInfo.skipRet = impl_->Commit(devId, commitInfo.fence);
         }
@@ -231,8 +227,8 @@ public:
                 HDF_LOGE("%{public}s, GetDisplayReleaseFence failed with ret = %{public}d", __func__, ret);
             }
         }
-        HDF_LOGI("%{public}s, first commit with skipRet = %{public}d, fence = %{public}d, needFlush = %{public}d",
-            __func__, commitInfo.skipRet, commitInfo.fence, commitInfo.needFlush);
+        HDF_LOGD("skipRet:%{public}d,fence:%{public}d,needFlush:%{public}d, ssv:%{public}d, iv:%{public}d",
+            commitInfo.skipRet, commitInfo.fence, commitInfo.needFlush, isSupportSkipValidate, isValidated);
 REPLY:
         ReplyCommitAndGetReleaseFence(outFds, devId, commitInfo);
     }
@@ -240,13 +236,12 @@ REPLY:
     int32_t CmdRequest(uint32_t inEleCnt, const std::vector<HdifdInfo>& inFds, uint32_t& outEleCnt,
         std::vector<HdifdInfo>& outFds)
     {
-        HDF_LOGE("CmdRequest inEleCnt:%{public}u", inEleCnt);
         std::shared_ptr<char> requestData(new char[inEleCnt * CmdUtils::ELEMENT_SIZE], std::default_delete<char[]>());
         int32_t ret = request_->Read(reinterpret_cast<int32_t *>(requestData.get()), inEleCnt,
             CmdUtils::TRANSFER_WAIT_TIME);
 
         CommandDataUnpacker unpacker;
-        unpacker.Init(requestData.get(), inEleCnt << CmdUtils::ELEMENT_SIZE);
+        unpacker.Init(requestData.get(), inEleCnt << CmdUtils::MOVE_SIZE);
 #ifdef DEBUG_DISPLAY_CMD_RAW_DATA
         unpacker.Dump();
 #endif // DEBUG_DISPLAY_CMD_RAW_DATA
@@ -260,7 +255,6 @@ REPLY:
             CmdUtils::CommandToString(unpackCmd)));
 
         while (ret == HDF_SUCCESS && unpacker.NextSection()) {
-            unpackCmd = -1;
             if (!unpacker.BeginSection(unpackCmd)) {
                 HDF_LOGE("error: PackSection failed, unpackCmd=%{public}s.",
                     CmdUtils::CommandToString(unpackCmd));
@@ -281,7 +275,7 @@ REPLY:
 #endif // DEBUG_DISPLAY_CMD_RAW_DATA
 
         /*  Write reply pack */
-        outEleCnt = replyPacker_.ValidSize() >> CmdUtils::ELEMENT_SIZE;
+        outEleCnt = replyPacker_.ValidSize() >> CmdUtils::MOVE_SIZE;
         ret = reply_->Write(reinterpret_cast<int32_t *>(replyPacker_.GetDataPtr()), outEleCnt,
             CmdUtils::TRANSFER_WAIT_TIME);
         if (ret != HDF_SUCCESS) {

@@ -126,8 +126,6 @@ public:
         const std::vector<HdifdInfo>& inFds, std::vector<HdifdInfo>& outFds)
     {
         int32_t ret = HDF_SUCCESS;
-        HDF_LOGD("%{public}s: PackSection, cmd-[%{public}d] = %{public}s",
-            __func__, cmd, CmdUtils::CommandToString(cmd));
         switch (cmd) {
             case REQUEST_CMD_PREPARE_DISPLAY_LAYERS: OnPrepareDisplayLayers(unpacker); break;
             case REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER: OnSetDisplayClientBuffer(unpacker, inFds); break;
