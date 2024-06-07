@@ -28,7 +28,7 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/location/geofence/v1_0:location_geofence_idl_target"
+          "//drivers/interface/location/geofence/v2_0:location_geofence_idl_target"
         ],
         "test": [
         ],

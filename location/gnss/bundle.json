@@ -28,7 +28,7 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/location/gnss/v1_0:location_gnss_idl_target"
+          "//drivers/interface/location/gnss/v2_0:location_gnss_idl_target"
         ],
         "test": [
         ],
