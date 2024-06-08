@@ -19,10 +19,6 @@ hdi("location_geofence") {
     "IGeofenceCallback.idl",
     "IGeofenceInterface.idl",
   ]
-  sequenceable_ext_deps = [
-    "drivers_interface_location_gnss:liblocation_gnss_proxy_2.0",
-    "drivers_interface_location_gnss:location_gnss_idl_headers",
-  ]
 
   language = "cpp"
   subsystem_name = "hdf"
