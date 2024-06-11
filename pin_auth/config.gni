@@ -12,5 +12,5 @@
 # limitations under the License.
 
 declare_args() {
-  pinauth_hdi_enabled = true
+  drivers_interface_pin_auth_enabled = true
 }
