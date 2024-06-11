@@ -71,7 +71,7 @@ enum BufferUsage : ohos.hdi.display.composer.v1_0.BufferUsage {
  * @version 1.0
  */
 enum PixelFormat : ohos.hdi.display.composer.v1_1.PixelFormat {
-    PIXEL_FMT_RGBA16_FLOAT = 39,/**< RGBA16 float format*/
+    PIXEL_FMT_RGBA16_FLOAT = 39, /**< RGBA16 float format */
 };
 
 enum DispCmd : ohos.hdi.display.composer.v1_0.DispCmd {
