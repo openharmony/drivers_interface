@@ -65,7 +65,7 @@ enum BufferUsage : ohos.hdi.display.composer.v1_0.BufferUsage {
 
 
 /**
- * @brief Enumerates the property id of the display vdi.
+ * @brief Enumerates pixel formats.
  *
  * @since 5.0
  * @version 1.0
