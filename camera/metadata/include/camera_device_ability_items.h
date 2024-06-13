@@ -1375,14 +1375,14 @@ typedef enum camera_device_metadata_tag {
     /**
      * ohos.control.cameraPhysicalAperttureRange [static, float[], public]
      *
-     * camera device property, set current camera physical apertture range
+     * camera device property, set current camera physical aperture range
      * (i.e. float[] ...)
      */
     OHOS_ABILITY_CAMERA_PHYSICAL_APERTURE_RANGE,
     /**
      * ohos.control.cameraPhysicalAperttureValue [static, float, public]
      *
-     * camera device property, set current camera physical apertture value
+     * camera device property, set current camera physical aperture value
      * (i.e. float ...)
      */
     OHOS_CONTROL_CAMERA_PHYSICAL_APERTURE_VALUE,
@@ -1396,7 +1396,7 @@ typedef enum camera_device_metadata_tag {
     /**
      * ohos.device.exitCameraEvent [static, byte, public]
      *
-     * camera device property, set current camera exitCamera event
+     * camera device property, set current camera exitcamera event
      * (i.e. byte ...)
      */
     OHOS_DEVICE_EXITCAMERA_EVENT,
@@ -1424,7 +1424,7 @@ typedef enum camera_device_metadata_tag {
     /**
      * ohos.control.motionDetection [static, enum, public]
      *
-     * camera device property, set current camera Operation status detection switch
+     * camera device property, set current camera operation status detection switch
      * (i.e. enum: disable/enable ...)
      */
     OHOS_CONTROL_MOTION_DETECTION,
