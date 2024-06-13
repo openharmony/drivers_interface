@@ -130,7 +130,7 @@ interface IUsbInterface {
      * @deprecated since 5.0
      * @useinstead ohos.hdi.usb.v1_1.IUsbInterface.GetDeviceFileDescriptor
      */
-    GetFileDescriptor([in] struct UsbDev dev, [out] FileDescriptor fd);
+    GetFileDescriptor([in] struct UsbDev dev, [out] int fd);
 
     /* *
      * @brief Sets the configuration information of a USB device.
