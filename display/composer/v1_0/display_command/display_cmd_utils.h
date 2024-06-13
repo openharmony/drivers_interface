@@ -38,8 +38,11 @@ class DisplayCmdUtils {
 public:
     static constexpr int32_t MAX_INT = 0x7fffffff;
     static constexpr uint32_t ELEMENT_SIZE = sizeof(int32_t);
+    static constexpr uint32_t MOVE_SIZE = sizeof(int) / 2;
     static constexpr uint32_t TRANSFER_WAIT_TIME = 100000000; // ms
     static constexpr uint32_t INIT_ELEMENT_COUNT = 32 * 1024;
+    static constexpr uint32_t MAX_MEMORY = 10485760; // 10M;
+    static constexpr uint32_t MAX_ELE_COUNT = 100000;
 
     #define SWITCHCASE(x) case (x): {return #x;}
     static const char *CommandToString(int32_t cmdId)
@@ -76,33 +79,33 @@ public:
         }
     }
 
-    static int32_t StartPack(int32_t cmdId, std::shared_ptr<CommandDataPacker> packer)
+    static int32_t StartPack(int32_t cmdId, CommandDataPacker& packer)
     {
-        return packer->PackBegin(cmdId) ? HDF_SUCCESS : HDF_FAILURE;
+        return packer.PackBegin(cmdId) ? HDF_SUCCESS : HDF_FAILURE;
     }
 
-    static int32_t EndPack(std::shared_ptr<CommandDataPacker> packer)
+    static int32_t EndPack(CommandDataPacker& packer)
     {
-        return packer->PackEnd(CONTROL_CMD_REQUEST_END) ? HDF_SUCCESS : HDF_FAILURE;
+        return packer.PackEnd(CONTROL_CMD_REQUEST_END) ? HDF_SUCCESS : HDF_FAILURE;
     }
 
-    static int32_t StartSection(int32_t cmdId, std::shared_ptr<CommandDataPacker> packer)
+    static int32_t StartSection(int32_t cmdId, CommandDataPacker& packer)
     {
-        return packer->BeginSection(cmdId) ? HDF_SUCCESS : HDF_FAILURE;
+        return packer.BeginSection(cmdId) ? HDF_SUCCESS : HDF_FAILURE;
     }
 
-    static int32_t SetupDevice(uint32_t devId, uint32_t layerId, std::shared_ptr<CommandDataPacker> packer)
+    static int32_t SetupDevice(uint32_t devId, uint32_t layerId, CommandDataPacker& packer)
     {
-        DISPLAY_CHK_RETURN(packer->WriteUint32(devId) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(packer.WriteUint32(devId) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write devId error", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteUint32(layerId) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(packer.WriteUint32(layerId) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write layerId error", __func__));
         return HDF_SUCCESS;
     }
 
-    static int32_t EndSection(std::shared_ptr<CommandDataPacker> packer)
+    static int32_t EndSection(CommandDataPacker& packer)
     {
-        return packer->EndSection() ? HDF_SUCCESS : HDF_FAILURE;
+        return packer.EndSection() ? HDF_SUCCESS : HDF_FAILURE;
     }
 
     static int32_t GenerateHdifdSeqid()
@@ -132,87 +135,96 @@ public:
         return false;
     }
 
-    static int32_t RectPack(const IRect& rect, std::shared_ptr<CommandDataPacker> packer)
+    static int32_t RectPack(const IRect& rect, CommandDataPacker& packer)
     {
-        DISPLAY_CHK_RETURN(packer->WriteInt32(rect.x) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(packer.WriteInt32(rect.x) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write rect.x error", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteInt32(rect.y) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(packer.WriteInt32(rect.y) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write rect.y error", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteInt32(rect.w) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(packer.WriteInt32(rect.w) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write rect.w error", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteInt32(rect.h) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(packer.WriteInt32(rect.h) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write rect.h error", __func__));
         return HDF_SUCCESS;
     }
 
-    static int32_t LayerColorPack(const LayerColor& layerColor, std::shared_ptr<CommandDataPacker> packer)
+    static int32_t LayerColorPack(const LayerColor& layerColor, CommandDataPacker& packer)
     {
-        DISPLAY_CHK_RETURN(packer->WriteUint8(layerColor.r) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(packer.WriteUint8(layerColor.r) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write layerColor.r error", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteUint8(layerColor.g) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(packer.WriteUint8(layerColor.g) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write layerColor.g error", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteUint8(layerColor.b) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(packer.WriteUint8(layerColor.b) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write layerColor.b error", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteUint8(layerColor.a) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(packer.WriteUint8(layerColor.a) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write layerColor.a error", __func__));
         return HDF_SUCCESS;
     }
 
     static int32_t FileDescriptorPack(
-        const int32_t fd, std::shared_ptr<CommandDataPacker> packer, std::vector<HdifdInfo>& hdiFds)
+        const int32_t fd, CommandDataPacker& packer, std::vector<HdifdInfo>& hdiFds, bool dupFd = true)
     {
+        if (fd < 0) {
+            DISPLAY_CHK_RETURN(packer.WriteInt32(fd) == false, HDF_FAILURE,
+                HDF_LOGE("%{public}s, write fd error", __func__));
+            return HDF_SUCCESS;
+        }
+
         HdifdInfo hdifdInfo;
         hdifdInfo.id = GenerateHdifdSeqid();
-        hdifdInfo.hdiFd = new HdifdParcelable();
-        DISPLAY_CHK_RETURN(hdifdInfo.hdiFd == nullptr, HDF_FAILURE,
-            HDF_LOGE("%{public}s, new HdifdParcelable failed", __func__));
-        if (fd >= 0) {
+        if (dupFd) {
+            hdifdInfo.hdiFd = new HdifdParcelable();
+            DISPLAY_CHK_RETURN(hdifdInfo.hdiFd == nullptr, HDF_FAILURE,
+                HDF_LOGE("%{public}s, new HdifdParcelable failed", __func__));
             // A normal fd is transfered by binder, here just write id for unpacking to match fd.
             DISPLAY_CHK_RETURN(hdifdInfo.hdiFd->Init(fd) == false, HDF_FAILURE,
-                HDF_LOGE("%{public}s, hdiFd init failed", __func__));
-            hdiFds.push_back(hdifdInfo);
-            DISPLAY_CHK_RETURN(packer->WriteInt32(hdifdInfo.id) == false, HDF_FAILURE,
-                HDF_LOGE("%{public}s, hdiFd init failed", __func__));
+                HDF_LOGE("%{public}s, hdiFd init failed, fd:%{public}d", __func__, fd));
         } else {
-            // A illegal fd is transfered by smq directly.
-            DISPLAY_CHK_RETURN(packer->WriteInt32(fd) == false, HDF_FAILURE,
-                HDF_LOGE("%{public}s, write fd error", __func__));
+            hdifdInfo.hdiFd = new HdifdParcelable(fd);
+            DISPLAY_CHK_RETURN(hdifdInfo.hdiFd == nullptr, HDF_FAILURE,
+                HDF_LOGE("%{public}s, new HdifdParcelable failed", __func__));
+            hdifdInfo.hdiFd->Move();
         }
+
+        hdiFds.push_back(hdifdInfo);
+        DISPLAY_CHK_RETURN(packer.WriteInt32(hdifdInfo.id) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, write hdifdInfo.id failed", __func__));
+
         return HDF_SUCCESS;
     }
 
-    static int32_t BufferHandlePack(const BufferHandle* buffer, std::shared_ptr<CommandDataPacker> packer,
+    static int32_t BufferHandlePack(const BufferHandle* buffer, CommandDataPacker& packer,
         std::vector<HdifdInfo>& hdiFds)
     {
         if (buffer == nullptr) {
-            DISPLAY_CHK_RETURN(packer->WriteUint32(UINT32_MAX) == false, HDF_FAILURE,
+            DISPLAY_CHK_RETURN(packer.WriteUint32(UINT32_MAX) == false, HDF_FAILURE,
                 HDF_LOGE("%{public}s, write null buffer reserveFds error", __func__));
-            DISPLAY_CHK_RETURN(packer->WriteUint32(UINT32_MAX) == false, HDF_FAILURE,
+            DISPLAY_CHK_RETURN(packer.WriteUint32(UINT32_MAX) == false, HDF_FAILURE,
                 HDF_LOGE("%{public}s, write null buffer reservceInts error", __func__));
             return HDF_SUCCESS;
         } else {
-            DISPLAY_CHK_RETURN(packer->WriteUint32(buffer->reserveFds) == false, HDF_FAILURE,
+            DISPLAY_CHK_RETURN(packer.WriteUint32(buffer->reserveFds) == false, HDF_FAILURE,
                 HDF_LOGE("%{public}s, write buffer->reserveFds error", __func__));
-            DISPLAY_CHK_RETURN(packer->WriteUint32(buffer->reserveInts) == false, HDF_FAILURE,
+            DISPLAY_CHK_RETURN(packer.WriteUint32(buffer->reserveInts) == false, HDF_FAILURE,
                 HDF_LOGE("%{public}s, write buffer->reserveInts error", __func__));
         }
         int32_t ret = FileDescriptorPack(buffer->fd, packer, hdiFds);
         if (ret != HDF_SUCCESS) {
             return ret;
         }
-        DISPLAY_CHK_RETURN(packer->WriteInt32(buffer->width) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(packer.WriteInt32(buffer->width) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write buffer->width failed", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteInt32(buffer->stride) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(packer.WriteInt32(buffer->stride) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write buffer->stride failed", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteInt32(buffer->height) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(packer.WriteInt32(buffer->height) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write buffer->height failed", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteInt32(buffer->size) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(packer.WriteInt32(buffer->size) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write buffer->size failed", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteInt32(buffer->format) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(packer.WriteInt32(buffer->format) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write buffer->format failed", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteUint64(buffer->usage) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(packer.WriteUint64(buffer->usage) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write buffer->usage failed", __func__));
-        DISPLAY_CHK_RETURN(packer->WriteUint64(buffer->phyAddr) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(packer.WriteUint64(buffer->phyAddr) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, write buffer->phyAddr failed", __func__));
         uint32_t i = 0;
         for (i = 0; i < buffer->reserveFds; i++) {
@@ -222,39 +234,39 @@ public:
             }
         }
         for (uint32_t j = 0; j < buffer->reserveInts; j++) {
-            DISPLAY_CHK_RETURN(packer->WriteInt32(buffer->reserve[i++]) == false, HDF_FAILURE,
+            DISPLAY_CHK_RETURN(packer.WriteInt32(buffer->reserve[i++]) == false, HDF_FAILURE,
                 HDF_LOGE("%{public}s, write buffer->reserve failed", __func__));
         }
         return HDF_SUCCESS;
     }
 
-    static int32_t SetupDeviceUnpack(std::shared_ptr<CommandDataUnpacker> unpacker, uint32_t& devId, uint32_t& layerId)
+    static int32_t SetupDeviceUnpack(CommandDataUnpacker& unpacker, uint32_t& devId, uint32_t& layerId)
     {
-        DISPLAY_CHK_RETURN(unpacker->ReadUint32(devId) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(unpacker.ReadUint32(devId) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, read devId failed", __func__));
-        DISPLAY_CHK_RETURN(unpacker->ReadUint32(layerId) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(unpacker.ReadUint32(layerId) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, read layerId failed", __func__));
         return HDF_SUCCESS;
     }
 
-    static int32_t RectUnpack(std::shared_ptr<CommandDataUnpacker> unpacker, IRect& rect)
+    static int32_t RectUnpack(CommandDataUnpacker& unpacker, IRect& rect)
     {
-        DISPLAY_CHK_RETURN(unpacker->ReadInt32(rect.x) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(unpacker.ReadInt32(rect.x) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, read rect.x failed", __func__));
-        DISPLAY_CHK_RETURN(unpacker->ReadInt32(rect.y) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(unpacker.ReadInt32(rect.y) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, read rect.y failed", __func__));
-        DISPLAY_CHK_RETURN(unpacker->ReadInt32(rect.w) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(unpacker.ReadInt32(rect.w) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, read rect.w failed", __func__));
-        DISPLAY_CHK_RETURN(unpacker->ReadInt32(rect.h) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(unpacker.ReadInt32(rect.h) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, read rect.h failed", __func__));
         return HDF_SUCCESS;
     }
 
     static int32_t FileDescriptorUnpack(
-        std::shared_ptr<CommandDataUnpacker> unpacker, const std::vector<HdifdInfo>& hdiFds, int32_t& fd)
+        CommandDataUnpacker& unpacker, const std::vector<HdifdInfo>& hdiFds, int32_t& fd)
     {
         int32_t fdId = -1;
-        DISPLAY_CHK_RETURN(unpacker->ReadInt32(fdId) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(unpacker.ReadInt32(fdId) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, read fdId failed", __func__));
         if (fdId < 0 || MatchHdiFd(fdId, hdiFds, fd) == false) {
             // If matching failure, the illegal fd is transfered by smq directly, not by binder IPC.
@@ -263,29 +275,29 @@ public:
         return HDF_SUCCESS;
     }
 
-    static bool UnpackBasicInfo(std::shared_ptr<CommandDataUnpacker> unpacker, const std::vector<HdifdInfo>& hdiFds,
+    static bool UnpackBasicInfo(CommandDataUnpacker& unpacker, const std::vector<HdifdInfo>& hdiFds,
         BufferHandle *handle)
     {
         int32_t ret = FileDescriptorUnpack(unpacker, hdiFds, handle->fd);
         bool retVal = (ret == HDF_SUCCESS ? true : false);
-        DISPLAY_CHK_CONDITION(retVal, true, unpacker->ReadInt32(handle->width),
+        DISPLAY_CHK_CONDITION(retVal, true, unpacker.ReadInt32(handle->width),
             HDF_LOGE("%{public}s, read handle->width error", __func__));
-        DISPLAY_CHK_CONDITION(retVal, true, unpacker->ReadInt32(handle->stride),
+        DISPLAY_CHK_CONDITION(retVal, true, unpacker.ReadInt32(handle->stride),
             HDF_LOGE("%{public}s, read handle->stride error", __func__));
-        DISPLAY_CHK_CONDITION(retVal, true, unpacker->ReadInt32(handle->height),
+        DISPLAY_CHK_CONDITION(retVal, true, unpacker.ReadInt32(handle->height),
             HDF_LOGE("%{public}s, read handle->height error", __func__));
-        DISPLAY_CHK_CONDITION(retVal, true, unpacker->ReadInt32(handle->size),
+        DISPLAY_CHK_CONDITION(retVal, true, unpacker.ReadInt32(handle->size),
             HDF_LOGE("%{public}s, read handle->size error", __func__));
-        DISPLAY_CHK_CONDITION(retVal, true, unpacker->ReadInt32(handle->format),
+        DISPLAY_CHK_CONDITION(retVal, true, unpacker.ReadInt32(handle->format),
             HDF_LOGE("%{public}s, read handle->format error", __func__));
-        DISPLAY_CHK_CONDITION(retVal, true, unpacker->ReadUint64(handle->usage),
+        DISPLAY_CHK_CONDITION(retVal, true, unpacker.ReadUint64(handle->usage),
             HDF_LOGE("%{public}s, read handle->usage error", __func__));
-        DISPLAY_CHK_CONDITION(retVal, true, unpacker->ReadUint64(handle->phyAddr),
+        DISPLAY_CHK_CONDITION(retVal, true, unpacker.ReadUint64(handle->phyAddr),
             HDF_LOGE("%{public}s, read handle->phyAddr error", __func__));
         return retVal;
     }
 
-    static bool UnpackExtraInfo(std::shared_ptr<CommandDataUnpacker> unpacker, const std::vector<HdifdInfo>& hdiFds,
+    static bool UnpackExtraInfo(CommandDataUnpacker& unpacker, const std::vector<HdifdInfo>& hdiFds,
         BufferHandle *handle)
     {
         bool retVal = true;
@@ -298,7 +310,7 @@ public:
             }
         }
         for (uint32_t j = 0; j < handle->reserveInts; j++) {
-            retVal = unpacker->ReadInt32(handle->reserve[i++]);
+            retVal = unpacker.ReadInt32(handle->reserve[i++]);
             if (!retVal) {
                 HDF_LOGE("%{public}s, get reserve data error, i:%{public}u, j:%{public}u",
                     __func__, i, j);
@@ -308,14 +320,14 @@ public:
         return retVal;
     }
 
-    static int32_t BufferHandleUnpack(std::shared_ptr<CommandDataUnpacker> unpacker,
+    static int32_t BufferHandleUnpack(CommandDataUnpacker& unpacker,
         const std::vector<HdifdInfo>& hdiFds, BufferHandle*& buffer)
     {
         uint32_t fdsNum = 0;
         uint32_t intsNum = 0;
-        DISPLAY_CHK_RETURN(unpacker->ReadUint32(fdsNum) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(unpacker.ReadUint32(fdsNum) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, read fdsNum error", __func__));
-        DISPLAY_CHK_RETURN(unpacker->ReadUint32(intsNum) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(unpacker.ReadUint32(intsNum) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, read intsNum error", __func__));
         if (fdsNum == UINT32_MAX && intsNum == UINT32_MAX) {
             buffer = nullptr;
@@ -340,15 +352,15 @@ public:
         return retVal ? HDF_SUCCESS : HDF_FAILURE;
     }
 
-    static int32_t LayerColorUnpack(std::shared_ptr<CommandDataUnpacker> unpacker, LayerColor& layerColor)
+    static int32_t LayerColorUnpack(CommandDataUnpacker& unpacker, LayerColor& layerColor)
     {
-        DISPLAY_CHK_RETURN(unpacker->ReadUint8(layerColor.r) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(unpacker.ReadUint8(layerColor.r) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, read layerColor.r failed", __func__));
-        DISPLAY_CHK_RETURN(unpacker->ReadUint8(layerColor.g) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(unpacker.ReadUint8(layerColor.g) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, read layerColor.g failed", __func__));
-        DISPLAY_CHK_RETURN(unpacker->ReadUint8(layerColor.b) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(unpacker.ReadUint8(layerColor.b) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, read layerColor.b failed", __func__));
-        DISPLAY_CHK_RETURN(unpacker->ReadUint8(layerColor.a) == false, HDF_FAILURE,
+        DISPLAY_CHK_RETURN(unpacker.ReadUint8(layerColor.a) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, read layerColor.a failed", __func__));
         return HDF_SUCCESS;
     }

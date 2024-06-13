@@ -11,8 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-HDF_CORE_PATH = "../../../hdf_core"
-import("$HDF_CORE_PATH/adapter/uhdf2/hdi.gni")
+import("//build/config/components/hdi/hdi.gni")
 hdi("motion") {
   module_name = "motion_service"
 

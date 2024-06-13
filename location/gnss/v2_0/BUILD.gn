@@ -19,6 +19,7 @@ hdi("location_gnss") {
     "GnssTypes.idl",
     "IGnssCallback.idl",
     "IGnssInterface.idl",
+    "IGnssMeasurementCallback.idl",
   ]
 
   language = "cpp"

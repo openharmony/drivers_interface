@@ -42,6 +42,7 @@ package ohos.hdi.location.gnss.v2_0;
 
 import ohos.hdi.location.gnss.v2_0.IGnssCallback;
 import ohos.hdi.location.gnss.v2_0.GnssTypes;
+import ohos.hdi.location.gnss.v2_0.IGnssMeasurementCallback;
 
 /*
  * @brief Defines the functions for performing basic operations on GNSS.
@@ -190,5 +191,27 @@ interface IGnssInterface {
      * @version 2.0
      */
     SendNetworkInitiatedMsg([in] String msg, [in] int length);
+
+    /*
+     * @brief Enable GNSS measurement and listen to measurement information.
+     *
+     * @param callbackObj Indicates callback for reporting GNSS Measurement information. 
+     * For details, see {@link IGnssMeasurementCallback}.
+     * @return Returns <b>0</b> if the GNSS Measurement is successfully enabled; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    EnableGnssMeasurement([in] IGnssMeasurementCallback callbackObj);
+
+    /*
+     * @brief Disable GNSS measurement reporting.
+     *
+     * @return Returns <b>0</b> if the GNSS Measurement is successfully disabled; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    DisableGnssMeasurement();
 }
 /** @} */

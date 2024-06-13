@@ -59,6 +59,19 @@ enum DispPowerStatus : ohos.hdi.display.composer.v1_1.DispPowerStatus {
  */
 enum BufferUsage : ohos.hdi.display.composer.v1_0.BufferUsage {
     HBM_USE_CPU_HW_BOTH = (1ULL << 17),        /**< For support cpu and hardware */
+    HBM_BUFFER_FORMAT_ALIGNMENT_512 = (1ULL << 18),        /**< For support buffer alignment: */
+    HBM_USE_RGB_TO_YUV_CONVERSION = (1ULL << 19),          /**< For identify RGB to YUV conversion */
+};
+
+
+/**
+ * @brief Enumerates pixel formats.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+enum PixelFormat : ohos.hdi.display.composer.v1_1.PixelFormat {
+    PIXEL_FMT_RGBA16_FLOAT = 39, /**< RGBA16 float format */
 };
 
 enum DispCmd : ohos.hdi.display.composer.v1_0.DispCmd {
