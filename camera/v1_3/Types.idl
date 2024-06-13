@@ -26,6 +26,7 @@
 package ohos.hdi.camera.v1_3;
 
 import ohos.hdi.camera.v1_2.Types;
+import ohos.hdi.camera.v1_0.Types;
 
 sequenceable ohos.hdi.camera.v1_0.BufferHandleSequenceable;
 sequenceable ohos.hdi.camera.v1_0.MapDataSequenceable;
@@ -85,6 +86,12 @@ enum OperationMode : ohos.hdi.camera.v1_2.OperationMode_V1_2 {
     */
     SECURE = 15,
 
+    /**
+    * quick shot photo mode, which dedicated to quick shot photo mode
+    * @since 5.0
+    * @version 1.0
+    */
+    QUICK_SHOT_PHOTO = 16,
 };
 
 /**
@@ -95,7 +102,7 @@ enum OperationMode : ohos.hdi.camera.v1_2.OperationMode_V1_2 {
 enum ExtendedStreamInfoType : ohos.hdi.camera.v1_2.ExtendedStreamInfoType_V1_2 {
 
     /**
-     * Slow motion mode, which dedicated to video recording slow motion
+     * Extended stream information of raw.
      */
     EXTENDED_STREAM_INFO_RAW = 2,
 
@@ -168,4 +175,18 @@ enum ExecutionMode : ohos.hdi.camera.v1_2.ExecutionMode {
      * Default mode.
      */
     DEFAULT = 3,
+};
+
+/**
+ * @brief Enumerates camera device error types, which are used by {@link OnError}.
+ * @since 3.2
+ * @version 1.1
+ */
+enum ErrorType : ohos.hdi.camera.v1_0.ErrorType {
+    /**
+     * sensor data error.
+     * @since 5.0
+     * @version 1.0
+     */
+    SENSOR_DATA_ERROR = 5,
 };
