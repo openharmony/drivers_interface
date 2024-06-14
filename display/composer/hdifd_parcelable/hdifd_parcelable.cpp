@@ -56,6 +56,7 @@ bool HdifdParcelable::Init(int32_t fd)
     } else {
         if (fd < 0) {
             hdiFd_ = -1;
+            ret = false;
         } else {
             hdiFd_ = dup(fd);
             ret = (hdiFd_ < 0) ? false : true;
