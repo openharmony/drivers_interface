@@ -1998,7 +1998,7 @@ enum CameraEffectSuggestionType {
 // OHOS_CONTROL_BURST_CAPTURE
 enum BurstCapture {
     OHOS_CONTROL_BURST_CAPTURE_END = 0,
-    OHOS_CONTROL_BURST_CAPTURE_START = 1,
+    OHOS_CONTROL_BURST_CAPTURE_BEGIN = 1,
 };
 
 #endif
