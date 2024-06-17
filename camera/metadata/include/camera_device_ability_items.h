@@ -288,6 +288,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_HIGH_QUALITY_SUPPORT,
     /**
+     * ohos.status.burstCapture [static, enum, public]
+     *
+     * camera device property, set current camera device burst capture mode
+     * (i.e. enum: begin/end ...)
+     */
+    OHOS_CONTROL_BURST_CAPTURE,
+    /**
      * ohos.camera.propertiesEnd
      *
      * camera property end
@@ -1986,6 +1993,12 @@ enum CameraEffectSuggestionType {
     OHOS_CAMERA_EFFECT_SUGGESTION_FOOD,
     OHOS_CAMERA_EFFECT_SUGGESTION_SKY,
     OHOS_CAMERA_EFFECT_SUGGESTION_SUNRISE_SUNSET,
+};
+
+// OHOS_CONTROL_BURST_CAPTURE
+enum BurstCapture {
+    OHOS_CONTROL_BURST_CAPTURE_END = 0,
+    OHOS_CONTROL_BURST_CAPTURE_BEGIN = 1,
 };
 
 #endif
