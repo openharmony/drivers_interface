@@ -61,7 +61,6 @@ struct UsbCtrlTransfer {
     int requestCmd;
     int value;
     int index;
-    int length;
     int timeout;
 };
 
