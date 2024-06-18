@@ -92,6 +92,13 @@ enum OperationMode : ohos.hdi.camera.v1_2.OperationMode_V1_2 {
     * @version 1.0
     */
     QUICK_SHOT_PHOTO = 16,
+
+    /**
+    * light painting mode, which dedicated to streamer shutter mode
+    * @since 5.0
+    * @version 1.0
+    */
+    LIGHT_PAINTING = 17,
 };
 
 /**
