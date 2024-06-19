@@ -2022,4 +2022,12 @@ enum BurstCapture {
     OHOS_CONTROL_BURST_CAPTURE_BEGIN = 1,
 };
 
+// OHOS_ABILITY_LIGHT_PAINTING_TYPE
+enum LightPaintingType {
+    CAR = 0,
+    STAR,
+    WATER,
+    LIGHT,
+};
+
 #endif
