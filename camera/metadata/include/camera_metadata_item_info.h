@@ -379,7 +379,7 @@ static item_info_t g_ohosPostProcess[OHOS_CAMERA_EFFECT_END - OHOS_CAMERA_EFFECT
     [OHOS_CONTROL_LIGHT_PAINTING_TYPE -
         OHOS_CAMERA_EFFECT_START] = {"controlLightPaintingType", META_TYPE_BYTE, 1},
     [OHOS_CONTROL_LIGHT_PAINTING_FLASH -
-        OHOS_CAMERA_EFFECT_START] = {"controlLightPaintingType", META_TYPE_BYTE, 1},
+        OHOS_CAMERA_EFFECT_START] = {"controlLightPaintingFlash", META_TYPE_BYTE, 1},
 };
 
 static item_info_t g_ohosCameraSecure[OHOS_CAMERA_SECURE_END - OHOS_CAMERA_SECURE_START] = {
