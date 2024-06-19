@@ -295,6 +295,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_BURST_CAPTURE,
     /**
+     * ohos.ability.cameraFoldStatus [static, enum, public]
+     *
+     * camera device property, report current camera fold status
+     * (i.e. enum: nonFoldable/expanded/folded ...)
+     */
+    OHOS_ABILITY_CAMERA_FOLD_STATUS,
+    /**
      * ohos.camera.propertiesEnd
      *
      * camera property end
