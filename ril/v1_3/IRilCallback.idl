@@ -64,9 +64,9 @@ import ohos.hdi.ril.v1_3.Types;
       * @param imeiSv IMEISV of the device.
       *
       * @since 5.0
-      * @version 1.0
+      * @version 1.1
       */
-    GetImeiSvResponse([in] struct RilRadioResponseInfo responseInfo, [in] String imeiSv);
+    [oneway] GetImeiSvResponse([in] struct RilRadioResponseInfo responseInfo, [in] String imeiSv);
 
     /**
      * @brief Callback for the response of obtaining the SIM card status.
@@ -76,8 +76,8 @@ import ohos.hdi.ril.v1_3.Types;
      * @param SimCardStatusInfo SIM card status. For details, see {@link SimCardStatusInfo}.
      *
      * @since 5.0
-     * @version 1.0
+     * @version 1.1
      */
-    GetSimCardStatusResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct SimCardStatusInfo result);
+    [oneway] GetSimCardStatusResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct SimCardStatusInfo result);
 }
 /** @} */

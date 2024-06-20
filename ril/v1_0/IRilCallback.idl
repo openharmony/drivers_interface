@@ -63,9 +63,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param emergencyInfoList Emergency call number list. For details, see {@link EmergencyInfoList}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    CallEmergencyNotice([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] CallEmergencyNotice([in] struct RilRadioResponseInfo responseInfo,
         [in] struct EmergencyInfoList emergencyInfoList);
 
     /**
@@ -75,9 +75,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    CallStateUpdated([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] CallStateUpdated([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for reporting the call ringback tone.
@@ -87,9 +87,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param ringbackVoice Ringback tone information. For details, see {@link RingbackVoice}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    CallRingbackVoiceNotice([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] CallRingbackVoiceNotice([in] struct RilRadioResponseInfo responseInfo,
         [in] struct RingbackVoice ringbackVoice);
 
     /**
@@ -100,9 +100,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param srvccStatus SRVCC status. For details, see {@link SrvccStatus}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    CallSrvccStatusNotice([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] CallSrvccStatusNotice([in] struct RilRadioResponseInfo responseInfo,
         [in] struct SrvccStatus srvccStatus);
 
     /**
@@ -113,9 +113,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param ussdNoticeInfo USSD service information. For details, see {@link UssdNoticeInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    CallUssdNotice([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] CallUssdNotice([in] struct RilRadioResponseInfo responseInfo,
         [in] struct UssdNoticeInfo ussdNoticeInfo);
 
     /**
@@ -126,9 +126,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param ssNoticeInfo Supplementary service information. For details, see {@link SsNoticeInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    CallSsNotice([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] CallSsNotice([in] struct RilRadioResponseInfo responseInfo,
         [in] struct SsNoticeInfo ssNoticeInfo);
 
     /**
@@ -138,9 +138,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    CallRsrvccStatusNotify([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] CallRsrvccStatusNotify([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of setting the emergency call number list.
@@ -149,9 +149,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetEmergencyCallListResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetEmergencyCallListResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of querying the emergency call number list.
@@ -161,9 +161,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param emergencyInfoList Emergency call number list. For details, see {@link EmergencyInfoList}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetEmergencyCallListResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetEmergencyCallListResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct EmergencyInfoList emergencyInfoList);
 
     /**
@@ -174,9 +174,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param callList Call status information list. For details, see {@link CallInfoList}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetCallListResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetCallListResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct CallInfoList callList);
 
     /**
@@ -186,9 +186,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    DialResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] DialResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for ending a call.
@@ -197,9 +197,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    HangupResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] HangupResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for rejecting a call.
@@ -208,9 +208,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    RejectResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] RejectResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for answering a call.
@@ -219,9 +219,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    AnswerResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] AnswerResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for holding a call.
@@ -230,9 +230,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    HoldCallResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] HoldCallResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for unholding a call.
@@ -241,9 +241,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    UnHoldCallResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] UnHoldCallResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for switching a call.
@@ -252,9 +252,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SwitchCallResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SwitchCallResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for querying the CLIP service.
@@ -264,9 +264,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param getClipResult CLIP result. For details, see {@link GetClipResult}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetClipResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetClipResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct GetClipResult getClipResult);
 
     /**
@@ -276,9 +276,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetClipResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetClipResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for combining calls into a conference call.
@@ -287,9 +287,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    CombineConferenceResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] CombineConferenceResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for separating calls from a conference call.
@@ -298,9 +298,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SeparateConferenceResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SeparateConferenceResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for ending the call is in the foreground and resuming the call in the background.
@@ -309,9 +309,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    CallSupplementResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] CallSupplementResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for querying the call waiting information.
@@ -321,9 +321,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param callWaitResult Call waiting result. For details, see {@link CallWaitResult}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetCallWaitingResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetCallWaitingResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct CallWaitResult callWaitResult);
 
     /**
@@ -333,9 +333,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetCallWaitingResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetCallWaitingResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for querying call forwarding information.
@@ -346,9 +346,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link CallForwardQueryInfoList}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetCallTransferInfoResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetCallTransferInfoResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct CallForwardQueryInfoList cFQueryList);
 
     /**
@@ -358,9 +358,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetCallTransferInfoResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetCallTransferInfoResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of querying call restriction information.
@@ -370,9 +370,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param result Call restriction result. For details, see {@link CallRestrictionResult}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetCallRestrictionResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetCallRestrictionResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct CallRestrictionResult result);
 
     /**
@@ -382,9 +382,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetCallRestrictionResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetCallRestrictionResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of querying CLIR service information.
@@ -394,9 +394,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param getClirResult CLIR result. For details, see {@link GetClirResult}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetClirResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetClirResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct GetClirResult getClirResult);
 
     /**
@@ -406,9 +406,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetClirResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetClirResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of enabling DTMF.
@@ -417,9 +417,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    StartDtmfResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] StartDtmfResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of sending DTMF.
@@ -428,9 +428,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SendDtmfResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SendDtmfResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of stopping DTMF sending.
@@ -439,9 +439,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    StopDtmfResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] StopDtmfResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of querying the call preference mode.
@@ -451,9 +451,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param mode CallPreference mode.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetCallPreferenceModeResponse([in] struct RilRadioResponseInfo responseInfo, [in] int mode);
+    [oneway] GetCallPreferenceModeResponse([in] struct RilRadioResponseInfo responseInfo, [in] int mode);
 
     /**
      * @brief Callback for the response of setting the call preference mode.
@@ -462,9 +462,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetCallPreferenceModeResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetCallPreferenceModeResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of setting the USSD service.
@@ -473,9 +473,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetUssdResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetUssdResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of querying the USSD service.
@@ -485,9 +485,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param cusd USSD service information.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetUssdResponse([in] struct RilRadioResponseInfo responseInfo, [in] int cusd);
+    [oneway] GetUssdResponse([in] struct RilRadioResponseInfo responseInfo, [in] int cusd);
 
     /**
      * @brief Callback for the response of setting the mute mode.
@@ -496,9 +496,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetMuteResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetMuteResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of querying the mute status.
@@ -509,9 +509,9 @@ import ohos.hdi.ril.v1_0.Types;
      * indicates the muted state.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetMuteResponse([in] struct RilRadioResponseInfo responseInfo, [in] int mute);
+    [oneway] GetMuteResponse([in] struct RilRadioResponseInfo responseInfo, [in] int mute);
 
     /**
      * @brief Callback for the response of querying the call failure cause.
@@ -521,9 +521,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param callFail Call failure cause.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetCallFailReasonResponse([in] struct RilRadioResponseInfo responseInfo, [in] int callFail);
+    [oneway] GetCallFailReasonResponse([in] struct RilRadioResponseInfo responseInfo, [in] int callFail);
 
     /**
      * @brief Callback for the response of setting the call restriction password.
@@ -532,9 +532,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetBarringPasswordResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetBarringPasswordResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for reporting status updates such as data service connection or disconnection.
@@ -544,9 +544,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param dataCallResultList List of data service activation results. For details, see {@link DataCallResultList}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    PdpContextListUpdated([in] struct RilRadioResponseInfo responseInfo, [in] struct DataCallResultList dataCallResultList);
+    [oneway] PdpContextListUpdated([in] struct RilRadioResponseInfo responseInfo, [in] struct DataCallResultList dataCallResultList);
 
     /**
      * @brief Callback for the response of activating the data service.
@@ -556,9 +556,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param setupDataCallResultInfo Data service activation result. For details, see {@link SetupDataCallResultInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    ActivatePdpContextResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] ActivatePdpContextResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct SetupDataCallResultInfo setupDataCallResultInfo);
 
     /**
@@ -568,9 +568,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    DeactivatePdpContextResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] DeactivatePdpContextResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of querying the PDP context list.
@@ -580,9 +580,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param dataCallResultList List of data service activation results. For details, see {@link DataCallResultList}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetPdpContextListResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetPdpContextListResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct DataCallResultList dataCallResultList);
 
     /**
@@ -592,9 +592,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetInitApnInfoResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetInitApnInfoResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of querying the current data link bandwidth information.
@@ -604,9 +604,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param dataLinkBandwidthInfo Data link bandwidth information. For details, see {@link DataLinkBandwidthInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetLinkBandwidthInfoResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetLinkBandwidthInfoResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct DataLinkBandwidthInfo dataLinkBandwidthInfo);
 
     /**
@@ -616,9 +616,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetLinkBandwidthReportingRuleResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetLinkBandwidthReportingRuleResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of enabling the data service for a SIM card slot.
@@ -627,9 +627,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetDataPermittedResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetDataPermittedResponse([in] struct RilRadioResponseInfo responseInfo);
 
      /**
       * @brief Callback for reporting the radio status.
@@ -639,9 +639,9 @@ import ohos.hdi.ril.v1_0.Types;
       * @param state Radio status. The value <b>0</b> indicates OFF, and the value <b>1</b> indicates ON.
       *
       * @since 3.2
-      * @version 1.0
+      * @version 1.1
       */
-    RadioStateUpdated([in] struct RilRadioResponseInfo responseInfo, [in] int state);
+    [oneway] RadioStateUpdated([in] struct RilRadioResponseInfo responseInfo, [in] int state);
 
      /**
       * @brief Callback for reporting the change of the radio access technology.
@@ -652,9 +652,9 @@ import ohos.hdi.ril.v1_0.Types;
       * For details, see {@link VoiceRadioTechnology}.
       *
       * @since 3.2
-      * @version 1.0
+      * @version 1.1
       */
-    VoiceRadioTechUpdated([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] VoiceRadioTechUpdated([in] struct RilRadioResponseInfo responseInfo,
         [in] struct VoiceRadioTechnology voiceRadioTechnology);
 
      /**
@@ -664,9 +664,9 @@ import ohos.hdi.ril.v1_0.Types;
       * For details, see {@link RilRadioResponseInfo}.
       *
       * @since 3.2
-      * @version 1.0
+      * @version 1.1
       */
-    ShutDownResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] ShutDownResponse([in] struct RilRadioResponseInfo responseInfo);
 
      /**
       * @brief Callback for the response of setting the modem status.
@@ -675,9 +675,9 @@ import ohos.hdi.ril.v1_0.Types;
       * For details, see {@link RilRadioResponseInfo}.
       *
       * @since 3.2
-      * @version 1.0
+      * @version 1.1
       */
-    SetRadioStateResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetRadioStateResponse([in] struct RilRadioResponseInfo responseInfo);
 
      /**
       * @brief Callback for the response of querying the modem status.
@@ -686,9 +686,9 @@ import ohos.hdi.ril.v1_0.Types;
       * For details, see {@link RilRadioResponseInfo}.
       *
       * @since 3.2
-      * @version 1.0
+      * @version 1.1
       */
-    GetRadioStateResponse([in] struct RilRadioResponseInfo responseInfo,[in] int state);
+    [oneway] GetRadioStateResponse([in] struct RilRadioResponseInfo responseInfo,[in] int state);
 
      /**
       * @brief Callback for the response of querying the international mobile equipment identity (IMEI).
@@ -698,9 +698,9 @@ import ohos.hdi.ril.v1_0.Types;
       * @param imei IMEI of the device.
       *
       * @since 3.2
-      * @version 1.0
+      * @version 1.1
       */
-    GetImeiResponse([in] struct RilRadioResponseInfo responseInfo, [in] String imei);
+    [oneway] GetImeiResponse([in] struct RilRadioResponseInfo responseInfo, [in] String imei);
 
      /**
       * @brief Callback for the response of querying the mobile equipment identifier (MEID).
@@ -710,9 +710,9 @@ import ohos.hdi.ril.v1_0.Types;
       * @param meid MEID of the device.
       *
       * @since 3.2
-      * @version 1.0
+      * @version 1.1
       */
-    GetMeidResponse([in] struct RilRadioResponseInfo responseInfo, [in] String meid);
+    [oneway] GetMeidResponse([in] struct RilRadioResponseInfo responseInfo, [in] String meid);
 
      /**
       * @brief Callback for the response of querying the radio access technology of the CS domain.
@@ -722,9 +722,9 @@ import ohos.hdi.ril.v1_0.Types;
       * @param VoiceRadioTechnology Voice radio access technology. For details, see {@link VoiceRadioTechnology}.
       *
       * @since 3.2
-      * @version 1.0
+      * @version 1.1
       */
-    GetVoiceRadioTechnologyResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetVoiceRadioTechnologyResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct VoiceRadioTechnology voiceRadioTechnology);
 
      /**
@@ -735,9 +735,9 @@ import ohos.hdi.ril.v1_0.Types;
       * @param basebandVersion Baseband version.
       *
       * @since 3.2
-      * @version 1.0
+      * @version 1.1
       */
-    GetBasebandVersionResponse([in] struct RilRadioResponseInfo responseInfo, [in] String basebandVersion);
+    [oneway] GetBasebandVersionResponse([in] struct RilRadioResponseInfo responseInfo, [in] String basebandVersion);
 
     /**
      * @brief Callback for reporting SIM card status updates.
@@ -746,9 +746,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SimStateUpdated([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SimStateUpdated([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for reporting the STK <b>SessionEnd</b> instruction.
@@ -757,9 +757,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SimStkSessionEndNotify([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SimStkSessionEndNotify([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for reporting STK <b>Proactive</b> instructions.
@@ -768,9 +768,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SimStkProactiveNotify([in] struct RilRadioResponseInfo responseInfo, [in] String response);
+    [oneway] SimStkProactiveNotify([in] struct RilRadioResponseInfo responseInfo, [in] String response);
 
     /**
      * @brief Callback for reporting STK <b>Alpha</b> instructions.
@@ -779,9 +779,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SimStkAlphaNotify([in] struct RilRadioResponseInfo responseInfo, [in] String response);
+    [oneway] SimStkAlphaNotify([in] struct RilRadioResponseInfo responseInfo, [in] String response);
 
     /**
      * @brief Callback for reporting STK events.
@@ -790,9 +790,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SimStkEventNotify([in] struct RilRadioResponseInfo responseInfo, [in] String response);
+    [oneway] SimStkEventNotify([in] struct RilRadioResponseInfo responseInfo, [in] String response);
 
     /**
      * @brief Callback for reporting STK <b>CallSetup</b> instructions.
@@ -801,9 +801,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SimStkCallSetupNotify([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SimStkCallSetupNotify([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for reporting the SIM card status.
@@ -812,9 +812,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SimRefreshNotify([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SimRefreshNotify([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for reporting STK Radio protocol updates.
@@ -823,9 +823,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SimRadioProtocolUpdated([in] struct RilRadioResponseInfo responseInfo, [in] struct RadioProtocol radioProtocol);
+    [oneway] SimRadioProtocolUpdated([in] struct RilRadioResponseInfo responseInfo, [in] struct RadioProtocol radioProtocol);
 
     /**
      * @brief Callback for the response of querying SIM card data.
@@ -835,9 +835,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param result I/O response result of the SIM card. For details, see {@link IccIoResultInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetSimIOResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct IccIoResultInfo result);
+    [oneway] GetSimIOResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct IccIoResultInfo result);
 
     /**
      * @brief Callback for the response of obtaining the SIM card status.
@@ -847,9 +847,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param CardStatusInfo SIM card status. For details, see {@link CardStatusInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetSimStatusResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct CardStatusInfo result);
+    [oneway] GetSimStatusResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct CardStatusInfo result);
 
     /**
      * @brief Callback for the response of obtaining the IMSI of a SIM card.
@@ -859,9 +859,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param response IMSI of the SIM card.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetImsiResponse([in] struct RilRadioResponseInfo responseInfo, [in] String response);
+    [oneway] GetImsiResponse([in] struct RilRadioResponseInfo responseInfo, [in] String response);
 
     /**
      * @brief Callback for the response of obtaining the SIM card lock status.
@@ -871,9 +871,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param simLockStatus SIM card lock status. For details, see {@link simLockStatus}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetSimLockStatusResponse([in] struct RilRadioResponseInfo responseInfo, [in] int simLockStatus);
+    [oneway] GetSimLockStatusResponse([in] struct RilRadioResponseInfo responseInfo, [in] int simLockStatus);
 
     /**
      * @brief Callback for the response of setting the SIM card lock status.
@@ -883,9 +883,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param LockStatusResp SIM card lock status response. For details, see {@link LockStatusResp}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetSimLockResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
+    [oneway] SetSimLockResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
 
     /**
      * @brief Callback for the response of changing the SIM card password.
@@ -895,9 +895,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param LockStatusResp SIM card lock status response. For details, see {@link LockStatusResp}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    ChangeSimPasswordResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
+    [oneway] ChangeSimPasswordResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
 
     /**
      * @brief Callback for the response of unlocking with the PIN.
@@ -907,9 +907,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param LockStatusResp SIM card lock status response. For details, see {@link LockStatusResp}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    UnlockPinResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
+    [oneway] UnlockPinResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
 
     /**
      * @brief Callback for the response of unlocking with the PUK.
@@ -919,9 +919,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param LockStatusResp SIM card lock status response. For details, see {@link LockStatusResp}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    UnlockPukResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
+    [oneway] UnlockPukResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
 
     /**
      * @brief Callback for the response of unlocking with PIN2.
@@ -931,9 +931,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param LockStatusResp SIM card lock status response. For details, see {@link LockStatusResp}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    UnlockPin2Response([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
+    [oneway] UnlockPin2Response([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
 
     /**
      * @brief Callback for the response of unlocking with PUK2.
@@ -943,9 +943,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param LockStatusResp SIM card lock status response. For details, see {@link LockStatusResp}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    UnlockPuk2Response([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
+    [oneway] UnlockPuk2Response([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
 
     /**
      * @brief Callback for the response of activating or deactivating the SIM card.
@@ -954,9 +954,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetActiveSimResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetActiveSimResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of sending the STK <b>TerminalResponse</b> instruction.
@@ -965,9 +965,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SimStkSendTerminalResponseResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SimStkSendTerminalResponseResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of sending the STK <b>Envelope</b> instruction.
@@ -976,9 +976,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SimStkSendEnvelopeResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SimStkSendEnvelopeResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of sending the STK <b>CallSetup</b> instruction.
@@ -987,9 +987,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SimStkSendCallSetupRequestResultResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SimStkSendCallSetupRequestResultResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of querying whether the STK is ready.
@@ -998,9 +998,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SimStkIsReadyResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SimStkIsReadyResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of querying the protocol stack of the primary and secondary SIM cards.
@@ -1010,9 +1010,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param RadioProtocol Radio protocol. For details, see {@link RadioProtocol}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetRadioProtocolResponse([in] struct RilRadioResponseInfo responseInfo,[in] struct RadioProtocol radioProtocol);
+    [oneway] GetRadioProtocolResponse([in] struct RilRadioResponseInfo responseInfo,[in] struct RadioProtocol radioProtocol);
 
     /**
      * @brief Callback for the response of setting the protocol stack of the primary and secondary SIM cards.
@@ -1022,9 +1022,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param RadioProtocol Radio protocol. For details, see {@link RadioProtocol}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetRadioProtocolResponse([in] struct RilRadioResponseInfo responseInfo,[in] struct RadioProtocol radioProtocol);
+    [oneway] SetRadioProtocolResponse([in] struct RilRadioResponseInfo responseInfo,[in] struct RadioProtocol radioProtocol);
 
     /**
      * @brief Callback for the response of opening the logical channel for APDU transmission.
@@ -1035,9 +1035,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link OpenLogicalChannelResponse}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SimOpenLogicalChannelResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] SimOpenLogicalChannelResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct OpenLogicalChannelResponse pOpenLogicalChannelResponse);
 
     /**
@@ -1047,9 +1047,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SimCloseLogicalChannelResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SimCloseLogicalChannelResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of transmitting APDU over a logical channel.
@@ -1059,9 +1059,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param result Data transmission result. For details, see {@link IccIoResultInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SimTransmitApduLogicalChannelResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] SimTransmitApduLogicalChannelResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct IccIoResultInfo result);
 
     /**
@@ -1072,9 +1072,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param result Indicates the data transmission result. For details, see {@link IccIoResultInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SimTransmitApduBasicChannelResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] SimTransmitApduBasicChannelResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct IccIoResultInfo result);
 
     /**
@@ -1085,9 +1085,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param result SIM card authentication result. For details, see {@link IccIoResultInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SimAuthenticationResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct IccIoResultInfo result);
+    [oneway] SimAuthenticationResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct IccIoResultInfo result);
 
     /**
      * @brief Callback for the response of SIM card unlocking.
@@ -1097,9 +1097,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param LockStatusResp SIM card lock status response. For details, see {@link LockStatusResp}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    UnlockSimLockResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
+    [oneway] UnlockSimLockResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct LockStatusResp lockStatus);
 
     /**
      * @brief Callback for reporting network registration status updates of the CS domain.
@@ -1109,9 +1109,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param csRegStatusInfo Network registration status of the CS domain. For details, see {@link CsRegStatusInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    NetworkCsRegStatusUpdated([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] NetworkCsRegStatusUpdated([in] struct RilRadioResponseInfo responseInfo,
         [in] struct CsRegStatusInfo csRegStatusInfo);
 
     /**
@@ -1122,9 +1122,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param psRegStatusInfo Network registration status of the PS domain. For details, see {@link PsRegStatusInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    NetworkPsRegStatusUpdated([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] NetworkPsRegStatusUpdated([in] struct RilRadioResponseInfo responseInfo,
         [in] struct PsRegStatusInfo psRegStatusInfo);
 
     /**
@@ -1135,9 +1135,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param rssi Signal strength. For details, see {@link Rssi}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SignalStrengthUpdated([in] struct RilRadioResponseInfo responseInfo, [in] struct Rssi rssi);
+    [oneway] SignalStrengthUpdated([in] struct RilRadioResponseInfo responseInfo, [in] struct Rssi rssi);
 
     /**
      * @brief Callback for reporting NITZ time zone updates.
@@ -1147,9 +1147,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param timeZoneStr NITZ time zone.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    NetworkTimeZoneUpdated([in] struct RilRadioResponseInfo responseInfo, [in] String timeZoneStr);
+    [oneway] NetworkTimeZoneUpdated([in] struct RilRadioResponseInfo responseInfo, [in] String timeZoneStr);
 
     /**
      * @brief Callback for reporting NITZ time updates.
@@ -1159,9 +1159,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param timeStr NITZ time.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    NetworkTimeUpdated([in] struct RilRadioResponseInfo responseInfo, [in] String timeStr);
+    [oneway] NetworkTimeUpdated([in] struct RilRadioResponseInfo responseInfo, [in] String timeStr);
 
     /**
      * @brief Callback for reporting physical channel configuration updates.
@@ -1171,9 +1171,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param channelConfigInfoList Channel configuration information list. For details, see {@link ChannelConfigInfoList}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    NetworkPhyChnlCfgUpdated([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] NetworkPhyChnlCfgUpdated([in] struct RilRadioResponseInfo responseInfo,
         [in] struct ChannelConfigInfoList channelConfigInfoList);
 
     /**
@@ -1184,9 +1184,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param cellListCurrentInfo Cell information list. For details, see {@link CellListCurrentInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    NetworkCurrentCellUpdated([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] NetworkCurrentCellUpdated([in] struct RilRadioResponseInfo responseInfo,
         [in] struct CellListCurrentInfo cellListCurrentInfo);
 
     /**
@@ -1197,9 +1197,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param rssi Signal strength. For details, see {@link Rssi}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetSignalStrengthResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct Rssi rssi);
+    [oneway] GetSignalStrengthResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct Rssi rssi);
 
     /**
      * @brief Callback for the response of obtaining the network registration status of the CS domain.
@@ -1209,9 +1209,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param csRegStatusInfo Network registration status of the CS domain. For details, see {@link CsRegStatusInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetCsRegStatusResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetCsRegStatusResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct CsRegStatusInfo csRegStatusInfo);
 
     /**
@@ -1222,9 +1222,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param psRegStatusInfo Network registration status of the PS domain. For details, see {@link PsRegStatusInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetPsRegStatusResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetPsRegStatusResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct PsRegStatusInfo psRegStatusInfo);
 
     /**
@@ -1235,9 +1235,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param psRegStatusInfo Carrier information. For details, see {@link OperatorInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetOperatorInfoResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct OperatorInfo psRegStatusInfo);
+    [oneway] GetOperatorInfoResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct OperatorInfo psRegStatusInfo);
 
     /**
      * @brief Callback for the response of querying available network information.
@@ -1247,9 +1247,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param availableNetworkList Available network list. For details, see {@link AvailableNetworkList}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetNetworkSearchInformationResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetNetworkSearchInformationResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct AvailableNetworkList availableNetworkList);
 
     /**
@@ -1260,9 +1260,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param setNetworkModeInfo Network modes available for selection. For details, see {@link SetNetworkModeInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetNetworkSelectionModeResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetNetworkSelectionModeResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct SetNetworkModeInfo setNetworkModeInfo);
 
     /**
@@ -1272,9 +1272,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetNetworkSelectionModeResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetNetworkSelectionModeResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of querying neighboring cell information.
@@ -1284,9 +1284,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param cellListNearbyInfo Neighboring cell information list. For details, see {@link CellListNearbyInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetNeighboringCellInfoListResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetNeighboringCellInfoListResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct CellListNearbyInfo cellListNearbyInfo);
 
     /**
@@ -1297,9 +1297,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param cellListCurrentInfo Cell information list. For details, see {@link CellListNearbyInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetCurrentCellInfoResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetCurrentCellInfoResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct CellListCurrentInfo cellListCurrentInfo);
 
     /**
@@ -1309,9 +1309,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetPreferredNetworkResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetPreferredNetworkResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of querying the preferred network type.
@@ -1321,9 +1321,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param preferredNetworkTypeInfo Preferred network type information. For details, see {@link PreferredNetworkTypeInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetPreferredNetworkResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetPreferredNetworkResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct PreferredNetworkTypeInfo preferredNetworkTypeInfo);
 
     /**
@@ -1334,9 +1334,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param channelConfigInfoList Physical channel configuration information list. For details, see {@link ChannelConfigInfoList}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetPhysicalChannelConfigResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetPhysicalChannelConfigResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct ChannelConfigInfoList channelConfigInfoList);
 
     /**
@@ -1346,9 +1346,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetLocateUpdatesResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetLocateUpdatesResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of setting a notification filter.
@@ -1357,9 +1357,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetNotificationFilterResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetNotificationFilterResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of setting the device status.
@@ -1368,9 +1368,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetDeviceStateResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetDeviceStateResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for reporting new GSM SMS message notifications.
@@ -1380,9 +1380,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param smsMessageInfo SMS message information. For details, see {@link SmsMessageInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    NewSmsNotify([in] struct RilRadioResponseInfo responseInfo, [in] struct SmsMessageInfo smsMessageInfo);
+    [oneway] NewSmsNotify([in] struct RilRadioResponseInfo responseInfo, [in] struct SmsMessageInfo smsMessageInfo);
 
     /**
      * @brief Callback for reporting new CDMA SMS message notifications.
@@ -1392,9 +1392,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param smsMessageInfo SMS message information. For details, see {@link SmsMessageInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    NewCdmaSmsNotify([in] struct RilRadioResponseInfo responseInfo,[in] struct SmsMessageInfo smsMessageInfo);
+    [oneway] NewCdmaSmsNotify([in] struct RilRadioResponseInfo responseInfo,[in] struct SmsMessageInfo smsMessageInfo);
 
     /**
      * @brief Callback for reporting SMS status notifications.
@@ -1404,9 +1404,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param smsMessageInfo SMS message information. For details, see {@link SmsMessageInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SmsStatusReportNotify([in] struct RilRadioResponseInfo responseInfo, [in] struct SmsMessageInfo smsMessageInfo);
+    [oneway] SmsStatusReportNotify([in] struct RilRadioResponseInfo responseInfo, [in] struct SmsMessageInfo smsMessageInfo);
 
     /**
      * @brief Callback for reporting storage of new SMS message in a SIM card.
@@ -1417,9 +1417,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param indicationType Notification type. For details, see {@link HRilNotiType}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    NewSmsStoredOnSimNotify([in] struct RilRadioResponseInfo responseInfo, [in] int recordNumber,
+    [oneway] NewSmsStoredOnSimNotify([in] struct RilRadioResponseInfo responseInfo, [in] int recordNumber,
         [in] int indicationType);
 
     /**
@@ -1430,9 +1430,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param cellBroadConfigReportInfo Cell broadcast information. For details, see {@link CBConfigReportInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    CBConfigNotify([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] CBConfigNotify([in] struct RilRadioResponseInfo responseInfo,
         [in] struct CBConfigReportInfo cellBroadConfigReportInfo);
 
     /**
@@ -1443,9 +1443,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param sendSmsResultInfo SMS message sending result. For details, see {@link SendSmsResultInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SendGsmSmsResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct SendSmsResultInfo sendSmsResultInfo);
+    [oneway] SendGsmSmsResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct SendSmsResultInfo sendSmsResultInfo);
 
     /**
      * @brief Callback for the response of sending a CDMA SMS message.
@@ -1455,9 +1455,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param sendSmsResultInfo SMS message sending result. For details, see {@link SendSmsResultInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SendCdmaSmsResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] SendCdmaSmsResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct SendSmsResultInfo sendSmsResultInfo);
 
     /**
@@ -1467,9 +1467,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    AddSimMessageResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] AddSimMessageResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of deleting GSM SMS messages from a SIM card.
@@ -1478,9 +1478,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    DelSimMessageResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] DelSimMessageResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of updating the GSM SMS messages in a SIM card.
@@ -1489,9 +1489,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    UpdateSimMessageResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] UpdateSimMessageResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of writing CDMA SMS messages to a SIM card.
@@ -1500,9 +1500,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    AddCdmaSimMessageResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] AddCdmaSimMessageResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of deleting CDMA SMS messages from a SIM card.
@@ -1511,9 +1511,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    DelCdmaSimMessageResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] DelCdmaSimMessageResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of updating the CDMA SMS messages in a SIM card.
@@ -1522,9 +1522,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    UpdateCdmaSimMessageResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] UpdateCdmaSimMessageResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of setting an SMSC address.
@@ -1533,9 +1533,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetSmscAddrResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetSmscAddrResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of querying the SMSC address.
@@ -1545,9 +1545,9 @@ import ohos.hdi.ril.v1_0.Types;
      *
      * @param serviceCenterAddress SMSC address. For details, see {@link ServiceCenterAddress}.
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetSmscAddrResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetSmscAddrResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct ServiceCenterAddress serviceCenterAddress);
 
     /**
@@ -1557,9 +1557,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetCBConfigResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetCBConfigResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of querying the GSM cell broadcast configuration.
@@ -1569,9 +1569,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param cellBroadcastInfo GSM cell broadcast configuration information. For details, see {@link CBConfigInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetCBConfigResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct CBConfigInfo cellBroadcastInfo);
+    [oneway] GetCBConfigResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct CBConfigInfo cellBroadcastInfo);
 
     /**
      * @brief Callback for the response of activating CDMA cell broadcast.
@@ -1580,9 +1580,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SetCdmaCBConfigResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SetCdmaCBConfigResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of querying the CDMA cell broadcast configuration.
@@ -1592,9 +1592,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param cdmaCBConfigInfo CDMA cell broadcast configuration information. For details, see {@link CdmaCBConfigInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    GetCdmaCBConfigResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetCdmaCBConfigResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct CdmaCBConfigInfo cdmaCBConfigInfo);
 
     /**
@@ -1605,9 +1605,9 @@ import ohos.hdi.ril.v1_0.Types;
      * @param sendSmsResultInfo SMS message sending result. For details, see {@link SendSmsResultInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SendSmsMoreModeResponse([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] SendSmsMoreModeResponse([in] struct RilRadioResponseInfo responseInfo,
         [in] struct SendSmsResultInfo sendSmsResultInfo);
 
     /**
@@ -1617,9 +1617,9 @@ import ohos.hdi.ril.v1_0.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    SendSmsAckResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SendSmsAckResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of a common error.
@@ -1627,8 +1627,8 @@ import ohos.hdi.ril.v1_0.Types;
      * @param responseInfo Common response information, such as the card slot ID and request sequence ID. For details, see {@link RilRadioResponseInfo}.
      *
      * @since 3.2
-     * @version 1.0
+     * @version 1.1
      */
-    CommonErrorResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] CommonErrorResponse([in] struct RilRadioResponseInfo responseInfo);
 }
 /** @} */
