@@ -98,6 +98,8 @@ static item_info_t g_ohosCameraProperties[OHOS_CAMERA_PROPERTIES_END - OHOS_CAME
         OHOS_CAMERA_PROPERTIES_START] = {"cameraAbilityHighQualitySupport", META_TYPE_BYTE, 1},
     [OHOS_CONTROL_BURST_CAPTURE -
         OHOS_CAMERA_PROPERTIES_START] = {"cameraControlBurstCapture", META_TYPE_BYTE, 1},
+    [OHOS_ABILITY_CAMERA_FOLD_STATUS -
+        OHOS_CAMERA_PROPERTIES_START] = {"cameraFoldStatus", META_TYPE_BYTE, 1},
 };
 
 static item_info_t g_ohosCameraSensor[OHOS_CAMERA_SENSOR_END - OHOS_CAMERA_SENSOR_START] = {

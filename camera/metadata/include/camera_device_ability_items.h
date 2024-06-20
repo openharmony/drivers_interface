@@ -295,6 +295,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_BURST_CAPTURE,
     /**
+     * ohos.ability.cameraFoldStatus [static, enum, public]
+     *
+     * camera device property, report current camera fold status
+     * (i.e. enum: nonFoldable/expanded/folded ...)
+     */
+    OHOS_ABILITY_CAMERA_FOLD_STATUS,
+    /**
      * ohos.camera.propertiesEnd
      *
      * camera property end
@@ -2022,6 +2029,13 @@ enum BurstCapture {
     OHOS_CONTROL_BURST_CAPTURE_BEGIN = 1,
 };
 
+// OHOS_ABILITY_CAMERA_FOLD_STATUS
+enum CameraFoldStatus {
+    OHOS_CAMERA_FOLD_STATUS_NONFOLDABLE = 0,
+    OHOS_CAMERA_FOLD_STATUS_EXPENDED = 1,
+    OHOS_CAMERA_FOLD_STATUS_FOLDED = 2,
+};
+
 // OHOS_ABILITY_LIGHT_PAINTING_TYPE
 enum LightPaintingType {
     CAR = 0,
@@ -2029,5 +2043,4 @@ enum LightPaintingType {
     WATER,
     LIGHT,
 };
-
 #endif
