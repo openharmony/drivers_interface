@@ -2043,4 +2043,5 @@ enum LightPaintingType {
     WATER,
     LIGHT,
 };
+
 #endif
