@@ -94,7 +94,7 @@ import ohos.hdi.location.gnss.v2_0.GnssTypes;
      * @since 5.0
      * @version 2.0
      */
-    ReportGnssCapabilities([in] enum GnssCapabilities capabilities);
+    ReportGnssCapabilities([in] unsigned int capabilities);
 
     /*
      * @brief Satellite status information reporting.

@@ -133,7 +133,7 @@ interface IGnssInterface {
      * @since 5.0
      * @version 2.0
      */
-    DeleteAuxiliaryData([in] enum GnssAuxiliaryDataType data);
+    DeleteAuxiliaryData([in] unsigned short data);
 
     /*
      * @brief Ingesting Predict Gnss Data.
