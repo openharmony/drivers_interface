@@ -59,5 +59,7 @@ import ohos.hdi.wlan.chip.v1_0.ChipTypes;
      * @version 1.0
      */
     [oneway] OnScanResultsCallback([in] unsigned int event);
+
+    [oneway] OnRssiReport([in] int index, [in] int c0Rssi, [in] int c1Rssi);
 };
 /** @} */
