@@ -232,4 +232,4 @@ struct CameraDeviceResourceCost {
      * @brief Cameradevices ID that can not open while current camera device is on.
      */
     String[] conflictingDevices_;
-}
+};
