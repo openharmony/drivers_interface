@@ -119,7 +119,7 @@ enum OperationMode : ohos.hdi.camera.v1_2.OperationMode_V1_2 {
     * @since 5.0
     * @version 1.0
     */
-    APERTURE_VIDEO = 19,
+    APERTURE_VIDEO = 20,
 };
 
 /**
