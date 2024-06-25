@@ -106,6 +106,20 @@ enum OperationMode : ohos.hdi.camera.v1_2.OperationMode_V1_2 {
     * @version 1.0
     */
     PANORAMA_PHOTO = 18,
+
+    /**
+    * Timelapse photo mode, which dedicated to timelapse photo mode
+    * @since 5.0
+    * @version 1.0
+    */
+    TIMELAPSE_PHOTO = 19,
+
+    /**
+    * Aperture video mode, which dedicated to aperture video mode
+    * @since 5.0
+    * @version 1.0
+    */
+    APERTURE_VIDEO = 19,
 };
 
 /**
@@ -204,3 +218,18 @@ enum ErrorType : ohos.hdi.camera.v1_0.ErrorType {
      */
     SENSOR_DATA_ERROR = 5,
 };
+
+/**
+ * @brief Defines the CameraDeviceResourceCost, which is used by {@link ICameraDevice::GetResourceCost}.
+ */
+struct CameraDeviceResourceCost {
+    /**
+     * @brief Total resource cost of using current camera device, scope is [0, 100].
+     */
+    unsigned int resourceCost_;
+
+    /**
+     * @brief Cameradevices ID that can not open while current camera device is on.
+     */
+    String[] conflictingDevices_;
+}
