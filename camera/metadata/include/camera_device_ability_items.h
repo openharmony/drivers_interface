@@ -1534,6 +1534,27 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_CONFLICT_CONFIGURATIONS,
     /**
+     * ohos.ability.lightPaintingType [static, byte[], public]
+     *
+     * camera device property, report current camera light painting type
+     * (i.e. byte[] ...)
+     */
+    OHOS_ABILITY_LIGHT_PAINTING_TYPE,
+    /**
+     * ohos.control.lightPaintingType [static, byte[], public]
+     *
+     * camera device property, report current camera light painting type
+     * (i.e. byte[] [enum, 0(car)/1(star)/2(water)/3(light)])
+     */
+    OHOS_CONTROL_LIGHT_PAINTING_TYPE,
+    /**
+     * ohos.control.lightPaintingFlash [static, byte[], public]
+     *
+     * camera device property, report current camera light painting flash
+     * (i.e. byte[] ...)
+     */
+    OHOS_CONTROL_LIGHT_PAINTING_FLASH,
+    /**
      * ohos.camera.effectEnd
      *
      * camera effect end
@@ -2013,6 +2034,14 @@ enum CameraFoldStatus {
     OHOS_CAMERA_FOLD_STATUS_NONFOLDABLE = 0,
     OHOS_CAMERA_FOLD_STATUS_EXPANDED = 1,
     OHOS_CAMERA_FOLD_STATUS_FOLDED = 2,
+};
+
+// OHOS_ABILITY_LIGHT_PAINTING_TYPE
+enum LightPaintingType {
+    OHOS_CAMERA_LIGHT_PAINTING_CAR = 0,
+    OHOS_CAMERA_LIGHT_PAINTING_STAR,
+    OHOS_CAMERA_LIGHT_PAINTING_WATER,
+    OHOS_CAMERA_LIGHT_PAINTING_LIGHT,
 };
 
 #endif
