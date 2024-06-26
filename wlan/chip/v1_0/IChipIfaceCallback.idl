@@ -61,8 +61,8 @@ import ohos.hdi.wlan.chip.v1_0.ChipTypes;
     [oneway] OnScanResultsCallback([in] unsigned int event);
 
     /**
-     * @brief Obtains the callback for the rssi change event, This interface is preferentially used to
-     * communicate with the Wi-Fi service.
+     * @brief Obtains the callback for the rssi change event.
+     * This interface is preferentially used to communicate with the Wi-Fi service.
      *
      * @param aerials index.
      * @param c0Rssi first antenna rssi.

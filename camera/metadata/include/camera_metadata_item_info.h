@@ -376,6 +376,12 @@ static item_info_t g_ohosPostProcess[OHOS_CAMERA_EFFECT_END - OHOS_CAMERA_EFFECT
         OHOS_CAMERA_EFFECT_START] = {"availableConfigurations", META_TYPE_INT32, -1},
     [OHOS_ABILITY_CONFLICT_CONFIGURATIONS -
         OHOS_CAMERA_EFFECT_START] = {"conflictConfigurations", META_TYPE_INT32, -1},
+    [OHOS_ABILITY_LIGHT_PAINTING_TYPE -
+        OHOS_CAMERA_EFFECT_START] = {"lightPaintingType", META_TYPE_BYTE, -1},
+    [OHOS_CONTROL_LIGHT_PAINTING_TYPE -
+        OHOS_CAMERA_EFFECT_START] = {"controlLightPaintingType", META_TYPE_BYTE, 1},
+    [OHOS_CONTROL_LIGHT_PAINTING_FLASH -
+        OHOS_CAMERA_EFFECT_START] = {"controlLightPaintingFlash", META_TYPE_BYTE, 1},
 };
 
 static item_info_t g_ohosCameraSecure[OHOS_CAMERA_SECURE_END - OHOS_CAMERA_SECURE_START] = {
