@@ -101,7 +101,7 @@ static item_info_t g_ohosCameraProperties[OHOS_CAMERA_PROPERTIES_END - OHOS_CAME
     [OHOS_ABILITY_CAMERA_FOLD_STATUS -
         OHOS_CAMERA_PROPERTIES_START] = {"cameraFoldStatus", META_TYPE_BYTE, 1},
     [OHOS_STATUS_CAMERA_OCCLUSION_DETECTION -
-        OHOS_CAMERA_PROPERTIES_START] = {"cameraStatusOcclusionDetection", META_TYPE_UINT32, 1},
+        OHOS_CAMERA_PROPERTIES_START] = {"cameraStatusOcclusionDetection", META_TYPE_BYTE, 1},
 };
 
 static item_info_t g_ohosCameraSensor[OHOS_CAMERA_SENSOR_END - OHOS_CAMERA_SENSOR_START] = {
