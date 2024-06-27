@@ -55,6 +55,19 @@ interface IAudioCapture {
     CaptureFrame([out] byte[] frame, [out] unsigned long replyBytes);
 
     /**
+     * @brief Reads a ec frame of input data (uplink data) from the audio driver for capturing.
+     *
+     * @param capture Indicates the pointer to the <b>IAudioCapture</b> object to operate.
+     * @param frameLen Indicates the pointer to the len of captureEc frame.
+     * @param frameInfo Indicates the pointer to the audio captureEc attributes.
+     * @return Returns <b>0</b> if the input data is read successfully; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    CaptureFrameEc([in] struct AudioFrameLen frameLen, [out] struct AudioCaptureFrameInfo frameInfo);
+
+    /**
      * @brief Obtains the last number of input audio frames.
      *
      * @param capture Indicates the pointer to the <b>IAudioCapture</b> object to operate.

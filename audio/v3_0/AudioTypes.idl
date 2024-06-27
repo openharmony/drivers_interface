@@ -425,7 +425,7 @@ struct AudioSceneDescriptor {
  * @brief Defines audio input type.
  *
  * @since 4.1
- * @version 2.0
+ * @version 3.0
  */
 enum AudioInputType {
     AUDIO_INPUT_DEFAULT_TYPE             = 0,      /**< Assigned default input type */
@@ -437,6 +437,8 @@ enum AudioInputType {
     AUDIO_INPUT_VOICE_DOWNLINK_TYPE      = 1 << 5, /**< Assigned voice downlink input type */
     AUDIO_INPUT_VOICE_CALL_TYPE          = 1 << 6, /**< Assigned voice call input type */
     AUDIO_INPUT_CAMCORDER_TYPE           = 1 << 7, /**< Assigned camcorder input type */
+    AUDIO_INPUT_EC_TYPE                  = 1 << 8, /**< Assigned EC input type */
+    AUDIO_INPUT_NOISE_REDUCTION_TYPE     = 1 << 9, /**< Assigned noise reduction input type */
 };
 
 /**
@@ -458,10 +460,55 @@ struct AudioOffloadInfo
 };
 
 /**
+ * @brief Defines audio Ecsampling attributes.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+struct EcSampleAttributes {
+    boolean ecInterleaved;
+    enum AudioFormat ecFormat;
+    unsigned int ecSampleRate;
+    unsigned int ecChannelCount;
+    unsigned long ecChannelLayout;
+    unsigned int ecPeriod;
+    unsigned int ecFrameSize;
+    boolean ecIsBigEndian;
+    boolean ecIsSignedData;
+    unsigned int ecStartThreshold;
+    unsigned int ecStopThreshold;
+    unsigned int ecSilenceThreshold;
+}
+
+/**
+ * @brief Defines audio captureEc attributes.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+struct AudioCaptureFrameInfo {
+    byte[] frame;
+    unsigned long replyBytes;
+    byte[] frameEc;
+    unsigned long replyBytesEc;
+}
+
+/**
+ * @brief Defines audio len of captureEc frame.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+struct AudioFrameLen {
+    unsigned int frameLen;
+    unsigned int frameEcLen;
+}
+
+/**
  * @brief Defines audio sampling attributes.
  *
  * @since 4.1
- * @version 2.0
+ * @version 3.0
  */
 struct AudioSampleAttributes {
     enum AudioCategory type;       /**< Audio type. For details, see {@link AudioCategory} */
@@ -482,6 +529,7 @@ struct AudioSampleAttributes {
     int streamId;                  /**< Audio Identifier of render or capture */
     int sourceType;                /**< Audio sourceType of render or capture */
     struct AudioOffloadInfo offloadInfo;  /**< offload info for offload stream */
+    struct EcSampleAttributes ecSampleAttributes; /**< ec config */
 };
 
 /**
