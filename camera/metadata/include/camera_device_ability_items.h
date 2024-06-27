@@ -302,6 +302,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_CAMERA_FOLD_STATUS,
     /**
+     * ohos.ability.cameraFoldStatus [static, uint32, public]
+     *
+     * camera device property, query current camera occlusion detection
+     * (i.e. uint32: ...)
+     */
+    OHOS_STATUS_CAMERA_OCCLUSION_DETECTION,
+    /**
      * ohos.camera.propertiesEnd
      *
      * camera property end
