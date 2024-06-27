@@ -478,7 +478,7 @@ struct EcSampleAttributes {
     unsigned int ecStartThreshold;    /**< Audio start threshold. */
     unsigned int ecStopThreshold;     /**< Audio stop threshold. */
     unsigned int ecSilenceThreshold;  /**< Audio buffer threshold. */
-}
+};
 
 /**
  * @brief Defines audio captureEc attributes.
@@ -491,7 +491,7 @@ struct AudioCaptureFrameInfo {
     unsigned long replyBytes;    /**< The actual length of the audio capture frame */
     byte[] frameEc;              /**< Audio capture ec frame */
     unsigned long replyBytesEc;  /**< The actual length of the audio capture ec frame */
-}
+};
 
 /**
  * @brief Defines audio len of captureEc frame.
@@ -502,7 +502,7 @@ struct AudioCaptureFrameInfo {
 struct AudioFrameLen {
     unsigned int frameLen;     /**< The length of the audio capture frame */
     unsigned int frameEcLen;   /**< The length of the audio capture ec frame */
-}
+};
 
 /**
  * @brief Defines audio sampling attributes.
