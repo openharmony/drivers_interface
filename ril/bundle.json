@@ -30,8 +30,7 @@
                 "//drivers/interface/ril/v1_1:ril_idl_target",
                 "//drivers/interface/ril/v1_2:ril_idl_target",
                 "//drivers/interface/ril/v1_3:ril_idl_target",
-                "//drivers/interface/ril/v2_0:ril_idl_target",
-                "//base/telephony/ril_adapter/interfaces/innerkits:hril_innerkits"
+                "//drivers/interface/ril/v2_0:ril_idl_target"
             ],
             "test": [
             ],
