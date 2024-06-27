@@ -466,18 +466,18 @@ struct AudioOffloadInfo
  * @version 1.0
  */
 struct EcSampleAttributes {
-    boolean ecInterleaved;
-    enum AudioFormat ecFormat;
-    unsigned int ecSampleRate;
-    unsigned int ecChannelCount;
-    unsigned long ecChannelLayout;
-    unsigned int ecPeriod;
-    unsigned int ecFrameSize;
-    boolean ecIsBigEndian;
-    boolean ecIsSignedData;
-    unsigned int ecStartThreshold;
-    unsigned int ecStopThreshold;
-    unsigned int ecSilenceThreshold;
+    boolean ecInterleaved;            /**< Interleaving flag of audio data */
+    enum AudioFormat ecFormat;        /**< Audio data format. For details, see {@link AudioFormat}. */
+    unsigned int ecSampleRate;        /**< Audio sampling rate */
+    unsigned int ecChannelCount;      /**< Number of audio channels */
+    unsigned long ecChannelLayout;    /**< Audio channel layout */
+    unsigned int ecPeriod;            /**< Audio sampling period */
+    unsigned int ecFrameSize;         /**< Frame size of the audio data */
+    boolean ecIsBigEndian;            /**< Big endian flag of audio data */
+    boolean ecIsSignedData;           /**< Signed or unsigned flag of audio data */
+    unsigned int ecStartThreshold;    /**< Audio start threshold. */
+    unsigned int ecStopThreshold;     /**< Audio stop threshold. */
+    unsigned int ecSilenceThreshold;  /**< Audio buffer threshold. */
 }
 
 /**
@@ -487,10 +487,10 @@ struct EcSampleAttributes {
  * @version 1.0
  */
 struct AudioCaptureFrameInfo {
-    byte[] frame;
-    unsigned long replyBytes;
-    byte[] frameEc;
-    unsigned long replyBytesEc;
+    byte[] frame;                /**< Audio capture frame */
+    unsigned long replyBytes;    /**< The actual length of the audio capture frame */
+    byte[] frameEc;              /**< Audio capture ec frame */
+    unsigned long replyBytesEc;  /**< The actual length of the audio capture ec frame */
 }
 
 /**
@@ -500,8 +500,8 @@ struct AudioCaptureFrameInfo {
  * @version 1.0
  */
 struct AudioFrameLen {
-    unsigned int frameLen;
-    unsigned int frameEcLen;
+    unsigned int frameLen;     /**< The length of the audio capture frame */
+    unsigned int frameEcLen;   /**< The length of the audio capture ec frame */
 }
 
 /**
