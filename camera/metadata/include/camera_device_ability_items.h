@@ -2037,7 +2037,7 @@ enum CameraFoldStatus {
 };
 
 // OHOS_ABILITY_LIGHT_PAINTING_TYPE
-enum LightPaintingType {
+enum CameraLightPaintingType {
     OHOS_CAMERA_LIGHT_PAINTING_CAR = 0,
     OHOS_CAMERA_LIGHT_PAINTING_STAR,
     OHOS_CAMERA_LIGHT_PAINTING_WATER,

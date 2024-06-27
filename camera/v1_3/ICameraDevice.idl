@@ -27,6 +27,7 @@ package ohos.hdi.camera.v1_3;
 import ohos.hdi.camera.v1_2.ICameraDevice;
 import ohos.hdi.camera.v1_3.IStreamOperatorCallback;
 import ohos.hdi.camera.v1_2.IStreamOperator;
+import ohos.hdi.camera.v1_3.Types;
 
 interface ICameraDevice extends ohos.hdi.camera.v1_2.ICameraDevice {
     /**
@@ -58,4 +59,17 @@ interface ICameraDevice extends ohos.hdi.camera.v1_2.ICameraDevice {
      * @version 1.0
      */
     GetSecureCameraSeq([out] unsigned long SeqId);
+
+    /**
+     * @brief Obtains the resourceCost of camera device.
+     *
+     * @param resourceCost Indicates the resources required to open this camera device.
+     * 
+     * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
+     * in {@link CamRetCode} otherwise.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    GetResourceCost([out] CameraDeviceResourceCost resourceCost);
 }
