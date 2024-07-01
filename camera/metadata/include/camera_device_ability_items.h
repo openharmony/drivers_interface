@@ -1562,6 +1562,69 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_LIGHT_PAINTING_FLASH,
     /**
+     * ohos.control.timeLapseInterval [static, uint32_t[], public]
+     *
+     * camera device property, set current camera time lapse interval
+     * (i.e. uint32_t[] ...)
+     */
+    OHOS_CONTROL_TIME_LAPSE_INTERVAL,
+    /**
+     * ohos.control.timeLapseTryaeState [static, byte[], public]
+     *
+     * camera device property, set current camera time lapse tryae state
+     * (i.e. byte[] ...)
+     */
+    OHOS_CONTROL_TIME_LAPSE_TRYAE_STATE,
+    /**
+     * ohos.status.timeLapsePreviewType [static, byte[], public]
+     *
+     * camera device property, query current camera time lapse preview type
+     * (i.e. byte[] ...)
+     */
+    OHOS_STATUS_TIME_LAPSE_PREVIEW_TYPE,
+    /**
+     * ohos.status.timeLapseTryaeHint [static, byte[], public]
+     *
+     * camera device property, query current camera time lapse tryae hint
+     * (i.e. byte[] ...)
+     */
+    OHOS_STATUS_TIME_LAPSE_TRYAE_HINT,
+    /**
+     * ohos.status.timeLapseCaptureInterval [static, uint32_t[], public]
+     *
+     * camera device property, query current camera time lapse capture interval
+     * (i.e. uint32_t[] ...)
+     */
+    OHOS_STATUS_TIME_LAPSE_CAPTURE_INTERVAL,
+    /**
+     * ohos.status.timeLapseTryaeDone [static, byte[], public]
+     *
+     * camera device property, query current camera time lapse tryae done
+     * (i.e. byte[] ...)
+     */
+    OHOS_STATUS_TIME_LAPSE_TRYAE_DONE,
+    /**
+     * ohos.control.timeLapseRecordState [static, byte[], public]
+     *
+     * camera device property, set current camera time lapse record state
+     * (i.e. byte[] ...)
+     */
+    OHOS_CONTROL_TIME_LAPSE_RECORD_STATE,
+    /**
+     * ohos.control.timeLapsePreviewType [static, byte[], public]
+     *
+     * camera device property, set current camera time lapse preview type
+     * (i.e. byte[] ...)
+     */
+    OHOS_CONTROL_TIME_LAPSE_PREVIEW_TYPE,
+    /**
+     * ohos.ability.timeLapseIntervalRange [static, uint32_t[], public]
+     *
+     * camera device property, report current camera time lapse interval range
+     * (i.e. uint32_t[] ...)
+     */
+    OHOS_ABILITY_TIME_LAPSE_INTERVAL_RANGE,
+    /**
      * ohos.camera.effectEnd
      *
      * camera effect end
@@ -2049,6 +2112,18 @@ enum CameraLightPaintingType {
     OHOS_CAMERA_LIGHT_PAINTING_STAR,
     OHOS_CAMERA_LIGHT_PAINTING_WATER,
     OHOS_CAMERA_LIGHT_PAINTING_LIGHT,
+};
+
+//OHOS_CONTRAL_TIME_LAPSE_TRYAE_STATE
+enum TimeLapseRecordState {
+    TIME_LAPSE_IDLE = 0,
+    TIME_LAPSE_RECORDING = 1,
+};
+
+//OHOS_STATUS_TIME_LAPSE_PREVIEW_TYPE
+enum TimeLapsePreviewType {
+    TIME_LAPSE_PREVIEW_DARK = 1,
+    TIME_LAPSE_PREVIEW_LIGHT = 2,
 };
 
 #endif
