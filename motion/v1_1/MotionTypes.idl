@@ -89,6 +89,8 @@ enum HdfMotionTypeTag {
     HDF_MOTION_TYPE_TOUCH_LINK,
     /** hover status */
     HDF_MOTION_TYPE_HOVER,
+    /** put in pocket */
+    HDF_MOTION_TYPE_PUT_IN_POCKET,
     /** Reserved */
     HDF_MOTION_TYPE_RESERVED,
     /** Maximum motion type */

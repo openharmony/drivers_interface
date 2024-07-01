@@ -26,6 +26,7 @@
 package ohos.hdi.camera.v1_3;
 
 import ohos.hdi.camera.v1_2.Types;
+import ohos.hdi.camera.v1_0.Types;
 
 sequenceable ohos.hdi.camera.v1_0.BufferHandleSequenceable;
 sequenceable ohos.hdi.camera.v1_0.MapDataSequenceable;
@@ -85,6 +86,40 @@ enum OperationMode : ohos.hdi.camera.v1_2.OperationMode_V1_2 {
     */
     SECURE = 15,
 
+    /**
+    * quick shot photo mode, which dedicated to quick shot photo mode
+    * @since 5.0
+    * @version 1.0
+    */
+    QUICK_SHOT_PHOTO = 16,
+
+    /**
+    * Light painting mode, which dedicated to light painting mode
+    * @since 5.0
+    * @version 1.0
+    */
+    LIGHT_PAINTING = 17,
+
+    /**
+    * Panorama photo mode, which dedicated to panorama photo mode
+    * @since 5.0
+    * @version 1.0
+    */
+    PANORAMA_PHOTO = 18,
+
+    /**
+    * Timelapse photo mode, which dedicated to timelapse photo mode
+    * @since 5.0
+    * @version 1.0
+    */
+    TIMELAPSE_PHOTO = 19,
+
+    /**
+    * Aperture video mode, which dedicated to aperture video mode
+    * @since 5.0
+    * @version 1.0
+    */
+    APERTURE_VIDEO = 20,
 };
 
 /**
@@ -95,7 +130,7 @@ enum OperationMode : ohos.hdi.camera.v1_2.OperationMode_V1_2 {
 enum ExtendedStreamInfoType : ohos.hdi.camera.v1_2.ExtendedStreamInfoType_V1_2 {
 
     /**
-     * Slow motion mode, which dedicated to video recording slow motion
+     * Extended stream information of raw.
      */
     EXTENDED_STREAM_INFO_RAW = 2,
 
@@ -168,4 +203,33 @@ enum ExecutionMode : ohos.hdi.camera.v1_2.ExecutionMode {
      * Default mode.
      */
     DEFAULT = 3,
+};
+
+/**
+ * @brief Enumerates camera device error types, which are used by {@link OnError}.
+ * @since 3.2
+ * @version 1.1
+ */
+enum ErrorType : ohos.hdi.camera.v1_0.ErrorType {
+    /**
+     * sensor data error.
+     * @since 5.0
+     * @version 1.0
+     */
+    SENSOR_DATA_ERROR = 5,
+};
+
+/**
+ * @brief Defines the CameraDeviceResourceCost, which is used by {@link ICameraDevice::GetResourceCost}.
+ */
+struct CameraDeviceResourceCost {
+    /**
+     * @brief Total resource cost of using current camera device, scope is [0, 100].
+     */
+    unsigned int resourceCost_;
+
+    /**
+     * @brief Cameradevices ID that can not open while current camera device is on.
+     */
+    String[] conflictingDevices_;
 };

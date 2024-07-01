@@ -275,7 +275,7 @@ struct SatelliteStatusInfo {
     /* Carrier frequency of the signal tracked. */
     float[] carrierFrequencies;
 
-    enum SatelliteAdditionalInfo[] additionalInfo;
+    unsigned int[] additionalInfo;
 };
 
 /*
@@ -338,7 +338,7 @@ struct GnssRefTime {
  * @since 5.0
  */
 struct LocationInfo {
-    enum GnssLocationValidity fieldValidity;
+    unsigned int fieldValidity;
 
     double latitude;
 
@@ -401,7 +401,7 @@ struct GnssNiNotificationRequest {
     enum GnssNiRequestCategory gnssNiRequestCategory;
 
     /* Category of notification. */
-    enum GnssNiNotificationCategory notificationCategory;
+    int notificationCategory;
 
     /* Timeout to wait for user response. The unit is seconds. */
     int requestTimeout;

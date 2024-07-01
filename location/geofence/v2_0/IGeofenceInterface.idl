@@ -72,7 +72,7 @@ interface IGeofenceInterface {
      * @version 2.0
      */
     AddGnssGeofence([in] struct GeofenceInfo fence,
-                    [in] enum GeofenceEvent monitorEvent);
+                    [in]int monitorEvent);
 
     /*
      * @brief Delete a geofence.

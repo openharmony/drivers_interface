@@ -67,5 +67,17 @@ import ohos.hdi.ril.v1_3.Types;
       * @version 1.0
       */
     GetImeiSvResponse([in] struct RilRadioResponseInfo responseInfo, [in] String imeiSv);
+
+    /**
+     * @brief Callback for the response of obtaining the SIM card status.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID.
+     * For details, see {@link RilRadioResponseInfo}.
+     * @param SimCardStatusInfo SIM card status. For details, see {@link SimCardStatusInfo}.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    GetSimCardStatusResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct SimCardStatusInfo result);
 }
 /** @} */

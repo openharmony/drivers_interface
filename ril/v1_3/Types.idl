@@ -30,3 +30,37 @@ package ohos.hdi.ril.v1_3;
 import ohos.hdi.ril.v1_1.Types;
 import ohos.hdi.ril.v1_2.Types;
 
+/**
+ * @brief Defines the SIM card status information.
+ */
+struct SimCardStatusInfo {
+    /**
+     * SIM card index
+     */
+    int index;
+
+    /**
+     * SIM card type:
+     *- 0: unknown
+     *- 1: common SIM card
+     *- 2: USIM, supporting 4G
+     */
+    int simType;
+
+   /**
+     * SIM card status:
+     *- -1: unknown
+     *- 0: SIM card not inserted
+     *- 1: SIM card detected normally
+     *- 2: PIN required
+     *- 3: PUK required
+     *- 4: PIN2 required
+     *- 5: PUK2 required
+     */
+    int simState;
+
+    /**
+     * SIM card iccid:
+     */
+    String iccid;
+};

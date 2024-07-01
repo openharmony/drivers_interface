@@ -517,7 +517,7 @@ struct GlobalConfigParam {
     GlobalConfigValue value;
     /** Specified userIds. GlobalConfigParam will be effect for all userspaces when the array is empty. */
     int[] userIds;
-    /** Specified authTypes, See @{AuthType}. GlobalConfigParam will be effect for all authTypes when the array is empty.*/
+    /** Specified authTypes, shouldn't empty. See @{AuthType}.*/
     int[] authTypes;
 };
 
