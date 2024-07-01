@@ -1616,14 +1616,14 @@ typedef enum camera_device_metadata_tag {
      * camera device property, set current camera time lapse preview type
      * (i.e. byte[] ...)
      */
-    OHOS_CONTROL_TIME_PLASE_PREVIEW_TYPE,
+    OHOS_CONTROL_TIME_LAPSE_PREVIEW_TYPE,
     /**
      * ohos.ability.timeLapseIntervalRange [static, uint32_t[], public]
      *
      * camera device property, report current camera time lapse interval range
      * (i.e. uint32_t[] ...)
      */
-    OHOS_ABILITY_TIME_PLASE_INTERVAL_RANGE,
+    OHOS_ABILITY_TIME_LAPSE_INTERVAL_RANGE,
     /**
      * ohos.camera.effectEnd
      *
