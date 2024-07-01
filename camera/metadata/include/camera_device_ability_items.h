@@ -1550,14 +1550,14 @@ typedef enum camera_device_metadata_tag {
     /**
      * ohos.control.lightPaintingType [static, byte[], public]
      *
-     * camera device property, report current camera light painting type
+     * camera device property, set current camera light painting type
      * (i.e. byte[] [enum, 0(car)/1(star)/2(water)/3(light)])
      */
     OHOS_CONTROL_LIGHT_PAINTING_TYPE,
     /**
      * ohos.control.lightPaintingFlash [static, byte[], public]
      *
-     * camera device property, report current camera light painting flash
+     * camera device property, set current camera light painting flash
      * (i.e. byte[] ...)
      */
     OHOS_CONTROL_LIGHT_PAINTING_FLASH,
