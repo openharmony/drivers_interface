@@ -1527,6 +1527,34 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_AVAILABLE_PROFILE_LEVEL,
     /**
+     * ohos.ability.availablePreviewProfile [static, int32[], public]
+     *
+     * camera device property, report current camera available preview profile
+     * (i.e. int32[] ...)
+     */
+    OHOS_ABILITY_AVAILABLE_PREVIEW_PROFILE,
+    /**
+     * ohos.ability.availablePhotoProfile [static, int32[], public]
+     *
+     * camera device property, report current camera available photo profile
+     * (i.e. int32[] ...)
+     */
+    OHOS_ABILITY_AVAILABLE_PHOTO_PROFILE,
+    /**
+     * ohos.ability.availableVideoProfile [static, int32[], public]
+     *
+     * camera device property, report current camera available video profile
+     * (i.e. int32[] ...)
+     */
+    OHOS_ABILITY_AVAILABLE_VIDEO_PROFILE,
+    /**
+     * ohos.ability.availableMetadataProfile [static, int32[], public]
+     *
+     * camera device property, report current camera available metadata profile
+     * (i.e. int32[] ...)
+     */
+    OHOS_ABILITY_AVAILABLE_METADATA_PROFILE,
+    /**
      * ohos.ability.availableConfigurations [static, int32[], public]
      *
      * camera device property, report current camera available configurations
