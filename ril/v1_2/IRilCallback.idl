@@ -64,9 +64,9 @@ import ohos.hdi.ril.v1_2.Types;
      * @param plmn resident network.
      *
      * @since 4.1
-     * @version 1.2
+     * @version 1.3
      */
-    ResidentNetworkUpdated([in] struct RilRadioResponseInfo responseInfo, [in] String plmn);
+    [oneway] ResidentNetworkUpdated([in] struct RilRadioResponseInfo responseInfo, [in] String plmn);
 
     /**
      * @brief Callback for the response of Send sim matched operator info.
@@ -75,9 +75,9 @@ import ohos.hdi.ril.v1_2.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 4.1
-     * @version 1.2
+     * @version 1.3
      */
-    SendSimMatchedOperatorInfoResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] SendSimMatchedOperatorInfoResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of cleaning all data connections.
@@ -86,9 +86,9 @@ import ohos.hdi.ril.v1_2.Types;
      * For details, see {@link RilRadioResponseInfo}.
      *
      * @since 4.1
-     * @version 1.2
+     * @version 1.3
      */
-    CleanAllConnectionsResponse([in] struct RilRadioResponseInfo responseInfo);
+    [oneway] CleanAllConnectionsResponse([in] struct RilRadioResponseInfo responseInfo);
 
     /**
      * @brief Callback for the response of querying nr ssd id information.
@@ -98,9 +98,9 @@ import ohos.hdi.ril.v1_2.Types;
      * @param nrCellSsbIds is NR cell ssb Id info. For details, see {@link NrCellSsbIds}.
      *
      * @since 4.1
-     * @version 1.2
+     * @version 1.3
      */
-    GetNrSsbIdResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct NrCellSsbIds nrCellSsbIds);
+    [oneway] GetNrSsbIdResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct NrCellSsbIds nrCellSsbIds);
 
     /**
      * @brief Callback for reporting cell information.
@@ -110,9 +110,9 @@ import ohos.hdi.ril.v1_2.Types;
      * @param cellListCurrentInfo Cell information list. For details, see {@link CellListCurrentInfo_1_2}.
      *
      * @since 4.1
-     * @version 1.2
+     * @version 1.3
      */
-    NetworkCurrentCellUpdated_1_2([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] NetworkCurrentCellUpdated_1_2([in] struct RilRadioResponseInfo responseInfo,
         [in] struct CellListCurrentInfo_1_2 cellListCurrentInfo);
 
     /**
@@ -123,9 +123,9 @@ import ohos.hdi.ril.v1_2.Types;
      * @param cellListCurrentInfo Cell information list. For details, see {@link CellListCurrentInfo_1_2}.
      *
      * @since 4.1
-     * @version 1.2
+     * @version 1.3
      */
-    GetCurrentCellInfoResponse_1_2([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetCurrentCellInfoResponse_1_2([in] struct RilRadioResponseInfo responseInfo,
         [in] struct CellListCurrentInfo_1_2 cellListCurrentInfo);
 
     /**
@@ -136,9 +136,9 @@ import ohos.hdi.ril.v1_2.Types;
      * @param cellListNearbyInfo Neighboring cell information list. For details, see {@link CellListNearbyInfo_1_2}.
      *
      * @since 4.1
-     * @version 1.2
+     * @version 1.3
      */
-    GetNeighboringCellInfoListResponse_1_2([in] struct RilRadioResponseInfo responseInfo,
+    [oneway] GetNeighboringCellInfoListResponse_1_2([in] struct RilRadioResponseInfo responseInfo,
         [in] struct CellListNearbyInfo_1_2 cellListNearbyInfo);
 }
 /** @} */
