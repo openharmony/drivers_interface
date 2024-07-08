@@ -288,13 +288,6 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_HIGH_QUALITY_SUPPORT,
     /**
-     * ohos.status.burstCapture [static, enum, public]
-     *
-     * camera device property, set current camera device burst capture mode
-     * (i.e. enum: begin/end ...)
-     */
-    OHOS_CONTROL_BURST_CAPTURE,
-    /**
      * ohos.ability.cameraFoldStatus [static, enum, public]
      *
      * camera device property, report current camera fold status
@@ -302,7 +295,7 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_CAMERA_FOLD_STATUS,
     /**
-     * ohos.ability.cameraFoldStatus [static, uint32, public]
+     * ohos.status.cameraFoldStatus [static, uint32, public]
      *
      * camera device property, query current camera occlusion detection
      * (i.e. uint32: ...)
@@ -777,6 +770,13 @@ typedef enum camera_device_metadata_tag {
      * (i.e. enum: OFF/ON ...)
      */
     OHOS_CONTROL_HIGH_QUALITY_MODE,
+    /**
+     * ohos.status.burstCapture [static, enum, public]
+     *
+     * camera device property, set current camera device burst capture mode
+     * (i.e. enum: begin/end ...)
+     */
+    OHOS_CONTROL_BURST_CAPTURE,
     /**
      * ohos.device.controlEnd
      *
