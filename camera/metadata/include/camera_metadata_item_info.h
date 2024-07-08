@@ -196,7 +196,7 @@ static item_info_t g_ohosCameraControl[OHOS_DEVICE_CONTROL_END - OHOS_DEVICE_CON
     [OHOS_CONTROL_SENSOR_WB_VALUE - OHOS_DEVICE_CONTROL_START] = {"sensorWbValue", META_TYPE_INT32, 1},
     [OHOS_CONTROL_HIGH_QUALITY_MODE - OHOS_DEVICE_CONTROL_START] = {"highQualityMode", META_TYPE_BYTE, 1},
     [OHOS_CONTROL_BURST_CAPTURE -
-        OHOS_CAMERA_PROPERTIES_START] = {"cameraControlBurstCapture", META_TYPE_BYTE, 1},
+        OHOS_DEVICE_CONTROL_START] = {"cameraControlBurstCapture", META_TYPE_BYTE, 1},
 };
 
 static item_info_t g_ohosDeviceExposure[OHOS_DEVICE_EXPOSURE_END - OHOS_DEVICE_EXPOSURE_START] = {
