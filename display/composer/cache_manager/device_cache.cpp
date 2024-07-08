@@ -113,8 +113,8 @@ int32_t DeviceCache::SetDisplayClientBuffer(const BufferHandle*& buffer, uint32_
     if (ret != HDF_SUCCESS) {
         clientBufferCaches_->EraseCache(seqNo);
         buffer = nullptr;
+        HDF_LOGE("%{public}s: call realFunc fail", __func__);
     }
-    HDF_LOGE("%{public}s: call realFunc fail", __func__);
 
     return ret;
 }
