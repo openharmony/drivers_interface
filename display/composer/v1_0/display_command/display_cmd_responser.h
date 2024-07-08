@@ -405,10 +405,6 @@ EXIT:
 #endif // DISPLAY_COMMUNITY
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("%{public}s, SetDisplayClientBuffer error", __func__);
-            if (data.isValidBuffer) {
-                FreeBufferHandle(data.buffer);
-                data.buffer = nullptr;
-            }
             errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, ret);
         }
     }
@@ -846,10 +842,6 @@ EXIT:
 #endif // DISPLAY_COMMUNITY
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("%{public}s, SetLayerBuffer error", __func__);
-            if (data.isValidBuffer) {
-                FreeBufferHandle(data.buffer);
-                data.buffer = nullptr;
-            }
             errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, ret);
         }
 
