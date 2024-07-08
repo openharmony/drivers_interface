@@ -45,6 +45,8 @@ enum BufferHandleAttrKey {
 
     ATTRKEY_REQUEST_ACCESS_TYPE = 10,       // value: current request frame mode
     ATTRKEY_ACCESS_TYPE = 11,               // value: current data frame mode
+    ATTRKEY_FORCE_GLOBAL_ALPHA = 12,        // value: int 0~255, arbitrary set pixel alpha value, 0 means opaque,
+                                            // default to -1, the field doesn't take effect.
 
     /* vendor internal extended meta type */
     ATTRKEY_VENDOR_EXT_START = 2048,
