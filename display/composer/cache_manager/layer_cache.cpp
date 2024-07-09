@@ -75,8 +75,7 @@ int32_t LayerCache::SetLayerBuffer(BufferHandle*& buffer, uint32_t seqNo, bool &
             __func__, num));
     }
 
-    BufferHandle* handle = BufferCacheUtils::NativeBufferCache(bufferCaches_,
-        const_cast<BufferHandle*>(buffer), seqNo, layerId_, needFreeBuffer);
+    BufferHandle* handle = BufferCacheUtils::NativeBufferCache(bufferCaches_, buffer, seqNo, layerId_, needFreeBuffer);
     DISPLAY_CHK_RETURN(handle == nullptr, HDF_FAILURE,
         HDF_LOGE("%{public}s: call NativeBufferCache fail", __func__));
     int32_t ret = realFunc(*handle);
