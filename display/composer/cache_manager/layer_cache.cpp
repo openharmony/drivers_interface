@@ -80,7 +80,11 @@ int32_t LayerCache::SetLayerBuffer(BufferHandle*& buffer, uint32_t seqNo, bool &
     DISPLAY_CHK_RETURN(handle == nullptr, HDF_FAILURE,
         HDF_LOGE("%{public}s: call NativeBufferCache fail", __func__));
     int32_t ret = realFunc(*handle);
-    DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret, HDF_LOGE("%{public}s: call realFunc fail", __func__));
+    if (ret != HDF_SUCCESS) {
+        bufferCaches_->EraseCache(seqNo);
+        buffer = nullptr;
+        HDF_LOGE("%{public}s: call realFunc fail", __func__);
+    }
 
     return HDF_SUCCESS;
 }
