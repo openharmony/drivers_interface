@@ -102,7 +102,7 @@ int32_t DeviceCache::RemoveLayerCache(uint32_t id)
     return HDF_SUCCESS;
 }
 
-int32_t DeviceCache::SetDisplayClientBuffer(BufferHandle* buffer, uint32_t seqNo, bool &needFreeBuffer,
+int32_t DeviceCache::SetDisplayClientBuffer(BufferHandle*& buffer, uint32_t seqNo, bool &needFreeBuffer,
     std::function<int32_t (const BufferHandle&)> realFunc)
 {
     BufferHandle* handle = BufferCacheUtils::NativeBufferCache(clientBufferCaches_,
@@ -115,7 +115,7 @@ int32_t DeviceCache::SetDisplayClientBuffer(BufferHandle* buffer, uint32_t seqNo
     return ret;
 }
 
-int32_t DeviceCache::SetVirtualDisplayBuffer(BufferHandle* buffer, uint32_t seqNo, bool &needFreeBuffer,
+int32_t DeviceCache::SetVirtualDisplayBuffer(BufferHandle*& buffer, uint32_t seqNo, bool &needFreeBuffer,
     std::function<int32_t (const BufferHandle&)> realFunc)
 {
     int32_t ret = HDF_FAILURE;

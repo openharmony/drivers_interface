@@ -66,7 +66,7 @@ int32_t LayerCache::SetBufferCacheMaxCount(uint32_t cacheCount)
     return HDF_SUCCESS;
 }
 
-int32_t LayerCache::SetLayerBuffer(BufferHandle* buffer, uint32_t seqNo, bool &needFreeBuffer,
+int32_t LayerCache::SetLayerBuffer(BufferHandle*& buffer, uint32_t seqNo, bool &needFreeBuffer,
     const std::vector<uint32_t>& deletingList, std::function<int32_t (const BufferHandle&)> realFunc)
 {
     for (auto num : deletingList) {
