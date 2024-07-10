@@ -295,10 +295,10 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_CAMERA_FOLD_STATUS,
     /**
-     * ohos.status.cameraFoldStatus [static, uint32, public]
+     * ohos.status.cameraFoldStatus [static, byte, public]
      *
      * camera device property, query current camera occlusion detection
-     * (i.e. uint32: ...)
+     * (i.e. byte: ...)
      */
     OHOS_STATUS_CAMERA_OCCLUSION_DETECTION,
     /**
@@ -771,7 +771,7 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_HIGH_QUALITY_MODE,
     /**
-     * ohos.status.burstCapture [static, enum, public]
+     * ohos.control.burstCapture [static, enum, public]
      *
      * camera device property, set current camera device burst capture mode
      * (i.e. enum: begin/end ...)
@@ -1417,7 +1417,7 @@ typedef enum camera_device_metadata_tag {
     /**
      * ohos.device.exitCameraEvent [static, byte, public]
      *
-     * camera device property, set current camera exitcamera event
+     * camera device property, set current camera exitCamera event
      * (i.e. byte ...)
      */
     OHOS_DEVICE_EXITCAMERA_EVENT,
@@ -2121,17 +2121,17 @@ enum CameraEffectSuggestionType {
     OHOS_CAMERA_EFFECT_SUGGESTION_SUNRISE_SUNSET,
 };
 
-// OHOS_CONTROL_BURST_CAPTURE
-enum BurstCapture {
-    OHOS_CONTROL_BURST_CAPTURE_END = 0,
-    OHOS_CONTROL_BURST_CAPTURE_BEGIN = 1,
-};
-
 // OHOS_ABILITY_CAMERA_FOLD_STATUS
 enum CameraFoldStatus {
     OHOS_CAMERA_FOLD_STATUS_NONFOLDABLE = 0,
     OHOS_CAMERA_FOLD_STATUS_EXPANDED = 1,
     OHOS_CAMERA_FOLD_STATUS_FOLDED = 2,
+};
+
+// OHOS_CONTROL_BURST_CAPTURE
+enum BurstCapture {
+    OHOS_CONTROL_BURST_CAPTURE_END = 0,
+    OHOS_CONTROL_BURST_CAPTURE_BEGIN = 1,
 };
 
 // OHOS_ABILITY_LIGHT_PAINTING_TYPE
