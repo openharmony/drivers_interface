@@ -466,7 +466,7 @@ common_metadata_header_t *CameraMetadata::FillCameraMetadata(common_metadata_hea
     metadataHeader->data_start = AlignTo(dataUnaligned, DATA_ALIGNMENT);
 
     METADATA_INFO_LOG("MetadataHeader ItemCapacity Size = %{public}u, DataCapacity Size = %{public}u",
-        metadataHeader->item_capacity), metadataHeader->data_capacity);
+        metadataHeader->item_capacity, metadataHeader->data_capacity);
     METADATA_DEBUG_LOG("FillCameraMetadata end");
     return metadataHeader;
 }
