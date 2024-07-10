@@ -59,7 +59,7 @@ enum DispPowerStatus : ohos.hdi.display.composer.v1_1.DispPowerStatus {
  */
 enum BufferUsage : ohos.hdi.display.composer.v1_0.BufferUsage {
     HBM_USE_CPU_HW_BOTH = (1ULL << 17),        /**< For support cpu and hardware */
-    HBM_BUFFER_GPU_PERFORMANCE = (1ULL << 18),             /**< Prefer performance over memory consumption: */
+    HBM_USAGE_GPU_PERFORMANCE = (1ULL << 18),             /**< Prefer performance over memory consumption: */
     HBM_USE_RGB_TO_YUV_CONVERSION = (1ULL << 19),          /**< For identify RGB to YUV conversion */
 };
 
