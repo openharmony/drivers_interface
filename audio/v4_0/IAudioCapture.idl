@@ -63,7 +63,7 @@ interface IAudioCapture {
      * @return Returns <b>0</b> if the input data is read successfully; returns a negative value otherwise.
      *
      * @since 5.0
-     * @version 4.0
+     * @version 1.0
      */
     CaptureFrameEc([in] struct AudioFrameLen frameLen, [out] struct AudioCaptureFrameInfo frameInfo);
 

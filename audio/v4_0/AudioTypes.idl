@@ -425,7 +425,7 @@ struct AudioSceneDescriptor {
  * @brief Defines audio input type.
  *
  * @since 4.1
- * @version 4.0
+ * @version 3.0
  */
 enum AudioInputType {
     AUDIO_INPUT_DEFAULT_TYPE             = 0,      /**< Assigned default input type */
@@ -463,7 +463,7 @@ struct AudioOffloadInfo
  * @brief Defines audio Ecsampling attributes.
  *
  * @since 5.0
- * @version 4.0
+ * @version 1.0
  */
 struct EcSampleAttributes {
     boolean ecInterleaved;            /**< Interleaving flag of audio data */
@@ -484,7 +484,7 @@ struct EcSampleAttributes {
  * @brief Defines audio captureEc attributes.
  *
  * @since 5.0
- * @version 4.0
+ * @version 1.0
  */
 struct AudioCaptureFrameInfo {
     byte[] frame;                /**< Audio capture frame */
@@ -497,7 +497,7 @@ struct AudioCaptureFrameInfo {
  * @brief Defines audio len of captureEc frame.
  *
  * @since 5.0
- * @version 4.0
+ * @version 1.0
  */
 struct AudioFrameLen {
     unsigned int frameLen;     /**< The length of the audio capture frame */
@@ -508,7 +508,7 @@ struct AudioFrameLen {
  * @brief Defines audio sampling attributes.
  *
  * @since 4.1
- * @version 4.0
+ * @version 3.0
  */
 struct AudioSampleAttributes {
     enum AudioCategory type;       /**< Audio type. For details, see {@link AudioCategory} */
@@ -612,7 +612,7 @@ struct AudioDevExtInfo {
  * @brief Describes AudioMixInfo.
  *
  * @since 4.1
- * @version 4.0
+ * @version 3.0
  */
 struct AudioMixExtInfo {
     int moduleId; /**< Identifier of the module stream is attached to */
