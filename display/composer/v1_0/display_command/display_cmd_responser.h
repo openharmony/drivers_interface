@@ -351,7 +351,7 @@ EXIT:
         return HDF_SUCCESS;
     }
 
-    int32_t SetDisplayClientBuffer(ClientBufferData data, bool &needFreeBuffer, bool &needMoveFd, int fd)
+    int32_t SetDisplayClientBuffer(ClientBufferData& data, bool &needFreeBuffer, bool &needMoveFd, int fd)
     {
         if (cacheMgr_ == nullptr) {
             HDF_LOGE("%{public}s, get cache manager error", __func__);
@@ -405,8 +405,9 @@ EXIT:
 #endif // DISPLAY_COMMUNITY
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("%{public}s, SetDisplayClientBuffer error", __func__);
-            if (data.isValidBuffer) {
+            if (data.isValidBuffer && data.buffer != nullptr) {
                 FreeBufferHandle(data.buffer);
+                data.buffer = nullptr;
             }
             errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, ret);
         }
@@ -791,7 +792,7 @@ EXIT:
         return HDF_SUCCESS;
     }
 
-    int32_t SetLayerBuffer(LayerBufferData data, std::vector<uint32_t> &deletingList,
+    int32_t SetLayerBuffer(LayerBufferData& data, std::vector<uint32_t> &deletingList,
         bool &needFreeBuffer, bool &needMoveFd, int fd)
     {
         DISPLAY_CHECK(cacheMgr_ == nullptr, return HDF_FAILURE);
@@ -845,8 +846,9 @@ EXIT:
 #endif // DISPLAY_COMMUNITY
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("%{public}s, SetLayerBuffer error", __func__);
-            if (data.isValidBuffer) {
+            if (data.isValidBuffer && data.buffer != nullptr) {
                 FreeBufferHandle(data.buffer);
+                data.buffer = nullptr;
             }
             errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, ret);
         }

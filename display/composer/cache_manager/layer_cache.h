@@ -33,7 +33,7 @@ class LayerCache : public NoCopyable {
 public:
     ~LayerCache();
     static LayerCache* Create(uint32_t id);
-    int32_t SetLayerBuffer(const BufferHandle* buffer, uint32_t seqNo, bool &needFreeBuffer,
+    int32_t SetLayerBuffer(BufferHandle*& buffer, uint32_t seqNo, bool &needFreeBuffer,
         const std::vector<uint32_t>& deletingList, std::function<int32_t (const BufferHandle&)> realFunc);
     int32_t SetBufferCacheMaxCount(uint32_t cacheCount);
     void Dump() const;
