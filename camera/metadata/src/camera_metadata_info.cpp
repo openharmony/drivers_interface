@@ -1177,7 +1177,7 @@ std::string U8ItemToString(int32_t item, const camera_metadata_item_t entry)
     std::string st = {};
     uint32_t count = entry.count;
     if (entry.data.u8 == nullptr) {
-        METADATA_ERR_LOG("U8ItemToString: entry.data.u8 is null!");
+        METADATA_ERR_LOG("U8ItemToString: entry.data.u8 is null");
         return st;
     }
     std::string dataStr = std::to_string(*(entry.data.u8));
@@ -1191,7 +1191,7 @@ std::string U8ItemToString(int32_t item, const camera_metadata_item_t entry)
 
     const char *name = GetCameraMetadataItemName(item);
     if (name == nullptr) {
-        METADATA_ERR_LOG("U8ItemToString: get u8 item name fail!");
+        METADATA_ERR_LOG("U8ItemToString: get u8 item name fail");
         return st;
     }
     std::string nameStr(name);
@@ -1207,7 +1207,7 @@ std::string I32ItemToString(int32_t item, const camera_metadata_item_t entry)
     std::string st = {};
     uint32_t count = entry.count;
     if (entry.data.i32 == nullptr) {
-        METADATA_ERR_LOG("I32ItemToString: entry.data.i32 is null!");
+        METADATA_ERR_LOG("I32ItemToString: entry.data.i32 is null");
         return st;
     }
     std::string dataStr = std::to_string(*(entry.data.i32));
@@ -1221,7 +1221,7 @@ std::string I32ItemToString(int32_t item, const camera_metadata_item_t entry)
 
     const char *name = GetCameraMetadataItemName(item);
     if (name == nullptr) {
-        METADATA_ERR_LOG("I32ItemToString: get i32 item name fail!");
+        METADATA_ERR_LOG("I32ItemToString: get i32 item name fail");
         return st;
     }
     std::string nameStr(name);
@@ -1237,7 +1237,7 @@ std::string U32ItemToString(int32_t item, const camera_metadata_item_t entry)
     std::string st = {};
     uint32_t count = entry.count;
     if (entry.data.ui32 == nullptr) {
-        METADATA_ERR_LOG("U32ItemToString: entry.data.ui32 is null!");
+        METADATA_ERR_LOG("U32ItemToString: entry.data.ui32 is null");
         return st;
     }
     std::string dataStr = std::to_string(*(entry.data.ui32));
@@ -1251,7 +1251,7 @@ std::string U32ItemToString(int32_t item, const camera_metadata_item_t entry)
 
     const char *name = GetCameraMetadataItemName(item);
     if (name == nullptr) {
-        METADATA_ERR_LOG("U32ItemToString: get u32 item name fail!");
+        METADATA_ERR_LOG("U32ItemToString: get u32 item name fail");
         return st;
     }
     std::string nameStr(name);
@@ -1267,7 +1267,7 @@ std::string I64ItemToString(int32_t item, const camera_metadata_item_t entry)
     std::string st = {};
     uint32_t count = entry.count;
     if (entry.data.i64 == nullptr) {
-        METADATA_ERR_LOG("I64ItemToString: entry.data.i64 is null!");
+        METADATA_ERR_LOG("I64ItemToString: entry.data.i64 is null");
         return st;
     }
     std::string dataStr = std::to_string(*(entry.data.i64));
@@ -1281,7 +1281,7 @@ std::string I64ItemToString(int32_t item, const camera_metadata_item_t entry)
 
     const char *name = GetCameraMetadataItemName(item);
     if (name == nullptr) {
-        METADATA_ERR_LOG("I64ItemToString: get i64 item name fail!");
+        METADATA_ERR_LOG("I64ItemToString: get i64 item name fail");
         return st;
     }
     std::string nameStr(name);
@@ -1297,7 +1297,7 @@ std::string FloatItemToString(int32_t item, const camera_metadata_item_t entry)
     std::string st = {};
     uint32_t count = entry.count;
     if (entry.data.f == nullptr) {
-        METADATA_ERR_LOG("FloatItemToString: entry.data.f is null!");
+        METADATA_ERR_LOG("FloatItemToString: entry.data.f is null");
         return st;
     }
     std::string dataStr = std::to_string(*(entry.data.f));
@@ -1311,7 +1311,7 @@ std::string FloatItemToString(int32_t item, const camera_metadata_item_t entry)
 
     const char *name = GetCameraMetadataItemName(item);
     if (name == nullptr) {
-        METADATA_ERR_LOG("FloatItemToString: get float item name fail!");
+        METADATA_ERR_LOG("FloatItemToString: get float item name fail");
         return st;
     }
     std::string nameStr(name);
@@ -1327,7 +1327,7 @@ std::string DoubleItemToString(int32_t item, const camera_metadata_item_t entry)
     std::string st = {};
     uint32_t count = entry.count;
     if (entry.data.d == nullptr) {
-        METADATA_ERR_LOG("DoubleItemToString: entry.data.d is null!");
+        METADATA_ERR_LOG("DoubleItemToString: entry.data.d is null");
         return st;
     }
     std::string dataStr = std::to_string(*(entry.data.d));
@@ -1341,7 +1341,7 @@ std::string DoubleItemToString(int32_t item, const camera_metadata_item_t entry)
 
     const char *name = GetCameraMetadataItemName(item);
     if (name == nullptr) {
-        METADATA_ERR_LOG("DoubleItemToString: get double item name fail!");
+        METADATA_ERR_LOG("DoubleItemToString: get double item name fail");
         return st;
     }
     std::string nameStr(name);
@@ -1357,7 +1357,7 @@ std::string RationalItemToString(int32_t item, const camera_metadata_item_t entr
     std::string st = {};
     uint32_t count = entry.count;
     if (entry.data.r == nullptr) {
-        METADATA_ERR_LOG("RationalItemToString: entry.data.r is null!");
+        METADATA_ERR_LOG("RationalItemToString: entry.data.r is null");
         return st;
     }
     std::string dataStr = std::to_string((*(entry.data.r)).numerator) + "/" +
@@ -1374,7 +1374,7 @@ std::string RationalItemToString(int32_t item, const camera_metadata_item_t entr
 
     const char *name = GetCameraMetadataItemName(item);
     if (name == nullptr) {
-        METADATA_ERR_LOG("RationalItemToString: get rational item name fail!");
+        METADATA_ERR_LOG("RationalItemToString: get rational item name fail");
         return st;
     }
     std::string nameStr(name);
