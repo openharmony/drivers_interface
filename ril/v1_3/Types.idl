@@ -63,4 +63,95 @@ struct SimCardStatusInfo {
      * SIM card iccid:
      */
     String iccid;
-};
+};
+
+/**
+ * @brief Defines PDP context information.
+ */
+struct DataProfileDataInfo1_3 {
+    /**
+     * Request SN
+     */
+    int serial;
+
+    /**
+     * Data service type. The value 0 indicates the default data service,
+     * and the value 1 indicates the MMS data service.
+     */
+    int profileId;
+
+    /**
+     * Authentication mode:
+     *- 0: no authentication
+     *- 1: Password Authentication Protocol (PAP)
+     *- 2: Challenge Handshake Authentication Protocol (CHAP)
+     */
+    int authenticationType;
+
+    /**
+     * Access point name
+     */
+    String apn;
+
+    /**
+     * Protocol version
+     */
+    String protocol;
+
+    /**
+     * Roaming protocol version
+     */
+    String roamingProtocol;
+
+    /**
+     * Username
+     */
+    String userName;
+
+    /**
+     * Password
+     */
+    String password;
+
+    /**
+     * Supported APN types Bitmap
+     */
+    unsigned long supportedApnTypesBitmap;
+};
+
+/**
+ * @brief Defines the data service information.
+ */
+struct DataCallInfo1_3 {
+    /**
+     * Request SN
+     */
+    int serial;
+
+    /**
+     * Radio access technology. For details, see {@link RilRadioTech}.
+     */
+    int radioTechnology;
+
+    /**
+     * Whether the PDP context is set for the modem
+     */
+    boolean modemCognitive;
+
+    /**
+     * Whether roaming is allowed. The value true indicates that roaming is allowed,
+     * and the value false indicates the opposite.
+     */
+    boolean roamingAllowed;
+
+    /**
+     * Whether the user is roaming. The value true indicates that the user is roaming,
+     * and the value false indicates the opposite.
+     */
+    boolean isRoaming;
+
+    /**
+     * PDP context information
+     */
+    struct DataProfileDataInfo1_3 dataProfileInfo;
+};

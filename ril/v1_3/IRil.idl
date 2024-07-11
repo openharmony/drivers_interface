@@ -83,5 +83,20 @@ interface IRil extends ohos.hdi.ril.v1_2.IRil {
      * @version 1.0
      */
     [oneway] GetImeiSv([in] int slotId, [in] int serialId);
+
+    /**
+     * @brief Activates the packet data protocol (PDP) context.
+     *
+     * @param slotId Card slot ID.
+     * @param serialId Serial ID of a request.
+     * @param dataCallInfo Data service information. For details, see {@link DataCallInfo}.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-0 value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    [oneway] ActivatePdpContext1_3([in] int slotId, [in] int serialId, [in] struct DataCallInfo1_3 dataCallInfo);
 }
 /** @} */

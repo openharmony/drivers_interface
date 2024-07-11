@@ -30,7 +30,7 @@
                 "//drivers/interface/ril/v1_1:ril_idl_target",
                 "//drivers/interface/ril/v1_2:ril_idl_target",
                 "//drivers/interface/ril/v1_3:ril_idl_target",
-                "//drivers/interface/ril/v2_0:ril_idl_target"
+                "//base/telephony/ril_adapter/interfaces/innerkits:hril_innerkits"
             ],
             "test": [
             ],
@@ -93,27 +93,6 @@
                 },
                 {
                   "name": "//drivers/interface/ril/v1_3:ril_idl_headers_1.3",
-                  "header": {
-                    "header_files": [],
-                    "header_base": "//drivers/interface/ril"
-                  }
-                },
-                {
-                  "name": "//drivers/interface/ril/v2_0:libril_proxy_2.0",
-                  "header": {
-                    "header_files": [],
-                    "header_base": "//drivers/interface/ril"
-                  }
-                },
-                {
-                  "name": "//drivers/interface/ril/v2_0:libril_stub_2.0",
-                  "header": {
-                    "header_files": [],
-                    "header_base": "//drivers/interface/ril"
-                  }
-                },
-                {
-                  "name": "//drivers/interface/ril/v2_0:ril_idl_headers_2.0",
                   "header": {
                     "header_files": [],
                     "header_base": "//drivers/interface/ril"
