@@ -65,7 +65,7 @@ public:
             HDF_LOGE("%{public}s error: clientCacheCount can't be set, because cacheCountMax_ > count", __func__);
             ret = false;
         }
-        HDF_LOGI("%{public}s: set cache max count from %{public}u to %{public}u",
+        HDF_LOGD("%{public}s: set cache max count from %{public}u to %{public}u",
             __func__, originalMaxCount, cacheCountMax_);
         return ret;
     }
