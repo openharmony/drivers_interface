@@ -41,7 +41,7 @@ public:
     static constexpr uint32_t MOVE_SIZE = sizeof(int) / 2;
     static constexpr uint32_t TRANSFER_WAIT_TIME = 100000000; // ms
     static constexpr uint32_t INIT_ELEMENT_COUNT = 32 * 1024;
-    static constexpr uint32_t MAX_MEMORY = 10485760; // 10M;
+    static constexpr uint32_t MAX_MEMORY = 10485760; // 10M
     static constexpr uint32_t MAX_ELE_COUNT = 100000;
 
     #define SWITCHCASE(x) case (x): {return #x;}
