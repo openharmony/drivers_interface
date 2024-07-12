@@ -66,9 +66,9 @@ struct SimCardStatusInfo {
 };
 
 /**
- * @brief Defines PDP context information.
+ * @brief Defines PDP context information with apn types.
  */
-struct DataProfileDataInfo1_3 {
+struct DataProfileDataInfoWithApnTypes {
     /**
      * Request SN
      */
@@ -122,7 +122,7 @@ struct DataProfileDataInfo1_3 {
 /**
  * @brief Defines the data service information.
  */
-struct DataCallInfo1_3 {
+struct DataCallInfoWithApnTypes {
     /**
      * Request SN
      */
@@ -151,7 +151,7 @@ struct DataCallInfo1_3 {
     boolean isRoaming;
 
     /**
-     * PDP context information
+     * PDP context information with apn types
      */
-    struct DataProfileDataInfo1_3 dataProfileInfo;
+    struct DataProfileDataInfoWithApnTypes dataProfileInfo;
 };
