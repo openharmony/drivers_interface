@@ -64,32 +64,32 @@ bool MetadataUtils::ConvertMetadataToVec(const std::shared_ptr<CameraMetadata> &
     cameraAbility.clear();
 
     if (metadata == nullptr) {
-        METADATA_ERR_LOG("MetadataUtils::ConvertMetadataToVec: metadata is null!");
+        METADATA_ERR_LOG("ConvertMetadataToVec metadata is null!");
         return false;
     }
 
     common_metadata_header_t *meta = metadata->get();
     if (meta == nullptr) {
         WriteData<uint32_t>(0, cameraAbility);
-        METADATA_WARNING_LOG("MetadataUtils::ConvertMetadataToVec: tagCount is 0!");
+        METADATA_WARNING_LOG("ConvertMetadataToVec tagCount is 0!");
         return true;
     }
 
     uint32_t tagCount = GetCameraMetadataItemCount(meta);
     if (tagCount > MAX_SUPPORTED_TAGS) {
-        METADATA_ERR_LOG("MetadataUtils::ConvertMetadataToVec: tagCount out of range: %u", tagCount);
+        METADATA_ERR_LOG("ConvertMetadataToVec tagCount out of range:%{public}d", tagCount);
         return false;
     }
 
     uint32_t itemCapacity = GetCameraMetadataItemCapacity(meta);
     if (itemCapacity > MAX_ITEM_CAPACITY) {
-        METADATA_ERR_LOG("MetadataUtils::ConvertMetadataToVec: itemCapacity out of range: %u", itemCapacity);
+        METADATA_ERR_LOG("ConvertMetadataToVec itemCapacity out of range:%{public}d", itemCapacity);
         return false;
     }
 
     uint32_t dataCapacity = GetCameraMetadataDataSize(meta);
     if (dataCapacity > MAX_DATA_CAPACITY) {
-        METADATA_ERR_LOG("MetadataUtils::ConvertMetadataToVec: dataCapacity out of range: %u", dataCapacity);
+        METADATA_ERR_LOG("ConvertMetadataToVec dataCapacity out of range:%{public}d", dataCapacity);
         return false;
     }
 
@@ -100,19 +100,18 @@ bool MetadataUtils::ConvertMetadataToVec(const std::shared_ptr<CameraMetadata> &
         camera_metadata_item_t item;
         int ret = GetCameraMetadataItem(meta, i, &item);
         if (ret != CAM_META_SUCCESS) {
-            METADATA_ERR_LOG("MetadataUtils::ConvertMetadataToVec: get meta item failed!");
-            return false;
-        }
-
-        if (item.count > MAX_SUPPORTED_ITEMS) {
-            METADATA_ERR_LOG("MetadataUtils::ConvertMetadataToVec: item.count out of range:%u", item.count);
+            METADATA_ERR_LOG("ConvertMetadataToVec get meta item failed!");
             return false;
         }
         WriteData<uint32_t>(item.index, cameraAbility);
         WriteData<uint32_t>(item.item, cameraAbility);
         WriteData<uint32_t>(item.data_type, cameraAbility);
         WriteData<uint32_t>(item.count, cameraAbility);
-
+        if (item.count > MAX_SUPPORTED_ITEMS) {
+            METADATA_ERR_LOG("ConvertMetadataToVec item.count out of range:%{public}d item:%{public}d",
+                item.count, item.item);
+            return false;
+        }
         WriteMetadataDataToVec(item, cameraAbility);
     }
     return true;
@@ -268,17 +267,17 @@ void MetadataUtils::ConvertVecToMetadata(const std::vector<uint8_t>& cameraAbili
 
     ReadData<uint32_t>(tagCount, index, cameraAbility);
     if (tagCount > MAX_SUPPORTED_TAGS) {
-        METADATA_ERR_LOG("MetadataUtils::ConvertVecToMetadata: tagCount out of range: %u", tagCount);
+        METADATA_ERR_LOG("ConvertVecToMetadata tagCount out of range:%{public}d", tagCount);
         return;
     }
     ReadData<uint32_t>(itemCapacity, index, cameraAbility);
     if (itemCapacity > MAX_ITEM_CAPACITY) {
-        METADATA_ERR_LOG("MetadataUtils::ConvertVecToMetadata: itemCapacity out of range: %u", itemCapacity);
+        METADATA_ERR_LOG("ConvertVecToMetadata itemCapacity out of range:%{public}d", itemCapacity);
         return;
     }
     ReadData<uint32_t>(dataCapacity, index, cameraAbility);
     if (dataCapacity > MAX_DATA_CAPACITY) {
-        METADATA_ERR_LOG("MetadataUtils::ConvertVecToMetadata: dataCapacity out of range: %u", dataCapacity);
+        METADATA_ERR_LOG("ConvertVecToMetadata dataCapacity out of range:%{public}d", dataCapacity);
         return;
     }
 
@@ -290,7 +289,8 @@ void MetadataUtils::ConvertVecToMetadata(const std::vector<uint8_t>& cameraAbili
         ReadData<uint32_t>(item.data_type, index, cameraAbility);
         ReadData<uint32_t>(item.count, index, cameraAbility);
         if (item.count > MAX_SUPPORTED_ITEMS) {
-            METADATA_ERR_LOG("MetadataUtils::ConvertVecToMetadata item.count out of range:%u", item.count);
+            METADATA_ERR_LOG("ConvertVecToMetadata item.count out of range:%{public}d item:%{public}d",
+                item.count, item.item);
             return;
         }
         ReadMetadataDataFromVec(index, item, cameraAbility);
