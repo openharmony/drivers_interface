@@ -12,6 +12,6 @@
 # limitations under the License.
 
 declare_args() {
-  drivers_interface_camera_feature_vendor_tag = false
+  drivers_interface_camera_feature_vendor_tag = true
   drivers_interface_camera_feature_coverage = false
 }
