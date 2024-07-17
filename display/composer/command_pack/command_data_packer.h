@@ -54,7 +54,7 @@ public:
         packSize_ = size;
         uint32_t alignedSize = (packSize_ + ALLOC_PAGE_SIZE - 1) & (~(ALLOC_PAGE_SIZE - 1));
         if (data_ != nullptr) {
-            delete [] data_;
+            delete[] data_;
         }
         data_ = new char[alignedSize];
         DISPLAY_CHK_RETURN(data_ == nullptr, false,
