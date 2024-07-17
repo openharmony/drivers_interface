@@ -52,12 +52,6 @@ ohos_shared_library("libdisplay_buffer_hdi_impl") {
     "ipc:ipc_single",
   ]
 
-  sanitize = {
-    cfi = true
-    cfi_cross_dso = true
-    debug = false
-  }
-
   install_images = [ "system" ]
   subsystem_name = "hdf"
   innerapi_tags = [

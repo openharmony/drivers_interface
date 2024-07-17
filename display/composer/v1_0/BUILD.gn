@@ -59,12 +59,6 @@ ohos_shared_library("libdisplay_composer_hdi_impl") {
     "ipc:ipc_single",
   ]
 
-  sanitize = {
-    cfi = true
-    cfi_cross_dso = true
-    debug = false
-  }
-
   install_images = [ "system" ]
   subsystem_name = "hdf"
   part_name = "drivers_interface_display"
