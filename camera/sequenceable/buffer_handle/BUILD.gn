@@ -25,6 +25,8 @@ config("buffer_handle_sequenceable_config") {
 ohos_shared_library("libbuffer_handle_sequenceable_1.0") {
   sources = [ "buffer_handle_sequenceable.cpp" ]
 
+  all_dependent_configs = [ ":buffer_handle_sequenceable_config" ]
+
   external_deps = [
     "c_utils:utils",
     "hdf_core:libhdf_utils",
