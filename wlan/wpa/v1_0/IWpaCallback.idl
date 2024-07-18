@@ -151,6 +151,17 @@ import ohos.hdi.wlan.wpa.v1_0.WpaTypes;
     OnEventWpsTimeout([in] String ifName);
 
     /**
+     * Used to indicate the timeout of a authentication connection attempt from the currently wifi
+     * network on this iface.
+     *
+     * @param ifName Indicates the NIC name.
+     *
+     * @since 4.1
+     * @version 1.0
+     */
+    OnEventAuthTimeout([in] String ifName);
+
+    /**
      * Used to indicate the timeout of a PBC connection attempt from the currently wifi
      * network on this iface.
      *
