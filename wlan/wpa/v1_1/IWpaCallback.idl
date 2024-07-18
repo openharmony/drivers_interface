@@ -40,4 +40,15 @@ import ohos.hdi.wlan.wpa.v1_1.WpaTypes;
    * @version 1.0
    */
    OnEventGroupInfoStarted([in] struct HdiP2pGroupInfoStartedParam groupStartedParam, [in] String ifName);
+
+   /**
+    * Used to indicate the timeout of a authentication connection attempt from the currently wifi
+    * network on this iface.
+    *
+    * @param ifName Indicates the NIC name.
+    *
+    * @since 5.0
+    * @version 1.0
+    */
+   OnEventAuthTimeout([in] String ifName);
 }
