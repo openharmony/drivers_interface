@@ -30,12 +30,6 @@ ohos_shared_library("libhdifd_parcelable") {
     "ipc:ipc_single",
   ]
 
-  sanitize = {
-    cfi = true
-    cfi_cross_dso = true
-    debug = false
-  }
-
   innerapi_tags = [ "chipsetsdk" ]
   install_images = [ "system" ]
   subsystem_name = "hdf"

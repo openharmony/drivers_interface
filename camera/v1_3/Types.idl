@@ -155,11 +155,11 @@ enum ExtendedStreamInfoType : ohos.hdi.camera.v1_2.ExtendedStreamInfoType_V1_2 {
      * Extended stream information of secure.
      */
     EXTENDED_STREAM_INFO_SECURE = 5,
-    
+
     /**
      * Extended stream information of maker.
      */
-    EXTENDED_STREAM_INFO_MAKER_INFO = 5,
+    EXTENDED_STREAM_INFO_MAKER_INFO = 6,
 };
 
 /**
@@ -277,7 +277,7 @@ enum MediaStreamType {
  * @since 5.0
  * @version 1.0
  */
-struct SteramDescription {
+struct StreamDescription {
     /**
      * stream id
      * @since 5.0
@@ -289,7 +289,7 @@ struct SteramDescription {
      * @since 5.0
      * @version 1.0
      */
-    enmm MediaStreamType type;
+    enum MediaStreamType type;
     /**
      * pixel format
      * @since 5.0

@@ -26,6 +26,7 @@ config("camera_sequenceable_config") {
 ohos_shared_library("libbuffer_producer_sequenceable_1.0") {
   sources = [ "buffer_producer_sequenceable.cpp" ]
 
+  all_dependent_configs = [ ":camera_sequenceable_config" ]
   public_configs = [ ":camera_sequenceable_config" ]
 
   external_deps = [
@@ -42,6 +43,5 @@ ohos_shared_library("libbuffer_producer_sequenceable_1.0") {
   install_images = [ system_base_dir ]
   relative_install_dir = "chipset-sdk"
   subsystem_name = "hdf"
-  innerapi_tags = [ "chipsetsdk" ]
   part_name = "drivers_interface_camera"
 }

@@ -25,6 +25,7 @@
 package ohos.hdi.camera.v1_3;
 
 import ohos.hdi.camera.v1_3.Types;
+import ohos.hdi.camera.v1_1.Types;
 
 interface IVideoProcessSession {
 
@@ -48,18 +49,7 @@ interface IVideoProcessSession {
      * @since 5.0
      * @version 1.0
      */
-    Prepare([in] String videoId, [in]FileDescriptor fd, [out] SteramDescription []streamDescs);
-
-    /**
-     * @brief Process the specific video by video ID.
-     *
-     * @param videoId Indicates video id.
-     * @param timestamp Indicates need process video frame time.
-     *
-     * @since 5.0
-     * @version 1.0
-     */
-    ProcessVideo([in] String videoId, [in] unsigned long timestamp);
+    Prepare([in] String videoId, [in] FileDescriptor fd, [out] StreamDescription []streamDescs);
 
     /**
      * @brief Creates streams.
@@ -80,7 +70,7 @@ interface IVideoProcessSession {
      * This function must be called after {@link CreateStreams}.
      *
      * @param mode Indicates the operation mode of the stream. For details, see {@link OperationMode_V1_1}.
-     * @param modeSetting Indicates the stream configuration parameters, including the frame rate and zoom information.
+     * @param modeSetting Indicates the stream configuration parameters, including the frame rate and zoom information
      * @return Returns <b>NO_ERROR</b> if the operation is successful;
      * returns an error code defined in {@link CamRetCode} otherwise.
      *
@@ -88,6 +78,30 @@ interface IVideoProcessSession {
      * @version 1.0
      */
     CommitStreams([in] unsigned char[] modeSetting);
+
+    /**
+     * @brief Releases streams.
+     *
+     * @param streamInfos Indicates the information of the streams to release.
+     *
+     * @return Returns <b>NO_ERROR</b> if the operation is successful;
+     * returns an error code defined in {@link CamRetCode} otherwise.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    ReleaseStreams([in] struct StreamInfo_V1_1[] streamInfos);
+
+    /**
+     * @brief Process the specific video by video ID.
+     *
+     * @param videoId Indicates video id.
+     * @param timestamp Indicates need process video frame time.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    ProcessVideo([in] String videoId, [in] unsigned long timestamp);
 
     /**
      * @brief Remove the specific video by video ID.

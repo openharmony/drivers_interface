@@ -347,7 +347,7 @@ typedef enum camera_device_metadata_tag {
      * ohos.ability.muteModes [static, enum[], public]
      *
      * camera device property, report current camera mute modes
-     * (i.e. enum[]: OFF, solidColorBlack, ...)
+     * (i.e. enum[]: OFF, solidColorBlack ...)
      */
     OHOS_ABILITY_MUTE_MODES,
     /**
@@ -2206,7 +2206,7 @@ enum CameraFoldStatus {
 };
 
 // OHOS_CONTROL_BURST_CAPTURE
-enum BurstCapture {
+enum CameraBurstCaptureEnum {
     OHOS_CONTROL_BURST_CAPTURE_END = 0,
     OHOS_CONTROL_BURST_CAPTURE_BEGIN = 1,
 };

@@ -32,7 +32,7 @@ interface IVideoProcessService {
      * @brief Create video process session.
      *
      * @param userId Indicates user ID.
-     * @param videoProcessCallback Indicates the video process callback. For details, see {@link IVideoProcessCallback}.
+     * @param videoProcessCallback Indicates the video process callback. For details, see {@link IVideoProcessCallback}
      * @param videoProcessSession Indicates the video process session. For details, see {@link IVideoProcessSession}
      *
      * @since 5.0

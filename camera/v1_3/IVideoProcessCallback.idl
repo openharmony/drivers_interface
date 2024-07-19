@@ -23,6 +23,7 @@
  */
 
 package ohos.hdi.camera.v1_3;
+
 import ohos.hdi.camera.v1_3.Types;
 import ohos.hdi.camera.v1_2.Types;
 
