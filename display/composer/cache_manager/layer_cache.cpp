@@ -86,7 +86,7 @@ int32_t LayerCache::SetLayerBuffer(BufferHandle*& buffer, uint32_t seqNo, bool &
     return HDF_SUCCESS;
 }
 
-int32_t ResetLayerBuffer()
+int32_t LayerCache::ResetLayerBuffer()
 {
     HDF_LOGI("%{public}s", __func__);
     return Init();
