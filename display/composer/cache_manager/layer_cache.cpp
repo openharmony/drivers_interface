@@ -71,8 +71,6 @@ int32_t LayerCache::SetLayerBuffer(BufferHandle*& buffer, uint32_t seqNo, bool &
 {
     for (auto num : deletingList) {
         bool result = bufferCaches_->EraseCache(num);
-        DISPLAY_CHECK(!result, HDF_LOGE("%{public}s: warning, erase buffer cache fail, num: %{public}u",
-            __func__, num));
     }
 
     BufferHandle* handle = BufferCacheUtils::NativeBufferCache(bufferCaches_, buffer, seqNo, layerId_, needFreeBuffer);
