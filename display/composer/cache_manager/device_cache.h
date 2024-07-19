@@ -44,7 +44,7 @@ public:
     int32_t AddLayerCache(uint32_t id, uint32_t bufferCacheCount);
     int32_t RemoveLayerCache(uint32_t id);
     int32_t ClearClientCache();
-    int32_t ClearLayerBuffer();
+    int32_t ClearLayerBuffer(uint32_t layerId);
     int32_t SetDisplayClientBuffer(BufferHandle*& buffer, uint32_t seqNo, bool &needFreeBuffer,
         std::function<int32_t (const BufferHandle&)> realFunc);
     int32_t SetVirtualDisplayBuffer(BufferHandle*& buffer, uint32_t seqNo, bool &needFreeBuffer,
