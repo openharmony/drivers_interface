@@ -132,9 +132,9 @@ int32_t DeviceCache::ClearLayerBuffer(uint32_t layerId)
 int32_t DeviceCache::SetDisplayClientBuffer(BufferHandle*& buffer, uint32_t seqNo, bool &needFreeBuffer,
     std::function<int32_t (const BufferHandle&)> realFunc)
 {
-    HDF_LOGI("%{public}s, seqNo %{public}u, needFreeBuffer %{public}d", __func__, seqNo, needFreeBuffer);
     if (buffer != nullptr) {
-        HDF_LOGI("%{public}s, fd %{public}d, size %{public}d", __func__, buffer->fd, buffer->size);
+        HDF_LOGI("%{public}s, seqNo %{public}u, fd %{public}d, size %{public}d", __func__, seqNo, buffer->fd,
+                 buffer->size);
     }
     BufferHandle* handle = BufferCacheUtils::NativeBufferCache(clientBufferCaches_, buffer, seqNo, deviceId_,
                                                                needFreeBuffer);
