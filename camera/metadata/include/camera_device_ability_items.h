@@ -2129,7 +2129,7 @@ enum CameraFoldStatus {
 };
 
 // OHOS_CONTROL_BURST_CAPTURE
-enum BurstCapture {
+enum CameraBurstCaptureEnum {
     OHOS_CONTROL_BURST_CAPTURE_END = 0,
     OHOS_CONTROL_BURST_CAPTURE_BEGIN = 1,
 };
