@@ -323,7 +323,7 @@ struct RangeValue {
  * @brief Defines the video encoding and decoding capabilities.
   
  * @since 4.1
- * @version 3.1
+ * @version 4.0
  */
 struct CodecVideoPortCap {
     struct Rect minSize;               /**< Minimum resolution supported. */
@@ -338,6 +338,7 @@ struct CodecVideoPortCap {
                                             For details, see {@link BitRateMode}. */
     struct RangeValue frameRate;       /**< Frame rate range. */
     int[] measuredFrameRate;           /**< Frame rate measured. */
+    boolean isSupportPassthrough;      /**< Whether supports passthrough feature */
     boolean isSupportLowLatency;       /**< Whether supports low-latency feature */
     boolean isSupportTSVC;	           /**< Whether supports temporal level scale feature */
     boolean isSupportLTR;	           /**< Whether supports long-term reference feature */
