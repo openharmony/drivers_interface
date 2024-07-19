@@ -323,7 +323,7 @@ struct RangeValue {
  * @brief Defines the video encoding and decoding capabilities.
   
  * @since 4.1
- * @version 3.2
+ * @version 4.0
  */
 struct CodecVideoPortCap {
     struct Rect minSize;               /**< Minimum resolution supported. */
