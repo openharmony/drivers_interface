@@ -33,4 +33,28 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_1.IDisplayCompos
      * @version 1.2
      */
      RegDisplayVBlankIdleCallback([in] IVBlankIdleCallback cb);
+
+    /**
+     * @brief Clear all Client Buffer.
+     *
+     * @param devId Indicates which device.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 5.0
+     * @version 1.2
+     */
+     ClearClientBuffer([in] unsigned int devId);
+
+    /**
+     * @brief Clear all Layer Buffer.
+     *
+     * @param devId Indicates which device, layerId Indicates which layer.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 5.0
+     * @version 1.2
+     */
+     ClearLayerBuffer([in] unsigned int devId, [in] unsigned int layerId);
 }
