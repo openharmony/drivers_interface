@@ -70,7 +70,7 @@ int32_t LayerCache::SetLayerBuffer(BufferHandle*& buffer, uint32_t seqNo, bool &
     const std::vector<uint32_t>& deletingList, std::function<int32_t (const BufferHandle&)> realFunc)
 {
     for (auto num : deletingList) {
-        bool result = bufferCaches_->EraseCache(num);
+        (void)bufferCaches_->EraseCache(num);
     }
 
     BufferHandle* handle = BufferCacheUtils::NativeBufferCache(bufferCaches_, buffer, seqNo, layerId_, needFreeBuffer);
