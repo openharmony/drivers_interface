@@ -61,6 +61,10 @@ public:
     virtual int32_t RegDisplayVBlankIdleCallback(VBlankIdleCallback cb, void* data) = 0;
 
     virtual int32_t SetDisplayConstraint(uint32_t devId, uint64_t frameID, uint64_t ns, uint32_t type) = 0;
+
+    virtual int32_t ClearClientBuffer(uint32_t devId) = 0;
+
+    virtual int32_t ClearLayerBuffer(uint32_t devId, uint32_t layerId) = 0;
 };
 } // V1_2
 } // Composer
