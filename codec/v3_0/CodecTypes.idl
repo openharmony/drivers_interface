@@ -69,6 +69,7 @@ enum AvCodecRole {
     MEDIA_ROLETYPE_IMAGE_JPEG = 0,        /**< JPEG image. */
     MEDIA_ROLETYPE_VIDEO_AVC,             /**< H.264 video. */
     MEDIA_ROLETYPE_VIDEO_HEVC,            /**< H.265 video. */
+    MEDIA_ROLETYPE_VIDEO_VVC,             /**< H.266 video. */
     MEDIA_ROLETYPE_AUDIO_FIRST = 0x10000, /**< Audio. */
     MEDIA_ROLETYPE_AUDIO_AAC = 0x10000,   /**< Advanced Audio Coding (AAC). */
     MEDIA_ROLETYPE_AUDIO_G711A,           /**< G.711 a-law audio. */
