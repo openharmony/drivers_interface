@@ -708,6 +708,15 @@ int CameraMetadata::AddCameraMetadataItem(common_metadata_header_t *dst, uint32_
     const void *data, size_t dataCount)
 {
     METADATA_DEBUG_LOG("AddCameraMetadataItem start");
+    
+    const uint32_t itemLen = sizeof(camera_metadata_item_entry_t);
+    uint32_t actualMemSize = dst->size;
+    if ((actualMemSize - dst->items_start) < (uint64_t)dst->item_count * itemLen ||
+        (actualMemSize - dst->data_start) < dst->data_count) {
+        METADATA_ERR_LOG("AddCameraMetadataItem fail, dst->item_count: %{public}u, "
+            "dst->data_count: %{public}u", dst->item_count, dst->data_count);
+        return CAM_META_INVALID_PARAM;
+    }
 
     uint32_t dataType;
     int32_t ret = AddCameraMetadataItemVerify(dst, item, data, dataCount, &dataType);
@@ -720,14 +729,6 @@ int CameraMetadata::AddCameraMetadataItem(common_metadata_header_t *dst, uint32_
     }
 
     size_t dataPayloadBytes = dataCount * OHOS_CAMERA_METADATA_TYPE_SIZE[dataType];
-
-    if ((actualMemSize - meta->items_start) < (uint64_t)meta->item_count * itemLen ||
-        (actualMemSize - meta->data_start) < meta->data_count) {
-        METADATA_ERR_LOG("AddCameraMetadataItem fail, dst->item_count: %{public}u, "
-            "dst->data_count: %{public}u", dst->item_count, dst->data_count);
-        return CAM_META_INVALID_PARAM;
-    }
-
     camera_metadata_item_entry_t *metadataItem = GetMetadataItems(dst) + dst->item_count;
     ret = memset_s(metadataItem, sizeof(camera_metadata_item_entry_t), 0, sizeof(camera_metadata_item_entry_t));
     if (ret != EOK) {
