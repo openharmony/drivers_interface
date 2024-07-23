@@ -713,11 +713,10 @@ int CameraMetadata::AddCameraMetadataItem(common_metadata_header_t *dst, uint32_
             "dst->data_count: %{public}u", dst->item_count, dst->data_count);
         return CAM_META_INVALID_PARAM;
     }
+    
     uint32_t dataType;
     int32_t ret = AddCameraMetadataItemVerify(dst, item, data, dataCount, &dataType);
-    if (ret != CAM_META_SUCCESS) {
-        return ret;
-    }
+    if (ret != CAM_META_SUCCESS) return ret;
 
     size_t dataBytes = CalculateCameraMetadataItemDataSize(dataType, dataCount);
     if (dataBytes + dst->data_count > dst->data_capacity) {
