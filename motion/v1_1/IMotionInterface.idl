@@ -43,6 +43,7 @@
  */
 package ohos.hdi.motion.v1_1;
 
+import ohos.hdi.motion.v1_0.MotionTypes;
 import ohos.hdi.motion.v1_0.IMotionCallback;
 import ohos.hdi.motion.v1_0.IMotionInterface;
 import ohos.hdi.motion.v1_1.MotionTypes;
