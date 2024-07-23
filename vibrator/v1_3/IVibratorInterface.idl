@@ -57,4 +57,18 @@ interface IVibratorInterface extends ohos.hdi.vibrator.v1_2.IVibratorInterface{
      * @version 1.3
      */
     StartByIntensity([in] String effectType, [in] unsigned short intensity);
+
+    /**
+     * @brief Obtains the vibration wave information.
+     *
+     * @param vibratorId Indicates the vibration index.
+     * @param info Indicates the information.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns negative value if the get failed.
+     *
+     * @since 5.0
+     * @version 1.3
+     */
+    GetAllWaveInfo([in] int vibratorId, [out] struct HdfWaveInformation[] info);
 }
