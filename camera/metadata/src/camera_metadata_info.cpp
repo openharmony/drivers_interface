@@ -721,7 +721,8 @@ int CameraMetadata::AddCameraMetadataItem(common_metadata_header_t *dst, uint32_
 
     size_t dataPayloadBytes = dataCount * OHOS_CAMERA_METADATA_TYPE_SIZE[dataType];
 
-    if (dst->item_count == 0 || dst->data_count == 0) {
+    if ((actualMemSize - meta->items_start) < (uint64_t)meta->item_count * itemLen ||
+        (actualMemSize - meta->data_start) < meta->data_count) {
         METADATA_ERR_LOG("AddCameraMetadataItem fail, dst->item_count: %{public}u, "
             "dst->data_count: %{public}u", dst->item_count, dst->data_count);
         return CAM_META_INVALID_PARAM;
