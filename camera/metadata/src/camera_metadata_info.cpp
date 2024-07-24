@@ -28,6 +28,7 @@ static CameraVendorTag* g_vendorTagImpl = nullptr;
 const char* g_exampleVendorTagLib = "libcamera_example_vendor_tag_impl.z.so";
 const char* g_vendorTagLib = "libcamera_vendor_tag_impl.z.so";
 const int METADATA_HEADER_DATA_SIZE = 4;
+const uint32_t itemLen = sizeof(camera_metadata_item_entry_t);
 const std::vector<uint32_t> g_metadataTags = {
     OHOS_ABILITY_CAMERA_POSITION,
     OHOS_ABILITY_CAMERA_TYPE,
@@ -708,11 +709,15 @@ int CameraMetadata::AddCameraMetadataItem(common_metadata_header_t *dst, uint32_
     const void *data, size_t dataCount)
 {
     METADATA_DEBUG_LOG("AddCameraMetadataItem start");
+    if ((dst->size - dst->items_start) < (uint64_t)dst->item_count * itemLen ||
+        (dst->size - dst->data_start) < dst->data_count) {
+        METADATA_ERR_LOG("AddCameraMetadataItem fail:count == 0.");
+        return CAM_META_INVALID_PARAM;
+    }
+
     uint32_t dataType;
     int32_t ret = AddCameraMetadataItemVerify(dst, item, data, dataCount, &dataType);
-    if (ret != CAM_META_SUCCESS) {
-        return ret;
-    }
+    if (ret != CAM_META_SUCCESS) return ret;
 
     size_t dataBytes = CalculateCameraMetadataItemDataSize(dataType, dataCount);
     if (dataBytes + dst->data_count > dst->data_capacity) {
