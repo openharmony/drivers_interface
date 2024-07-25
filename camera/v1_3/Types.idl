@@ -120,6 +120,13 @@ enum OperationMode : ohos.hdi.camera.v1_2.OperationMode_V1_2 {
     * @version 1.0
     */
     APERTURE_VIDEO = 20,
+
+    /**
+    * flourscence photo mode, which dedicated to flourscence photo mode
+    * @since 5.0
+    * @version 1.0
+    */
+    FLOURSCENCE_PHOTO = 21,
 };
 
 /**
@@ -148,6 +155,11 @@ enum ExtendedStreamInfoType : ohos.hdi.camera.v1_2.ExtendedStreamInfoType_V1_2 {
      * Extended stream information of secure.
      */
     EXTENDED_STREAM_INFO_SECURE = 5,
+
+    /**
+     * Extended stream information of maker.
+     */
+    EXTENDED_STREAM_INFO_MAKER_INFO = 6,
 };
 
 /**
@@ -232,4 +244,106 @@ struct CameraDeviceResourceCost {
      * @brief Cameradevices ID that can not open while current camera device is on.
      */
     String[] conflictingDevices_;
+};
+
+/**
+ * @brief Enumerates camera media stream type.
+ * @since 5.0
+ * @version 1.0
+ */
+enum MediaStreamType {
+    /**
+     * video media stream
+     * @since 5.0
+     * @version 1.0
+     */
+    MEDIA_STREAM_TYPE_VIDEO = 0,
+    /**
+     * metadata media stream
+     * @since 5.0
+     * @version 1.0
+     */
+    MEDIA_STREAM_TYPE_METADATA = 1,
+    /**
+     * maker media stream
+     * @since 5.0
+     * @version 1.0
+     */
+    MEDIA_STREAM_TYPE_MAKER = 2,
+};
+
+/**
+ * @brief Defines the SteramDescription, which is used by {@link IVideoProcessSession::Prepare}.
+ * @since 5.0
+ * @version 1.0
+ */
+struct StreamDescription {
+    /**
+     * stream id
+     * @since 5.0
+     * @version 1.0
+     */
+    int streamId;
+    /**
+     * media stream type
+     * @since 5.0
+     * @version 1.0
+     */
+    enum MediaStreamType type;
+    /**
+     * pixel format
+     * @since 5.0
+     * @version 1.0
+     */
+    int pixelFormat;
+    /**
+     * image width
+     * @since 5.0
+     * @version 1.0
+     */
+    int width;
+    /**
+     * image height
+     * @since 5.0
+     * @version 1.0
+     */
+    int height;
+    /**
+     * image color space
+     * @since 5.0
+     * @version 1.0
+     */
+    int dataspace;
+};
+
+/**
+ * @brief Defines the CaptureEndedInfoExt, which is used by {@link IStreamOperatorCallback::OnCaptureEndedExt}.
+ * @since 5.0
+ * @version 1.0
+ */
+struct CaptureEndedInfoExt {
+    /**
+     * stream id
+     * @since 5.0
+     * @version 1.0
+     */
+    int streamId_;
+    /**
+     * frame count
+     * @since 5.0
+     * @version 1.0
+     */
+    int frameCount_;
+    /**
+     * whether deffered video enhancement available
+     * @since 5.0
+     * @version 1.0
+     */
+    boolean isDeferredVideoEnhancementAvailable_;
+    /**
+     * video id
+     * @since 5.0
+     * @version 1.0
+     */
+    String videoId_;
 };
