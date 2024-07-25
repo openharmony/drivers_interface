@@ -57,4 +57,41 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_1.IDisplayCompos
      * @version 1.0
      */
      ClearLayerBuffer([in] unsigned int devId, [in] unsigned int layerId);
+
+     /**
+     * @brief Set Hardware Cursor Position.
+     *
+     * @param devId Indicates which device, x and y Indicates the position of hardware cursor.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 5.0
+     * @version 1.0
+     */
+     SetHardwareCursorPosition([in] unsigned int devId, [in] int x, [in] int y);
+
+     /**
+     * @brief Enable Hardware Cursor.
+     *
+     * @param devId Indicates which device, enable Indicates which stats of enabled hardware cursor.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 5.0
+     * @version 1.0
+     */
+     EnableHardwareCursorStats([in] unsigned int devId, [in] boolean enable);
+
+     /**
+     * @brief Get Hardware Cursor stats.
+     *
+     * @param devId Indicates which device, frameCount Indicates hardware cursor frame count,
+     * vsyncCount Indicates hardware cursor vsync count.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 5.0
+     * @version 1.0
+     */
+     GetHardwareCursorStats([in] unsigned int devId, [out] unsigned int frameCount, [out] unsigned int vsyncCount);
 }

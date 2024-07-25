@@ -65,6 +65,12 @@ public:
     virtual int32_t ClearClientBuffer(uint32_t devId) = 0;
 
     virtual int32_t ClearLayerBuffer(uint32_t devId, uint32_t layerId) = 0;
+
+    virtual int32_t SetHardwareCursorPosition(uint32_t devId, int32_t x, int32_t y) = 0;
+
+    virtual int32_t EnableHardwareCursorStats(uint32_t devId, bool enable) = 0;
+
+    virtual int32_t GetHardwareCursorStats(uint32_t devId, uint32_t& frameCount, uint32_t& vsyncCount) = 0;
 };
 } // V1_2
 } // Composer

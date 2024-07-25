@@ -91,4 +91,5 @@ enum DispCmd : ohos.hdi.display.composer.v1_0.DispCmd {
  */
 enum DisplayPropertyID {
     DISPLAY_PROPERTY_ID_SKIP_VALIDATE = 1,
+    DISPLAY_CAPBILITY_HARDWARE_CURSOR = 2,
 };
