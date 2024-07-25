@@ -281,6 +281,5 @@ interface IChipIface {
      * @since 5.0
      * @version 1.0
      */
-     SetTxPower([in] int power);
-};
+    SetTxPower([in] int power);};
 /** @} */
