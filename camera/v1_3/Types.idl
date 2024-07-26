@@ -122,11 +122,11 @@ enum OperationMode : ohos.hdi.camera.v1_2.OperationMode_V1_2 {
     APERTURE_VIDEO = 20,
 
     /**
-    * flourscence photo mode, which dedicated to flourscence photo mode
+    * fluorescence photo mode, which dedicated to fluorescence photo mode
     * @since 5.0
     * @version 1.0
     */
-    FLOURSCENCE_PHOTO = 21,
+    FLUORESCENCE_PHOTO = 21,
 };
 
 /**
