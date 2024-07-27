@@ -92,85 +92,79 @@ int32_t LayerCache::ResetLayerBuffer()
     return Init();
 }
 
-void LayerCache::NativeBufferInit(sptr<NativeBuffer>& buffer)
+void LayerCache::NativeBufferInit(std::unique_ptr<NativeBuffer>& buffer)
 {
+#ifdef DISPLAY_COMUNITY
     if (buffer == nullptr) {
         HDF_LOGW("NativeBufferInit buffer nullptr!");
         return;
     }
-    int32_t ret = RegisterBuffer(buffer);
+    int32_t ret = Mmap(buffer);
     if (ret != HDF_SUCCESS) {
-        HDF_LOGE("%{public}s: RegisterBuffer failed with %{public}d!", __func__, ret);
+        HDF_LOGE("%{public}s: Mmap failed with %{public}d!", __func__, ret);
     }
+#endif
 }
 
-void LayerCache::NativeBufferCleanUp(sptr<NativeBuffer>& buffer)
+void LayerCache::NativeBufferCleanUp(std::unique_ptr<NativeBuffer>& buffer)
 {
+#ifdef DISPLAY_COMUNITY
     if (buffer == nullptr) {
         HDF_LOGW("NativeBufferCleanUp buffer nullptr!");
         return;
     }
-    int32_t ret = FreeMem(buffer);
+    int32_t ret = Unmap(buffer);
     if (ret != HDF_SUCCESS) {
-        HDF_LOGE("%{public}s: FreeMem failed with %{public}d!", __func__, ret);
+        HDF_LOGE("%{public}s: Unmap failed with %{public}d!", __func__, ret);
     }
-}
-
-sptr<Buffer::V1_1::IMetadata> LayerCache::GetMetaService()
-{
-    static sptr<Buffer::V1_1::IMetadata> metaService = nullptr;
-    if (metaService == nullptr) {
-        metaService = Buffer::V1_1::IMetadata::Get(true);
-    }
-    return metaService;
+#endif
 }
 
 sptr<Buffer::V1_2::IMapper> LayerCache::GetMapperService()
 {
-    static sptr<Buffer::V1_2::IMapper> mapperService = nullptr;
+    static sptr<Buffer::V1_2::IMapper> mapperService;
     if (mapperService == nullptr) {
         mapperService = Buffer::V1_2::IMapper::Get(true);
     }
     return mapperService;
 }
 
-int32_t LayerCache::Mmap(sptr<NativeBuffer>& buffer)
+int32_t LayerCache::Mmap(std::unique_ptr<NativeBuffer>& buffer)
 {
     auto mapperService = GetMapperService();
     if (mapperService == nullptr) {
         HDF_LOGE("GetMapperService failed!");
         return HDF_FAILURE;
     }
-    return mapperService->Mmap(buffer);
+
+    sptr<NativeBuffer> nativeBuffer(new NativeBuffer);
+    if (nativeBuffer == nullptr) {
+        HDF_LOGE("new NativeBuffer failed!");
+        return HDF_FAILURE;
+    }
+
+    nativeBuffer->SetBufferHandle(buffer->GetBufferHandle(), false);
+
+    return mapperService->Mmap(nativeBuffer);
 }
 
-int32_t LayerCache::Unmap(sptr<NativeBuffer>& buffer)
+int32_t LayerCache::Unmap(std::unique_ptr<NativeBuffer>& buffer)
 {
     auto mapperService = GetMapperService();
     if (mapperService == nullptr) {
         HDF_LOGE("GetMapperService failed!");
         return HDF_FAILURE;
     }
-    return mapperService->Unmap(buffer);
-}
 
-int32_t LayerCache::FreeMem(sptr<NativeBuffer>& buffer)
-{
-    auto mapperService = GetMapperService();
-    if (mapperService == nullptr) {
-        HDF_LOGE("GetMapperService failed!");
+    sptr<NativeBuffer> nativeBuffer(new NativeBuffer);
+    if (nativeBuffer == nullptr) {
+        HDF_LOGE("new NativeBuffer failed!");
         return HDF_FAILURE;
     }
-    return mapperService->FreeMem(buffer);
-}
 
-int32_t LayerCache::RegisterBuffer(sptr<NativeBuffer>& buffer)
-{
-    auto metaService = GetMetaService();
-    if (metaService == nullptr) {
-        return HDF_FAILURE;
-    }
-    return metaService->RegisterBuffer(buffer);
+    nativeBuffer->SetBufferHandle(buffer->GetBufferHandle(), false);
+
+    return mapperService->Unmap(nativeBuffer);
 }
 
 void LayerCache::Dump() const
