@@ -316,6 +316,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_STATISTICS_DETECT_SETTING,
     /**
+     * ohos.ability.availableExtendedStreamInfoTypes [static, int32[], public]
+     *
+     * camera device property, report current camera extended streams supported by different streams in the mode
+     * (i.e. int32[] ...)
+     */
+    OHOS_ABILITY_AVAILABLE_EXTENDED_STREAM_INFO_TYPES,
+    /**
      * ohos.camera.propertiesEnd
      *
      * camera property end
