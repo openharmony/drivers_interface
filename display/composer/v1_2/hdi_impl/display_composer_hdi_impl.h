@@ -126,6 +126,27 @@ public:
         return ToDispErrCode(hdi_v1_2_->ClearLayerBuffer(devId, layerId));
     }
 
+    virtual int32_t SetHardwareCursorPosition(uint32_t devId, int32_t x, int32_t y) override
+    {
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_2_);
+        int32_t ret = ToDispErrCode(hdi_v1_2_->SetHardwareCursorPosition(devId, x, y));
+        return ret;
+    }
+
+    virtual int32_t EnableHardwareCursorStats(uint32_t devId, bool enable) override
+    {
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_2_);
+        int32_t ret = ToDispErrCode(hdi_v1_2_->EnableHardwareCursorStats(devId, enable));
+        return ret;
+    }
+
+    virtual int32_t GetHardwareCursorStats(uint32_t devId, uint32_t& frameCount, uint32_t& vsyncCount) override
+    {
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_2_);
+        int32_t ret = ToDispErrCode(hdi_v1_2_->GetHardwareCursorStats(devId, frameCount, vsyncCount));
+        return ret;
+    }
+
 protected:
     using BaseType1_1 = V1_1::DisplayComposerHdiImpl<Interface, CompHdi, CmdReq>;
     using BaseType1_1::WAIT_TIME_INTERVAL;
