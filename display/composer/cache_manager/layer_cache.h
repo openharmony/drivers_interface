@@ -23,7 +23,6 @@
 #include "cache_manager.h"
 #include "nocopyable.h"
 #include "v1_2/mapper_stub.h"
-#include "v1_1/imetadata.h"
 
 namespace OHOS {
 namespace HDI {
@@ -39,17 +38,15 @@ public:
     int32_t SetBufferCacheMaxCount(uint32_t cacheCount);
     int32_t ResetLayerBuffer();
     void Dump() const;
-    static void NativeBufferInit(sptr<NativeBuffer>& buffer);
-    static void NativeBufferCleanUp(sptr<NativeBuffer>& buffer);
+    static void NativeBufferInit(std::unique_ptr<NativeBuffer>& buffer);
+    static void NativeBufferCleanUp(std::unique_ptr<NativeBuffer>& buffer);
 private:
     explicit LayerCache(uint32_t id);
     int32_t Init();
     static sptr<Buffer::V1_2::IMapper> GetMapperService();
-    static sptr<Buffer::V1_1::IMetadata> GetMetaService();
-    static int32_t Mmap(sptr<NativeBuffer>& buffer);
-    static int32_t Unmap(sptr<NativeBuffer>& buffer);
-    static int32_t FreeMem(sptr<NativeBuffer>& buffer);
-    static int32_t RegisterBuffer(sptr<NativeBuffer>& buffer);
+    static int32_t Mmap(std::unique_ptr<NativeBuffer>& buffer);
+    static int32_t Unmap(std::unique_ptr<NativeBuffer>& buffer);
+
     uint32_t layerId_;
     std::shared_ptr<CacheManager<uint32_t, NativeBuffer>> bufferCaches_;
 };
