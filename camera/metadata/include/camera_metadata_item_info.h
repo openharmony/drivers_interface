@@ -104,6 +104,8 @@ static item_info_t g_ohosCameraProperties[OHOS_CAMERA_PROPERTIES_END - OHOS_CAME
         OHOS_CAMERA_PROPERTIES_START] = {"statisticsDetectType", META_TYPE_BYTE, -1},
     [OHOS_CONTROL_STATISTICS_DETECT_SETTING -
         OHOS_CAMERA_PROPERTIES_START] = {"statisticsDetectSetting", META_TYPE_BYTE, -1},
+    [OHOS_ABILITY_AVAILABLE_EXTENDED_STREAM_INFO_TYPES -
+        OHOS_CAMERA_PROPERTIES_START] = {"availableExtendedStreamInfoTypes", META_TYPE_INT32, -1},
 };
 
 static item_info_t g_ohosCameraSensor[OHOS_CAMERA_SENSOR_END - OHOS_CAMERA_SENSOR_START] = {
