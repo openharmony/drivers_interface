@@ -302,6 +302,27 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_STATUS_CAMERA_OCCLUSION_DETECTION,
     /**
+     * ohos.ability.statisticsDetectType [static, enum[], public]
+     *
+     * camera device property, report current camera support statistice detect type
+     * (i.e. enum[]: [humanFace/human/catFace/cat/dogFace/dog/salient/barCode] ...)
+     */
+    OHOS_ABILITY_STATISTICS_DETECT_TYPE,
+    /**
+     * ohos.control.statisticsDetectSetting [static, enum[], public]
+     *
+     * camera device property, set current camera what statistice detect type ware supported
+     * (i.e. enum[]: [humanFace/human/catFace/cat/dogFace/dog/salient/barCode] ...)
+     */
+    OHOS_CONTROL_STATISTICS_DETECT_SETTING,
+    /**
+     * ohos.ability.availableExtendedStreamInfoTypes [static, int32[], public]
+     *
+     * camera device property, report current camera extended streams supported by different streams in the mode
+     * (i.e. int32[] ...)
+     */
+    OHOS_ABILITY_AVAILABLE_EXTENDED_STREAM_INFO_TYPES,
+    /**
      * ohos.camera.propertiesEnd
      *
      * camera property end
@@ -333,7 +354,7 @@ typedef enum camera_device_metadata_tag {
      * ohos.ability.muteModes [static, enum[], public]
      *
      * camera device property, report current camera mute modes
-     * (i.e. enum[]: OFF, solidColorBlack, ...)
+     * (i.e. enum[]: OFF, solidColorBlack ...)
      */
     OHOS_ABILITY_MUTE_MODES,
     /**
@@ -455,6 +476,62 @@ typedef enum camera_device_metadata_tag {
      * (i.e. int32[] ...)
      */
     OHOS_STATISTICS_FACE_SCORES,
+    /**
+     * ohos.statistics.detectHumanFaceInfos [static, int32[], public]
+     *
+     * camera device property, query current camera detect human face informations
+     * (i.e. int32[] ...)
+     */
+    OHOS_STATISTICS_DETECT_HUMAN_FACE_INFOS,
+    /**
+     * ohos.statistics.detectHumanBodyInfos [static, int32[], public]
+     *
+     * camera device property, query current camera detect human body informations
+     * (i.e. int32[] ...)
+     */
+    OHOS_STATISTICS_DETECT_HUMAN_BODY_INFOS,
+    /**
+     * ohos.statistics.detectCatFaceInfos [static, int32[], public]
+     *
+     * camera device property, query current camera detect cat face informations
+     * (i.e. int32[] ...)
+     */
+    OHOS_STATISTICS_DETECT_CAT_FACE_INFOS,
+    /**
+     * ohos.statistics.detectCatBodyInfos [static, int32[], public]
+     *
+     * camera device property, query current camera detect cat body informations
+     * (i.e. int32[] ...)
+     */
+    OHOS_STATISTICS_DETECT_CAT_BODY_INFOS,
+    /**
+     * ohos.statistics.detectDogFaceInfos [static, int32[], public]
+     *
+     * camera device property, query current camera detect dog face informations
+     * (i.e. int32[] ...)
+     */
+    OHOS_STATISTICS_DETECT_DOG_FACE_INFOS,
+    /**
+     * ohos.statistics.detectDogBodyInfos [static, int32[], public]
+     *
+     * camera device property, query current camera detect dog body informations
+     * (i.e. int32[] ...)
+     */
+    OHOS_STATISTICS_DETECT_DOG_BODY_INFOS,
+    /**
+     * ohos.statistics.detectSalientInfos [static, int32[], public]
+     *
+     * camera device property, query current camera detect salient informations
+     * (i.e. int32[] ...)
+     */
+    OHOS_STATISTICS_DETECT_SALIENT_INFOS,
+    /**
+     * ohos.statistics.detectBarCodeInfos [static, int32[], public]
+     *
+     * camera device property, query current camera detect bar code informations
+     * (i.e. int32[] ...)
+     */
+    OHOS_STATISTICS_DETECT_BAR_CODE_INFOS,
     /**
      * ohos.camera.statisticsEnd
      *
@@ -1366,6 +1443,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_CAMERA_MACRO_SUPPORTED,
     /**
+     * ohos.ability.sceneMacroCap [static, int32[], public]
+     *
+     * camera device property, report current camera different macro capAbility
+     * (i.e. int32[] ...)
+     */
+    OHOS_ABILITY_SCENE_MACRO_CAP,
+    /**
      * ohos.status.camera [static, enum, public]
      *
      * camera device property, query current camera macro
@@ -2129,7 +2213,7 @@ enum CameraFoldStatus {
 };
 
 // OHOS_CONTROL_BURST_CAPTURE
-enum BurstCapture {
+enum CameraBurstCaptureEnum {
     OHOS_CONTROL_BURST_CAPTURE_END = 0,
     OHOS_CONTROL_BURST_CAPTURE_BEGIN = 1,
 };
@@ -2152,6 +2236,18 @@ enum TimeLapseRecordState {
 enum TimeLapsePreviewType {
     TIME_LAPSE_PREVIEW_DARK = 1,
     TIME_LAPSE_PREVIEW_LIGHT = 2,
+};
+
+// OHOS_ABILITY_STATISTICS_DETECT_TYPE
+enum StatisticsDetectType {
+    OHOS_CAMERA_HUMAN_FACE_DETECT = 0,
+    OHOS_CAMERA_HUMAN_BODY_DETECT = 1,
+    OHOS_CAMERA_CAT_FACE_DETECT = 2,
+    OHOS_CAMERA_CAT_BODY_DETECT = 3,
+    OHOS_CAMERA_DOG_FACE_DETECT = 4,
+    OHOS_CAMERA_DOG_BODY_DETECT = 5,
+    OHOS_CAMERA_SALIENT_DETECT = 6,
+    OHOS_CAMERA_BAR_CODE_DETECT = 7,
 };
 
 #endif

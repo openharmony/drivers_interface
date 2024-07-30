@@ -19,6 +19,7 @@
      "adapted_system_type":[
         "standard"
      ],
+     "features": ["drivers_interface_user_auth_enabled"],
      "rom":"1000KB",
      "ram":"1000KB",
      "deps":{

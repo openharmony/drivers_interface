@@ -76,7 +76,7 @@ public:
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
         ret = DoReplyResults(replyEleCnt, outFds, replyData, [&](void *data) -> int32_t {
-            FenceData *fenceData = (reinterpret_cast<struct FenceData *>(data));
+            FenceData *fenceData = reinterpret_cast<struct FenceData *>(data);
             if (fenceData == nullptr) {
                 fence = -1;
                 skipState = -1;
@@ -160,7 +160,7 @@ EXIT:
                     HDF_LOGE("%{public}s: HDI 1.2 read layer vector failed", __func__));
             }
 
-            // unpack layers vector
+            // unpack fences vector
             vectSize = 0;
             DISPLAY_CHK_RETURN(true != replyUnpacker.ReadUint32(vectSize), HDF_FAILURE,
                 HDF_LOGE("%{public}s: HDI 1.2 read vect size failed", __func__));

@@ -92,7 +92,7 @@ import ohos.hdi.pin_auth.v2_0.PinAuthTypes;
      * @version 2.0
      */
     OnGetData([in] unsigned char[] algoParameter, [in] unsigned long authSubType, [in] unsigned int algoVersion,
-        [in] unsigned char[] challenge, [in] unsigned char[] complexityReg);
+        [in] unsigned char[] challenge, [in] String complexityReg);
     /**
      * @brief Defines the function for reporting message.
      *

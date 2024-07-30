@@ -36,6 +36,7 @@ public:
     int32_t SetLayerBuffer(BufferHandle*& buffer, uint32_t seqNo, bool &needFreeBuffer,
         const std::vector<uint32_t>& deletingList, std::function<int32_t (const BufferHandle&)> realFunc);
     int32_t SetBufferCacheMaxCount(uint32_t cacheCount);
+    int32_t ResetLayerBuffer();
     void Dump() const;
     static void NativeBufferInit(std::unique_ptr<NativeBuffer>& buffer);
     static void NativeBufferCleanUp(std::unique_ptr<NativeBuffer>& buffer);

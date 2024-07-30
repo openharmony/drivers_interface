@@ -24,7 +24,7 @@
 
 package ohos.hdi.camera.v1_3;
 
-import ohos.hdi.camera.v1_2.Types;
+import ohos.hdi.camera.v1_3.Types;
 
 [callback] interface IStreamOperatorCallback extends ohos.hdi.camera.v1_2.IStreamOperatorCallback {
     /**
@@ -50,4 +50,15 @@ import ohos.hdi.camera.v1_2.Types;
      * @version 1.3
      */
     OnFrameShutterEnd([in] int captureId, [in] int[] streamIds, [in] unsigned long timestamp);
+
+    /**
+     * @brief Called when the capture ends.
+     *
+     * @param captureId Indicates the ID of the capture request corresponding to the callback.
+     * @param infos Indicates information related to the capture when it ends.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    OnCaptureEndedExt([in] int captureId, [in] struct CaptureEndedInfoExt[] infos);
 }
