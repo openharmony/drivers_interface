@@ -9,7 +9,7 @@
 
 ![](figures/hdi-schematic.png)
 
-使用IDL语法描述HDI接口并保存为`.idl`文件，`.idl`文件在编译过程中转换为C/C++语言的函数接口声明、客户端与服务端IPC相关过程代码，开发者只需要基于生成的`ifoo.h`函数接口实现具体服务功能即可。代码生成与编译功能已经集成在`//drivers/hdf_core/adapter/uhdf2/hdi.gni`编译模板，基于该编译模板编写`idl`文件的`BUILD.gn`就可以简单的生成客户端、服务端代码并编译为共享库。
+使用IDL语法描述HDI接口并保存为`.idl`文件，`.idl`文件在编译过程中转换为C/C++语言的函数接口声明、客户端与服务端IPC相关过程代码，开发者只需要基于生成的`ifoo.h`函数接口实现具体服务功能即可。代码生成与编译功能已经集成在`//build/config/components/hdi/hdi.gni`编译模板，基于该编译模板编写`idl`文件的`BUILD.gn`就可以简单的生成客户端、服务端代码并编译为共享库。
 
 ## 目录
 
@@ -85,7 +85,7 @@
 1. 编写 `idl`文件的`BUILD.gn`
     - 在上述`drivers/interface/foo/v1.0/`目录中添加`BUILD.gn`文件，内容参考如下：
         ```
-        import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")   # 编译idl必须要导入的模板
+        import("//build/config/components/hdi/hdi.gni")   # 编译idl必须要导入的模板
         hdi("foo") {                                # 目标名称，会生成两个so，分别对应 libfoo_client_v1.0.z.so 和 libfoo_stub_v1.0.z.so
             package = "ohos.hdi.foo.v1_0"           # 包名，必须与idl路径匹配
             module_name = "foo"                     # module_name控制dirver文件中驱动描 述符(struct HdfDriverEntry)的moduleName

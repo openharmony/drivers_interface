@@ -9,7 +9,7 @@ This repository is used to manage the hardware device interface (HDI) definition
 
 ![](figures/hdi-schematic.png)
 
-Define an HDI in the IDL and saved it in the `.idl` format. Then, the `.idl` file will be compiled and converted into the function interface declaration and IPC-related process code in C or C++. You only need to implement service functionalities based on the `ifoo.h` generated. The `//drivers/hdf_core/adapter/uhdf2/hdi.gni` template integrates code generation and compilation. You can write the `BUILD.gn` file based on this template to generate client and server code and compile the code into a shared library (.so file).
+Define an HDI in the IDL and saved it in the `.idl` format. Then, the `.idl` file will be compiled and converted into the function interface declaration and IPC-related process code in C or C++. You only need to implement service functionalities based on the `ifoo.h` generated. The `//build/config/components/hdi/hdi.gni` template integrates code generation and compilation. You can write the `BUILD.gn` file based on this template to generate client and server code and compile the code into a shared library (.so file).
 
 ## Directory Structure
 
@@ -82,7 +82,7 @@ Define an HDI in the IDL and saved it in the `.idl` format. Then, the `.idl` fil
 2. Write `BUILD.gn` for the `idl` file.
     - Add the `BUILD.gn` file to the `drivers/interface/foo/v1.0/` directory. The file content is as follows:
         ```
-        import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")   # Template to be imported for compiling the .idl file.
+        import("//build/config/components/hdi/hdi.gni")   # Template to be imported for compiling the .idl file.
         hdi("foo") {                                # Target .so files (libfoo_client_v1.0.z.so and libfoo_stub_v1.0.z.so) to be generated.
             package = "ohos.hdi.foo.v1_0"                    # Package name, which must match the .idl path.
             module_name = "foo"                     # moduleName that determines the driver descriptor (struct HdfDriverEntry) in the driver file.
