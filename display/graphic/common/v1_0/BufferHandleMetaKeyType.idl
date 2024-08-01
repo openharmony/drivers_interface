@@ -15,6 +15,13 @@
 
 package ohos.hdi.display.graphic.common.v1_0;
 
+struct BufferHandleMetaRegion {
+    unsigned int left;
+    unsigned int top;
+    unsigned int width;
+    unsigned int height;
+};
+
 enum BufferHandleAttrKey {
     /* 0-2047 OS standard meta type */
     ATTRKEY_COLORSPACE_INFO = 1,            // value: CM_ColorSpaceInfo

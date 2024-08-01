@@ -12,6 +12,9 @@
     "component": {
       "name": "drivers_interface_huks",
       "subsystem": "hdf",
+      "features": [
+        "drivers_interface_huks_enabled"
+      ],
       "adapted_system_type": ["standard"],
       "rom": "675KB",
       "ram": "1024KB",
@@ -44,10 +47,10 @@
             "header": {
               "header_files": [
               ],
-              "header_base": "//drivers/interfaces/huks"
+              "header_base": "//drivers/interface/huks"
             }
           }
         ]
       }
     }
-  }
+}

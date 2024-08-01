@@ -15,6 +15,7 @@
 
 #include "buffer_producer_sequenceable.h"
 
+#include "hdi_log.h"
 #include <message_parcel.h>
 
 namespace OHOS {
@@ -38,11 +39,15 @@ bool BufferProducerSequenceable::Marshalling(Parcel &parcel) const
 
 sptr<BufferProducerSequenceable> BufferProducerSequenceable::Unmarshalling(Parcel &parcel)
 {
-    sptr<BufferProducerSequenceable> sequenceData = new BufferProducerSequenceable();
+    sptr<BufferProducerSequenceable> sequenceData(new BufferProducerSequenceable());
 
     OHOS::MessageParcel &dataParcel = static_cast<OHOS::MessageParcel &>(parcel);
 
     sptr<IRemoteObject> remoteObj = dataParcel.ReadRemoteObject();
+    if (remoteObj == nullptr) {
+        HDI_CAMERA_LOGE("Remote object is null.");
+        return nullptr;
+    }
     sptr<OHOS::IBufferProducer> bufferProducer = OHOS::iface_cast<OHOS::IBufferProducer>(remoteObj);
     sequenceData->producer_ = bufferProducer;
 
@@ -51,8 +56,9 @@ sptr<BufferProducerSequenceable> BufferProducerSequenceable::Unmarshalling(Parce
 
 BufferProducerSequenceable &BufferProducerSequenceable::operator=(const BufferProducerSequenceable &other)
 {
-    if (&other != this)
-    producer_ = other.producer_;
+    if (&other != this) {
+        producer_ = other.producer_;
+    }
     return *this;
 }
 } // V1_0

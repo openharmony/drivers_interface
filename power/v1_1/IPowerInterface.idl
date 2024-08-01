@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -41,6 +41,7 @@
 
 package ohos.hdi.power.v1_1;
 
+import ohos.hdi.power.v1_1.IPowerRunningLockCallback;
 import ohos.hdi.power.v1_1.IPowerHdiCallback;
 import ohos.hdi.power.v1_1.PowerTypes;
 import ohos.hdi.power.v1_1.RunningLockTypes;
@@ -150,5 +151,64 @@ interface IPowerInterface {
      * @since 4.0
      */
     UnholdRunningLock([in] struct RunningLockInfo info);
+
+    /**
+     * @brief obtain system wakeup reason.
+     *
+     * @param info wakeup reason info.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 4.1
+     */
+    GetWakeupReason([out] String reason);
+
+    /**
+     * @brief Holds the running lock to block device hibernation.
+     *
+     * @param extra Running lock info.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful; returns <b>HDF_FAILED</b> if the
+     * running lock type conflicts with current lock.
+     *
+     * @since 4.1
+     * @deprecated
+     */
+    HoldRunningLockExt([in] struct RunningLockInfo info, [in] unsigned long lockid, [in] String bundleName);
+
+    /**
+     * @brief Unholds the running lock to unblock device hibernation.
+     *
+     * @param extra Running lock info.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 4.1
+     * @deprecated
+     */
+    UnholdRunningLockExt([in] struct RunningLockInfo info, [in] unsigned long lockid, [in] String bundleName);
+
+    /**
+     * @brief Registers the callback of the running lock status.
+     *
+     * @param iPowerRunningLockCallback Callback to register.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @see IPowerRunningLockCallback
+     *
+     * @since 4.1
+     * @deprecated
+     */
+    RegisterRunningLockCallback([in] IPowerRunningLockCallback iPowerRunningLockCallback);
+
+    /**
+     * @brief Unregister the callback of the running lock status.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 4.1
+     * @deprecated
+     */
+    UnRegisterRunningLockCallback();
 }
 /** @} */

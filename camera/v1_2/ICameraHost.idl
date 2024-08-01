@@ -25,10 +25,28 @@
 package ohos.hdi.camera.v1_2;
 
 import ohos.hdi.camera.v1_1.ICameraHost;
-import ohos.hdi.camera.v1_1.ICameraDevice;
+import ohos.hdi.camera.v1_2.ICameraDevice;
 import ohos.hdi.camera.v1_2.ICameraHostCallback;
-
+import ohos.hdi.camera.v1_0.ICameraDeviceCallback;
 interface ICameraHost extends ohos.hdi.camera.v1_1.ICameraHost {
+    /**
+     * @brief Opens a camera device.
+     *
+     * By calling this function, you can obtain the <b>ICameraDevice</b> instance and operate the
+     * specific camera device mapping to the instance.
+     *
+     * @param cameraId Indicates the ID of the camera device, which can be obtained by calling {@link GetCameraIds}.
+     * @param callback Indicates the callback related to the camera. For details, see {@link ICameraDeviceCallback}.
+     * @param device Indicates the <b>ICameraDevice</b> instance corresponding to the ID of the camera device.
+     *
+     * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
+     * in {@link CamRetCode} otherwise.
+     *
+     * @since 4.1
+     * @version 1.2
+     */
+    OpenCamera_V1_2([in] String cameraId, [in] ICameraDeviceCallback callbackObj, [out] ICameraDevice device);
+
     /**
      * @brief Notify the device vendor of the device status change.
      *
@@ -56,7 +74,7 @@ interface ICameraHost extends ohos.hdi.camera.v1_1.ICameraHost {
      * @since 4.1
      * @version 1.2
      */
-    SetCallbackV1_2([in] ICameraHostCallback callbackObj);
+    SetCallback_V1_2([in] ICameraHostCallback callbackObj);
 
     /**
      * @brief Turns on or off the flash.
@@ -72,5 +90,38 @@ interface ICameraHost extends ohos.hdi.camera.v1_1.ICameraHost {
      * @since 4.1
      * @version 1.2
      */
-    SetFlashlightV1_2([in] float level);
+    SetFlashlight_V1_2([in] float level);
+
+    /**
+     * @brief Warm-up a camera device when lens switching.
+     *
+     * This function can be called when user touch camera application lens switch icon to accelerate the startup
+     * of the camera device specified by <b>cameraId</b>.
+     *
+     * @param cameraId Indicates the ID of the camera device, which can be obtained by calling {@link GetCameraIds}.
+     *
+     * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
+     * in {@link CamRetCode} otherwise.
+     *
+     * @since 4.1
+     * @version 1.2
+     */
+    PreCameraSwitch([in] String cameraId);
+
+    /**
+     * @brief Prelaunch a camera device.
+     *
+     * This function can be called when user touch camera application icon to accelerate the startup
+     * of the camera device specified by <b>cameraId</b>.
+     *
+     * @param config Indicates the preluanch configuration. For details, see {@link PrelaunchConfig}.
+     * @param operationMode Indicates the stream operation mode. For details, see {@link OperationMode}.
+     *
+     * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
+     * in {@link CamRetCode} otherwise.
+     *
+     * @since 4.1
+     * @version 1.2
+     */
+    PrelaunchWithOpMode([in] struct PrelaunchConfig config, [in] int operationMode);
 }

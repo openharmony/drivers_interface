@@ -100,3 +100,28 @@ struct UsbRequestPipe {
    /** Endpoint address. */
    unsigned char endpoint;
 };
+
+/**
+ * @brief Usb Ashmem.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+struct UsbAshmem {
+    /** File descriptor of the shared memory. */
+    FileDescriptor ashmemFd;
+    /** Buffer address. */
+    unsigned char[] address;
+    /** Buffer size. */
+    unsigned int size;
+    /** Offset of the used buffer. The default value is 0, which indicates that there is no offset\n
+     * and the buffer starts from the specified address.
+     */
+    unsigned int offset;
+    /** Length of the used buffer. By default, the value is equal to the size, which indicates that\n
+     * the entire buffer is used.
+     */
+    unsigned int bufferLength;
+    /** Length of the transferred data. */
+    unsigned int transferredLength;
+};

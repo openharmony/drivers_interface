@@ -27,7 +27,7 @@
 #undef LOG_TAG
 #define LOG_TAG "DISP_HDI_BUFF"
 #undef LOG_DOMAIN
-#define LOG_DOMAIN 0xD002500
+#define LOG_DOMAIN 0xD002515
 
 namespace OHOS {
 namespace HDI {
@@ -39,10 +39,7 @@ class DisplayBufferHdiImpl : public V1_0::DisplayBufferHdiImpl<Interface> {
 public:
     explicit DisplayBufferHdiImpl(bool isAllocLocal = false) : BaseType1_0(isAllocLocal), metadata_(nullptr)
     {
-        uint32_t count = 0;
         while ((metadata_ = IMetadata::Get(true)) == nullptr) {
-            HDF_LOGE("%{public}d@%{public}s get metadata service, count = %{public}d",
-                __LINE__, __func__, ++count);
             // Waiting for metadata service ready
             usleep(WAIT_TIME_INTERVAL);
         }
@@ -100,8 +97,8 @@ public:
     }
 private:
     using BaseType1_0 = V1_0::DisplayBufferHdiImpl<Interface>;
-    using BaseType1_0::WAIT_TIME_INTERVAL;
 protected:
+    using BaseType1_0::WAIT_TIME_INTERVAL;
     sptr<IMetadata> metadata_;
 };
 using HdiDisplayBufferImpl = DisplayBufferHdiImpl<V1_1::IDisplayBuffer>;

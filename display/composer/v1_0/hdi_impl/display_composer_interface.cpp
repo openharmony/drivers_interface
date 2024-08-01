@@ -21,9 +21,9 @@ namespace HDI {
 namespace Display {
 namespace Composer {
 namespace V1_0 {
-IDisplayComposerInterface* IDisplayComposerInterface::Get()
+IDisplayComposerInterface* IDisplayComposerInterface::Get(bool needSMQ)
 {
-    return HdiDisplayComposer::Create();
+    return HdiDisplayComposer::Create(needSMQ);
 }
 } // namespace V1_0
 } // namespace Composer

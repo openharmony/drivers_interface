@@ -32,7 +32,7 @@ interface IStreamOperator extends ohos.hdi.camera.v1_1.IStreamOperator {
     /**
      * @brief Update streams.
      *
-     * The function must be called after Loop CancelCaptures {@link CancelCaptures}.  
+     * The function must be called after Loop CancelCaptures {@link CancelCaptures}.
      *
      * @param streamInfos Indicates the list of stream information, which is defined by {@link StreamInfo}.
      * The passed stream information may be changed. Therefore, you can run {@link GetStreamAttributes} to
@@ -45,4 +45,19 @@ interface IStreamOperator extends ohos.hdi.camera.v1_1.IStreamOperator {
      * @version 1.2
      */
     UpdateStreams([in] struct StreamInfo_V1_1[] streamInfos);
+
+    /**
+     * @brief Confirm capture.
+     *
+     * The function must be called after start capture, the scene is in night view mode.
+     *
+     * @param captureId Indicates the ID of the stream to confirm.
+     *
+     * @return Returns <b>NO_ERROR</b> if the operation is successful;
+     * returns an error code defined in {@link CamRetCode} otherwise.
+     *
+     * @since 4.1
+     * @version 1.2
+     */
+    ConfirmCapture([in] int captureId);
 }

@@ -63,7 +63,7 @@ import ohos.hdi.location.geofence.v1_0.GeofenceTypes;
      * @param fenceIndex Indicates geofence ID, this geofence ID is unique.
      * @param location Indicates current Location. For details, see {@link Location}.
      * @param event Indicates name of the currently report event. For details, see {@link GeofenceEvent}.
-     * @param timestamp Indicates timestamp when the geofence event is reported.
+     * @param timestamp Indicates timestamp when the geofence event is reported. Milliseconds since January 1, 1970.
      * @return Returns <b>0</b> if reporting is successed; returns a negative value otherwise.
      *
      * @since 3.2

@@ -295,6 +295,8 @@ interface IUserAuthInterface {
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
+     *
+     * @deprecated
      */
     BeginEnrollmentV1_1([in] int userId, [in] unsigned char[] authToken, [in] struct EnrollParam param, 
         [out] struct ScheduleInfoV1_1 info);
@@ -307,6 +309,8 @@ interface IUserAuthInterface {
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
+     *
+     * @deprecated
      */
     BeginAuthenticationV1_1([in] unsigned long contextId, [in] struct AuthSolution param,
         [out] struct ScheduleInfoV1_1[] scheduleInfos);
@@ -343,5 +347,31 @@ interface IUserAuthInterface {
      * @return Returns a non-zero value if the operation fails.
      */
     GetAllExtUserInfo([out] ExtUserInfo[] userInfos);
+    /**
+     * @brief Begins authentication, and generates the authentication solution.
+     *
+     * @param contextId Indicates the context index.
+     * @param param Indicates input parameters. See {@link AuthSolutionV1_2}.
+     * @param scheduleInfos Indicates scheduling information. See {@link ScheduleInfoV1_1}.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value if the operation fails.
+     */
+    BeginAuthenticationV1_2([in] unsigned long contextId, [in] struct AuthSolutionV1_2 param,
+        [out] struct ScheduleInfoV1_1[] scheduleInfos);
+    /**
+     * @brief Begins the enrollment of authentication credentials. 
+     * If the authentication type is PIN, this method updates the existing PIN credential.
+     *
+     * @param userId Indicates the user ID.
+     * @param authToken Indicates the authentication token of the user password.
+     * @param param Indicates input parameters. See {@link EnrollParamV1_2}.
+     * @param info Indicates scheduling information. See {@link ScheduleInfoV1_1}.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value if the operation fails.
+     */
+    BeginEnrollmentV1_2([in] int userId, [in] unsigned char[] authToken, [in] struct EnrollParamV1_2 param, 
+        [out] struct ScheduleInfoV1_1 info);
 }
 /** @} */

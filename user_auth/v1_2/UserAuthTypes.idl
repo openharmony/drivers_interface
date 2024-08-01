@@ -173,6 +173,8 @@ struct ScheduleInfo {
  *
  * @since 4.1
  * @version 1.2
+ *
+ * @deprecated
  */
 struct AuthSolution {
     /**< User ID. */
@@ -243,6 +245,8 @@ struct IdentifyResultInfo {
  *
  * @since 4.1
  * @version 1.2
+ *
+ * @deprecated
  */
 struct EnrollParam {
     /**< Authentication type. See @{AuthType}. */
@@ -350,4 +354,45 @@ struct ExtUserInfo {
     /**< info of this user. */
     struct UserInfo userInfo;
 };
+
+/**
+ * @brief Defines the authentication solution.
+ *
+ * @since 4.1
+ * @version 1.2
+ */
+struct AuthSolutionV1_2 {
+    /**< User ID. */
+    int userId;
+    /**< Authentication trust level. */
+    unsigned int authTrustLevel;
+    /**< Authentication type. See @{AuthType}. */
+    enum AuthType authType;
+    /**< Executor sensor hint under the same authentication type, 0 is not allowed. */
+    unsigned int executorSensorHint;
+    /**< Challenge of the authentication. */
+    unsigned char[] challenge;
+    /**< Caller name. */
+    String callerName;
+    /**< Calling api version. */
+    int apiVersion;
+};
+
+/**
+ * @brief Defines credential enrollment parameters.
+ *
+ * @since 4.1
+ * @version 1.2
+ */
+struct EnrollParamV1_2 {
+    /**< Authentication type. See @{AuthType}. */
+    enum AuthType authType;
+    /**< Executor sensor hint under the same authentication type. 0 is not allowed. */
+    unsigned int executorSensorHint;
+    /**< Caller name. */
+    String callerName;
+    /**< Calling api version. */
+    int apiVersion;
+};
+
 /** @} */

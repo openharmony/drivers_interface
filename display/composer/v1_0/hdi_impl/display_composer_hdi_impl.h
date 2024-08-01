@@ -29,7 +29,7 @@
 #undef LOG_TAG
 #define LOG_TAG "DISP_HDI_COMP"
 #undef LOG_DOMAIN
-#define LOG_DOMAIN 0xD002500
+#define LOG_DOMAIN 0xD002515
 
 namespace OHOS {
 namespace HDI {
@@ -40,7 +40,7 @@ using namespace OHOS::HDI::Display::Composer::V1_0;
 
 #define DISPLAY_TRACE HdfTrace trace(__func__, "HDI:DISP:")
 
-#define COMPOSER_CHECK_NULLPTR(ptr)                                                         \
+#define COMPOSER_CHECK_NULLPTR_RETURN(ptr)                                                  \
     if ((ptr) == nullptr) {                                                                 \
         HDF_LOGE("%{public}d@%{public}s nullptr error", __LINE__, __func__);                \
         return DISPLAY_NULL_PTR;                                                            \
@@ -49,22 +49,22 @@ using namespace OHOS::HDI::Display::Composer::V1_0;
 template <typename Interface, typename CompHdi, typename CmdReq>
 class DisplayComposerHdiImpl : public Interface, public IHotPlugCallback, public IVBlankCallback {
 public:
-    static IDisplayComposerInterface* Create()
+    static IDisplayComposerInterface* Create(bool needSMQ)
     {
         sptr<CompHdi> hdi;
-        uint32_t count = 0;
-
+        std::shared_ptr<CmdReq> req = nullptr;
+        HDF_LOGI("%{public}s: hdi V1_0 start", __func__);
         while ((hdi = CompHdi::Get()) == nullptr) {
-            HDF_LOGE("%{public}s: get display_composer_service, count = %{public}d, %{public}d",
-                __func__, ++count, __LINE__);
             // Waiting for display composer service ready
             usleep(WAIT_TIME_INTERVAL);
         }
-
-        std::shared_ptr<CmdReq> req = CmdReq::Create(hdi);
-        if (req == nullptr) {
-            HDF_LOGE("%{public}s: Create DisplayCmdRequester failed %{public}d", __func__, __LINE__);
-            return nullptr;
+        HDF_LOGI("%{public}s: hdi V1_0 end", __func__);
+        if (needSMQ) {
+            req = CmdReq::Create(hdi);
+            if (req == nullptr) {
+                HDF_LOGE("%{public}s: Create DisplayCmdRequester failed %{public}d", __func__, __LINE__);
+                return nullptr;
+            }
         }
         return new DisplayComposerHdiImpl(hdi, req);
     }
@@ -76,7 +76,9 @@ public:
         vBlankCb_(nullptr),
         hotPlugCbData_(nullptr),
         vBlankCbData_(nullptr),
-        recipient_(nullptr) {}
+        recipient_(nullptr) {
+            vsyncEnableCount_.clear();
+        }
 
     virtual ~DisplayComposerHdiImpl()
     {
@@ -120,107 +122,121 @@ public:
     {
         hotPlugCb_ = cb;
         hotPlugCbData_ = data;
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(hdi_->RegHotPlugCallback(this));
     }
 
     virtual int32_t SetClientBufferCacheCount(uint32_t devId, uint32_t cacheCount) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(hdi_->SetClientBufferCacheCount(devId, cacheCount));
     }
 
     virtual int32_t GetDisplayCapability(uint32_t devId, DisplayCapability& info) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(hdi_->GetDisplayCapability(devId, info));
     }
 
     virtual int32_t GetDisplaySupportedModes(uint32_t devId, std::vector<DisplayModeInfo>& modes) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(hdi_->GetDisplaySupportedModes(devId, modes));
     }
 
     virtual int32_t GetDisplayMode(uint32_t devId, uint32_t& modeId) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(hdi_->GetDisplayMode(devId, modeId));
     }
 
     virtual int32_t SetDisplayMode(uint32_t devId, uint32_t modeId) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(hdi_->SetDisplayMode(devId, modeId));
     }
 
     virtual int32_t GetDisplayPowerStatus(uint32_t devId, DispPowerStatus& status) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(hdi_->GetDisplayPowerStatus(devId, status));
     }
 
     virtual int32_t SetDisplayPowerStatus(uint32_t devId, DispPowerStatus status) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(hdi_->SetDisplayPowerStatus(devId, status));
     }
 
     virtual int32_t GetDisplayBacklight(uint32_t devId, uint32_t& level) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(hdi_->GetDisplayBacklight(devId, level));
     }
 
     virtual int32_t SetDisplayBacklight(uint32_t devId, uint32_t level) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(hdi_->SetDisplayBacklight(devId, level));
     }
 
     virtual int32_t GetDisplayProperty(uint32_t devId, uint32_t id, uint64_t& value) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(hdi_->GetDisplayProperty(devId, id, value));
     }
 
     virtual int32_t GetDisplayCompChange(
         uint32_t devId, std::vector<uint32_t>& layers, std::vector<int32_t>& types) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(req_);
         return ToDispErrCode(req_->GetDisplayCompChange(devId, layers, types));
     }
 
     virtual int32_t SetDisplayClientCrop(uint32_t devId, const IRect& rect) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(hdi_->SetDisplayClientCrop(devId, rect));
     }
 
     virtual int32_t SetDisplayClientBuffer(uint32_t devId, const BufferHandle* buffer, uint32_t seqNo,
         int32_t fence) override
     {
-        COMPOSER_CHECK_NULLPTR(req_);
+        COMPOSER_CHECK_NULLPTR_RETURN(req_);
         return ToDispErrCode(req_->SetDisplayClientBuffer(devId, buffer, seqNo, fence));
     }
 
     virtual int32_t SetDisplayClientDamage(uint32_t devId, std::vector<IRect>& rects) override
     {
-        COMPOSER_CHECK_NULLPTR(req_);
+        COMPOSER_CHECK_NULLPTR_RETURN(req_);
         return ToDispErrCode(req_->SetDisplayClientDamage(devId, rects));
     }
 
     virtual int32_t SetDisplayVsyncEnabled(uint32_t devId, bool enabled) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
-        return ToDispErrCode(hdi_->SetDisplayVsyncEnabled(devId, enabled));
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
+
+        /* Already enabled, return success */
+        if (enabled && vsyncEnableCount_[devId] > 0) {
+            HDF_LOGD("%{public}s: Count[%{public}u] = %{public}u, Skip", __func__, devId, vsyncEnableCount_[devId]);
+            ++vsyncEnableCount_[devId];
+            return DISPLAY_SUCCESS;
+        }
+
+        int32_t ret = ToDispErrCode(hdi_->SetDisplayVsyncEnabled(devId, enabled));
+        if (ret != DISPLAY_SUCCESS) {
+            return ret;
+        }
+
+        vsyncEnableCount_[devId] = enabled ? 1 : 0;
+        return ret;
     }
 
     virtual int32_t RegDisplayVBlankCallback(uint32_t devId, VBlankCallback cb, void *data) override
     {
         vBlankCb_ = cb;
         vBlankCbData_ = data;
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(hdi_->RegDisplayVBlankCallback(devId, this));
     }
 
@@ -228,7 +244,7 @@ public:
         uint32_t devId, std::vector<uint32_t>& layers, std::vector<int32_t>& fences) override
     {
         std::vector<sptr<HdifdParcelable>> hdiFences;
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         int32_t ret = ToDispErrCode(hdi_->GetDisplayReleaseFence(devId, layers, hdiFences));
         if (ret == DISPLAY_SUCCESS) {
             for (uint32_t i = 0; i < hdiFences.size(); i++) {
@@ -244,13 +260,13 @@ public:
 
     virtual int32_t CreateVirtualDisplay(uint32_t width, uint32_t height, int32_t& format, uint32_t& devId) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(hdi_->CreateVirtualDisplay(width, height, format, devId));
     }
 
     virtual int32_t DestroyVirtualDisplay(uint32_t devId) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(hdi_->DestroyVirtualDisplay(devId));
     }
 
@@ -273,60 +289,52 @@ public:
 
     virtual int32_t SetDisplayProperty(uint32_t devId, uint32_t id, uint64_t value) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(hdi_->SetDisplayProperty(devId, id, value));
     }
 
     virtual int32_t Commit(uint32_t devId, int32_t& fence) override
     {
-        COMPOSER_CHECK_NULLPTR(req_);
+        COMPOSER_CHECK_NULLPTR_RETURN(req_);
         return ToDispErrCode(req_->Commit(devId, fence));
     }
 
     virtual int32_t GetDisplaySupportedColorGamuts(uint32_t devId, std::vector<ColorGamut>& gamuts) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
     virtual int32_t GetDisplayColorGamut(uint32_t devId, ColorGamut& gamut) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t SetDisplayColorGamut(uint32_t devId, const ColorGamut& gamut) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t GetDisplayGamutMap(uint32_t devId, GamutMap& gamutMap) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t SetDisplayGamutMap(uint32_t devId, const GamutMap& gamutMap) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t SetDisplayColorTransform(uint32_t devId, const std::vector<float>& matrix) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t GetHDRCapabilityInfos(uint32_t devId, HDRCapability& info) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t GetSupportedMetadataKey(uint32_t devId, std::vector<HDRMetadataKey>& keys) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
@@ -334,159 +342,154 @@ public:
     virtual int32_t CreateLayer(uint32_t devId, const LayerInfo& layerInfo, uint32_t cacheCount,
         uint32_t& layerId) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(hdi_->CreateLayer(devId, layerInfo, cacheCount, layerId));
     }
 
     virtual int32_t DestroyLayer(uint32_t devId, uint32_t layerId) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(hdi_->DestroyLayer(devId, layerId));
     }
 
     virtual int32_t PrepareDisplayLayers(uint32_t devId, bool& needFlushFb) override
     {
-        COMPOSER_CHECK_NULLPTR(req_);
+        COMPOSER_CHECK_NULLPTR_RETURN(req_);
         return ToDispErrCode(req_->PrepareDisplayLayers(devId, needFlushFb));
     }
 
     virtual int32_t SetLayerAlpha(uint32_t devId, uint32_t layerId, const LayerAlpha& alpha) override
     {
-        COMPOSER_CHECK_NULLPTR(req_);
+        COMPOSER_CHECK_NULLPTR_RETURN(req_);
         return ToDispErrCode(req_->SetLayerAlpha(devId, layerId, alpha));
     }
 
     virtual int32_t SetLayerRegion(uint32_t devId, uint32_t layerId, const IRect& rect) override
     {
-        COMPOSER_CHECK_NULLPTR(req_);
+        COMPOSER_CHECK_NULLPTR_RETURN(req_);
         return ToDispErrCode(req_->SetLayerRegion(devId, layerId, rect));
     }
 
     virtual int32_t SetLayerCrop(uint32_t devId, uint32_t layerId, const IRect& rect) override
     {
-        COMPOSER_CHECK_NULLPTR(req_);
+        COMPOSER_CHECK_NULLPTR_RETURN(req_);
         return ToDispErrCode(req_->SetLayerCrop(devId, layerId, rect));
     }
 
     virtual int32_t SetLayerZorder(uint32_t devId, uint32_t layerId, uint32_t zorder) override
     {
-        COMPOSER_CHECK_NULLPTR(req_);
+        COMPOSER_CHECK_NULLPTR_RETURN(req_);
         return ToDispErrCode(req_->SetLayerZorder(devId, layerId, zorder));
     }
 
     virtual int32_t SetLayerPreMulti(uint32_t devId, uint32_t layerId, bool preMul) override
     {
-        COMPOSER_CHECK_NULLPTR(req_);
+        COMPOSER_CHECK_NULLPTR_RETURN(req_);
         return ToDispErrCode(req_->SetLayerPreMulti(devId, layerId, preMul));
     }
 
     virtual int32_t SetLayerTransformMode(uint32_t devId, uint32_t layerId, TransformType type) override
     {
-        COMPOSER_CHECK_NULLPTR(req_);
+        COMPOSER_CHECK_NULLPTR_RETURN(req_);
         return ToDispErrCode(req_->SetLayerTransformMode(devId, layerId, type));
     }
 
     virtual int32_t SetLayerDirtyRegion(uint32_t devId, uint32_t layerId, std::vector<IRect>& rects) override
     {
-        COMPOSER_CHECK_NULLPTR(req_);
+        COMPOSER_CHECK_NULLPTR_RETURN(req_);
         return ToDispErrCode(req_->SetLayerDirtyRegion(devId, layerId, rects));
     }
 
     virtual int32_t SetLayerVisibleRegion(uint32_t devId, uint32_t layerId, std::vector<IRect>& rects) override
     {
-        COMPOSER_CHECK_NULLPTR(req_);
+        COMPOSER_CHECK_NULLPTR_RETURN(req_);
         return ToDispErrCode(req_->SetLayerVisibleRegion(devId, layerId, rects));
     }
 
     virtual int32_t SetLayerBuffer(uint32_t devId, uint32_t layerId, const BufferHandle* buffer, uint32_t seqNo,
         int32_t fence, const std::vector<uint32_t>& deletingList) override
     {
-        COMPOSER_CHECK_NULLPTR(req_);
+        COMPOSER_CHECK_NULLPTR_RETURN(req_);
         return ToDispErrCode(req_->SetLayerBuffer(devId, layerId, buffer, seqNo, fence, deletingList));
     }
 
     virtual int32_t SetLayerCompositionType(uint32_t devId, uint32_t layerId, CompositionType type) override
     {
-        COMPOSER_CHECK_NULLPTR(req_);
+        COMPOSER_CHECK_NULLPTR_RETURN(req_);
         return ToDispErrCode(req_->SetLayerCompositionType(devId, layerId, type));
     }
 
     virtual int32_t SetLayerBlendType(uint32_t devId, uint32_t layerId, BlendType type) override
     {
-        COMPOSER_CHECK_NULLPTR(req_);
+        COMPOSER_CHECK_NULLPTR_RETURN(req_);
         return ToDispErrCode(req_->SetLayerBlendType(devId, layerId, type));
     }
 
     virtual int32_t SetLayerMaskInfo(uint32_t devId, uint32_t layerId, const MaskInfo maskInfo) override
     {
-        COMPOSER_CHECK_NULLPTR(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(req_->SetLayerMaskInfo(devId, layerId, maskInfo));
     }
 
     virtual int32_t SetLayerColorTransform(uint32_t devId, uint32_t layerId, const std::vector<float>& matrix) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t SetLayerColorDataSpace(uint32_t devId, uint32_t layerId, const ColorDataSpace colorSpace) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t GetLayerColorDataSpace(uint32_t devId, uint32_t layerId, ColorDataSpace& colorSpace) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t SetLayerMetaData(uint32_t devId, uint32_t layerId,
         const std::vector<HDRMetaData>& metaData) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t SetLayerMetaDataSet(uint32_t devId, uint32_t layerId, HDRMetadataKey key,
         const std::vector<uint8_t>& metaData) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t GetSupportedPresentTimestamp(uint32_t devId, uint32_t layerId, PresentTimestampType& type) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t GetHwPresentTimestamp(uint32_t devId, uint32_t layerId, PresentTimestamp& pts) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t SetLayerTunnelHandle(uint32_t devId, uint32_t layerId, const ExtDataHandle& handle) override
     {
-        HDF_LOGE("%s is not supported", __func__);
         return DISPLAY_NOT_SUPPORT;
     }
 
     virtual int32_t SetLayerColor(uint32_t devId, uint32_t layerId, const LayerColor& layerColor) override
     {
-        COMPOSER_CHECK_NULLPTR(req_);
+        COMPOSER_CHECK_NULLPTR_RETURN(req_);
         return ToDispErrCode(req_->SetLayerColor(devId, layerId, layerColor));
     }
 
     // Callback implement
     virtual int32_t OnHotPlug(uint32_t outputId, bool connected) override
     {
+        DISPLAY_TRACE;
+        
+        HDF_LOGI("OnHotPlug(%{public}u, %{public}u)", outputId, connected);
         int32_t ret = HDF_SUCCESS;
         if (hotPlugCb_ != nullptr) {
             hotPlugCb_(outputId, connected, hotPlugCbData_);
         } else {
-            HDF_LOGE("erroe: hot plug callback fn is nullptr");
+            HDF_LOGE("error: hot plug callback fn is nullptr");
             ret = HDF_FAILURE;
         }
 
@@ -501,14 +504,14 @@ public:
         if (vBlankCb_ != nullptr) {
             vBlankCb_(sequence, ns, vBlankCbData_);
         } else {
-            HDF_LOGE("erroe: vblank callback fn is nullptr");
+            HDF_LOGE("error: vblank callback fn is nullptr");
             ret = HDF_FAILURE;
         }
 
         return ret;
     }
 
-private:
+protected:
     int32_t ToDispErrCode(int32_t hdfStatus)
     {
         int32_t ec = DISPLAY_FAILURE;
@@ -561,8 +564,8 @@ private:
         return ec;
     }
 
-private:
-    static constexpr uint32_t WAIT_TIME_INTERVAL = 1000;
+protected:
+    static constexpr uint32_t WAIT_TIME_INTERVAL = 10000;
     sptr<CompHdi> hdi_;
     std::shared_ptr<CmdReq> req_;
     HotPlugCallback hotPlugCb_;
@@ -570,6 +573,7 @@ private:
     void *hotPlugCbData_;
     void *vBlankCbData_;
     sptr<IRemoteObject::DeathRecipient> recipient_;
+    std::unordered_map<uint32_t, uint32_t> vsyncEnableCount_;
 };
 using HdiDisplayComposer = DisplayComposerHdiImpl<IDisplayComposerInterface, IDisplayComposer, HdiDisplayCmdRequester>;
 } // namespace V1_0

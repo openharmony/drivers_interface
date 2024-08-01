@@ -17,10 +17,10 @@
  * @addtogroup HdiGnss
  * @{
  *
- * @brief Provides unified APIs for gnss services to access gnss drivers.
+ * @brief Provides unified APIs for GNSS services to access GNSS drivers.
  *
- * A gnss service can obtain a gnss driver object or agent and then call APIs provided by this object or agent to
- * access gnss devices, thereby Start the GNSS chip, start the navigation,
+ * A GNSS service can obtain a GNSS driver object or agent and then call APIs provided by this object or agent to
+ * access GNSS devices, thereby Start the GNSS chip, start the navigation,
  * set the GNSS working mode, inject reference information, obtain the positioning result, obtain the nmea,
  * obtain the satellite status information, and obtain the cache location information.
  *
@@ -75,7 +75,7 @@ import ohos.hdi.location.gnss.v1_0.GnssTypes;
     /*
      * @brief Reporting NMEA.
      *
-     * @param timestamp Indicates the timestamp when the NMEA is reported.
+     * @param timestamp Indicates the timestamp when the NMEA is reported. Milliseconds since January 1, 1970.
      * @param nmea Indicates NMEA sentences, follows standard NMEA 0183.
      * @param length Indicates length of NMEA sentences.
      * @return Returns <b>0</b> If the reporting is successful; returns a negative value otherwise.
@@ -111,7 +111,7 @@ import ohos.hdi.location.gnss.v1_0.GnssTypes;
     /*
      * @brief Request upper-layer ingest reference information.
      *
-     * @param type Indicates the gnss reference information type. For details, see {@link GnssRefInfoType}.
+     * @param type Indicates the GNSS reference information type. For details, see {@link GnssRefInfoType}.
      * @return Returns <b>0</b> If sending request is successful; returns a negative value otherwise.
      *
      * @since 3.2
@@ -132,7 +132,7 @@ import ohos.hdi.location.gnss.v1_0.GnssTypes;
     /*
      * @brief Report all location information cached by the bottom-layer GNSS module to the upper layer.
      *
-     * @param gnssLocations Indicates all locations of the gnss chip cache. For details, see {@link Location}.
+     * @param gnssLocations Indicates all locations of the GNSS chip cache. For details, see {@link Location}.
      * @return Returns <b>0</b> If the reporting is successful; returns a negative value otherwise.
      *
      * @since 3.2

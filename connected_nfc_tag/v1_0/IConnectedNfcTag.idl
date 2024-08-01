@@ -64,6 +64,8 @@ interface IConnectedNfcTag {
      *
      * @since 3.2
      * @version 1.0
+     * @deprecated
+     * @The String parameter not allow include '\0' data, be replaced with new api ReadNdefData
      */
     ReadNdefTag([out] String ndefData);
 
@@ -75,6 +77,8 @@ interface IConnectedNfcTag {
      *
      * @since 3.2
      * @version 1.0
+     * @deprecated
+     * @The String parameter not allow include '\0' data, be replaced with new api WriteNdefData
      */
     WriteNdefTag([in] String ndefData);
 }

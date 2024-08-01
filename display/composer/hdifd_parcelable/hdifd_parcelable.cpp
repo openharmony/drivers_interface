@@ -24,24 +24,24 @@
 #undef LOG_TAG
 #define LOG_TAG "DISP_HDIFD"
 #undef LOG_DOMAIN
-#define LOG_DOMAIN 0xD002500
+#define LOG_DOMAIN 0xD002515
 
 namespace OHOS {
 namespace HDI {
 namespace Display {
 HdifdParcelable::HdifdParcelable()
-    : init_(false), hdiFd_(-1)
+    : isOwner_(false), hdiFd_(-1)
 {
 }
 
 HdifdParcelable::HdifdParcelable(int32_t fd)
-    : init_(true), hdiFd_(fd)
+    : isOwner_(true), hdiFd_(fd)
 {
 }
 
 HdifdParcelable::~HdifdParcelable()
 {
-    if ((init_ != false) && (hdiFd_ >= 0)) {
+    if (isOwner_ && (hdiFd_ >= 0)) {
         close(hdiFd_);
     }
 }
@@ -50,7 +50,7 @@ bool HdifdParcelable::Init(int32_t fd)
 {
     bool ret = true;
 
-    if (init_ == true) {
+    if (isOwner_) {
         HDF_LOGI("%{public}s: fd parcelable have been initialized", __func__);
         ret = false;
     } else {
@@ -60,10 +60,10 @@ bool HdifdParcelable::Init(int32_t fd)
             hdiFd_ = dup(fd);
             ret = (hdiFd_ < 0) ? false : true;
         }
-        if (ret == false) {
+        if (!ret) {
             return ret;
         }
-        init_ = true;
+        isOwner_ = true;
     }
     return ret;
 }
@@ -78,12 +78,19 @@ bool HdifdParcelable::WriteFileDescriptor(const int fd, Parcel& parcel)
         return false;
     }
 
-    sptr<IPCFileDescriptor> descriptor = new (std::nothrow) IPCFileDescriptor(dupFd);
+    sptr<IPCFileDescriptor> descriptor(new (std::nothrow) IPCFileDescriptor(dupFd));
     if (descriptor == nullptr) {
         HDF_LOGE("%{public}s: create IPCFileDescriptor object failed", __func__);
+        close(dupFd);
         return false;
     }
-    return parcel.WriteObject<IPCFileDescriptor>(descriptor);
+    bool ret = parcel.WriteObject<IPCFileDescriptor>(descriptor);
+    if (!ret) {
+        HDF_LOGE("%{public}s: WriteObject IPCFileDescriptor failed", __func__);
+        close(dupFd);
+        return false;
+    }
+    return ret;
 }
 
 int HdifdParcelable::ReadFileDescriptor(Parcel& parcel)
@@ -118,18 +125,25 @@ sptr<HdifdParcelable> HdifdParcelable::Unmarshalling(Parcel& parcel)
     bool validFlag = false;
     if (!parcel.ReadBool(validFlag)) {
         HDF_LOGE("%{public}s: ReadBool validFlag failed", __func__);
-        return nullptr;
+        return sptr<HdifdParcelable>();
     }
     int32_t fd = -1;
     if (validFlag) {
         fd = ReadFileDescriptor(parcel);
         if (fd < 0) {
             HDF_LOGE("%{public}s: ReadFileDescriptor fd failed", __func__);
-            return nullptr;
+            return sptr<HdifdParcelable>();
         }
     }
-    sptr<HdifdParcelable> newParcelable = new HdifdParcelable(fd);
-    newParcelable->init_ = true;
+    sptr<HdifdParcelable> newParcelable(new HdifdParcelable(fd));
+
+    if (newParcelable == nullptr) {
+        HDF_LOGE("%{public}s: new HdifdParcelable failed", __func__);
+        if (fd >= 0) {
+            close(fd);
+        }
+        return sptr<HdifdParcelable>();
+    }
     return newParcelable;
 }
 
@@ -140,7 +154,7 @@ int32_t HdifdParcelable::GetFd()
 
 int32_t HdifdParcelable::Move()
 {
-    init_ = false;
+    isOwner_ = false;
     return hdiFd_;
 }
 

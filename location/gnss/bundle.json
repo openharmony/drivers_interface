@@ -12,7 +12,6 @@
     "component": {
       "name": "drivers_interface_location_gnss",
       "subsystem": "hdf",
-      "syscap": [ "SystemCapability.Location.Location.Gnss" ],
       "adapted_system_type": [
         "standard"
       ],
@@ -29,13 +28,13 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/location/gnss/v1_0:location_gnss_idl_target"
+          "//drivers/interface/location/gnss/v2_0:location_gnss_idl_target"
         ],
         "test": [
         ],
         "inner_kits": [
           {
-            "name": "//drivers/interface/location/gnss/v1_0:liblocation_gnss_proxy_1.0",
+            "name": "//drivers/interface/location/gnss/v2_0:liblocation_gnss_proxy_2.0",
             "header": {
               "header_files": [
               ],
@@ -43,7 +42,7 @@
             }
           },
           {
-            "name": "//drivers/interface/location/gnss/v1_0:location_gnss_idl_headers",
+            "name": "//drivers/interface/location/gnss/v2_0:location_gnss_idl_headers",
             "header": {
               "header_files": [
               ],
@@ -51,12 +50,12 @@
             }
           },
           {
-            "name": "//drivers/interface/location/gnss/v1_0:liblocation_gnss_stub_1.0",
+            "name": "//drivers/interface/location/gnss/v2_0:liblocation_gnss_stub_2.0",
             "header": {
               "header_files": [
               ],
               "header_base": "//drivers/interface/location/gnss"
-            }
+	    }
           }
         ]
       }

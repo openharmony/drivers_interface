@@ -26,12 +26,64 @@
       },
       "build": {
         "sub_component": [
+          "//drivers/interface/intelligent_voice/engine/v1_2:intell_voice_engine_idl_target",
+          "//drivers/interface/intelligent_voice/engine/v1_1:intell_voice_engine_idl_target",
           "//drivers/interface/intelligent_voice/engine/v1_0:intell_voice_engine_idl_target",
+          "//drivers/interface/intelligent_voice/trigger/v1_2:intell_voice_trigger_idl_target",
+          "//drivers/interface/intelligent_voice/trigger/v1_1:intell_voice_trigger_idl_target",
           "//drivers/interface/intelligent_voice/trigger/v1_0:intell_voice_trigger_idl_target"
         ],
         "test": [
         ],
         "inner_kits": [
+          {
+            "name": "//drivers/interface/intelligent_voice/engine/v1_2:libintell_voice_engine_proxy_1.2",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/intelligent_voice/engine"
+            }
+          },
+          {
+            "name": "//drivers/interface/intelligent_voice/engine/v1_2:libintell_voice_engine_stub_1.2",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/intelligent_voice/engine"
+            }
+          },
+          {
+            "name": "//drivers/interface/intelligent_voice/engine/v1_2:intell_voice_engine_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/intelligent_voice/engine"
+            }
+          },
+          {
+            "name": "//drivers/interface/intelligent_voice/engine/v1_1:libintell_voice_engine_proxy_1.1",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/intelligent_voice/engine"
+            }
+          },
+          {
+            "name": "//drivers/interface/intelligent_voice/engine/v1_1:libintell_voice_engine_stub_1.1",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/intelligent_voice/engine"
+            }
+          },
+          {
+            "name": "//drivers/interface/intelligent_voice/engine/v1_1:intell_voice_engine_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/intelligent_voice/engine"
+            }
+          },
           {
             "name": "//drivers/interface/intelligent_voice/engine/v1_0:libintell_voice_engine_proxy_1.0",
             "header": {
@@ -54,6 +106,54 @@
               "header_files": [
               ],
               "header_base": "//drivers/interface/intelligent_voice/engine"
+            }
+          },
+          {
+            "name": "//drivers/interface/intelligent_voice/trigger/v1_2:libintell_voice_trigger_proxy_1.2",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/intelligent_voice/trigger"
+            }
+          },
+          {
+            "name": "//drivers/interface/intelligent_voice/trigger/v1_2:libintell_voice_trigger_stub_1.2",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/intelligent_voice/trigger"
+            }
+          },
+          {
+            "name": "//drivers/interface/intelligent_voice/trigger/v1_2:intell_voice_trigger_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/intelligent_voice/trigger"
+            }
+          },
+          {
+            "name": "//drivers/interface/intelligent_voice/trigger/v1_1:libintell_voice_trigger_proxy_1.1",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/intelligent_voice/trigger"
+            }
+          },
+          {
+            "name": "//drivers/interface/intelligent_voice/trigger/v1_1:libintell_voice_trigger_stub_1.1",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/intelligent_voice/trigger"
+            }
+          },
+          {
+            "name": "//drivers/interface/intelligent_voice/trigger/v1_1:intell_voice_trigger_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/intelligent_voice/trigger"
             }
           },
           {

@@ -30,7 +30,7 @@
 #undef LOG_TAG
 #define LOG_TAG "DISP_HDI_BUFF"
 #undef LOG_DOMAIN
-#define LOG_DOMAIN 0xD002500
+#define LOG_DOMAIN 0xD002515
 
 #ifndef BUFFER_HDI_IMPL_LOGE
 #define BUFFER_HDI_IMPL_LOGE(format, ...)              \
@@ -75,17 +75,11 @@ public:
     explicit DisplayBufferHdiImpl(bool isAllocLocal = false) : allocator_(nullptr),
         mapper_(nullptr), recipient_(nullptr)
     {
-        uint32_t count = 0;
         while ((allocator_ = IAllocator::Get(isAllocLocal)) == nullptr) {
-            HDF_LOGE("%{public}d@%{public}s get allocator service, count = %{public}d",
-                __LINE__, __func__, ++count);
             // Waiting for allocator service ready
             usleep(WAIT_TIME_INTERVAL);
         }
-        count= 0;
         while ((mapper_ = IMapper::Get(true)) == nullptr) {
-            HDF_LOGE("%{public}d@%{public}s get mapper service, count = %{public}d",
-                __LINE__, __func__, ++count);
             // Waiting for mapper IF ready
             usleep(WAIT_TIME_INTERVAL);
         }
@@ -136,7 +130,9 @@ public:
             handle = hdiBuffer->Move();
         } else {
             handle = nullptr;
-            ret = HDF_FAILURE;
+            if (ret == HDF_SUCCESS) {
+                ret = HDF_FAILURE;
+            }
             HDF_LOGE("%{public}s: AllocMem error", __func__);
         }
         return ret;
@@ -201,7 +197,7 @@ public:
     }
 
 protected:
-    static constexpr uint32_t WAIT_TIME_INTERVAL = 1000;
+    static constexpr uint32_t WAIT_TIME_INTERVAL = 10000;
     sptr<IAllocator> allocator_;
     sptr<IMapper> mapper_;
     sptr<IRemoteObject::DeathRecipient> recipient_;

@@ -155,6 +155,11 @@ enum OperationMode_V1_2 {
      * Super stabilization mode, which dedicated to use Suprt stabilization mode
      */
     SUPER_STAB = 10,
+
+    /**
+     * Operation mode max
+     */
+    OPERATION_MODE_MAX,
 };
 
 /**
@@ -212,29 +217,29 @@ enum SessionStatus {
  */
 enum ErrorCode {
     /**
-     * Timeout.
+     * The imageId is Invalid.
      */
-    TIMEOUT = 0,
-
+    ERROR_INVALID_ID = 0,
     /**
-     * Error.
+     * Processing error, no image can provide
      */
-    ERROR = 1,
-
+    ERROR_PROCESS = 1,
     /**
-     * Busy.
+     * Processing timeout, can be retried.
      */
-    BUSY = 3,
-
+    ERROR_TIMEOUT = 2,
     /**
-     * High temperature.
+     * Processing error due to high temperature.
      */
-    HIGH_TEMPERATURE = 4,
-
+    ERROR_HIGH_TEMPERATURE = 3,
     /**
-     * Abort.
+     * Processing is abnormal, can be retried
      */
-    ABORT = 5,
+    ERROR_ABNORMAL = 4,
+    /**
+     * Processing is abort.
+     */
+    ERROR_ABORT = 5,
 };
 
 /**
@@ -261,11 +266,6 @@ enum ExecutionMode {
  * @brief Defines the ImageBufferInfo, which is used by {@link IImageProcessCallback::OnProcessDone}.
  */
 struct ImageBufferInfo {
-    /**
-     * Is the metadata valid.
-     */
-    boolean isMetaDataValid;
-
     /**
      * Data of metadata.
      */
@@ -295,4 +295,19 @@ struct ImageBufferInfo {
      * Data of depthMapHandle.
      */
     BufferHandleSequenceable depthMapHandle;
+};
+
+/**
+ * @brief Defines the CaptureStartedInfo, which is used by {@link IStreamOperatorCallback::OnCaptureStarted_V1_2}.
+ */
+struct CaptureStartedInfo {
+    /**
+     * ID of a captured stream.
+     */
+    int streamId_;
+
+    /**
+     * Time of exposure time, the unit is ms.
+     */
+    int exposureTime_;
 };

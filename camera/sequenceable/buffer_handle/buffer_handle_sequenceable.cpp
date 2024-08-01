@@ -17,6 +17,7 @@
 #include <message_parcel.h>
 #include "buffer_handle_sequenceable.h"
 #include "buffer_util.h"
+#include "hdi_log.h"
 #include "native_buffer.h"
 
 namespace OHOS {
@@ -29,7 +30,11 @@ class BufferHandleSequenceable::BufferHandleWrap {
 public:
     explicit BufferHandleWrap(BufferHandle *bufferHandle = nullptr)
     {
-        nativeBuffer_ = new NativeBuffer();
+        nativeBuffer_ = new (std::nothrow) NativeBuffer();
+        if (nativeBuffer_ == nullptr) {
+            HDI_CAMERA_LOGE("Native buffer object create failed.");
+            return;
+        }
         nativeBuffer_->SetBufferHandle(bufferHandle);
     }
     sptr<NativeBuffer> nativeBuffer_;
@@ -75,7 +80,10 @@ bool BufferHandleSequenceable::Marshalling(Parcel &parcel) const
 
 sptr<BufferHandleSequenceable> BufferHandleSequenceable::Unmarshalling(Parcel &parcel)
 {
-    sptr<BufferHandleSequenceable> sequenceObj = new BufferHandleSequenceable();
+    sptr<BufferHandleSequenceable> sequenceObj(new BufferHandleSequenceable());
+    if (sequenceObj->bufferHandleWrap_ == nullptr) {
+        return nullptr;
+    }
     sequenceObj->bufferHandleWrap_->nativeBuffer_ = NativeBuffer::Unmarshalling(parcel);
     return sequenceObj;
 }

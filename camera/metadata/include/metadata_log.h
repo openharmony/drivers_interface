@@ -22,7 +22,7 @@
 
 #undef LOG_DOMAIN
 #undef LOG_TAG
-#define LOG_DOMAIN 0xD002B00
+#define LOG_DOMAIN 0xD002513
 #define LOG_TAG "METADATA"
 
 #define FILENAME (__builtin_strrchr(__FILE__, '/') ? __builtin_strrchr(__FILE__, '/') + 1 : __FILE__)

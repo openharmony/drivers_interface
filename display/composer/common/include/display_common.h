@@ -25,7 +25,9 @@ namespace Display {
 typedef void (*HotPlugCallback)(uint32_t devId, bool connected, void* data);
 typedef void (*VBlankCallback)(unsigned int sequence, uint64_t ns, void* data);
 typedef void (*RefreshCallback)(uint32_t devId, void* data);
-
+typedef void (*ModeCallback)(uint32_t modeId, uint64_t vBlankPeriod, void* data);
+typedef void (*SeamlessChangeCallback)(uint32_t devId, void* data);
+typedef void (*VBlankIdleCallback)(uint32_t devId, uint64_t ns, void* data);
 } // namespace Display
 } // namespace HDI
 } // namespace OHOS

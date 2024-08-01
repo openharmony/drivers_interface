@@ -23,12 +23,14 @@ if (defined(ohos_lite)) {
     imports = [ "ohos.hdi.camera.v1_1:camera" ]
 
     sources = [
+      "ICameraDevice.idl",
       "ICameraHost.idl",
       "ICameraHostCallback.idl",
       "IImageProcessCallback.idl",
       "IImageProcessService.idl",
       "IImageProcessSession.idl",
       "IStreamOperator.idl",
+      "IStreamOperatorCallback.idl",
       "Types.idl",
     ]
 
@@ -37,7 +39,7 @@ if (defined(ohos_lite)) {
       "../sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0",
       "../sequenceable/map_data:libmap_data_sequenceable_1.0",
     ]
-    sequenceable_ext_deps = [ "graphic_chipsetsdk:surface" ]
+    sequenceable_ext_deps = [ "graphic_surface:surface" ]
 
     language = "cpp"
     subsystem_name = "hdf"

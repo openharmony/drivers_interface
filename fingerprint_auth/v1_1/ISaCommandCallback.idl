@@ -17,9 +17,9 @@
  * @addtogroup HdfFingerprintAuth
  * @{
  *
- * @brief Provides APIs for the face auth driver.
+ * @brief Provides APIs for the fingerprint auth driver.
  *
- * The face auth driver provides a unified interface for the face auth service to access the face auth driver.
+ * The fingerprint auth driver provides a unified interface for the fingerprint auth service to access the fingerprint auth driver.
  * After obtaining the face auth driver proxy, the service can call related APIs to obtain executors.
  * After obtaining the face auth executors, the service can call related APIs to get executor information, get
  * template information, and enroll, authenticate, and delete templates, etc.

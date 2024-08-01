@@ -82,7 +82,7 @@ interface IWlanInterface {
     /**
      * @brief Creates a <b>Feature</b> object based on the specified type.
      *
-     * @param type Indicates the type of the <b>Feature</b> object to create.
+     * @param type Indicates the type of the <b>Feature</b> object to create, 2:Station, 3:AP.
      * @param ifeature Indicates the <b>Feature</b> object created.
      *
      * @return Returns <b>0</b> if the operation is successful.
@@ -140,7 +140,7 @@ interface IWlanInterface {
      *
      * @param ifeature Indicates the <b>Feature</b> object.
      * @param mac Indicates the MAC address obtained.
-     * @param len Indicates the length of the MAC address.
+     * @param len Indicates the length of the MAC address, the value is fiexed to 6.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a negative value if the operation fails.
@@ -182,7 +182,7 @@ interface IWlanInterface {
      * @brief Obtains the frequencies supported by the specified frequency band.
      *
      * @param ifeature Indicates the <b>Feature</b> object.
-     * @param wifiInfo Indicates the frequency band, which can be 2.4 GHz or 5 GHz.
+     * @param wifiInfo Indicates the frequency info, wifiInfo.band, 0:2.4 GHz; 1:5 GHz. wifiInfo.size, minimum is 14.
      * @param freq Indicates the supported frequencies obtained.
      *
      * @return Returns <b>0</b> if the operation is successful.

@@ -13,25 +13,35 @@
 
 import("//build/ohos.gni")
 import("//drivers/hdf_core/adapter/uhdf2/uhdf.gni")
+import("//drivers/interface/camera/camera.gni")
 
 config("camera_sequenceable_config") {
-  include_dirs = [ "./" ]
+  include_dirs = [
+    "./",
+    "//drivers/peripheral/base",
+    "../include",
+  ]
 }
 
 ohos_shared_library("libbuffer_producer_sequenceable_1.0") {
   sources = [ "buffer_producer_sequenceable.cpp" ]
 
   all_dependent_configs = [ ":camera_sequenceable_config" ]
+  public_configs = [ ":camera_sequenceable_config" ]
 
   external_deps = [
     "c_utils:utils",
-    "graphic_chipsetsdk:surface",
+    "graphic_surface:surface",
+    "hdf_core:libpub_utils",
+    "hilog:libhilog",
     "ipc:ipc_single",
   ]
-
+  if (drivers_interface_camera_feature_coverage) {
+    cflags_cc = [ "--coverage" ]
+    ldflags = [ "--coverage" ]
+  }
   install_images = [ system_base_dir ]
   relative_install_dir = "chipset-sdk"
   subsystem_name = "hdf"
-  innerapi_tags = [ "chipsetsdk" ]
   part_name = "drivers_interface_camera"
 }

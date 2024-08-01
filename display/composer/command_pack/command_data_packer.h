@@ -40,15 +40,23 @@ public:
     ~CommandDataPacker()
     {
         if (data_ != nullptr) {
-            delete data_;
+            delete[] data_;
         }
     }
 
     bool Init(size_t size = INIT_DATA_SIZE, bool isAdaptiveGrowth = false)
     {
+        writePos_ = 0;
+        curSecOffset_ = 0;
+        settingSecLen_ = 0;
+        curSecLenPos_ = 0;
+        isAdaptiveGrowth_ = false;
         packSize_ = size;
         uint32_t alignedSize = (packSize_ + ALLOC_PAGE_SIZE - 1) & (~(ALLOC_PAGE_SIZE - 1));
-        data_ = new char[alignedSize]();
+        if (data_ != nullptr) {
+            delete[] data_;
+        }
+        data_ = new char[alignedSize];
         DISPLAY_CHK_RETURN(data_ == nullptr, false,
             HDF_LOGE("%{public}s, alloc memory failed", __func__));
         packSize_ = alignedSize;
@@ -205,7 +213,7 @@ private:
                 newData = nullptr;
                 return false;
             }
-            delete data_;
+            delete[] data_;
             data_ = newData;
             packSize_ = newSize;
         }

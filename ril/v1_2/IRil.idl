@@ -85,5 +85,33 @@ interface IRil extends ohos.hdi.ril.v1_1.IRil {
       */
     [oneway] SendSimMatchedOperatorInfo([in] int slotId, [in] int serialId,
         [in] struct NcfgOperatorInfo ncfgOperatorInfo);
+
+     /**
+      * @brief Clean all data connections.
+      *
+      * @param slotId Card slot ID.
+      * @param serialId Serial ID of a request.
+      *
+      * @return Returns <b>0</b> if the operation is successful.
+      * @return Returns a non-0 value if the operation fails.
+      *
+      * @since 4.1
+      * @version 1.2
+      */
+    [oneway] CleanAllConnections([in] int slotId, [in] int serialId);
+
+     /**
+      * @brief Get nr ssbid info.
+      *
+      * @param slotId Card slot ID.
+      * @param serialId Serial ID of a request.
+      *
+      * @return Returns <b>0</b> if the operation is successful.
+      * @return Returns a non-0 value if the operation fails.
+      *
+      * @since 4.1
+      * @version 1.2
+      */
+    [oneway] GetNrSsbId([in] int slotId, [in] int serialId);
 }
 /** @} */
