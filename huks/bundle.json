@@ -12,7 +12,7 @@
     "component": {
       "name": "drivers_interface_huks",
       "subsystem": "hdf",
-      "feature": [
+      "features": [
         "drivers_interface_huks_enabled"
       ],
       "adapted_system_type": ["standard"],
