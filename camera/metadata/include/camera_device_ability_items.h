@@ -323,6 +323,97 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_AVAILABLE_EXTENDED_STREAM_INFO_TYPES,
     /**
+     * ohos.ability.autoDeferedVideoEnhance [static, enum, public]
+     *
+     * camera device property, report current camera whether support auto defered video enhance
+     * (i.e. enum: OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED ...)
+     */
+    OHOS_ABILITY_AOTU_DEFERRED_VIDEO_ENHANCE,
+    /**
+     * ohos.control.autoDeferedVideoEnhance [static, enum, public]
+     *
+     * camera device property, set current camera whether support auto defered video enhance
+     * (i.e. enum: OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED ...)
+     */
+    OHOS_CONTROL_AOTU_DEFERRED_VIDEO_ENHANCE,
+    /**
+     * ohos.ability.autoCloudImageEnhance [static, int32[], public]
+     *
+     * camera device property, report current camera whether support auto cloud image enhance by mode
+     * (i.e. int32[]: [mode, OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED, mode ...] ...)
+     */
+    OHOS_ABILITY_AOTU_CLOUD_IMAGE_ENHANCE,
+    /**
+     * ohos.control.autoCloudImageEnhance [static, enum, public]
+     *
+     * camera device property, set current camera whether support auto cloud image enhance
+     * (i.e. enum: OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED ...)
+     */
+    OHOS_CONTROL_AOTU_CLOUD_IMAGE_ENHANCE,
+    /**
+     * ohos.ability.tripodDetection [static, int32[], public]
+     *
+     * camera device property, report current camera whether supporttripod detection by mode
+     * (i.e. int32[]: [mode, OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED, mode ...] ...)
+     */
+    OHOS_ABILITY_TRIPOD_DETECTION,
+    /**
+     * ohos.control.tripodDetection [static, byte, public]
+     *
+     * camera device property, set current camera whether enable tripod detection
+     * (i.e. byte: 0-false/1-true ...)
+     */
+    OHOS_CONTROL_TRIPOD_DETECTION,
+    /**
+     * ohos.control.tripodStablitation [static, byte, public]
+     *
+     * camera device property, set current camera whether enable tripod stablitation algorithm
+     * (i.e. byte: 0-false/1-true ...)
+     */
+    OHOS_CONTROL_TRIPOD_STABLITATION,
+    /**
+     * ohos.status.tripodDetectionStatus [static, enum, public]
+     *
+     * camera device property, query current camera tripod detection status
+     * (i.e. enum: TRIPOD_STATUS_INVALID/TRIPOD_STATUS_ACTIVE/TRIPOD_STATUS_ENTER/TRIPOD_STATUS_EXITING ...)
+     */
+    OHOS_STATUS_TRIPOD_DETECTION_STATUS,
+    /**
+     * ohos.status.sketchPoint [static, float[], public]
+     *
+     * camera device property, query current camera sketch center point position
+     * (i.e. float[]: [px, py] ...)
+     */
+    OHOS_STATUS_SKETCH_POINT,
+    /**
+     * ohos.ability.lowLightBoost [static, int32[], public]
+     *
+     * camera device property, report current camera whether low light boost by mode
+     * (i.e. int32[]: [mode, OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED, mode ...] ...)
+     */
+    OHOS_ABILITY_LOW_LIGHT_BOOST,
+    /**
+     * ohos.control.lowLightDetect [static, byte, public]
+     *
+     * camera device property, set current camera whether low light detect
+     * (i.e. byte: 0-false/1-true ...)
+     */
+    OHOS_CONTROL_LOW_LIGHT_DETECT,
+    /**
+     * ohos.control.lowLightBoost [static, byte, public]
+     *
+     * camera device property, set current camera whether low light boost
+     * (i.e. byte: 0-false/1-true ...)
+     */
+    OHOS_CONTROL_LOW_LIGHT_BOOST,
+    /**
+     * ohos.control.lowLightDetection [static, byte, public]
+     *
+     * camera device property, query current camera low light detection status
+     * (i.e. byte: 0-false/1-true ...)
+     */
+    OHOS_STATUS_LOW_LIGHT_DETECTION,
+    /**
      * ohos.camera.propertiesEnd
      *
      * camera property end
@@ -2248,6 +2339,14 @@ enum StatisticsDetectType {
     OHOS_CAMERA_DOG_BODY_DETECT = 5,
     OHOS_CAMERA_SALIENT_DETECT = 6,
     OHOS_CAMERA_BAR_CODE_DETECT = 7,
+};
+
+// OHOS_STATUS_TRIPOD_DETECTION_STATUS
+enum TripodStatus {
+    TRIPOD_STATUS_INVALID = 0,
+    TRIPOD_STATUS_ACTIVE = 1,
+    TRIPOD_STATUS_ENTER = 2,
+    TRIPOD_STATUS_EXITING = 3,
 };
 
 #endif
