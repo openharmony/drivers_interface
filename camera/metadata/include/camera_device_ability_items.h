@@ -323,37 +323,37 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_AVAILABLE_EXTENDED_STREAM_INFO_TYPES,
     /**
-     * ohos.ability.autoDeferedVideoEnhance [static, enum, public]
+     * ohos.ability.autoDeferredVideoEnhance [static, enum, public]
      *
-     * camera device property, report current camera whether support auto defered video enhance
+     * camera device property, report current camera whether support auto deferred video enhance
      * (i.e. enum: OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED ...)
      */
-    OHOS_ABILITY_AOTU_DEFERRED_VIDEO_ENHANCE,
+    OHOS_ABILITY_AUTO_DEFERRED_VIDEO_ENHANCE,
     /**
-     * ohos.control.autoDeferedVideoEnhance [static, enum, public]
+     * ohos.control.autoDeferredVideoEnhance [static, enum, public]
      *
-     * camera device property, set current camera whether support auto defered video enhance
+     * camera device property, set current camera whether support auto deferred video enhance
      * (i.e. enum: OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED ...)
      */
-    OHOS_CONTROL_AOTU_DEFERRED_VIDEO_ENHANCE,
+    OHOS_CONTROL_AUTO_DEFERRED_VIDEO_ENHANCE,
     /**
      * ohos.ability.autoCloudImageEnhance [static, int32[], public]
      *
      * camera device property, report current camera whether support auto cloud image enhance by mode
      * (i.e. int32[]: [mode, OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED, mode ...] ...)
      */
-    OHOS_ABILITY_AOTU_CLOUD_IMAGE_ENHANCE,
+    OHOS_ABILITY_AUTO_CLOUD_IMAGE_ENHANCE,
     /**
      * ohos.control.autoCloudImageEnhance [static, enum, public]
      *
      * camera device property, set current camera whether support auto cloud image enhance
      * (i.e. enum: OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED ...)
      */
-    OHOS_CONTROL_AOTU_CLOUD_IMAGE_ENHANCE,
+    OHOS_CONTROL_AUTO_CLOUD_IMAGE_ENHANCE,
     /**
      * ohos.ability.tripodDetection [static, int32[], public]
      *
-     * camera device property, report current camera whether supporttripod detection by mode
+     * camera device property, report current camera whether support tripod detection by mode
      * (i.e. int32[]: [mode, OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED, mode ...] ...)
      */
     OHOS_ABILITY_TRIPOD_DETECTION,
