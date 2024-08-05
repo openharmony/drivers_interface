@@ -202,6 +202,10 @@ struct DCStreamInfo {
      * Stream type, see {@link DCStreamType}.
      */
     enum DCStreamType type_;
+    /**
+     * Current scene mode.
+     */
+    int mode_;
 };
 
 /**

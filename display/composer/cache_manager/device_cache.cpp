@@ -102,9 +102,40 @@ int32_t DeviceCache::RemoveLayerCache(uint32_t id)
     return HDF_SUCCESS;
 }
 
+int32_t DeviceCache::ClearClientCache()
+{
+    HDF_LOGI("%{public}s", __func__);
+    clientBufferCaches_.reset(new CacheManager<uint32_t, NativeBuffer>());
+    DISPLAY_CHK_RETURN(clientBufferCaches_ == nullptr, HDF_FAILURE,
+                       HDF_LOGE("%{public}s: create client buffer caches failed", __func__));
+
+    clientBufferCaches_->SetInitFunc(LayerCache::NativeBufferInit);
+    clientBufferCaches_->SetCleanUpFunc(LayerCache::NativeBufferCleanUp);
+    return HDF_SUCCESS;
+}
+
+int32_t DeviceCache::ClearLayerBuffer(uint32_t layerId)
+{
+    HDF_LOGI("%{public}s, layerId %{public}u", __func__, layerId);
+    if (layerCaches_ == nullptr) {
+        return HDF_FAILURE;
+    }
+    LayerCache* layerCache = layerCaches_->SearchCache(layerId);
+    if (layerCache == nullptr) {
+        HDF_LOGE("%{public}s, layerId %{public}u not found", __func__, layerId);
+        return HDF_FAILURE;
+    }
+
+    return layerCache->ResetLayerBuffer();
+}
+
 int32_t DeviceCache::SetDisplayClientBuffer(BufferHandle*& buffer, uint32_t seqNo, bool &needFreeBuffer,
     std::function<int32_t (const BufferHandle&)> realFunc)
 {
+    if (buffer != nullptr) {
+        HDF_LOGI("%{public}s, seqNo %{public}u, fd %{public}d, size %{public}d", __func__, seqNo, buffer->fd,
+                 buffer->size);
+    }
     BufferHandle* handle = BufferCacheUtils::NativeBufferCache(clientBufferCaches_, buffer, seqNo, deviceId_,
                                                                needFreeBuffer);
     DISPLAY_CHK_RETURN(handle == nullptr, HDF_FAILURE,

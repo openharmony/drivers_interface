@@ -22,7 +22,10 @@ if (defined(ohos_lite)) {
     module_name = "vibrator_service"
     imports = [ "ohos.hdi.vibrator.v1_2:vibrator" ]
 
-    sources = [ "IVibratorInterface.idl" ]
+    sources = [
+      "IVibratorInterface.idl",
+      "VibratorTypes.idl",
+    ]
 
     language = "cpp"
     subsystem_name = "hdf"

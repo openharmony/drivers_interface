@@ -70,9 +70,7 @@ int32_t LayerCache::SetLayerBuffer(BufferHandle*& buffer, uint32_t seqNo, bool &
     const std::vector<uint32_t>& deletingList, std::function<int32_t (const BufferHandle&)> realFunc)
 {
     for (auto num : deletingList) {
-        bool result = bufferCaches_->EraseCache(num);
-        DISPLAY_CHECK(!result, HDF_LOGE("%{public}s: warning, erase buffer cache fail, num: %{public}u",
-            __func__, num));
+        (void)bufferCaches_->EraseCache(num);
     }
 
     BufferHandle* handle = BufferCacheUtils::NativeBufferCache(bufferCaches_, buffer, seqNo, layerId_, needFreeBuffer);
@@ -86,6 +84,12 @@ int32_t LayerCache::SetLayerBuffer(BufferHandle*& buffer, uint32_t seqNo, bool &
     }
 
     return HDF_SUCCESS;
+}
+
+int32_t LayerCache::ResetLayerBuffer()
+{
+    HDF_LOGI("%{public}s", __func__);
+    return Init();
 }
 
 void LayerCache::NativeBufferInit(std::unique_ptr<NativeBuffer>& buffer)

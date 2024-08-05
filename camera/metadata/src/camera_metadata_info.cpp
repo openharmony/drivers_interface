@@ -28,6 +28,7 @@ static CameraVendorTag* g_vendorTagImpl = nullptr;
 const char* g_exampleVendorTagLib = "libcamera_example_vendor_tag_impl.z.so";
 const char* g_vendorTagLib = "libcamera_vendor_tag_impl.z.so";
 const int METADATA_HEADER_DATA_SIZE = 4;
+const uint32_t itemLen = sizeof(camera_metadata_item_entry_t);
 const std::vector<uint32_t> g_metadataTags = {
     OHOS_ABILITY_CAMERA_POSITION,
     OHOS_ABILITY_CAMERA_TYPE,
@@ -59,6 +60,22 @@ const std::vector<uint32_t> g_metadataTags = {
     OHOS_ABILITY_HIGH_QUALITY_SUPPORT,
     OHOS_ABILITY_CAMERA_FOLD_STATUS,
     OHOS_STATUS_CAMERA_OCCLUSION_DETECTION,
+    OHOS_ABILITY_STATISTICS_DETECT_TYPE,
+    OHOS_CONTROL_STATISTICS_DETECT_SETTING,
+    OHOS_ABILITY_AVAILABLE_EXTENDED_STREAM_INFO_TYPES,
+    OHOS_ABILITY_AUTO_DEFERRED_VIDEO_ENHANCE,
+    OHOS_CONTROL_AUTO_DEFERRED_VIDEO_ENHANCE,
+    OHOS_ABILITY_AUTO_CLOUD_IMAGE_ENHANCE,
+    OHOS_CONTROL_AUTO_CLOUD_IMAGE_ENHANCE,
+    OHOS_ABILITY_TRIPOD_DETECTION,
+    OHOS_CONTROL_TRIPOD_DETECTION,
+    OHOS_CONTROL_TRIPOD_STABLITATION,
+    OHOS_STATUS_TRIPOD_DETECTION_STATUS,
+    OHOS_STATUS_SKETCH_POINT,
+    OHOS_ABILITY_LOW_LIGHT_BOOST,
+    OHOS_CONTROL_LOW_LIGHT_DETECT,
+    OHOS_CONTROL_LOW_LIGHT_BOOST,
+    OHOS_STATUS_LOW_LIGHT_DETECTION,
 
     OHOS_SENSOR_EXPOSURE_TIME,
     OHOS_SENSOR_COLOR_CORRECTION_GAINS,
@@ -81,6 +98,14 @@ const std::vector<uint32_t> g_metadataTags = {
     OHOS_STATISTICS_FACE_LANDMARKS,
     OHOS_STATISTICS_FACE_RECTANGLES,
     OHOS_STATISTICS_FACE_SCORES,
+    OHOS_STATISTICS_DETECT_HUMAN_FACE_INFOS,
+    OHOS_STATISTICS_DETECT_HUMAN_BODY_INFOS,
+    OHOS_STATISTICS_DETECT_CAT_FACE_INFOS,
+    OHOS_STATISTICS_DETECT_CAT_BODY_INFOS,
+    OHOS_STATISTICS_DETECT_DOG_FACE_INFOS,
+    OHOS_STATISTICS_DETECT_DOG_BODY_INFOS,
+    OHOS_STATISTICS_DETECT_SALIENT_INFOS,
+    OHOS_STATISTICS_DETECT_BAR_CODE_INFOS,
 
     OHOS_CONTROL_AE_ANTIBANDING_MODE,
     OHOS_CONTROL_AE_EXPOSURE_COMPENSATION,
@@ -212,6 +237,7 @@ const std::vector<uint32_t> g_metadataTags = {
     OHOS_ABILITY_BEAUTY_SKIN_SMOOTH_VALUES,
     OHOS_CONTROL_BEAUTY_SKIN_SMOOTH_VALUE,
     OHOS_ABILITY_CAMERA_MACRO_SUPPORTED,
+    OHOS_ABILITY_SCENE_MACRO_CAP,
     OHOS_CAMERA_MACRO_STATUS,
     OHOS_CONTROL_CAMERA_MACRO,
     OHOS_ABILITY_CAMERA_VIRTUAL_APERTURE_RANGE,
@@ -699,10 +725,14 @@ int CameraMetadata::AddCameraMetadataItem(common_metadata_header_t *dst, uint32_
     METADATA_DEBUG_LOG("AddCameraMetadataItem start");
     uint32_t dataType;
     int32_t ret = AddCameraMetadataItemVerify(dst, item, data, dataCount, &dataType);
-    if (ret != CAM_META_SUCCESS) {
-        return ret;
-    }
+    if (ret != CAM_META_SUCCESS) return ret;
 
+    if ((dst->size - dst->items_start) < (uint64_t)dst->item_count * itemLen ||
+        (dst->size - dst->data_start) < dst->data_count) {
+        METADATA_ERR_LOG("AddCameraMetadataItem fail: invalid argument.");
+        return CAM_META_INVALID_PARAM;
+    }
+    
     size_t dataBytes = CalculateCameraMetadataItemDataSize(dataType, dataCount);
     if (dataBytes + dst->data_count > dst->data_capacity) {
         METADATA_ERR_LOG("AddCameraMetadataItem data_capacity limit reached");

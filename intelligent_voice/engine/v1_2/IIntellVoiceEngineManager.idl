@@ -110,4 +110,13 @@ interface IIntellVoiceEngineManager extends ohos.hdi.intelligent_voice.engine.v1
      * @version 1.2
      */
     SendCloneFile([in] String filePath, [in] List <unsigned char> buffer);
+    /**
+     * @brief Clear user wakeup data.
+     * @param wakeupPhrase Indicates wakeup phrase.
+     * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 1.2
+     */
+    ClearUserWakeupData([in] String wakeupPhrase);
 }

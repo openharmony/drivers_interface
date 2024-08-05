@@ -27,6 +27,7 @@ package ohos.hdi.camera.v1_3;
 import ohos.hdi.camera.v1_2.ICameraHost;
 import ohos.hdi.camera.v1_3.ICameraDevice;
 import ohos.hdi.camera.v1_0.ICameraDeviceCallback;
+import ohos.hdi.camera.v1_3.Types;
 
 interface ICameraHost extends ohos.hdi.camera.v1_2.ICameraHost {
     /**
@@ -64,4 +65,18 @@ interface ICameraHost extends ohos.hdi.camera.v1_2.ICameraHost {
      * @version 1.0
      */
     OpenSecureCamera([in] String cameraId, [in] ICameraDeviceCallback callbackObj, [out] ICameraDevice device);
+
+    /**
+     * @brief Obtain the resource cost of opening the camera on the camera device through cameraHost
+     *
+     * @param resourceCost Indicates open the resource cost of the camera device
+     * @param cameraId Indicates the ID of the camera device, which can be obtained by calling {@link GetCameraIds}.
+     * 
+     * @return Returns <b>NO_ERROR</b> if the operation is successful; returns an error code defined
+     * in {@link CamRetCode} otherwise.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    GetResourceCost([in] String cameraId, [out] CameraDeviceResourceCost resourceCost);
 }

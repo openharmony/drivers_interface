@@ -120,6 +120,7 @@ interface ICodecImage {
      * @brief Allocate input buffer.
      *
      * You can use this API to allocate input buffer for image codec.
+     * After input buffer is duplicated to proxy, stub will automatically free its own reference to input buffer.
      *
      * @param inBuffer Indicates input buffer of the image codec {@link CodecImageBuffer} obtained.
      * @param size Indicates size of input buffer {@link CodecImageBuffer} obtained.
@@ -148,6 +149,8 @@ interface ICodecImage {
      * see <b>HDF_STATUS</b> defined by HDF.
      *
      * @since 4.0
+     * @deprecated
+     * @stub no longer hold reference to input buffer, no need to free.
      */
     FreeInBuffer([in] struct CodecImageBuffer inBuffer);
 

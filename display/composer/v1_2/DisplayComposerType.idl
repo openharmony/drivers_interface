@@ -87,8 +87,9 @@ enum DispCmd : ohos.hdi.display.composer.v1_0.DispCmd {
  * @brief Enumerates the property id of the display vdi.
  *
  * @since 5.0
- * @version 1.0
+ * @version 1.1
  */
 enum DisplayPropertyID {
     DISPLAY_PROPERTY_ID_SKIP_VALIDATE = 1,
+    DISPLAY_CAPBILITY_HARDWARE_CURSOR = 2,
 };

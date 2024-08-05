@@ -302,6 +302,118 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_STATUS_CAMERA_OCCLUSION_DETECTION,
     /**
+     * ohos.ability.statisticsDetectType [static, enum[], public]
+     *
+     * camera device property, report current camera support statistice detect type
+     * (i.e. enum[]: [humanFace/human/catFace/cat/dogFace/dog/salient/barCode] ...)
+     */
+    OHOS_ABILITY_STATISTICS_DETECT_TYPE,
+    /**
+     * ohos.control.statisticsDetectSetting [static, enum[], public]
+     *
+     * camera device property, set current camera what statistice detect type ware supported
+     * (i.e. enum[]: [humanFace/human/catFace/cat/dogFace/dog/salient/barCode] ...)
+     */
+    OHOS_CONTROL_STATISTICS_DETECT_SETTING,
+    /**
+     * ohos.ability.availableExtendedStreamInfoTypes [static, int32[], public]
+     *
+     * camera device property, report current camera extended streams supported by different streams in the mode
+     * (i.e. int32[] ...)
+     */
+    OHOS_ABILITY_AVAILABLE_EXTENDED_STREAM_INFO_TYPES,
+    /**
+     * ohos.ability.autoDeferredVideoEnhance [static, enum, public]
+     *
+     * camera device property, report current camera whether support auto deferred video enhance
+     * (i.e. enum: OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED ...)
+     */
+    OHOS_ABILITY_AUTO_DEFERRED_VIDEO_ENHANCE,
+    /**
+     * ohos.control.autoDeferredVideoEnhance [static, enum, public]
+     *
+     * camera device property, set current camera whether support auto deferred video enhance
+     * (i.e. enum: OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED ...)
+     */
+    OHOS_CONTROL_AUTO_DEFERRED_VIDEO_ENHANCE,
+    /**
+     * ohos.ability.autoCloudImageEnhance [static, int32[], public]
+     *
+     * camera device property, report current camera whether support auto cloud image enhance by mode
+     * (i.e. int32[]: [mode, OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED, mode ...] ...)
+     */
+    OHOS_ABILITY_AUTO_CLOUD_IMAGE_ENHANCE,
+    /**
+     * ohos.control.autoCloudImageEnhance [static, enum, public]
+     *
+     * camera device property, set current camera whether support auto cloud image enhance
+     * (i.e. enum: OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED ...)
+     */
+    OHOS_CONTROL_AUTO_CLOUD_IMAGE_ENHANCE,
+    /**
+     * ohos.ability.tripodDetection [static, int32[], public]
+     *
+     * camera device property, report current camera whether support tripod detection by mode
+     * (i.e. int32[]: [mode, OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED, mode ...] ...)
+     */
+    OHOS_ABILITY_TRIPOD_DETECTION,
+    /**
+     * ohos.control.tripodDetection [static, byte, public]
+     *
+     * camera device property, set current camera whether enable tripod detection
+     * (i.e. byte: 0-false/1-true ...)
+     */
+    OHOS_CONTROL_TRIPOD_DETECTION,
+    /**
+     * ohos.control.tripodStablitation [static, byte, public]
+     *
+     * camera device property, set current camera whether enable tripod stablitation algorithm
+     * (i.e. byte: 0-false/1-true ...)
+     */
+    OHOS_CONTROL_TRIPOD_STABLITATION,
+    /**
+     * ohos.status.tripodDetectionStatus [static, enum, public]
+     *
+     * camera device property, query current camera tripod detection status
+     * (i.e. enum: TRIPOD_STATUS_INVALID/TRIPOD_STATUS_ACTIVE/TRIPOD_STATUS_ENTER/TRIPOD_STATUS_EXITING ...)
+     */
+    OHOS_STATUS_TRIPOD_DETECTION_STATUS,
+    /**
+     * ohos.status.sketchPoint [static, float[], public]
+     *
+     * camera device property, query current camera sketch center point position
+     * (i.e. float[]: [px, py] ...)
+     */
+    OHOS_STATUS_SKETCH_POINT,
+    /**
+     * ohos.ability.lowLightBoost [static, int32[], public]
+     *
+     * camera device property, report current camera whether low light boost by mode
+     * (i.e. int32[]: [mode, OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED, mode ...] ...)
+     */
+    OHOS_ABILITY_LOW_LIGHT_BOOST,
+    /**
+     * ohos.control.lowLightDetect [static, byte, public]
+     *
+     * camera device property, set current camera whether low light detect
+     * (i.e. byte: 0-false/1-true ...)
+     */
+    OHOS_CONTROL_LOW_LIGHT_DETECT,
+    /**
+     * ohos.control.lowLightBoost [static, byte, public]
+     *
+     * camera device property, set current camera whether low light boost
+     * (i.e. byte: 0-false/1-true ...)
+     */
+    OHOS_CONTROL_LOW_LIGHT_BOOST,
+    /**
+     * ohos.control.lowLightDetection [static, byte, public]
+     *
+     * camera device property, query current camera low light detection status
+     * (i.e. byte: 0-false/1-true ...)
+     */
+    OHOS_STATUS_LOW_LIGHT_DETECTION,
+    /**
      * ohos.camera.propertiesEnd
      *
      * camera property end
@@ -333,7 +445,7 @@ typedef enum camera_device_metadata_tag {
      * ohos.ability.muteModes [static, enum[], public]
      *
      * camera device property, report current camera mute modes
-     * (i.e. enum[]: OFF, solidColorBlack, ...)
+     * (i.e. enum[]: OFF, solidColorBlack ...)
      */
     OHOS_ABILITY_MUTE_MODES,
     /**
@@ -455,6 +567,62 @@ typedef enum camera_device_metadata_tag {
      * (i.e. int32[] ...)
      */
     OHOS_STATISTICS_FACE_SCORES,
+    /**
+     * ohos.statistics.detectHumanFaceInfos [static, int32[], public]
+     *
+     * camera device property, query current camera detect human face informations
+     * (i.e. int32[] ...)
+     */
+    OHOS_STATISTICS_DETECT_HUMAN_FACE_INFOS,
+    /**
+     * ohos.statistics.detectHumanBodyInfos [static, int32[], public]
+     *
+     * camera device property, query current camera detect human body informations
+     * (i.e. int32[] ...)
+     */
+    OHOS_STATISTICS_DETECT_HUMAN_BODY_INFOS,
+    /**
+     * ohos.statistics.detectCatFaceInfos [static, int32[], public]
+     *
+     * camera device property, query current camera detect cat face informations
+     * (i.e. int32[] ...)
+     */
+    OHOS_STATISTICS_DETECT_CAT_FACE_INFOS,
+    /**
+     * ohos.statistics.detectCatBodyInfos [static, int32[], public]
+     *
+     * camera device property, query current camera detect cat body informations
+     * (i.e. int32[] ...)
+     */
+    OHOS_STATISTICS_DETECT_CAT_BODY_INFOS,
+    /**
+     * ohos.statistics.detectDogFaceInfos [static, int32[], public]
+     *
+     * camera device property, query current camera detect dog face informations
+     * (i.e. int32[] ...)
+     */
+    OHOS_STATISTICS_DETECT_DOG_FACE_INFOS,
+    /**
+     * ohos.statistics.detectDogBodyInfos [static, int32[], public]
+     *
+     * camera device property, query current camera detect dog body informations
+     * (i.e. int32[] ...)
+     */
+    OHOS_STATISTICS_DETECT_DOG_BODY_INFOS,
+    /**
+     * ohos.statistics.detectSalientInfos [static, int32[], public]
+     *
+     * camera device property, query current camera detect salient informations
+     * (i.e. int32[] ...)
+     */
+    OHOS_STATISTICS_DETECT_SALIENT_INFOS,
+    /**
+     * ohos.statistics.detectBarCodeInfos [static, int32[], public]
+     *
+     * camera device property, query current camera detect bar code informations
+     * (i.e. int32[] ...)
+     */
+    OHOS_STATISTICS_DETECT_BAR_CODE_INFOS,
     /**
      * ohos.camera.statisticsEnd
      *
@@ -1366,6 +1534,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_CAMERA_MACRO_SUPPORTED,
     /**
+     * ohos.ability.sceneMacroCap [static, int32[], public]
+     *
+     * camera device property, report current camera different macro capAbility
+     * (i.e. int32[] ...)
+     */
+    OHOS_ABILITY_SCENE_MACRO_CAP,
+    /**
      * ohos.status.camera [static, enum, public]
      *
      * camera device property, query current camera macro
@@ -2129,7 +2304,7 @@ enum CameraFoldStatus {
 };
 
 // OHOS_CONTROL_BURST_CAPTURE
-enum BurstCapture {
+enum CameraBurstCaptureEnum {
     OHOS_CONTROL_BURST_CAPTURE_END = 0,
     OHOS_CONTROL_BURST_CAPTURE_BEGIN = 1,
 };
@@ -2152,6 +2327,26 @@ enum TimeLapseRecordState {
 enum TimeLapsePreviewType {
     TIME_LAPSE_PREVIEW_DARK = 1,
     TIME_LAPSE_PREVIEW_LIGHT = 2,
+};
+
+// OHOS_ABILITY_STATISTICS_DETECT_TYPE
+enum StatisticsDetectType {
+    OHOS_CAMERA_HUMAN_FACE_DETECT = 0,
+    OHOS_CAMERA_HUMAN_BODY_DETECT = 1,
+    OHOS_CAMERA_CAT_FACE_DETECT = 2,
+    OHOS_CAMERA_CAT_BODY_DETECT = 3,
+    OHOS_CAMERA_DOG_FACE_DETECT = 4,
+    OHOS_CAMERA_DOG_BODY_DETECT = 5,
+    OHOS_CAMERA_SALIENT_DETECT = 6,
+    OHOS_CAMERA_BAR_CODE_DETECT = 7,
+};
+
+// OHOS_STATUS_TRIPOD_DETECTION_STATUS
+enum TripodStatus {
+    TRIPOD_STATUS_INVALID = 0,
+    TRIPOD_STATUS_ACTIVE = 1,
+    TRIPOD_STATUS_ENTER = 2,
+    TRIPOD_STATUS_EXITING = 3,
 };
 
 #endif
