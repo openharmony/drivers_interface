@@ -86,11 +86,20 @@ int32_t DeviceCache::AddLayerCache(uint32_t id, uint32_t bufferCacheCount)
     DISPLAY_CHK_RETURN(layer == nullptr, HDF_FAILURE, HDF_LOGE("%{public}s: Create cache failed", __func__));
 
     int32_t retResult = layer->SetBufferCacheMaxCount(bufferCacheCount);
-    DISPLAY_CHK_RETURN(retResult != HDF_SUCCESS, retResult,
-        HDF_LOGE("%{public}s: set buffer cache max count failed", __func__));
+    if (retResult != HDF_SUCCESS) {
+        delete layer;
+        layer = nullptr;
+        HDF_LOGE("%{public}s: set buffer cache max count failed", __func__);
+        return retResult;
+    }
 
     bool ret = layerCaches_->InsertCache(id, layer);
-    DISPLAY_CHK_RETURN(ret != true, HDF_FAILURE, HDF_LOGE("%{public}s: insert cache failed", __func__));
+    if (ret != true) {
+        delete layer;
+        layer = nullptr;
+        HDF_LOGE("%{public}s: insert cache failed", __func__)
+        return HDF_FAILURE;
+    }
     return HDF_SUCCESS;
 }
 
