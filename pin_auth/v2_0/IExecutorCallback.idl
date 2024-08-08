@@ -89,7 +89,7 @@ import ohos.hdi.pin_auth.v2_0.PinAuthTypes;
      * @return Returns a non-zero value if the operation fails.
      *
      * @since 3.2
-     * @version 2.0
+     * @version 3.0
      */
     OnGetData([in] unsigned char[] algoParameter, [in] unsigned long authSubType, [in] unsigned int algoVersion,
         [in] unsigned char[] challenge, [in] String complexityReg);
