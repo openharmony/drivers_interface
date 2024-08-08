@@ -97,7 +97,7 @@ int32_t DeviceCache::AddLayerCache(uint32_t id, uint32_t bufferCacheCount)
     if (ret != true) {
         delete layer;
         layer = nullptr;
-        HDF_LOGE("%{public}s: insert cache failed", __func__)
+        HDF_LOGE("%{public}s: insert cache failed", __func__);
         return HDF_FAILURE;
     }
     return HDF_SUCCESS;
