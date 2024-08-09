@@ -30,3 +30,37 @@ hdi("display_composer") {
   subsystem_name = "hdf"
   part_name = "drivers_interface_display"
 }
+
+config("libdisplay_composer_hdi_impl_config") {
+  include_dirs = [
+    "../",
+    "../hdifd_parcelable",
+  ]
+}
+
+ohos_shared_library("libdisplay_composer_hdi_impl_1.1") {
+  sources = [ "../v1_1/hdi_impl/display_composer_interface.cpp" ]
+
+  public_configs = [ ":libdisplay_composer_hdi_impl_config" ]
+
+  deps = [
+    ":libdisplay_composer_proxy_1.1",
+    "../hdifd_parcelable:libhdifd_parcelable",
+    "../v1_0:libdisplay_composer_proxy_1.0",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "graphic_surface:buffer_handle",
+    "hdf_core:libhdi",
+    "hdf_core:libpub_utils",
+    "hilog:libhilog",
+    "hitrace:hitrace_meter",
+    "init:libbegetutil",
+    "ipc:ipc_single",
+  ]
+
+  install_images = [ "system" ]
+  subsystem_name = "hdf"
+  part_name = "drivers_interface_display"
+}
