@@ -22,6 +22,9 @@
 #include "hdf_log.h"
 #include "nocopyable.h"
 #include <mutex>
+#include "hdf_base.h"
+#include "hilog/log.h"
+#include "base/native_buffer.h"
 
 #undef LOG_TAG
 #define LOG_TAG "DISP_CACHE_MGR"
@@ -146,6 +149,123 @@ private:
     std::unordered_map<IdType, std::unique_ptr<CacheType>> caches_;
     void (*cleanUpFunc_)(std::unique_ptr<CacheType>&);
     void (*initFunc_)(std::unique_ptr<CacheType>&);
+    std::mutex mutex_;
+};
+
+template <typename IdType>
+class CacheManager<IdType, Base::NativeBuffer> : public NoCopyable {
+public:
+    CacheManager()
+        : cacheCountMax_ { 0 },
+          cleanUpFunc_ { nullptr },
+          initFunc_ { nullptr }
+    {}
+
+    virtual ~CacheManager()
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (cleanUpFunc_) {
+            for (auto& cache : caches_) {
+                cleanUpFunc_(cache.second);
+            }
+        }
+        caches_.clear();
+    }
+
+    bool SetCacheMaxCount(uint32_t count)
+    {
+        bool ret = true;
+        uint32_t originalMaxCount = cacheCountMax_;
+        if (count >= cacheCountMax_) {
+            cacheCountMax_ = count;
+        } else if (Size() <= count) {
+            cacheCountMax_ = count;
+        } else {
+            HDF_LOGE("%{public}s error: clientCacheCount can't be set, because cacheCountMax_ > count", __func__);
+            ret = false;
+        }
+        HDF_LOGI("%{public}s: set cache max count from %{public}u to %{public}u",
+            __func__, originalMaxCount, cacheCountMax_);
+        return ret;
+    }
+
+    uint32_t Size()
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        return caches_.size();
+    }
+
+    bool InsertCache(IdType id, Base::NativeBuffer* cache)
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        auto cacheItem = caches_.find(id);
+        if (cacheItem != caches_.end()) {
+            HDF_LOGI("%{public}s: intend to insert a existing cache, SeqNo=%{public}d", __func__, id);
+            cacheItem->second = OHOS::sptr<Base::NativeBuffer>(cache);
+        } else {
+            if (cacheCountMax_ != 0 && caches_.size() >= cacheCountMax_) {
+                HDF_LOGE("%{public}s: Caches is full, new seqNo:%{public}d can't be inserted", __func__, id);
+                return false;
+            }
+            caches_[id] = OHOS::sptr<Base::NativeBuffer>(cache);
+        }
+        if (initFunc_) {
+            initFunc_(caches_[id]);
+        }
+        return true;
+    }
+
+    bool EraseCache(IdType id)
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        auto cacheItem = caches_.find(id);
+        if (cacheItem == caches_.end()) {
+            HDF_LOGE("%{public}s: Cache %{public}d is not existing\n", __func__, id);
+            return false;
+        }
+
+        if (cleanUpFunc_ && cacheItem->second != nullptr) {
+            cleanUpFunc_(cacheItem->second);
+        }
+
+        caches_.erase(cacheItem);
+        return true;
+    }
+
+    Base::NativeBuffer* SearchCache(IdType id)
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        auto cacheItem = caches_.find(id);
+        if (cacheItem == caches_.end()) {
+            return nullptr;
+        }
+
+        return cacheItem->second.GetRefPtr();
+    }
+
+    void TravelCaches(std::function<void (IdType id, const Base::NativeBuffer& cache)> func)
+    {
+        std::lock_guard<std::mutex> lock(mutex_);
+        for (auto const& [key, value] : caches_) {
+            func(key, *value.GetRefPtr());
+        }
+    }
+
+    void SetCleanUpFunc(void (*func)(OHOS::sptr<Base::NativeBuffer>&))
+    {
+        cleanUpFunc_ = func;
+    }
+
+    void SetInitFunc(void (*func)(OHOS::sptr<Base::NativeBuffer>&))
+    {
+        initFunc_ = func;
+    }
+
+private:
+    uint32_t cacheCountMax_;
+    std::unordered_map<IdType, OHOS::sptr<Base::NativeBuffer>> caches_;
+    void (*cleanUpFunc_)(OHOS::sptr<Base::NativeBuffer>&);
+    void (*initFunc_)(OHOS::sptr<Base::NativeBuffer>&);
     std::mutex mutex_;
 };
 } // namespace Composer
