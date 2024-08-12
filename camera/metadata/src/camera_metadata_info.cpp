@@ -941,6 +941,9 @@ int CameraMetadata::UpdateameraMetadataItemSize(camera_metadata_item_entry_t *it
     if (item == nullptr) {
         METADATA_ERR_LOG("UpdateameraMetadataItemSize item is null");
         return CAM_META_FAILURE;
+    } else if (item->data_type < META_TYPE_BYTE || item->data_type >= META_NUM_TYPES) {
+        METADATA_ERR_LOG("UpdateameraMetadataItemSize invalid datatype:%{public}d", item->data_type);
+        return CAM_META_FAILURE;
     }
     size_t dataSize = CalculateCameraMetadataItemDataSize(item->data_type, dataCount);
     size_t dataPayloadSize = dataCount * OHOS_CAMERA_METADATA_TYPE_SIZE[item->data_type];
@@ -955,14 +958,12 @@ int CameraMetadata::UpdateameraMetadataItemSize(camera_metadata_item_entry_t *it
             METADATA_ERR_LOG("UpdateCameraMetadataItemByIndex data_capacity limit reached");
             return CAM_META_DATA_CAP_EXCEED;
         }
-
         if (oldItemSize != 0) {
             ret = MetadataExpandItemMem(dst, item, oldItemSize);
             if (ret != CAM_META_SUCCESS) {
                 return ret;
             }
         }
-
         if (dataSize != 0) {
             item->data.offset = dst->data_count;
             ret = copyMetadataMemory(dst, item, dataPayloadSize, data);
@@ -977,7 +978,6 @@ int CameraMetadata::UpdateameraMetadataItemSize(camera_metadata_item_entry_t *it
             return ret;
         }
     }
-
     if (dataSize == 0) {
         ret = memcpy_s(item->data.value, dataPayloadSize, data, dataPayloadSize);
         if (ret != EOK) {
@@ -1470,7 +1470,7 @@ std::string CameraMetadata::FormatCameraMetadataToString(const common_metadata_h
     for (auto it = g_metadataTags.begin(); it != g_metadataTags.end(); it++) {
         metaStr += MetadataItemDump(metadataHeader, *it);
     }
-    METADATA_INFO_LOG("metadataHeader item = %{public}s", metaStr.c_str());
+    METADATA_DEBUG_LOG("metadataHeader item = %{public}s", metaStr.c_str());
     return metaStr;
 }
 
