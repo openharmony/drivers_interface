@@ -373,7 +373,7 @@ EXIT:
             HdfTrace traceVdi("SetDisplayClientBuffer", data.buffer == nullptr ? "data.buffer is nullptr! " :
             ("HDI:DISP:HARDWARE height:" + std::to_string(data.buffer->height) +
             " width:" + std::to_string(data.buffer->width) + " "));
-			needMoveFd = true;
+            needMoveFd = true;
             int rc = impl_->SetDisplayClientBuffer(data.devId, handle, fd);
             DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
             return HDF_SUCCESS;
