@@ -370,8 +370,10 @@ EXIT:
 #ifdef DISPLAY_COMSPOER_DEBUG_DUMP
             DumpLayerBuffer(data.devId, data.seqNo, data.fence, handle, "client_");
 #endif
-            HdfTrace traceVdi("SetDisplayClientBuffer", "HDI:DISP:HARDWARE");
-            needMoveFd = true;
+			HdfTrace traceVdi("SetDisplayClientBuffer", data.buffer == nullptr ? "data.buffer is nullptr! " :
+			("HDI:DISP:HARDWARE height:" + std::to_string(data.buffer->height) +
+			" width:" + std::to_string(data.buffer->width) + " "));
+			needMoveFd = true;
             int rc = impl_->SetDisplayClientBuffer(data.devId, handle, fd);
             DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
             return HDF_SUCCESS;
