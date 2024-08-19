@@ -245,6 +245,8 @@ interface IUsbInterface {
      *
      * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
      * @since 3.2
+     * @deprecated since 5.0
+     * @useinstead ohos.hdi.usb.v1_1.IUsbInterface.ControlTransferReadwithLength
      */
     ControlTransferRead([in] struct UsbDev dev, [in] struct UsbCtrlTransfer ctrl, [out] unsigned char[] data);
 
