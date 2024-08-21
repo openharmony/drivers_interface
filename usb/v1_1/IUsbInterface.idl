@@ -40,6 +40,7 @@
 
 package ohos.hdi.usb.v1_1;
 
+import ohos.hdi.usb.v1_1.UsbTypes;
 import ohos.hdi.usb.v1_0.UsbTypes;
 import ohos.hdi.usb.v1_0.IUsbdSubscriber;
 import ohos.hdi.usb.v1_0.IUsbdBulkCallback;
@@ -104,4 +105,20 @@ interface IUsbInterface extends ohos.hdi.usb.v1_0.IUsbInterface{
      * @version 1.0
      */
     BulkTransferReadwithLength([in] struct UsbDev dev, [in] struct UsbPipe pipe, [in] int timeout, [in] int length, [out] unsigned char[] data);
+
+    /* *
+     * @brief Performs control transfer for endpoint 0 of the device. The data transfer direction is determined by the
+     * request type. If the result of <b>requestType</b>&
+     * <b>USB_ENDPOINT_DIR_MASK</b> is <b>USB_DIR_OUT</b>, the endpoint is in the data writing direction; if the result
+     * is <b>USB_DIR_IN</b>, the endpoint is in the data reading direction.
+     *
+     * @param dev Indicates the USB device address.
+     * @param ctrl Indicates the control data packet structure.
+     * @param data Indicates the read data.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
+     * @since 5.0
+     * @version 1.0
+     */
+    ControlTransferReadwithLength([in] struct UsbDev dev, [in] struct UsbCtrlTransferParams ctrl, [out] unsigned char[] data);
 }
