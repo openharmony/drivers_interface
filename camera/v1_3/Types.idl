@@ -461,7 +461,7 @@ struct ImageBufferInfoExt {
      * @version 1.0
      */
     BufferHandleSequenceable makerHandle;
-}
+};
 
 /**
  * @brief Enumerates encoding types of stream data.
@@ -473,4 +473,4 @@ enum EncodeType : ohos.hdi.camera.v1_0.EncodeType {
       * HEIC
       */
      ENCODE_TYPE_HEIC = 4,
-}
+};
