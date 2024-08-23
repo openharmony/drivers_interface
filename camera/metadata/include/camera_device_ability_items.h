@@ -407,12 +407,19 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_LOW_LIGHT_BOOST,
     /**
-     * ohos.control.lowLightDetection [static, byte, public]
+     * ohos.status.lowLightDetection [static, byte, public]
      *
      * camera device property, query current camera low light detection status
      * (i.e. byte: 0-false/1-true ...)
      */
     OHOS_STATUS_LOW_LIGHT_DETECTION,
+    /**
+     * ohos.status.cameraLensDirtyDetection [static, byte, public]
+     *
+     * camera device property, query current camera lens dirty detection
+     * (i.e. byte: 0-false/1-true ...)
+     */
+    OHOS_STATUS_CAMERA_LENS_DIRTY_DETECTION,
     /**
      * ohos.camera.propertiesEnd
      *
