@@ -24,10 +24,12 @@ ohos_shared_library("metadata") {
     "-fPIC",
     "-Wall",
   ]
+  cflags_cc = cflags
+  cflags_cc += [ "-fstack-protector-strong" ]
+  ldflags = [ "-s" ]
   if (drivers_interface_camera_feature_coverage) {
     cflags += [ "--coverage" ]
-    ldflags = [ "--coverage" ]
-    cflags_cc = cflags
+    ldflags += [ "--coverage" ]
   }
   all_dependent_configs = [ ":camera_metadata_config" ]
   if (defined(ohos_lite)) {
