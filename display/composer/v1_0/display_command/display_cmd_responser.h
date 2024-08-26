@@ -74,8 +74,10 @@ public:
     DisplayCmdResponser(VdiImpl* impl, std::shared_ptr<DeviceCacheManager> cacheMgr)
         : impl_(impl),
         cacheMgr_(cacheMgr),
+        std::lock_guard<std::mutex> lock(request_mutex);		
         request_(nullptr),
         isReplyUpdated_(false),
+        std::lock_guard<std::mutex> lock(reply_mutex);		
         reply_(nullptr),
         replyCommandCnt_(0) {}
 
@@ -93,6 +95,7 @@ public:
     {
         DISPLAY_CHK_RETURN(request == nullptr, HDF_FAILURE,
             HDF_LOGE("%{public}s: error, request is nullptr", __func__));
+        std::lock_guard<std::mutex> lock(request_mutex);
         if (request_ != nullptr) {
             request_.reset();
         }
@@ -108,7 +111,8 @@ public:
             ret = InitReply(CmdUtils::INIT_ELEMENT_COUNT);
         }
         if (ret == HDF_SUCCESS) {
-            if (reply_ != nullptr) {
+        std::lock_guard<std::mutex> lock(reply_mutex);
+		if (reply_ != nullptr) {
                 reply = reply_;
             } else {
                 ret = HDF_FAILURE;
@@ -161,6 +165,7 @@ public:
             return HDF_FAILURE;
         }
         std::shared_ptr<char> requestData(new char[inEleCnt * CmdUtils::ELEMENT_SIZE], std::default_delete<char[]>());
+		std::lock_guard<std::mutex> lock(request_mutex);
         int32_t ret = request_->Read(reinterpret_cast<int32_t *>(requestData.get()), inEleCnt,
             CmdUtils::TRANSFER_WAIT_TIME);
 
@@ -200,6 +205,7 @@ public:
 
         /*  Write reply pack */
         outEleCnt = replyPacker_.ValidSize() >> CmdUtils::MOVE_SIZE;
+		std::lock_guard<std::mutex> lock(reply_mutex);
         ret = reply_->Write(reinterpret_cast<int32_t *>(replyPacker_.GetDataPtr()), outEleCnt,
             CmdUtils::TRANSFER_WAIT_TIME);
         if (ret != HDF_SUCCESS) {
@@ -217,7 +223,7 @@ protected:
             HDF_LOGE("%{public}s: size:%{public}u is too large", __func__, size);
             return HDF_FAILURE;
         }
-
+        std::lock_guard<std::mutex> lock(reply_mutex);
         reply_ = std::make_shared<Transfer>(size, SmqType::SYNCED_SMQ);
         DISPLAY_CHK_RETURN(reply_ == nullptr, HDF_FAILURE,
             HDF_LOGE("%{public}s: reply_ construct failed", __func__));
@@ -1099,6 +1105,10 @@ protected:
     std::unordered_map<int32_t, int32_t> errMaps_;
     /* fix fd leak */
     std::queue<BufferHandle *> delayFreeQueue_;
+private:
+    std::mutex request_mutex;
+	std::mutex reply_mutex;
+	
 };
 using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, IDisplayComposerVdi>;
 } // namespace V1_0
