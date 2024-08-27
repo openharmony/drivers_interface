@@ -111,8 +111,8 @@ public:
             ret = InitReply(CmdUtils::INIT_ELEMENT_COUNT);
         }
         if (ret == HDF_SUCCESS) {
-        std::lock_guard<std::mutex> lock(reply_mutex);
-		if (reply_ != nullptr) {
+            std::lock_guard<std::mutex> lock(reply_mutex);
+		    if (reply_ != nullptr) {
                 reply = reply_;
             } else {
                 ret = HDF_FAILURE;
@@ -165,7 +165,7 @@ public:
             return HDF_FAILURE;
         }
         std::shared_ptr<char> requestData(new char[inEleCnt * CmdUtils::ELEMENT_SIZE], std::default_delete<char[]>());
-		std::lock_guard<std::mutex> lock(request_mutex);
+        std::lock_guard<std::mutex> lock(request_mutex);
         int32_t ret = request_->Read(reinterpret_cast<int32_t *>(requestData.get()), inEleCnt,
             CmdUtils::TRANSFER_WAIT_TIME);
 
