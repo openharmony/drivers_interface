@@ -279,9 +279,11 @@ REPLY:
 
         /*  Write reply pack */
         outEleCnt = replyPacker_.ValidSize() >> CmdUtils::MOVE_SIZE;
-        std::lock_guard<std::mutex> lock(replyMutex_);
-        ret = reply_->Write(reinterpret_cast<int32_t *>(replyPacker_.GetDataPtr()), outEleCnt,
-            CmdUtils::TRANSFER_WAIT_TIME);
+        {
+            std::lock_guard<std::mutex> lock(replyMutex_);
+            ret = reply_->Write(reinterpret_cast<int32_t *>(replyPacker_.GetDataPtr()), outEleCnt,
+                CmdUtils::TRANSFER_WAIT_TIME);
+        }
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("Reply write failure, ret=%{public}d", ret);
             outEleCnt = 0;
