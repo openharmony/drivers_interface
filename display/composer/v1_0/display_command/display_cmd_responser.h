@@ -104,12 +104,12 @@ public:
 
     int32_t GetCmdReply(std::shared_ptr<Transfer>& reply)
     {
+        std::lock_guard<std::mutex> lock(replyMutex_);
         int32_t ret = HDF_SUCCESS;
         if (isReplyUpdated_ == false) {
             ret = InitReply(CmdUtils::INIT_ELEMENT_COUNT);
         }
         if (ret == HDF_SUCCESS) {
-            std::lock_guard<std::mutex> lock(replyMutex_);
             if (reply_ != nullptr) {
                 reply = reply_;
             } else {
@@ -208,7 +208,7 @@ public:
         {
             std::lock_guard<std::mutex> lock(replyMutex_);
             ret = reply_->Write(reinterpret_cast<int32_t *>(replyPacker_.GetDataPtr()), outEleCnt,
-            CmdUtils::TRANSFER_WAIT_TIME);
+                CmdUtils::TRANSFER_WAIT_TIME);
         }
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("Reply write failure, ret=%{public}d", ret);
