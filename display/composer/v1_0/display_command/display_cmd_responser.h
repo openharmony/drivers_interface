@@ -163,8 +163,8 @@ public:
             return HDF_FAILURE;
         }
         std::shared_ptr<char> requestData(new char[inEleCnt * CmdUtils::ELEMENT_SIZE], std::default_delete<char[]>());
-        std::lock_guard<std::mutex> lock(requestMutex_);
         {
+            std::lock_guard<std::mutex> lock(requestMutex_);    
             int32_t ret = request_->Read(reinterpret_cast<int32_t *>(requestData.get()), inEleCnt,
                 CmdUtils::TRANSFER_WAIT_TIME);
         }
