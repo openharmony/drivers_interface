@@ -74,10 +74,8 @@ public:
     DisplayCmdResponser(VdiImpl* impl, std::shared_ptr<DeviceCacheManager> cacheMgr)
         : impl_(impl),
         cacheMgr_(cacheMgr),
-        std::lock_guard<std::mutex> lock(request_mutex);		
         request_(nullptr),
         isReplyUpdated_(false),
-        std::lock_guard<std::mutex> lock(reply_mutex);		
         reply_(nullptr),
         replyCommandCnt_(0) {}
 
