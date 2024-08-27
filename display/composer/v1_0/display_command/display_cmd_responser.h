@@ -1107,7 +1107,7 @@ protected:
     std::queue<BufferHandle *> delayFreeQueue_;
 private:
     std::mutex request_mutex;
-	std::mutex reply_mutex;
+    std::mutex reply_mutex;
 	
 };
 using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, IDisplayComposerVdi>;
