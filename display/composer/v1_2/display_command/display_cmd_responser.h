@@ -349,6 +349,8 @@ private:
     using BaseType1_1::OnRequestEnd;
     using BaseType1_1::OnSetLayerColor;
     VdiImpl1_1* vdiImpl1_1_ = nullptr;
+    using BaseType1_1::requestMutex_;
+    using BaseType1_1::replyMutex_;
 };
 
 using HdiDisplayCmdResponser =
