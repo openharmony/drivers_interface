@@ -112,7 +112,7 @@ public:
         }
         if (ret == HDF_SUCCESS) {
             std::lock_guard<std::mutex> lock(reply_mutex);
-		    if (reply_ != nullptr) {
+            if (reply_ != nullptr) {
                 reply = reply_;
             } else {
                 ret = HDF_FAILURE;
@@ -205,7 +205,7 @@ public:
 
         /*  Write reply pack */
         outEleCnt = replyPacker_.ValidSize() >> CmdUtils::MOVE_SIZE;
-		std::lock_guard<std::mutex> lock(reply_mutex);
+        std::lock_guard<std::mutex> lock(reply_mutex);
         ret = reply_->Write(reinterpret_cast<int32_t *>(replyPacker_.GetDataPtr()), outEleCnt,
             CmdUtils::TRANSFER_WAIT_TIME);
         if (ret != HDF_SUCCESS) {
