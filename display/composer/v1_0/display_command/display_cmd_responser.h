@@ -225,7 +225,6 @@ protected:
             HDF_LOGE("%{public}s: size:%{public}u is too large", __func__, size);
             return HDF_FAILURE;
         }
-        std::lock_guard<std::mutex> lock(replyMutex_);
         reply_ = std::make_shared<Transfer>(size, SmqType::SYNCED_SMQ);
         DISPLAY_CHK_RETURN(reply_ == nullptr, HDF_FAILURE,
             HDF_LOGE("%{public}s: reply_ construct failed", __func__));
