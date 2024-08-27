@@ -1106,7 +1106,6 @@ protected:
 private:
     std::mutex request_mutex;
     std::mutex reply_mutex;
-	
 };
 using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, IDisplayComposerVdi>;
 } // namespace V1_0
