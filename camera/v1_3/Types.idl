@@ -372,11 +372,11 @@ struct ImageBufferInfoExt {
     MapDataSequenceable metadata;
 
     /**
-     * @brief The information of ImageHandle.
+     * @brief The information of imageHandle.
      * @since 5.0
      * @version 1.0
      */
-    BufferHandleSequenceable ImageHandle;
+    BufferHandleSequenceable imageHandle;
 
     /**
      * @brief If the gain map reported.
@@ -453,14 +453,14 @@ struct ImageBufferInfoExt {
      * @since 5.0
      * @version 1.0
      */
-    boolean isMakerValid;
+    boolean isMakerInfoValid;
 
     /**
      * @brief The maker information.
      * @since 5.0
      * @version 1.0
      */
-    BufferHandleSequenceable makerHandle;
+    BufferHandleSequenceable makerInfoHandle;
 };
 
 /**
