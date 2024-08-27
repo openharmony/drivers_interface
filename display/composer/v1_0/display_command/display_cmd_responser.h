@@ -1105,7 +1105,6 @@ protected:
     std::unordered_map<int32_t, int32_t> errMaps_;
     /* fix fd leak */
     std::queue<BufferHandle *> delayFreeQueue_;
-private:
     std::mutex requestMutex_;
     std::mutex replyMutex_;
 };
