@@ -237,7 +237,7 @@ REPLY:
         std::vector<HdifdInfo>& outFds)
     {
         std::shared_ptr<char> requestData(new char[inEleCnt * CmdUtils::ELEMENT_SIZE], std::default_delete<char[]>());
-        std::lock_guard<std::mutex> lock(request_mutex);
+        std::lock_guard<std::mutex> lock(requestMutex_);
         int32_t ret = request_->Read(reinterpret_cast<int32_t *>(requestData.get()), inEleCnt,
             CmdUtils::TRANSFER_WAIT_TIME);
 
@@ -277,7 +277,7 @@ REPLY:
 
         /*  Write reply pack */
         outEleCnt = replyPacker_.ValidSize() >> CmdUtils::MOVE_SIZE;
-        std::lock_guard<std::mutex> lock(reply_mutex);
+        std::lock_guard<std::mutex> lock(replyMutex_);
         ret = reply_->Write(reinterpret_cast<int32_t *>(replyPacker_.GetDataPtr()), outEleCnt,
             CmdUtils::TRANSFER_WAIT_TIME);
         if (ret != HDF_SUCCESS) {
