@@ -93,7 +93,7 @@ public:
     {
         DISPLAY_CHK_RETURN(request == nullptr, HDF_FAILURE,
             HDF_LOGE("%{public}s: error, request is nullptr", __func__));
-        std::lock_guard<std::mutex> lock(request_mutex);
+        std::lock_guard<std::mutex> lock(requestMutex);
         if (request_ != nullptr) {
             request_.reset();
         }
@@ -109,7 +109,7 @@ public:
             ret = InitReply(CmdUtils::INIT_ELEMENT_COUNT);
         }
         if (ret == HDF_SUCCESS) {
-            std::lock_guard<std::mutex> lock(reply_mutex);
+            std::lock_guard<std::mutex> lock(replyMutex);
             if (reply_ != nullptr) {
                 reply = reply_;
             } else {
@@ -163,10 +163,11 @@ public:
             return HDF_FAILURE;
         }
         std::shared_ptr<char> requestData(new char[inEleCnt * CmdUtils::ELEMENT_SIZE], std::default_delete<char[]>());
-        std::lock_guard<std::mutex> lock(request_mutex);
-        int32_t ret = request_->Read(reinterpret_cast<int32_t *>(requestData.get()), inEleCnt,
-            CmdUtils::TRANSFER_WAIT_TIME);
-
+        std::lock_guard<std::mutex> lock(requestMutex);
+        {
+            int32_t ret = request_->Read(reinterpret_cast<int32_t *>(requestData.get()), inEleCnt,
+                CmdUtils::TRANSFER_WAIT_TIME);
+        }
         CommandDataUnpacker unpacker;
         unpacker.Init(requestData.get(), inEleCnt << CmdUtils::MOVE_SIZE);
 #ifdef DEBUG_DISPLAY_CMD_RAW_DATA
@@ -203,7 +204,7 @@ public:
 
         /*  Write reply pack */
         outEleCnt = replyPacker_.ValidSize() >> CmdUtils::MOVE_SIZE;
-        std::lock_guard<std::mutex> lock(reply_mutex);
+        std::lock_guard<std::mutex> lock(replyMutex);
         ret = reply_->Write(reinterpret_cast<int32_t *>(replyPacker_.GetDataPtr()), outEleCnt,
             CmdUtils::TRANSFER_WAIT_TIME);
         if (ret != HDF_SUCCESS) {
@@ -221,7 +222,7 @@ protected:
             HDF_LOGE("%{public}s: size:%{public}u is too large", __func__, size);
             return HDF_FAILURE;
         }
-        std::lock_guard<std::mutex> lock(reply_mutex);
+        std::lock_guard<std::mutex> lock(replyMutex);
         reply_ = std::make_shared<Transfer>(size, SmqType::SYNCED_SMQ);
         DISPLAY_CHK_RETURN(reply_ == nullptr, HDF_FAILURE,
             HDF_LOGE("%{public}s: reply_ construct failed", __func__));
