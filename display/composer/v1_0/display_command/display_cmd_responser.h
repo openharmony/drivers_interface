@@ -191,7 +191,7 @@ public:
             ret = ProcessRequestCmd(unpacker, unpackCmd, inFds, outFds);
         }
 
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,HDF_LOGE("%{public}s: ProcessRequestCmd failed", __func__));
+        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret, HDF_LOGE("%{public}s:ProcessRequestCmd failed", __func__));
         /* pack request end commands */
         replyPacker_.PackEnd(CONTROL_CMD_REPLY_END);
 
