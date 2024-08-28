@@ -237,9 +237,12 @@ REPLY:
         std::vector<HdifdInfo>& outFds)
     {
         std::shared_ptr<char> requestData(new char[inEleCnt * CmdUtils::ELEMENT_SIZE], std::default_delete<char[]>());
-        int32_t ret = request_->Read(reinterpret_cast<int32_t *>(requestData.get()), inEleCnt,
-            CmdUtils::TRANSFER_WAIT_TIME);
-
+        int32_t ret = HDF_SUCCESS;
+        {
+            std::lock_guard<std::mutex> lock(requestMutex_);
+            ret = request_->Read(reinterpret_cast<int32_t *>(requestData.get()), inEleCnt,
+                CmdUtils::TRANSFER_WAIT_TIME);
+        }
         CommandDataUnpacker unpacker;
         unpacker.Init(requestData.get(), inEleCnt << CmdUtils::MOVE_SIZE);
 #ifdef DEBUG_DISPLAY_CMD_RAW_DATA
@@ -276,8 +279,11 @@ REPLY:
 
         /*  Write reply pack */
         outEleCnt = replyPacker_.ValidSize() >> CmdUtils::MOVE_SIZE;
-        ret = reply_->Write(reinterpret_cast<int32_t *>(replyPacker_.GetDataPtr()), outEleCnt,
-            CmdUtils::TRANSFER_WAIT_TIME);
+        {
+            std::lock_guard<std::mutex> lock(replyMutex_);
+            ret = reply_->Write(reinterpret_cast<int32_t *>(replyPacker_.GetDataPtr()), outEleCnt,
+                CmdUtils::TRANSFER_WAIT_TIME);
+        }
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("Reply write failure, ret=%{public}d", ret);
             outEleCnt = 0;
@@ -345,6 +351,8 @@ private:
     using BaseType1_1::OnRequestEnd;
     using BaseType1_1::OnSetLayerColor;
     VdiImpl1_1* vdiImpl1_1_ = nullptr;
+    using BaseType1_1::requestMutex_;
+    using BaseType1_1::replyMutex_;
 };
 
 using HdiDisplayCmdResponser =
