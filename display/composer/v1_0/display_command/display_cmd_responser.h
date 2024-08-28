@@ -166,7 +166,7 @@ public:
         int32_t ret = HDF_SUCCESS;
         {
             std::lock_guard<std::mutex> lock(requestMutex_);
-            ret = request_->Read(reinterpret_cast<int32_t *>(requestData.get()),inEleCnt,CmdUtils::TRANSFER_WAIT_TIME);
+            ret = request_->Read(reinterpret_cast<int32_t *>(requestData.get()), inEleCnt,CmdUtils::TRANSFER_WAIT_TIME);
         }
         CommandDataUnpacker unpacker;
         unpacker.Init(requestData.get(), inEleCnt << CmdUtils::MOVE_SIZE);
@@ -184,7 +184,7 @@ public:
 
         while (ret == HDF_SUCCESS && unpacker.NextSection()) {
             if (!unpacker.BeginSection(unpackCmd)) {
-                HDF_LOGE("error: PackSection failed,unpackCmd=%{public}s.",CmdUtils::CommandToString(unpackCmd));
+                HDF_LOGE("error: PackSection failed, unpackCmd=%{public}s.", CmdUtils::CommandToString(unpackCmd));
                 ret = HDF_FAILURE;
             }
             ret = ProcessRequestCmd(unpacker, unpackCmd, inFds, outFds);
