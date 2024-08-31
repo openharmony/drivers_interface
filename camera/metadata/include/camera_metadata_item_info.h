@@ -134,6 +134,8 @@ static item_info_t g_ohosCameraProperties[OHOS_CAMERA_PROPERTIES_END - OHOS_CAME
         OHOS_CAMERA_PROPERTIES_START] = {"lowLightDetection", META_TYPE_BYTE, 1},
     [OHOS_STATUS_CAMERA_LENS_DIRTY_DETECTION -
         OHOS_CAMERA_PROPERTIES_START] = {"cameraLensDirtyDetection", META_TYPE_BYTE, 1},
+    [OHOS_DEVICE_PROTECTION_STATE -
+        OHOS_CAMERA_PROPERTIES_START] = {"protectionState", META_TYPE_BYTE, 1},
 };
 
 static item_info_t g_ohosCameraSensor[OHOS_CAMERA_SENSOR_END - OHOS_CAMERA_SENSOR_START] = {
@@ -247,6 +249,12 @@ static item_info_t g_ohosCameraControl[OHOS_DEVICE_CONTROL_END - OHOS_DEVICE_CON
     [OHOS_CONTROL_HIGH_QUALITY_MODE - OHOS_DEVICE_CONTROL_START] = {"highQualityMode", META_TYPE_BYTE, 1},
     [OHOS_CONTROL_BURST_CAPTURE -
         OHOS_DEVICE_CONTROL_START] = {"cameraControlBurstCapture", META_TYPE_BYTE, 1},
+    [OHOS_CONTROL_CAMERA_SESSION_USAGE -
+        OHOS_DEVICE_CONTROL_START] = {"cameraSessionUsage", META_TYPE_INT32, 1},
+    [OHOS_CONTROL_EJECT_RETRY -
+        OHOS_DEVICE_CONTROL_START] = {"ejectRetry", META_TYPE_BYTE, 1},
+    [OHOS_CONTROL_FALL_PROTECTION -
+        OHOS_DEVICE_CONTROL_START] = {"fallProtection", META_TYPE_BYTE, 1},
 };
 
 static item_info_t g_ohosDeviceExposure[OHOS_DEVICE_EXPOSURE_END - OHOS_DEVICE_EXPOSURE_START] = {

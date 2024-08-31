@@ -474,3 +474,18 @@ enum EncodeType : ohos.hdi.camera.v1_0.EncodeType {
       */
      ENCODE_TYPE_HEIC = 4,
 };
+
+/**
+ * @brief Enumerates stream error types, which are used by {@link CaptureErrorInfo}.
+ * @since 3.2
+ * @version 1.1
+ */
+enum StreamError : ohos.hdi.camera.v1_0.StreamError {
+    /**
+     * When the sensor temperature is higher than the threshold, the cameraHal will stop the sketch stream
+     * and report the high temperature error through by {@link OnCaptureError}.
+     * @since 5.0
+     * @version 1.0
+     */
+    HIGH_TEMPERATURE_ERROR = 2,
+};
