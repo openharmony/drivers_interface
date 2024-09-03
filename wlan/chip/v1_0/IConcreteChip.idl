@@ -285,5 +285,49 @@ interface IConcreteChip {
      * @version 1.0
      */
     SetChipMode([in] unsigned int modeId);
+
+    /**
+     * @brief Creates the extend private interface service, This interface is preferentially used to communicate with
+     * the Wi-Fi service.
+     *
+     * @param ifName Indicates extend interface service name.
+     * @param iface Indicates extend interface service object.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    CreateExtService([in] String ifName, [out] IChipIface iface);
+
+    /**
+     * @brief Obtains the service of the extend interface, This interface is preferentially used to communicate
+     * with the Wi-Fi service.
+     *
+     * @param ifName Indicates extend interface service name.
+     * @param iface Indicates the extend interface service object.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    GetExtService([in] String ifName, [out] IChipIface iface);
+
+    /**
+     * @brief Deletes the service of the extend interface, This interface is preferentially used to
+     * communicate with the Wi-Fi service.
+     *
+     * @param ifName Indicates extend interface service name.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    RemoveExtService([in] String ifName);
 };
 /** @} */

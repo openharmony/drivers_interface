@@ -295,5 +295,63 @@ interface IChipIface {
      * @version 1.0
      */
     SetIfaceState([in] boolean state);
+
+    /**
+     * @brief Send private commond to driver, This interface is preferentially used to communicate with the Wi-Fi service.
+     *
+     * @param uid Indicates the current uid.
+     * @param protocol Indicates the rule.
+     * @param enable Indicates the mode.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    SendCmdToDriver([in] String ifName, [in] int cmdId, [in] byte[] paramBuf);
+
+    /**
+     * @brief send action frame to driver, This interface is preferentially used to communicate with the Wi-Fi service.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param freq Indicates the send channel frequency.
+     * @param ifName Indicates the action frame data.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    SendActionFrame([in] String ifName, [in] unsigned int freq, [in] unsigned char[] frameData);
+
+    /**
+     * @brief register action frame receiver, This interface is preferentially used to communicate with the Wi-Fi service.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param txChannel Indicates the data matching action frame.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    RegisterActionFrameReceiver([in] String ifName, [in] unsigned char[] match);
+
+    /**
+     * @brief get coex channel list, This interface is preferentially used to communicate with the Wi-Fi service.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param paramBuf coex channel list.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    GetCoexictenceChannelList([in] String ifName, [out] unsigned char[] paramBuf);
 };
 /** @} */
