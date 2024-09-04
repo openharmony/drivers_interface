@@ -460,6 +460,10 @@ static item_info_t g_ohosPostProcess[OHOS_CAMERA_EFFECT_END - OHOS_CAMERA_EFFECT
         OHOS_CAMERA_EFFECT_START] = {"controlTimeLapsePreviewType", META_TYPE_BYTE, 1},
     [OHOS_ABILITY_TIME_LAPSE_INTERVAL_RANGE -
         OHOS_CAMERA_EFFECT_START] = {"timeLapseIntervalRange", META_TYPE_UINT32, 1},
+    [OHOS_ABILITY_DEPTH_DATA_PROFILES -
+        OHOS_CAMERA_EFFECT_START] = {"depthDataProfiles", META_TYPE_INT32, -1},
+    [OHOS_CONTROL_DEPTH_DATA_ACCURACY -
+        OHOS_CAMERA_EFFECT_START] = {"depthDataAccuracy", META_TYPE_INT32, -1},
 };
 
 static item_info_t g_ohosCameraSecure[OHOS_CAMERA_SECURE_END - OHOS_CAMERA_SECURE_START] = {

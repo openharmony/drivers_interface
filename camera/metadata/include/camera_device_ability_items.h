@@ -1828,6 +1828,20 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_TIME_LAPSE_INTERVAL_RANGE,
     /**
+     * ohos.ability.depthDataProfiles [static, int32_t[], public]
+     *
+     * camera device property, report current camera depth data profiles
+     * (i.e. int32_t[] ...)
+     */
+    OHOS_ABILITY_DEPTH_DATA_PROFILES,
+    /**
+     * ohos.control.depthDataAccuracy [static, int32_t[], public]
+     *
+     * camera device property, set current camera depth data accuracy
+     * (i.e. int32_t[] ...)
+     */
+    OHOS_CONTROL_DEPTH_DATA_ACCURACY,
+    /**
      * ohos.camera.effectEnd
      *
      * camera effect end
@@ -2077,6 +2091,8 @@ typedef enum camera_format {
     OHOS_CAMERA_FORMAT_YCRCB_P010,
     OHOS_CAMERA_FORMAT_DNG,
     OHOS_CAMERA_FORMAT_422_YUYV,
+    OHOS_CAMERA_FORMAT_DEPTH_16,
+    OHOS_CAMERA_FORMAT_DEPTH_32,
     OHOS_CAMERA_FORMAT_IMPLEMENTATION_DEFINED = 0x1000,
 } camera_format_t;
 
@@ -2347,6 +2363,12 @@ enum TripodStatus {
     TRIPOD_STATUS_ACTIVE = 1,
     TRIPOD_STATUS_ENTER = 2,
     TRIPOD_STATUS_EXITING = 3,
+};
+
+// OHOS_CONTROL_DEPTH_DATA_ACCURACY
+enum DepthDataAccuracyType {
+    OHOS_DEPTH_DATA_ACCURACY_RELATIVE = 1,
+    OHOS_DEPTH_DATA_ACCURACY_ABSOLUTE,
 };
 
 #endif
