@@ -79,5 +79,29 @@ import ohos.hdi.ril.v1_3.Types;
      * @version 1.1
      */
     [oneway] GetSimCardStatusResponse([in] struct RilRadioResponseInfo responseInfo, [in] struct SimCardStatusInfo result);
+
+    /**
+     * @brief Reporting NV refresh result.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. For details,
+     * see {@link RilRadioResponseInfo}.
+     * @param state NV refresh result.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    [oneway] NcfgFinishedResult([in] struct RilRadioResponseInfo responseInfo, [in] int state);
+
+    /**
+     * @brief Reporting restart rild Nv match state.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. For details,
+     * see {@link RilRadioResponseInfo}.
+     * @param state restart rild Nv match state.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    [oneway] RestartRildNvMatch([in] struct RilRadioResponseInfo responseInfo, [in] int state);
 }
 /** @} */
