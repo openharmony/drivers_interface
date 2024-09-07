@@ -61,5 +61,8 @@ ohos_shared_library("libdisplay_buffer_hdi_impl_v1_1") {
     "chipsetsdk_indirect",
     "platformsdk_indirect",
   ]
+
+  branch_protector_ret = "pac_ret"
+
   part_name = "drivers_interface_display"
 }
