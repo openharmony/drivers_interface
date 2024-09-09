@@ -247,6 +247,8 @@ struct AuthResultInfo {
     long pinExpiredInfo;
     /**< Remote auth result message. */
     unsigned char[] remoteAuthResultMsg;
+    /**< Re-enroll flag. */
+    boolean reEnrollFlag;
 };
 
 /**
