@@ -210,23 +210,23 @@ public:
 protected:
     int32_t CmdRequestDataRead(std::shared_ptr<char> requestData, uint32_t inEleCnt)
     {
-		std::lock_guard<std::mutex> lock(requestMutex_);
-		if (request_ == nullptr || requestData == nullptr) {
+        std::lock_guard<std::mutex> lock(requestMutex_);
+        if (request_ == nullptr || requestData == nullptr) {
             HDF_LOGE("%{public}s: inEleCnt: %{public}u request_ is nullptr", __func__, inEleCnt);
-		    return HDF_FAILURE;
-		}
-		return request_->Read(reinterpret_cast<int32_t *>(requestData.get()), inEleCnt,
-	        CmdUtils::TRANSFER_WAIT_TIME);
+            return HDF_FAILURE;
+        }
+        return request_->Read(reinterpret_cast<int32_t *>(requestData.get()), inEleCnt,
+            CmdUtils::TRANSFER_WAIT_TIME);
     }
 	
     int32_t CmdRequestDataWrite(uint32_t outEleCnt)
     {
-		std::lock_guard<std::mutex> lock(replyMutex_);
-		if (reply_ == nullptr) {
+        std::lock_guard<std::mutex> lock(replyMutex_);
+        if (reply_ == nullptr) {
             HDF_LOGE("%{public}s: reply_ is nullptr", __func__);
 		    return HDF_FAILURE;
 		}
-		return reply_->Write(reinterpret_cast<int32_t *>(replyPacker_.GetDataPtr()), outEleCnt,
+        return reply_->Write(reinterpret_cast<int32_t *>(replyPacker_.GetDataPtr()), outEleCnt,
             CmdUtils::TRANSFER_WAIT_TIME);
     }
 
