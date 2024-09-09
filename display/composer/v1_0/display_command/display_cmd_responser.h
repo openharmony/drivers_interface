@@ -225,7 +225,7 @@ protected:
         if (reply_ == nullptr) {
             HDF_LOGE("%{public}s: reply_ is nullptr", __func__);
 		    return HDF_FAILURE;
-		}
+        }
         return reply_->Write(reinterpret_cast<int32_t *>(replyPacker_.GetDataPtr()), outEleCnt,
             CmdUtils::TRANSFER_WAIT_TIME);
     }
