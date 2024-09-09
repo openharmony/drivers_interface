@@ -237,7 +237,7 @@ REPLY:
         std::vector<HdifdInfo>& outFds)
     {
         std::shared_ptr<char> requestData(new char[inEleCnt * CmdUtils::ELEMENT_SIZE], std::default_delete<char[]>());
-		int32_t ret = CmdRequestDataRead(requestData, inEleCnt);
+        int32_t ret = CmdRequestDataRead(requestData, inEleCnt);
 
         CommandDataUnpacker unpacker;
         unpacker.Init(requestData.get(), inEleCnt << CmdUtils::MOVE_SIZE);
@@ -275,7 +275,7 @@ REPLY:
 
         /*  Write reply pack */
         outEleCnt = replyPacker_.ValidSize() >> CmdUtils::MOVE_SIZE;
-		ret = CmdRequestDataWrite(outEleCnt);
+        ret = CmdRequestDataWrite(outEleCnt);
 
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("Reply write failure, ret=%{public}d", ret);
