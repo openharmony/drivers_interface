@@ -163,13 +163,8 @@ public:
             return HDF_FAILURE;
         }
         std::shared_ptr<char> requestData(new char[inEleCnt * CmdUtils::ELEMENT_SIZE], std::default_delete<char[]>());
-        int32_t ret = HDF_SUCCESS;
-        {
-            std::lock_guard<std::mutex> lock(requestMutex_);
-            ret = request_->Read(reinterpret_cast<int32_t *>(requestData.get()), inEleCnt,
-                CmdUtils::TRANSFER_WAIT_TIME);
-        }
-        CommandDataUnpacker unpacker;
+        int32_t ret = CmdRequestDataRead(requestData, inEleCnt);
+		CommandDataUnpacker unpacker;
         unpacker.Init(requestData.get(), inEleCnt << CmdUtils::MOVE_SIZE);
 #ifdef DEBUG_DISPLAY_CMD_RAW_DATA
         unpacker.Dump();
@@ -203,11 +198,7 @@ public:
 
         /*  Write reply pack */
         outEleCnt = replyPacker_.ValidSize() >> CmdUtils::MOVE_SIZE;
-        {
-            std::lock_guard<std::mutex> lock(replyMutex_);
-            ret = reply_->Write(reinterpret_cast<int32_t *>(replyPacker_.GetDataPtr()), outEleCnt,
-                CmdUtils::TRANSFER_WAIT_TIME);
-        }
+        ret = CmdRequestDataWrite(outEleCnt);
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("Reply write failure, ret=%{public}d", ret);
             outEleCnt = 0;
@@ -217,6 +208,30 @@ public:
     }
 
 protected:
+    int32_t CmdRequestDataRead(std::shared_ptr<char> requestData, uint32_t inEleCnt)
+	{
+		std::lock_guard<std::mutex> lock(requestMutex_);
+		if (request_ == nullptr || requestData == nullptr) {
+            HDF_LOGE("%{public}s: inEleCnt: %{public}u request_ is nullptr", __func__, inEleCnt);
+		    return HDF_FAILURE;
+		}
+		return request_->Read(reinterpret_cast<int32_t *>(requestData.get()), inEleCnt,
+	        CmdUtils::TRANSFER_WAIT_TIME);
+	}
+	
+    int32_t CmdRequestDataWrite(uint32_t outEleCnt)
+	{
+		std::lock_guard<std::mutex> lock(replyMutex_);
+		if (reply_ == nullptr) {
+            HDF_LOGE("%{public}s: reply_ is nullptr", __func__);
+		    return HDF_FAILURE;
+		}
+		return reply_->Write(reinterpret_cast<int32_t *>(replyPacker_.GetDataPtr()), outEleCnt,
+            CmdUtils::TRANSFER_WAIT_TIME);
+	}	
+
+
+
     int32_t InitReply(uint32_t size)
     {
         if (size > CmdUtils::MAX_MEMORY) {
