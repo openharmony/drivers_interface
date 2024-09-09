@@ -164,7 +164,7 @@ public:
         }
         std::shared_ptr<char> requestData(new char[inEleCnt * CmdUtils::ELEMENT_SIZE], std::default_delete<char[]>());
         int32_t ret = CmdRequestDataRead(requestData, inEleCnt);
-		CommandDataUnpacker unpacker;
+        CommandDataUnpacker unpacker;
         unpacker.Init(requestData.get(), inEleCnt << CmdUtils::MOVE_SIZE);
 #ifdef DEBUG_DISPLAY_CMD_RAW_DATA
         unpacker.Dump();
