@@ -276,7 +276,6 @@ REPLY:
         /*  Write reply pack */
         outEleCnt = replyPacker_.ValidSize() >> CmdUtils::MOVE_SIZE;
         ret = CmdRequestDataWrite(outEleCnt);
-
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("Reply write failure, ret=%{public}d", ret);
             outEleCnt = 0;
