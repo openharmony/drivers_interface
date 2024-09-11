@@ -27,6 +27,7 @@ if (defined(ohos_lite)) {
       "ICameraHost.idl",
       "IImageProcessCallback.idl",
       "IImageProcessService.idl",
+      "IStreamOperator.idl",
       "IStreamOperatorCallback.idl",
       "IVideoProcessCallback.idl",
       "IVideoProcessService.idl",
