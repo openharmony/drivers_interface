@@ -19,6 +19,7 @@ if (defined(ohos_lite)) {
   }
 } else {
   hdi("wlan") {
+    branch_protector_ret = "pac_ret"
     module_name = "wlan_service"
 
     sources = [
