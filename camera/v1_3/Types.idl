@@ -170,6 +170,21 @@ enum ExtendedStreamInfoType : ohos.hdi.camera.v1_2.ExtendedStreamInfoType_V1_2 {
      * Extended stream information of gainmap.
      */
     EXTENDED_STREAM_INFO_GAINMAP = 8,
+
+    /**
+     * Extended stream information of unrefocus.
+     */
+    EXTENDED_STREAM_INFO_UNREFOCUS = 9,
+
+    /**
+     * Extended stream information of linear.
+     */
+    EXTENDED_STREAM_INFO_LINEAR = 10,
+
+    /**
+     * Extended stream information of fragment.
+     */
+    EXTENDED_STREAM_INFO_FRAGMENT =11,
 };
 
 /**
