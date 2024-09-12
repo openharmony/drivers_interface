@@ -132,57 +132,77 @@ enum OperationMode : ohos.hdi.camera.v1_2.OperationMode_V1_2 {
 /**
  * @brief Enumerates types of the extended stream information.
  * @since 4.0
- * @version 1.2
+ * @version 1.4
  */
 enum ExtendedStreamInfoType : ohos.hdi.camera.v1_2.ExtendedStreamInfoType_V1_2 {
 
     /**
      * Extended stream information of raw.
+     * @since 5.0
+     * @version 1.0
      */
     EXTENDED_STREAM_INFO_RAW = 2,
 
     /**
      * Extended stream information of depth.
+     * @since 5.0
+     * @version 1.0
      */
     EXTENDED_STREAM_INFO_DEPTH = 3,
 
     /**
      * Extended stream information of meta.
+     * @since 5.0
+     * @version 1.0
      */
     EXTENDED_STREAM_INFO_META = 4,
     
     /**
      * Extended stream information of secure.
+     * @since 5.0
+     * @version 1.0
      */
     EXTENDED_STREAM_INFO_SECURE = 5,
 
     /**
      * Extended stream information of maker.
+     * @since 5.0
+     * @version 1.0
      */
     EXTENDED_STREAM_INFO_MAKER_INFO = 6,
 
     /**
      * Extended stream information of exif.
+     * @since 5.0
+     * @version 1.0
      */
     EXTENDED_STREAM_INFO_EXIF = 7,
 
     /**
      * Extended stream information of gainmap.
+     * @since 5.0
+     * @version 1.0
      */
     EXTENDED_STREAM_INFO_GAINMAP = 8,
 
     /**
      * Extended stream information of unrefocus.
+     * @since 5.0
+     * @version 1.0
      */
     EXTENDED_STREAM_INFO_UNREFOCUS = 9,
 
     /**
      * Extended stream information of linear.
+     * @since 5.0
+     * @version 1.0
      */
     EXTENDED_STREAM_INFO_LINEAR = 10,
 
     /**
      * Extended stream information of fragment.
+     * @since 5.0
+     * @version 1.0
      */
     EXTENDED_STREAM_INFO_FRAGMENT =11,
 };
