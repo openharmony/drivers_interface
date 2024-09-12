@@ -92,4 +92,5 @@ enum DispCmd : ohos.hdi.display.composer.v1_0.DispCmd {
 enum DisplayPropertyID {
     DISPLAY_PROPERTY_ID_SKIP_VALIDATE = 1,
     DISPLAY_CAPBILITY_HARDWARE_CURSOR = 2,
+    DISPLAY_PROPERTY_ID_ADAPTIVE_SYNC = 3,             /**< Indicates whether to support adaptive sync(display in advance) */
 };
