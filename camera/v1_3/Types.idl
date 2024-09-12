@@ -132,7 +132,7 @@ enum OperationMode : ohos.hdi.camera.v1_2.OperationMode_V1_2 {
 /**
  * @brief Enumerates types of the extended stream information.
  * @since 4.0
- * @version 1.4
+ * @version 1.2
  */
 enum ExtendedStreamInfoType : ohos.hdi.camera.v1_2.ExtendedStreamInfoType_V1_2 {
 
