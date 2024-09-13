@@ -15,7 +15,7 @@
 
 /**
  * @addtogroup HdiAudio
- * @{
+ * @
  *
  * @brief Provides unified APIs for audio services to access audio drivers.
  *
