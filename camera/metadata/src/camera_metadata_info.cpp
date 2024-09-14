@@ -1019,7 +1019,8 @@ int CameraMetadata::UpdateCameraMetadataItemByIndex(common_metadata_header_t *ds
     int32_t ret = CAM_META_SUCCESS;
     camera_metadata_item_entry_t *item = GetMetadataItems(dst) + index;
     if (item->data.offset > dst->item_count * sizeof(OHOS_CAMERA_METADATA_TYPE[item->data_type])) {
-        return CAM_META_INVALID_PARAM;
+        METADATA_ERR_LOG("UpdateCameraMetadataItemByIndex invalid item");
+        return CAM_META_FAILURE;
     }
 
     ret = UpdateameraMetadataItemSize(item, dataCount, dst, data);
