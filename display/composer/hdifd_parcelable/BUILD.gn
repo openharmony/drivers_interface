@@ -35,3 +35,14 @@ ohos_shared_library("libhdifd_parcelable") {
   subsystem_name = "hdf"
   part_name = "drivers_interface_display"
 }
+
+config("composer_common_config") {
+  include_dirs = [
+    ".",
+    "../common/include",
+  ]
+}
+
+ohos_static_library("display_composer_common_config") {
+  public_configs = [ ":composer_common_config" ]
+}

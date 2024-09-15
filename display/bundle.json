@@ -329,6 +329,9 @@
             ],
             "header_base": "//drivers/interface/display/v1_0/stub"
           }
+        },
+        {
+          "name": "//drivers/interface/display/composer/hdifd_parcelable:display_composer_common_config"
         }
       ]
     }
