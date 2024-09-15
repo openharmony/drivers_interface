@@ -43,6 +43,6 @@ config("common_config") {
   ]
 }
 
-ohos_static_library("display_common_config") {
-  public_configs = [ ":common_config" ]
+ohos_static_library("display_composer_common_config") {
+  public_configs = [ ":composer_common_config" ]
 }
