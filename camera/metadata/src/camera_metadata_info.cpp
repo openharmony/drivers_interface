@@ -963,7 +963,6 @@ int CameraMetadata::UpdateameraMetadataItemSize(camera_metadata_item_entry_t *it
     size_t dataPayloadSize = dataCount * OHOS_CAMERA_METADATA_TYPE_SIZE[item->data_type];
     size_t oldItemSize = CalculateCameraMetadataItemDataSize(item->data_type, item->count);
     int32_t ret = CAM_META_SUCCESS;
-
     if (dataSize != oldItemSize) {
         if (dst->data_capacity < (dst->data_count + dataSize - oldItemSize)) {
             METADATA_ERR_LOG("UpdateCameraMetadataItemByIndex data_capacity limit reached");
