@@ -36,7 +36,7 @@ ohos_shared_library("libhdifd_parcelable") {
   part_name = "drivers_interface_display"
 }
 
-config("common_config") {
+config("composer_common_config") {
   include_dirs = [
     ".",
     "../common/include",
