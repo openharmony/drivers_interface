@@ -36,13 +36,13 @@ ohos_shared_library("libhdifd_parcelable") {
   part_name = "drivers_interface_display"
 }
 
-config("display_config_parcelable") {
+config("common_config") {
   include_dirs = [
     ".",
     "../common/include",
   ]
 }
 
-ohos_static_library("libdisplay_config_parcelable") {
-  public_configs = [ ":display_config_parcelable" ]
+ohos_static_library("display_common_config") {
+  public_configs = [ ":common_config" ]
 }

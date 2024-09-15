@@ -331,7 +331,7 @@
           }
         },
         {
-          "name": "//drivers/interface/display/composer/hdifd_parcelable:libdisplay_config_parcelable"
+          "name": "//drivers/interface/display/composer/hdifd_parcelable:display_common_config"
         }
       ]
     }
