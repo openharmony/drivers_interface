@@ -109,7 +109,7 @@ public:
     static uint32_t GetCameraMetadataDataSize(const common_metadata_header_t *metadata_header);
     static int32_t CopyCameraMetadataItems(common_metadata_header_t *newMetadata,
         const common_metadata_header_t *oldMetadata);
-    static size_t CalculateCameraMetadataItemDataSize(uint32_t type, size_t data_count);
+    static int32_t CalculateCameraMetadataItemDataSize(uint32_t type, size_t data_count);
     static int32_t GetCameraMetadataItemType(uint32_t item, uint32_t *data_type);
     static common_metadata_header_t *FillCameraMetadata(common_metadata_header_t *buffer, size_t memoryRequired,
         uint32_t itemCapacity, uint32_t dataCapacity);
