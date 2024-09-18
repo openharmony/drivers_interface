@@ -675,7 +675,7 @@ const char *CameraMetadata::GetCameraMetadataItemName(uint32_t item)
     return g_ohosItemInfo[section][itemIndex].item_name;
 }
 
-int32_t  CameraMetadata::CalculateCameraMetadataItemDataSize(uint32_t type, size_t dataCount)
+int32_t CameraMetadata::CalculateCameraMetadataItemDataSize(uint32_t type, size_t dataCount)
 {
     METADATA_DEBUG_LOG("CalculateCameraMetadataItemDataSize start");
     if (type < META_TYPE_BYTE || type >= META_NUM_TYPES) {
