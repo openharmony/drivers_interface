@@ -27,6 +27,7 @@ if (defined(ohos_lite)) {
       "ICodecComponent.idl",
       "ICodecComponentManager.idl",
     ]
+    branch_protector_ret = "pac_ret"
     language = "cpp"
     subsystem_name = "hdf"
     part_name = "drivers_interface_codec"
