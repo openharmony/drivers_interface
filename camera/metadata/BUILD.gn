@@ -19,6 +19,8 @@ config("camera_metadata_config") {
 }
 
 ohos_shared_library("metadata") {
+  branch_protector_ret = "pac_ret"
+
   install_enable = true
   cflags = [
     "-fPIC",
