@@ -987,6 +987,7 @@ int CameraMetadata::UpdateameraMetadataItemSize(camera_metadata_item_entry_t *it
         if (ret != CAM_META_SUCCESS) {
             return ret;
         }
+        dst->data_count += dataSize;
     }
     if (dataSize == 0) {
         ret = memcpy_s(item->data.value, dataPayloadSize, data, dataPayloadSize);
