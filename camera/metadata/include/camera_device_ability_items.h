@@ -1931,7 +1931,7 @@ typedef enum camera_device_metadata_tag {
      * camera device property, set current camera close after seconds
      * (i.e. uint32 ...)
      */
-     OHOS_CONTROL_CAMERA_CLOSE_AFTER_SECONDS,
+    OHOS_CONTROL_CAMERA_CLOSE_AFTER_SECONDS,
     /**
      * ohos.camera.effectEnd
      *
