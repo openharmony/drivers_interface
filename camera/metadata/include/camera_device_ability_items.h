@@ -1926,6 +1926,20 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_DEPTH_DATA_ACCURACY,
     /**
+     * ohos.ability.cameraIsRetractable [static, byte, public]
+     *
+     * camera device property, report current camera retractable
+     * (i.e. byte ...)
+     */
+    OHOS_ABILITY_CAMERA_IS_RETRACTABLE,
+    /**
+     * ohos.control.closeAfterSeconds [static, uint32, public]
+     *
+     * camera device property, set current camera close after seconds
+     * (i.e. uint32 ...)
+     */
+    OHOS_CONTROL_CAMERA_CLOSE_AFTER_SECONDS,
+    /**
      * ohos.camera.effectEnd
      *
      * camera effect end
