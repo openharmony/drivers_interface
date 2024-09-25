@@ -126,58 +126,82 @@ EXIT:
     int32_t SetDisplayClientBuffer(uint32_t devId, const BufferHandle* buffer, uint32_t seqNo,
         int32_t fence)
     {
-        int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: StartSection failed", __func__));
+        int32_t ret = 0;
+        bool retBool = false;
+        int32_t writePos = requestPacker_.ValidSize();
 
-        bool retBool = requestPacker_.WriteUint32(devId);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write devId failed", __func__));
+        do {
+            ret = CmdUtils::StartSection(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: StartSection failed", __func__));
 
-        ret = CmdUtils::BufferHandlePack(buffer, requestPacker_, requestHdiFds_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: BufferHandlePack failed", __func__));
+            retBool = requestPacker_.WriteUint32(devId);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write devId failed", __func__));
 
-        retBool = requestPacker_.WriteUint32(seqNo);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write seqNo failed", __func__));
+            ret = CmdUtils::BufferHandlePack(buffer, requestPacker_, requestHdiFds_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: BufferHandlePack failed", __func__));
 
-        ret = CmdUtils::FileDescriptorPack(fence, requestPacker_, requestHdiFds_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: FileDescriptorPack failed", __func__));
+            retBool = requestPacker_.WriteUint32(seqNo);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write seqNo failed", __func__));
 
-        ret = CmdUtils::EndSection(requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: EndSection failed", __func__));
+            ret = CmdUtils::FileDescriptorPack(fence, requestPacker_, requestHdiFds_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: FileDescriptorPack failed", __func__));
 
+            ret = CmdUtils::EndSection(requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: EndSection failed", __func__));
+        } while (0);
+
+        if (retBool == false || ret != HDF_SUCCESS) {
+            requestPacker_.RollBack(writePos);
+            HDF_LOGE("%{public}s: writePos_ rollback", __func__);
+            return HDF_FAILURE;
+        }
         return HDF_SUCCESS;
     }
 
     int32_t SetDisplayClientDamage(uint32_t devId, std::vector<IRect> &rects)
     {
-        int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_DISPLAY_CLIENT_DAMAGE, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: StartSection failed", __func__));
+        int32_t ret = 0;
+        bool retBool = false;
+        int32_t writePos = requestPacker_.ValidSize();
 
-        ret = requestPacker_.WriteUint32(devId) ? HDF_SUCCESS : HDF_FAILURE;
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: write devId failed", __func__));
+        do {
+            ret = CmdUtils::StartSection(REQUEST_CMD_SET_DISPLAY_CLIENT_DAMAGE, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: StartSection failed", __func__));
 
-        uint32_t vectSize = static_cast<uint32_t>(rects.size());
-        bool retBool = requestPacker_.WriteUint32(vectSize);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write damage vector size failed", __func__));
+            ret = requestPacker_.WriteUint32(devId) ? HDF_SUCCESS : HDF_FAILURE;
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: write devId failed", __func__));
 
-        for (uint32_t i = 0; i < vectSize; i++) {
-            ret = CmdUtils::RectPack(rects[i], requestPacker_);
-            DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-                HDF_LOGE("%{public}s: RectPack failed", __func__));
+            uint32_t vectSize = static_cast<uint32_t>(rects.size());
+            retBool = requestPacker_.WriteUint32(vectSize);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write damage vector size failed", __func__));
+
+            for (uint32_t i = 0; i < vectSize; i++) {
+                ret = CmdUtils::RectPack(rects[i], requestPacker_);
+                DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                    HDF_LOGE("%{public}s: RectPack failed", __func__));
+            }
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: RectPack failed, break!", __func__));
+
+            ret = CmdUtils::EndSection(requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: EndSection failed", __func__));
+        } while (0);
+
+        if (retBool == false || ret != HDF_SUCCESS) {
+            requestPacker_.RollBack(writePos);
+            HDF_LOGE("%{public}s: writePos_ rollback", __func__);
+            return HDF_FAILURE;
         }
-
-        ret = CmdUtils::EndSection(requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: EndSection failed", __func__));
-
         return HDF_SUCCESS;
     }
 
@@ -216,322 +240,470 @@ EXIT:
 
     int32_t SetLayerAlpha(uint32_t devId, uint32_t layerId, const LayerAlpha &alpha)
     {
-        int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_ALPHA, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: StartSection failed", __func__));
+        int32_t ret = 0;
+        bool retBool = false;
+        int32_t writePos = requestPacker_.ValidSize();
 
-        ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: write devId failed", __func__));
+        do {
+            ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_ALPHA, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: StartSection failed", __func__));
 
-        bool retBool = requestPacker_.WriteBool(alpha.enGlobalAlpha);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write enGlobalAlpha failed", __func__));
+            ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: write devId failed", __func__));
 
-        retBool = requestPacker_.WriteBool(alpha.enPixelAlpha);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write enPixelAlpha failed", __func__));
+            retBool = requestPacker_.WriteBool(alpha.enGlobalAlpha);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write enGlobalAlpha failed", __func__));
 
-        retBool = requestPacker_.WriteUint8(alpha.alpha0);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write alpha0 failed", __func__));
+            retBool = requestPacker_.WriteBool(alpha.enPixelAlpha);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write enPixelAlpha failed", __func__));
 
-        retBool = requestPacker_.WriteUint8(alpha.alpha1);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write alpha1 failed", __func__));
+            retBool = requestPacker_.WriteUint8(alpha.alpha0);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write alpha0 failed", __func__));
 
-        retBool = requestPacker_.WriteUint8(alpha.gAlpha);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write gAlpha failed", __func__));
+            retBool = requestPacker_.WriteUint8(alpha.alpha1);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write alpha1 failed", __func__));
 
-        ret = CmdUtils::EndSection(requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: EndSection failed", __func__));
+            retBool = requestPacker_.WriteUint8(alpha.gAlpha);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write gAlpha failed", __func__));
 
+            ret = CmdUtils::EndSection(requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: EndSection failed", __func__));
+        } while (0);
+
+        if (retBool == false || ret != HDF_SUCCESS) {
+            requestPacker_.RollBack(writePos);
+            HDF_LOGE("%{public}s: writePos_ rollback", __func__);
+            return HDF_FAILURE;
+        }
         return HDF_SUCCESS;
     }
 
     int32_t SetLayerRegion(uint32_t devId, uint32_t layerId, const IRect &rect)
     {
-        int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_REGION, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: StartSection failed", __func__));
+        int32_t ret = 0;
+        int32_t writePos = requestPacker_.ValidSize();
 
-        ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: SetupDevice failed", __func__));
+        do {
+            ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_REGION, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: StartSection failed", __func__));
 
-        ret = CmdUtils::RectPack(rect, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: RectPack failed", __func__));
+            ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: SetupDevice failed", __func__));
 
-        ret = CmdUtils::EndSection(requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: EndSection failed", __func__));
+            ret = CmdUtils::RectPack(rect, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: RectPack failed", __func__));
 
+            ret = CmdUtils::EndSection(requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: EndSection failed", __func__));
+        } while (0);
+
+        if (ret != HDF_SUCCESS) {
+            requestPacker_.RollBack(writePos);
+            HDF_LOGE("%{public}s: writePos_ rollback", __func__);
+            return HDF_FAILURE;
+        }
         return HDF_SUCCESS;
     }
 
     int32_t SetLayerCrop(uint32_t devId, uint32_t layerId, const IRect &rect)
     {
-        int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_CROP, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: StartSection failed", __func__));
+        int32_t ret = 0;
+        int32_t writePos = requestPacker_.ValidSize();
 
-        ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: SetupDevice failed", __func__));
+        do {
+            ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_CROP, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: StartSection failed", __func__));
 
-        ret = CmdUtils::RectPack(rect, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: RectPack failed", __func__));
+            ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: SetupDevice failed", __func__));
 
-        ret = CmdUtils::EndSection(requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: EndSection failed", __func__));
+            ret = CmdUtils::RectPack(rect, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: RectPack failed", __func__));
 
+            ret = CmdUtils::EndSection(requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: EndSection failed", __func__));
+        } while (0);
+
+        if (ret != HDF_SUCCESS) {
+            requestPacker_.RollBack(writePos);
+            HDF_LOGE("%{public}s: writePos_ rollback", __func__);
+            return HDF_FAILURE;
+        }
         return HDF_SUCCESS;
     }
 
     int32_t SetLayerZorder(uint32_t devId, uint32_t layerId, uint32_t zorder)
     {
-        int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_ZORDER, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: StartSection failed", __func__));
+        int32_t ret = 0;
+        bool retBool = false;
+        int32_t writePos = requestPacker_.ValidSize();
 
-        ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: SetupDevice failed", __func__));
+        do {
+            ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_ZORDER, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: StartSection failed", __func__));
 
-        bool retBool = requestPacker_.WriteUint32(zorder);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write zorder failed", __func__));
+            ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: SetupDevice failed", __func__));
 
-        ret = CmdUtils::EndSection(requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: EndSection failed", __func__));
+            retBool = requestPacker_.WriteUint32(zorder);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write zorder failed", __func__));
 
+            ret = CmdUtils::EndSection(requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: EndSection failed", __func__));
+        } while (0);
+
+        if (retBool == false || ret != HDF_SUCCESS) {
+            requestPacker_.RollBack(writePos);
+            HDF_LOGE("%{public}s: writePos_ rollback", __func__);
+            return HDF_FAILURE;
+        }
         return HDF_SUCCESS;
     }
 
     int32_t SetLayerPreMulti(uint32_t devId, uint32_t layerId, bool preMul)
     {
-        int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_PREMULTI, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: StartSection failed", __func__));
+        int32_t ret = 0;
+        bool retBool = false;
+        int32_t writePos = requestPacker_.ValidSize();
 
-        ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: SetupDevice failed", __func__));
+        do {
+            ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_PREMULTI, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: StartSection failed", __func__));
 
-        bool retBool = requestPacker_.WriteBool(preMul);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write preMul failed", __func__));
+            ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: SetupDevice failed", __func__));
 
-        ret = CmdUtils::EndSection(requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: EndSection failed", __func__));
+            retBool = requestPacker_.WriteBool(preMul);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write preMul failed", __func__));
+
+            ret = CmdUtils::EndSection(requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: EndSection failed", __func__));
+        } while (0);
+
+        if (retBool == false || ret != HDF_SUCCESS) {
+            requestPacker_.RollBack(writePos);
+            HDF_LOGE("%{public}s: writePos_ rollback", __func__);
+            return HDF_FAILURE;
+        }
 
         return HDF_SUCCESS;
     }
 
     int32_t SetLayerTransformMode(uint32_t devId, uint32_t layerId, TransformType type)
     {
-        int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_TRANSFORM_MODE, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: StartSection failed", __func__));
+        int32_t ret = 0;
+        bool retBool = false;
+        int32_t writePos = requestPacker_.ValidSize();
 
-        ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: SetupDevice failed", __func__));
+        do {
+            ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_TRANSFORM_MODE, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: StartSection failed", __func__));
 
-        bool retBool = requestPacker_.WriteInt32(type);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write transform-type failed", __func__));
+            ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: SetupDevice failed", __func__));
 
-        ret = CmdUtils::EndSection(requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: EndSection failed", __func__));
+            retBool = requestPacker_.WriteInt32(type);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write transform-type failed", __func__));
 
+            ret = CmdUtils::EndSection(requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: EndSection failed", __func__));
+        } while (0);
+
+        if (retBool == false || ret != HDF_SUCCESS) {
+            requestPacker_.RollBack(writePos);
+            HDF_LOGE("%{public}s: writePos_ rollback", __func__);
+            return HDF_FAILURE;
+        }
         return HDF_SUCCESS;
     }
 
     int32_t SetLayerDirtyRegion(uint32_t devId, uint32_t layerId, const std::vector<IRect> &rects)
     {
-        int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_DIRTY_REGION, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: StartSection failed", __func__));
+        int32_t ret = 0;
+        bool retBool = false;
+        int32_t writePos = requestPacker_.ValidSize();
 
-        ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: SetupDevice failed", __func__));
+        do {
+            ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_DIRTY_REGION, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: StartSection failed", __func__));
 
-        uint32_t vSize = rects.size();
-        bool retBool = requestPacker_.WriteUint32(vSize);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write vSize failed", __func__));
-        for (uint32_t i = 0; i < vSize; i++) {
-            ret = CmdUtils::RectPack(rects[i], requestPacker_);
-            DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-                HDF_LOGE("%{public}s: RectPack failed", __func__));
+            ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: SetupDevice failed", __func__));
+
+            uint32_t vSize = rects.size();
+            retBool = requestPacker_.WriteUint32(vSize);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write vSize failed", __func__));
+            for (uint32_t i = 0; i < vSize; i++) {
+                ret = CmdUtils::RectPack(rects[i], requestPacker_);
+                DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                    HDF_LOGE("%{public}s: RectPack failed", __func__));
+            }
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: RectPack failed, break", __func__));
+
+            ret = CmdUtils::EndSection(requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: EndSection failed", __func__));
+        } while (0);
+
+        if (retBool == false || ret != HDF_SUCCESS) {
+            requestPacker_.RollBack(writePos);
+            HDF_LOGE("%{public}s: writePos_ rollback", __func__);
+            return HDF_FAILURE;
         }
-
-        ret = CmdUtils::EndSection(requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: EndSection failed", __func__));
-
         return HDF_SUCCESS;
     }
 
     int32_t SetLayerVisibleRegion(uint32_t devId, uint32_t layerId, std::vector<IRect> &rects)
     {
-        int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_VISIBLE_REGION, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: StartSection failed", __func__));
+        int32_t ret = 0;
+        bool retBool = false;
+        int32_t writePos = requestPacker_.ValidSize();
 
-        ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: SetupDevice failed", __func__));
+        do {
+            ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_VISIBLE_REGION, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: StartSection failed", __func__));
 
-        uint32_t vSize = rects.size();
-        bool retBool = requestPacker_.WriteUint32(vSize);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write vSize failed", __func__));
-        for (uint32_t i = 0; i < vSize; i++) {
-            ret = CmdUtils::RectPack(rects[i], requestPacker_);
-            DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-                HDF_LOGE("%{public}s: RectPack failed", __func__));
+            ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: SetupDevice failed", __func__));
+
+            uint32_t vSize = rects.size();
+            retBool = requestPacker_.WriteUint32(vSize);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write vSize failed", __func__));
+            for (uint32_t i = 0; i < vSize; i++) {
+                ret = CmdUtils::RectPack(rects[i], requestPacker_);
+                DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                    HDF_LOGE("%{public}s: RectPack failed", __func__));
+            }
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: RectPack failed, break", __func__));
+
+            ret = CmdUtils::EndSection(requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: EndSection failed", __func__));
+        } while (0);
+
+        if (retBool == false || ret != HDF_SUCCESS) {
+            requestPacker_.RollBack(writePos);
+            HDF_LOGE("%{public}s: writePos_ rollback", __func__);
+            return HDF_FAILURE;
         }
-
-        ret = CmdUtils::EndSection(requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: EndSection failed", __func__));
-
         return HDF_SUCCESS;
     }
 
     int32_t SetLayerBuffer(uint32_t devId, uint32_t layerId, const BufferHandle* buffer, uint32_t seqNo,
         int32_t fence, const std::vector<uint32_t>& deletingList)
     {
-        int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_BUFFER, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: StartSection failed", __func__));
+        int32_t ret = 0;
+        bool retBool = false;
+        bool result = false;
+        int32_t writePos = requestPacker_.ValidSize();
 
-        ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: SetupDevice failed", __func__));
+        do {
+            ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_BUFFER, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: StartSection failed", __func__));
 
-        ret = CmdUtils::BufferHandlePack(buffer, requestPacker_, requestHdiFds_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: BufferHandlePack failed", __func__));
+            ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: SetupDevice failed", __func__));
 
-        bool result = requestPacker_.WriteUint32(seqNo);
-        DISPLAY_CHK_RETURN(result == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write seqNo failed", __func__));
+            ret = CmdUtils::BufferHandlePack(buffer, requestPacker_, requestHdiFds_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: BufferHandlePack failed", __func__));
 
-        ret = CmdUtils::FileDescriptorPack(fence, requestPacker_, requestHdiFds_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: FileDescriptorPack failed", __func__));
-        // write deletingList
-        uint32_t vectSize = static_cast<uint32_t>(deletingList.size());
-        bool retBool = requestPacker_.WriteUint32(vectSize);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write vector size failed", __func__));
+            result = requestPacker_.WriteUint32(seqNo);
+            DISPLAY_CHK_BREAK(result == false,
+                HDF_LOGE("%{public}s: write seqNo failed", __func__));
 
-        for (uint32_t i = 0; i < vectSize; i++) {
-            bool result = requestPacker_.WriteUint32(deletingList[i]);
-            DISPLAY_CHK_RETURN(result == false, HDF_FAILURE,
-                HDF_LOGE("%{public}s: write deletingList failed", __func__));
+            ret = CmdUtils::FileDescriptorPack(fence, requestPacker_, requestHdiFds_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: FileDescriptorPack failed", __func__));
+            // write deletingList
+            uint32_t vectSize = static_cast<uint32_t>(deletingList.size());
+            retBool = requestPacker_.WriteUint32(vectSize);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write vector size failed", __func__));
+
+            for (uint32_t i = 0; i < vectSize; i++) {
+                bool result = requestPacker_.WriteUint32(deletingList[i]);
+                DISPLAY_CHK_BREAK(result == false,
+                    HDF_LOGE("%{public}s: write deletingList failed", __func__));
+            }
+            DISPLAY_CHK_BREAK(result == false,
+                HDF_LOGE("%{public}s: write deletingList failed, break!", __func__));
+
+            ret = CmdUtils::EndSection(requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: EndSection failed", __func__));
+        } while (0);
+
+        if (retBool == false || result == false || ret != HDF_SUCCESS) {
+            requestPacker_.RollBack(writePos);
+            HDF_LOGE("%{public}s: writePos_ rollback", __func__);
+            return HDF_FAILURE;
         }
-
-        ret = CmdUtils::EndSection(requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: EndSection failed", __func__));
-
         return HDF_SUCCESS;
     }
 
     int32_t SetLayerCompositionType(uint32_t devId, uint32_t layerId, CompositionType type)
     {
-        int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_COMPOSITION_TYPE, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: StartSection failed", __func__));
+        int32_t ret = 0;
+        bool retBool = false;
+        int32_t writePos = requestPacker_.ValidSize();
 
-        ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: SetupDevice failed", __func__));
+        do {
+            ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_COMPOSITION_TYPE, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: StartSection failed", __func__));
 
-        int32_t retBool = requestPacker_.WriteInt32(type);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write composition type failed", __func__));
+            ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: SetupDevice failed", __func__));
 
-        ret = CmdUtils::EndSection(requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: EndSection failed", __func__));
+            retBool = requestPacker_.WriteInt32(type);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write composition type failed", __func__));
 
+            ret = CmdUtils::EndSection(requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: EndSection failed", __func__));
+        } while (0);
+
+        if (retBool == false || ret != HDF_SUCCESS) {
+            requestPacker_.RollBack(writePos);
+            HDF_LOGE("%{public}s: writePos_ rollback", __func__);
+            return HDF_FAILURE;
+        }
         return HDF_SUCCESS;
     }
 
     int32_t SetLayerBlendType(uint32_t devId, uint32_t layerId, BlendType type)
     {
-        int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_BLEND_TYPE, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: StartSection failed", __func__));
+        int32_t ret = 0;
+        bool retBool = false;
+        int32_t writePos = requestPacker_.ValidSize();
 
-        ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: SetupDevice failed", __func__));
+        do {
+            ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_BLEND_TYPE, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: StartSection failed", __func__));
 
-        bool retBool = requestPacker_.WriteInt32(type);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write blend type failed", __func__));
+            ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: SetupDevice failed", __func__));
 
-        ret = CmdUtils::EndSection(requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: EndSection failed", __func__));
+            retBool = requestPacker_.WriteInt32(type);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write blend type failed", __func__));
 
+            ret = CmdUtils::EndSection(requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: EndSection failed", __func__));
+        } while (0);
+
+        if (retBool == false || ret != HDF_SUCCESS) {
+            requestPacker_.RollBack(writePos);
+            HDF_LOGE("%{public}s: writePos_ rollback", __func__);
+            return HDF_FAILURE;
+        }
         return HDF_SUCCESS;
     }
 
     int32_t SetLayerMaskInfo(uint32_t devId, uint32_t layerId, const MaskInfo maskInfo)
     {
-        int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_MASK_INFO, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: StartSection failed", __func__));
+        int32_t ret = 0;
+        bool retBool = false;
+        int32_t writePos = requestPacker_.ValidSize();
 
-        ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: SetupDevice failed", __func__));
+        do {
+            ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_MASK_INFO, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: StartSection failed", __func__));
 
-        bool retBool = requestPacker_.WriteUint32(maskInfo);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write maskInfo failed", __func__));
+            ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: SetupDevice failed", __func__));
 
-        ret = CmdUtils::EndSection(requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: EndSection failed", __func__));
+            retBool = requestPacker_.WriteUint32(maskInfo);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write maskInfo failed", __func__));
 
+            ret = CmdUtils::EndSection(requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: EndSection failed", __func__));
+        } while (0);
+
+        if (retBool == false || ret != HDF_SUCCESS) {
+            requestPacker_.RollBack(writePos);
+            HDF_LOGE("%{public}s: writePos_ rollback", __func__);
+            return HDF_FAILURE;
+        }
         return HDF_SUCCESS;
     }
 
     int32_t SetLayerColor(uint32_t devId, uint32_t layerId, const LayerColor& layerColor)
     {
-        int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_COLOR, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: StartSection failed", __func__));
+        int32_t ret = 0;
+        int32_t writePos = requestPacker_.ValidSize();
 
-        ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: SetupDevice failed", __func__));
+        do {
+            ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_COLOR, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: StartSection failed", __func__));
 
-        ret = CmdUtils::LayerColorPack(layerColor, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: RectPack failed", __func__));
+            ret = CmdUtils::SetupDevice(devId, layerId, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: SetupDevice failed", __func__));
 
-        ret = CmdUtils::EndSection(requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: EndSection failed", __func__));
+            ret = CmdUtils::LayerColorPack(layerColor, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: RectPack failed", __func__));
 
+            ret = CmdUtils::EndSection(requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: EndSection failed", __func__));
+        } while (0);
+
+        if (ret != HDF_SUCCESS) {
+            requestPacker_.RollBack(writePos);
+            HDF_LOGE("%{public}s: writePos_ rollback", __func__);
+            return HDF_FAILURE;
+        }
         return HDF_SUCCESS;
     }
 
