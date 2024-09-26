@@ -61,6 +61,11 @@ enum BufferUsage : ohos.hdi.display.composer.v1_0.BufferUsage {
     HBM_USE_CPU_HW_BOTH = (1ULL << 17),        /**< For support cpu and hardware */
     HBM_USAGE_GPU_PERFORMANCE = (1ULL << 18),             /**< Prefer performance over memory consumption: */
     HBM_USE_RGB_TO_YUV_CONVERSION = (1ULL << 19),          /**< For identify RGB to YUV conversion */
+    HBM_USE_AUXILLARY_BUFFER0 = (1ULL << 20),
+    HBM_USE_AUXILLARY_BUFFER1 = (1ULL << 21),
+    HBM_USE_AUXILLARY_BUFFER2 = (1ULL << 22),
+    HBM_USE_AUXILLARY_BUFFER3 = (1ULL << 23),
+    HBM_USE_VIDEO_DEC_MV = HBM_USE_VIDEO_DECODER | HBM_USE_AUXILLARY_BUFFER2,
 };
 
 
