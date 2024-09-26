@@ -353,8 +353,8 @@ typedef enum camera_device_metadata_tag {
     /**
      * ohos.ability.tripodDetection [static, int32[], public]
      *
-     * camera device property, report current camera whether supporttripod detection by mode
-     * (i.e. int32[]: [mode, OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED, mode ...] ...)
+     * camera device property, report current camera what mode support tripod detection
+     * (i.e. int32[]: [mode, mode ...] ...)
      */
     OHOS_ABILITY_TRIPOD_DETECTION,
     /**
@@ -623,6 +623,13 @@ typedef enum camera_device_metadata_tag {
      * (i.e. int32[] ...)
      */
     OHOS_STATISTICS_DETECT_BAR_CODE_INFOS,
+    /**
+     * ohos.statistics.baseFaceInfo [static, int32[], public]
+     *
+     * camera device property, query current camera detect base face information
+     * (i.e. int32[] ...)
+     */
+    OHOS_STATISTICS_DETECT_BASE_FACE_INFO,
     /**
      * ohos.camera.statisticsEnd
      *
@@ -2333,7 +2340,7 @@ enum CameraLightPaintingType {
     OHOS_CAMERA_LIGHT_PAINTING_LIGHT,
 };
 
-//OHOS_CONTRAL_TIME_LAPSE_TRYAE_STATE
+//OHOS_CONTROL_TIME_LAPSE_TRYAE_STATE
 enum TimeLapseRecordState {
     TIME_LAPSE_IDLE = 0,
     TIME_LAPSE_RECORDING = 1,
@@ -2355,6 +2362,7 @@ enum StatisticsDetectType {
     OHOS_CAMERA_DOG_BODY_DETECT = 5,
     OHOS_CAMERA_SALIENT_DETECT = 6,
     OHOS_CAMERA_BAR_CODE_DETECT = 7,
+    OHOS_CAMERA_BASE_FACE_DETECT = 8,
 };
 
 // OHOS_STATUS_TRIPOD_DETECTION_STATUS
@@ -2369,6 +2377,13 @@ enum TripodStatus {
 enum DepthDataAccuracyType {
     OHOS_DEPTH_DATA_ACCURACY_RELATIVE = 1,
     OHOS_DEPTH_DATA_ACCURACY_ABSOLUTE,
+};
+
+enum StatisticsDetectEmotion {
+    OHOS_EMOTION_NEUTRAL = 0,
+    OHOS_EMOTION_SADNESS = 1,
+    OHOS_EMOTION_SMILE = 2,
+    OHOS_EMOTION_SURPRISE = 3,
 };
 
 #endif

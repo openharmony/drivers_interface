@@ -180,6 +180,8 @@ static item_info_t g_ohosCameraStatistics[OHOS_CAMERA_STATISTICS_END - OHOS_CAME
         OHOS_CAMERA_STATISTICS_START] = {"detectSalientInfos", META_TYPE_INT32,  -1},
     [OHOS_STATISTICS_DETECT_BAR_CODE_INFOS -
         OHOS_CAMERA_STATISTICS_START] = {"detectBarCodeInfos", META_TYPE_INT32,  -1},
+    [OHOS_STATISTICS_DETECT_BASE_FACE_INFO -
+        OHOS_CAMERA_STATISTICS_START] = {"baseFaceInfo", META_TYPE_INT32,  -1},
 };
 
 static item_info_t g_ohosCameraControl[OHOS_DEVICE_CONTROL_END - OHOS_DEVICE_CONTROL_START] = {
