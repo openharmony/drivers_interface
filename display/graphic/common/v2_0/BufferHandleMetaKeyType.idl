@@ -67,19 +67,19 @@ enum HebcAccessType {
 };
 
 /**
- * @brief Enumerates the CacheOption types
+ * @brief Enumerates the CacheOption types.
  *
  */
-enum CachheOption {
+enum CacheOption {
     CACHE_NOOP = 0x0, // Do nothing
-    CACHE_INVALID, // Hardware writing aux buffer to disable cache
+    CACHE_INVALIDATE, // Hardware writing aux buffer to disable cache
     CACHE_FLUSH, // Write aux buffer on CPU and flash cache to DDR
-}
+};
 
 struct BlobDataType {
-    unsigned long vaddr; // virtual address, diret accessed w/o copy
+    unsigned long vaddr; // virtual address, direct accessed w/o copy
     unsigned int offset; // field offset in dmabuf, support dma access
     unsigned int length; // data length set by previous SetMetadata(), default to 0
     unsigned int capacity; // reserved data size
-    enum CacheOption cacheOp; // effective in setMateData()
-}
+    enum CacheOption cacheOp; // effective in SetMetaData()
+};
