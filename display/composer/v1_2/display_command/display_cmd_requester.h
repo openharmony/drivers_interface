@@ -115,6 +115,10 @@ EXIT:
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
             HDF_LOGE("%{public}s: HDI 1.2 read vect size failed", __func__));
 
+        if (vectSize > CmdUtils::MAX_MEMORY) {
+            HDF_LOGE("%{public}s: layers vectSize:%{public}u is too large", __func__, vectSize);
+            return HDF_FAILURE;
+        }
         compChangeLayers_[devId].resize(vectSize);
         for (uint32_t i = 0; i < vectSize; i++) {
             DISPLAY_CHK_RETURN(replyUnpacker.ReadUint32(compChangeLayers_[devId][i]) == false, HDF_FAILURE,
@@ -126,6 +130,10 @@ EXIT:
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
             HDF_LOGE("%{public}s: HDI 1.2 read vect size failed", __func__));
 
+        if (vectSize > CmdUtils::MAX_MEMORY) {
+            HDF_LOGE("%{public}s: layers vectSize:%{public}u is too large", __func__, vectSize);
+            return HDF_FAILURE;
+        }
         compChangeTypes_[devId].resize(vectSize);
         for (uint32_t i = 0; i < vectSize; i++) {
             DISPLAY_CHK_RETURN(replyUnpacker.ReadInt32(compChangeTypes_[devId][i]) == false, HDF_FAILURE,
@@ -154,6 +162,10 @@ EXIT:
             DISPLAY_CHK_RETURN(true != replyUnpacker.ReadUint32(vectSize), HDF_FAILURE,
                 HDF_LOGE("%{public}s: HDI 1.2 read vect size failed", __func__));
 
+            if (vectSize > CmdUtils::MAX_MEMORY) {
+                HDF_LOGE("%{public}s: layers vectSize:%{public}u is too large", __func__, vectSize);
+                return HDF_FAILURE;
+            }
             layers.resize(vectSize);
             for (uint32_t i = 0; i < vectSize; i++) {
                 DISPLAY_CHK_RETURN(replyUnpacker.ReadUint32(layers[i]) == false, HDF_FAILURE,
@@ -165,6 +177,10 @@ EXIT:
             DISPLAY_CHK_RETURN(true != replyUnpacker.ReadUint32(vectSize), HDF_FAILURE,
                 HDF_LOGE("%{public}s: HDI 1.2 read vect size failed", __func__));
 
+            if (vectSize > CmdUtils::MAX_MEMORY) {
+                HDF_LOGE("%{public}s: layers vectSize:%{public}u is too large", __func__, vectSize);
+                return HDF_FAILURE;
+            }
             fences.resize(vectSize);
             for (uint32_t i = 0; i < vectSize; i++) {
                 ret = CmdUtils::FileDescriptorUnpack(replyUnpacker, replyFds, fences[i]);
