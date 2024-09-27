@@ -25,6 +25,7 @@ if (defined(ohos_lite)) {
     sources = [
       "ICameraDevice.idl",
       "ICameraHost.idl",
+      "IStreamOperator.idl",
       "IStreamOperatorCallback.idl",
       "IVideoProcessCallback.idl",
       "IVideoProcessService.idl",
