@@ -353,7 +353,7 @@ typedef enum camera_device_metadata_tag {
     /**
      * ohos.ability.tripodDetection [static, int32[], public]
      *
-     * camera device property, report current camera what mode support tripod detection
+     * camera device property, report current camera which modes support tripod detection
      * (i.e. int32[]: [mode, mode ...] ...)
      */
     OHOS_ABILITY_TRIPOD_DETECTION,
