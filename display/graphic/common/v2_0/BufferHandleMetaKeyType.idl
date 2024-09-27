@@ -46,6 +46,7 @@ enum BufferHandleAttrKey {
     ATTRKEY_REQUEST_ACCESS_TYPE = 10,       // value: current request frame mode
     ATTRKEY_ACCESS_TYPE = 11,               // value: current data frame mode
     ATTRKEY_FORCE_GLOBAL_ALPHA = 12,        // 0~255, pixel alpha value, default to -1, don't take effect.
+    ATTRKEY_VIDEO_DECODER_MV = 13,          // value BlobDataType
 
     /* vendor internal extended meta type */
     ATTRKEY_VENDOR_EXT_START = 2048,
@@ -63,4 +64,30 @@ enum HebcAccessType {
     HEBC_ACCESS_UNINIT = 0,  // not configured frame mode
     HEBC_ACCESS_CPU_ACCESS,  // cpu is accessible; hebc is not accessible
     HEBC_ACCESS_HW_ONLY,     // hardware_only: cpu is not accessible; hebc is accessible
+};
+
+/**
+ * @brief Enumerates the CacheOption types.
+ *
+ * @since 5.0
+ * @version 2.0
+ */
+enum CacheOption {
+    CACHE_NOOP = 0x0, // Do nothing
+    CACHE_INVALIDATE, // Hardware writing aux buffer to disable cache
+    CACHE_FLUSH, // Write aux buffer on CPU and flash cache to DDR
+};
+
+/**
+ * @brief BlobDataType of [value] in GetMetadata/SetMetaData, to avoid data copy.
+ *
+ * @since 5.0
+ * @version 2.0
+ */
+struct BlobDataType {
+    unsigned long vaddr; // virtual address, direct accessed w/o copy
+    unsigned int offset; // field offset in dmabuf, support dma access
+    unsigned int length; // data length set by previous SetMetadata(), default to 0
+    unsigned int capacity; // reserved data size
+    enum CacheOption cacheOp; // effective in SetMetaData()
 };
