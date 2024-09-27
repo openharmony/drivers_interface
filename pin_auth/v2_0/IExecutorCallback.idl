@@ -83,6 +83,7 @@ import ohos.hdi.pin_auth.v2_0.PinAuthTypes;
      * @param authSubType Indicates the pin sub type.
      * @param algoVersion is the version of the algorithm.
      * @param challenge is challenge.
+     * @param complexityReg Indicates the complexity reg.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
@@ -91,7 +92,7 @@ import ohos.hdi.pin_auth.v2_0.PinAuthTypes;
      * @version 2.0
      */
     OnGetData([in] unsigned char[] algoParameter, [in] unsigned long authSubType, [in] unsigned int algoVersion,
-        [in] unsigned char[] challenge);
+        [in] unsigned char[] challenge, [in] String complexityReg);
     /**
      * @brief Defines the function for reporting message.
      *
