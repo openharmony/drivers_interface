@@ -76,6 +76,10 @@ enum CacheOption {
     CACHE_FLUSH, // Write aux buffer on CPU and flash cache to DDR
 };
 
+/**
+ * @brief BlobDataType of [value] in GetMetadata/SetMetaData, to avoid data copy.
+ *
+ */
 struct BlobDataType {
     unsigned long vaddr; // virtual address, direct accessed w/o copy
     unsigned int offset; // field offset in dmabuf, support dma access
