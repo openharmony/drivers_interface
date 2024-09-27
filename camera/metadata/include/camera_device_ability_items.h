@@ -1940,6 +1940,27 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_CAMERA_CLOSE_AFTER_SECONDS,
     /**
+     * ohos.ability.captureMacroDepthFusionSupported [static, byte, public]
+     *
+     * camera device property, report current capture macro depth fusion supported
+     * (i.e. byte ...)
+     */
+    OHOS_ABILITY_CAPTURE_MACRO_DEPTH_FUSION_SUPPORTED,
+    /**
+     * ohos.ability.captureMacroDepthFusionZoomRange [static, float[], public]
+     *
+     * camera device property, report current capture macro depth fusion zoom range
+     * (i.e. float[] ...)
+     */
+    OHOS_ABILITY_CAPTURE_MACRO_DEPTH_FUSION_ZOOM_RANGE,
+    /**
+     * ohos.control.captureMacroDepthFusion [static, byte, public]
+     *
+     * camera device property, set current capture macro depth fusion
+     * (i.e. byte ...)
+     */
+    OHOS_CONTROL_CAPTURE_MACRO_DEPTH_FUSION,
+    /**
      * ohos.camera.effectEnd
      *
      * camera effect end
