@@ -162,7 +162,7 @@ int32_t LayerCache::FreeMem(sptr<NativeBuffer>& buffer)
         return HDF_FAILURE;
     }
     int32_t ret = Unmap(buffer);
-    if( ret != HDF_SUCCESS) {
+    if (ret != HDF_SUCCESS) {
         HDF_LOGE("Unmap failed!");
     }
     return mapperService->FreeMem(buffer);
