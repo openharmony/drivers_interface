@@ -970,7 +970,7 @@ typedef enum camera_device_metadata_tag {
      * ohos.control.cameraUsedAsPosition [static, byte, public]
      *
      * camera device property, set current camera used as position
-     * (i.e. enum: byte ...)
+     * (i.e. byte ...)
      */
     OHOS_CONTROL_CAMERA_USED_AS_POSITION,
     /**
