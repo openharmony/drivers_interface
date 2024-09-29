@@ -175,7 +175,7 @@ int32_t LayerCache::RegisterBuffer(sptr<NativeBuffer>& buffer)
         return HDF_FAILURE;
     }
     int32_t ret = metaService->RegisterBuffer(buffer);
-    if( ret != HDF_SUCCESS) {
+    if (ret != HDF_SUCCESS) {
         HDF_LOGE("Register Buffer failed!");
         return ret;
     }
