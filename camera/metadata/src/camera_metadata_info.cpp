@@ -960,7 +960,7 @@ int CameraMetadata::copyMetadataMemory(common_metadata_header_t *dst, camera_met
         return CAM_META_FAILURE;
     }
 
-    size_t remaind = dst->data_capacity - metadataItem->data.offset;
+    size_t remaind = dst->data_capacity - item->data.offset;
     if (remaind < dataPayloadSize) {
         METADATA_ERR_LOG("AddCameraMetadataItem Insufficient capacity for copying");
         return CAM_META_FAILURE;
