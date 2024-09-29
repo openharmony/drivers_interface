@@ -161,10 +161,10 @@ int32_t LayerCache::FreeMem(sptr<NativeBuffer>& buffer)
         HDF_LOGE("GetMapperService failed!");
         return HDF_FAILURE;
     }
-	int32_t ret = Unmap(buffer);
-	if( ret != HDF_SUCCESS) {
+    int32_t ret = Unmap(buffer);
+    if( ret != HDF_SUCCESS) {
         HDF_LOGE("Unmap failed!");		
-	}
+    }
     return mapperService->FreeMem(buffer);
 }
 
@@ -175,14 +175,14 @@ int32_t LayerCache::RegisterBuffer(sptr<NativeBuffer>& buffer)
         return HDF_FAILURE;
     }
     int32_t ret = metaService->RegisterBuffer(buffer);
-	if( ret != HDF_SUCCESS) {
+    if( ret != HDF_SUCCESS) {
         HDF_LOGE("Register Buffer failed!");
         return ret;
-	}
+    }
     ret = Mmap(buffer);
-	if( ret != HDF_SUCCESS) {
+    if( ret != HDF_SUCCESS) {
         HDF_LOGE("Mmap failed!");		
-	}
+    }
     return HDF_SUCCESS;	
 }
 
