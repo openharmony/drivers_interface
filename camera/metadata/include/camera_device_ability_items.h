@@ -967,6 +967,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_BURST_CAPTURE,
     /**
+     * ohos.control.cameraUsedAsPosition [static, byte, public]
+     *
+     * camera device property, set current camera used as position
+     * (i.e. enum: byte ...)
+     */
+    OHOS_CONTROL_CAMERA_USED_AS_POSITION,
+    /**
      * ohos.control.cameraSessionUsage [static, enum[], public]
      *
      * camera device property, set current camera session usage type whether enable
@@ -2025,6 +2032,7 @@ typedef enum camera_switch_enum {
     OHOS_CAMERA_SWTICH_ON,
 } camera_switch_enum_t;
 
+// OHOS_ABILITY_CAMERA_USED_AS_POSITION enumeration values
 // OHOS_ABILITY_CAMERA_POSITION enumeration values
 typedef enum camera_position_enum {
     OHOS_CAMERA_POSITION_FRONT = 0,
