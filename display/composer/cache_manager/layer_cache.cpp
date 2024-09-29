@@ -180,7 +180,7 @@ int32_t LayerCache::RegisterBuffer(sptr<NativeBuffer>& buffer)
         return ret;
     }
     ret = Mmap(buffer);
-    if( ret != HDF_SUCCESS) {
+    if (ret != HDF_SUCCESS) {
         HDF_LOGE("Mmap failed!");
     }
     return HDF_SUCCESS;
