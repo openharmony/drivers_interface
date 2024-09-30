@@ -984,6 +984,7 @@ int CameraMetadata::UpdateameraMetadataItemSize(camera_metadata_item_entry_t *it
     if (item == nullptr || dst == nullptr) {
         METADATA_ERR_LOG("UpdateameraMetadataItemSize item is null or dst is null");
         return CAM_META_FAILURE;
+    }
     if (dataSize != oldItemSize) {
         if (dst->data_capacity < (dst->data_count + dataSize - oldItemSize)) {
             METADATA_ERR_LOG("UpdateCameraMetadataItemByIndex data_capacity limit reached");
