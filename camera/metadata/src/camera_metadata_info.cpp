@@ -970,8 +970,8 @@ int CameraMetadata::copyMetadataMemory(common_metadata_header_t *dst, camera_met
 int CameraMetadata::UpdateameraMetadataItemSize(camera_metadata_item_entry_t *item, uint32_t dataCount,
     common_metadata_header_t *dst, const void *data)
 {
-    if (item == nullptr || dst == nullptr) {
-        METADATA_ERR_LOG("UpdateameraMetadataItemSize item is null or dst is null");
+    if (item == nullptr) {
+        METADATA_ERR_LOG("UpdateameraMetadataItemSize item is null");
         return CAM_META_FAILURE;
     } else if (item->data_type < META_TYPE_BYTE || item->data_type >= META_NUM_TYPES) {
         METADATA_ERR_LOG("UpdateameraMetadataItemSize invalid datatype:%{public}d", item->data_type);
@@ -981,6 +981,10 @@ int CameraMetadata::UpdateameraMetadataItemSize(camera_metadata_item_entry_t *it
     size_t dataPayloadSize = dataCount * OHOS_CAMERA_METADATA_TYPE_SIZE[item->data_type];
     int32_t oldItemSize = CalculateCameraMetadataItemDataSize(item->data_type, item->count);
     int32_t ret = CAM_META_SUCCESS;
+    if (item == nullptr || dst == nullptr) {
+        METADATA_ERR_LOG("UpdateameraMetadataItemSize item is null or dst is null");
+        return CAM_META_FAILURE;
+    }
     if (dataSize != oldItemSize) {
         if (dst->data_capacity < (dst->data_count + dataSize - oldItemSize)) {
             METADATA_ERR_LOG("UpdateCameraMetadataItemByIndex data_capacity limit reached");
@@ -1001,12 +1005,10 @@ int CameraMetadata::UpdateameraMetadataItemSize(camera_metadata_item_entry_t *it
             dst->data_count += dataSize;
         }
     } else if (dataSize != 0) {
-        item->data.offset = dst->data_count;
         ret = copyMetadataMemory(dst, item, dataPayloadSize, data);
         if (ret != CAM_META_SUCCESS) {
             return ret;
         }
-        dst->data_count += dataSize;
     }
     if (dataSize == 0) {
         ret = memcpy_s(item->data.value, dataPayloadSize, data, dataPayloadSize);
