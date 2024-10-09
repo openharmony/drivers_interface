@@ -22,8 +22,7 @@
           "hdf_core",
           "hilog",
           "c_utils"
-        ],
-        "third_party": []
+        ]
       },
       "build": {
         "sub_component": [
