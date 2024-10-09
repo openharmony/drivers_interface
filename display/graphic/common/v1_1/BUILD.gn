@@ -16,7 +16,7 @@ import("//build/config/components/hdi/hdi.gni")
 hdi("display_commontype") {
   module_name = "display_commontype"
 
-  imports = [ "ohos.hdi.display.graphic.common.v1_0:display_commontype" ]
+  sequenceable_pub_deps = [ "ohos.hdi.display.graphic.common.v1_0:display_commontype" ]
 
   sources = [ "BufferHandleMetaKeyType.idl" ]
 
