@@ -94,7 +94,7 @@ public:
         DISPLAY_CHECK(replyPacker_.WriteBool(commitInfo.needFlush) == false,
             HDF_LOGE("%{public}s, write needFlush error", __func__));
 
-      // Write compLayers vector
+        // Write compLayers vector
         uint32_t vectSize = static_cast<uint32_t>(commitInfo.compLayers.size());
         DISPLAY_CHECK(replyPacker_.WriteUint32(vectSize) == false,
             HDF_LOGE("%{public}s, write compLayers.size error", __func__));
@@ -103,7 +103,7 @@ public:
             DISPLAY_CHECK(replyPacker_.WriteUint32(commitInfo.compLayers[i]) == false,
                 HDF_LOGE("%{public}s, write compLayers error", __func__));
         }
-      // Write compTypes vector
+        // Write compTypes vector
         vectSize = static_cast<uint32_t>(commitInfo.compTypes.size());
         DISPLAY_CHECK(replyPacker_.WriteUint32(vectSize) == false,
             HDF_LOGE("%{public}s, write compTypes.size error", __func__));
