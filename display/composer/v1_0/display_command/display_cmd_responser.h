@@ -93,8 +93,8 @@ public:
     {
         DISPLAY_CHK_RETURN(request == nullptr, HDF_FAILURE,
             HDF_LOGE("%{public}s: error, request is nullptr", __func__));
-		std::lock_guard<std::mutex> lock(requestMutex_);
-		if (request_ != nullptr) {
+        std::lock_guard<std::mutex> lock(requestMutex_);
+        if (request_ != nullptr) {
             request_.reset();
         }
         request_ = request;
@@ -104,8 +104,8 @@ public:
 
     int32_t GetCmdReply(std::shared_ptr<Transfer>& reply)
     {
-		std::lock_guard<std::mutex> lock(replyMutex_);  
-		int32_t ret = HDF_SUCCESS;
+        std::lock_guard<std::mutex> lock(replyMutex_);
+        int32_t ret = HDF_SUCCESS;
         if (isReplyUpdated_ == false) {
             ret = InitReply(CmdUtils::INIT_ELEMENT_COUNT);
         }
