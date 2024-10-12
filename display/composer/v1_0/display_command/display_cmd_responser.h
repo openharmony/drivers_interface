@@ -1105,8 +1105,8 @@ protected:
     std::unordered_map<int32_t, int32_t> errMaps_;
     /* fix fd leak */
     std::queue<BufferHandle *> delayFreeQueue_;
-    std:: mutex requestMutex_;
-    std:: mutex replyMutex_;
+    std::mutex requestMutex_;
+    std::mutex replyMutex_;
 };
 using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, IDisplayComposerVdi>;
 } // namespace V1_0
