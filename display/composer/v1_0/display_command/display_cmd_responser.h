@@ -163,12 +163,12 @@ public:
             return HDF_FAILURE;
         }
         std::shared_ptr<char> requestData(new char[inEleCnt * CmdUtils::ELEMENT_SIZE], std::default_delete<char[]>());
-		int32_t ret = HDF_SUCCESS;
-		{
-		    std::lock_guard<std::mutex> lock(requestMutex_);	
+        int32_t ret = HDF_SUCCESS;
+        {
+            std::lock_guard<std::mutex> lock(requestMutex_);
             ret = request_->Read(reinterpret_cast<int32_t *>(requestData.get()), inEleCnt,
-		        CmdUtils::TRANSFER_WAIT_TIME);
-		}
+                CmdUtils::TRANSFER_WAIT_TIME);
+        }
         CommandDataUnpacker unpacker;
         unpacker.Init(requestData.get(), inEleCnt << CmdUtils::MOVE_SIZE);
 #ifdef DEBUG_DISPLAY_CMD_RAW_DATA
@@ -204,10 +204,10 @@ public:
         /*  Write reply pack */
         outEleCnt = replyPacker_.ValidSize() >> CmdUtils::MOVE_SIZE;
         {
-			std::lock_guard<std::mutex> lock(replyMutex_);
-			ret = reply_->Write(reinterpret_cast<int32_t *>(replyPacker_.GetDataPtr()), outEleCnt,
-		        CmdUtils::TRANSFER_WAIT_TIME);
-		}
+            std::lock_guard<std::mutex> lock(replyMutex_);
+            ret = reply_->Write(reinterpret_cast<int32_t *>(replyPacker_.GetDataPtr()), outEleCnt,
+                CmdUtils::TRANSFER_WAIT_TIME);
+        }
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("Reply write failure, ret=%{public}d", ret);
             outEleCnt = 0;
@@ -1105,8 +1105,8 @@ protected:
     std::unordered_map<int32_t, int32_t> errMaps_;
     /* fix fd leak */
     std::queue<BufferHandle *> delayFreeQueue_;
-	std:: mutex requestMutex_;
-	std:: mutex replyMutex_;
+    std:: mutex requestMutex_;
+    std:: mutex replyMutex_;
 };
 using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, IDisplayComposerVdi>;
 } // namespace V1_0
