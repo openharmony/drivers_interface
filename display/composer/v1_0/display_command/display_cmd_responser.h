@@ -388,9 +388,18 @@ EXIT:
 #ifdef DISPLAY_COMSPOER_DEBUG_DUMP
             DumpLayerBuffer(data.devId, data.seqNo, data.fence, handle, "client_");
 #endif
-            HdfTrace traceVdi("SetDisplayClientBuffer", data.buffer == nullptr ? ("data.buffer is nullptr! seqNo:" +
-            std::to_string(data.seqNo)) : ("HDI:DISP:HARDWARE height:" + std::to_string(data.buffer->height) +
-            " width:" + std::to_string(data.buffer->width) + " seqNo:" + std::to_string(data.seqNo)));
+            std::string traceMsg = "";
+            if (data.buffer == nullptr) {
+                traceMsg = "data.buffer is nullptr! seqNo:" + std::to_string(data.seqNo);
+            } else {
+                traceMsg = "HDI:DISP:HARDWARE " +
+                           "height:" + std::to_string(data.buffer->height) +
+                           " width:" + std::to_string(data.buffer->width) +
+                           " data.buffer->fd:" + std::to_string(data.buffer->fd) +
+                           " seqNo:" + std::to_string(data.seqNo))+
+                           " fd:" + std::to_string(fd));
+            }
+            HdfTrace traceVdi("SetDisplayClientBuffer", traceMsg);
             needMoveFd = true;
             int rc = impl_->SetDisplayClientBuffer(data.devId, handle, fd);
             DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
@@ -829,7 +838,18 @@ EXIT:
 #ifdef DISPLAY_COMSPOER_DEBUG_DUMP
             DumpLayerBuffer(data.devId, data.layerId, data.fence, handle, "layer_");
 #endif
-            HdfTrace traceVdi("SetLayerBuffer", "HDI:DISP:HARDWARE");
+            std::string traceMsg = "";
+            if (data.buffer == nullptr) {
+                traceMsg = "data.buffer is nullptr! seqNo:" + std::to_string(data.seqNo);
+            } else {
+                traceMsg = "HDI:DISP:HARDWARE " +
+                           "height:" + std::to_string(data.buffer->height) +
+                           " width:" + std::to_string(data.buffer->width) +
+                           " data.buffer->fd:" + std::to_string(data.buffer->fd) +
+                           " seqNo:" + std::to_string(data.seqNo))+
+                           " fd:" + std::to_string(fd));
+            }
+            HdfTrace traceVdi("SetLayerBuffer", traceMsg);
             needMoveFd = true;
             int rc = impl_->SetLayerBuffer(data.devId, data.layerId, handle, fd);
             DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
