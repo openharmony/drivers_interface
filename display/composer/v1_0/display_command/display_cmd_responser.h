@@ -396,9 +396,9 @@ EXIT:
                            "height:" + std::to_string(data.buffer->height) +
                            " width:" + std::to_string(data.buffer->width) +
                            " data.buffer->fd:" + std::to_string(data.buffer->fd) +
-                           " seqNo:" + std::to_string(data.seqNo))+
-                           " fd:" + std::to_string(fd));
+                           " seqNo:" + std::to_string(data.seqNo));
             }
+            traceMsg += " fd:" + std::to_string(fd);
             HdfTrace traceVdi("SetDisplayClientBuffer", traceMsg);
             needMoveFd = true;
             int rc = impl_->SetDisplayClientBuffer(data.devId, handle, fd);
@@ -846,9 +846,9 @@ EXIT:
                            "height:" + std::to_string(data.buffer->height) +
                            " width:" + std::to_string(data.buffer->width) +
                            " data.buffer->fd:" + std::to_string(data.buffer->fd) +
-                           " seqNo:" + std::to_string(data.seqNo))+
-                           " fd:" + std::to_string(fd));
+                           " seqNo:" + std::to_string(data.seqNo));
             }
+            traceMsg += " fd:" + std::to_string(fd);
             HdfTrace traceVdi("SetLayerBuffer", traceMsg);
             needMoveFd = true;
             int rc = impl_->SetLayerBuffer(data.devId, data.layerId, handle, fd);
