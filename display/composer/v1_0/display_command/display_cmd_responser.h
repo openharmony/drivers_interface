@@ -396,7 +396,7 @@ EXIT:
                            "height:" + std::to_string(data.buffer->height) +
                            " width:" + std::to_string(data.buffer->width) +
                            " data.buffer->fd:" + std::to_string(data.buffer->fd) +
-                           " seqNo:" + std::to_string(data.seqNo));
+                           " seqNo:" + std::to_string(data.seqNo);
             }
             traceMsg += " fd:" + std::to_string(fd);
             HdfTrace traceVdi("SetDisplayClientBuffer", traceMsg);
@@ -846,7 +846,7 @@ EXIT:
                            "height:" + std::to_string(data.buffer->height) +
                            " width:" + std::to_string(data.buffer->width) +
                            " data.buffer->fd:" + std::to_string(data.buffer->fd) +
-                           " seqNo:" + std::to_string(data.seqNo));
+                           " seqNo:" + std::to_string(data.seqNo);
             }
             traceMsg += " fd:" + std::to_string(fd);
             HdfTrace traceVdi("SetLayerBuffer", traceMsg);
