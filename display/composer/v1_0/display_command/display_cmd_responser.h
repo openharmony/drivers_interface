@@ -392,7 +392,7 @@ EXIT:
             if (data.buffer == nullptr) {
                 traceMsg = "data.buffer is nullptr! seqNo:" + std::to_string(data.seqNo);
             } else {
-                traceMsg = "HDI:DISP:HARDWARE " +
+                traceMsg = "HDI:DISP:HARDWARE "
                            "height:" + std::to_string(data.buffer->height) +
                            " width:" + std::to_string(data.buffer->width) +
                            " data.buffer->fd:" + std::to_string(data.buffer->fd) +
@@ -842,7 +842,7 @@ EXIT:
             if (data.buffer == nullptr) {
                 traceMsg = "data.buffer is nullptr! seqNo:" + std::to_string(data.seqNo);
             } else {
-                traceMsg = "HDI:DISP:HARDWARE " +
+                traceMsg = "HDI:DISP:HARDWARE
                            "height:" + std::to_string(data.buffer->height) +
                            " width:" + std::to_string(data.buffer->width) +
                            " data.buffer->fd:" + std::to_string(data.buffer->fd) +
