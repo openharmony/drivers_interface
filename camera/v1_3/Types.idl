@@ -499,6 +499,18 @@ struct ImageBufferInfoExt {
 };
 
 /**
+ * @brief Enumerates encoding types of stream data.
+ * @since 5.0
+ * @version 1.0
+ */
+enum EncodeType : ohos.hdi.camera.v1_0.EncodeType {
+     /**
+      * HEIC
+      */
+     ENCODE_TYPE_HEIC = 4,
+};
+
+/**
  * @brief Enumerates stream error types, which are used by {@link CaptureErrorInfo}.
  * @since 3.2
  * @version 1.1
