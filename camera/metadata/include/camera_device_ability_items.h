@@ -323,38 +323,38 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_AVAILABLE_EXTENDED_STREAM_INFO_TYPES,
     /**
-     * ohos.ability.autoDeferedVideoEnhance [static, enum, public]
+     * ohos.ability.autoDeferredVideoEnhance [static, enum, public]
      *
-     * camera device property, report current camera whether support auto defered video enhance
+     * camera device property, report current camera whether support auto deferred video enhance
      * (i.e. enum: OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED ...)
      */
-    OHOS_ABILITY_AOTU_DEFERRED_VIDEO_ENHANCE,
+    OHOS_ABILITY_AUTO_DEFERRED_VIDEO_ENHANCE,
     /**
-     * ohos.control.autoDeferedVideoEnhance [static, enum, public]
+     * ohos.control.autoDeferredVideoEnhance [static, enum, public]
      *
-     * camera device property, set current camera whether support auto defered video enhance
+     * camera device property, set current camera whether support auto deferred video enhance
      * (i.e. enum: OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED ...)
      */
-    OHOS_CONTROL_AOTU_DEFERRED_VIDEO_ENHANCE,
+    OHOS_CONTROL_AUTO_DEFERRED_VIDEO_ENHANCE,
     /**
      * ohos.ability.autoCloudImageEnhance [static, int32[], public]
      *
      * camera device property, report current camera whether support auto cloud image enhance by mode
      * (i.e. int32[]: [mode, OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED, mode ...] ...)
      */
-    OHOS_ABILITY_AOTU_CLOUD_IMAGE_ENHANCE,
+    OHOS_ABILITY_AUTO_CLOUD_IMAGE_ENHANCE,
     /**
      * ohos.control.autoCloudImageEnhance [static, enum, public]
      *
      * camera device property, set current camera whether support auto cloud image enhance
      * (i.e. enum: OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED ...)
      */
-    OHOS_CONTROL_AOTU_CLOUD_IMAGE_ENHANCE,
+    OHOS_CONTROL_AUTO_CLOUD_IMAGE_ENHANCE,
     /**
      * ohos.ability.tripodDetection [static, int32[], public]
      *
-     * camera device property, report current camera whether supporttripod detection by mode
-     * (i.e. int32[]: [mode, OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED, mode ...] ...)
+     * camera device property, report current camera which modes support tripod detection
+     * (i.e. int32[]: [mode, mode ...] ...)
      */
     OHOS_ABILITY_TRIPOD_DETECTION,
     /**
@@ -407,12 +407,19 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_LOW_LIGHT_BOOST,
     /**
-     * ohos.control.lowLightDetection [static, byte, public]
+     * ohos.status.lowLightDetection [static, byte, public]
      *
      * camera device property, query current camera low light detection status
      * (i.e. byte: 0-false/1-true ...)
      */
     OHOS_STATUS_LOW_LIGHT_DETECTION,
+    /**
+     * ohos.status.cameraLensDirtyDetection [static, byte, public]
+     *
+     * camera device property, query current camera lens dirty detection
+     * (i.e. byte: 0-false/1-true ...)
+     */
+    OHOS_STATUS_CAMERA_LENS_DIRTY_DETECTION,
     /**
      * ohos.camera.propertiesEnd
      *
@@ -623,6 +630,13 @@ typedef enum camera_device_metadata_tag {
      * (i.e. int32[] ...)
      */
     OHOS_STATISTICS_DETECT_BAR_CODE_INFOS,
+    /**
+     * ohos.statistics.baseFaceInfo [static, int32[], public]
+     *
+     * camera device property, query current camera detect base face information
+     * (i.e. int32[] ...)
+     */
+    OHOS_STATISTICS_DETECT_BASE_FACE_INFO,
     /**
      * ohos.camera.statisticsEnd
      *
@@ -945,6 +959,13 @@ typedef enum camera_device_metadata_tag {
      * (i.e. enum: begin/end ...)
      */
     OHOS_CONTROL_BURST_CAPTURE,
+    /**
+     * ohos.control.cameraUsedAsPosition [static, byte, public]
+     *
+     * camera device property, set current camera used as position
+     * (i.e. byte ...)
+     */
+    OHOS_CONTROL_CAMERA_USED_AS_POSITION,
     /**
      * ohos.device.controlEnd
      *
@@ -1828,6 +1849,48 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_TIME_LAPSE_INTERVAL_RANGE,
     /**
+     * ohos.ability.lcdFlash [static, int32_t[], public]
+     *
+     * camera device property, report current camera lcd flash
+     * (i.e. int32_t[] ...)
+     */
+    OHOS_ABILITY_LCD_FLASH,
+    /**
+     * ohos.control.lcdFlashDetection [static, byte[], public]
+     *
+     * camera device property, set current camera lcd flash detection
+     * (i.e. byte[] ...)
+     */
+    OHOS_CONTROL_LCD_FLASH_DETECTION,
+    /**
+     * ohos.control.lcdFlash [static, byte[], public]
+     *
+     * camera device property, set current camera lcd flash
+     * (i.e. byte[] ...)
+     */
+    OHOS_CONTROL_LCD_FLASH,
+    /**
+     * ohos.status.lcdFlashStatus [static, int32_t[], public]
+     *
+     * camera device property, quiry current camera lcd flash status
+     * (i.e. int32_t[] ...)
+     */
+    OHOS_STATUS_LCD_FLASH_STATUS,
+    /**
+     * ohos.ability.depthDataDelivery [static, int32_t[], public]
+     *
+     * camera device property, report current camera depth data delivery
+     * (i.e. int32_t[] ...)
+     */
+    OHOS_ABILITY_DEPTH_DATA_DELIVERY,
+    /**
+     * ohos.control.depthDataDeliverySwitch [static, byte[], public]
+     *
+     * camera device property, set current camera depth data delivery switch
+     * (i.e. byte[] ...)
+     */
+    OHOS_CONTROL_DEPTH_DATA_DELIVERY_SWITCH,
+    /**
      * ohos.ability.depthDataProfiles [static, int32_t[], public]
      *
      * camera device property, report current camera depth data profiles
@@ -1927,6 +1990,7 @@ typedef enum camera_switch_enum {
     OHOS_CAMERA_SWTICH_ON,
 } camera_switch_enum_t;
 
+// OHOS_ABILITY_CAMERA_USED_AS_POSITION enumeration values
 // OHOS_ABILITY_CAMERA_POSITION enumeration values
 typedef enum camera_position_enum {
     OHOS_CAMERA_POSITION_FRONT = 0,
@@ -2093,6 +2157,7 @@ typedef enum camera_format {
     OHOS_CAMERA_FORMAT_422_YUYV,
     OHOS_CAMERA_FORMAT_DEPTH_16,
     OHOS_CAMERA_FORMAT_DEPTH_32,
+    OHOS_CAMERA_FORMAT_HEIC,
     OHOS_CAMERA_FORMAT_IMPLEMENTATION_DEFINED = 0x1000,
 } camera_format_t;
 
@@ -2333,7 +2398,7 @@ enum CameraLightPaintingType {
     OHOS_CAMERA_LIGHT_PAINTING_LIGHT,
 };
 
-//OHOS_CONTRAL_TIME_LAPSE_TRYAE_STATE
+//OHOS_CONTROL_TIME_LAPSE_TRYAE_STATE
 enum TimeLapseRecordState {
     TIME_LAPSE_IDLE = 0,
     TIME_LAPSE_RECORDING = 1,
@@ -2355,6 +2420,7 @@ enum StatisticsDetectType {
     OHOS_CAMERA_DOG_BODY_DETECT = 5,
     OHOS_CAMERA_SALIENT_DETECT = 6,
     OHOS_CAMERA_BAR_CODE_DETECT = 7,
+    OHOS_CAMERA_BASE_FACE_DETECT = 8,
 };
 
 // OHOS_STATUS_TRIPOD_DETECTION_STATUS
@@ -2369,6 +2435,13 @@ enum TripodStatus {
 enum DepthDataAccuracyType {
     OHOS_DEPTH_DATA_ACCURACY_RELATIVE = 1,
     OHOS_DEPTH_DATA_ACCURACY_ABSOLUTE,
+};
+
+enum StatisticsDetectEmotion {
+    OHOS_EMOTION_NEUTRAL = 0,
+    OHOS_EMOTION_SADNESS = 1,
+    OHOS_EMOTION_SMILE = 2,
+    OHOS_EMOTION_SURPRISE = 3,
 };
 
 #endif

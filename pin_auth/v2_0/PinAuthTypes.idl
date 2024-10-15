@@ -54,8 +54,6 @@ enum AuthType : int {
     FACE = 2,
     /**< Indicates that the authentication type is fingerprint. */
     FINGERPRINT = 4,
-    /**< Indicates that the authentication type is recovery key. */
-    RECOVERY_KEY = 8,
 };
 
 /**

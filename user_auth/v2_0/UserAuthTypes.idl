@@ -487,8 +487,6 @@ struct ReuseUnlockInfo {
 enum GlobalConfigType : int {
     /** Pin expired period */
     PIN_EXPIRED_PERIOD = 1,
-    /** Enable specified authType capability. */
-    ENABLE_STATUS = 2,
 };
 
 /**
@@ -500,8 +498,6 @@ enum GlobalConfigType : int {
 union GlobalConfigValue {
     /** Pin expired period value. When pinExpiredPeriod equals to 0, userAuth won't check pin expired period. */
     long pinExpiredPeriod;
-    /** Enable specified authType capability.*/
-    boolean enableStatus;
 };
 
 /**
@@ -515,10 +511,6 @@ struct GlobalConfigParam {
     int type;
     /** Global config value. See @{GlobalConfigValue}*/
     GlobalConfigValue value;
-    /** Specified userIds. GlobalConfigParam will be effect for all userspaces when the array is empty. */
-    int[] userIds;
-    /** Specified authTypes, shouldn't empty. See @{AuthType}.*/
-    int[] authTypes;
 };
 
 /** @} */

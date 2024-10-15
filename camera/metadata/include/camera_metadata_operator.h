@@ -33,6 +33,7 @@
 
 #define INDEX_COUNTER 2
 #define WRAP_LENGTH 4
+#define ENTRY_DATA_SIZE 4
 
 // data type
 enum {
@@ -87,7 +88,7 @@ typedef struct camera_metadata_item_entry {
     uint32_t count;
     union {
         uint32_t offset;
-        uint8_t  value[4];
+        uint8_t  value[ENTRY_DATA_SIZE];
     } data;
 } camera_metadata_item_entry_t;
 
@@ -201,7 +202,7 @@ uint32_t GetCameraMetadataItemCapacity(const common_metadata_header_t *metadata_
 uint32_t GetCameraMetadataDataSize(const common_metadata_header_t *metadata_header);
 int32_t CopyCameraMetadataItems(common_metadata_header_t *newMetadata,
     const common_metadata_header_t *oldMetadata);
-size_t CalculateCameraMetadataItemDataSize(uint32_t type, size_t data_count);
+int32_t CalculateCameraMetadataItemDataSize(uint32_t type, size_t data_count);
 int32_t GetCameraMetadataItemType(uint32_t item, uint32_t *data_type);
 common_metadata_header_t *FillCameraMetadata(common_metadata_header_t *buffer, size_t memoryRequired,
     uint32_t itemCapacity, uint32_t dataCapacity);

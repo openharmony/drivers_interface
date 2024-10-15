@@ -52,7 +52,7 @@ const char *GetCameraMetadataItemName(uint32_t item)
     return CameraMetadata::GetCameraMetadataItemName(item);
 }
 
-size_t CalculateCameraMetadataItemDataSize(uint32_t type, size_t dataCount)
+int32_t CalculateCameraMetadataItemDataSize(uint32_t type, size_t dataCount)
 {
     return CameraMetadata::CalculateCameraMetadataItemDataSize(type, dataCount);
 }

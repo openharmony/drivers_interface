@@ -63,10 +63,10 @@ const std::vector<uint32_t> g_metadataTags = {
     OHOS_ABILITY_STATISTICS_DETECT_TYPE,
     OHOS_CONTROL_STATISTICS_DETECT_SETTING,
     OHOS_ABILITY_AVAILABLE_EXTENDED_STREAM_INFO_TYPES,
-    OHOS_ABILITY_AOTU_DEFERRED_VIDEO_ENHANCE,
-    OHOS_CONTROL_AOTU_DEFERRED_VIDEO_ENHANCE,
-    OHOS_ABILITY_AOTU_CLOUD_IMAGE_ENHANCE,
-    OHOS_CONTROL_AOTU_CLOUD_IMAGE_ENHANCE,
+    OHOS_ABILITY_AUTO_DEFERRED_VIDEO_ENHANCE,
+    OHOS_CONTROL_AUTO_DEFERRED_VIDEO_ENHANCE,
+    OHOS_ABILITY_AUTO_CLOUD_IMAGE_ENHANCE,
+    OHOS_CONTROL_AUTO_CLOUD_IMAGE_ENHANCE,
     OHOS_ABILITY_TRIPOD_DETECTION,
     OHOS_CONTROL_TRIPOD_DETECTION,
     OHOS_CONTROL_TRIPOD_STABLITATION,
@@ -76,6 +76,7 @@ const std::vector<uint32_t> g_metadataTags = {
     OHOS_CONTROL_LOW_LIGHT_DETECT,
     OHOS_CONTROL_LOW_LIGHT_BOOST,
     OHOS_STATUS_LOW_LIGHT_DETECTION,
+    OHOS_STATUS_CAMERA_LENS_DIRTY_DETECTION,
 
     OHOS_SENSOR_EXPOSURE_TIME,
     OHOS_SENSOR_COLOR_CORRECTION_GAINS,
@@ -106,6 +107,7 @@ const std::vector<uint32_t> g_metadataTags = {
     OHOS_STATISTICS_DETECT_DOG_BODY_INFOS,
     OHOS_STATISTICS_DETECT_SALIENT_INFOS,
     OHOS_STATISTICS_DETECT_BAR_CODE_INFOS,
+    OHOS_STATISTICS_DETECT_BASE_FACE_INFO,
 
     OHOS_CONTROL_AE_ANTIBANDING_MODE,
     OHOS_CONTROL_AE_EXPOSURE_COMPENSATION,
@@ -152,6 +154,7 @@ const std::vector<uint32_t> g_metadataTags = {
     OHOS_CONTROL_SENSOR_WB_VALUE,
     OHOS_CONTROL_HIGH_QUALITY_MODE,
     OHOS_CONTROL_BURST_CAPTURE,
+    OHOS_CONTROL_CAMERA_USED_AS_POSITION,
 
     // Camera device image acquisition related
     OHOS_ABILITY_DEVICE_AVAILABLE_EXPOSUREMODES,
@@ -279,6 +282,12 @@ const std::vector<uint32_t> g_metadataTags = {
     OHOS_CONTROL_TIME_LAPSE_RECORD_STATE,
     OHOS_CONTROL_TIME_LAPSE_PREVIEW_TYPE,
     OHOS_ABILITY_TIME_LAPSE_INTERVAL_RANGE,
+    OHOS_ABILITY_LCD_FLASH,
+    OHOS_CONTROL_LCD_FLASH_DETECTION,
+    OHOS_CONTROL_LCD_FLASH,
+    OHOS_STATUS_LCD_FLASH_STATUS,
+    OHOS_ABILITY_DEPTH_DATA_DELIVERY,
+    OHOS_CONTROL_DEPTH_DATA_DELIVERY_SWITCH,
     OHOS_ABILITY_DEPTH_DATA_PROFILES,
     OHOS_CONTROL_DEPTH_DATA_ACCURACY,
 
@@ -365,7 +374,11 @@ bool CameraMetadata::resize_add_metadata(uint32_t item, const void *data, size_t
         METADATA_ERR_LOG("GetCameraMetadataItemType invalid item type");
         return false;
     }
-    size_t size = CalculateCameraMetadataItemDataSize(data_type, data_count);
+    int32_t size = CalculateCameraMetadataItemDataSize(data_type, data_count);
+    if (size == CAM_META_FAILURE) {
+        METADATA_ERR_LOG("CalculateCameraMetadataItemDataSize invalid datatype:%{public}d", data_type);
+        return false;
+    }
 
     common_metadata_header_t *newMetadata = AllocateCameraMetadataBuffer((itemCapacity + 1) * INDEX_COUNTER,
         AlignTo((data_capacity + size) * INDEX_COUNTER, DATA_ALIGNMENT));
@@ -493,7 +506,7 @@ common_metadata_header_t *CameraMetadata::FillCameraMetadata(common_metadata_hea
         metadataHeader->item_capacity) - reinterpret_cast<uint8_t *>(metadataHeader);
     metadataHeader->data_start = AlignTo(dataUnaligned, DATA_ALIGNMENT);
 
-    METADATA_INFO_LOG("MetadataHeader ItemCapacity Size = %{public}u, DataCapacity Size = %{public}u",
+    METADATA_DEBUG_LOG("MetadataHeader ItemCapacity Size = %{public}u, DataCapacity Size = %{public}u",
         metadataHeader->item_capacity, metadataHeader->data_capacity);
     METADATA_DEBUG_LOG("FillCameraMetadata end");
     return metadataHeader;
@@ -671,12 +684,12 @@ const char *CameraMetadata::GetCameraMetadataItemName(uint32_t item)
     return g_ohosItemInfo[section][itemIndex].item_name;
 }
 
-size_t CameraMetadata::CalculateCameraMetadataItemDataSize(uint32_t type, size_t dataCount)
+int32_t CameraMetadata::CalculateCameraMetadataItemDataSize(uint32_t type, size_t dataCount)
 {
     METADATA_DEBUG_LOG("CalculateCameraMetadataItemDataSize start");
     if (type < META_TYPE_BYTE || type >= META_NUM_TYPES) {
         METADATA_ERR_LOG("CalculateCameraMetadataItemDataSize invalid type");
-        return 0;
+        return CAM_META_FAILURE;
     }
 
     size_t dataBytes = dataCount * OHOS_CAMERA_METADATA_TYPE_SIZE[type];
@@ -718,6 +731,11 @@ int CameraMetadata::AddCameraMetadataItemVerify(common_metadata_header_t *dst,
         return CAM_META_INVALID_PARAM;
     }
 
+    if (*dataType < META_TYPE_BYTE || *dataType >= META_NUM_TYPES) {
+        METADATA_ERR_LOG("AddCameraMetadataItemVerify invalid type");
+        return CAM_META_INVALID_PARAM;
+    }
+
     return CAM_META_SUCCESS;
 }
 
@@ -735,8 +753,9 @@ int CameraMetadata::AddCameraMetadataItem(common_metadata_header_t *dst, uint32_
         return CAM_META_INVALID_PARAM;
     }
     
-    size_t dataBytes = CalculateCameraMetadataItemDataSize(dataType, dataCount);
-    if (dataBytes + dst->data_count > dst->data_capacity) {
+    int32_t dataBytes = CalculateCameraMetadataItemDataSize(dataType, dataCount);
+    if ((uint32_t)dataBytes >= (UINT32_MAX - dst->data_count) ||
+        (uint32_t)dataBytes + dst->data_count > dst->data_capacity) {
         METADATA_ERR_LOG("AddCameraMetadataItem data_capacity limit reached");
         return CAM_META_DATA_CAP_EXCEED;
     }
@@ -765,13 +784,25 @@ int CameraMetadata::AddCameraMetadataItem(common_metadata_header_t *dst, uint32_
             METADATA_ERR_LOG("AddCameraMetadataItem GetMetadataData failed");
             return CAM_META_FAILURE;
         }
-        ret = memcpy_s(dstMetadataData + metadataItem->data.offset, dst->data_capacity - dst->data_count, data,
-            dataPayloadBytes);
+        if (dst->data_capacity < metadataItem->data.offset) {
+            METADATA_ERR_LOG("AddCameraMetadataItem Invalid data capacity and data offset failed");
+            return CAM_META_FAILURE;
+        }
+        size_t remaind = dst->data_capacity - metadataItem->data.offset;
+        if (remaind < dataPayloadBytes) {
+            METADATA_ERR_LOG("AddCameraMetadataItem Insufficient capacity for copying");
+            return CAM_META_FAILURE;
+        }
+        ret = memcpy_s(dstMetadataData + metadataItem->data.offset, remaind, data, dataPayloadBytes);
         if (ret != EOK) {
             METADATA_ERR_LOG("AddCameraMetadataItem memory copy failed");
             return CAM_META_FAILURE;
         }
-        dst->data_count += dataBytes;
+        if (dst->data_count > UINT32_MAX - (uint32_t)dataBytes) {
+            METADATA_ERR_LOG("AddCameraMetadataItem Insufficient capacity");
+            return CAM_META_FAILURE;
+        }
+        dst->data_count += (uint32_t)dataBytes;
     }
     dst->item_count++;
 
@@ -805,9 +836,12 @@ int CameraMetadata::GetCameraMetadataItem(const common_metadata_header_t *src, u
     item->data_type = localItem->data_type;
     item->count = localItem->count;
 
-    size_t dataBytes = CalculateCameraMetadataItemDataSize(localItem->data_type, localItem->count);
+    int32_t dataBytes = CalculateCameraMetadataItemDataSize(localItem->data_type, localItem->count);
     if (dataBytes == 0) {
         item->data.u8 = localItem->data.value;
+    } else if (dataBytes == CAM_META_FAILURE) {
+        METADATA_ERR_LOG("GetCameraMetadataItem invalid datatype:%{public}d", localItem->data_type);
+        return CAM_META_FAILURE;
     } else {
         uint8_t *srcMetadataData = GetMetadataData(src);
         if (srcMetadataData == nullptr) {
@@ -929,7 +963,18 @@ int CameraMetadata::copyMetadataMemory(common_metadata_header_t *dst, camera_met
         METADATA_ERR_LOG("UpdateameraMetadataItemSize GetMetadataData failed");
         return CAM_META_FAILURE;
     }
-    ret = memcpy_s(dstMetadataData + item->data.offset, dataPayloadSize, data, dataPayloadSize);
+    if (dst->data_capacity < item->data.offset) {
+        METADATA_ERR_LOG("UpdateameraMetadataItemSize Invalid data capacity and data offset failed");
+        return CAM_META_FAILURE;
+    }
+
+    size_t remaind = dst->data_capacity - item->data.offset;
+    if (remaind < dataPayloadSize) {
+        METADATA_ERR_LOG("UpdateameraMetadataItemSize Insufficient capacity for copying");
+        return CAM_META_FAILURE;
+    }
+
+    ret = memcpy_s(dstMetadataData + item->data.offset, remaind, data, dataPayloadSize);
     if (ret != EOK) {
         METADATA_ERR_LOG("UpdateCameraMetadataItemByIndex memory copy failed");
         return CAM_META_FAILURE;
@@ -940,23 +985,23 @@ int CameraMetadata::copyMetadataMemory(common_metadata_header_t *dst, camera_met
 int CameraMetadata::UpdateameraMetadataItemSize(camera_metadata_item_entry_t *item, uint32_t dataCount,
     common_metadata_header_t *dst, const void *data)
 {
-    if (item == nullptr) {
-        METADATA_ERR_LOG("UpdateameraMetadataItemSize item is null");
+    if (item == nullptr || dst == nullptr) {
+        METADATA_ERR_LOG("UpdateameraMetadataItemSize item is null or dst is null");
         return CAM_META_FAILURE;
     } else if (item->data_type < META_TYPE_BYTE || item->data_type >= META_NUM_TYPES) {
         METADATA_ERR_LOG("UpdateameraMetadataItemSize invalid datatype:%{public}d", item->data_type);
         return CAM_META_FAILURE;
     }
-    size_t dataSize = CalculateCameraMetadataItemDataSize(item->data_type, dataCount);
+    int32_t dataSize = CalculateCameraMetadataItemDataSize(item->data_type, dataCount);
     size_t dataPayloadSize = dataCount * OHOS_CAMERA_METADATA_TYPE_SIZE[item->data_type];
-    size_t oldItemSize = CalculateCameraMetadataItemDataSize(item->data_type, item->count);
+    int32_t oldItemSize = CalculateCameraMetadataItemDataSize(item->data_type, item->count);
     int32_t ret = CAM_META_SUCCESS;
-    if (item == nullptr || dst == nullptr) {
-        METADATA_ERR_LOG("UpdateameraMetadataItemSize item is null or dst is null");
-        return CAM_META_FAILURE;
-    }
     if (dataSize != oldItemSize) {
-        if (dst->data_capacity < (dst->data_count + dataSize - oldItemSize)) {
+        if (dst->data_count > UINT32_MAX - (uint32_t)dataSize &&
+            dst->data_count + (uint32_t)dataSize < (uint32_t)oldItemSize) {
+            return CAM_META_FAILURE;
+        }
+        if (dst->data_capacity < (dst->data_count + (uint32_t)dataSize - (uint32_t)oldItemSize)) {
             METADATA_ERR_LOG("UpdateCameraMetadataItemByIndex data_capacity limit reached");
             return CAM_META_DATA_CAP_EXCEED;
         }
@@ -972,7 +1017,10 @@ int CameraMetadata::UpdateameraMetadataItemSize(camera_metadata_item_entry_t *it
             if (ret != CAM_META_SUCCESS) {
                 return ret;
             }
-            dst->data_count += dataSize;
+            if (dst->data_count > UINT32_MAX - (uint32_t)dataSize) {
+                return CAM_META_FAILURE;
+            }
+            dst->data_count += (uint32_t)dataSize;
         }
     } else if (dataSize != 0) {
         ret = copyMetadataMemory(dst, item, dataPayloadSize, data);
@@ -981,7 +1029,7 @@ int CameraMetadata::UpdateameraMetadataItemSize(camera_metadata_item_entry_t *it
         }
     }
     if (dataSize == 0) {
-        ret = memcpy_s(item->data.value, dataPayloadSize, data, dataPayloadSize);
+        ret = memcpy_s(item->data.value, ENTRY_DATA_SIZE, data, dataPayloadSize);
         if (ret != EOK) {
             METADATA_ERR_LOG("UpdateCameraMetadataItemByIndex memory copy failed");
             return CAM_META_FAILURE;
@@ -1087,22 +1135,29 @@ int CameraMetadata::DeleteCameraMetadataItemByIndex(common_metadata_header_t *ds
 
     int32_t ret = CAM_META_SUCCESS;
     camera_metadata_item_entry_t *itemToDelete = GetMetadataItems(dst) + index;
-    size_t dataBytes = CalculateCameraMetadataItemDataSize(itemToDelete->data_type, itemToDelete->count);
+    int32_t dataBytes = CalculateCameraMetadataItemDataSize(itemToDelete->data_type, itemToDelete->count);
     if (dataBytes > 0) {
         ret = moveMetadataMemery(dst, itemToDelete, dataBytes);
         if (ret != CAM_META_SUCCESS) {
             return ret;
         }
-        dst->data_count -= dataBytes;
+        if (dst->data_count < (uint32_t)dataBytes) {
+            return CAM_META_FAILURE;
+        }
+        dst->data_count -= (uint32_t)dataBytes;
 
         camera_metadata_item_entry_t *metadataItems = GetMetadataItems(dst);
         for (uint32_t i = 0; i < dst->item_count; i++, ++metadataItems) {
             if (CalculateCameraMetadataItemDataSize(
                 metadataItems->data_type, metadataItems->count) > 0 &&
-                metadataItems->data.offset > itemToDelete->data.offset) {
-                metadataItems->data.offset -= dataBytes;
+                metadataItems->data.offset > itemToDelete->data.offset &&
+                metadataItems->data.offset > (uint32_t)dataBytes) {
+                metadataItems->data.offset -= (uint32_t)dataBytes;
             }
         }
+    } else if (dataBytes == CAM_META_FAILURE) {
+        METADATA_ERR_LOG("DeleteCameraMetadataItemByIndex invalid datatype:%{public}d", itemToDelete->data_type);
+        return CAM_META_FAILURE;
     }
 
     uint64_t length = sizeof(camera_metadata_item_entry_t) * (dst->item_count - index - 1);
@@ -1193,7 +1248,7 @@ int32_t CameraMetadata::CopyCameraMetadataItems(common_metadata_header_t *newMet
             sizeof(uint8_t[oldMetadata->data_count]));
         if (ret != EOK) {
             METADATA_ERR_LOG("CopyCameraMetadataItems memory copy failed, DataCapacity Size = %{public}u,"
-                "DataCount Size = %{public}u", newMetadata->data_capacity, oldMetadata->data_count);
+                "DataCount Size  = %{public}u", newMetadata->data_capacity, oldMetadata->data_count);
             return CAM_META_FAILURE;
         }
     }

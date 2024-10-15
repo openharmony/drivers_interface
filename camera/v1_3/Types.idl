@@ -394,6 +394,111 @@ struct CaptureEndedInfoExt {
 };
 
 /**
+ * @brief Defines the ImageBufferInfo, which is used by {@link IImageProcessCallback::OnProcessDoneExt}.
+ * @since 5.0
+ * @version 1.0
+ */
+struct ImageBufferInfoExt {
+    /**
+     * @brief The information of metadata.
+     * @since 5.0
+     * @version 1.0
+     */
+    MapDataSequenceable metadata;
+
+    /**
+     * @brief The information of imageHandle.
+     * @since 5.0
+     * @version 1.0
+     */
+    BufferHandleSequenceable imageHandle;
+
+    /**
+     * @brief If the gain map reported.
+     * @since 5.0
+     * @version 1.0
+     */
+    boolean isGainMapValid;
+
+    /**
+     * @brief The gain map information.
+     * @since 5.0
+     * @version 1.0
+     */
+    BufferHandleSequenceable gainMapHandle;
+
+    /**
+     * @brief Is depthMapHandle valid.
+     * @since 5.0
+     * @version 1.0
+     */
+    boolean isDepthMapValid;
+
+    /**
+     * @brief Data of metadata.
+     * @since 5.0
+     * @version 1.0
+     */
+    BufferHandleSequenceable depthMapHandle;
+
+    /**
+     * @brief If the unrefocus image of portrait mode reported.
+     * @since 5.0
+     * @version 1.0
+     */
+    boolean isUnrefocusImageValid;
+
+    /**
+     * @brief The unrefocus image of portrait mode.
+     * @since 5.0
+     * @version 1.0
+     */
+    BufferHandleSequenceable unrefocusImageHandle;
+
+    /**
+     * @brief If the high bit depth linear image reported.
+     * @since 5.0
+     * @version 1.0
+     */
+    boolean isHighBitDepthLinearImageValid;
+
+    /**
+     * @brief The high bit depth linear image.
+     * @since 5.0
+     * @version 1.0
+     */
+    BufferHandleSequenceable highBitDepthLinearImageHandle;
+
+    /**
+     * @brief If the exif information reported.
+     * @since 5.0
+     * @version 1.0
+     */
+    boolean isExifValid;
+
+    /**
+     * @brief The exif information.
+     * @since 5.0
+     * @version 1.0
+     */
+    BufferHandleSequenceable exifHandle;
+
+    /**
+     * @brief If the maker information reported.
+     * @since 5.0
+     * @version 1.0
+     */
+    boolean isMakerInfoValid;
+
+    /**
+     * @brief The maker information.
+     * @since 5.0
+     * @version 1.0
+     */
+    BufferHandleSequenceable makerInfoHandle;
+};
+
+/**
  * @brief Enumerates stream error types, which are used by {@link CaptureErrorInfo}.
  * @since 3.2
  * @version 1.1

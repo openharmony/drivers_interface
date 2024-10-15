@@ -61,4 +61,18 @@ import ohos.hdi.camera.v1_3.Types;
      * @version 1.0
      */
     OnCaptureEndedExt([in] int captureId, [in] struct CaptureEndedInfoExt[] infos);
+
+    /**
+     * @brief Called to report metadata and other information related to the stream.
+     * For details about the reporting mode, see {@link SetResultMode}.
+     *
+     * @param streamId Indicates the ID of the stream related to metadata is reported.
+     * @param result Indicates the metadata and other information reported.
+     * The reported metadata and other information are specified by {@link EnableResult}.
+     * You can call {@link DisableResult} to disable metadata and other information reporting.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    OnResult([in] int streamId, [in] unsigned char[] result);
 }
