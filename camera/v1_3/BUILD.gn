@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
+import("//build/config/components/hdi/hdi.gni")
 if (defined(ohos_lite)) {
   group("libcamera_proxy_1.3") {
     deps = []
@@ -25,6 +25,8 @@ if (defined(ohos_lite)) {
     sources = [
       "ICameraDevice.idl",
       "ICameraHost.idl",
+      "IImageProcessCallback.idl",
+      "IImageProcessService.idl",
       "IStreamOperator.idl",
       "IStreamOperatorCallback.idl",
       "IVideoProcessCallback.idl",
