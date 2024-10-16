@@ -400,6 +400,7 @@ EXIT:
             }
             traceMsg += " fd:" + std::to_string(fd);
             HdfTrace traceVdi("SetDisplayClientBuffer", traceMsg);
+            HDF_LOGE("%{public}s: %{public}s", __func__, traceMsg);
             needMoveFd = true;
             int rc = impl_->SetDisplayClientBuffer(data.devId, handle, fd);
             DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
@@ -850,6 +851,7 @@ EXIT:
             }
             traceMsg += " fd:" + std::to_string(fd);
             HdfTrace traceVdi("SetLayerBuffer", traceMsg);
+            HDF_LOGE("%{public}s: %{public}s", __func__, traceMsg);
             needMoveFd = true;
             int rc = impl_->SetLayerBuffer(data.devId, data.layerId, handle, fd);
             DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
