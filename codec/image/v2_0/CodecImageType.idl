@@ -204,9 +204,9 @@ enum PropertyType {
     TONE_MAP_METADATA,                   /**< Tone map meta data for HDR. */
     USER_DATA_DO_COMPRESS,               /**< Determines whether user data is compressed. */
     IT35_INFO,                           /**< It35 info for HDR. */
-    AUX_TYPE,                            /**< auxType for auxiliary image. */
-    IMG_RESOLUTION,                      /**< Resolution for auxiliary image. */
-    RLOC_INFO,                           /**< rloc info for auxiliary image. */
+    AUX_TYPE,                            /**< URN for auxiliary image. */
+    IMG_RESOLUTION,                      /**< Resolution for uncoded auxiliary image. */
+    RLOC_INFO,                           /**< Rloc info for fragmentmap. */
 };
 
 /**
