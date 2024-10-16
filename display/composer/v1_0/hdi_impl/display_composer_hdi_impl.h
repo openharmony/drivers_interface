@@ -165,7 +165,7 @@ public:
     virtual int32_t SetDisplayPowerStatus(uint32_t devId, DispPowerStatus status) override
     {
         COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
-        int32_t ToDispErrCode(hdi_->SetDisplayPowerStatus(devId, status));
+        int32_t ret = ToDispErrCode(hdi_->SetDisplayPowerStatus(devId, status));
         HDF_LOGI("devId: %{public}u, status: %{public}u", devId, status);
         return ToDispErrCode(ret);
     }
