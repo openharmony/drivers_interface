@@ -68,9 +68,9 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_1.IDisplayCompos
      * @since 5.0
      * @version 1.0
      */
-     SetHardwareCursorPosition([in] unsigned int devId, [in] int x, [in] int y);
+    SetHardwareCursorPosition([in] unsigned int devId, [in] int x, [in] int y);
 
-     /**
+    /**
      * @brief Enable Hardware Cursor.
      *
      * @param devId Indicates which device, enable Indicates which stats of enabled hardware cursor.
@@ -80,10 +80,10 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_1.IDisplayCompos
      * @since 5.0
      * @version 1.0
      */
-     EnableHardwareCursorStats([in] unsigned int devId, [in] boolean enable);
+    EnableHardwareCursorStats([in] unsigned int devId, [in] boolean enable);
 
-     /**
-     * @brief Get Hardware Cursor stats.
+    /**
+     * @brief Get Hardware Cursor Stats.
      *
      * @param devId Indicates which device, frameCount Indicates hardware cursor frame count,
      * vsyncCount Indicates hardware cursor vsync count.
@@ -93,5 +93,5 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_1.IDisplayCompos
      * @since 5.0
      * @version 1.0
      */
-     GetHardwareCursorStats([in] unsigned int devId, [out] unsigned int frameCount, [out] unsigned int vsyncCount);
+    GetHardwareCursorStats([in] unsigned int devId, [out] unsigned int frameCount, [out] unsigned int vsyncCount);
 }

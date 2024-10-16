@@ -27,6 +27,8 @@ hdi("display_buffer") {
     "platformsdk_indirect",
   ]
 
+  branch_protector_ret = "pac_ret"
+
   language = "cpp"
   subsystem_name = "hdf"
   part_name = "drivers_interface_display"
@@ -58,5 +60,8 @@ ohos_shared_library("libdisplay_buffer_hdi_impl") {
     "chipsetsdk_indirect",
     "platformsdk_indirect",
   ]
+
+  branch_protector_ret = "pac_ret"
+
   part_name = "drivers_interface_display"
 }
