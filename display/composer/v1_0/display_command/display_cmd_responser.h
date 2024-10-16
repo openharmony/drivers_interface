@@ -93,6 +93,7 @@ public:
     {
         DISPLAY_CHK_RETURN(request == nullptr, HDF_FAILURE,
             HDF_LOGE("%{public}s: error, request is nullptr", __func__));
+        std::lock_guard<std::mutex> lock(requestMutex_);
         if (request_ != nullptr) {
             request_.reset();
         }
@@ -103,6 +104,7 @@ public:
 
     int32_t GetCmdReply(std::shared_ptr<Transfer>& reply)
     {
+        std::lock_guard<std::mutex> lock(replyMutex_);
         int32_t ret = HDF_SUCCESS;
         if (isReplyUpdated_ == false) {
             ret = InitReply(CmdUtils::INIT_ELEMENT_COUNT);
@@ -161,9 +163,12 @@ public:
             return HDF_FAILURE;
         }
         std::shared_ptr<char> requestData(new char[inEleCnt * CmdUtils::ELEMENT_SIZE], std::default_delete<char[]>());
-        int32_t ret = request_->Read(reinterpret_cast<int32_t *>(requestData.get()), inEleCnt,
-            CmdUtils::TRANSFER_WAIT_TIME);
-
+        int32_t ret = HDF_SUCCESS;
+        {
+            std::lock_guard<std::mutex> lock(requestMutex_);
+            ret = request_->Read(reinterpret_cast<int32_t *>(requestData.get()), inEleCnt,
+                CmdUtils::TRANSFER_WAIT_TIME);
+        }
         CommandDataUnpacker unpacker;
         unpacker.Init(requestData.get(), inEleCnt << CmdUtils::MOVE_SIZE);
 #ifdef DEBUG_DISPLAY_CMD_RAW_DATA
@@ -180,15 +185,13 @@ public:
 
         while (ret == HDF_SUCCESS && unpacker.NextSection()) {
             if (!unpacker.BeginSection(unpackCmd)) {
-                HDF_LOGE("error: PackSection failed, unpackCmd=%{public}s.",
-                    CmdUtils::CommandToString(unpackCmd));
+                HDF_LOGE("error: PackSection failed, unpackCmd=%{public}s.", CmdUtils::CommandToString(unpackCmd));
                 ret = HDF_FAILURE;
             }
             ret = ProcessRequestCmd(unpacker, unpackCmd, inFds, outFds);
         }
 
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: ProcessRequestCmd failed", __func__));
+        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret, HDF_LOGE("%{public}s:ProcessRequestCmd failed", __func__));
         /* pack request end commands */
         replyPacker_.PackEnd(CONTROL_CMD_REPLY_END);
 
@@ -200,8 +203,11 @@ public:
 
         /*  Write reply pack */
         outEleCnt = replyPacker_.ValidSize() >> CmdUtils::MOVE_SIZE;
-        ret = reply_->Write(reinterpret_cast<int32_t *>(replyPacker_.GetDataPtr()), outEleCnt,
-            CmdUtils::TRANSFER_WAIT_TIME);
+        {
+            std::lock_guard<std::mutex> lock(replyMutex_);
+            ret = reply_->Write(reinterpret_cast<int32_t *>(replyPacker_.GetDataPtr()), outEleCnt,
+                CmdUtils::TRANSFER_WAIT_TIME);
+        }
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("Reply write failure, ret=%{public}d", ret);
             outEleCnt = 0;
@@ -370,7 +376,9 @@ EXIT:
 #ifdef DISPLAY_COMSPOER_DEBUG_DUMP
             DumpLayerBuffer(data.devId, data.seqNo, data.fence, handle, "client_");
 #endif
-            HdfTrace traceVdi("SetDisplayClientBuffer", "HDI:DISP:HARDWARE");
+            HdfTrace traceVdi("SetDisplayClientBuffer", data.buffer == nullptr ? ("data.buffer is nullptr! seqNo:" +
+            std::to_string(data.seqNo)) : ("HDI:DISP:HARDWARE height:" + std::to_string(data.buffer->height) +
+            " width:" + std::to_string(data.buffer->width) + " seqNo:" + std::to_string(data.seqNo)));
             needMoveFd = true;
             int rc = impl_->SetDisplayClientBuffer(data.devId, handle, fd);
             DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
@@ -1097,6 +1105,8 @@ protected:
     std::unordered_map<int32_t, int32_t> errMaps_;
     /* fix fd leak */
     std::queue<BufferHandle *> delayFreeQueue_;
+    std::mutex requestMutex_;
+    std::mutex replyMutex_;
 };
 using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, IDisplayComposerVdi>;
 } // namespace V1_0
