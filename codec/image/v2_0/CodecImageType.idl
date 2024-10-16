@@ -204,6 +204,9 @@ enum PropertyType {
     TONE_MAP_METADATA,                   /**< Tone map meta data for HDR. */
     USER_DATA_DO_COMPRESS,               /**< Determines whether user data is compressed. */
     IT35_INFO,                           /**< It35 info for HDR. */
+    AUX_TYPE,                            /**< auxType for auxiliary image. */
+    IMG_RESO,                            /**< Resolution for auxiliary image. */
+    RLOC_INFO,                           /**< rloc info for auxiliary image. */
 };
 
 /**
@@ -260,6 +263,28 @@ struct MasteringDisplayColourVolume {
     unsigned short whitePointY;                     /**< White point for Y-plane. */
     unsigned int maxDisplayMasteringLuminance;      /**< Max display mastering luminance. */
     unsigned int minDisplayMasteringLuminance;      /**< Min display mastering luminance. */
+};
+
+/**
+ * @brief Defines a struct to describe the relative position of the auxiliary image to the associated image.
+ *
+ * @since 5.0
+ * @version 2.0
+ */
+struct RelativeLocation {
+    unsigned int horizontalOffset;    /**< Horizontal offset in pixels of the left-most pixel column. */
+    unsigned int verticalOffset;      /**< Vertical offset in pixels of the top-most pixel row. */
+};
+
+/**
+ * @brief Defines a struct to describe resolution for image.
+ *
+ * @since 5.0
+ * @version 2.0
+ */
+struct Resolution {
+    unsigned int width;
+    unsigned int height;
 };
 
 /**
@@ -336,11 +361,12 @@ struct ImageItem {
     String itemName;                   /**< Item name. */
     unsigned int id;                   /**< Item id. */
     NativeBuffer pixelBuffer;          /**< Buffer to store pixel data. */
+    SharedBuffer pixelSharedBuffer;    /**< Buffer to store pixel data which cannot be stored in NativeBuffer. */
     boolean isPrimary;                 /**< Primary image flag. */
     boolean isHidden;                  /**< Determines whether to display this image. */
     String compressType;               /**< Determines how to compress the pixel data. */
     unsigned int quality;              /**< Compress quality, value range: [0, 100]. */
-    unsigned char[] liteProperties;    /**< Store smaller propety data, (enum + struct)... */
+    unsigned char[] liteProperties;    /**< Store smaller propety data, (enum + struct)... Exc:(enum + strlen + str)*/
     SharedBuffer sharedProperties;     /**< Store larger data, (enum + buffersize + buffer)... */
 };
 
