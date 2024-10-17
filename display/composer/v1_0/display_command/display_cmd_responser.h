@@ -55,6 +55,7 @@ using HdifdSet = std::vector<std::shared_ptr<HdifdParcelable>>;
 static constexpr uint32_t TIME_BUFFER_MAX_LEN = 15;
 static constexpr uint32_t BUFFER_QUEUE_MAX_SIZE = 6;
 static constexpr unsigned int REDUCE_COUNT = 50;
+static constexpr unsigned int ERROR_FENCE_COUNT = 500;
 static sptr<IMapper> g_bufferServiceImpl = nullptr;
 
 static constexpr uint32_t COMMIT_PRINT_INTERVAL = 1200;
@@ -388,9 +389,21 @@ EXIT:
 #ifdef DISPLAY_COMSPOER_DEBUG_DUMP
             DumpLayerBuffer(data.devId, data.seqNo, data.fence, handle, "client_");
 #endif
-            HdfTrace traceVdi("SetDisplayClientBuffer", data.buffer == nullptr ? ("data.buffer is nullptr! seqNo:" +
-            std::to_string(data.seqNo)) : ("HDI:DISP:HARDWARE height:" + std::to_string(data.buffer->height) +
-            " width:" + std::to_string(data.buffer->width) + " seqNo:" + std::to_string(data.seqNo)));
+            std::string traceMsg = "";
+            if (data.buffer == nullptr) {
+                traceMsg = "data.buffer is nullptr! seqNo:" + std::to_string(data.seqNo);
+            } else {
+                traceMsg = "HDI:DISP:HARDWARE "
+                           "height:" + std::to_string(data.buffer->height) +
+                           " width:" + std::to_string(data.buffer->width) +
+                           " data.buffer->fd:" + std::to_string(data.buffer->fd) +
+                           " seqNo:" + std::to_string(data.seqNo);
+            }
+            traceMsg += " fd:" + std::to_string(fd);
+            if (data.fence > ERROR_FENCE_COUNT) {
+                HDF_LOGI("SetDisplayClientBuffer: %{public}s", traceMsg.c_str());
+            }
+            HdfTrace traceVdi("SetDisplayClientBuffer", traceMsg);
             needMoveFd = true;
             int rc = impl_->SetDisplayClientBuffer(data.devId, handle, fd);
             DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
@@ -829,7 +842,21 @@ EXIT:
 #ifdef DISPLAY_COMSPOER_DEBUG_DUMP
             DumpLayerBuffer(data.devId, data.layerId, data.fence, handle, "layer_");
 #endif
-            HdfTrace traceVdi("SetLayerBuffer", "HDI:DISP:HARDWARE");
+            std::string traceMsg = "";
+            if (data.buffer == nullptr) {
+                traceMsg = "data.buffer is nullptr! seqNo:" + std::to_string(data.seqNo);
+            } else {
+                traceMsg = "HDI:DISP:HARDWARE"
+                           "height:" + std::to_string(data.buffer->height) +
+                           " width:" + std::to_string(data.buffer->width) +
+                           " data.buffer->fd:" + std::to_string(data.buffer->fd) +
+                           " seqNo:" + std::to_string(data.seqNo);
+            }
+            traceMsg += " fd:" + std::to_string(fd);
+            if (data.fence > ERROR_FENCE_COUNT) {
+                HDF_LOGI("SetLayerBuffer: %{public}s", traceMsg.c_str());
+            }
+            HdfTrace traceVdi("SetLayerBuffer", traceMsg);
             needMoveFd = true;
             int rc = impl_->SetLayerBuffer(data.devId, data.layerId, handle, fd);
             DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
