@@ -932,7 +932,7 @@ int CameraMetadata::MetadataExpandItemMem(common_metadata_header_t *dst, camera_
     }
     if (item->data.offset > UINT32_MAX - (uint32_t)oldItemSize ||
         item->data.offset + (uint32_t)oldItemSize > dst->data_count) {
-        METADATA_ERR_LOG("MetadataExpandItemMem data.offset:%{public}u, oldItemSize:%{pulic}uz, "
+        METADATA_ERR_LOG("MetadataExpandItemMem data.offset:%{public}u, oldItemSize:%{pulic}zu, "
             "dst->data_count:%{public}u", item->data.offset, oldItemSize, dst->data_count);
         return CAM_META_FAILURE;
     }
