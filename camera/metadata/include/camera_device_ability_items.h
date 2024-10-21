@@ -1968,6 +1968,48 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_CAPTURE_MACRO_DEPTH_FUSION,
     /**
+     * ohos.ability.cameraPortraitThemeSupported [static, byte, public]
+     *
+     * camera device property, report current camera portrait theme supported
+     * (i.e. byte ...)
+     */
+    OHOS_ABILITY_CAMERA_PORTRAIT_THEME_SUPPORTED,
+    /**
+     * ohos.ability.cameraPortraitThemeTypes [static, byte[], public]
+     *
+     * camera device property, report current camera supported portrait theme types
+     * (i.e. byte[] ...)
+     */
+    OHOS_ABILITY_CAMERA_PORTRAIT_THEME_TYPES,
+    /**
+     * ohos.control.cameraPortraitThemeType [static, byte, public]
+     *
+     * camera device property, set current camera portrait theme type
+     * (i.e. byte ...)
+     */
+    OHOS_CONTROL_CAMERA_PORTRAIT_THEME_TYPE,
+    /**
+     * ohos.ability.cameraVideoRotationSupported [static, byte, public]
+     *
+     * camera device property, report current camera video rotation supported
+     * (i.e. byte ...)
+     */
+    OHOS_ABILITY_CAMERA_VIDEO_ROTATION_SUPPORTED,
+    /**
+     * ohos.ability.cameraVideoRotation [static, int32[], public]
+     *
+     * camera device property, report current camera supported video rotation
+     * (i.e. int32[] ...)
+     */
+    OHOS_ABILITY_CAMERA_VIDEO_ROTATION,
+    /**
+     * ohos.control.cameraVideoRotation [static, int32, public]
+     *
+     * camera device property, set current camera video rotation
+     * (i.e. int32 ...)
+     */
+    OHOS_CONTROL_CAMERA_VIDEO_ROTATION,
+    /**
      * ohos.camera.effectEnd
      *
      * camera effect end
@@ -2525,5 +2567,24 @@ enum StatisticsDetectEmotion {
     OHOS_EMOTION_SMILE = 2,
     OHOS_EMOTION_SURPRISE = 3,
 };
+
+// OHOS_ABILITY_CAMERA_PORTRAIT_THEME_SUPPORTED
+enum camera_portrait_theme_supportede_type {
+    OHOS_CAMERA_PORTRAIT_THEME_NOT_SUPPORTED = 0,
+    OHOS_CAMERA_PORTRAIT_THEME_SUPPORTED,
+}
+
+// OHOS_ABILITY_CAMERA_PORTRAIT_THEME_TYPES
+enum cameera_portrait_theme_types {
+    OHOS_CAMERA_PORTRAIT_THEME_TYPE_NATURAL = 0,
+    OHOS_CAMERA_PORTRAIT_THEME_TYPE_DELICATE,
+    OHOS_CAMERA_PORTRAIT_THEME_TYPE_STYLISH,
+}
+
+// OHOS_ABILITY_CAMERA_VIDEO_ROTATION_SUPPORTED
+enum camera_video_rotation_supported_type {
+    OHOS_CAMERA_VIDEO_ROTATION_NOT_SUPPORTED = 0,
+    OHOS_CAMERA_VIDEO_ROTATION_SUPPORTED,
+}
 
 #endif
