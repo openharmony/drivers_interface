@@ -128,7 +128,7 @@ EXIT:
     {
         int32_t ret = 0;
         bool retBool = false;
-        int32_t writePos = requestPacker_.ValidSize();
+        size_t writePos = requestPacker_.ValidSize();
 
         do {
             ret = CmdUtils::StartSection(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, requestPacker_);
@@ -168,7 +168,7 @@ EXIT:
     {
         int32_t ret = 0;
         bool retBool = false;
-        int32_t writePos = requestPacker_.ValidSize();
+        size_t writePos = requestPacker_.ValidSize();
 
         do {
             ret = CmdUtils::StartSection(REQUEST_CMD_SET_DISPLAY_CLIENT_DAMAGE, requestPacker_);
@@ -242,7 +242,7 @@ EXIT:
     {
         int32_t ret = 0;
         bool retBool = false;
-        int32_t writePos = requestPacker_.ValidSize();
+        size_t writePos = requestPacker_.ValidSize();
 
         do {
             ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_ALPHA, requestPacker_);
@@ -289,7 +289,7 @@ EXIT:
     int32_t SetLayerRegion(uint32_t devId, uint32_t layerId, const IRect &rect)
     {
         int32_t ret = 0;
-        int32_t writePos = requestPacker_.ValidSize();
+        size_t writePos = requestPacker_.ValidSize();
 
         do {
             ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_REGION, requestPacker_);
@@ -320,7 +320,7 @@ EXIT:
     int32_t SetLayerCrop(uint32_t devId, uint32_t layerId, const IRect &rect)
     {
         int32_t ret = 0;
-        int32_t writePos = requestPacker_.ValidSize();
+        size_t writePos = requestPacker_.ValidSize();
 
         do {
             ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_CROP, requestPacker_);
@@ -352,7 +352,7 @@ EXIT:
     {
         int32_t ret = 0;
         bool retBool = false;
-        int32_t writePos = requestPacker_.ValidSize();
+        size_t writePos = requestPacker_.ValidSize();
 
         do {
             ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_ZORDER, requestPacker_);
@@ -384,7 +384,7 @@ EXIT:
     {
         int32_t ret = 0;
         bool retBool = false;
-        int32_t writePos = requestPacker_.ValidSize();
+        size_t writePos = requestPacker_.ValidSize();
 
         do {
             ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_PREMULTI, requestPacker_);
@@ -417,7 +417,7 @@ EXIT:
     {
         int32_t ret = 0;
         bool retBool = false;
-        int32_t writePos = requestPacker_.ValidSize();
+        size_t writePos = requestPacker_.ValidSize();
 
         do {
             ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_TRANSFORM_MODE, requestPacker_);
@@ -449,7 +449,7 @@ EXIT:
     {
         int32_t ret = 0;
         bool retBool = false;
-        int32_t writePos = requestPacker_.ValidSize();
+        size_t writePos = requestPacker_.ValidSize();
 
         do {
             ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_DIRTY_REGION, requestPacker_);
@@ -489,7 +489,7 @@ EXIT:
     {
         int32_t ret = 0;
         bool retBool = false;
-        int32_t writePos = requestPacker_.ValidSize();
+        size_t writePos = requestPacker_.ValidSize();
 
         do {
             ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_VISIBLE_REGION, requestPacker_);
@@ -531,7 +531,7 @@ EXIT:
         int32_t ret = 0;
         bool retBool = false;
         bool result = false;
-        int32_t writePos = requestPacker_.ValidSize();
+        size_t writePos = requestPacker_.ValidSize();
 
         do {
             ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_BUFFER, requestPacker_);
@@ -584,7 +584,7 @@ EXIT:
     {
         int32_t ret = 0;
         bool retBool = false;
-        int32_t writePos = requestPacker_.ValidSize();
+        size_t writePos = requestPacker_.ValidSize();
 
         do {
             ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_COMPOSITION_TYPE, requestPacker_);
@@ -616,7 +616,7 @@ EXIT:
     {
         int32_t ret = 0;
         bool retBool = false;
-        int32_t writePos = requestPacker_.ValidSize();
+        size_t writePos = requestPacker_.ValidSize();
 
         do {
             ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_BLEND_TYPE, requestPacker_);
@@ -648,7 +648,7 @@ EXIT:
     {
         int32_t ret = 0;
         bool retBool = false;
-        int32_t writePos = requestPacker_.ValidSize();
+        size_t writePos = requestPacker_.ValidSize();
 
         do {
             ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_MASK_INFO, requestPacker_);
@@ -679,7 +679,7 @@ EXIT:
     int32_t SetLayerColor(uint32_t devId, uint32_t layerId, const LayerColor& layerColor)
     {
         int32_t ret = 0;
-        int32_t writePos = requestPacker_.ValidSize();
+        size_t writePos = requestPacker_.ValidSize();
 
         do {
             ret = CmdUtils::StartSection(REQUEST_CMD_SET_LAYER_COLOR, requestPacker_);
