@@ -2569,20 +2569,20 @@ enum StatisticsDetectEmotion {
 };
 
 // OHOS_ABILITY_CAMERA_PORTRAIT_THEME_SUPPORTED
-enum camera_portrait_theme_supportede_type {
+enum CameraPortraitThemeSupportedType {
     OHOS_CAMERA_PORTRAIT_THEME_NOT_SUPPORTED = 0,
     OHOS_CAMERA_PORTRAIT_THEME_SUPPORTED,
 }
 
 // OHOS_ABILITY_CAMERA_PORTRAIT_THEME_TYPES
-enum cameera_portrait_theme_types {
+enum CameraPortraitThemeTypes {
     OHOS_CAMERA_PORTRAIT_THEME_TYPE_NATURAL = 0,
     OHOS_CAMERA_PORTRAIT_THEME_TYPE_DELICATE,
     OHOS_CAMERA_PORTRAIT_THEME_TYPE_STYLISH,
 }
 
 // OHOS_ABILITY_CAMERA_VIDEO_ROTATION_SUPPORTED
-enum camera_video_rotation_supported_type {
+enum CameraVideoRotationSupportedType {
     OHOS_CAMERA_VIDEO_ROTATION_NOT_SUPPORTED = 0,
     OHOS_CAMERA_VIDEO_ROTATION_SUPPORTED,
 }
