@@ -82,7 +82,7 @@ public:
         COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_2_);
         value = 0;
         int32_t ret = ToDispErrCode(hdi_v1_2_->GetDisplayProperty(devId, id, value));
-        if (ret == DISPLAY_SUCCESS) {
+        if (ret == DISPLAY_SUCCESS && id == V1_2::DisplayPropertyID::DISPLAY_PROPERTY_ID_SKIP_VALIDATE) {
             isSupportSkipValidate_ = value;
         }
 
