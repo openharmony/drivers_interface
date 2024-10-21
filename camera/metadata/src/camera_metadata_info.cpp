@@ -934,6 +934,10 @@ int CameraMetadata::MetadataExpandItemMem(common_metadata_header_t *dst, camera_
         METADATA_ERR_LOG("MetadataExpandItemMem GetMetadataData failed");
         return CAM_META_FAILURE;
     }
+    if (item->data.offset > UINT32_MAX - oldItemSize || item->data.offset + oldItemSize >= dst->data_capacity) {
+        METADATA_ERR_LOG("MetadataExpandItemMem GetMetadataData failed");
+        return CAM_META_FAILURE;
+    }
     uint8_t *start = dstMetadataData + item->data.offset;
     uint8_t *end = start + oldItemSize;
     size_t length = dst->data_count - item->data.offset - oldItemSize;
