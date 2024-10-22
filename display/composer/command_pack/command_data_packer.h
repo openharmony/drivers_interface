@@ -104,7 +104,7 @@ public:
         return data_;
     }
 
-    void RollBack(int32_t writePos)
+    void RollBack(size_t writePos)
     {
         writePos_ = writePos;
     }

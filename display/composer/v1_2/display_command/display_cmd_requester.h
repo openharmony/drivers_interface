@@ -259,7 +259,7 @@ EXIT:
     {
         int32_t ret = 0;
         bool retBool = false;
-        int32_t writePos = requestPacker_.ValidSize();
+        size_t writePos = requestPacker_.ValidSize();
 
         do {
             ret = CmdUtils::StartSection(REQUEST_CMD_SET_DISPLAY_CONSTRAINT, requestPacker_);
