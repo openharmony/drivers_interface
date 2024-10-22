@@ -55,7 +55,7 @@ using HdifdSet = std::vector<std::shared_ptr<HdifdParcelable>>;
 static constexpr uint32_t TIME_BUFFER_MAX_LEN = 15;
 static constexpr uint32_t BUFFER_QUEUE_MAX_SIZE = 6;
 static constexpr unsigned int REDUCE_COUNT = 50;
-static constexpr unsigned int ERROR_FENCE_COUNT = 500;
+static constexpr int32_t ERROR_FENCE_COUNT = 500;
 static sptr<IMapper> g_bufferServiceImpl = nullptr;
 
 static constexpr uint32_t COMMIT_PRINT_INTERVAL = 1200;
