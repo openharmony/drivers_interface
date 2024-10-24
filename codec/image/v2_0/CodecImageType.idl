@@ -204,9 +204,9 @@ enum PropertyType {
     TONE_MAP_METADATA,                   /**< Tone map meta data for HDR. */
     USER_DATA_DO_COMPRESS,               /**< Determines whether user data is compressed. */
     IT35_INFO,                           /**< It35 info for HDR. */
-    AUX_TYPE,                            /**< auxType for auxiliary image. */
-    IMG_RESO,                            /**< Resolution for auxiliary image. */
-    RLOC_INFO,                           /**< rloc info for auxiliary image. */
+    AUX_TYPE,                            /**< URN for auxiliary image. */
+    IMG_RESOLUTION,                      /**< Resolution for uncoded auxiliary image. */
+    RLOC_INFO,                           /**< Rloc info for fragmentmap. */
 };
 
 /**
@@ -269,7 +269,7 @@ struct MasteringDisplayColourVolume {
  * @brief Defines a struct to describe the relative position of the auxiliary image to the associated image.
  *
  * @since 5.0
- * @version 2.0
+ * @version 1.0
  */
 struct RelativeLocation {
     unsigned int horizontalOffset;    /**< Horizontal offset in pixels of the left-most pixel column. */
@@ -280,7 +280,7 @@ struct RelativeLocation {
  * @brief Defines a struct to describe resolution for image.
  *
  * @since 5.0
- * @version 2.0
+ * @version 1.0
  */
 struct Resolution {
     unsigned int width;
@@ -366,7 +366,7 @@ struct ImageItem {
     boolean isHidden;                  /**< Determines whether to display this image. */
     String compressType;               /**< Determines how to compress the pixel data. */
     unsigned int quality;              /**< Compress quality, value range: [0, 100]. */
-    unsigned char[] liteProperties;    /**< Store smaller propety data, (enum + struct)... Exc:(enum + strlen + str)*/
+    unsigned char[] liteProperties;    /**< Store smaller propety data, (enum + struct)|(enum + strlen + str)...*/
     SharedBuffer sharedProperties;     /**< Store larger data, (enum + buffersize + buffer)... */
 };
 
