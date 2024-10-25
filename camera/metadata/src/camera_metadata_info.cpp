@@ -934,8 +934,10 @@ int CameraMetadata::MetadataExpandItemMem(common_metadata_header_t *dst, camera_
         METADATA_ERR_LOG("MetadataExpandItemMem GetMetadataData failed");
         return CAM_META_FAILURE;
     }
-    if (item->data.offset > UINT32_MAX - oldItemSize || item->data.offset + oldItemSize >= dst->data_capacity) {
-        METADATA_ERR_LOG("MetadataExpandItemMem GetMetadataData failed");
+    if (item->data.offset > UINT32_MAX - (uint32_t)oldItemSize ||
+        item->data.offset + (uint32_t)oldItemSize > dst->data_count) {
+        METADATA_ERR_LOG("MetadataExpandItemMem data.offset:%{public}u, oldItemSize:%{pulic}zu, "
+            "dst->data_count:%{public}u", item->data.offset, oldItemSize, dst->data_count);
         return CAM_META_FAILURE;
     }
     uint8_t *start = dstMetadataData + item->data.offset;
