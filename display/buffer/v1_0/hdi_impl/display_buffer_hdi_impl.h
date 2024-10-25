@@ -26,11 +26,13 @@
 #include "v1_0/iallocator.h"
 #include "v1_0/imapper.h"
 #include "v1_0/include/idisplay_buffer.h"
+#include "hdf_trace.h"
 
 #undef LOG_TAG
 #define LOG_TAG "DISP_HDI_BUFF"
 #undef LOG_DOMAIN
 #define LOG_DOMAIN 0xD002515
+#define DISPLAY_TRACE HdfTrace trace(__func__, "HDI:DISP:IMPL:")
 
 #ifndef BUFFER_HDI_IMPL_LOGE
 #define BUFFER_HDI_IMPL_LOGE(format, ...)              \
@@ -123,6 +125,7 @@ public:
 
     int32_t AllocMem(const AllocInfo& info, BufferHandle*& handle) const override
     {
+        DISPLAY_TRACE;
         CHECK_NULLPOINTER_RETURN_VALUE(allocator_, HDF_FAILURE);
         sptr<NativeBuffer> hdiBuffer;
         int32_t ret = allocator_->AllocMem(info, hdiBuffer);
