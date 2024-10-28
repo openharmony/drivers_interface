@@ -40,7 +40,7 @@ public:
     int32_t DestroyCaches();
     void SetNeedMap(bool needMap)
     {
-        LayerCache::needMap_ = needMap;		
+        LayerCache::needMap_ = needMap;
     }
     DeviceCache* DeviceCacheInstance(uint32_t deviceId) const;
     LayerCache* LayerCacheInstance(uint32_t deviceId, uint32_t layerId) const;
