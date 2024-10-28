@@ -104,6 +104,11 @@ public:
         return data_;
     }
 
+    void RollBack(int32_t writePos)
+    {
+        writePos_ = writePos;
+    }
+
     bool PackBegin(int32_t beginCmd)
     {
         writePos_ = 0;
