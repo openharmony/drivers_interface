@@ -38,10 +38,10 @@ public:
     int32_t CreateVirtualDisplayCache(uint32_t deviceId);
     int32_t DestroyVirtualDisplayCache(uint32_t deviceId);
     int32_t DestroyCaches();
-	void SetNeedMap(bool needMap)
-	{
-		LayerCache::needMap_ = needMap;		
-	}
+    void SetNeedMap(bool needMap)
+    {
+        LayerCache::needMap_ = needMap;		
+    }
     DeviceCache* DeviceCacheInstance(uint32_t deviceId) const;
     LayerCache* LayerCacheInstance(uint32_t deviceId, uint32_t layerId) const;
     void Dump() const;
