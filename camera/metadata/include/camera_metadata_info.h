@@ -50,7 +50,7 @@ private:
     static uint32_t AlignTo(uint32_t val, uint32_t alignment);
     static uint32_t MaxAlignment(uint32_t dataAlignment, uint32_t metadataAlignment);
     static size_t CalculateCameraMetadataMemoryRequired(uint32_t itemCount, uint32_t dataCount);
-    static int UpdateameraMetadataItemSize(camera_metadata_item_entry_t *item, uint32_t dataCount,
+    static int UpdateCameraMetadataItemSize(camera_metadata_item_entry_t *item, uint32_t dataCount,
         common_metadata_header_t *dst, const void *data);
     static int AddCameraMetadataItemVerify(common_metadata_header_t *dst,
         uint32_t item, const void *data, size_t dataCount, uint32_t *dataType);
