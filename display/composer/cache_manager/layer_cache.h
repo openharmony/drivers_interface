@@ -41,7 +41,7 @@ public:
     void Dump() const;
     static void NativeBufferInit(sptr<NativeBuffer>& buffer);
     static void NativeBufferCleanUp(sptr<NativeBuffer>& buffer);
-	static bool needMap_;
+    static bool needMap_;
 private:
     explicit LayerCache(uint32_t id);
     int32_t Init();
