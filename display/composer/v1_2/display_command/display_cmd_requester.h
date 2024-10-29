@@ -241,30 +241,41 @@ EXIT:
     // LTPO新增接口
     int32_t SetDisplayConstraint(uint32_t devId, uint64_t frameID, uint64_t ns, uint32_t type)
     {
-        int32_t ret = CmdUtils::StartSection(REQUEST_CMD_SET_DISPLAY_CONSTRAINT, requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: StartSection failed", __func__));
+        int32_t ret = 0;
+        bool retBool = false;
+        int32_t writePos = requestPacker_.ValidSize();
 
-        bool retBool = requestPacker_.WriteUint32(devId);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write devId failed", __func__));
+        do {
+            ret = CmdUtils::StartSection(REQUEST_CMD_SET_DISPLAY_CONSTRAINT, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: StartSection failed", __func__));
 
-        retBool = requestPacker_.WriteUint64(frameID);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write frameID failed", __func__));
+            retBool = requestPacker_.WriteUint32(devId);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write devId failed", __func__));
 
-        retBool = requestPacker_.WriteUint64(ns);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write ns failed", __func__));
+            retBool = requestPacker_.WriteUint64(frameID);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write frameID failed", __func__));
 
-        retBool = requestPacker_.WriteUint32(type);
-        DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
-            HDF_LOGE("%{public}s: write type failed", __func__));
+            retBool = requestPacker_.WriteUint64(ns);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write ns failed", __func__));
 
-        ret = CmdUtils::EndSection(requestPacker_);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: EndSection failed", __func__));
+            retBool = requestPacker_.WriteUint32(type);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write type failed", __func__));
 
+            ret = CmdUtils::EndSection(requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: EndSection failed", __func__));
+        } while (0);
+
+        if (retBool == false || ret != HDF_SUCCESS) {
+            requestPacker_.RollBack(writePos);
+            HDF_LOGE("%{public}s: writePos_ rollback", __func__);
+            return HDF_FAILURE;
+        }
         return HDF_SUCCESS;
     }
 
