@@ -90,6 +90,7 @@ enum AudioCategory {
     AUDIO_MMAP_VOIP        = 8, /**< Audio voip */
     AUDIO_IN_NAVIGATION    = 9, /**< Audio navigation */
     AUDIO_DIRECT           = 10,/**< Audio direct */
+    AUDIO_RAW              = 11,/**< Audio raw */
 };
 
 /**
