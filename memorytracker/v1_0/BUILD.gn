@@ -11,8 +11,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
+import("//build/config/components/hdi/hdi.gni")
 hdi("memorytracker") {
+  branch_protector_ret = "pac_ret"
   module_name = "memory_tracker_interface_service"
   sources = [
     "IMemoryTrackerInterface.idl",
