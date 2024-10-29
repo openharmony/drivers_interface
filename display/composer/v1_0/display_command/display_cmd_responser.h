@@ -187,6 +187,7 @@ public:
             if (!unpacker.BeginSection(unpackCmd)) {
                 HDF_LOGE("error: PackSection failed, unpackCmd=%{public}s.", CmdUtils::CommandToString(unpackCmd));
                 ret = HDF_FAILURE;
+                break;
             }
             ret = ProcessRequestCmd(unpacker, unpackCmd, inFds, outFds);
         }
