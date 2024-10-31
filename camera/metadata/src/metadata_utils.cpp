@@ -265,6 +265,10 @@ void MetadataUtils::ConvertVecToMetadata(const std::vector<uint8_t>& cameraAbili
     uint32_t itemCapacity = 0;
     uint32_t dataCapacity = 0;
 
+    if (cameraAbility.size() < MIN_VEC_SIZE) {
+        METADATA_ERR_LOG("ConvertVecToMetadata cameraAbility size:%{public}d", static_cast<int>(cameraAbility.size()));
+        return;
+    }
     ReadData<uint32_t>(tagCount, index, cameraAbility);
     if (tagCount > MAX_SUPPORTED_TAGS) {
         METADATA_ERR_LOG("ConvertVecToMetadata tagCount out of range:%{public}d", tagCount);

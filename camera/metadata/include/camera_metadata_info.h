@@ -25,6 +25,7 @@ static constexpr uint32_t MAX_SUPPORTED_TAGS = 1000;
 static constexpr uint32_t MAX_SUPPORTED_ITEMS = (12000 * 2 * 2);
 static constexpr uint32_t MAX_ITEM_CAPACITY = (1000 * 10);
 static constexpr uint32_t MAX_DATA_CAPACITY = (1000 * 10 * 10 * 10);
+static constexpr uint32_t MIN_VEC_SIZE = 12;
 
 #define METADATA_PACKET_ALIGNMENT \
     MaxAlignment(MaxAlignment(DATA_ALIGNMENT, METADATA_ALIGNMENT), ITEM_ALIGNMENT)

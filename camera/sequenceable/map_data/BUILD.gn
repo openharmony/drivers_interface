@@ -35,7 +35,7 @@ ohos_shared_library("libmap_data_sequenceable_1.0") {
     "ipc:ipc_single",
   ]
   cflags_cc = [ "-fstack-protector-strong" ]
-  ldflags = [ "-s" ]
+
   if (drivers_interface_camera_feature_coverage) {
     cflags_cc += [ "--coverage" ]
     ldflags += [ "--coverage" ]
