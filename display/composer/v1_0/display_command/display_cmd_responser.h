@@ -39,6 +39,7 @@
 #include "parameter.h"
 #include "v1_0/display_composer_type.h"
 #include "v1_0/mapper_stub.h"
+#include "common/include/display_vdi_adapter_interface.h"
 
 #define DISPLAY_TRACE HdfTrace trace(__func__, "HDI:DISP:")
 
@@ -1148,7 +1149,7 @@ protected:
     std::mutex requestMutex_;
     std::mutex replyMutex_;
 };
-using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, IDisplayComposerVdi>;
+using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, DisplayComposerVdiAdapter>;
 } // namespace V1_0
 } // namespace Composer
 } // namespace Display
