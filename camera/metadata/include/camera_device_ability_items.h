@@ -421,6 +421,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_STATUS_CAMERA_LENS_DIRTY_DETECTION,
     /**
+     * ohos.device.protectionState [static, enum, public]
+     *
+     * camera device property, query current camera device protection state
+     * (i.e. enum: DeviceProtectionStatus ...)
+     */
+    OHOS_DEVICE_PROTECTION_STATE,
+    /**
      * ohos.camera.propertiesEnd
      *
      * camera property end
@@ -966,6 +973,27 @@ typedef enum camera_device_metadata_tag {
      * (i.e. byte ...)
      */
     OHOS_CONTROL_CAMERA_USED_AS_POSITION,
+    /**
+     * ohos.control.cameraSessionUsage [static, enum[], public]
+     *
+     * camera device property, set current camera session usage type whether enable
+     * (i.e. enum[]: [CameraSessionUsageType, CameraSessionUsageControlType] ...)
+     */
+    OHOS_CONTROL_CAMERA_SESSION_USAGE,
+    /**
+     * ohos.control.ejectRetry [static, byte, public]
+     *
+     * camera device property, set current camera lens retry eject
+     * (i.e. byte: 0-false/1true ...)
+     */
+    OHOS_CONTROL_EJECT_RETRY,
+    /**
+     * ohos.control.fallProtection [static, byte, public]
+     *
+     * camera device property, set current camera lens fall protection
+     * (i.e. byte: 0-false/1true ...)
+     */
+    OHOS_CONTROL_FALL_PROTECTION,
     /**
      * ohos.device.controlEnd
      *
@@ -2442,6 +2470,25 @@ enum StatisticsDetectEmotion {
     OHOS_EMOTION_SADNESS = 1,
     OHOS_EMOTION_SMILE = 2,
     OHOS_EMOTION_SURPRISE = 3,
+};
+
+// OHOS_CONTROL_CAMERA_SESSION_USAGE
+enum CameraSessionUsageType {
+    OHOS_CAMERA_SESSION_USAGE_BOKEH = 0,
+};
+
+// OHOS_CONTROL_CAMERA_SESSION_USAGE
+enum CameraSessionUsageControlType {
+    OHOS_CAMERA_SESSION_USAGE_DISABLE = 0,
+    OHOS_CAMERA_SESSION_USAGE_ENABLE = 1,
+};
+
+// OHOS_DEVICE_PROTECTION_STATE
+enum DeviceProtectionStatus {
+    OHOS_DEVICE_SWITCH_FREQUENT = 0,
+    OHOS_DEVICE_EXTERNAL_PRESS = 1,
+    OHOS_DEVICE_EJECT_BLOCK = 2,
+    OHOS_DEVICE_FALL_PROTECTION = 3,
 };
 
 #endif
