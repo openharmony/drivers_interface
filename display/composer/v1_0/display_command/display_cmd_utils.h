@@ -272,7 +272,9 @@ public:
             HDF_LOGE("%{public}s, read fdId failed", __func__));
         if (fdId < 0 || MatchHdiFd(fdId, hdiFds, fd) == false) {
             // If matching failure, the illegal fd is transfered by smq directly, not by binder IPC.
-            fd = fdId;
+            HDF_LOGE("%{public}s, matching failure, fd %{public}d, fdId %{public}d, hdiFds.size %{public}zu",
+                     __func__, fd, fdId, hdiFds.size());
+            fd = -1;
         }
         return HDF_SUCCESS;
     }
