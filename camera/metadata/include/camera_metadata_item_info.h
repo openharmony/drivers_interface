@@ -511,7 +511,7 @@ static item_info_t g_ohosPostProcess[OHOS_CAMERA_EFFECT_END - OHOS_CAMERA_EFFECT
     [OHOS_ABILITY_CAMERA_VIDEO_ROTATION -
         OHOS_CAMERA_EFFECT_START] = {"supportedVideoRotation", META_TYPE_INT32, -1},
     [OHOS_CONTROL_CAMERA_VIDEO_ROTATION -
-        OHOS_CAMERA_EFFECT_START] = {"videoRotation", META_TYPE_BYTE, 1},
+        OHOS_CAMERA_EFFECT_START] = {"videoRotation", META_TYPE_INT32, 1},
 };
 
 static item_info_t g_ohosCameraSecure[OHOS_CAMERA_SECURE_END - OHOS_CAMERA_SECURE_START] = {
