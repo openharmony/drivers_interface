@@ -33,7 +33,6 @@ ohos_shared_library("metadata") {
     cflags += [ "--coverage" ]
     ldflags += [ "--coverage" ]
   }
-  all_dependent_configs = [ ":camera_metadata_config" ]
   if (defined(ohos_lite)) {
     sources = [
       "src/camera_metadata_info.cpp",
