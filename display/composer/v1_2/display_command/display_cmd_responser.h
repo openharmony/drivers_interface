@@ -239,7 +239,7 @@ REPLY:
             CmdUtils::CommandToString(unpackCmd)));
 
         DISPLAY_CHK_RETURN(PeriodDataReset() == HDF_FAILURE, HDF_FAILURE,
-                           HDF_LOGE("%{public}s: error: Check RequestBegin failed", __func__));
+                           HDF_LOGE("%{public}s: error: PeriodDataReset failed", __func__));
         while (ret == HDF_SUCCESS && unpacker.NextSection()) {
             if (!unpacker.BeginSection(unpackCmd)) {
                 HDF_LOGE("error: PackSection failed, unpackCmd=%{public}s.",
