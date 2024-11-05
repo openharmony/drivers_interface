@@ -230,8 +230,6 @@ REPLY:
         unpacker.Dump();
 #endif // DEBUG_DISPLAY_CMD_RAW_DATA
 
-        int32_t ec = PeriodDataReset();
-
         int32_t unpackCmd = -1;
         bool retBool = unpacker.PackBegin(unpackCmd);
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
@@ -240,6 +238,8 @@ REPLY:
             HDF_LOGI("error: unpacker PackBegin cmd not match, cmd(%{public}d)=%{public}s.", unpackCmd,
             CmdUtils::CommandToString(unpackCmd)));
 
+        DISPLAY_CHK_RETURN(PeriodDataReset() == HDF_FAILURE, HDF_FAILURE,
+                           HDF_LOGE("%{public}s: error: Check RequestBegin failed", __func__));
         while (ret == HDF_SUCCESS && unpacker.NextSection()) {
             if (!unpacker.BeginSection(unpackCmd)) {
                 HDF_LOGE("error: PackSection failed, unpackCmd=%{public}s.",
