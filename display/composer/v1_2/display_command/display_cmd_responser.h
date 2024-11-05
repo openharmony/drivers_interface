@@ -238,6 +238,8 @@ REPLY:
             HDF_LOGI("error: unpacker PackBegin cmd not match, cmd(%{public}d)=%{public}s.", unpackCmd,
             CmdUtils::CommandToString(unpackCmd)));
 
+        DISPLAY_CHK_RETURN(PeriodDataReset() == HDF_FAILURE, HDF_FAILURE,
+                           HDF_LOGE("%{public}s: error: PeriodDataReset failed", __func__));
         while (ret == HDF_SUCCESS && unpacker.NextSection()) {
             if (!unpacker.BeginSection(unpackCmd)) {
                 HDF_LOGE("error: PackSection failed, unpackCmd=%{public}s.",
@@ -266,8 +268,7 @@ REPLY:
             HDF_LOGE("Reply write failure, ret=%{public}d", ret);
             outEleCnt = 0;
         }
-        int32_t ec = PeriodDataReset();
-        return (ret == HDF_SUCCESS ? ec : ret);
+        return ret;
     }
 
     int32_t OnSetDisplayConstraint(CommandDataUnpacker& unpacker)
