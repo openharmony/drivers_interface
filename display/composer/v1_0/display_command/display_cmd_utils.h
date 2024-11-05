@@ -27,7 +27,7 @@
 #undef LOG_DOMAIN
 #define LOG_DOMAIN 0xD002515
 
-#define INVALID_FD -1
+#define INVALID_FD (-1)
 
 namespace OHOS {
 namespace HDI {
