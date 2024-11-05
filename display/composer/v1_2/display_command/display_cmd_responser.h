@@ -230,6 +230,8 @@ REPLY:
         unpacker.Dump();
 #endif // DEBUG_DISPLAY_CMD_RAW_DATA
 
+        int32_t ec = PeriodDataReset();
+
         int32_t unpackCmd = -1;
         bool retBool = unpacker.PackBegin(unpackCmd);
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
@@ -266,8 +268,7 @@ REPLY:
             HDF_LOGE("Reply write failure, ret=%{public}d", ret);
             outEleCnt = 0;
         }
-        int32_t ec = PeriodDataReset();
-        return (ret == HDF_SUCCESS ? ec : ret);
+        return ret;
     }
 
     int32_t OnSetDisplayConstraint(CommandDataUnpacker& unpacker)
