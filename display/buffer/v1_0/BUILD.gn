@@ -51,6 +51,7 @@ ohos_shared_library("libdisplay_buffer_hdi_impl") {
     "hdf_core:libhdi",
     "hdf_core:libpub_utils",
     "hilog:libhilog",
+    "hitrace:hitrace_meter",
     "ipc:ipc_single",
   ]
 

@@ -25,11 +25,11 @@ config("camera_sequenceable_config") {
 ohos_shared_library("libbuffer_producer_sequenceable_1.0") {
   sources = [ "buffer_producer_sequenceable.cpp" ]
 
-  all_dependent_configs = [ ":camera_sequenceable_config" ]
   public_configs = [ ":camera_sequenceable_config" ]
 
   external_deps = [
     "c_utils:utils",
+    "graphic_surface:buffer_handle",
     "graphic_surface:surface",
     "hdf_core:libpub_utils",
     "hilog:libhilog",

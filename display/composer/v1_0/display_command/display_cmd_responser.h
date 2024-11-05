@@ -39,6 +39,7 @@
 #include "parameter.h"
 #include "v1_0/display_composer_type.h"
 #include "v1_0/mapper_stub.h"
+#include "common/include/display_vdi_adapter_interface.h"
 
 #define DISPLAY_TRACE HdfTrace trace(__func__, "HDI:DISP:")
 
@@ -183,6 +184,7 @@ public:
             if (!unpacker.BeginSection(unpackCmd)) {
                 HDF_LOGE("error: PackSection failed, unpackCmd=%{public}s.", CmdUtils::CommandToString(unpackCmd));
                 ret = HDF_FAILURE;
+                break;
             }
             ret = ProcessRequestCmd(unpacker, unpackCmd, inFds, outFds);
         }
@@ -1147,7 +1149,7 @@ protected:
     std::mutex requestMutex_;
     std::mutex replyMutex_;
 };
-using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, IDisplayComposerVdi>;
+using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, DisplayComposerVdiAdapter>;
 } // namespace V1_0
 } // namespace Composer
 } // namespace Display

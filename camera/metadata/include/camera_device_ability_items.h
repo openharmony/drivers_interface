@@ -1947,6 +1947,27 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_CAMERA_CLOSE_AFTER_SECONDS,
     /**
+     * ohos.status.movingPhotoBufferDuration [static, uint32[], public]
+     *
+     * camera device property, report current moving photo buffer duration
+     * (i.e. uint32[] ...)
+     */
+    OHOS_MOVING_PHOTO_BUFFER_DURATION,
+    /**
+     * ohos.movingPhotoStart [static, uint32[], public]
+     *
+     * camera device property, report current moving photo start time
+     * (i.e. uint32[] ...)
+     */
+    OHOS_MOVING_PHOTO_START,
+    /**
+     * ohos.movingPhotoEnd [static, int64[], public]
+     *
+     * camera device property, report current moving photo end time
+     * (i.e. int64[] ...)
+     */
+    OHOS_MOVING_PHOTO_END,
+    /**
      * ohos.ability.captureMacroDepthFusionSupported [static, byte, public]
      *
      * camera device property, report current capture macro depth fusion supported

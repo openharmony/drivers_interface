@@ -116,13 +116,13 @@ public:
     }
     virtual int32_t ClearClientBuffer(uint32_t devId) override
     {
-        COMPOSER_CHECK_NULLPTR_RETURN(req_v1_2_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_2_);
         return ToDispErrCode(hdi_v1_2_->ClearClientBuffer(devId));
     }
 
     virtual int32_t ClearLayerBuffer(uint32_t devId, uint32_t layerId) override
     {
-        COMPOSER_CHECK_NULLPTR_RETURN(req_v1_2_);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_2_);
         return ToDispErrCode(hdi_v1_2_->ClearLayerBuffer(devId, layerId));
     }
 
