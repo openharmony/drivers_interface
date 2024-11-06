@@ -44,12 +44,10 @@
         }                                                   \
     } while (0)
 
-#define DISPLAY_CHK_BREAK(val, ...)  \
-    do {                                  \
-        if (val) {                        \
-            __VA_ARGS__;                  \
-            break;                        \
-        }                                 \
-    } while (0)
+#define DISPLAY_CHK_BREAK(val, ...)   \
+    if (val) {                        \
+        __VA_ARGS__;                  \
+        break;                        \
+    }                                 \
 
 #endif // DISPLAY_INTERFACE_UTILS_H
