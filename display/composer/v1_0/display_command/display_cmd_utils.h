@@ -27,6 +27,8 @@
 #undef LOG_DOMAIN
 #define LOG_DOMAIN 0xD002515
 
+#define INVALID_FD (-1)
+
 namespace OHOS {
 namespace HDI {
 namespace Display {
@@ -272,7 +274,9 @@ public:
             HDF_LOGE("%{public}s, read fdId failed", __func__));
         if (fdId < 0 || MatchHdiFd(fdId, hdiFds, fd) == false) {
             // If matching failure, the illegal fd is transfered by smq directly, not by binder IPC.
-            fd = fdId;
+            HDF_LOGE("%{public}s, matching failure, fd %{public}d, fdId %{public}d, hdiFds.size %{public}zu",
+                     __func__, fd, fdId, hdiFds.size());
+            fd = INVALID_FD;
         }
         return HDF_SUCCESS;
     }
