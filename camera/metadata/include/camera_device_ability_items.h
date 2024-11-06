@@ -1933,6 +1933,69 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_DEPTH_DATA_ACCURACY,
     /**
+     * ohos.ability.captureMacroDepthFusionSupported [static, byte, public]
+     *
+     * camera device property, report current capture macro depth fusion supported
+     * (i.e. byte ...)
+     */
+    OHOS_ABILITY_CAPTURE_MACRO_DEPTH_FUSION_SUPPORTED,
+    /**
+     * ohos.ability.captureMacroDepthFusionZoomRange [static, float[], public]
+     *
+     * camera device property, report current capture macro depth fusion zoom range
+     * (i.e. float[] ...)
+     */
+    OHOS_ABILITY_CAPTURE_MACRO_DEPTH_FUSION_ZOOM_RANGE,
+    /**
+     * ohos.control.captureMacroDepthFusion [static, byte, public]
+     *
+     * camera device property, set current capture macro depth fusion
+     * (i.e. byte ...)
+     */
+    OHOS_CONTROL_CAPTURE_MACRO_DEPTH_FUSION,
+    /**
+     * ohos.ability.cameraPortraitThemeSupported [static, byte, public]
+     *
+     * camera device property, report current camera portrait theme supported
+     * (i.e. byte ...)
+     */
+    OHOS_ABILITY_CAMERA_PORTRAIT_THEME_SUPPORTED,
+    /**
+     * ohos.ability.cameraPortraitThemeTypes [static, byte[], public]
+     *
+     * camera device property, report current camera supported portrait theme types
+     * (i.e. byte[] ...)
+     */
+    OHOS_ABILITY_CAMERA_PORTRAIT_THEME_TYPES,
+    /**
+     * ohos.control.cameraPortraitThemeType [static, byte, public]
+     *
+     * camera device property, set current camera portrait theme type
+     * (i.e. byte ...)
+     */
+    OHOS_CONTROL_CAMERA_PORTRAIT_THEME_TYPE,
+    /**
+     * ohos.ability.cameraVideoRotationSupported [static, byte, public]
+     *
+     * camera device property, report current camera video rotation supported
+     * (i.e. byte ...)
+     */
+    OHOS_ABILITY_CAMERA_VIDEO_ROTATION_SUPPORTED,
+    /**
+     * ohos.ability.cameraVideoRotation [static, int32[], public]
+     *
+     * camera device property, report current camera supported video rotation
+     * (i.e. int32[] ...)
+     */
+    OHOS_ABILITY_CAMERA_VIDEO_ROTATION,
+    /**
+     * ohos.control.cameraVideoRotation [static, int32, public]
+     *
+     * camera device property, set current camera video rotation
+     * (i.e. int32 ...)
+     */
+    OHOS_CONTROL_CAMERA_VIDEO_ROTATION,
+    /**
      * ohos.camera.effectEnd
      *
      * camera effect end
@@ -2489,6 +2552,25 @@ enum DeviceProtectionStatus {
     OHOS_DEVICE_EXTERNAL_PRESS = 1,
     OHOS_DEVICE_EJECT_BLOCK = 2,
     OHOS_DEVICE_FALL_PROTECTION = 3,
+};
+
+// OHOS_ABILITY_CAMERA_PORTRAIT_THEME_SUPPORTED
+enum CameraPortraitThemeSupportedType {
+    OHOS_CAMERA_PORTRAIT_THEME_NOT_SUPPORTED = 0,
+    OHOS_CAMERA_PORTRAIT_THEME_SUPPORTED,
+};
+
+// OHOS_ABILITY_CAMERA_PORTRAIT_THEME_TYPES
+enum CameraPortraitThemeTypes {
+    OHOS_CAMERA_PORTRAIT_THEME_TYPE_NATURAL = 0,
+    OHOS_CAMERA_PORTRAIT_THEME_TYPE_DELICATE,
+    OHOS_CAMERA_PORTRAIT_THEME_TYPE_STYLISH,
+};
+
+// OHOS_ABILITY_CAMERA_VIDEO_ROTATION_SUPPORTED
+enum CameraVideoRotationSupportedType {
+    OHOS_CAMERA_VIDEO_ROTATION_NOT_SUPPORTED = 0,
+    OHOS_CAMERA_VIDEO_ROTATION_SUPPORTED,
 };
 
 #endif
