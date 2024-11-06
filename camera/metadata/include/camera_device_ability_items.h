@@ -428,6 +428,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_DEVICE_PROTECTION_STATE,
     /**
+     * ohos.device.tofsensorabnormal [static, int32, public]
+     *
+     * camera device property, query current camera tof sensor abnormal state
+     * (i.e. int32 ...)
+     */
+    OHOS_STATUS_TOF_SENSOR_ABNORMAL,
+    /**
      * ohos.camera.propertiesEnd
      *
      * camera property end
