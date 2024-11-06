@@ -499,6 +499,10 @@ uint8_t *CameraMetadata::GetMetadataData(const common_metadata_header_t *metadat
 
 camera_metadata_item_entry_t *CameraMetadata::GetMetadataItems(const common_metadata_header_t *metadataHeader)
 {
+    if (metadataHeader == nullptr) {
+        METADATA_ERR_LOG("GetMetadataItems metadataHeader is null");
+        return nullptr;
+    }
     return reinterpret_cast<camera_metadata_item_entry_t *>(
         (reinterpret_cast<uint8_t *>(const_cast<common_metadata_header_t *>(metadataHeader)) +
         metadataHeader->items_start));
@@ -615,6 +619,11 @@ int32_t CameraMetadata::GetMetadataSection(uint32_t itemSection, uint32_t *secti
     if (itemSection < OHOS_CAMERA_PROPERTIES ||
         itemSection >= OHOS_ABILITY_SECTION_END) {
         METADATA_ERR_LOG("GetMetadataSection itemSection is not valid");
+        return CAM_META_FAILURE;
+    }
+
+    if (section == nullptr) {
+        METADATA_ERR_LOG("GetMetadataSection section is nullptr");
         return CAM_META_FAILURE;
     }
 
