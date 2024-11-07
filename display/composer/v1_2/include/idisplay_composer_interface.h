@@ -71,6 +71,9 @@ public:
     virtual int32_t EnableHardwareCursorStats(uint32_t devId, bool enable) = 0;
 
     virtual int32_t GetHardwareCursorStats(uint32_t devId, uint32_t& frameCount, uint32_t& vsyncCount) = 0;
+
+    virtual int32_t FastPresent(uint32_t devId, const PresentParam& param,
+        const std::vector<BufferHandle*> inHandles) = 0;
 };
 } // V1_2
 } // Composer
