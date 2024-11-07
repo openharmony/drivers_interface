@@ -72,5 +72,17 @@ import ohos.hdi.wlan.chip.v1_0.ChipTypes;
      * @version 1.0
      */
     [oneway] OnRssiReport([in] int index, [in] int c0Rssi, [in] int c1Rssi);
+
+    /**
+     * @brief Called to process the Netlink message received, This interface is preferentially used to
+     * communicate with the Wi-Fi service.
+     *
+     * @param type Indicates the Netlink message type (Action Message, Action Status, Ext Message).
+     * @param recvMsg Indicates the Netlink message received.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    [oneway] OnWifiNetlinkMessage([in] unsigned int type, [in] unsigned char[] recvMsg);
 };
 /** @} */
