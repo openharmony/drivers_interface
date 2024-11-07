@@ -10,14 +10,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
- 
+
 import("//build/config/components/hdi/hdi.gni")
- 
+
 hdi("display_commontype") {
   module_name = "display_commontype"
- 
+
   sources = [ "CMColorSpace.idl" ]
- 
+
   language = "cpp"
   subsystem_name = "hdf"
   part_name = "drivers_interface_display"
