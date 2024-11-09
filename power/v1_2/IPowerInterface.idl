@@ -235,5 +235,35 @@ interface IPowerInterface {
      * @version 1.0
      */
     SetSuspendTag([in] String tag);
+
+    /**
+     * @brief Set the set-path file value related to the scene name.
+     *
+     * @param scene The scene name defined in power config json file.
+     *
+     * @param value Value of the set-path file.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 5.0
+     *
+     * @version 1.0
+     */
+    SetPowerConfig([in] String scene, [in] String value);
+
+    /**
+     * @brief Get the get-path file value related to the scene name.
+     *
+     * @param scene The scene name defined in power config json file.
+     *
+     * @param value Value of the get-path file.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 5.0
+     *
+     * @version 1.0
+     */
+    GetPowerConfig([in] String scene, [out] String value);
 }
 /** @} */
