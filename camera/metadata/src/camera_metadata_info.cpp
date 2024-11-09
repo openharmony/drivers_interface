@@ -20,10 +20,12 @@
 #include <memory>
 #include <vector>
 #include <map>
+#include <mutex>
 #include "camera_metadata_item_info.h"
 #include "camera_vendor_tag.h"
 
 namespace OHOS::Camera {
+static std::mutex mtx_;
 static CameraVendorTag* g_vendorTagImpl = nullptr;
 const char* g_exampleVendorTagLib = "libcamera_example_vendor_tag_impl.z.so";
 const char* g_vendorTagLib = "libcamera_vendor_tag_impl.z.so";
@@ -349,6 +351,7 @@ CameraMetadata::CameraMetadata(size_t itemCapacity, size_t dataCapacity)
 
 CameraMetadata::~CameraMetadata()
 {
+    std::lock_guard<std::mutex> lockGuard(mtx_);
     if (metadata_) {
         FreeCameraMetadataBuffer(metadata_);
         metadata_ = nullptr;
@@ -411,6 +414,7 @@ bool CameraMetadata::resize_add_metadata(uint32_t item, const void *data, size_t
     if (result != CAM_META_SUCCESS) {
         METADATA_ERR_LOG("Failed to copy the old metadata to new metadata");
         FreeCameraMetadataBuffer(newMetadata);
+        newMetadata = nullptr;
         return false;
     }
 
@@ -418,6 +422,7 @@ bool CameraMetadata::resize_add_metadata(uint32_t item, const void *data, size_t
     if (result != CAM_META_SUCCESS) {
         METADATA_ERR_LOG("Failed to add new entry");
         FreeCameraMetadataBuffer(newMetadata);
+        newMetadata = nullptr;
         return false;
     }
     replace_metadata(newMetadata);
@@ -431,7 +436,10 @@ void CameraMetadata::replace_metadata(common_metadata_header_t *newMetadata)
         return;
     }
 
-    FreeCameraMetadataBuffer(metadata_);
+    std::lock_guard<std::mutex> lockGuard(mtx_);
+    if (metadata_ != nullptr) {
+        FreeCameraMetadataBuffer(metadata_);
+    }
     metadata_ = newMetadata;
 }
 
