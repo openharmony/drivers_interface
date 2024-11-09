@@ -439,7 +439,6 @@ void CameraMetadata::replace_metadata(common_metadata_header_t *newMetadata)
     std::lock_guard<std::mutex> lockGuard(mtx_);
     if (metadata_ != nullptr) {
         FreeCameraMetadataBuffer(metadata_);
-        metadata_ = newMetadata;
     }
     metadata_ = newMetadata;
 }
