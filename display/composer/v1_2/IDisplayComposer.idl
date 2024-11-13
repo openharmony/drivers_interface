@@ -107,5 +107,5 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_1.IDisplayCompos
      * @since 5.0
      * @version 1.2
      */
-     SetDisplayActiveRegion([in] unsigned int devId, [out] struct IRect rect);
+     SetDisplayActiveRegion([in] unsigned int devId, [in] struct IRect rect);
 }
