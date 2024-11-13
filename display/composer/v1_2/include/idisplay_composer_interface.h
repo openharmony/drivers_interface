@@ -72,7 +72,7 @@ public:
 
     virtual int32_t GetHardwareCursorStats(uint32_t devId, uint32_t& frameCount, uint32_t& vsyncCount) = 0;
 
-    virtual int32_t SetDisplayActiveRegion(uint32_t devId, const IRect& rect) = 0;
+    virtual int32_t SetDisplayActiveRegion(uint32_t devId, const OHOS::HDI::Display::Composer::V1_0::IRect& rect) = 0;
 };
 } // V1_2
 } // Composer
