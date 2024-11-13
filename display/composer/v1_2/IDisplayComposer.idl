@@ -16,6 +16,7 @@
 package ohos.hdi.display.composer.v1_2;
 
 import ohos.hdi.display.composer.v1_1.IDisplayComposer;
+import ohos.hdi.display.composer.v1_0.DisplayComposerType;
 import ohos.hdi.display.composer.v1_2.DisplayComposerType;
 import ohos.hdi.display.composer.v1_2.IVBlankIdleCallback;
 
