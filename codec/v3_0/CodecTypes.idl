@@ -324,7 +324,7 @@ struct RangeValue {
  * @brief Defines the video encoding and decoding capabilities.
   
  * @since 4.1
- * @version 4.0
+ * @version 5.0
  */
 struct CodecVideoPortCap {
     struct Rect minSize;               /**< Minimum resolution supported. */
@@ -345,6 +345,7 @@ struct CodecVideoPortCap {
     boolean isSupportLTR;	           /**< Whether supports long-term reference feature */
     int maxLTRFrameNum;	               /**< Maximum long-term reference frame numbers supported */
     boolean isSupportWaterMark;	       /**< Whether supports WaterMark feature */
+    boolean isSupportQPMap;	           /**< Whether supports frame qp map feature */
 };
 
 /**
