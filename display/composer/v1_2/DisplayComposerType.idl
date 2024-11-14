@@ -99,3 +99,17 @@ enum DisplayPropertyID {
     DISPLAY_CAPBILITY_HARDWARE_CURSOR = 2,
     DISPLAY_PROPERTY_ID_ADAPTIVE_SYNC = 3,             /**< Indicates whether to support adaptive sync(display in advance) */
 };
+
+/**
+ * @brief Defines the data structure of present param.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+struct PresentParam {
+    unsigned int isLowLatency;    /**< flag of low latency display */
+    unsigned int sliceHeight;     /**< height of slice */
+    unsigned int sliceNum;        /**< slice nums of current frame */
+    unsigned int imageDimension;  /**< low 16 bits: image width, high 16 bits: image height */
+    int reserve;                  /**< reserve */
+};

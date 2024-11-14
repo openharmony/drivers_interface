@@ -154,6 +154,22 @@ public:
         return ret;
     }
 
+    virtual int32_t FastPresent(uint32_t devId, const PresentParam& param,
+        const std::vector<BufferHandle*> inHandles) override
+    {
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_2_);
+        std::vector<sptr<NativeBuffer>> outHandles;
+        for (auto inHandle : inHandles) {
+            sptr<NativeBuffer> nativeBuffer = new NativeBuffer(inHandle);
+            if (nativeBuffer == nullptr) {
+                HDF_LOGE("failed to alloc mem for NativeBuffer");
+                return DISPLAY_FAILURE;
+            }
+            outHandles.emplace_back(nativeBuffer);
+        }
+        return ToDispErrCode(hdi_v1_2_->FastPresent(devId, param, outHandles));
+    }
+
 protected:
     using BaseType1_1 = V1_1::DisplayComposerHdiImpl<Interface, CompHdi, CmdReq>;
     using BaseType1_1::WAIT_TIME_INTERVAL;
