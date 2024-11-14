@@ -147,6 +147,13 @@ public:
         return ret;
     }
 
+    virtual int32_t SetDisplayActiveRegion(uint32_t devId, const IRect& rect) override
+    {
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_2_);
+        int32_t ret = ToDispErrCode(hdi_v1_2_->SetDisplayActiveRegion(devId, rect));
+        return ret;
+    }
+
 protected:
     using BaseType1_1 = V1_1::DisplayComposerHdiImpl<Interface, CompHdi, CmdReq>;
     using BaseType1_1::WAIT_TIME_INTERVAL;
