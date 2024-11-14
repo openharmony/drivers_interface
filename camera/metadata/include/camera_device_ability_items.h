@@ -435,6 +435,41 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_STATUS_TOF_SENSOR_ABNORMAL,
     /**
+     * ohos.ability.sunBlockPreviewTypes [static, byte[], public]
+     *
+     * camera device property, report current camera sun block types supported in proview
+     * (i.e. byte[]: [0-notSupport|1-RGB|2-UV|...])
+     */
+    OHOS_ABILITY_SUN_BLOCK_PREVIEW_TYPES,
+    /**
+     * ohos.ability.sunBlockBlendColors [static, byte[], public]
+     *
+     * camera device property, report current camera sun block supports blend colors
+     * (i.e. byte[]: [0-notSupport|1-purple|2-silver|3-gold|...])
+     */
+    OHOS_ABILITY_SUN_BLOCK_BLEND_COLORS,
+    /**
+     * ohos.ability.sunBlockRgbCropRegion [static, float[], public]
+     *
+     * camera device property, report current camera RGB image cropping coefficient, which is the normalized coordinate
+     * (i.e. float[] ...)
+     */
+    OHOS_ABILITY_SUN_BLOCK_RGB_CROP_REGION,
+    /**
+     * ohos.ability.sunBlockRgbUvRegion [static, float[], public]
+     *
+     * camera device property, report current camera UV image cropping coefficient, which is the normalized coordinate
+     * (i.e. float[] ...)
+     */
+    OHOS_ABILITY_SUN_BLOCK_RGB_UV_REGION,
+    /**
+     * ohos.status.sunBlockHint [static, byte, public]
+     *
+     * camera device property, queries the status returned by the current camera running the sun protection detection
+     * (i.e. byte ...)
+     */
+    OHOS_STATUS_SUN_BLOCK_HINT,
+    /**
      * ohos.camera.propertiesEnd
      *
      * camera property end
@@ -1001,6 +1036,20 @@ typedef enum camera_device_metadata_tag {
      * (i.e. byte: 0-false/1true ...)
      */
     OHOS_CONTROL_FALL_PROTECTION,
+    /**
+     * ohos.control.sunBlockPreviewType [static, byte, public]
+     *
+     * camera device property, sets the sun protection detection type under the current camera preview
+     * (i.e. byte: 0-RGB/1-UV/2-RGB+UV)
+     */
+    OHOS_CONTROL_SUN_BLOCK_PREVIEW_TYPE,
+    /**
+     * ohos.control.sunBlockBlendColor [static, byte, public]
+     *
+     * camera device property, sets the sun protection detection blend color for the current camera
+     * (i.e. byte: 0-none/1-purple/2-silver/3-gold)
+     */
+    OHOS_CONTROL_SUN_BLOCK_BLEND_COLOR,
     /**
      * ohos.device.controlEnd
      *

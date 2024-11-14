@@ -127,6 +127,13 @@ enum OperationMode : ohos.hdi.camera.v1_2.OperationMode_V1_2 {
     * @version 1.0
     */
     FLUORESCENCE_PHOTO = 21,
+
+    /**
+    * sun block mode, which dedicated to uv sunscreen detection mode
+    * @since 5.0
+    * @version 1.0
+    */
+    SUN_BLOCK = 22,
 };
 
 /**
@@ -205,6 +212,13 @@ enum ExtendedStreamInfoType : ohos.hdi.camera.v1_2.ExtendedStreamInfoType_V1_2 {
      * @version 1.0
      */
     EXTENDED_STREAM_INFO_FRAGMENT =11,
+
+    /**
+     * Extended stream information of uv sunscreen detection
+     * @since 5.0
+     * @version 1.0
+     */
+    EXTENDED_STREAM_INFO_UV = 12,
 };
 
 /**

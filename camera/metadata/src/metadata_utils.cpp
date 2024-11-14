@@ -69,12 +69,6 @@ bool MetadataUtils::ConvertMetadataToVec(const std::shared_ptr<CameraMetadata> &
     }
 
     common_metadata_header_t *meta = metadata->get();
-    if (meta == nullptr) {
-        WriteData<uint32_t>(0, cameraAbility);
-        METADATA_WARNING_LOG("ConvertMetadataToVec tagCount is 0!");
-        return true;
-    }
-
     uint32_t tagCount = GetCameraMetadataItemCount(meta);
     if (tagCount > MAX_SUPPORTED_TAGS) {
         METADATA_ERR_LOG("ConvertMetadataToVec tagCount out of range:%{public}d", tagCount);
