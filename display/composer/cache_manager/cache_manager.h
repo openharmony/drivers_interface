@@ -220,7 +220,7 @@ public:
         std::lock_guard<std::mutex> lock(mutex_);
         auto cacheItem = caches_.find(id);
         if (cacheItem == caches_.end()) {
-            HDF_LOGE("%{public}s: Cache %{public}d is not existing\n", __func__, id);
+            HDF_LOGE("%{public}s: Cache %{public}d is not existing", __func__, id);
             return false;
         }
 

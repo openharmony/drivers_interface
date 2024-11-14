@@ -89,6 +89,7 @@ struct DisplayComposerVdiAdapter {
     int32_t (*SetHardwareCursorPosition)(uint32_t devId, int32_t x, int32_t y);
     int32_t (*EnableHardwareCursorStats)(uint32_t devId, bool enable);
     int32_t (*GetHardwareCursorStats)(uint32_t devId, uint32_t& frameCount, uint32_t& vsyncCount);
+    int32_t (*SetDisplayActiveRegion)(uint32_t devId, const IRect& rect);
     int32_t (*FastPresent)(uint32_t devId, const PresentParam& param,
         const std::vector<BufferHandle*>& inHandles);
 };
@@ -151,6 +152,7 @@ using SetDisplayConstraintFunc = int32_t (*)(uint32_t devId, uint64_t frameID, u
 using SetHardwareCursorPositionFunc = int32_t (*)(uint32_t devId, int32_t x, int32_t y);
 using EnableHardwareCursorStatsFunc = int32_t (*)(uint32_t devId, bool enable);
 using GetHardwareCursorStatsFunc = int32_t (*)(uint32_t devId, uint32_t& frameCount, uint32_t& vsyncCount);
+using SetDisplayActiveRegionFunc = int32_t (*)(uint32_t devId, const IRect& rect);
 using FastPresentFunc = int32_t (*)(uint32_t devId, const PresentParam& param,
     const std::vector<BufferHandle*>& inHandles);
 
