@@ -323,6 +323,14 @@
           }
         },
         {
+          "name": "//drivers/interface/display/graphic/common/v2_1:libdisplay_commontype_proxy_2.1",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/display/graphic/common"
+          }
+        },
+        {
           "name": "//drivers/interface/display/graphic/common/v2_1:display_commontype_idl_headers_2.1",
           "header": {
             "header_files": [
