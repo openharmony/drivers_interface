@@ -175,7 +175,6 @@ enum ExtendedStreamInfoType : ohos.hdi.camera.v1_2.ExtendedStreamInfoType_V1_2 {
      * Extended stream information of exif.
      * @since 5.0
      * @version 1.0
-     * Extended stream information of exif.
      */
     EXTENDED_STREAM_INFO_EXIF = 7,
 
