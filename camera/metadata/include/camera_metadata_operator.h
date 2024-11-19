@@ -33,6 +33,7 @@
 
 #define INDEX_COUNTER 2
 #define WRAP_LENGTH 4
+#define ENTRY_DATA_SIZE 4
 
 // data type
 enum {
