@@ -272,11 +272,16 @@ public:
         int32_t fdId = -1;
         DISPLAY_CHK_RETURN(unpacker.ReadInt32(fdId) == false, HDF_FAILURE,
             HDF_LOGE("%{public}s, read fdId failed", __func__));
-        if (fdId < 0 || MatchHdiFd(fdId, hdiFds, fd) == false) {
+        if (fdId < 0) {
+            fd = INVALID_FD;
+            return HDF_SUCCESS;
+        }
+        if (!(MatchHdiFd(fdId, hdiFds, fd))) {
             // If matching failure, the illegal fd is transfered by smq directly, not by binder IPC.
             HDF_LOGE("%{public}s, matching failure, fd %{public}d, fdId %{public}d, hdiFds.size %{public}zu",
                      __func__, fd, fdId, hdiFds.size());
             fd = INVALID_FD;
+            return HDF_FAILURE;
         }
         return HDF_SUCCESS;
     }
