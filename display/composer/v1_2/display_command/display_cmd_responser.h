@@ -291,10 +291,13 @@ REPLY:
         ret = unpacker.ReadUint32(type) ? HDF_SUCCESS : HDF_FAILURE;
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        DISPLAY_CHECK(impl_ == nullptr || impl_->SetDisplayConstraint == nullptr, goto EXIT);
-        ret = impl_->SetDisplayConstraint(devId, frameID, ns, type);
+        if (impl_ != nullptr && impl_->SetDisplayConstraint != nullptr) {
+            ret = impl_->SetDisplayConstraint(devId, frameID, ns, type);
+        }
 
-        DISPLAY_CHECK(ret != HDF_SUCCESS && ret != DISPLAY_NOT_SUPPORT && ret != HDF_ERR_NOT_SUPPORT, goto EXIT);
+        if (ret != HDF_SUCCESS && ret != DISPLAY_NOT_SUPPORT && ret != HDF_ERR_NOT_SUPPORT) {
+            HDF_LOGE("SetDisplayConstraint failed with ret = %{public}d", ret);
+        }
 EXIT:
         if (ret != HDF_SUCCESS) {
             errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CONSTRAINT, ret);
