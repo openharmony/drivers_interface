@@ -15,7 +15,6 @@
 
 /**
  * @addtogroup HdiAudio
- * @
  *
  * @brief Provides unified APIs for audio services to access audio drivers.
  *
@@ -366,7 +365,7 @@ enum AudioInputType {
  */
 struct AudioOffloadInfo
 {
-    unsigned int sampleRate;    /**< Audio sampling rate */    
+    unsigned int sampleRate;    /**< Audio sampling rate */
     unsigned int channelCount;  /**< Number of audio channels */
     unsigned long channelLayout;   /**< Audio channel layout */
     unsigned int bitRate;       /**< bitRate of compressed audio data */
