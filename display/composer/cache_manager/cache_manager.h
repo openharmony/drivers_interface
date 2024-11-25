@@ -85,6 +85,9 @@ public:
         auto cacheItem = caches_.find(id);
         if (cacheItem != caches_.end()) {
             HDF_LOGI("%{public}s: intend to insert a existing cache, SeqNo=%{public}d", __func__, id);
+            if (cleanUpFunc_ && cacheItem->second != nullptr) {
+                cleanUpFunc_(cacheItem->second);
+            }
             cacheItem->second.reset(cache);
         } else {
             if (cacheCountMax_ != 0 && caches_.size() >= cacheCountMax_) {
@@ -201,6 +204,9 @@ public:
         auto cacheItem = caches_.find(id);
         if (cacheItem != caches_.end()) {
             HDF_LOGI("%{public}s: intend to insert a existing cache, SeqNo=%{public}d", __func__, id);
+            if (cleanUpFunc_ && cacheItem->second != nullptr) {
+                cleanUpFunc_(cacheItem->second);
+            }
             cacheItem->second = OHOS::sptr<Base::NativeBuffer>(cache);
         } else {
             if (cacheCountMax_ != 0 && caches_.size() >= cacheCountMax_) {
