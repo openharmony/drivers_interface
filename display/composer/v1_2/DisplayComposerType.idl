@@ -66,6 +66,7 @@ enum BufferUsage : ohos.hdi.display.composer.v1_0.BufferUsage {
     HBM_USE_AUXILLARY_BUFFER2 = (1ULL << 22),              /**< combine with main usage for specific meta feature */
     HBM_USE_AUXILLARY_BUFFER3 = (1ULL << 23),              /**< combine with main usage for specific meta feature */
     HBM_USE_VIDEO_DEC_MV = HBM_USE_VIDEO_DECODER | HBM_USE_AUXILLARY_BUFFER2, /**< ref to VIDEO_DEC */
+    HBM_USE_DRM_REDRAW = (1ULL << 24),          /**< For DRM redraw framebuffer allocate */
 };
 
 
