@@ -55,6 +55,7 @@ using HdifdSet = std::vector<std::shared_ptr<HdifdParcelable>>;
 static constexpr uint32_t TIME_BUFFER_MAX_LEN = 15;
 static constexpr uint32_t BUFFER_QUEUE_MAX_SIZE = 6;
 static constexpr unsigned int REDUCE_COUNT = 50;
+static constexpr int32_t ERROR_FENCE_COUNT = 500;
 static sptr<IMapper> g_bufferServiceImpl = nullptr;
 
 static constexpr uint32_t COMMIT_PRINT_INTERVAL = 1200;
@@ -223,7 +224,6 @@ protected:
             HDF_LOGE("%{public}s: size:%{public}u is too large", __func__, size);
             return HDF_FAILURE;
         }
-
         reply_ = std::make_shared<Transfer>(size, SmqType::SYNCED_SMQ);
         DISPLAY_CHK_RETURN(reply_ == nullptr, HDF_FAILURE,
             HDF_LOGE("%{public}s: reply_ construct failed", __func__));
@@ -372,14 +372,27 @@ EXIT:
         }
 
         int32_t ret = devCache->SetDisplayClientBuffer(data.buffer, data.seqNo, needFreeBuffer,
-            [&](const BufferHandle& handle)->int32_t {
+            [&data, &needMoveFd, &fd, this](const BufferHandle& handle)->int32_t {
 #ifdef DISPLAY_COMSPOER_DEBUG_DUMP
             DumpLayerBuffer(data.devId, data.seqNo, data.fence, handle, "client_");
 #endif
-            HdfTrace traceVdi("SetDisplayClientBuffer", data.buffer == nullptr ? ("data.buffer is nullptr! seqNo:" +
-            std::to_string(data.seqNo)) : ("HDI:DISP:HARDWARE height:" + std::to_string(data.buffer->height) +
-            " width:" + std::to_string(data.buffer->width) + " seqNo:" + std::to_string(data.seqNo)));
+            if (data.fence > ERROR_FENCE_COUNT) {
+                HDF_LOGW("SetDisplayClientBuffer:%{public}s data.devId:%{public}d, data.buffer->fd:%{public}d, "
+                         "data.seqNo:%{public}d, fd:%{public}d",
+                    data.buffer == nullptr ? "data.buffer is nullptr!" : "",
+                    data.devId,
+                    data.buffer == nullptr ? -1 : data.buffer->fd,
+                    data.seqNo,
+                    fd);
+            }
             needMoveFd = true;
+            HITRACE_METER_FMT(HITRACE_TAG_HDF,
+                "SetDisplayClientBuffer:%s data.devId:%d, data.buffer->fd:%d, data.seqNo:%d, fd:%d",
+                data.buffer == nullptr ? "data.buffer is nullptr!" : "",
+                data.devId,
+                data.buffer == nullptr ? -1 : data.buffer->fd,
+                data.seqNo,
+                fd);
             int rc = impl_->SetDisplayClientBuffer(data.devId, handle, fd);
             DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
             return HDF_SUCCESS;
@@ -813,12 +826,29 @@ EXIT:
         DISPLAY_CHECK(layerCache == nullptr, return HDF_FAILURE);
 
         int32_t ret = layerCache->SetLayerBuffer(data.buffer, data.seqNo, needFreeBuffer, deletingList,
-            [&](const BufferHandle& handle)->int32_t {
+            [&data, &needMoveFd, &fd, this](const BufferHandle& handle)->int32_t {
 #ifdef DISPLAY_COMSPOER_DEBUG_DUMP
             DumpLayerBuffer(data.devId, data.layerId, data.fence, handle, "layer_");
 #endif
-            HdfTrace traceVdi("SetLayerBuffer", "HDI:DISP:HARDWARE");
+            if (data.fence > ERROR_FENCE_COUNT) {
+                HDF_LOGW("SetLayerBuffer:%{public}s data.devId:%{public}d, data.layerId:%{public}d, "
+                         "data.buffer->fd:%{public}d, data.seqNo:%{public}d, fd:%{public}d",
+                    data.buffer == nullptr ? "data.buffer is nullptr!" : "",
+                    data.devId,
+                    data.layerId,
+                    data.buffer == nullptr ? -1 : data.buffer->fd,
+                    data.seqNo,
+                    fd);
+            }
             needMoveFd = true;
+            HITRACE_METER_FMT(HITRACE_TAG_HDF,
+                "SetLayerBuffer:%s data.devId:%d, data.layerId:%d, data.buffer->fd:%d, data.seqNo:%d, fd:%d",
+                data.buffer == nullptr ? "data.buffer is nullptr!" : "",
+                data.devId,
+                data.layerId,
+                data.buffer == nullptr ? -1 : data.buffer->fd,
+                data.seqNo,
+                fd);
             int rc = impl_->SetLayerBuffer(data.devId, data.layerId, handle, fd);
             DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
             return HDF_SUCCESS;
