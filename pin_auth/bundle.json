@@ -15,7 +15,7 @@
   },
   "component":{
     "name":"drivers_interface_pin_auth",
-    "subsystem":"hdf",
+    "subsystem":"driver",
     "adapted_system_type":[
       "standard"
     ],
