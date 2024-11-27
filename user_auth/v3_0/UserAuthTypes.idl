@@ -532,41 +532,4 @@ struct GlobalConfigParam {
     /** Specified authTypes, shouldn't empty. See @{AuthType}.*/
     int[] authTypes;
 };
-
-/**
- * @brief User auth token plain.
- *
- * @since 5.1
- * @version 1.0
- */
-struct UserAuthTokenPlain {
-    /** Token version. */
-    unsigned int version;
-    /** User ID. */
-    int userId;
-    /** Challenge of the token. */
-    unsigned char[] challenge;
-    /** Time interval between token signed and verified. */
-    unsigned long timeInterval;
-    /** Authentication trust level. */
-    unsigned int authTrustLevel;
-    /** Authentication type. See @{AuthType}. */
-    int authType;
-    /** Auth mode. */
-    int authMode;
-    /** Security level. */
-    unsigned int securityLevel;
-    /** Token type. */
-    int tokenType;
-    /** SecureUid of the user. */
-    unsigned long secureUid;
-    /** Enrollment ID. */
-    unsigned long enrolledId;
-    /** Credential ID. */
-    unsigned long credentialId;
-    /** Collector udid. */
-    String collectorUdid;
-    /** Verifier udid. */
-    String verifierUdid;
-};
 /** @} */
