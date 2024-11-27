@@ -496,22 +496,6 @@ interface IUserAuthInterface {
      */
     SetGlobalConfigParam([in] GlobalConfigParam param);
     /**
-     * @brief Verify token and return the plainText. 
-     *
-     * @param tokenIn Token signed by userAuth.
-     * @param allowableDuration Allowable duration of token.
-     * @param tokenPlainOut Token plainText.
-     * @param rootSecret protection key for the user file key.
-     *
-     * @return Returns <b>0</b> if the operation is successful.
-     * @return Returns a non-zero value if the operation fails.
-     *
-     * @since 5.1
-     * @version 1.0
-     */
-    VerifyAuthToken([in] unsigned char[] tokenIn, [in] unsigned long allowableDuration,
-        [out] struct UserAuthTokenPlain tokenPlainOut, [out] unsigned char[] rootSecret);
-    /**
      * @brief Obtains credential information.
      *
      * @param credentialId Indicates the credential ID.
