@@ -856,9 +856,10 @@ EXIT:
             }
             traceMsg += " fd:" + std::to_string(fd);
             if (data.fence > ERROR_FENCE_COUNT || fd > ERROR_FENCE_COUNT || handle.fd > ERROR_FENCE_COUNT) {
-                HDF_LOGI("SetLayerBuffer: %{public}s data.devId: %{public}d data.layerId: %{public}d, data.buffer->fd:%{public}d, 
-                data.seqNo:%{public}d handle.fd:%{public}d, fd:%{public}d", data.buffer == nullptr ? "data.buffer is nullptr!" : 
-                "", data.devId, data.layerId, data.buffer == nullptr ? -1 : data.buffer->fd,
+                HDF_LOGI("SetLayerBuffer: %{public}s data.devId: %{public}d data.layerId: %{public}d, "
+                "data.buffer->fd:%{public}d, data.seqNo:%{public}d handle.fd:%{public}d, fd:%{public}d", 
+                data.buffer == nullptr ? "data.buffer is nullptr!" : "", 
+                data.devId, data.layerId, data.buffer == nullptr ? -1 : data.buffer->fd,
 				data.seqNo, handle.fd, fd);
             }
             HdfTrace traceVdi("SetLayerBuffer", traceMsg);
