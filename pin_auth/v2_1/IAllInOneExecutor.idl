@@ -180,7 +180,7 @@ interface IAllInOneExecutor {
     /**
      * @brief Sends a command to the driver.
      *
-     * @param commandId Indicates the command ID. See {@link DriverCommandId}.
+     * @param commandId Indicates the command ID. See {@link CommandId}.
      * @param extraInfo Indicates the extra information of the command.
      * @param callbackObj Indicates the callback object of the command. See {@link IExecutorCallback}.
      *
