@@ -129,6 +129,7 @@ public:
 
         DISPLAY_CHECK(replyPacker_.WriteInt32(commitInfo.skipRet) == false,
             HDF_LOGE("%{public}s, write skip validate return value error", __func__));
+
         if (commitInfo.skipRet != HDF_SUCCESS) {
             ReplyNotSkipInfo(devId, commitInfo);
         } else {
@@ -243,7 +244,6 @@ REPLY:
             ret = request_->Read(reinterpret_cast<int32_t *>(requestData.get()), inEleCnt,
                 CmdUtils::TRANSFER_WAIT_TIME);
         }
-
         CommandDataUnpacker unpacker;
         unpacker.Init(requestData.get(), inEleCnt << CmdUtils::MOVE_SIZE);
 #ifdef DEBUG_DISPLAY_CMD_RAW_DATA
@@ -258,6 +258,8 @@ REPLY:
             HDF_LOGI("error: unpacker PackBegin cmd not match, cmd(%{public}d)=%{public}s.", unpackCmd,
             CmdUtils::CommandToString(unpackCmd)));
 
+        DISPLAY_CHK_RETURN(PeriodDataReset() == HDF_FAILURE, HDF_FAILURE,
+                           HDF_LOGE("%{public}s: error: PeriodDataReset failed", __func__));
         while (ret == HDF_SUCCESS && unpacker.NextSection()) {
             if (!unpacker.BeginSection(unpackCmd)) {
                 HDF_LOGE("error: PackSection failed, unpackCmd=%{public}s.",
@@ -289,8 +291,7 @@ REPLY:
             HDF_LOGE("Reply write failure, ret=%{public}d", ret);
             outEleCnt = 0;
         }
-        int32_t ec = PeriodDataReset();
-        return (ret == HDF_SUCCESS ? ec : ret);
+        return ret;
     }
 
     int32_t OnSetDisplayConstraint(CommandDataUnpacker& unpacker)
@@ -312,6 +313,7 @@ REPLY:
 
         ret = unpacker.ReadUint32(type) ? HDF_SUCCESS : HDF_FAILURE;
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+
         if (vdiImpl1_1_ != nullptr) {
             ret = vdiImpl1_1_->SetDisplayConstraint(devId, frameID, ns, type);
         }
@@ -358,10 +360,8 @@ private:
 
 using HdiDisplayCmdResponser =
     DisplayCmdResponser<SharedMemQueue<int32_t>, IDisplayComposerVdi, IDisplayComposerVdiV1_1>;
-
 using HdiDisplayCmdResponser_1_1 =
     DisplayCmdResponser<SharedMemQueue<int32_t>, IDisplayComposerVdi, IDisplayComposerVdiV1_1>;
-
 } // namespace V1_2
 } // namespace Composer
 } // namespace Display
