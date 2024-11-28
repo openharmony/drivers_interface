@@ -540,8 +540,13 @@ common_metadata_header_t *CameraMetadata::FillCameraMetadata(common_metadata_hea
     metadataHeader->items_start = AlignTo(sizeof(common_metadata_header_t), ITEM_ALIGNMENT);
     metadataHeader->data_count = 0;
     metadataHeader->data_capacity = dataCapacity;
-    size_t dataUnaligned = reinterpret_cast<uint8_t *>(GetMetadataItems(metadataHeader) +
-        metadataHeader->item_capacity) - reinterpret_cast<uint8_t *>(metadataHeader);
+    camera_metadata_item_entry_t *pItem = GetMetadataItems(metadataHeader);
+    if (pItem == nullptr) {
+        METADATA_ERR_LOG("FillCameraMetadata pItem is null");
+        return nullptr;
+    }
+    size_t dataUnaligned = reinterpret_cast<uint8_t *>(pItem + metadataHeader->item_capacity) -
+                           reinterpret_cast<uint8_t *>(metadataHeader);
     metadataHeader->data_start = AlignTo(dataUnaligned, DATA_ALIGNMENT);
 
     METADATA_DEBUG_LOG("MetadataHeader ItemCapacity Size = %{public}u, DataCapacity Size = %{public}u",
@@ -803,7 +808,12 @@ int CameraMetadata::AddCameraMetadataItem(common_metadata_header_t *dst, uint32_
     }
 
     size_t dataPayloadBytes = dataCount * OHOS_CAMERA_METADATA_TYPE_SIZE[dataType];
-    camera_metadata_item_entry_t *metadataItem = GetMetadataItems(dst) + dst->item_count;
+    camera_metadata_item_entry_t *pItem = GetMetadataItems(dst);
+    if (pItem == nullptr) {
+        METADATA_ERR_LOG("AddCameraMetadataItem pItem is null");
+        return CAM_META_INVALID_PARAM;
+    }
+    camera_metadata_item_entry_t *metadataItem = pItem + dst->item_count;
     ret = memset_s(metadataItem, sizeof(camera_metadata_item_entry_t), 0, sizeof(camera_metadata_item_entry_t));
     if (ret != EOK) {
         METADATA_ERR_LOG("AddCameraMetadataItem: memset_s failed");
@@ -858,8 +868,12 @@ int CameraMetadata::GetCameraMetadataItem(const common_metadata_header_t *src, u
         METADATA_ERR_LOG("GetCameraMetadataItem index is greater than item count");
         return CAM_META_INVALID_PARAM;
     }
-
-    camera_metadata_item_entry_t *localItem = GetMetadataItems(src) + index;
+    camera_metadata_item_entry_t *pItem = GetMetadataItems(src);
+    if (pItem == nullptr) {
+        METADATA_ERR_LOG("GetCameraMetadataItem pItem is null");
+        return CAM_META_INVALID_PARAM;
+    }
+    camera_metadata_item_entry_t *localItem = pItem + index;
 
     item->index = index;
     item->item = localItem->item;
@@ -1123,6 +1137,10 @@ int CameraMetadata::UpdateCameraMetadataItem(common_metadata_header_t *dst, uint
 int CameraMetadata::moveMetadataMemery(common_metadata_header_t *dst, camera_metadata_item_entry_t *itemToDelete,
     size_t dataBytes)
 {
+    if (itemToDelete == nullptr) {
+        METADATA_ERR_LOG("UpdateCameraMetadataItemSize itemToDelete is null");
+        return CAM_META_INVALID_PARAM;
+    }
     uint8_t *dstMetadataData = GetMetadataData(dst);
     if (dstMetadataData == nullptr) {
         METADATA_ERR_LOG("UpdateCameraMetadataItemSize GetMetadataData failed");
@@ -1156,7 +1174,12 @@ int CameraMetadata::DeleteCameraMetadataItemByIndex(common_metadata_header_t *ds
     }
 
     int32_t ret = CAM_META_SUCCESS;
-    camera_metadata_item_entry_t *itemToDelete = GetMetadataItems(dst) + index;
+    camera_metadata_item_entry_t *pItem = GetMetadataItems(dst);
+    if (pItem == nullptr) {
+        METADATA_ERR_LOG("DeleteCameraMetadataItemByIndex pItem is null");
+        return CAM_META_INVALID_PARAM;
+    }
+    camera_metadata_item_entry_t *itemToDelete = pItem + index;
     int32_t dataBytes = CalculateCameraMetadataItemDataSize(itemToDelete->data_type, itemToDelete->count);
     if (dataBytes > 0) {
         ret = moveMetadataMemery(dst, itemToDelete, dataBytes);
