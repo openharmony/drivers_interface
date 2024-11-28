@@ -41,7 +41,7 @@ package ohos.hdi.user_auth.v3_0;
  * @brief Enumerates the credential types for authentication.
  *
  * @since 3.2
- * @version 2.0
+ * @version 3.0
  */
 enum AuthType : int {
     /**< All types. */
@@ -94,7 +94,7 @@ enum ExecutorSecureLevel : int {
  * @brief Defines pin auth's subtype.
  *
  * @since 3.2
- * @version 2.0
+ * @version 3.0
  */
 enum PinSubType : int {
     /**< Six digit pin. */
@@ -130,7 +130,7 @@ enum ScheduleMode : int {
  * Auth intent.
  *
  * @since 5.0
- * @version 1.0
+ * @version 2.0
  */
 enum AuthIntent : int {
     /**< The auth intent is default. */
@@ -276,7 +276,7 @@ struct IdentifyResultInfo {
  * @brief Defines credential information.
  *
  * @since 4.0
- * @version 1.0
+ * @version 2.0
  */
 struct CredentialInfo {
     /**< Credential ID. */
@@ -441,7 +441,7 @@ struct ReuseUnlockParam {
  * @brief Defines credential enrollment parameters.
  *
  * @since 3.2
- * @version 2.0
+ * @version 3.0
  */
 struct EnrollParam {
     /**< Authentication type. See @{AuthType}. */

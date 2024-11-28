@@ -153,4 +153,15 @@ struct Property {
     int nextFailLockoutDuration;
 };
 
+/**
+ * @brief Enumerates command IDs.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+enum CommandId : int {
+    /**< The vendor may add a custom command ID after this. */
+    VENDOR_COMMAND_BEGIN = 10000
+};
+
 /** @} */

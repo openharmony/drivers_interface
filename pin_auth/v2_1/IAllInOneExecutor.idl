@@ -187,7 +187,7 @@ interface IAllInOneExecutor {
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
      *
-     * @since 5.1
+     * @since 5.0
      * @version 1.0
      */
     SendCommand([in] int commandId, [in] unsigned char[] extraInfo, [in] IExecutorCallback callbackObj);
