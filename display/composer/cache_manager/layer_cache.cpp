@@ -19,7 +19,7 @@
 #include "common/include/display_interface_utils.h"
 #include "hdf_base.h"
 #include "hdf_log.h"
-#include "gen/drivers/interface/display/composer/v1_0/display_composer_type.h"
+#include "v1_0/display_composer_type.h"
 
 namespace OHOS {
 namespace HDI {
