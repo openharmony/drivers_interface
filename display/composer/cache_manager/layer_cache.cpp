@@ -19,7 +19,7 @@
 #include "common/include/display_interface_utils.h"
 #include "hdf_base.h"
 #include "hdf_log.h"
-#include "v1_0/display_composer_type.h"
+#include "gen/drivers/interface/display/composer/v1_0/display_composer_type.h"
 
 namespace OHOS {
 namespace HDI {
@@ -167,7 +167,7 @@ int32_t LayerCache::FreeMem(sptr<NativeBuffer>& buffer)
         HDF_LOGE("GetMapperService failed!");
         return HDF_FAILURE;
     }
-    if (needMap_ && ((buffer->GetBufferHandle()->usage & HBM_USE_PROTECTED) != HBM_USE_PROTECTED)) {
+    if (needMap_ && ((buffer->GetBufferHandle()->usage & V1_0::HBM_USE_PROTECTED) != V1_0::HBM_USE_PROTECTED)) {
         int32_t ret = Unmap(buffer);
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("Unmap failed!");
@@ -187,7 +187,7 @@ int32_t LayerCache::RegisterBuffer(sptr<NativeBuffer>& buffer)
         HDF_LOGE("Register Buffer failed!");
         return ret;
     }
-    if (needMap_ && ((buffer->GetBufferHandle()->usage & HBM_USE_PROTECTED) != HBM_USE_PROTECTED)) {
+    if (needMap_ && ((buffer->GetBufferHandle()->usage & V1_0::HBM_USE_PROTECTED) != V1_0::HBM_USE_PROTECTED)) {
         ret = Mmap(buffer);
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("Mmap failed!");
