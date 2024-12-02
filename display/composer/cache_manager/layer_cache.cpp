@@ -167,6 +167,10 @@ int32_t LayerCache::FreeMem(sptr<NativeBuffer>& buffer)
         HDF_LOGE("GetMapperService failed!");
         return HDF_FAILURE;
     }
+    if (buffer == nullptr || buffer->GetBufferHandle() == nullptr) {
+        HDF_LOGE("buffer or GetBufferHandle is null!");
+        return mapperService->FreeMem(buffer);
+    }    
     if (needMap_ && ((buffer->GetBufferHandle()->usage & V1_0::HBM_USE_PROTECTED) != V1_0::HBM_USE_PROTECTED)) {
         int32_t ret = Unmap(buffer);
         if (ret != HDF_SUCCESS) {
@@ -187,6 +191,10 @@ int32_t LayerCache::RegisterBuffer(sptr<NativeBuffer>& buffer)
         HDF_LOGE("Register Buffer failed!");
         return ret;
     }
+    if (buffer == nullptr || buffer->GetBufferHandle() == nullptr) {
+        HDF_LOGE("buffer or GetBufferHandle is null!");
+        return HDF_FAILURE;
+    }    
     if (needMap_ && ((buffer->GetBufferHandle()->usage & V1_0::HBM_USE_PROTECTED) != V1_0::HBM_USE_PROTECTED)) {
         ret = Mmap(buffer);
         if (ret != HDF_SUCCESS) {
