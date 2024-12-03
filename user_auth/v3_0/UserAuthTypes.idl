@@ -162,13 +162,17 @@ enum UserType : int {
  * @brief Reuse mode.
  *
  * @since 5.0
- * @version 1.0
+ * @version 2.0
  */
 enum ReuseMode : int {
-    /**< sub user. */
+    /**< auth type relevant. */
     AUTH_TYPE_RELEVANT = 1,
-    /**< private user. */
+    /**< auth type irrelevant. */
     AUTH_TYPE_IRRELEVANT = 2,
+    /**< caller irrelevant and auth type relevant */
+    CALLER_IRRELEVANT_AUTH_TYPE_RELEVANT = 3,
+    /**< caller irrelevant and auth type irrelevant */
+    CALLER_IRRELEVANT_AUTH_TYPE_IRRELEVANT = 4,
 };
 
 /**
