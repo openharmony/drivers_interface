@@ -173,7 +173,7 @@ public:
     virtual int32_t SetLayerPerFrameParameterSmq(uint32_t devId, uint32_t layerId, const std::string& key,
         const std::vector<int8_t>& value) override
     {
-        return ToDispErrCode(req_v1_2_->SetLayerPerFrameParameter(devId, layerId, key, value));
+        return ToDispErrCode(req_v1_2_->SetLayerPerFrameParameterSmq(devId, layerId, key, value));
     }
 
 protected:
