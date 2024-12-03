@@ -137,37 +137,37 @@ enum OperationMode : ohos.hdi.camera.v1_2.OperationMode_V1_2 {
 enum ExtendedStreamInfoType : ohos.hdi.camera.v1_2.ExtendedStreamInfoType_V1_2 {
 
     /**
+     * Extended stream information of raw.
      * @since 5.0
      * @version 1.0
-     * Extended stream information of raw.
      */
     EXTENDED_STREAM_INFO_RAW = 2,
 
     /**
+     * Extended stream information of depth.
      * @since 5.0
      * @version 1.0
-     * Extended stream information of depth.
      */
     EXTENDED_STREAM_INFO_DEPTH = 3,
 
     /**
+     * Extended stream information of meta.
      * @since 5.0
      * @version 1.0
-     * Extended stream information of meta.
      */
     EXTENDED_STREAM_INFO_META = 4,
     
     /**
+     * Extended stream information of secure.
      * @since 5.0
      * @version 1.0
-     * Extended stream information of secure.
      */
     EXTENDED_STREAM_INFO_SECURE = 5,
 
     /**
+     * Extended stream information of maker.
      * @since 5.0
      * @version 1.0
-     * Extended stream information of maker.
      */
     EXTENDED_STREAM_INFO_MAKER_INFO = 6,
 
