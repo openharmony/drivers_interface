@@ -329,7 +329,7 @@ EXIT:
 
         for (uint32_t i = 0; i < vectStrSize; i++) {
             int32_t tmpChar;
-            ret = unpacker.ReadUint32(tmpChar) ? HDF_SUCCESS : HDF_FAILURE;
+            ret = unpacker.ReadInt32(tmpChar) ? HDF_SUCCESS : HDF_FAILURE;
             if (ret != HDF_SUCCESS) {
                 break;
             }
