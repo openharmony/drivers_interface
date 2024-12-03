@@ -50,6 +50,8 @@ import ohos.hdi.display.composer.v1_1.DisplayComposerType;
 enum DispPowerStatus : ohos.hdi.display.composer.v1_1.DispPowerStatus {
     POWER_STATUS_PRE_ON = 5,                  /**< The power status is Enter pre-lit screen state */
     POWER_STATUS_PRE_OFF = 6,                 /**< The power status is Exit pre-lit sreen state */
+    POWER_STATUS_DOZE = 7,                    /**< The power status is doze and prepare to present */
+    POWER_STATUS_DOZE_SUSPEND = 8,            /**< The power status is doze and ended present */
     POWER_STATUS_BUTT_V1_2,                   /**< The power status is invalid */
 };
 
