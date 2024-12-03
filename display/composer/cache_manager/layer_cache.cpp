@@ -174,8 +174,8 @@ int32_t LayerCache::FreeMem(sptr<NativeBuffer>& buffer)
                 HDF_LOGE("Unmap failed!");
             }
         }
-    }        
-
+    }
+    
     return mapperService->FreeMem(buffer);
 }
 
@@ -192,7 +192,8 @@ int32_t LayerCache::RegisterBuffer(sptr<NativeBuffer>& buffer)
     }
     
     if (needMap_) {
-        if (buffer != nullptr && buffer->GetBufferHandle() != nullptr && ((buffer->GetBufferHandle()->usage & V1_0::HBM_USE_PROTECTED) != V1_0::HBM_USE_PROTECTED)) {
+        if (buffer != nullptr && buffer->GetBufferHandle() != nullptr &&
+            ((buffer->GetBufferHandle()->usage & V1_0::HBM_USE_PROTECTED) != V1_0::HBM_USE_PROTECTED)) {
             ret = Mmap(buffer);
             if (ret != HDF_SUCCESS) {
                 HDF_LOGE("Mmap failed!");
