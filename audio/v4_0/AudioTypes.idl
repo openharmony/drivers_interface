@@ -76,7 +76,7 @@ enum AudioPortPin {
  * @brief Enumerates the audio category.
  *
  * @since 4.1
- * @version 3.1
+ * @version 3.0
  */
 enum AudioCategory {
     AUDIO_IN_MEDIA         = 0, /**< Media */
@@ -90,7 +90,6 @@ enum AudioCategory {
     AUDIO_MMAP_VOIP        = 8, /**< Audio voip */
     AUDIO_IN_NAVIGATION    = 9, /**< Audio navigation */
     AUDIO_DIRECT           = 10,/**< Audio direct */
-    AUDIO_RAW              = 11,/**< Audio raw */
 };
 
 /**
@@ -440,6 +439,7 @@ enum AudioInputType {
     AUDIO_INPUT_CAMCORDER_TYPE           = 1 << 7, /**< Assigned camcorder input type */
     AUDIO_INPUT_EC_TYPE                  = 1 << 8, /**< Assigned EC input type */
     AUDIO_INPUT_NOISE_REDUCTION_TYPE     = 1 << 9, /**< Assigned noise reduction input type */
+    AUDIO_INPUT_RAW_TYPE                 = 1 << 10, /**< Assigned raw input type */
 };
 
 /**
