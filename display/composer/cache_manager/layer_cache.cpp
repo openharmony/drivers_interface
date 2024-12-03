@@ -168,7 +168,8 @@ int32_t LayerCache::FreeMem(sptr<NativeBuffer>& buffer)
         return HDF_FAILURE;
     }
     if (needMap_) {
-        if (buffer != nullptr && buffer->GetBufferHandle() != nullptr && ((buffer->GetBufferHandle()->usage & V1_0::HBM_USE_PROTECTED) != V1_0::HBM_USE_PROTECTED)) {
+        if (buffer != nullptr && buffer->GetBufferHandle() != nullptr &&
+            ((buffer->GetBufferHandle()->usage & V1_0::HBM_USE_PROTECTED) != V1_0::HBM_USE_PROTECTED)) {
             int32_t ret = Unmap(buffer);
             if (ret != HDF_SUCCESS) {
                 HDF_LOGE("Unmap failed!");
