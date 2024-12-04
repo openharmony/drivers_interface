@@ -170,6 +170,12 @@ public:
         return ToDispErrCode(hdi_v1_2_->FastPresent(devId, param, outHandles));
     }
 
+    virtual int32_t SetLayerPerFrameParameterSmq(uint32_t devId, uint32_t layerId, const std::string& key,
+        const std::vector<int8_t>& value) override
+    {
+        return ToDispErrCode(req_v1_2_->SetLayerPerFrameParameterSmq(devId, layerId, key, value));
+    }
+
 protected:
     using BaseType1_1 = V1_1::DisplayComposerHdiImpl<Interface, CompHdi, CmdReq>;
     using BaseType1_1::WAIT_TIME_INTERVAL;
