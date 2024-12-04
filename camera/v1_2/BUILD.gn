@@ -39,7 +39,10 @@ if (defined(ohos_lite)) {
       "../sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0",
       "../sequenceable/map_data:libmap_data_sequenceable_1.0",
     ]
-    sequenceable_ext_deps = [ "graphic_surface:surface" ]
+    sequenceable_ext_deps = [
+      "graphic_surface:buffer_handle",
+      "graphic_surface:surface",
+    ]
 
     language = "cpp"
     subsystem_name = "hdf"

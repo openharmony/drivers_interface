@@ -35,6 +35,7 @@ ohos_shared_library("libbuffer_producer_sequenceable_1.0") {
     "hilog:libhilog",
     "ipc:ipc_single",
   ]
+  public_external_deps = [ "graphic_surface:buffer_handle" ]
   cflags_cc = [ "-fstack-protector-strong" ]
 
   if (drivers_interface_camera_feature_coverage) {
