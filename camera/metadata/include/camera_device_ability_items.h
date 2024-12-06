@@ -995,6 +995,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_FALL_PROTECTION,
     /**
+     * ohos.ability.qualityPrioritization [static, byte, public]
+     *
+     * camera device property, set current camera quality prioritization
+     * (i.e. byte ...)
+     */
+    OHOS_CONTROL_QUALITY_PRIORITIZATION,
+    /**
      * ohos.device.controlEnd
      *
      * device controlEnd
@@ -2592,6 +2599,12 @@ enum CameraPortraitThemeTypes {
 enum CameraVideoRotationSupportedType {
     OHOS_CAMERA_VIDEO_ROTATION_NOT_SUPPORTED = 0,
     OHOS_CAMERA_VIDEO_ROTATION_SUPPORTED,
+};
+
+// OHOS_ABILITY_CAMERA_QUALITY_PRIORITIZATION
+enum CameraQualityPrioritization {
+    OHOS_CAMERA_QUALITY_PRIORITIZATION_HIGH_QUALITY = 0,
+    OHOS_CAMERA_QUALITY_PRIORITIZATION_POWER_BALANCE,
 };
 
 #endif
