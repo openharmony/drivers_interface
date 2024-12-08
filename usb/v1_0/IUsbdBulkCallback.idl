@@ -29,6 +29,8 @@
 
 package ohos.hdi.usb.v1_0;
 
+import ohos.hdi.usb.v1_0.UsbTypes;
+
 /**
  * @brief Defines the callback for reporting usb data. This callback needs to be registered when
  * a usb user subscribes to usb data. Only after the usb is enabled, the usb data subscriber can receive
@@ -38,8 +40,8 @@ package ohos.hdi.usb.v1_0;
  */
 [callback] interface IUsbdBulkCallback {
 
-    OnBulkWriteCallback([in] int status, [in] int actLength);
+    OnBulkWriteCallback([in] int status, [in] int actLength, [in] UsbIsoPacketDescriptor[] descs, [in] unsigned int userData);
 
-    OnBulkReadCallback([in] int status, [in] int actLength);
+    OnBulkReadCallback([in] int status, [in] int actLength, [in] UsbIsoPacketDescriptor[] descs, [in] unsigned int userData);
     
 }

@@ -69,3 +69,19 @@ struct USBDeviceInfo {
     int busNum;
     int devNum;
 };
+
+struct UsbIsoPacketDescriptor {
+    int isoLength;
+    int isoActualLength;
+    int isoStatus;
+};
+
+struct USBTransferInfo {
+    int endpoint;
+    int flags;
+    int type;
+    int timeOut;
+    int length;
+    unsigned int userData;
+    unsigned int numIsoPackets;
+};
