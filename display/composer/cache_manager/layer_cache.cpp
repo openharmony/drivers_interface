@@ -50,6 +50,14 @@ LayerCache::~LayerCache()
 {
 }
 
+bool LayerCache::IsBufferCacheNotExist()
+{
+    if (bufferCaches_ == nullptr) {
+        return true;
+    }
+    return bufferCaches_->Size() == 0;
+}
+
 int32_t LayerCache::Init()
 {
     bufferCaches_.reset(new CacheManager<uint32_t, NativeBuffer>());
@@ -84,8 +92,6 @@ int32_t LayerCache::SetLayerBuffer(BufferHandle*& buffer, uint32_t seqNo, bool &
         HDF_LOGE("%{public}s: call NativeBufferCache fail", __func__));
     int32_t ret = realFunc(*handle);
     if (ret != HDF_SUCCESS) {
-        bufferCaches_->EraseCache(seqNo);
-        buffer = nullptr;
         HDF_LOGE("%{public}s: call realFunc fail", __func__);
     }
 

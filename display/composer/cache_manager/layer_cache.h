@@ -38,6 +38,7 @@ public:
         const std::vector<uint32_t>& deletingList, std::function<int32_t (const BufferHandle&)> realFunc);
     int32_t SetBufferCacheMaxCount(uint32_t cacheCount);
     int32_t ResetLayerBuffer();
+    bool IsBufferCacheNotExist();
     void Dump() const;
     static void NativeBufferInit(sptr<NativeBuffer>& buffer);
     static void NativeBufferCleanUp(sptr<NativeBuffer>& buffer);

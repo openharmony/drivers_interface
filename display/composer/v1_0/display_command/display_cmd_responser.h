@@ -440,10 +440,6 @@ EXIT:
 #endif // DISPLAY_COMMUNITY
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("%{public}s, SetDisplayClientBuffer error", __func__);
-            if (data.isValidBuffer && data.buffer != nullptr) {
-                FreeBufferHandle(data.buffer);
-                data.buffer = nullptr;
-            }
             errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, ret);
         }
     }
@@ -633,6 +629,37 @@ EXIT:
             errMaps_.emplace(REQUEST_CMD_SET_LAYER_CROP, ret);
         }
         return;
+    }
+
+    int32_t CheckBufferNotExist(uint32_t devId, uint32_t layerId)
+    {
+        if (cacheMgr_ == nullptr) {
+            HDF_LOGE("%{public}s, cacheMgr_ is null, devId:%{public}d, layerId:%{public}d",
+                __func__, devId, layerId);
+            return HDF_FAILURE;
+        }
+
+        std::lock_guard<std::mutex> lock(cacheMgr_->GetCacheMgrMutex());
+        DeviceCache* devCache = cacheMgr_->DeviceCacheInstance(devId);
+        if (devCache == nullptr) {
+            HDF_LOGE("%{public}s, devCache is null, devId:%{public}d, layerId:%{public}d",
+                __func__, devId, layerId);
+            return HDF_FAILURE;
+        }
+
+        LayerCache* layerCache = devCache->LayerCacheInstance(layerId);
+        if (layerCache == nullptr) {
+            HDF_LOGE("%{public}s, layerCache is null, devId:%{public}d, layerId:%{public}d",
+                __func__, devId, layerId);
+            return HDF_FAILURE;
+        }
+
+        if (layerCache->IsBufferCacheNotExist()) {
+            HDF_LOGE("%{public}s, no buffer in devId:%{public}d, layerId:%{public}d",
+                __func__, devId, layerId);
+            return HDF_FAILURE;
+        }
+        return HDF_SUCCESS;
     }
 
     void OnSetLayerZorder(CommandDataUnpacker& unpacker)
@@ -898,10 +925,6 @@ EXIT:
 #endif // DISPLAY_COMMUNITY
         if (ret != HDF_SUCCESS) {
             HDF_LOGE("%{public}s, SetLayerBuffer error", __func__);
-            if (data.isValidBuffer && data.buffer != nullptr) {
-                FreeBufferHandle(data.buffer);
-                data.buffer = nullptr;
-            }
             errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, ret);
         }
 
