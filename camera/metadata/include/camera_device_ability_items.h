@@ -1051,6 +1051,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_SUN_BLOCK_BLEND_COLOR,
     /**
+     * ohos.ability.qualityPrioritization [static, byte, public]
+     *
+     * camera device property, set current camera quality prioritization
+     * (i.e. byte ...)
+     */
+    OHOS_CONTROL_QUALITY_PRIORITIZATION,
+    /**
      * ohos.device.controlEnd
      *
      * device controlEnd
@@ -2694,6 +2701,12 @@ enum CameraSunBlockHint {
     OHOS_HINT_FACE_TOO_LOWER = 8,
     OHOS_HINT_FACE_TOO_TOP = 9,
     OHOS_HINT_SUNSCREEN_NO_FULL_COVERAGE = 20,
+};
+
+// OHOS_ABILITY_CAMERA_QUALITY_PRIORITIZATION
+enum CameraQualityPrioritization {
+    OHOS_CAMERA_QUALITY_PRIORITIZATION_HIGH_QUALITY = 0,
+    OHOS_CAMERA_QUALITY_PRIORITIZATION_POWER_BALANCE,
 };
 
 #endif
