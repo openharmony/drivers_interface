@@ -135,12 +135,18 @@ void DeviceCacheManager::Dump() const
 
 int32_t DeviceCacheManager::AddCacheInternal(uint32_t deviceId, DeviceCache::DeviceType type)
 {
+    auto devCache = deviceCaches_->SearchCache(deviceId);
+    if (devCache != nullptr && devCache->CacheType() == type) {
+        HDF_LOGI("AddCacheInternal deviceId:%{public}u, type:%{public}u already exist", deviceId, type);
+        return HDF_SUCCESS;
+    }
     DeviceCache* device = DeviceCache::Create(deviceId, type);
     DISPLAY_CHK_RETURN(device == nullptr, HDF_FAILURE, HDF_LOGE("%{public}s: Create cache failed", __func__));
 
     bool ret = deviceCaches_->InsertCache(deviceId, device);
     DISPLAY_CHK_RETURN(ret == false, HDF_FAILURE, HDF_LOGE("%{public}s: insert device cache failed", __func__));
 
+    HDF_LOGI("AddCacheInternal deviceId:%{public}u, type:%{public}u success", deviceId, type);
     return HDF_SUCCESS;
 }
 
