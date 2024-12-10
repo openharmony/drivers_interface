@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
+import("//build/config/components/hdi/hdi.gni")
 hdi("nnrt") {
   module_name = "nnrt"
   branch_protector_ret = "pac_ret"
@@ -24,7 +24,6 @@ hdi("nnrt") {
   ]
 
   language = "cpp"
-  innerapi_tags = [ "platformsdk" ]
   subsystem_name = "hdf"
   part_name = "drivers_interface_nnrt"
 }
