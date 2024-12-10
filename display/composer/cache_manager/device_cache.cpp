@@ -151,8 +151,6 @@ int32_t DeviceCache::SetDisplayClientBuffer(BufferHandle*& buffer, uint32_t seqN
         HDF_LOGE("%{public}s: call NativeBufferCache fail", __func__));
     auto ret = realFunc(*handle);
     if (ret != HDF_SUCCESS) {
-        clientBufferCaches_->EraseCache(seqNo);
-        buffer = nullptr;
         HDF_LOGE("%{public}s: call realFunc fail", __func__);
     }
 
@@ -170,8 +168,6 @@ int32_t DeviceCache::SetVirtualDisplayBuffer(BufferHandle*& buffer, uint32_t seq
             HDF_LOGE("%{public}s: call NativeBufferCache fail", __func__));
         ret = realFunc(*handle);
         if (ret != HDF_SUCCESS) {
-            outputBufferCaches_->EraseCache(seqNo);
-            buffer = nullptr;
             HDF_LOGE("%{public}s: call realFunc fail", __func__);
         }
     } else {
