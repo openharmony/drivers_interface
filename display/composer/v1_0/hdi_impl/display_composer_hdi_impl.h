@@ -30,6 +30,7 @@
 #define LOG_TAG "DISP_HDI_COMP"
 #undef LOG_DOMAIN
 #define LOG_DOMAIN 0xD002515
+#define MAX_COUNT 10
 
 namespace OHOS {
 namespace HDI {
@@ -219,7 +220,7 @@ public:
         COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
 
         /* Already enabled, return success */
-        if (enabled && vsyncEnableCount_[devId] > 0) {
+        if (enabled && vsyncEnableCount_[devId] > 0 && vsyncEnableCount_[devId] < MAX_COUNT) {
             HDF_LOGD("%{public}s: Count[%{public}u] = %{public}u, Skip", __func__, devId, vsyncEnableCount_[devId]);
             ++vsyncEnableCount_[devId];
             return DISPLAY_SUCCESS;
@@ -227,6 +228,7 @@ public:
 
         int32_t ret = ToDispErrCode(hdi_->SetDisplayVsyncEnabled(devId, enabled));
         if (ret != DISPLAY_SUCCESS) {
+            vsyncEnableCount_[devId] = 0;
             return ret;
         }
 
