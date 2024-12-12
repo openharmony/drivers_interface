@@ -865,7 +865,7 @@ int CameraMetadata::GetCameraMetadataItem(const common_metadata_header_t *src, u
         METADATA_ERR_LOG("GetCameraMetadataItem: memset_s failed");
         return CAM_META_FAILURE;
     }
-    if (index >= src->item_count) {
+    if (index >= src->item_count || index >= src->item_capacity) {
         METADATA_ERR_LOG("GetCameraMetadataItem index is greater than item count");
         return CAM_META_INVALID_PARAM;
     }

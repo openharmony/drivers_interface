@@ -102,8 +102,13 @@ bool MetadataUtils::ConvertMetadataToVec(const std::shared_ptr<CameraMetadata> &
         WriteData<uint32_t>(item.data_type, cameraAbility);
         WriteData<uint32_t>(item.count, cameraAbility);
         if (item.count > MAX_SUPPORTED_ITEMS) {
-            METADATA_ERR_LOG("ConvertMetadataToVec item.count out of range:%{public}d item:%{public}d",
-                item.count, item.item);
+            METADATA_ERR_LOG("ConvertMetadataToVec item.count out of range:%{public}d", item.count);
+            return false;
+        }
+        uint32_t dataPayloadBytes = item.count * OHOS_CAMERA_METADATA_TYPE_SIZE[item.data_type];
+        if (item.count > ENTRY_DATA_SIZE &&
+            ((item.data.u8 + dataPayloadBytes) > (GetMetadataData(meta) + dataCapacity))) {
+            METADATA_ERR_LOG("ConvertMetadataToVec get meta item failed!");
             return false;
         }
         WriteMetadataDataToVec(item, cameraAbility);
