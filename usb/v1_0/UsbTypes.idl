@@ -82,6 +82,6 @@ struct USBTransferInfo {
     int type;
     int timeOut;
     int length;
-    unsigned int userData;
+    unsigned long userData;
     unsigned int numIsoPackets;
 };

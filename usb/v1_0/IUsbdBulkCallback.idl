@@ -40,8 +40,12 @@ import ohos.hdi.usb.v1_0.UsbTypes;
  */
 [callback] interface IUsbdBulkCallback {
 
-    OnBulkWriteCallback([in] int status, [in] int actLength, [in] UsbIsoPacketDescriptor[] descs, [in] unsigned int userData);
+    OnBulkWriteCallback([in] int status, [in] int actLength);
 
-    OnBulkReadCallback([in] int status, [in] int actLength, [in] UsbIsoPacketDescriptor[] descs, [in] unsigned int userData);
+    OnBulkReadCallback([in] int status, [in] int actLength);
+
+    OnTransferWriteCallback([in] int status, [in] int actLength, [in] UsbIsoPacketDescriptor[] descs, [in] unsigned long userData);
+
+    OnTransferReadCallback([in] int status, [in] int actLength, [in] UsbIsoPacketDescriptor[] descs, [in] unsigned long userData);
     
 }
