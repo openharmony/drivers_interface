@@ -492,7 +492,7 @@ interface IUsbInterface {
      * @param ashmem Indicates the object of share memory
      *
      * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
-     * @since 3.2
+     * @since 5.0
      */
     UsbSubmitTransfer([in] struct UsbDev dev, [in] USBTransferInfo info, [in] IUsbdBulkCallback cb, [in] Ashmem ashmem);
     
@@ -503,7 +503,7 @@ interface IUsbInterface {
      * @param endpoint Indicates the endpoint address.
      *
      * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
-     * @since 3.2
+     * @since 5.0
      */
     UsbCancelTransfer([in] struct UsbDev dev, [in] int endpoint);
 }
