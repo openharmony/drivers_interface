@@ -24,8 +24,8 @@ if (defined(ohos_lite)) {
     sources = [
       "IUsbInterface.idl",
       "IUsbdBulkCallback.idl",
-      "IUsbdTransferCallback.idl",
       "IUsbdSubscriber.idl",
+      "IUsbdTransferCallback.idl",
       "UsbTypes.idl",
     ]
 
