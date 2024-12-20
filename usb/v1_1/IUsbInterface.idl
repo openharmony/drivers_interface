@@ -121,4 +121,37 @@ interface IUsbInterface extends ohos.hdi.usb.v1_0.IUsbInterface{
      * @version 1.0
      */
     ControlTransferReadwithLength([in] struct UsbDev dev, [in] struct UsbCtrlTransferParams ctrl, [out] unsigned char[] data);
+
+    /* *
+     * @brief Get Accessory Info.
+     *
+     * @param accessoryInfo Indicates the accessory information.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
+     * @since 5.0
+     * @version 1.0
+     */
+    GetAccessoryInfo([out] String[] accessoryInfo);
+
+    /* *
+     * @brief Open the Accessory descriptor.
+     *
+     * @param fd accessory file descriptor.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
+     * @since 5.0
+     * @version 1.0
+     */
+    OpenAccessory([out] FileDescriptor fd);
+
+    /* *
+     * @brief Close the Accessory descriptor.
+     *
+     * @param fd accessory file descriptor.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
+     * @since 5.0
+     * @version 1.0
+     */
+    CloseAccessory([in] FileDescriptor fd);
 }
