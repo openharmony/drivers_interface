@@ -158,7 +158,7 @@
               "header_base": "//drivers/interface/wlan/wpa"
             }
           },
-		  {
+          {
             "name": "//drivers/interface/wlan/wpa/v1_2:libwpa_proxy_1.2",
             "header": {
               "header_files": [
