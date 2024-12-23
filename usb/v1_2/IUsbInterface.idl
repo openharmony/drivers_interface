@@ -1,0 +1,86 @@
+/*
+ * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* *
+ * @addtogroup HdiUsb
+ *
+ * @brief Provides unified APIs for usb services to access usb drivers.
+ *
+ * A usb service can obtain a usb driver object or agent and then call APIs provided by this object or agent to
+ * access different types of usb devices based on the usb IDs, thereby obtaining usb information,
+ * subscribing to or unsubscribing from usb data, enabling or disabling a usb,
+ * setting the usb data reporting mode, and setting usb options such as the accuracy and measurement range.
+ *
+ * @since 5.1
+ */
+
+/* *
+ * @file IUsbInterface.idl
+ *
+ * @brief Declares the APIs provided by the usb module for obtaining usb information, subscribing to or
+ * unsubscribing from usb data, enabling or disabling a usb, setting the usb data reporting mode,
+ * and setting usb options such as the accuracy and measurement range.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+
+package ohos.hdi.usb.v1_2;
+
+import ohos.hdi.usb.v1_2.UsbTypes;
+import ohos.hdi.usb.v1_2.IUsbdTransferCallback;
+import ohos.hdi.usb.v1_1.UsbTypes;
+import ohos.hdi.usb.v1_1.IUsbInterface;
+/*
+import ohos.hdi.usb.v1_0.UsbTypes;
+import ohos.hdi.usb.v1_0.IUsbdSubscriber;
+import ohos.hdi.usb.v1_0.IUsbdBulkCallback;
+import ohos.hdi.usb.v1_0.IUsbInterface;
+*/
+/* *
+ * @brief Defines the functions for performing basic operations on usb.
+ *
+ * The operations include obtaining usb information, subscribing to or unsubscribing from usb data,
+ * enabling or disabling a usb, setting the usb data reporting mode, and setting usb options such as
+ * the accuracy and measurement range.
+ */
+interface IUsbInterface extends ohos.hdi.usb.v1_1.IUsbInterface{
+
+    /* *
+     * @brief Submit usb async transfer.
+     *
+     * @param dev Indicates the USB device address.
+     * @param info Indicates the param info of the USB transfer.
+     * @param cb Indicates the callback function of base.
+     * @param ashmem Indicates the object of share memory
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
+     * @since 5.1
+     * @version 1.0
+     */
+    UsbSubmitTransfer([in] struct UsbDev dev, [in] USBTransferInfo info, [in] IUsbdTransferCallback cb, [in] Ashmem ashmem);
+    
+    /* *
+     * @brief Cancels the usb async transfer by endpoint.
+     *
+     * @param dev Indicates the USB device address.
+     * @param endpoint Indicates the endpoint address.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
+     * @since 5.1
+     * @version 1.0
+     */
+    UsbCancelTransfer([in] struct UsbDev dev, [in] int endpoint);
+}
