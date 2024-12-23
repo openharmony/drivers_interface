@@ -132,6 +132,7 @@ typedef enum camera_metadata_sec {
     OHOS_SECTION_CAMERA_EFFECT,
     OHOS_SECTION_CAMERA_SECURE,
     OHOS_SECTION_CAMERA_XMAGE,
+    OHOS_SECTION_STREAM_CONTROL,
     OHOS_SECTION_COUNT,
 } camera_metadata_sec_t;
 

@@ -16,6 +16,7 @@
 #ifndef CAMERA_METADATA_ITEM_INFO_H
 #define CAMERA_METADATA_ITEM_INFO_H
 
+#include "camera_device_ability_items.h"
 #include "camera_metadata_operator.h"
 
 namespace OHOS::Camera {
@@ -46,6 +47,7 @@ static uint32_t g_ohosCameraSectionBounds[OHOS_SECTION_COUNT][2] = {
     [OHOS_SECTION_CAMERA_EFFECT] = {OHOS_CAMERA_EFFECT_START, OHOS_CAMERA_EFFECT_END },
     [OHOS_SECTION_CAMERA_SECURE] = {OHOS_CAMERA_SECURE_START, OHOS_CAMERA_SECURE_END },
     [OHOS_SECTION_CAMERA_XMAGE] = {OHOS_XMAGE_COLOR_MODES_START, OHOS_XMAGE_COLOR_MODES_END },
+    [OHOS_SECTION_STREAM_CONTROL] = {OHOS_STREAM_CONTROL_START, OHOS_STREAM_CONTROL_END },
 };
 
 static item_info_t g_ohosCameraProperties[OHOS_CAMERA_PROPERTIES_END - OHOS_CAMERA_PROPERTIES_START] = {
@@ -357,6 +359,13 @@ static item_info_t g_ohosStreamAbility[OHOS_STREAM_ABILITY_END - OHOS_STREAM_ABI
         OHOS_STREAM_ABILITY_START] = {"deferredImageDeliverySupportModes", META_TYPE_BYTE, -1},
     [OHOS_CONTROL_DEFERRED_IMAGE_DELIVERY -
         OHOS_STREAM_ABILITY_START] = {"deferredImageDeliveryMode", META_TYPE_BYTE, -1},
+    [OHOS_ABILITY_AUTO_VIDEO_FRAME_RATE -
+        OHOS_STREAM_ABILITY_START] = {"streamAutoFpsSupportedMode", META_TYPE_BYTE, -1},
+};
+ 
+static item_info_t g_ohosStreamControl[OHOS_STREAM_CONTROL_END - OHOS_STREAM_CONTROL_START] = {
+    [OHOS_CONTROL_AUTO_VIDEO_FRAME_RATE -
+        OHOS_STREAM_CONTROL_START] = {"streamAutoFpsControl", META_TYPE_BYTE, 1},
 };
 
 static item_info_t g_ohosStreamJpeg[OHOS_STREAM_JPEG_END - OHOS_STREAM_JPEG_START] = {
@@ -578,6 +587,7 @@ const static item_info_t *g_ohosItemInfo[OHOS_SECTION_COUNT] = {
     g_ohosPostProcess,
     g_ohosCameraSecure,
     g_ohosCameraXmage,
+    g_ohosStreamControl,
 };
 } // namespace Camera
 #endif /* CAMERA_METADATA_ITEM_INFO_H */

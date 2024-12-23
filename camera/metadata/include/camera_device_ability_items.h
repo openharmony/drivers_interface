@@ -1428,11 +1428,36 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_DEFERRED_IMAGE_DELIVERY,
     /**
+     * ohos.ability.autoVideoFrameRate [static, byte[], public]
+     *
+     * Camera device property, reporting that the camera supports automatic frame rate adjustment
+     * (i.e. byte[] ...)
+     * @since 5.1
+     * @version 1.0
+     */
+    OHOS_ABILITY_AUTO_VIDEO_FRAME_RATE,
+    /**
      * ohos.stream.abilityEnd
      *
      * camera stream abilityEnd
      */
     OHOS_STREAM_ABILITY_END,
+
+    /**
+     * ohos.control.autoVideoFrameRate [static, byte[], public]
+     *
+     * camera stream property, set camera support automatic frame rate adjustment
+     * (i.e. byte[] ...)
+     * @since 5.1
+     * @version 1.0
+     */
+    OHOS_CONTROL_AUTO_VIDEO_FRAME_RATE = OHOS_STREAM_CONTROL_START,
+    /**
+     * ohos.stream.controlEnd
+     *
+     * camera stream controlEnd
+     */
+    OHOS_STREAM_CONTROL_END,
 
     /**
      * ohos.jpeg.gpsCoordinates [static, double[], public]
@@ -2707,6 +2732,12 @@ enum CameraSunBlockHint {
 enum CameraQualityPrioritization {
     OHOS_CAMERA_QUALITY_PRIORITIZATION_HIGH_QUALITY = 0,
     OHOS_CAMERA_QUALITY_PRIORITIZATION_POWER_BALANCE,
+};
+
+// OHOS_ABILITY_AUTO_VIDEO_FRAME_RATE
+enum CameraStreamAutoFpsControl {
+    OHOS_STREAM_AUTO_FPS_DISABLE = 0,
+    OHOS_STREAM_AUTO_FPS_ENABLE,
 };
 
 #endif
