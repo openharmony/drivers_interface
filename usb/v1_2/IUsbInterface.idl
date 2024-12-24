@@ -43,12 +43,7 @@ import ohos.hdi.usb.v1_2.UsbTypes;
 import ohos.hdi.usb.v1_2.IUsbdTransferCallback;
 import ohos.hdi.usb.v1_1.UsbTypes;
 import ohos.hdi.usb.v1_1.IUsbInterface;
-/*
-import ohos.hdi.usb.v1_0.UsbTypes;
-import ohos.hdi.usb.v1_0.IUsbdSubscriber;
-import ohos.hdi.usb.v1_0.IUsbdBulkCallback;
-import ohos.hdi.usb.v1_0.IUsbInterface;
-*/
+
 /* *
  * @brief Defines the functions for performing basic operations on usb.
  *
