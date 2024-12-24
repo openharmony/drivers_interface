@@ -353,5 +353,19 @@ interface IChipIface {
      * @version 1.0
      */
     GetCoexictenceChannelList([in] String ifName, [out] unsigned char[] paramBuf);
+
+    /**
+     * @brief Sets the projection parameters, This interface is preferentially used to communicate with the Wi-Fi service.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param param Indicates the projection parameters to set.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    SetProjectionScreenParam([in] String ifName, [in] struct ProjectionScreenCmdParam param);
 };
 /** @} */
