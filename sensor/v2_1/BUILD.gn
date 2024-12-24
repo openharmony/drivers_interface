@@ -24,7 +24,6 @@ if (defined(ohos_lite)) {
     sources = [
       "ISensorCallback.idl",
       "ISensorInterface.idl",
-      "SensorTypes.idl",
     ]
 
     deps = [
