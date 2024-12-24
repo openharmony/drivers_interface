@@ -38,7 +38,7 @@
  * @version 2.1
  */
 
-package ohos.hdi.sensor.v2_0;
+package ohos.hdi.sensor.v2_1;
 
 import ohos.hdi.sensor.v2_0.SensorTypes;
 import ohos.hdi.sensor.v2_1.ISensorCallback;
