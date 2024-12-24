@@ -126,10 +126,14 @@ public:
         return ToDispErrCode(hdi_v1_2_->ClearLayerBuffer(devId, layerId));
     }
 
-    virtual int32_t SetHardwareCursorPosition(uint32_t devId, int32_t x, int32_t y) override
+    virtual int32_t UpdateHardwareCursor(uint32_t devId, int32_t x, int32_t y, BufferHandle* buffer) override
     {
         COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_2_);
-        int32_t ret = ToDispErrCode(hdi_v1_2_->SetHardwareCursorPosition(devId, x, y));
+        COMPOSER_CHECK_NULLPTR_RETURN(buffer);
+        stpr<NativeBuffer> hdiBuffer = new NativeBuffer(buffer);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdiBuffer);
+
+        int32_t ret = ToDispErrCode(hdi_v1_2_->UpdateHardwareCursor(devId, x, y, hdiBuffer));
         return ret;
     }
 
