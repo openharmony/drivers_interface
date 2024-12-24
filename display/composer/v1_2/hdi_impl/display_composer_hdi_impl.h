@@ -130,7 +130,7 @@ public:
     {
         COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_2_);
         COMPOSER_CHECK_NULLPTR_RETURN(buffer);
-        stpr<NativeBuffer> hdiBuffer = new NativeBuffer(buffer);
+        sptr<NativeBuffer> hdiBuffer = new NativeBuffer(buffer);
         COMPOSER_CHECK_NULLPTR_RETURN(hdiBuffer);
 
         int32_t ret = ToDispErrCode(hdi_v1_2_->UpdateHardwareCursor(devId, x, y, hdiBuffer));
