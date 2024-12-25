@@ -28,21 +28,11 @@
       "build": {
         "sub_component": [
           "//drivers/interface/nfc/v1_1:nfc_idl_target",
-          "//drivers/interface/nfc/v1_0:nfc_idl_target",
-          "//drivers/interface/nfc/v1_1:libnfc_stub_1.1",
-          "//drivers/interface/nfc/v1_0:libnfc_stub_1.0"
+          "//drivers/interface/nfc/v1_1:libnfc_stub_1.1"
         ],
         "test": [
         ],
         "inner_kits": [
-          {
-            "name": "//drivers/interface/nfc/v1_0:libnfc_proxy_1.0",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interface/nfc"
-            }
-          },
           {
             "name": "//drivers/interface/nfc/v1_1:libnfc_proxy_1.1",
             "header": {
@@ -52,23 +42,7 @@
             }
           },
           {
-            "name": "//drivers/interface/nfc/v1_0:libnfc_stub_1.0",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interface/nfc"
-            }
-          },
-          {
             "name": "//drivers/interface/nfc/v1_1:libnfc_stub_1.1",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interface/nfc"
-            }
-          },
-          {
-            "name": "//drivers/interface/nfc/v1_0:nfc_idl_headers",
             "header": {
               "header_files": [
               ],
