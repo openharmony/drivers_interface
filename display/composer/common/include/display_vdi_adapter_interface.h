@@ -86,7 +86,7 @@ struct DisplayComposerVdiAdapter {
     int32_t (*GetHDRCapabilityInfos)(uint32_t devId, HDRCapability& info);
     int32_t (*RegDisplayVBlankIdleCallback)(VBlankIdleCallback cb, void* data);
     int32_t (*SetDisplayConstraint)(uint32_t devId, uint64_t frameID, uint64_t ns, uint32_t type);
-    int32_t (*SetHardwareCursorPosition)(uint32_t devId, int32_t x, int32_t y);
+    int32_t (*UpdateHardwareCursor)(uint32_t devId, int32_t x, int32_t y, BufferHandle* buffer);
     int32_t (*EnableHardwareCursorStats)(uint32_t devId, bool enable);
     int32_t (*GetHardwareCursorStats)(uint32_t devId, uint32_t& frameCount, uint32_t& vsyncCount);
     int32_t (*SetDisplayActiveRegion)(uint32_t devId, const IRect& rect);
@@ -151,7 +151,7 @@ using GetDisplaySupportedColorGamutsFunc = int32_t (*)(uint32_t devId, std::vect
 using GetHDRCapabilityInfosFunc = int32_t (*)(uint32_t devId, HDRCapability& info);
 using RegDisplayVBlankIdleCallbackFunc = int32_t (*)(VBlankIdleCallback cb, void* data);
 using SetDisplayConstraintFunc = int32_t (*)(uint32_t devId, uint64_t frameID, uint64_t ns, uint32_t type);
-using SetHardwareCursorPositionFunc = int32_t (*)(uint32_t devId, int32_t x, int32_t y);
+using UpdateHardwareCursorFunc = int32_t (*)(uint32_t devId, int32_t x, int32_t y, BufferHandle* buffer);
 using EnableHardwareCursorStatsFunc = int32_t (*)(uint32_t devId, bool enable);
 using GetHardwareCursorStatsFunc = int32_t (*)(uint32_t devId, uint32_t& frameCount, uint32_t& vsyncCount);
 using SetDisplayActiveRegionFunc = int32_t (*)(uint32_t devId, const IRect& rect);
