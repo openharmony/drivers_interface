@@ -24,6 +24,7 @@
  * subscribing to or unsubscribing from sensor data, enabling or disabling a sensor,
  * setting the sensor data reporting mode, and setting sensor options such as the accuracy and measurement range.
  *
+ * @since 5.1
  * @version 2.0
  */
 
@@ -38,6 +39,7 @@ import ohos.hdi.sensor.v2_0.ISensorCallback;
  * sensor data. For details, see {@link ISensorInterface}.
  *
  * @since 5.1
+ * @version 1.1
  */
 [callback] interface ISensorCallback extends ohos.hdi.sensor.v2_0.ISensorCallback {
     /**
@@ -45,6 +47,7 @@ import ohos.hdi.sensor.v2_0.ISensorCallback;
     * @param event Indicates the information about sensor event in the system.
     *
     * @since 1.0
+    * @version 1.0
     */
-    [oneway] OnDataEventOneWay([in] struct HdfSensorEvents event);
+    [oneway] OnDataEventAsync([in] struct HdfSensorEvents[] events);
 }

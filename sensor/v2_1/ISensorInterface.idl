@@ -35,7 +35,7 @@
  * and setting sensor options such as the accuracy and measurement range.
  *
  * @since 5.1
- * @version 2.1
+ * @version 1.1
  */
 
 package ohos.hdi.sensor.v2_1;
@@ -67,7 +67,7 @@ interface ISensorInterface extends ohos.hdi.sensor.v2_0.ISensorInterface {
      * @since 5.1
      * @version 1.0
      */
-    RegisterOneWay([in] int groupId, [in] ISensorCallback callbackObj);
+    RegisterAsync([in] int groupId, [in] ISensorCallback callbackObj);
 
     /**
      * @brief Deregisters the callback for reporting sensor data.
@@ -83,5 +83,5 @@ interface ISensorInterface extends ohos.hdi.sensor.v2_0.ISensorInterface {
      * @since 5.1
      * @version 1.0
      */
-    UnregisterOneWay([in] int groupId, [in] ISensorCallback callbackObj);
+    UnregisterAsync([in] int groupId, [in] ISensorCallback callbackObj);
 }
