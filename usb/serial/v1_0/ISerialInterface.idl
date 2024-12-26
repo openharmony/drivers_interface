@@ -24,7 +24,7 @@
  * subscribing to or unsubscribing from serial data, enabling or disabling a serial,
  * setting the serial data reporting mode, and setting serial options such as the accuracy and measurement range.
  *
- * @since 5.0
+ * @since 5.1
  */
 
 /* *
@@ -34,7 +34,7 @@
  * unsubscribing from serial data, enabling or disabling a serial, setting the serial data reporting mode,
  * and setting serial options such as the accuracy and measurement range.
  *
- * @since 5.0
+ * @since 5.1
  * @version 1.0
  */
 
@@ -57,6 +57,10 @@ interface ISerialInterface {
      * @param portId Indicates the Serial port device portId.
      *
      * @return Returns 0 if the setting is successful; returns a negative number otherwise.
+     *
+     * @since 5.1
+     *
+     * @version 1.0
      */
     SerialOpen([in]int portId);
 
@@ -69,6 +73,10 @@ interface ISerialInterface {
      * @param portId Indicates the Serial port device portId.
      *
      * @return Returns 0 if the setting is successful; returns a negative number otherwise.
+     *
+     * @since 5.1
+     *
+     * @version 1.0
      */
     SerialClose([in]int portId);
 
@@ -79,6 +87,10 @@ interface ISerialInterface {
      * @param data Indicates the pointer to the buffer for receiving the data.
      *
      * @return Returns the size of the data that is successfully read; returns a negative number if the reading fails.
+     *
+     * @since 5.1
+     *
+     * @version 1.0
      */
     SerialRead([in] int portId, [out] unsigned char []data, [in] unsigned int size);
 
@@ -89,6 +101,10 @@ interface ISerialInterface {
      * @param data Indicates the pointer to the data to write.
      *
      * @return Returns the size of the data that is successfully write;  returns a negative number if the reading fails.
+     *
+     * @since 5.1
+     *
+     * @version 1.0
      */
     SerialWrite([in] int portId, [in] unsigned char []data, [in] unsigned int size);
 
@@ -101,6 +117,10 @@ interface ISerialInterface {
      * @param attribute Indicates the pointer to the SERIAL attribute to set.
      *
      * @return Returns 0 if the setting is successful; returns a negative number otherwise.
+     *
+     * @since 5.1
+     *
+     * @version 1.0
     */
     SerialSetAttribute([in] int portId, [in] struct SerialAttribute attribute);
 
@@ -113,6 +133,10 @@ interface ISerialInterface {
      * @param attribute Indicates the pointer to the obtained SERIAL attribute.
      *
      * @return Returns 0 if the setting is successful; returns a negative number otherwise.
+     *
+     * @since 5.1
+     *
+     * @version 1.0
      */
     SerialGetAttribute([in] int portId, [out] struct SerialAttribute attribute);
 
@@ -122,6 +146,10 @@ interface ISerialInterface {
      * @param portId Indicates the Serial port device portId
      *
      * @return Returns 0 if the setting is successful; returns a negative number otherwise.
+     *
+     * @since 5.1
+     *
+     * @version 1.0
      */
     SerialGetPortList([out] struct SerialPort[] portList);
 }

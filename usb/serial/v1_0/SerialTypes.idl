@@ -24,7 +24,7 @@
  * subscribing to or unsubscribing from serial data, enabling or disabling a serial,
  * setting the serial data reporting mode, and setting serial options such as the accuracy and measurement range.
  *
- * @since 5.0
+ * @since 5.1
  */
 
  /**
@@ -33,7 +33,7 @@
   * @brief Defines the data used by the serial module, including the serial information,
   * and reported serial data.
   *
-  * @since 5.0
+  * @since 5.1
   * @version 1.0
   */
 
