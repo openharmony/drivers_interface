@@ -26,10 +26,9 @@ if (defined(ohos_lite)) {
       "ISensorInterface.idl",
     ]
 
-    deps = [
-      "//drivers/interface/sensor/v2_0:libsensor_proxy_2.0",
-      "//drivers/interface/sensor/v2_0:libsensor_stub_2.0",
-    ]
+    proxy_deps = [ "../v2_0:libsensor_proxy_2.0" ]
+
+    stub_deps = [ "../v2_0:libsensor_stub_2.0" ]
 
     language = "cpp"
     subsystem_name = "hdf"
