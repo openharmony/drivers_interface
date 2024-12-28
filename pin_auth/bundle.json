@@ -1,7 +1,7 @@
 {
   "name":"@ohos/drivers_interface_pin_auth",
   "description":"pinauth device driver interface",
-  "version":"5.0",
+  "version":"5.1",
   "license":"Apache License 2.0",
   "publishAs":"code-segment",
   "segment":{
@@ -35,14 +35,14 @@
     },
     "build":{
       "sub_component":[
-        "//drivers/interface/pin_auth/v2_0:pin_auth_idl_target"
+        "//drivers/interface/pin_auth/v2_1:pin_auth_idl_target"
       ],
       "test":[
 
       ],
       "inner_kits":[
         {
-          "name":"//drivers/interface/pin_auth/v2_0:libpin_auth_proxy_2.0",
+          "name":"//drivers/interface/pin_auth/v2_1:libpin_auth_proxy_2.1",
           "header":{
             "header_files":[
 
@@ -51,7 +51,7 @@
           }
         },
         {
-          "name":"//drivers/interface/pin_auth/v2_0:libpin_auth_stub_2.0",
+          "name":"//drivers/interface/pin_auth/v2_1:libpin_auth_stub_2.1",
           "header":{
             "header_files":[
 
@@ -60,7 +60,7 @@
           }
         },
         {
-          "name":"//drivers/interface/pin_auth/v2_0:pin_auth_idl_headers",
+          "name":"//drivers/interface/pin_auth/v2_1:pin_auth_idl_headers",
           "header":{
             "header_files":[
 
