@@ -24,6 +24,7 @@ if (defined(ohos_lite)) {
     sources = [
       "ISensorCallback.idl",
       "ISensorInterface.idl",
+      "SensorTypes.idl",
     ]
 
     proxy_deps = [ "../v2_0:libsensor_proxy_2.0" ]
