@@ -39,32 +39,8 @@ import ohos.hdi.usb.v1_2.UsbTypes;
  */
 [callback] interface IUsbdTransferCallback {
 
-    /* *
-     * @brief Usb async transfer write callback.
-     *
-     * @param status Indicates the async transfer status code.
-     * @param actLength Indicates the actual length of transfered data.
-     * @param descs Indicates the iso transfer result.
-     * @param userData Indicates the custom user data.
-     *
-     * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
-     * @since 5.1
-     * @version 1.0
-     */
     OnTransferWriteCallback([in] int status, [in] int actLength, [in] UsbIsoPacketDescriptor[] descs, [in] unsigned long userData);
 
-    /* *
-     * @brief Usb async transfer read callback.
-     *
-     * @param status Indicates the async transfer status code.
-     * @param actLength Indicates the actual length of transfered data.
-     * @param descs Indicates the iso transfer result.
-     * @param userData Indicates the custom user data.
-     *
-     * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
-     * @since 5.1
-     * @version 1.0
-     */
     OnTransferReadCallback([in] int status, [in] int actLength, [in] UsbIsoPacketDescriptor[] descs, [in] unsigned long userData);
 
 }
