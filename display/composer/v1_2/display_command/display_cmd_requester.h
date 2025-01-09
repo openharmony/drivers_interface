@@ -311,7 +311,7 @@ EXIT:
             DISPLAY_CHK_BREAK(retBool == false,
                 HDF_LOGE("%{public}s: write devId failed", __func__));
 
-            retBool = requestPacker_.WriteUint64(layerId);
+            retBool = requestPacker_.WriteUint32(layerId);
             DISPLAY_CHK_BREAK(retBool == false,
                 HDF_LOGE("%{public}s: write layerId failed", __func__));
 
@@ -348,7 +348,7 @@ EXIT:
             requestPacker_.RollBack(writePos);
             HDF_LOGE("SetLayerPerFrameParameterSmq writePos_ rollback %{public}s, %{public}d, %{public}d",
                 key.c_str(), devId, layerId);
-            
+
             return HDF_FAILURE;
         }
         return HDF_SUCCESS;

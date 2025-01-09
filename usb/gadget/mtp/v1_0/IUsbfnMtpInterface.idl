@@ -50,7 +50,7 @@ import ohos.hdi.usb.gadget.mtp.v1_0.UsbfnMtpTypes;
 interface IUsbfnMtpInterface {
 
     /* *
-     * @brief Opens a USB MTP/PTP driver.
+     * @brief Open a USB MTP/PTP driver and init resources.
      *
      * @param None No parameter needed.
      *
@@ -61,7 +61,7 @@ interface IUsbfnMtpInterface {
     Start();
 
     /* *
-     * @brief Closes a USB MTP/PTP driver.
+     * @brief Close a USB MTP/PTP driver and release resources.
      *
      * @param None No parameter needed.
      *
@@ -72,7 +72,7 @@ interface IUsbfnMtpInterface {
     Stop();
 
     /* *
-     * @brief Read data by USB MTP/PTP driver.
+     * @brief Read data by adding a task to read queue.
      *
      * @param data Indicates the data read by USB MTP/PTP driver.
      *
@@ -83,7 +83,7 @@ interface IUsbfnMtpInterface {
     Read([out] unsigned char[] data);
 
     /* *
-     * @brief Write data by USB MTP/PTP driver.
+     * @brief Write data by adding a task to write queue.
      *
      * @param data Indicates the data write to USB MTP/PTP driver.
      *
@@ -131,7 +131,7 @@ interface IUsbfnMtpInterface {
     SendEvent([in] unsigned char[] eventData);
 
     /* *
-     * @brief Init a USB MTP/PTP driver. Used by usb_host.
+     * @brief Init a USB MTP/PTP port. Used by usb_host.
      *
      * @param None No parameter needed.
      *
@@ -142,7 +142,7 @@ interface IUsbfnMtpInterface {
     Init();
 
     /* *
-     * @brief Release a USB MTP/PTP driver. Used by usb_host.
+     * @brief Release a USB MTP/PTP port. Used by usb_host.
      *
      * @param None No parameter needed.
      *

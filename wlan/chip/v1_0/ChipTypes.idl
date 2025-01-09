@@ -183,4 +183,17 @@ struct SignalPollResult {
     int c1Rssi;
     unsigned char[] ext;
 };
+
+/**
+ * @brief Defines the projection parameters, This interface is preferentially used to communicate with the Wi-Fi service.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+struct ProjectionScreenCmdParam {
+    /** ID of the projection command. */
+    int cmdId;
+    /** Content of the projection command. */
+    byte[] buf;
+};
 /** @} */
