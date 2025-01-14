@@ -1,0 +1,226 @@
+/*
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup HdiHidDdk
+ * @{
+ *
+ * @brief Provides HID DDK APIs, including open device, get an input report, send an output report, etc.
+ *
+ * @since 5.1
+ * @version 1.1
+ */
+
+ /**
+ * @file IHidDdk.idl
+ *
+ * @brief Declares the HID DDK interfaces for the host to access an input device.
+ *
+ * @since 5.1
+ * @version 1.1
+ */
+
+package ohos.hdi.input.ddk.v1_1;
+
+import ohos.hdi.input.ddk.v1_1.HidDdkTypes;
+import ohos.hdi.input.ddk.v1_0.HidDdkTypes;
+import ohos.hdi.input.ddk.v1_0.IHidDdk;
+
+/**
+ * @brief Declares the HID DDK interfaces for the host to access an input device.
+ *
+ * @since 5.1
+ * @version 1.1
+ */
+interface IHidDdk extends ohos.hdi.input.ddk.v1_0.IHidDdk {
+    /**
+    * @brief Initializes the HID DDK.
+    *
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    Init();
+
+    /**
+    * @brief Releases the HID DDK.
+    *
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    Release();
+
+    /**
+    * @brief Open HID device by deviceId in blocking mode.
+    *
+    * @param deviceId ID of the device to be operated.
+    * @param interfaceIndex Interface index, which corresponds to interface which supports USB protocol HID.
+    * @param dev Device operation handle.
+    *
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    Open([in] unsigned long deviceId, [in] unsigned char interfaceIndex, [out] struct HidDeviceHandle dev);
+
+    /**
+    * @brief Close HID device by dev.
+    *
+    * @param dev Device operation handle.
+    *
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    Close([in] struct HidDeviceHandle dev);
+
+    /**
+    * @brief Write an Output report to a HID device.
+    *
+    * @param dev Device operation handle.
+    * @param data The data to be sent.
+    * @param bytesWritten The acture bytes of the data be sent.
+    *
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    Write([in] struct HidDeviceHandle dev, [in] unsigned char[] data, [out] unsigned int bytesWritten);
+
+    /**
+    * @brief Read an input report from the device with timeout.
+    *
+    * @param dev Device operation handle.
+    * @param data A buffer to put the read data into.
+    * @param buffSize A buffer size to put the read data into.
+    * @param timeout Timeout in milliseconds or -1 for blocking wait.
+    * @param bytesRead The number of bytes to read.
+    *
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    ReadTimeout([in] struct HidDeviceHandle dev, [out] unsigned char[] data, [in] unsigned int buffSize, [in] int timeout, [out] unsigned int bytesRead);
+
+    /**
+    * @brief Set the device handle to be non-blocking.
+    *
+    * @param dev Device operation handle.
+    * @param nonBlock Enable or not the nonblocking reads
+    *             - 1 to enable nonblocking
+    *             - 0 to disable nonblocking.
+    *
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    SetNonBlocking([in] struct HidDeviceHandle dev, [in] int nonBlock);
+
+    /**
+    * @brief Get a raw info from the device.
+    *
+    * @param dev Device operation handle.
+    * @param rawDevInfo Vendor id, product id and bus type get from the device.
+    *
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    GetRawInfo([in] struct HidDeviceHandle dev, [out] struct HidRawDevInfo rawDevInfo);
+
+    /**
+    * @brief Get a raw name from the device.
+    *
+    * @param dev Device operation handle.
+    * @param data A buffer to put the read data into.
+    * @param buffSize A buffer size to put the read data into.
+    *
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    GetRawName([in] struct HidDeviceHandle dev, [out] unsigned char[] data, [in] unsigned int buffSize);
+
+    /**
+    * @brief Get a physical address from the device.
+    *
+    * @param dev Device operation handle.
+    * @param data A buffer to put the read data into.
+    * @param buffSize A buffer size to put the read data into.
+    *
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    GetPhysicalAddress([in] struct HidDeviceHandle dev, [out] unsigned char[] data, [in] unsigned int buffSize);
+
+    /**
+    * @brief Get a raw unique id from the device.
+    *
+    * @param dev Device operation handle.
+    * @param data A buffer to put the read data into.
+    * @param buffSize A buffer size to put the read data into.
+    *
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    GetRawUniqueId([in] struct HidDeviceHandle dev, [out] unsigned char[] data, [in] unsigned int buffSize);
+
+    /**
+    * @brief Send a report to the device.
+    *
+    * @param dev Device operation handle.
+    * @param reportType Report type will be sent.
+    * @param data The data to be sent.
+    *
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    SendReport([in] struct HidDeviceHandle dev, [in] HidReportType reportType, [in] unsigned char[] data);
+
+    /**
+    * @brief Get a report from the device.
+    *
+    * @param dev Device operation handle.
+    * @param reportType Report type get from device.
+    * @param reportNumber The specified report number.
+    * @param data A buffer to put the read data into.
+    * @param buffSize A buffer size to put the read data into.
+    *
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    GetReport([in] struct HidDeviceHandle dev, [in] HidReportType reportType, [in] unsigned char reportNumber, [out] unsigned char[] data, [in] unsigned int buffSize);
+
+    /**
+    * @brief Get a report descriptor from the device.
+    *
+    * @param dev Device operation handle.
+    * @param buf The buffer to copy descriptor into.
+    * @param buffSize A buffer size to put the read data into.
+    * @param bytesRead The number of bytes to read.
+    *
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    GetReportDescriptor([in] struct HidDeviceHandle dev, [out] unsigned char[] buf, [in] unsigned int buffSize, [out] unsigned int bytesRead);
+}
+
+/** @} */
