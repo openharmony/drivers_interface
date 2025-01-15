@@ -470,10 +470,10 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_STATUS_SUN_BLOCK_HINT,
     /**
-     * ohos.ability.autoAigcPhoto [static, int31[], public]
+     * ohos.ability.autoAigcPhoto [static, int32[], public]
      *
      * camera device property, report current camera whether support auto auto aigc photo by mode
-     * (i.e. enum: OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED ...)
+     * (i.e. int32[]: [mode, OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED, mode ...] ...)
      * @since 5.1
      * @version 1.0
      */
@@ -482,7 +482,7 @@ typedef enum camera_device_metadata_tag {
      * ohos.control.autoAigcPhoto [static, enum, public]
      *
      * camera device property, set current camera whether support auto aigc photo
-     * (i.e. byte: -1-false/1-true ...)
+     * (i.e. byte: 0-false/1-true ...)
      * @since 5.1
      * @version 1.0
      */
