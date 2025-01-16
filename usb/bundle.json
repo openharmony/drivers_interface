@@ -35,7 +35,8 @@
         "//drivers/interface/usb/v1_2:usb_idl_target",
         "//drivers/interface/usb/v2_0:usb_idl_target",
         "//drivers/interface/usb/gadget/mtp/v1_0:usbfn_mtp_idl_target",
-        "//drivers/interface/usb/ddk/v1_0:usb_ddk_idl_target"
+        "//drivers/interface/usb/ddk/v1_0:usb_ddk_idl_target",
+        "//drivers/interface/usb/ddk/v1_1:usb_ddk_idl_target"
       ],
       "test": [],
       "inner_kits": [
@@ -163,6 +164,27 @@
           "header": {
             "header_files": [],
             "header_base": "//drivers/interface/usb"
+          }
+        },
+        {
+          "name": "//drivers/interface/usb/ddk/v1_1:libusb_ddk_proxy_1.1",
+          "header": {
+            "header_files": [],
+            "header_base": "//drivers/interface/usb/ddk"
+          }
+        },
+        {
+          "name": "//drivers/interface/usb/ddk/v1_1:libusb_ddk_stub_1.1",
+          "header": {
+            "header_files": [],
+            "header_base": "//drivers/interface/usb/ddk"
+          }
+        },
+        {
+          "name": "//drivers/interface/usb/ddk/v1_1:usb_ddk_idl_headers",
+          "header": {
+            "header_files": [],
+            "header_base": "//drivers/interface/usb/ddk"
           }
         }
       ]
