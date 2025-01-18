@@ -1,0 +1,108 @@
+/*
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* *
+ * @addtogroup HdiUsb
+ * @{
+ *
+ * @brief Provides unified APIs for usb services to access usb drivers.
+ *
+ * A usb service can obtain a usb driver object or agent and then call APIs provided by this object or agent to
+ * access different types of usb devices based on the usb IDs, thereby obtaining usb information,
+ * subscribing to or unsubscribing from usb data, enabling or disabling a usb,
+ * setting the usb data reporting mode, and setting usb options such as the accuracy and measurement range.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+
+/* *
+ * @file IUsbPortInterface.idl
+ *
+ * @brief Declares the APIs provided by the usb module for obtaining usb information, subscribing to or
+ * unsubscribing from usb data, enabling or disabling a usb, setting the usb data reporting mode,
+ * and setting usb options such as the accuracy and measurement range.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+
+package ohos.hdi.usb.v2_0;
+
+import ohos.hdi.usb.v2_0.UsbTypes;
+import ohos.hdi.usb.v2_0.IUsbdSubscriber;
+
+interface IUsbPortInterface {
+
+    /* *
+     * @brief Set the USB port role and data role.
+     *
+     * @param portId Indicates the port ID of the USB interface.
+     * @param powerRole Indicates the power role.
+     * @param dataRole Indicates the data role.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
+     * @since 5.1
+     * @version 1.0
+     */
+    SetPortRole([in] int portId, [in] int powerRole, [in] int dataRole);
+
+    /* *
+     * @brief Queries the current settings of a port.
+     *
+     * @param portId Indicates the port ID of the USB interface.
+     * @param powerRole Indicates the power role.
+     * @param dataRole Indicates the data role.
+     * @param mode Indicates the mode.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
+     * @since 5.1
+     * @version 1.0
+     */
+    QueryPort([out] int portId, [out] int powerRole, [out] int dataRole, [out] int mode);
+
+    /* *
+     * @brief Queries the current settings of all ports.
+     *
+     * @param portList Indicates the ports ID of the USB interface.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
+     * @since 5.1
+     * @version 1.0
+     */
+    QueryPorts([out] struct UsbPort[] portList);
+
+    /* *
+     * @brief Binds a subscriber.
+     *
+     * @param subscriber Indicates the subscriber.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
+     * @since 5.1
+     * @version 1.0
+     */
+    BindUsbdPortSubscriber([in] IUsbdSubscriber subscriber);
+
+    /* *
+     * @brief Unbinds a subscriber.
+     *
+     * @param subscriber Indicates the subscriber.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
+     * @since 5.1
+     * @version 1.0
+     */
+    UnbindUsbdPortSubscriber([in] IUsbdSubscriber subscriber);
+}
