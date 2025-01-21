@@ -1,0 +1,115 @@
+/*
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup HdiHidDdk
+ * @{
+ *
+ * @brief Provides HID DDK APIs, including open device, get an input report, send an output report, etc.
+ *
+ * @since 5.1
+ * @version 1.1
+ */
+
+ /**
+ * @file HidDdkTypes.idl
+ *
+ * @brief Provides definitions of enum variables and structs in the HID DDK.
+ *
+ * @since 5.1
+ * @version 1.1
+ */
+
+package ohos.hdi.input.ddk.v1_1;
+
+import ohos.hdi.input.ddk.v1_0.HidDdkTypes;
+
+/**
+ * @brief Defines the basic device handle.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+struct HidDeviceHandle {
+    /** Device file descriptor */
+    int fd;
+    /** Enable or not the nonblocking reads */
+    int nonBlock;
+};
+
+/**
+ * @brief Defines the report type.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+enum HidReportType {
+    /** Input report */
+    HID_INPUT_REPORT = 0,
+    /** Output report */
+    HID_OUTPUT_REPORT = 1,
+    /** Feature report */
+    HID_FEATURE_REPORT = 2
+};
+
+/**
+ * @brief Defines the raw dev info.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+struct HidRawDevInfo {
+    /** Bus type */
+    unsigned int busType;
+    /** Vendor ID */
+    unsigned short vendor;
+    /** Product ID */
+    unsigned short product;
+};
+
+/**
+ * @brief Defines the error codes used in the HID DDK.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+enum HidDdkErrCode {
+    /** @error Operation successful */
+    HID_DDK_SUCCESS = 0,
+    /** @error Permission denied */
+    HID_DDK_NO_PERM = 201,
+    /** @error Invalid parameter */
+    HID_DDK_INVALID_PARAMETER = 401,
+    /** @error Operation failed */
+    HID_DDK_FAILURE = 27300001,
+    /** @error Null pointer exception */
+    HID_DDK_NULL_PTR = 27300002,
+    /** @error Invalid operation */
+    HID_DDK_INVALID_OPERATION = 27300003,
+    /** @error Timeout */
+    HID_DDK_TIMEOUT = 27300004,
+    /** @error Init operation */
+    HID_DDK_INIT_ERROR = 27300005,
+    /** @error Service error operation */
+    HID_DDK_SERVICE_ERROR = 27300006,
+    /** @error Buff is outside accessible address space */
+    HID_DDK_MEMORY_ERROR  = 27300007,
+    /** @error Physical I/O error has occurred. */
+    HID_DDK_IO_ERROR = 27300008,
+    /** @error Device not found. */
+    HID_DDK_DEVICE_NOT_FOUND = 27300009
+};
+
+/** @} */

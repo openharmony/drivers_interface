@@ -150,6 +150,10 @@ static item_info_t g_ohosCameraProperties[OHOS_CAMERA_PROPERTIES_END - OHOS_CAME
         OHOS_CAMERA_PROPERTIES_START] = {"sunBlockRgbUvRegion", META_TYPE_FLOAT, -1},
     [OHOS_STATUS_SUN_BLOCK_HINT -
         OHOS_CAMERA_PROPERTIES_START] = {"sunBlockHint", META_TYPE_BYTE, -1},
+    [OHOS_ABILITY_AUTO_AIGC_PHOTO -
+        OHOS_CAMERA_PROPERTIES_START] = {"autoAigcPhoto", META_TYPE_INT32, -1},
+    [OHOS_CONTROL_AUTO_AIGC_PHOTO -
+        OHOS_CAMERA_PROPERTIES_START] = {"controlAutoAigcPhoto", META_TYPE_BYTE, 1},
 };
 
 static item_info_t g_ohosCameraSensor[OHOS_CAMERA_SENSOR_END - OHOS_CAMERA_SENSOR_START] = {
