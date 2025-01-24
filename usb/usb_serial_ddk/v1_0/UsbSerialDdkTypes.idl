@@ -1,0 +1,96 @@
+/*
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup HdiUsbSerialDdk
+ * @{
+ *
+ * @brief Provides USB SERIAL DDK types and declares the macros, enumerated variables, and\n
+ * data structures required by the USB SERIAL DDK APIs.
+ *
+ * @syscap SystemCapability.Driver.UsbSerial.Extension
+ * @since 5.1
+ * @version 1.0
+ */
+
+ /**
+ * @file UsbSerialDdkTypes.idl
+ *
+ * @brief Defines the enumeration values and data structures of the user_auth driver.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+
+package ohos.hdi.usb.usb_serial_ddk.v1_0;
+
+ /**
+ * @brief Defines USB Serial UsbSerialDeviceHandle for USB SERIAL DDK.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+struct UsbSerialDeviceHandle {
+    /** The usb serial device fd */
+    unsigned int fd;
+};
+
+/**
+ * @brief Defines flow control for USB SERIAL DDK.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+enum UsbSerialFlowControl {
+    /** No flow control */
+    USB_SERIAL_NO_FLOW_CONTROL = 0,
+    /** Software flow control */
+    USB_SERIAL_SOFTWARE_FLOW_CONTROL = 1,
+    /** Hardware flow control */
+    USB_SERIAL_HARDWARE_FLOW_CONTROL = 2,
+};
+
+/**
+ * @brief Defines parity for USB SERIAL DDK.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+enum UsbSerialParity {
+    /** No parity */
+    USB_SERIAL_PARITY_NONE = 0,
+    /** Odd parity */
+    USB_SERIAL_PARITY_ODD = 1,
+    /** Even parity */
+    USB_SERIAL_PARITY_EVEN = 2,
+};
+
+ /**
+ * @brief Defines USB Serial Port Params for USB SERIAL DDK.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+struct UsbSerialParams {
+    /** The baud rate requested by the system */
+    unsigned int baudRate;
+    /** The number of data bits to transmit */
+    unsigned char nDataBits;
+    /** The number of half stop bits. */
+    unsigned char nStopBits;
+    /** The parity setting to use during communication */
+    enum UsbSerialParity parity;
+};
+/** @} */

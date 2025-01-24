@@ -1,0 +1,186 @@
+/*
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup HdiUsbUsbSerialDdk
+ * @{
+ *
+ * @brief Provides USB SERIAL DDK types and declares the macros, enumerated variables, and\n
+ * data structures required by the USB SERIAL DDK APIs.
+ *
+ * @syscap SystemCapability.Driver.UsbSerial.Extension
+ * @since 5.1
+ * @version 1.0
+ */
+
+/**
+ * @file IUsbSerialDdk.idl
+ *
+ * @brief Declares the USB SERIAL DDK APIs used by the USB serial host to access USB serial devices.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+package ohos.hdi.usb.usb_serial_ddk.v1_0;
+
+import ohos.hdi.usb.usb_serial_ddk.v1_0.UsbSerialDdkTypes;
+
+/* *
+ * @brief Declares the USB DDK APIs used by the USB host to access USB devices.
+ */
+interface IUsbSerialDdk
+{
+
+    /* *
+     * @brief Initializes the USB serial DDK.
+     *
+     * @return <b>0</b> if the operation is successful; a negative value otherwise.
+     * @since 5.1
+     * @version 1.0
+     */
+    Init();
+
+    /* *
+     * @brief Releases the DDK.
+     *
+     * @return <b>0</b> if the operation is successful; a negative value otherwise.
+     * @since 5.1
+     * @version 1.0
+     */
+    Release();
+
+    /**
+    * @brief Open USB serial device by deviceId.
+    *
+    * @param deviceId ID of the device to be operated.
+    * @param interfaceIndex Interface index, which corresponds to interface which supports USB Protocol ACM.
+    * @param dev Device handle.
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    Open([in] unsigned long deviceId, [in] unsigned long interfaceIndex, [out] struct UsbSerialDeviceHandle dev);
+
+    /**
+    * @brief Close USB serial device.
+    *
+    * @param dev Device handle.
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    Close([in] struct UsbSerialDeviceHandle dev);
+
+    /**
+    * @brief Read bytesRead into buff from UsbSerial device.
+    *
+    * @param dev Device handle.
+    * @param bufferSize Max buff size.
+    * @param buff Received data from a serial device.
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    Read([in] struct UsbSerialDeviceHandle dev, [in] unsigned int bufferSize, [out] List<unsigned char> buff);
+
+    /**
+    * @brief Write bytesWritten from buff to UsbSerial device.
+    *
+    * @param dev Device handle.
+    * @param buff Serial information write to device.
+    * @param bytesWritten Actual bytes written.
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    Write([in] struct UsbSerialDeviceHandle dev, [in] List<unsigned char> buff, [out] unsigned int bytesWritten);
+
+    /**
+    * @brief Set the serial port baud rate.
+    *
+    * @param dev Device handle.
+    * @param baudRate Serial port baud rate set to connect device.
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    SetBaudRate([in] struct UsbSerialDeviceHandle dev,  [in] unsigned int baudRate);
+
+    /**
+    * @brief Set the serial port parameters.
+    *
+    * @param dev Device handle.
+    * @param params Serial port params set to connect device.
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    SetParams([in] struct UsbSerialDeviceHandle dev, [in] struct UsbSerialParams params);
+
+    /**
+    * @brief Sets the read timeout (in milliseconds)/blocking mode
+    *
+    * @param dev Device handle.
+    * @param timeout Set to -1 to infinite timeout, 0 to return immediately with any data (non
+                    blocking, or >0 to wait for data for a specified number of milliseconds). Timeout will
+                    be rounded to the nearest 100ms (a Linux API restriction). Maximum value limited to
+                    25500ms (another Linux API restriction).
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    SetTimeout([in] struct UsbSerialDeviceHandle dev, [in] int timeout);
+
+    /**
+    * @brief Sets FlowControl params.
+    *
+    * @param dev Device handle.
+    * @param flowControl flow control mode.
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    SetFlowControl([in] struct UsbSerialDeviceHandle dev, [in] enum UsbSerialFlowControl flowControl);
+
+    /**
+    * @brief flush buffers after write.
+    *
+    * @param dev Device handle.
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    Flush([in] struct UsbSerialDeviceHandle dev);
+
+    /**
+    * @brief flush read buffers.
+    *
+    * @param dev Device handle.
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    FlushInput([in] struct UsbSerialDeviceHandle dev);
+
+    /**
+    * @brief flush write buffers.
+    *
+    * @param dev Device handle.
+    * @return <b>0</b> if the operation is successful; a negative value otherwise.
+    * @since 5.1
+    * @version 1.0
+    */
+    FlushOutput([in] struct UsbSerialDeviceHandle dev);
+}
