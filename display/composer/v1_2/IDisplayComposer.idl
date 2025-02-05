@@ -16,6 +16,7 @@
 package ohos.hdi.display.composer.v1_2;
 
 import ohos.hdi.display.composer.v1_1.IDisplayComposer;
+import ohos.hdi.display.composer.v1_0.DisplayComposerType;
 import ohos.hdi.display.composer.v1_2.DisplayComposerType;
 import ohos.hdi.display.composer.v1_2.IVBlankIdleCallback;
 
@@ -94,4 +95,17 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_1.IDisplayCompos
      * @version 1.0
      */
     GetHardwareCursorStats([in] unsigned int devId, [out] unsigned int frameCount, [out] unsigned int vsyncCount);
+
+     /**
+     * @brief Set Display Active Region.
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param rect Indicates the pointer to the cropped region of the client buffer.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 5.0
+     * @version 1.2
+     */
+     SetDisplayActiveRegion([in] unsigned int devId, [in] struct IRect rect);
 }
