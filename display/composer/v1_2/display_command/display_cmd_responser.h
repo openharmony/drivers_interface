@@ -40,7 +40,7 @@ typedef struct CommitInfo {
     std::vector<int32_t> fences;
 } CommitInfo;
 
-template <typename Transfer, typename VdiImpl, typename VdiImpl1_1>
+template <typename Transfer, typename VdiImpl>
 class DisplayCmdResponser : public V1_1::DisplayCmdResponser<Transfer, VdiImpl> {
 public:
     static std::unique_ptr<DisplayCmdResponser> Create(VdiImpl* impl, std::shared_ptr<DeviceCacheManager> cacheMgr)
@@ -52,22 +52,7 @@ public:
         return std::make_unique<DisplayCmdResponser>(impl, cacheMgr);
     }
 
-    static std::unique_ptr<DisplayCmdResponser> CreateV1_1(
-        VdiImpl1_1* impl, std::shared_ptr<DeviceCacheManager> cacheMgr)
-    {
-        DISPLAY_CHK_RETURN(impl == nullptr, nullptr,
-            HDF_LOGE("%{public}s: error, VdiImpl is nullptr", __func__));
-        DISPLAY_CHK_RETURN(cacheMgr == nullptr, nullptr,
-            HDF_LOGE("%{public}s: error, VdiImpl is nullptr", __func__));
-        return std::make_unique<DisplayCmdResponser>(cacheMgr, impl);
-    }
-
     DisplayCmdResponser(VdiImpl* impl, std::shared_ptr<DeviceCacheManager> cacheMgr) : BaseType1_1(impl, cacheMgr) {}
-
-    DisplayCmdResponser(std::shared_ptr<DeviceCacheManager> cacheMgr, VdiImpl1_1* impl)
-        : BaseType1_1(impl, cacheMgr),
-          vdiImpl1_1_(impl)
-        {}
 
     virtual ~DisplayCmdResponser() {}
 
@@ -314,10 +299,13 @@ REPLY:
         ret = unpacker.ReadUint32(type) ? HDF_SUCCESS : HDF_FAILURE;
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        if (vdiImpl1_1_ != nullptr) {
-            ret = vdiImpl1_1_->SetDisplayConstraint(devId, frameID, ns, type);
+        if (impl_ != nullptr && impl_->SetDisplayConstraint != nullptr) {
+            ret = impl_->SetDisplayConstraint(devId, frameID, ns, type);
         }
-        DISPLAY_CHECK(ret != HDF_SUCCESS && ret != DISPLAY_NOT_SUPPORT && ret != HDF_ERR_NOT_SUPPORT, goto EXIT);
+
+        if (ret != HDF_SUCCESS && ret != DISPLAY_NOT_SUPPORT && ret != HDF_ERR_NOT_SUPPORT) {
+            HDF_LOGE("SetDisplayConstraint failed with ret = %{public}d", ret);
+        }
 EXIT:
         if (ret != HDF_SUCCESS) {
             errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_CONSTRAINT, ret);
@@ -353,15 +341,11 @@ private:
     using BaseType1_1::OnSetLayerMaskInfo;
     using BaseType1_1::OnRequestEnd;
     using BaseType1_1::OnSetLayerColor;
-    VdiImpl1_1* vdiImpl1_1_ = nullptr;
     using BaseType1_1::requestMutex_;
     using BaseType1_1::replyMutex_;
 };
 
-using HdiDisplayCmdResponser =
-    DisplayCmdResponser<SharedMemQueue<int32_t>, IDisplayComposerVdi, IDisplayComposerVdiV1_1>;
-using HdiDisplayCmdResponser_1_1 =
-    DisplayCmdResponser<SharedMemQueue<int32_t>, IDisplayComposerVdi, IDisplayComposerVdiV1_1>;
+using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, DisplayComposerVdiAdapter>;
 } // namespace V1_2
 } // namespace Composer
 } // namespace Display

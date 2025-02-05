@@ -47,7 +47,7 @@ public:
 private:
     using BaseType1_0 = V1_0::DisplayCmdResponser<Transfer, VdiImpl>;
 };
-using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, IDisplayComposerVdi>;
+using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, DisplayComposerVdiAdapter>;
 } // namespace V1_1
 } // namespace Composer
 } // namespace Display
