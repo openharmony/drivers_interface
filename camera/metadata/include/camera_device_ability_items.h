@@ -1232,6 +1232,48 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_FOCUS_DISTANCE,
     /**
+     * ohos.ability.focusRangeTypes [static, enum[], public]
+     *
+     * camera device property, report current camera support focus range types
+     * (i.e. enum[]: AUTO, NEAR ...)
+     */
+    OHOS_ABILITY_FOCUS_RANGE_TYPES,
+    /**
+     * ohos.control.focusRangeType [static, enum, public]
+     *
+     * camera device property, set current camera focus range type
+     * (i.e. enum: AUTO/NEAR ...)
+     */
+    OHOS_CONTROL_FOCUS_RANGE_TYPE,
+    /**
+     * ohos.control.focusTrackingMode [static, enum, public]
+     *
+     * camera device property, set current camera focus tracking mode
+     * (i.e. enum: AUTO ...)
+     */
+    OHOS_CONTROL_FOCUS_TRACKING_MODE,
+    /**
+     * ohos.ability.focusTrackingRegion [static, int32[], public]
+     *
+     * camera device property, report current camera focus tracking region
+     * (i.e. int32[] ...)
+     */
+    OHOS_ABILITY_FOCUS_TRACKING_REGION,
+    /**
+     * ohos.ability.focusDrivenTypes [static, enum[], public]
+     *
+     * camera device property, report current camera support focus driven types
+     * (i.e. enum[]: AUTO, FACE ...)
+     */
+    OHOS_ABILITY_FOCUS_DRIVEN_TYPES,
+    /**
+     * ohos.control.focusDrivenType [static, enum, public]
+     *
+     * camera device property, set current camera focus driven type
+     * (i.e. enum: AUTO/FACE ...)
+     */
+    OHOS_CONTROL_FOCUS_DRIVEN_TYPE,
+    /**
      * ohos.device.focusEnd
      *
      * camera device focusEnd
@@ -2137,6 +2179,20 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_CAMERA_VIDEO_ROTATION,
     /**
+     * ohos.ability.colorReservationTypes [static, enum[], public]
+     *
+     * camera device property, report current camera support color reservation types
+     * (i.e. enum[]: NONE, PORTRAIT ...)
+     */
+    OHOS_ABILITY_COLOR_RESERVATION_TYPES,
+    /**
+     * ohos.control.colorReservationType [static, enum, public]
+     *
+     * camera device property, set current camera color reservation type
+     * (i.e. enum: NONE/PORTRAIT ...)
+     */
+    OHOS_CONTROL_COLOR_RESERVATION_TYPE,
+    /**
      * ohos.camera.effectEnd
      *
      * camera effect end
@@ -2757,5 +2813,31 @@ enum CameraStreamAutoFpsControl {
     OHOS_STREAM_AUTO_FPS_DISABLE = 0,
     OHOS_STREAM_AUTO_FPS_ENABLE,
 };
+
+// OHOS_ABILITY_FOCUS_RANGE_TYPES
+// OHOS_CONTROL_FOCUS_RANGE_TYPE
+typedef enum camera_focus_range_type {
+    OHOS_CAMERA_FOCUS_RANGE_AUTO = 0,
+    OHOS_CAMERA_FOCUS_RANGE_NEAR
+} camera_focus_range_type_t;
+
+// OHOS_ABILITY_FOCUS_DRIVEN_TYPES
+// OHOS_CONTROL_FOCUS_DRIVEN_TYPE
+typedef enum camera_focus_driven_type {
+    OHOS_CAMERA_FOCUS_DRIVEN_AUTO = 0,
+    OHOS_CAMERA_FOCUS_DRIVEN_FACE
+} camera_focus_driven_type_t;
+
+// OHOS_CONTROL_FOCUS_TRACKING_MODE
+typedef enum camera_focus_tracking_mode {
+    OHOS_CAMERA_FOCUS_TRACKING_AUTO = 0,
+} camera_focus_tracking_mode_t;
+
+// OHOS_ABILITY_COLOR_RESERVATION_TYPES
+// OHOS_CONTROL_COLOR_RESERVATION_TYPE
+typedef enum camera_color_reservation_type {
+    OHOS_CAMERA_COLOR_RESERVATION_NONE = 0,
+    OHOS_CAMERA_COLOR_RESERVATION_PORTRAIT
+} camera_color_reservation_type_t;
 
 #endif
