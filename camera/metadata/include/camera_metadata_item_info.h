@@ -371,11 +371,17 @@ static item_info_t g_ohosStreamAbility[OHOS_STREAM_ABILITY_END - OHOS_STREAM_ABI
         OHOS_STREAM_ABILITY_START] = {"deferredImageDeliveryMode", META_TYPE_BYTE, -1},
     [OHOS_ABILITY_AUTO_VIDEO_FRAME_RATE -
         OHOS_STREAM_ABILITY_START] = {"streamAutoFpsSupportedMode", META_TYPE_BYTE, -1},
+    [OHOS_ABILITY_PRERECORD -
+        OHOS_STREAM_ABILITY_START] = {"prerecord", META_TYPE_INT32, -1},
 };
  
 static item_info_t g_ohosStreamControl[OHOS_STREAM_CONTROL_END - OHOS_STREAM_CONTROL_START] = {
     [OHOS_CONTROL_AUTO_VIDEO_FRAME_RATE -
         OHOS_STREAM_CONTROL_START] = {"streamAutoFpsControl", META_TYPE_BYTE, 1},
+    [OHOS_CONTROL_PRERECORD_MODE -
+        OHOS_STREAM_CONTROL_START] = {"prerecordMode", META_TYPE_BYTE, 1},
+    [OHOS_CONTROL_RECORD_STATE -
+        OHOS_STREAM_CONTROL_START] = {"recordState", META_TYPE_BYTE, 1},
 };
 
 static item_info_t g_ohosStreamJpeg[OHOS_STREAM_JPEG_END - OHOS_STREAM_JPEG_START] = {
