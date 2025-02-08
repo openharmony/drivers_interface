@@ -2547,6 +2547,7 @@ typedef enum camera_format {
     OHOS_CAMERA_FORMAT_DEPTH_16,
     OHOS_CAMERA_FORMAT_DEPTH_32,
     OHOS_CAMERA_FORMAT_HEIC,
+    OHOS_CAMERA_FORMAT_DNG_XDRAW,
     OHOS_CAMERA_FORMAT_IMPLEMENTATION_DEFINED = 0x1000,
 } camera_format_t;
 
@@ -2732,7 +2733,7 @@ typedef enum moving_photo_enum {
     OHOS_CAMERA_MOVING_PHOTO_UNSUPPORT = 0,
     OHOS_CAMERA_MOVING_PHOTO_SUPPORT,
 } moving_photo_enum_t;
- 
+
 // OHOS_CONTROL_MOVING_PHOTO
 typedef enum control_moving_photo_enum {
     OHOS_CAMERA_MOVING_PHOTO_OFF = 0,

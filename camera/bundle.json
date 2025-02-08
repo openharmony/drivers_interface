@@ -34,6 +34,7 @@
       },
       "build": {
         "sub_component": [
+          "//drivers/interface/camera/v1_4:camera_idl_target",
           "//drivers/interface/camera/v1_3:camera_idl_target",
           "//drivers/interface/camera/v1_2:camera_idl_target",
           "//drivers/interface/camera/v1_1:camera_idl_target",
@@ -42,6 +43,7 @@
           "//drivers/interface/camera/sequenceable/buffer_handle:libbuffer_handle_sequenceable_1.0",
           "//drivers/interface/camera/sequenceable/map_data:libmap_data_sequenceable_1.0",
           "//drivers/interface/camera/metadata:metadata",
+          "//drivers/interface/camera/v1_4:libcamera_stub_1.4",
           "//drivers/interface/camera/v1_3:libcamera_stub_1.3",
           "//drivers/interface/camera/v1_2:libcamera_stub_1.2",
           "//drivers/interface/camera/v1_1:libcamera_stub_1.1",
@@ -52,6 +54,30 @@
           "//drivers/peripheral/camera/test/hdi/sequenceable_test:camera_hdi_sequenceable_ut"
         ],
         "inner_kits": [
+          {
+            "name": "//drivers/interface/camera/v1_4:libcamera_stub_1.4",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/camera"
+            }
+          },
+          {
+            "name": "//drivers/interface/camera/v1_4:libcamera_proxy_1.4",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/camera"
+            }
+          },
+          {
+            "name": "//drivers/interface/camera/v1_4:camera_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/camera"
+            }
+	        },
           {
             "name": "//drivers/interface/camera/v1_3:libcamera_stub_1.3",
             "header": {
