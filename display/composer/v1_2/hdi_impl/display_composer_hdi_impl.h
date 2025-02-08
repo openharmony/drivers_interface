@@ -180,10 +180,11 @@ public:
         return ToDispErrCode(req_v1_2_->SetLayerPerFrameParameterSmq(devId, layerId, key, value));
     }
 	
-    virtual int32_t GetDisplayIdentificationData(uint32_t devId, uint8_t& portId, std::vector<uint8_t>& edidData) override
+    virtual int32_t GetDisplayIdentificationData(uint32_t devId, uint8_t& portId,
+        std::vector<uint8_t>& edidData) override
     {
-        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_2_);        
-		return ToDispErrCode(hdi_v1_2_->GetDisplayIdentificationData(devId, portId, edidData));
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_2_);
+        return ToDispErrCode(hdi_v1_2_->GetDisplayIdentificationData(devId, portId, edidData));
     }
 	
 protected:
