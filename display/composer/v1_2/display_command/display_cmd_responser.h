@@ -68,6 +68,8 @@ public:
             OnSetDisplayConstraint(unpacker);
         } else if (cmd == REQUEST_CMD_SET_LAYER_PERFRAME_PARAM) {
             OnSetLayerPerFrameParam(unpacker);
+        } else if (cmd == REQUEST_CMD_SET_DISPLAY_PERFRAME_PARAM) {
+            OnSetDisplayPerFrameParam(unpacker);
         } else {
             return V1_0::DisplayCmdResponser<Transfer, VdiImpl>::ProcessRequestCmd(unpacker, cmd, inFds, outFds);
         }
@@ -364,6 +366,62 @@ EXIT:
 UNPACKER_EXIT:
         if (ret != HDF_SUCCESS) {
             errMaps_.emplace(REQUEST_CMD_SET_LAYER_PERFRAME_PARAM, ret);
+        }
+        return ret;
+    }
+
+    int32_t OnSetDisplayPerFrameParam(CommandDataUnpacker& unpacker)
+    {
+        DISPLAY_TRACE;
+        uint32_t devId = 0;
+        std::string key;
+        std::vector<int8_t> value;
+        uint32_t vectSize = 0;
+        uint32_t vectStrSize = 0;
+
+        int32_t ret = unpacker.ReadUint32(devId) ? HDF_SUCCESS : HDF_FAILURE;
+        DISPLAY_CHECK(ret != HDF_SUCCESS, goto UNPACKER_EXIT);
+
+        ret = unpacker.ReadUint32(vectStrSize) ? HDF_SUCCESS : HDF_FAILURE;
+        DISPLAY_CHECK(ret != HDF_SUCCESS, goto UNPACKER_EXIT);
+
+        for (uint32_t i = 0; i < vectStrSize; i++) {
+            int32_t tmpChar;
+            ret = unpacker.ReadInt32(tmpChar) ? HDF_SUCCESS : HDF_FAILURE;
+            if (ret != HDF_SUCCESS) {
+                break;
+            }
+            key.push_back(static_cast<char>(tmpChar));
+        }
+        DISPLAY_CHECK(ret != HDF_SUCCESS, goto UNPACKER_EXIT);
+
+        ret = unpacker.ReadUint32(vectSize) ? HDF_SUCCESS : HDF_FAILURE;
+        DISPLAY_CHECK(ret != HDF_SUCCESS, goto UNPACKER_EXIT);
+
+        for (uint32_t i = 0; i < vectSize; i++) {
+            uint8_t tmpValue;
+            ret = unpacker.ReadUint8(tmpValue) ? HDF_SUCCESS : HDF_FAILURE;
+            if (ret != HDF_SUCCESS) {
+                break;
+            }
+            value.push_back(static_cast<int8_t>(tmpValue));
+        }
+        DISPLAY_CHECK(ret != HDF_SUCCESS, goto UNPACKER_EXIT);
+
+        HDF_LOGD("OnSetDisplayPerFrameParam %{public}s, %{public}d",
+            key.c_str(), devId);
+
+        if (impl_ != nullptr && impl_->SetDisplayPerFrameParameter != nullptr) {
+            ret = impl_->SetDisplayPerFrameParameter(devId, key, value);
+        }
+
+        if (ret != HDF_SUCCESS && ret != DISPLAY_NOT_SUPPORT && ret != HDF_ERR_NOT_SUPPORT) {
+            HDF_LOGE("OnSetDisplayPerFrameParam %{public}s, %{public}d, %{public}d",
+                key.c_str(), devId, ret);
+        }
+UNPACKER_EXIT:
+        if (ret != HDF_SUCCESS) {
+            errMaps_.emplace(REQUEST_CMD_SET_DISPLAY_PERFRAME_PARAM, ret);
         }
         return ret;
     }
