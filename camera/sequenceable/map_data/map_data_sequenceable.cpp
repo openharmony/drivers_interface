@@ -73,6 +73,10 @@ sptr<MapDataSequenceable> MapDataSequenceable::Unmarshalling(Parcel &parcel)
                 ret = sequenceData->Set(key, type, parcel.ReadString());
                 break;
             }
+            case MapDataType::U32: {
+                ret = sequenceData->Set(key, type, parcel.ReadUint32());
+                break;
+            }
             default: break;
         }
 
@@ -122,6 +126,13 @@ bool MapDataSequenceable::Marshalling(Parcel &parcel) const
                 dataParcel.WriteString(string);
                 break;
             }
+            case MapDataType::U32: {
+                uint32_t u32 = 0;
+                auto pVal = std::any_cast<uint32_t>(&data.val);
+                SET_DATA_FROM_POINTER(u32, pVal);
+                dataParcel.WriteUint32(u32);
+                break;
+            }
             default:
                 break;
         }
@@ -132,6 +143,11 @@ bool MapDataSequenceable::Marshalling(Parcel &parcel) const
 int32_t MapDataSequenceable::Get(const std::string &key, int32_t &value) const
 {
     return Get<int32_t>(key, MapDataType::I32, value);
+}
+
+int32_t MapDataSequenceable::Get(const std::string &key, uint32_t &value) const
+{
+    return Get<uint32_t>(key, MapDataType::U32, value);
 }
 
 int32_t MapDataSequenceable::Get(const std::string &key, int64_t &value) const
@@ -152,6 +168,11 @@ int32_t MapDataSequenceable::Get(const std::string &key, std::string &value) con
 int32_t MapDataSequenceable::Set(const std::string &key, int32_t value)
 {
     return Set(key, MapDataType::I32, value);
+}
+
+int32_t MapDataSequenceable::Set(const std::string &key, uint32_t value)
+{
+    return Set(key, MapDataType::U32, value);
 }
 
 int32_t MapDataSequenceable::Set(const std::string &key, int64_t value)
