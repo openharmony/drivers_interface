@@ -1,0 +1,139 @@
+/*
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup Ril
+ *
+ * @brief Defines Ril-related APIs.
+ *
+ * The radio interface layer (RIL) module provides APIs and callbacks for upper-layer telephony services,
+ * including call, SMS, MMS, network search, and SIM card services.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+
+package ohos.hdi.ril.v1_4;
+
+import ohos.hdi.ril.v1_1.Types;
+import ohos.hdi.ril.v1_2.Types;
+import ohos.hdi.ril.v1_3.Types;
+
+/**
+ * @brief Defines the call status information.
+ */
+struct CallInfoExt {
+    /**
+     * Call ID
+     */
+    int index;
+
+    /**
+     * Call direction. The value 0 indicates the calling party, and the value 1 indicates the called party.
+     */
+    int dir;
+
+    /**
+     * Call status:
+     *- 0: activated state
+     *- 1: call hold state
+     *- 2: calling party, dialing state
+     *- 3: calling party, ringback tone state
+     *- 4: called party, incoming call state
+     *- 5: called party, call waiting state
+     *- 6: disconnected state
+     *- 7: disconnecting state
+     *- 8: idle state
+     */
+    int state;
+
+    /**
+     * Call mode:
+     *- 0: voice call
+     *- 1: data call
+     *- 2: fax
+     */
+    int mode;
+
+    /**
+     * Multi-party call status:
+     *- 0: not a multi-party call
+     *- 1: a multi-party call
+     */
+    int mpty;
+
+    /**
+     * Call domain of the voice call:
+     *- 0: CS domain
+     *- 1: IP multimedia system (IMS) domain
+     */
+    int voiceDomain;
+
+    /**
+     * Call type. Currently, the value can only be 0, indicating a voice call.
+     */
+    int callType;
+
+    /**
+     * Code address type:
+     *-129: common number
+     *- 145: international number
+     */
+    int type;
+
+    /**
+     * Phone number
+     */
+    String number;
+
+    /**
+     * Name of a phone number in the phonebook
+     */
+    String alpha;
+    	
+    /**
+     * Indicates remote party name.
+     */
+    String name;
+ 
+    /**
+     * Identifies the CNAP display name;
+     * - 0：Allowed
+     * - 1：Restricted
+     * - 2：Not Specified/Unknown
+     * - 3：Payphone
+     */
+    int namePresentation;
+};
+
+/**
+ * @brief Defines the call status information list.
+ */
+struct CallInfoExtList {
+    /**
+     * Total number
+     */
+    int callSize;
+
+    /**
+     * ID of the call status information list
+     */
+    int flag;
+
+    /**
+     * Call status information list
+     */
+    List<struct CallInfoExt> calls;
+};
