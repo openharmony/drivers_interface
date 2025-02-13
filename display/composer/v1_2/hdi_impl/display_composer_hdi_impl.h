@@ -179,6 +179,12 @@ public:
     {
         return ToDispErrCode(req_v1_2_->SetLayerPerFrameParameterSmq(devId, layerId, key, value));
     }
+
+    virtual int32_t SetDisplayPerFrameParameterSmq(uint32_t devId, const std::string& key,
+        const std::vector<int8_t>& value) override
+    {
+        return ToDispErrCode(req_v1_2_->SetDisplayPerFrameParameterSmq(devId, key, value));
+    }
 	
     virtual int32_t GetDisplayIdentificationData(uint32_t devId, uint8_t& portId,
         std::vector<uint8_t>& edidData) override
