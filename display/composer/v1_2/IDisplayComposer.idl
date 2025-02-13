@@ -106,7 +106,7 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_1.IDisplayCompos
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined
      * in {@link DispErrCode} otherwise.
      * @since 5.0
-     * @version 1.2
+     * @version 1.0
      */
      SetDisplayActiveRegion([in] unsigned int devId, [in] struct IRect rect);
 
@@ -122,4 +122,17 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_1.IDisplayCompos
      * @version 1.0
      */
      FastPresent([in] unsigned int devId, [in] struct PresentParam param, [in] NativeBuffer[] inHandles);
+
+     /**
+     * @brief the function to GetDisplayIdentificationData.
+     *
+     * @param devId Indicates which device, portId Indicates which port,
+     * edidData Indicates the edid value.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 5.0
+     * @version 1.0
+     */
+     GetDisplayIdentificationData([in] unsigned int devId, [out] unsigned char portId, [out] unsigned char[] edidData);
 }
