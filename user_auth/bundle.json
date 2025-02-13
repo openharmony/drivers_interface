@@ -47,15 +47,6 @@
                  "header_files":[
 
                  ],
-                 "header_base":"//drivers/interface/user_auth"
-              }
-           },
-           {
-              "name":"//drivers/interface/user_auth/v3_0:user_auth_idl_headers",
-              "header":{
-                 "header_files":[
-
-                 ],
                  "header_base":"//drivers/interfaces/user_auth"
               }
            },
