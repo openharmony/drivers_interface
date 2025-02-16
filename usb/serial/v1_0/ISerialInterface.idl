@@ -92,7 +92,7 @@ interface ISerialInterface {
      *
      * @version 1.0
      */
-    SerialRead([in] int portId, [out] unsigned char []data, [in] unsigned int size);
+    SerialRead([in] int portId, [out] unsigned char []data, [in] unsigned int size, [in] unsigned int timeout);
 
     /**
      * @brief Read data from the serial port.
@@ -106,7 +106,7 @@ interface ISerialInterface {
      *
      * @version 1.0
      */
-    SerialWrite([in] int portId, [in] unsigned char []data, [in] unsigned int size);
+    SerialWrite([in] int portId, [in] unsigned char []data, [in] unsigned int size, [in] unsigned int timeout);
 
     /**
      * @brief Sets the SERIAL attribute.
