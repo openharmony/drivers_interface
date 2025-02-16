@@ -242,7 +242,7 @@
           "header": {
             "header_files": [],
             "header_base": "//drivers/interface/usb/serial"
-          },
+          }
         }
       ]
     }
