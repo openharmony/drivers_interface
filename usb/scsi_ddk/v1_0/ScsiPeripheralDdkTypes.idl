@@ -1,0 +1,260 @@
+/*
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* *
+ * @addtogroup HdiScsiDdk
+ * @{
+ *
+ * @brief Provides SCSI DDK types and declares the macros, enumerated variables, and\n
+ * data structures required by the SCSI DDK APIs.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+
+/**
+ * @file ScsiPeripheralDdkTypes.idl
+ *
+ * @brief Provides the enumerated variables, structures, and macros used in SCSI DDK APIs.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+
+package ohos.hdi.usb.scsi_ddk.v1_0;
+
+/**
+ * @brief Opaque SCSI device structure.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+struct ScsiPeripheralDevice {
+    /** File descriptor for device. */
+    int devFd;
+    /** File descriptor for mmap. */
+    int memMapFd;
+    /** Logical block length in bytes. */
+    unsigned int lbLength;
+};
+
+/**
+ * @brief Request parameters.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+struct ScsiPeripheralRequest {
+    /** Command descriptor block. */
+    unsigned char[] commandDescriptorBlock;
+    /** Data transfer direction. */
+    int dataTransferDirection;
+    /** Buffer size. */
+    unsigned int memMapSize;
+    /** Timeout(unit: millisec). */
+    unsigned int timeout;
+};
+
+/**
+ * @brief Response parameters.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+struct ScsiPeripheralResponse {
+    /** Sense data. */
+    unsigned char[] senseData;
+    /** The status at completion of the call, such as good, busy, or timeout. */
+    unsigned char status;
+    /** Shifted, masked scsi status. */
+    unsigned char maskedStatus;
+    /** Messaging level data (optional). */
+    unsigned char msgStatus;
+    /** Byte count actually written to sbp. */
+    unsigned char sbLenWr;
+    /** Errors from host adapter. */
+    unsigned short hostStatus;
+    /** Errors from software driver. */
+    unsigned short driverStatus;
+    /** Dxfer_len - actual_transferred. */
+    int resId;
+    /** Time taken by cmd (unit: millisec). */
+    unsigned int duration;
+    /** byte length of actual transferred data. */
+    int transferredLength;
+};
+
+/**
+ * @brief Request parameters for read/write.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+struct ScsiPeripheralIORequest {
+    /** Starting with the logical block. */
+    unsigned int lbAddress;
+    /** Number of contiguous logical blocks that shall be read. */
+    unsigned short transferLength;
+    /** Control byte. */
+    unsigned char control;
+    /** Byte 1 of the CDB. */
+    unsigned char byte1;
+    /** Byte 6 of the CDB. */
+    unsigned char byte6;
+    /** Buffer size. */
+    unsigned int memMapSize;
+    /** Timeout(unit: millisec). */
+    unsigned int timeout;
+};
+
+/**
+ * @brief SCSI test unit ready request.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+struct ScsiPeripheralTestUnitReadyRequest {
+    /** Control byte. */
+    unsigned char control;
+    /** Timeout(unit: millisec). */
+    unsigned int timeout;
+};
+
+/**
+ * @brief SCSI inquiry request.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+struct ScsiPeripheralInquiryRequest {
+    /** Page code. */
+    unsigned char pageCode;
+    /** Allocation length. */
+    unsigned short allocationLength;
+    /** Control byte. */
+    unsigned char control;
+    /** Byte 1 of the CDB. */
+    unsigned char byte1;
+    /** Buffer size. */
+    unsigned int memMapSize;
+    /** Timeout(unit: millisec). */
+    unsigned int timeout;
+};
+
+/**
+ * @brief SCSI inquiry data.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+struct ScsiPeripheralInquiryInfo {
+    /** Peripheral device type. */
+    unsigned char deviceType;
+    /** Vendor identification. */
+    unsigned char[] idVendor;
+    /** Product identification. */
+    unsigned char[] idProduct;
+    /** Product revision. */
+    unsigned char[] revProduct;
+};
+
+/**
+ * @brief SCSI read capacity request.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+struct ScsiPeripheralReadCapacityRequest {
+    /** Logical block address. */
+    unsigned int lbAddress;
+    /** Control byte. */
+    unsigned char control;
+    /** Byte 8 of the CDB. */
+    unsigned char byte8;
+    /** Timeout(unit: millisec). */
+    unsigned int timeout;
+};
+
+/**
+ * @brief SCSI read capacity data.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+struct ScsiPeripheralCapacityInfo {
+    /** Returned logical block address. */
+    unsigned int lbAddress;
+    /** Logical block length in bytes. */
+    unsigned int lbLength;
+};
+
+/**
+ * @brief SCSI request sense request.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+struct ScsiPeripheralRequestSenseRequest {
+    /** Allocation length. */
+    unsigned char allocationLength;
+    /** Control byte. */
+    unsigned char control;
+    /** Byte 1 of the CDB. */
+    unsigned char byte1;
+    /** Timeout(unit: millisec). */
+    unsigned int timeout;
+};
+
+/**
+ * @brief Basic sense data of Information、Command-specific information、Sense key specific.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+struct ScsiPeripheralBasicSenseInfo {
+    /** Response code. */
+    unsigned char responseCode;
+    /** Information valid bit. */
+    boolean valid;
+    /** Information sense data descriptor. */
+    unsigned long information;
+    /** Command-specific information sense data descriptor. */
+    unsigned long commandSpecific;
+    /** Sense key specific valid bit. */
+    boolean sksv;
+    /** Sense key specific sense data descriptor. */
+    unsigned int senseKeySpecific;
+};
+
+/**
+ * @brief SCSI verify request.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+struct ScsiPeripheralVerifyRequest {
+    /** Starting with the logical block. */
+    unsigned int lbAddress;
+    /** Number of contiguous logical blocks that shall be verify. */
+    unsigned short verificationLength;
+    /** Control byte. */
+    unsigned char control;
+    /** Byte 1 of the CDB. */
+    unsigned char byte1;
+    /** Byte 6 of the CDB. */
+    unsigned char byte6;
+    /** Timeout(unit: millisec). */
+    unsigned int timeout;
+};

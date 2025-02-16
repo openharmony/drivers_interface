@@ -1497,6 +1497,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_AUTO_VIDEO_FRAME_RATE,
     /**
+     * ohos.ability.prerecord [static, int32[], public]
+     *
+     * camera device property, query camera support prerecord and duration
+     * (i.e. int32[] ...)
+     */
+    OHOS_ABILITY_PRERECORD,
+    /**
      * ohos.stream.abilityEnd
      *
      * camera stream abilityEnd
@@ -1512,6 +1519,20 @@ typedef enum camera_device_metadata_tag {
      * @version 1.0
      */
     OHOS_CONTROL_AUTO_VIDEO_FRAME_RATE = OHOS_STREAM_CONTROL_START,
+    /**
+     * ohos.control.prerecord.mode [static, enum, public]
+     *
+     * camera stream property, set current camera prerecord mode
+     * (i.e. enum: ON/OFF ...)
+     */
+    OHOS_CONTROL_PRERECORD_MODE,
+    /**
+     * ohos.control.record.state [static, enum, public]
+     *
+     * camera stream property, set current camera record state
+     * (i.e. enum: PRERECORD_START/RECORD_START/RECORD_END  ...)
+     */
+    OHOS_CONTROL_RECORD_STATE,
     /**
      * ohos.stream.controlEnd
      *
@@ -2840,4 +2861,16 @@ typedef enum camera_color_reservation_type {
     OHOS_CAMERA_COLOR_RESERVATION_PORTRAIT
 } camera_color_reservation_type_t;
 
+// OHOS_CONTROL_PRERECORD_MODE
+enum CameraPrerecordMode {
+    OHOS_CAMERA_PRERECORD_MODE_ON = 1,
+    OHOS_CAMERA_PRERECORD_MODE_OFF = 2,
+};
+
+// OHOS_CONTROL_RECORD_STATE
+enum CameraRecordState {
+    OHOS_CAMERA_RECORD_STATE_PRERECORD_START = 1,
+    OHOS_CAMERA_RECORD_STATE_RECORD_START = 2,
+    OHOS_CAMERA_RECORD_STATE_RECORD_STOP = 3,
+};
 #endif

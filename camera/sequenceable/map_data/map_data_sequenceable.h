@@ -36,10 +36,12 @@ public:
     virtual ~MapDataSequenceable() = default;
 
     int32_t Get(const std::string &key, int32_t &value) const;
+    int32_t Get(const std::string &key, uint32_t &value) const;
     int32_t Get(const std::string &key, int64_t &value) const;
     int32_t Get(const std::string &key, double &value) const;
     int32_t Get(const std::string &key, std::string &value) const;
     int32_t Set(const std::string &key, int32_t value);
+    int32_t Set(const std::string &key, uint32_t value);
     int32_t Set(const std::string &key, int64_t value);
     int32_t Set(const std::string &key, double value);
     int32_t Set(const std::string &key, const std::string& value);
@@ -54,6 +56,7 @@ private:
         I64,
         F64,
         STRING,
+        U32,
     };
     template<class T>
     int32_t Get(const std::string &key, MapDataType type, T &value) const;

@@ -354,6 +354,61 @@ EXIT:
         return HDF_SUCCESS;
     }
 
+    int32_t SetDisplayPerFrameParameterSmq(uint32_t devId, const std::string& key,
+        const std::vector<int8_t>& value)
+    {
+        int32_t ret = 0;
+        bool retBool = false;
+        size_t writePos = requestPacker_.ValidSize();
+
+        do {
+            ret = CmdUtils::StartSection(REQUEST_CMD_SET_DISPLAY_PERFRAME_PARAM, requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: StartSection failed", __func__));
+
+            retBool = requestPacker_.WriteUint32(devId);
+            DISPLAY_CHK_BREAK(retBool == false,
+                HDF_LOGE("%{public}s: write devId failed", __func__));
+
+            uint32_t vectStrSize = key.size();
+            retBool = requestPacker_.WriteUint32(vectStrSize);
+            if (vectStrSize > CmdUtils::MAX_MEMORY) {
+                DISPLAY_CHK_BREAK(retBool == false,
+                    HDF_LOGE("%{public}s: write vectStr failed", __func__));
+            }
+            for (uint32_t i = 0; i < vectStrSize; i++) {
+                retBool = requestPacker_.WriteInt32(static_cast<int32_t>(key[i]));
+                DISPLAY_CHK_BREAK(retBool == false,
+                    HDF_LOGE("%{public}s: write vectStr failed", __func__));
+            }
+
+            uint32_t vectSize = value.size();
+            retBool = requestPacker_.WriteUint32(vectSize);
+            if (vectSize > CmdUtils::MAX_MEMORY) {
+                DISPLAY_CHK_BREAK(retBool == false,
+                    HDF_LOGE("%{public}s: write vect failed", __func__));
+            }
+            for (uint32_t i = 0; i < vectSize; i++) {
+                retBool = requestPacker_.WriteUint8(static_cast<uint8_t>(value[i]));
+                DISPLAY_CHK_BREAK(retBool == false,
+                    HDF_LOGE("%{public}s: write vect failed", __func__));
+            }
+
+            ret = CmdUtils::EndSection(requestPacker_);
+            DISPLAY_CHK_BREAK(ret != HDF_SUCCESS,
+                HDF_LOGE("%{public}s: EndSection failed", __func__));
+        } while (0);
+
+        if (retBool == false || ret != HDF_SUCCESS) {
+            requestPacker_.RollBack(writePos);
+            HDF_LOGE("SetDisplayPerFrameParameterSmq writePos_ rollback %{public}s, %{public}d",
+                key.c_str(), devId);
+
+            return HDF_FAILURE;
+        }
+        return HDF_SUCCESS;
+    }
+
 protected:
     sptr<CompHdi> hdi_1_2_;
 private:

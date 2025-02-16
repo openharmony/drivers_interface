@@ -79,6 +79,8 @@ struct DisplayComposerVdiAdapter {
     int32_t (*GetDisplayVBlankPeriod)(uint32_t devId, uint64_t& period);
     int32_t (*SetLayerPerFrameParameter)(
         uint32_t devId, uint32_t layerId, const std::string& key, const std::vector<int8_t>& value);
+    int32_t (*SetDisplayPerFrameParameter)(
+        uint32_t devId, const std::string& key, const std::vector<int8_t>& value);
     int32_t (*GetSupportedLayerPerFrameParameterKey)(std::vector<std::string>& keys);
     int32_t (*SetDisplayOverlayResolution)(uint32_t devId, uint32_t width, uint32_t height);
     int32_t (*RegRefreshCallback)(RefreshCallback cb, void* data);
@@ -94,6 +96,7 @@ struct DisplayComposerVdiAdapter {
         const std::vector<BufferHandle*>& inHandles);
     int32_t (*ClearDisplayClientBuffer)(uint32_t devId);
     int32_t (*ClearLayerBuffer)(uint32_t devId, uint32_t layerId);
+    int32_t (*GetDisplayIdentificationData)(uint32_t devId, uint8_t& portId, std::vector<uint8_t>& edidData);
 };
 
 using LoadVdiImplFunc = int32_t (*)();
@@ -144,6 +147,8 @@ using SetDisplayModeAsyncFunc = int32_t (*)(uint32_t devId, uint32_t modeId, Mod
 using GetDisplayVBlankPeriodFunc = int32_t (*)(uint32_t devId, uint64_t& period);
 using SetLayerPerFrameParameterFunc = int32_t (*)(
     uint32_t devId, uint32_t layerId, const std::string& key, const std::vector<int8_t>& value);
+using SetDisplayPerFrameParameterFunc = int32_t (*)(
+    uint32_t devId, const std::string& key, const std::vector<int8_t>& value);
 using GetSupportedLayerPerFrameParameterKeyFunc = int32_t (*)(std::vector<std::string>& keys);
 using SetDisplayOverlayResolutionFunc = int32_t (*)(uint32_t devId, uint32_t width, uint32_t height);
 using RegRefreshCallbackFunc = int32_t (*)(RefreshCallback cb, void* data);
@@ -159,6 +164,8 @@ using FastPresentFunc = int32_t (*)(uint32_t devId, const PresentParam& param,
     const std::vector<BufferHandle*>& inHandles);
 using ClearDisplayClientBufferFunc = int32_t (*)(uint32_t devId);
 using ClearLayerBufferFunc = int32_t (*)(uint32_t devId, uint32_t layerId);
+using GetDisplayIdentificationDataFunc = int32_t (*)(uint32_t devId, uint8_t& portId, std::vector<uint8_t>& edidData);
+
 
 } // namespace Composer
 } // namespace Display

@@ -77,7 +77,12 @@ public:
     virtual int32_t FastPresent(uint32_t devId, const PresentParam& param,
         const std::vector<BufferHandle*> inHandles) = 0;
 
+    virtual int32_t GetDisplayIdentificationData(uint32_t devId, uint8_t& portId, std::vector<uint8_t>& edidData) = 0;
+
     virtual int32_t SetLayerPerFrameParameterSmq(uint32_t devId, uint32_t layerId, const std::string& key,
+        const std::vector<int8_t>& value) = 0;
+
+    virtual int32_t SetDisplayPerFrameParameterSmq(uint32_t devId, const std::string& key,
         const std::vector<int8_t>& value) = 0;
 };
 } // V1_2
