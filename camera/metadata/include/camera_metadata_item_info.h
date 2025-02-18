@@ -136,6 +136,10 @@ static item_info_t g_ohosCameraProperties[OHOS_CAMERA_PROPERTIES_END - OHOS_CAME
         OHOS_CAMERA_PROPERTIES_START] = {"cameraLensDirtyDetection", META_TYPE_BYTE, 1},
     [OHOS_DEVICE_PROTECTION_STATE -
         OHOS_CAMERA_PROPERTIES_START] = {"protectionState", META_TYPE_BYTE, 1},
+    [OHOS_ABILITY_CAMERA_IS_RETRACTABLE -
+        OHOS_CAMERA_EFFECT_START] = {"cameraIsRetractable", META_TYPE_BYTE, 1},
+    [OHOS_CONTROL_CAMERA_CLOSE_AFTER_SECONDS -
+        OHOS_CAMERA_EFFECT_START] = {"cameraCloseAfterSeconds", META_TYPE_UINT32, 1},
 };
 
 static item_info_t g_ohosCameraSensor[OHOS_CAMERA_SENSOR_END - OHOS_CAMERA_SENSOR_START] = {
