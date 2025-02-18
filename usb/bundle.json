@@ -202,13 +202,6 @@
           }
         },
         {
-          "name": "//drivers/interface/usb/usb_serial_ddk/v1_0:usb_serial_ddk_idl_headers",
-          "header": {
-            "header_files": [],
-            "header_base": "//drivers/interface/usb/usb_serial_ddk"
-          }
-        },
-        {
           "name": "//drivers/interface/usb/scsi_ddk/v1_0:libscsi_ddk_proxy_1.0",
           "header": {
             "header_files": [],
