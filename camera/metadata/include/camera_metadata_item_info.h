@@ -516,6 +516,10 @@ static item_info_t g_ohosPostProcess[OHOS_CAMERA_EFFECT_END - OHOS_CAMERA_EFFECT
         OHOS_CAMERA_EFFECT_START] = {"movingPhotoStart", META_TYPE_INT64, 1},
     [OHOS_MOVING_PHOTO_END -
         OHOS_CAMERA_EFFECT_START] = {"movingPhotoEnd", META_TYPE_INT64, 1},
+    [OHOS_ABILITY_CAMERA_IS_RETRACTABLE -
+        OHOS_CAMERA_EFFECT_START] = {"cameraIsRetractable", META_TYPE_BYTE, 1},
+    [OHOS_CONTROL_CAMERA_CLOSE_AFTER_SECONDS -
+        OHOS_CAMERA_EFFECT_START] = {"cameraCloseAfterSeconds", META_TYPE_UINT32, 1},
 };
 
 static item_info_t g_ohosCameraSecure[OHOS_CAMERA_SECURE_END - OHOS_CAMERA_SECURE_START] = {
