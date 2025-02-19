@@ -1,0 +1,157 @@
+/*
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/* *
+ * @addtogroup HdiSerial
+ *
+ *
+ * @brief Provides unified APIs for serial services to access serial drivers.
+ *
+ * A serial service can obtain a serial driver object or agent and then call APIs provided by this object or agent to
+ * access different types of serial devices based on the serial IDs, thereby obtaining serial information,
+ * subscribing to or unsubscribing from serial data, enabling or disabling a serial,
+ * setting the serial data reporting mode, and setting serial options such as the accuracy and measurement range.
+ *
+ * @since 5.1
+ */
+
+/* *
+ * @file ISerialInterface.idl
+ *
+ * @brief Declares the APIs provided by the serial module for obtaining serial information, subscribing to or
+ * unsubscribing from serial data, enabling or disabling a serial, setting the serial data reporting mode,
+ * and setting serial options such as the accuracy and measurement range.
+ *
+ * @since 5.1
+ * @version 1.0
+ */
+
+package ohos.hdi.usb.serial.v1_0;
+import ohos.hdi.usb.serial.v1_0.SerialTypes;
+
+/* *
+ * @brief Defines the functions for performing basic operations on serial.
+ *
+ * The operations include obtaining serial port list information, opening and closing serial port, 
+ * reading or writing serial port data, and setting or obtaining serial port properties.
+ */
+interface ISerialInterface {
+
+    /**
+     * @brief Open and configure the serial port.
+     *
+     * Initializes and opens a serial communication port and sets communication parameters such as baud rate and parity.
+     *
+     * @param portId Indicates the Serial port device portId.
+     *
+     * @return Returns 0 if the setting is successful; returns a negative number otherwise.
+     *
+     * @since 5.1
+     *
+     * @version 1.0
+     */
+    SerialOpen([in]int portId);
+
+    /**
+     * @brief Close the serial port and release resources.
+     *
+     * Terminate the connection to the serial port, ensuring that the port and associated resources are released 
+     * after all data transfers are complete.
+     *
+     * @param portId Indicates the Serial port device portId.
+     *
+     * @return Returns 0 if the setting is successful; returns a negative number otherwise.
+     *
+     * @since 5.1
+     *
+     * @version 1.0
+     */
+    SerialClose([in]int portId);
+
+    /**
+     * @brief Read data from the serial port.
+     *
+     * @param portId Indicates the Serial port device portId
+     * @param data Indicates the pointer to the buffer for receiving the data.
+     *
+     * @return Returns the size of the data that is successfully read; returns a negative number if the reading fails.
+     *
+     * @since 5.1
+     *
+     * @version 1.0
+     */
+    SerialRead([in] int portId, [out] unsigned char []data, [in] unsigned int size, [in] unsigned int timeout);
+
+    /**
+     * @brief Read data from the serial port.
+     *
+     * @param portId Indicates the Serial port device portId
+     * @param data Indicates the pointer to the data to write.
+     *
+     * @return Returns the size of the data that is successfully write;  returns a negative number if the reading fails.
+     *
+     * @since 5.1
+     *
+     * @version 1.0
+     */
+    SerialWrite([in] int portId, [in] unsigned char []data, [in] unsigned int size, [in] unsigned int timeout);
+
+    /**
+     * @brief Sets the SERIAL attribute.
+     *
+     * SERIAL attributes include data bits, stop bits, parity bit, CTS, RTS, and receiving and transmitting FIFO.
+     *
+     * @param portId Indicates the Serial port device portId
+     * @param attribute Indicates the pointer to the SERIAL attribute to set.
+     *
+     * @return Returns 0 if the setting is successful; returns a negative number otherwise.
+     *
+     * @since 5.1
+     *
+     * @version 1.0
+    */
+    SerialSetAttribute([in] int portId, [in] struct SerialAttribute attribute);
+
+    /**
+     * @brief Obtains the SERIAL attribute.
+     *
+     * SERIAL attributes include data bits, stop bits, parity bit, CTS, RTS, and receiving and transmitting FIFO.
+     *
+     * @param portId Indicates the Serial port device portId
+     * @param attribute Indicates the pointer to the obtained SERIAL attribute.
+     *
+     * @return Returns 0 if the setting is successful; returns a negative number otherwise.
+     *
+     * @since 5.1
+     *
+     * @version 1.0
+     */
+    SerialGetAttribute([in] int portId, [out] struct SerialAttribute attribute);
+
+    /**
+     * @brief Obtains the SERIAL Port list.
+     *
+     * @param portId Indicates the Serial port device portId
+     *
+     * @return Returns 0 if the setting is successful; returns a negative number otherwise.
+     *
+     * @since 5.1
+     *
+     * @version 1.0
+     */
+    SerialGetPortList([out] struct SerialPort[] portList);
+}
+
+

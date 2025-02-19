@@ -1,0 +1,152 @@
+/*
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+ /**
+ * @addtogroup HdiSerial
+ *
+ *
+ * @brief Provides unified APIs for serial services to access serial drivers.
+ *
+ * A serial service can obtain a serial driver object or agent and then call APIs provided by this object or agent to
+ * access different types of serial devices based on the serial IDs, thereby obtaining serial information,
+ * subscribing to or unsubscribing from serial data, enabling or disabling a serial,
+ * setting the serial data reporting mode, and setting serial options such as the accuracy and measurement range.
+ *
+ * @since 5.1
+ */
+
+ /**
+  * @file UsbTypes.idl
+  *
+  * @brief Defines the data used by the serial module, including the serial information,
+  * and reported serial data.
+  *
+  * @since 5.1
+  * @version 1.0
+  */
+
+
+package ohos.hdi.usb.serial.v1_0;
+
+enum SerialBaudrate : unsigned int {
+    BAUDRATE_50 = 50,
+    BAUDRATE_75 = 75,
+    BAUDRATE_110 = 110,
+    BAUDRATE_134 = 134,
+    BAUDRATE_150 = 150,
+    BAUDRATE_200 = 200,
+    BAUDRATE_300 = 300,
+    BAUDRATE_600 = 600,
+    BAUDRATE_1200 = 1200,
+    BAUDRATE_1800 = 1800,
+    BAUDRATE_2400 = 2400,
+    BAUDRATE_4800 = 4800,
+    BAUDRATE_9600 = 9600,
+    BAUDRATE_19200 = 19200,
+    BAUDRATE_38400 = 38400,
+    BAUDRATE_57600 = 57600,
+    BAUDRATE_115200 = 115200,
+    BAUDRATE_230400 = 230400,
+    BAUDRATE_460800 = 460800,
+    BAUDRATE_500000 = 500000,
+    BAUDRATE_576000 = 576000,
+    BAUDRATE_921600 = 921600,
+    BAUDRATE_1000000 = 1000000,
+    BAUDRATE_1152000 = 1152000,
+    BAUDRATE_1500000 = 1500000,
+    BAUDRATE_2000000 = 2000000,
+    BAUDRATE_2500000 = 2500000,
+    BAUDRATE_3000000 = 3000000,
+    BAUDRATE_3500000 = 3500000,
+    BAUDRATE_4000000 = 4000000
+};
+
+enum SerialDataBits : unsigned char {
+    /* Indicates the USB word length, which is 8 data bits per frame. */
+    USB_ATTR_DATABIT_8 = 0,
+    /* Indicates the USB word length, which is 7 data bits per frame. */
+    USB_ATTR_DATABIT_7, 
+    /* Indicates the USB word length, which is 6 data bits per frame. */
+    USB_ATTR_DATABIT_6, 
+    /* Indicates the USB word length, which is 5 data bits per frame. */
+    USB_ATTR_DATABIT_5,
+    /* Indicates the USB word length, which is 4 data bits per frame. */
+    USB_ATTR_DATABIT_4 
+};
+
+enum SerialParity : unsigned char {
+    /* Indicates that the USB device has no parity bit. */
+    USB_ATTR_PARITY_NONE = 0,
+    /* Indicates that the USB device has an odd parity bit. */
+    USB_ATTR_PARITY_ODD,
+    /* Indicates that the USB device has an even parity bit. */
+    USB_ATTR_PARITY_EVEN,
+    /* Indicates that the parity bit is 1. */
+    USB_ATTR_PARITY_MARK,
+    /* Indicates that the parity bit is 0. */
+    USB_ATTR_PARITY_SPACE
+};
+
+enum SerialStopBits : unsigned char {
+    /* that the USB device has 1 stop bit. */
+    USB_ATTR_STOPBIT_1 = 0,
+    /* Indicates that the USB device has 1.5 stop bits. */
+    USB_ATTR_STOPBIT_1P5,
+    /* Indicates that the USB device has 2 stop bits. */
+    USB_ATTR_STOPBIT_2
+};
+
+struct DeviceInfo {
+    unsigned char busNum;
+    unsigned char devAddr;
+    int vid;
+    int pid;
+    String serialNum;
+};
+
+/**
+ * @brief Defines basic attributes of the USB to serial port.
+ *
+ * You can configure the attributes via {@link SerialSetAttribute}. If the parameters are not set,
+ * default attributes are used.
+ *
+ * @attention The USB controller determines which USB attribute parameters are supported.
+ *
+ */
+struct SerialAttribute {
+    unsigned int baudrate;
+    unsigned char stopBits;
+    unsigned char parity;
+    unsigned char dataBits;
+};
+
+struct SerialPort {
+    int portId;
+    DeviceInfo deviceInfo;
+};
+
+/**
+ * @brief Enumerates USB Serial commands.
+ *
+ */
+enum SerialIoCmd {
+    USB_SERIAL_GET_PORT_LIST = 0,   /**< Get the serial port list. */
+    USB_SERIAL_OPEN,                /**< Reference count management and initialize the USB device. */
+    USB_SERIAL_CLOSE,               /**< Reference count management and deinitialize the USB device. */
+    USB_SERIAL_READ,                /**< Read data. */
+    USB_SERIAL_WRITE,               /**< Write data. */
+    USB_SERIAL_GET_ATTRIBUTE,       /**< Obtain the device attributes. */
+    USB_SERIAL_SET_ATTRIBUTE        /**< Set the device attributes. */
+};
