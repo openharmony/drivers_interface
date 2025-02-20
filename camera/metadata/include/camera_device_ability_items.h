@@ -470,6 +470,36 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_STATUS_SUN_BLOCK_HINT,
     /**
+     * ohos.ability.cameraLimitedCapabilityes [static, double[], public]
+     *
+     * Camera capability set for limited concurrent scenarios.
+     * This item contains other capability items for device capability control,
+     * such as OHOS_ABILITY_FLASH_MODES or other 3A capabilities.
+     * Resolution is reported through OHOS_ABLE_AVAILABLE_PROFILE_LEVEL.
+     * (i.e. OHOS_ABILITY_FLASH_MODES, length, flashMode, flashMode, ...)
+     * @since 5.1
+     * @version 1.0
+     */
+    OHOS_ABILITY_CAMERA_LIMITED_CAPABILITIES,
+    /**
+     * ohos.ability.cameraConcurrentType [static, byte, public]
+     *
+     * Indicates whether the current camera is in full concurrency mode or limited concurrency mode.
+     * (i.e. byte)
+     * @since 5.1
+     * @version 1.0
+     */
+    OHOS_ABILITY_CAMERA_CONCURRENT_TYPE,
+    /**
+     * ohos.ability.cameraConcurrentType [static, int32, public]
+     *
+     * Concurrent camera combinations are supported. The camera combinations are separated by - 1.
+     * (i.e. int32[] [2, 3, -1, 1, 2])
+     * @since 5.1
+     * @version 1.0
+     */
+    OHOS_ABILITY_CONCURRENT_SUPPORTED_CAMERAS,
+    /**
      * ohos.ability.autoAigcPhoto [static, int32[], public]
      *
      * camera device property, report current camera whether support auto auto aigc photo by mode
@@ -2872,5 +2902,11 @@ enum CameraRecordState {
     OHOS_CAMERA_RECORD_STATE_PRERECORD_START = 1,
     OHOS_CAMERA_RECORD_STATE_RECORD_START = 2,
     OHOS_CAMERA_RECORD_STATE_RECORD_STOP = 3,
+};
+
+// OHOS_ABILITY_CAMERA_CONCURRENT_TYPE
+enum CameraConcurrentType {
+    OHOS_CAMERA_COCURRENT_FULL = 0,
+    OHOS_CAMERA_COCURRENT_LIIMITED,
 };
 #endif
