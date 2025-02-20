@@ -1496,6 +1496,20 @@ typedef enum camera_device_metadata_tag {
      * @version 1.0
      */
     OHOS_ABILITY_AUTO_VIDEO_FRAME_RATE,
+    /*
+     * ohos.ability.changeToOfflineStreamOpeator [static, byte[], public]
+     *
+     * camera stream property, get camera support offline stream
+     * (i.e. byte[] ...)
+     */
+    OHOS_ABILITY_CHANGETO_OFFLINE_STREAM_OPEATOR,
+    /**
+     * ohos.control.changeToOfflineStreamOpeator [static, byte[], public]
+     *
+     * camera stream property, set camera support offline stream
+     * (i.e. byte[] ...)
+     */
+    OHOS_CONTROL_CHANGETO_OFFLINE_STREAM_OPEATOR,
     /**
      * ohos.ability.prerecord [static, int32[], public]
      *
