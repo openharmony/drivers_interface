@@ -58,6 +58,15 @@
             ],
             "header_base":"//drivers/interface/pin_auth"
           }
+        },
+        {
+          "name":"//drivers/interface/pin_auth/v2_1:pin_auth_idl_headers",
+          "header":{
+            "header_files":[
+
+            ],
+            "header_base":"//drivers/interface/pin_auth"
+          }
         }
       ]
     }
