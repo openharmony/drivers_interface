@@ -27,6 +27,10 @@ if (defined(ohos_lite)) {
       "UsbTypes.idl",
     ]
 
+    proxy_deps = [ "../v1_0:libusb_proxy_1.0" ]
+
+    stub_deps = [ "../v1_0:libusb_stub_1.0" ]
+
     language = "cpp"
     subsystem_name = "hdf"
     part_name = "drivers_interface_usb"
