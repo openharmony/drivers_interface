@@ -47,7 +47,7 @@
                  "header_files":[
 
                  ],
-                 "header_base":"//drivers/interfaces/user_auth"
+                 "header_base":"//drivers/interface/user_auth"
               }
            },
            {
@@ -56,7 +56,7 @@
                  "header_files":[
 
                  ],
-                 "header_base":"//drivers/interfaces/user_auth"
+                 "header_base":"//drivers/interface/user_auth"
               }
            },
            {
