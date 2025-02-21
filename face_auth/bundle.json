@@ -49,6 +49,14 @@
               ],
               "header_base": "//drivers/interface/face_auth"
             }
+          },
+          {
+            "name": "//drivers/interface/face_auth/v2_0:face_auth_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/face_auth"
+            }
           }
         ]
       }
