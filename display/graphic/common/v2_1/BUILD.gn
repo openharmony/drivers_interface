@@ -21,7 +21,10 @@ hdi("display_commontype") {
     "//drivers/interface/display/graphic/common/v2_0:libdisplay_commontype_stub_2.0",
   ]
 
-  sources = [ "CMColorSpace.idl" ]
+  sources = [
+    "BufferHandleMetaKeyType.idl",
+    "CMColorSpace.idl",
+  ]
 
   language = "cpp"
   subsystem_name = "hdf"
