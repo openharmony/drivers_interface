@@ -887,6 +887,7 @@ EXIT:
                     "data.buffer->fd:%{public}d, data.seqNo:%{public}d handle.fd:%{public}d, fd:%{public}d",
                     data.buffer == nullptr ? "data.buffer is nullptr!" : "",
                     data.devId, data.layerId, data.buffer == nullptr ? -1 : data.buffer->fd, data.seqNo, handle.fd, fd);
+                cacheMgr_->Dump();
             }
             HdfTrace traceVdi("SetLayerBuffer", traceMsg);
             needMoveFd = true;
