@@ -1459,7 +1459,11 @@ typedef enum camera_device_metadata_tag {
       */
      OHOS_ABILITY_CAMERA_ZOOM_BEZIER_CURVC_POINT,
      /**
-    OHOS_DEVICE_ZOOM_END,
+     * ohos.device.zoomEnd
+     *
+     * camera device zoomEnd
+     */
+     OHOS_DEVICE_ZOOM_END,
 
     // Camera flow control related
     /**
