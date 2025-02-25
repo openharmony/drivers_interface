@@ -1450,7 +1450,7 @@ typedef enum camera_device_metadata_tag {
      * camera device property, set current camera support camera zoom performance
      * (i.e. byte ...)
      */
-     OHOS_ABILITY_CAMERA_ZOOM_PERFORMANCE,
+    OHOS_ABILITY_CAMERA_ZOOM_PERFORMANCE,
      /**
      * ohos.control.zoomBezierCurvePoint [static, byte, public]
       *
