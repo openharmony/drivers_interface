@@ -28,6 +28,6 @@ import ohos.hdi.display.graphic.common.v2_0.BufferHandleMetaKeyType;
  *
  */
 enum BufferHandleAttrKey : ohos.hdi.display.graphic.common.v2_0.BufferHandleAttrKey {
-    ATTRKEY_VIDEO_TV_PQ = 2049,                // value: TvPQMetadata
-    ATTRKEY_ADAPTIVE_FOV_METADATA = 2050,      // value: byte stream of look up table
+    ATTRKEY_VIDEO_TV_PQ = 14,                // value: TvPQMetadata
+    ATTRKEY_ADAPTIVE_FOV_METADATA = 15,      // value: byte stream of look up table
 };
