@@ -2342,6 +2342,27 @@ typedef enum camera_device_metadata_tag {
      * camera xmage end
      */
     OHOS_XMAGE_COLOR_MODES_END,
+    /**
+     * ohos.camera.controlLightStatus [static, enum, public]
+     *
+     * camera control light status
+     * (i.e. enum 0(disable)/1(enable) ...)
+     */
+    OHOS_CONTROL_LIGHT_STATUS,
+    /**
+     * ohos.camera.abilityLightStatus [static, enum, public]
+     *
+     * camera ability light status
+     * (i.e. enum 0(disable)/1(enable) ...)
+     */
+    OHOS_ABILITY_LIGHT_STATUS,
+    /**
+     * ohos.camera.lightStatus [static, enum, public]
+     *
+     * camera light status
+     * (i.e. enum 0(true)/1(false) ...)
+     */
+    OHOS_STATUS_LIGHT_STATUS
 } camera_device_metadata_tag_t;
 
 // switch type tag enumeration values
