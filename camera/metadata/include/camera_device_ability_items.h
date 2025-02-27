@@ -500,10 +500,10 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_CONCURRENT_SUPPORTED_CAMERAS,
     /**
-     * ohos.ability.autoAigcPhoto [static, int32[], public]
+     * ohos.ability.autoAigcPhoto [static, byte[], public]
      *
      * camera device property, report current camera whether support auto auto aigc photo by mode
-     * (i.e. int32[]: [mode, OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED, mode ...] ...)
+     * (i.e. byte[]: [mode, OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED, mode ...] ...)
      * @since 5.1
      * @version 1.0
      */
