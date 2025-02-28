@@ -372,6 +372,7 @@ std::map<uint32_t, uint32_t> g_metadataSectionMap = {
     {OHOS_CAMERA_SECURE, OHOS_SECTION_CAMERA_SECURE},
     {OHOS_XMAGE_COLOR_ABILITY, OHOS_SECTION_CAMERA_XMAGE},
     {OHOS_STREAM_CONTROL, OHOS_SECTION_STREAM_CONTROL},
+    {OHOS_LIGHT_STATUS, OHOS_SECTION_LIGHT_STATUS},
 };
 
 CameraMetadata::CameraMetadata(size_t itemCapacity, size_t dataCapacity)

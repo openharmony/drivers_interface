@@ -31,6 +31,7 @@ typedef enum camera_ability_section {
     OHOS_DEVICE_WHITE_BLANCE,
     OHOS_DEVICE_FLASH,
     OHOS_DEVICE_ZOOM,
+    OHOS_LIGHT_STATUS,
 
     // Camera effects & algorithms
     OHOS_CAMERA_EFFECT = 0x2000,
@@ -85,6 +86,7 @@ typedef enum camera_device_metadata_section_start {
 
     OHOS_XMAGE_COLOR_MODES_START = OHOS_XMAGE_COLOR_ABILITY << 16,
     OHOS_VENDOR_SECTION_START = OHOS_VENDOR_SECTION << 16,
+    OHOS_LIGHT_STATUS_START = OHOS_LIGHT_STATUS << 16,
 } camera_device_info_section_start_t;
 
 typedef enum camera_device_metadata_tag {
@@ -2343,26 +2345,32 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_XMAGE_COLOR_MODES_END,
     /**
-     * ohos.camera.controlLightStatus [static, enum, public]
+     * ohos.camera.abilityLightStatus [static, uint8, public]
+     *
+     * camera ability light status
+     * (i.e. enum 0(disable)/1(enable) ...)
+     */
+    OHOS_ABILITY_LIGHT_STATUS = OHOS_LIGHT_STATUS_START,
+    /**
+     * ohos.camera.controlLightStatus [static, uint8, public]
      *
      * camera control light status
      * (i.e. enum 0(disable)/1(enable) ...)
      */
     OHOS_CONTROL_LIGHT_STATUS,
     /**
-     * ohos.camera.abilityLightStatus [static, enum, public]
-     *
-     * camera ability light status
-     * (i.e. enum 0(disable)/1(enable) ...)
-     */
-    OHOS_ABILITY_LIGHT_STATUS,
-    /**
      * ohos.camera.lightStatus [static, enum, public]
      *
      * camera light status
      * (i.e. enum 0(true)/1(false) ...)
      */
-    OHOS_STATUS_LIGHT_STATUS
+    OHOS_STATUS_LIGHT_STATUS,
+    /**
+     * ohos.camera.lightStatus [static, enum, public]
+     *
+     * camera light status end
+     */
+    OHOS_LIGHT_STATUS_END,
 } camera_device_metadata_tag_t;
 
 // switch type tag enumeration values
