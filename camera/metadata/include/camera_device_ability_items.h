@@ -470,6 +470,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_MUTE_MODE,
     /**
+     * ohos.control.rotateAngle [static, int32, public]
+     *
+     * camera device property, set current camera rotate angle
+     * (i.e. int32 ...)
+     */
+    OHOS_CONTROL_ROTATE_ANGLE,
+    /**
      * ohos.camera.sensorEnd
      *
      * camera sensor endChar
