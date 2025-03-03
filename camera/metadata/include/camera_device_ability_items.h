@@ -1306,6 +1306,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_CAMERA_ZOOM_PERFORMANCE,
     /**
+     * ohos.control.zoomBezierCurvePoint [static, byte, public]
+      *
+      * camera device property, set current camera support camera BEZIER_CURVC_POINT
+      * (i.e. byte ...)
+      */
+    OHOS_ABILITY_CAMERA_ZOOM_BEZIER_CURVC_POINT,
+     /**
      * ohos.device.zoomEnd
      *
      * camera device zoomEnd
