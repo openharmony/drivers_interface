@@ -916,6 +916,11 @@ int CameraMetadata::GetCameraMetadataItem(const common_metadata_header_t *src, u
             METADATA_ERR_LOG("GetCameraMetadataItem GetMetadataData failed");
             return CAM_META_FAILURE;
         }
+        if (localItem->data.offset > src->data_count) {
+            METADATA_ERR_LOG("GetCameraMetadataItem offset is greater than data count,"
+                " offset:%{public}u, data count:%{public}u", localItem->data.offset, src->data_count);
+            return CAM_META_FAILURE;
+        }
         item->data.u8 = srcMetadataData + localItem->data.offset;
     }
 
@@ -1034,12 +1039,17 @@ int CameraMetadata::copyMetadataMemory(common_metadata_header_t *dst, camera_met
     uint8_t *dstMetadataData = GetMetadataData(dst);
     int32_t ret = CAM_META_SUCCESS;
     if (dstMetadataData == nullptr) {
-        METADATA_ERR_LOG("UpdateCameraMetadataItemSize GetMetadataData failed");
+        METADATA_ERR_LOG("copyMetadataMemory GetMetadataData failed");
+        return CAM_META_FAILURE;
+    }
+    if (dst->size < item->data.offset) {
+        METADATA_ERR_LOG("copyMetadataMemory offset is greater than total size,"
+            " offset:%{public}u, total size:%{public}u", item->data.offset, dst->size);
         return CAM_META_FAILURE;
     }
     ret = memcpy_s(dstMetadataData + item->data.offset, dataPayloadSize, data, dataPayloadSize);
     if (ret != EOK) {
-        METADATA_ERR_LOG("UpdateCameraMetadataItemByIndex memory copy failed");
+        METADATA_ERR_LOG("copyMetadataMemory memory copy failed");
         return CAM_META_FAILURE;
     }
     return CAM_META_SUCCESS;
