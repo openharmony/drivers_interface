@@ -21,7 +21,11 @@ if (defined(ohos_lite)) {
   hdi("camera") {
     module_name = "camera_service"
 
-    sources = [ "Types.idl" ]
+    sources = [
+      "IVideoProcessCallback.idl",
+      "IVideoProcessService.idl",
+      "Types.idl",
+    ]
 
     stub_deps = [
       "../sequenceable/buffer_handle:libbuffer_handle_sequenceable_1.0",
