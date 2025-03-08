@@ -137,3 +137,147 @@ struct CallInfoExtList {
      */
     List<struct CallInfoExt> calls;
 };
+
+/**
+ * @brief Defines ursp info.
+ */
+struct NetworkSliceUrspInfo {
+    List<unsigned char> urspInfo;
+};
+
+/**
+ * @brief Defines allowednssai Info.
+ */
+struct NetworkSliceAllowedNssaiInfo {
+    List<unsigned char> allowednssaiInfo;
+};
+
+/**
+ * @brief Defines ehplmn Info.
+ */
+struct NetworkSliceEhplmnInfo {
+    List<unsigned char> ehplmnInfo;
+};
+
+/**
+ * @brief Defines the uepolicy decode result information.
+ */
+struct UePolicyDecodeResult {    
+    List<unsigned char> uePolicyDecodeResultInfo;
+};
+
+/**
+ * @brief Defines the ue policy state indication.
+ */
+struct UePolicySectionIdentifier {   
+    List<unsigned char> uePolicySectionIdentifierInfo;
+};
+
+/**
+ * @brief Defines the ims rsd list.
+ */
+struct ImsRsdList {
+    List<unsigned char> imsRsdListInfo;
+};
+
+/**
+ * @brief Defines the SyncAllowedNssaiInfo.
+ */
+struct SyncAllowedNssaiInfo {
+    List<unsigned char> syncAllowedNssaiInfo;
+};
+
+/**
+ * @brief Defines PDP context information with apn types for slice.
+ */
+struct DataProfileDataInfoWithApnTypesforSlice {
+    /**
+     * Request SN
+     */
+    int serial;
+
+    /**
+     * Data service type. The value 0 indicates the default data service,
+     * and the value 1 indicates the MMS data service.
+     */
+    int profileId;
+
+    /**
+     * Authentication mode:
+     *- 0: no authentication
+     *- 1: Password Authentication Protocol (PAP)
+     *- 2: Challenge Handshake Authentication Protocol (CHAP)
+     */
+    int authenticationType;
+
+    /**
+     * Access point name
+     */
+    String apn;
+
+    /**
+     * Protocol version
+     */
+    String protocol;
+
+    /**
+     * Roaming protocol version
+     */
+    String roamingProtocol;
+
+    /**
+     * Username
+     */
+    String userName;
+
+    /**
+     * Password
+     */
+    String password;
+
+    /**
+     * Supported APN types Bitmap
+     */
+    unsigned long supportedApnTypesBitmap;
+
+    String snssai;
+ 
+    int sscMode;
+};
+
+/**
+ * @brief Defines the data service information for slice.
+ */
+struct DataCallInfoWithApnTypesforSlice {
+    /**
+     * Request SN
+     */
+    int serial;
+
+    /**
+     * Radio access technology. For details, see {@link RilRadioTech}.
+     */
+    int radioTechnology;
+
+    /**
+     * Whether the PDP context is set for the modem
+     */
+    boolean modemCognitive;
+
+    /**
+     * Whether roaming is allowed. The value true indicates that roaming is allowed,
+     * and the value false indicates the opposite.
+     */
+    boolean roamingAllowed;
+
+    /**
+     * Whether the user is roaming. The value true indicates that the user is roaming,
+     * and the value false indicates the opposite.
+     */
+    boolean isRoaming;
+
+    /**
+     * PDP context information with apn types
+     */
+    struct DataProfileDataInfoWithApnTypesforSlice dataProfileInfo;
+ };
