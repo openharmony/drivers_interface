@@ -53,6 +53,7 @@ enum BufferHandleAttrKey {
 
     /* temporarily extended meta type, between system and vendor */
     ATTRKEY_OEM_EXT_START = 4096,
+    ATTRKEY_EXTERNAL_METADATA_001 = 4097, // value: ExternalMetadata001
     ATTRKEY_END = 8192
 };
 
@@ -90,4 +91,21 @@ struct BlobDataType {
     unsigned int length; // data length set by previous SetMetadata(), default to 0
     unsigned int capacity; // reserved data size
     enum CacheOption cacheOp; // effective in SetMetaData()
+};
+
+/**
+ * @brief ExternalMetadata001 of [value] in GetMetadata/SetMetaData, to trans metadata.
+ *
+ * @since 5.0
+ * @version 2.0
+ */
+struct ExternalMetadata001 {
+    unsigned int sliceNum;        // default number of slice
+    unsigned int srcEvent;        // hts event pair, src side
+    unsigned int dstEvent;        // hts event pair, dst side
+    unsigned int hasGamma;        // gamma correction flag
+    unsigned int alignment;       // buffer align
+    unsigned int isHtsEnable;     // hts enable flag
+    unsigned int uvOrder;         // u/v order
+    unsigned int actualSliceNum;  // actual number of slice
 };
