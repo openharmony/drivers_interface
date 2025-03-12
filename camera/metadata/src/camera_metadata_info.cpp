@@ -542,6 +542,13 @@ camera_metadata_item_entry_t *CameraMetadata::GetMetadataItems(const common_meta
         METADATA_ERR_LOG("GetMetadataItems metadataHeader is null");
         return nullptr;
     }
+    if (metadataHeader->data_start != 0) {
+        if (metadataHeader->size != metadataHeader->data_capacity + metadataHeader->data_start) {
+            METADATA_ERR_LOG("GetMetadataItems error size:%{public}u, data_capacity:%{public}u, data_start:%{public}u",
+                metadataHeader->size, metadataHeader->data_capacity, metadataHeader->data_start);
+            return nullptr;
+        }
+    }
     return reinterpret_cast<camera_metadata_item_entry_t *>(
         (reinterpret_cast<uint8_t *>(const_cast<common_metadata_header_t *>(metadataHeader)) +
         metadataHeader->items_start));
