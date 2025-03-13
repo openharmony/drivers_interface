@@ -168,7 +168,7 @@ public:
         COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         if (status == DispPowerStatus::POWER_STATUS_ON) {
             vsyncEnableCount_[devId] = 0;
-    }
+        }
         int32_t ret = hdi_->SetDisplayPowerStatus(devId, status);
         HDF_LOGI("devId: %{public}u, status: %{public}u", devId, status);
         return ToDispErrCode(ret);
