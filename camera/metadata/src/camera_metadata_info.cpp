@@ -544,7 +544,8 @@ camera_metadata_item_entry_t *CameraMetadata::GetMetadataItems(const common_meta
         return nullptr;
     }
     if (metadataHeader->data_start != 0) {
-        if (metadataHeader->size != metadataHeader->data_capacity + metadataHeader->data_start) {
+        if (metadataHeader->size != metadataHeader->data_capacity + metadataHeader->data_start ||
+            metadataHeader->data_capacity == 0) {
             METADATA_ERR_LOG("GetMetadataItems error size:%{public}u, data_capacity:%{public}u, data_start:%{public}u",
                 metadataHeader->size, metadataHeader->data_capacity, metadataHeader->data_start);
             return nullptr;
@@ -947,6 +948,10 @@ int CameraMetadata::FindCameraMetadataItemIndex(const common_metadata_header_t *
     }
 
     camera_metadata_item_entry_t *searchItem = GetMetadataItems(src);
+    if (searchItem == nullptr) {
+        METADATA_ERR_LOG("FindCameraMetadataItemIndex item is null");
+        return CAM_META_INVALID_PARAM;
+    }
     uint32_t index;
     for (index = 0; index < src->item_count; index++, searchItem++) {
         if (searchItem->item == item) {
@@ -1132,7 +1137,12 @@ int CameraMetadata::UpdateCameraMetadataItemByIndex(common_metadata_header_t *ds
     }
 
     int32_t ret = CAM_META_SUCCESS;
-    camera_metadata_item_entry_t *item = GetMetadataItems(dst) + index;
+    camera_metadata_item_entry_t *metadataItem = GetMetadataItems(dst);
+    if (metadataItem == nullptr) {
+        METADATA_ERR_LOG("UpdateCameraMetadataItemByIndex item is null");
+        return CAM_META_INVALID_PARAM;
+    }
+    camera_metadata_item_entry_t *item = metadataItem + index;
 
     ret = UpdateCameraMetadataItemSize(item, dataCount, dst, data);
     if (ret != CAM_META_SUCCESS) {
