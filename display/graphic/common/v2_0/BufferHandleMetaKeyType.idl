@@ -54,6 +54,7 @@ enum BufferHandleAttrKey {
     /* temporarily extended meta type, between system and vendor */
     ATTRKEY_OEM_EXT_START = 4096,
     ATTRKEY_EXTERNAL_METADATA_001 = 4097, // value: ExternalMetadata001
+    ATTRKEY_EXTERNAL_METADATA_002 = 4098, // value: SDR nature tone metadata
     ATTRKEY_END = 8192
 };
 
