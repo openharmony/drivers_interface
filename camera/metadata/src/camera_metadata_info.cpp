@@ -25,7 +25,7 @@
 #include "camera_vendor_tag.h"
 
 namespace OHOS::Camera {
-static std::mutex mtx_;
+static std::mutex g_mtx;
 static std::mutex g_vendorTagImplMtx;
 static CameraVendorTag* g_vendorTagImpl = nullptr;
 const char* g_exampleVendorTagLib = "libcamera_example_vendor_tag_impl.z.so";
@@ -384,7 +384,7 @@ CameraMetadata::CameraMetadata(size_t itemCapacity, size_t dataCapacity)
 
 CameraMetadata::~CameraMetadata()
 {
-    std::lock_guard<std::mutex> lockGuard(mtx_);
+    std::lock_guard<std::mutex> lockGuard(g_mtx);
     if (metadata_) {
         FreeCameraMetadataBuffer(metadata_);
         metadata_ = nullptr;
@@ -469,7 +469,7 @@ void CameraMetadata::replace_metadata(common_metadata_header_t *newMetadata)
         return;
     }
 
-    std::lock_guard<std::mutex> lockGuard(mtx_);
+    std::lock_guard<std::mutex> lockGuard(g_mtx);
     if (metadata_ != nullptr) {
         FreeCameraMetadataBuffer(metadata_);
     }
