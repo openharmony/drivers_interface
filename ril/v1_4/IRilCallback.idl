@@ -68,5 +68,44 @@ import ohos.hdi.ril.v1_4.Types;
      */
     [oneway] GetCallListResponseExt([in] struct RilRadioResponseInfo responseInfo,
         [in] struct CallInfoExtList callList);
+
+    /**
+     * @brief Reporting the ursp info.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. For details,
+     * see {@link RilRadioResponseInfo}.
+     * @param networksliceUrspInfo.
+     *
+     * @since 5.1
+     * @version 1.0
+     */
+    [oneway] NetworkSliceUrspRpt([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct NetworkSliceUrspInfo networksliceUrspInfo);
++
+    /**
+     * @brief Reporting the allowed-nssai info.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. For details,
+     * see {@link RilRadioResponseInfo}.
+     * @param networksliceAllowedNssaiInfo.
+     *
+     * @since 5.1
+     * @version 1.0
+     */
+    [oneway] NetworkSliceAllowedNssaiRpt([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct NetworkSliceAllowedNssaiInfo networksliceAllowedNssaiInfo);
++
+    /**
+     * @brief Reporting the ehplmn info.
+     *
+     * @param responseInfo Common response information, such as the card slot ID and request sequence ID. For details,
+     * see {@link RilRadioResponseInfo}.
+     * @param networksliceEhplmnInfo.
+     *
+     * @since 5.1
+     * @version 1.0
+     */
+    [oneway] NetworkSliceEhplmnRpt([in] struct RilRadioResponseInfo responseInfo,
+        [in] struct NetworkSliceEhplmnInfo networksliceEhplmnInfo);
 }
 /** @} */
