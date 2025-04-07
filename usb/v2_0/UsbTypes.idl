@@ -99,16 +99,6 @@ struct USBDeviceInfo {
 };
 
 /**
- * @brief Defines the RoleCombinations Params.
- * @since 5.1
- * @version 1.0
- */
-struct RoleCombinations {
-    int powerRole;
-    int dataRole;
-};
-
-/**
  * @brief Defines the PortInfo Params.
  * @since 5.1
  * @version 1.0
@@ -118,6 +108,7 @@ struct PortInfo {
     int powerRole;
     int dataRole;
     int mode;
+    int supportedModes;
 };
 
 /**
@@ -129,8 +120,6 @@ struct UsbPortStatus {
     int currentMode;
     int currentPowerRole;
     int currentDataRole;
-    int isConnected;
-    RoleCombinations[] supportedRoleCombinations;
 };
 
 /**
