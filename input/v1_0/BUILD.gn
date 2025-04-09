@@ -21,11 +21,14 @@ if (defined(ohos_lite)) {
 } else {
   hdi("input") {
     module_name = "input_service"
-
     sources = [
       "IInputCallback.idl",
       "IInputInterfaces.idl",
       "InputTypes.idl",
+    ]
+    install_images = [
+        "system",
+        "updater"
     ]
     mode = "passthrough"
     language = "cpp"
