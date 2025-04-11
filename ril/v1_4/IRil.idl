@@ -45,6 +45,7 @@ package ohos.hdi.ril.v1_4;
 
 import ohos.hdi.ril.v1_4.IRilCallback;
 import ohos.hdi.ril.v1_3.IRil;
+import ohos.hdi.ril.v1_4.Types;
 
 /**
  * @brief Declares the request API of the RIL module.
@@ -68,5 +69,98 @@ interface IRil extends ohos.hdi.ril.v1_3.IRil {
       * @version 1.0
       */
     [oneway] SetCallback1_4([in] IRilCallback rilCallback);
+
+    /**
+    * @brief Send UePolicy Command result.
+    *
+    * @param slotId Card slot ID.
+    * @param serialId Serial ID of a request.
+    * @param msgbuffer
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a non-0 value if the operation fails.
+    *
+    * @since 5.1
+    * @version 1.0
+    */
+    [oneway] SendUrspDecodeResult([in] int slotId, [in] int serialId,
+      [in] struct UePolicyDecodeResult uePolicyDecodeResult);
+
+    /**
+    * @brief Send UePolicy Section Identifier.
+    *
+    * @param slotId Card slot ID.
+    * @param serialId Serial ID of a request.
+    * @param msgbuffer
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a non-0 value if the operation fails.
+    *
+    * @since 5.1
+    * @version 1.0
+    */
+    [oneway] SendUePolicySectionIdentifier([in] int slotId, [in] int serialId,
+      [in] struct UePolicySectionIdentifier uePolicySectionIdentifier);
+
+    /**
+    * @brief ImsRsdList.
+    *
+    * @param slotId Card slot ID.
+    * @param serialId Serial ID of a request.
+    * @param msgbuffer
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a non-0 value if the operation fails.
+    *
+    * @since 5.1
+    * @version 1.0
+    */
+    [oneway] SendImsRsdList([in] int slotId, [in] int serialId, [in] struct ImsRsdList imsRsdList);
+
+    /**
+    * @brief GetNetworkSliceAllowedNssai.
+    *
+    * @param slotId Card slot ID.
+    * @param serialId Serial ID of a request.
+    * @param msgbuffer
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a non-0 value if the operation fails.
+    *
+    * @since 5.1
+    * @version 1.0
+    */
+    [oneway] GetNetworkSliceAllowedNssai([in] int slotId, [in] int serialId,
+      [in] struct SyncAllowedNssaiInfo syncAllowedNssaiInfo);
+
+    /**
+    * @brief GetNetworkSliceEhplmn.
+    *
+    * @param slotId Card slot ID.
+    * @param serialId Serial ID of a request.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a non-0 value if the operation fails.
+    *
+    * @since 5.1
+    * @version 1.0
+    */
+    [oneway] GetNetworkSliceEhplmn([in] int slotId, [in] int serialId);
+
+    /**
+    * @brief Activates the packet data protocol (PDP) context.
+    *
+    * @param slotId Card slot ID.
+    * @param serialId Serial ID of a request.
+    * @param dataCallInfo Data service information with apn types. For details, see {@link DataCallInfoWithApnTypes}.
+    *
+    * @return Returns <b>0</b> if the operation is successful.
+    * @return Returns a non-0 value if the operation fails.
+    *
+    * @since 5.1
+    * @version 1.0
+    */
+    [oneway] ActivatePdpContextWithApnTypesforSlice([in] int slotId, [in] int serialId,
+        [in] struct DataCallInfoWithApnTypesforSlice dataCallInfo);
 }
 /** @} */
