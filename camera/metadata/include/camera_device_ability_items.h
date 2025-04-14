@@ -332,6 +332,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_AUTO_DEFERRED_VIDEO_ENHANCE,
     /**
+     * ohos.ability.movingPhotoMicroVideoEnhance [static, enum, public]
+     *
+     * camera device property, report current camera whether support dynamic photo enhancement processing
+     * (i.e. enum: OHOS_CAMERA_NOT_SUPPORTED/OHOS_CAMERA_SUPPORTED ...)
+     */
+    OHOS_ABILITY_MOVING_PHOTO_MICRO_VIDEO_ENHANCE,
+    /**
      * ohos.control.autoDeferredVideoEnhance [static, enum, public]
      *
      * camera device property, set current camera whether support auto deferred video enhance
