@@ -36,7 +36,7 @@ ohos_shared_library("libbuffer_producer_sequenceable_1.0") {
     "ipc:ipc_single",
   ]
   public_external_deps = [ "graphic_surface:buffer_handle" ]
-  cflags_cc = [ "-fstack-protector-strong" ]
+  branch_protector_ret = "pac_ret"
 
   if (drivers_interface_camera_feature_coverage) {
     cflags_cc += [ "--coverage" ]
