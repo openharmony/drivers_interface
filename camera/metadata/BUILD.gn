@@ -27,7 +27,6 @@ ohos_shared_library("metadata") {
     "-Wall",
   ]
   cflags_cc = cflags
-  cflags_cc += [ "-fstack-protector-strong" ]
 
   if (drivers_interface_camera_feature_coverage) {
     cflags += [ "--coverage" ]

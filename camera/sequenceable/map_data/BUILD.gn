@@ -33,7 +33,7 @@ ohos_shared_library("libmap_data_sequenceable_1.0") {
     "hilog:libhilog",
     "ipc:ipc_single",
   ]
-  cflags_cc = [ "-fstack-protector-strong" ]
+  branch_protector_ret = "pac_ret"
 
   if (drivers_interface_camera_feature_coverage) {
     cflags_cc += [ "--coverage" ]
