@@ -377,6 +377,14 @@ std::map<uint32_t, uint32_t> g_metadataSectionMap = {
     {OHOS_LIGHT_STATUS, OHOS_SECTION_LIGHT_STATUS},
 };
 
+std::map<uint32_t, uint32_t> g_itemDataTypeMap {
+    { OHOS_ABILITY_STREAM_AVAILABLE_BASIC_CONFIGURATIONS, META_TYPE_INT32 },
+    { OHOS_ABILITY_STREAM_AVAILABLE_EXTEND_CONFIGURATIONS, META_TYPE_INT32 },
+    { OHOS_SENSOR_INFO_MAX_FRAME_DURATION, META_TYPE_INT64 },
+    { OHOS_JPEG_MAX_SIZE, META_TYPE_INT32 },
+    { OHOS_ABILITY_CAMERA_CONNECTION_TYPE, META_TYPE_BYTE }
+};
+
 CameraMetadata::CameraMetadata(size_t itemCapacity, size_t dataCapacity)
 {
     metadata_ = AllocateCameraMetadataBuffer(itemCapacity, AlignTo(dataCapacity, DATA_ALIGNMENT));
@@ -968,6 +976,10 @@ int CameraMetadata::FindCameraMetadataItemIndex(const common_metadata_header_t *
             METADATA_ERR_LOG("FindCameraMetadataItemIndex item: %{public}u not found", item);
         }
         return CAM_META_ITEM_NOT_FOUND;
+    }
+
+    if (!CheckItemDataType(*searchItem)) {
+        return CAM_META_INVALID_PARAM;
     }
 
     *idx = index;
@@ -1638,5 +1650,17 @@ int32_t CameraMetadata::GetAllVendorTags(std::vector<vendorTag_t>& tagVec)
     std::lock_guard<std::mutex> lock(g_vendorTagImplMtx);
     g_vendorTagImpl->GetAllVendorTags(tagVec);
     return CAM_META_SUCCESS;
+}
+
+bool CameraMetadata::CheckItemDataType(camera_metadata_item_entry_t &item)
+{
+    auto iter = g_itemDataTypeMap.find(item.item);
+    if (iter != g_itemDataTypeMap.end()) {
+        if (iter->second != item.data_type) {
+            METADATA_ERR_LOG("Invalid data type :%{public}u, item :%{public}u", item.data_type, item.item);
+            return false;
+        }
+    }
+    return true;
 }
 } // Camera
