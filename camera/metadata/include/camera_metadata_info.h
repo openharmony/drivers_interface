@@ -58,6 +58,7 @@ private:
         camera_metadata_item_entry_t *itemToDelete, size_t dataBytes);
     static int copyMetadataMemory(common_metadata_header_t *dst, camera_metadata_item_entry_t *item,
         size_t dataPayloadSize, const void *data);
+    static bool CheckItemDataType(camera_metadata_item_entry_t &item);
 
 public:
     // Allocate a new camera metadata buffer and return the metadata header
