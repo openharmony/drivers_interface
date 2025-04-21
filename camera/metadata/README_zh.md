@@ -131,12 +131,12 @@ PS: '虚化'为OHOS_ABILITY_SCENE_PORTRAIT_EFFECT_TYPES, '滤镜'为OHOS_ABILITY
 
 对焦模式类型定义如下：
 
-| OHOS\_ABILITY\_FOCUS_MODES                  | 数值  | 用于查询支持的对焦模式 |
-| ------------------------------------------- | ---- |------------------- |
-| OHOS\_CAMERA\_FOCUS\_MODE\_MANUAL           | 0    | 手动    |
-| OHOS\_CAMERA\_FOCUS\_MODE\_CONTINOUS_AUTO   | 1    | 连续自动 |
-| OHOS\_CAMERA\_FOCUS\_MODE\_AUTO             | 2    | 自动    |
-| OHOS\_CAMERA\_FOCUS\_MODE\_LOCKED           | 3    | 锁定    |
+| OHOS\_ABILITY\_FOCUS_MODES                 | 数值 | 用于查询支持的对焦模式 |
+| ------------------------------------------ | ---- | ---------------------- |
+| OHOS\_CAMERA\_FOCUS\_MODE\_MANUAL          | 0    | 手动                   |
+| OHOS\_CAMERA\_FOCUS\_MODE\_CONTINUOUS_AUTO | 1    | 连续自动               |
+| OHOS\_CAMERA\_FOCUS\_MODE\_AUTO            | 2    | 自动                   |
+| OHOS\_CAMERA\_FOCUS\_MODE\_LOCKED          | 3    | 锁定                   |
 
 ### OHOS\_CONTROL\_FOCUS\_MODE
 8位整型，用于下发对焦模式。
@@ -146,12 +146,12 @@ PS: '虚化'为OHOS_ABILITY_SCENE_PORTRAIT_EFFECT_TYPES, '滤镜'为OHOS_ABILITY
 ### OHOS\_ABILITY\_EXPOSURE\_MODES
 8位整型数组，查询支持的曝光模式，类型定义如下：
 
-| OHOS\_ABILITY\_EXPOSURE\_MODES              |  用于查询支持的曝光模式 |
-| ------------------------------------------- | ------------------- |
-| OHOS\_CAMERA\_FOCUS\_MODE\_MANUAL           | 手动    |
-| OHOS\_CAMERA\_FOCUS\_MODE\_CONTINOUS_AUTO   | 连续自动 |
-| OHOS\_CAMERA\_FOCUS\_MODE\_AUTO             | 自动    |
-| OHOS\_CAMERA\_FOCUS\_MODE\_LOCKED           | 锁定    |
+| OHOS\_ABILITY\_EXPOSURE\_MODES                | 用于查询支持的曝光模式 |
+| --------------------------------------------- | ---------------------- |
+| OHOS\_CAMERA\_EXPOSURE\_MODE\_MANUAL          | 手动                   |
+| OHOS\_CAMERA\_EXPOSURE\_MODE\_CONTINUOUS_AUTO | 连续自动               |
+| OHOS\_CAMERA\_EXPOSURE\_MODE\_AUTO            | 自动                   |
+| OHOS\_CAMERA\_EXPOSURE\_MODE\_LOCKED          | 锁定                   |
 
 ### OHOS\_CONTROL\_EXPOSURE\_MODE
 8位整型，用于下发曝光模式。
@@ -257,7 +257,7 @@ typedef struct camera_rational {
 ### OHOS\_CONTROL\_FOCUS\_STATE
 8位整型数值，查询当前对焦状态，定义如下：
 
-| OHOS\_CONTROL\_FOCUS\_STATE | 查询当前闪光灯状态 |
+| OHOS\_CONTROL\_FOCUS\_STATE | 查询当前对焦状态 |
 | ---------------------------| ----------------- |
 |OHOS\_CAMERA\_FOCUS\_STATE\_SCAN | 扫描中 |
 |OHOS\_CAMERA\_FOCUS\_STATE\_FOCUSED | 已完成对焦 |
