@@ -77,7 +77,7 @@ public:
         vBlankCb_(nullptr),
         hotPlugCbData_(nullptr),
         vBlankCbData_(nullptr),
-		recipient_(nullptr) {}
+        recipient_(nullptr) {}
 
     virtual ~DisplayComposerHdiImpl()
     {
@@ -217,7 +217,6 @@ public:
     {
         COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
         return ToDispErrCode(hdi_->SetDisplaVsyncEnabled(devId, enabled));
-
     }
 
     virtual int32_t RegDisplayVBlankCallback(uint32_t devId, VBlankCallback cb, void *data) override
