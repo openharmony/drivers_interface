@@ -77,9 +77,7 @@ public:
         vBlankCb_(nullptr),
         hotPlugCbData_(nullptr),
         vBlankCbData_(nullptr),
-        recipient_(nullptr) {
-            vsyncEnableCount_.clear();
-        }
+		recipient_(nullptr) {}
 
     virtual ~DisplayComposerHdiImpl()
     {
@@ -166,9 +164,6 @@ public:
     virtual int32_t SetDisplayPowerStatus(uint32_t devId, DispPowerStatus status) override
     {
         COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
-        if (status == DispPowerStatus::POWER_STATUS_ON) {
-            vsyncEnableCount_[devId] = 0;
-        }
         int32_t ret = hdi_->SetDisplayPowerStatus(devId, status);
         HDF_LOGI("devId: %{public}u, status: %{public}u", devId, status);
         return ToDispErrCode(ret);
@@ -221,22 +216,8 @@ public:
     virtual int32_t SetDisplayVsyncEnabled(uint32_t devId, bool enabled) override
     {
         COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
+        return ToDispErrCode(hdi_->SetDisplaVsyncEnabled(devId, enabled));
 
-        /* Already enabled, return success */
-        if (enabled && vsyncEnableCount_[devId] > 0 && vsyncEnableCount_[devId] < MAX_COUNT) {
-            HDF_LOGD("%{public}s: Count[%{public}u] = %{public}u, Skip", __func__, devId, vsyncEnableCount_[devId]);
-            ++vsyncEnableCount_[devId];
-            return DISPLAY_SUCCESS;
-        }
-
-        int32_t ret = ToDispErrCode(hdi_->SetDisplayVsyncEnabled(devId, enabled));
-        if (ret != DISPLAY_SUCCESS) {
-            vsyncEnableCount_[devId] = 0;
-            return ret;
-        }
-
-        vsyncEnableCount_[devId] = enabled ? 1 : 0;
-        return ret;
     }
 
     virtual int32_t RegDisplayVBlankCallback(uint32_t devId, VBlankCallback cb, void *data) override
@@ -580,7 +561,6 @@ protected:
     void *hotPlugCbData_;
     void *vBlankCbData_;
     sptr<IRemoteObject::DeathRecipient> recipient_;
-    std::unordered_map<uint32_t, uint32_t> vsyncEnableCount_;
 };
 using HdiDisplayComposer = DisplayComposerHdiImpl<IDisplayComposerInterface, IDisplayComposer, HdiDisplayCmdRequester>;
 } // namespace V1_0
