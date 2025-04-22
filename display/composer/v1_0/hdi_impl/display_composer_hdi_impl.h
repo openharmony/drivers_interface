@@ -216,7 +216,7 @@ public:
     virtual int32_t SetDisplayVsyncEnabled(uint32_t devId, bool enabled) override
     {
         COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
-        return ToDispErrCode(hdi_->SetDisplaVsyncEnabled(devId, enabled));
+        return ToDispErrCode(hdi_->SetDisplayVsyncEnabled(devId, enabled));
     }
 
     virtual int32_t RegDisplayVBlankCallback(uint32_t devId, VBlankCallback cb, void *data) override
