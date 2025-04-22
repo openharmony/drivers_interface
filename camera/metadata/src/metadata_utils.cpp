@@ -16,6 +16,7 @@
 #include "metadata_utils.h"
 #include <securec.h>
 #include "metadata_log.h"
+#include "camera_metadata_item_info.h"
 
 #define IF_COND_PRINT_MSG_AND_RETURN(cond, msg) \
 if (cond) { \
@@ -483,12 +484,12 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
 
     IF_COND_PRINT_MSG_AND_RETURN(ret != EOK,
         "MetadataUtils::DecodeFromString Failed to copy memory for metadata header")
-    bool isItemsStartInvalid = meta->items_start >= actualMemSize || meta->items_start < headerLength ||
-        meta->item_count == 0;
+    bool isItemsStartInvalid = meta->items_start >= actualMemSize || meta->items_start < headerLength;
     bool isDataStartInvalid = meta->data_start >= actualMemSize || meta->data_start < headerLength;
     bool isMetadataCountInvaild = (actualMemSize - meta->items_start) < (uint64_t)meta->item_count * itemLen ||
         (actualMemSize - meta->data_start) < meta->data_count;
-    IF_COND_PRINT_MSG_AND_RETURN(isItemsStartInvalid || isDataStartInvalid || isMetadataCountInvaild,
+    bool isFuzzErrData = (actualMemSize - meta->items_start) < (uint64_t)meta->item_capacity * itemLen;
+    IF_COND_PRINT_MSG_AND_RETURN(isItemsStartInvalid || isDataStartInvalid || isMetadataCountInvaild || isFuzzErrData,
         "MetadataUtils::DecodeFromString invalid item_start")
     decodeData += headerLength;
     camera_metadata_item_entry_t *item = GetMetadataItems(meta);
@@ -503,8 +504,14 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
             "MetadataUtils::DecodeFromString Failed to copy memory for item fixed fields")
         decodeData += itemFixedLen;
         uint32_t dataLen = itemLen - itemFixedLen;
-        ret = memcpy_s(&(item->data), dataLen,  decodeData, dataLen);
-
+        ret = memcpy_s(&(item->data), dataLen, decodeData, dataLen);
+            if (item->data_type >= META_NUM_TYPES ||
+                totalLen < (uint64_t)(item->count * OHOS_CAMERA_METADATA_TYPE_SIZE[item->data_type])) {
+                METADATA_ERR_LOG("MetadataUtils::DecodeFromString Failed at item index: %{public}u, "
+                    "totalLen :%{public}u, data type :%{public}u, count:%{public}u",
+                    index, totalLen, item->data_type, item->count);
+                return {};
+            }
         IF_COND_PRINT_MSG_AND_RETURN(ret != EOK,
             "MetadataUtils::DecodeFromString Failed to copy memory for item data field")
         decodeData += dataLen;
