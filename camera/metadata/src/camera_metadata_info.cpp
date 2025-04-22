@@ -553,8 +553,7 @@ camera_metadata_item_entry_t *CameraMetadata::GetMetadataItems(const common_meta
         return nullptr;
     }
     if (metadataHeader->data_start != 0) {
-        if (metadataHeader->size != metadataHeader->data_capacity + metadataHeader->data_start ||
-            metadataHeader->data_capacity == 0) {
+        if (metadataHeader->size != metadataHeader->data_capacity + metadataHeader->data_start) {
             METADATA_ERR_LOG("GetMetadataItems error size:%{public}u, data_capacity:%{public}u, data_start:%{public}u",
                 metadataHeader->size, metadataHeader->data_capacity, metadataHeader->data_start);
             return nullptr;
