@@ -181,7 +181,7 @@ public:
         uint32_t originalMaxCount = cacheCountMax_;
         if (count >= cacheCountMax_) {
             cacheCountMax_ = count;
-        } else if (Size() <= count) {
+        } else if (Size() <= count || count == 0) {
             cacheCountMax_ = count;
         } else {
             HDF_LOGE("%{public}s error: clientCacheCount can't be set, because cacheCountMax_ > count", __func__);
