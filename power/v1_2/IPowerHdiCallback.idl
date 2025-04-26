@@ -66,5 +66,14 @@ package ohos.hdi.power.v1_2;
      * @since 3.1
      */
     OnWakeup();
+
+    /**
+     * @brief Callback of the wakeup state with a tag.
+     *
+     * This callback is used to notify the power service when the device enters the wakeup state with a tag.
+     *
+     * @since 6.0
+     */
+    OnWakeupWithTag([in] String tag);
 }
 /** @} */
