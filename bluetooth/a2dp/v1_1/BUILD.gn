@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
+import("//build/config/components/hdi/hdi.gni")
 hdi("bluetooth_a2dp") {
   module_name = "bluetooth_a2dp"
   imports = [ "ohos.hdi.bluetooth.a2dp.v1_0:bluetooth_a2dp" ]
