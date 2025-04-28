@@ -53,7 +53,7 @@
             }
           },
           {
-            "name": "//drivers/interface/intelligent_voice/engine/v1_2:intell_voice_engine_idl_headers",
+            "name": "//drivers/interface/intelligent_voice/engine/v1_2:intell_voice_engine_idl_headers_1.2",
             "header": {
               "header_files": [
               ],
@@ -77,7 +77,7 @@
             }
           },
           {
-            "name": "//drivers/interface/intelligent_voice/engine/v1_1:intell_voice_engine_idl_headers",
+            "name": "//drivers/interface/intelligent_voice/engine/v1_1:intell_voice_engine_idl_headers_1.1",
             "header": {
               "header_files": [
               ],
@@ -101,7 +101,7 @@
             }
           },
           {
-            "name": "//drivers/interface/intelligent_voice/engine/v1_0:intell_voice_engine_idl_headers",
+            "name": "//drivers/interface/intelligent_voice/engine/v1_0:intell_voice_engine_idl_headers_1.0",
             "header": {
               "header_files": [
               ],
@@ -125,7 +125,7 @@
             }
           },
           {
-            "name": "//drivers/interface/intelligent_voice/trigger/v1_2:intell_voice_trigger_idl_headers",
+            "name": "//drivers/interface/intelligent_voice/trigger/v1_2:intell_voice_trigger_idl_headers_1.2",
             "header": {
               "header_files": [
               ],
@@ -149,7 +149,7 @@
             }
           },
           {
-            "name": "//drivers/interface/intelligent_voice/trigger/v1_1:intell_voice_trigger_idl_headers",
+            "name": "//drivers/interface/intelligent_voice/trigger/v1_1:intell_voice_trigger_idl_headers_1.1",
             "header": {
               "header_files": [
               ],
@@ -173,7 +173,7 @@
             }
           },
           {
-            "name": "//drivers/interface/intelligent_voice/trigger/v1_0:intell_voice_trigger_idl_headers",
+            "name": "//drivers/interface/intelligent_voice/trigger/v1_0:intell_voice_trigger_idl_headers_1.0",
             "header": {
               "header_files": [
               ],
