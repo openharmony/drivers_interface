@@ -16,10 +16,9 @@ import("//build/config/components/hdi/hdi.gni")
 hdi("display_commontype") {
   module_name = "display_commontype"
 
-  deps = [
-    "//drivers/interface/display/graphic/common/v1_0:libdisplay_commontype_proxy_1.0",
-    "//drivers/interface/display/graphic/common/v1_0:libdisplay_commontype_stub_1.0",
-  ]
+  proxy_deps = [ "../v1_0:libdisplay_commontype_proxy_1.0" ]
+
+  stub_deps = [ "../v1_0:libdisplay_commontype_stub_1.0" ]
 
   sources = [ "BufferHandleMetaKeyType.idl" ]
 
