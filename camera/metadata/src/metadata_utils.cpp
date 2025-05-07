@@ -411,13 +411,13 @@ std::string MetadataUtils::EncodeToString(std::shared_ptr<CameraMetadata> metada
     camera_metadata_item_entry_t *item = GetMetadataItems(meta);
     for (uint32_t index = 0; index < meta->item_count; index++, item++) {
         ret = memcpy_s(encodeData, encodeDataLen, item, itemFixedLen);
-        if (ret != EOK) {
-            METADATA_ERR_LOG("MetadataUtils::EncodeToString Failed to copy memory for item fixed fields");
-            return {};
-        }
+        METADATA_CHECK_ERROR_RETURN_RET_LOG(
+            ret != EOK, {}, "MetadataUtils::EncodeToString Failed to copy memory for item fixed fields");
         encodeData += itemFixedLen;
         encodeDataLen -= itemFixedLen;
         int32_t dataLen = itemLen - itemFixedLen;
+        METADATA_CHECK_ERROR_RETURN_RET_LOG(
+            item == nullptr, {}, "MetadataUtils::EncodeToString Failed, item is nullptr");
         ret = memcpy_s(encodeData, encodeDataLen,  &(item->data), dataLen);
         if (ret != EOK) {
             METADATA_ERR_LOG("MetadataUtils::EncodeToString Failed to copy memory for item data field");
@@ -494,16 +494,16 @@ std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string sett
     decodeData += headerLength;
     camera_metadata_item_entry_t *item = GetMetadataItems(meta);
     for (uint32_t index = 0; index < meta->item_count; index++, item++) {
-        if (totalLen < ((decodeData - &setting[0]) + itemLen)) {
-            METADATA_ERR_LOG("MetadataUtils::DecodeFromString Failed at item index: %{public}u", index);
-            return {};
-        }
+        METADATA_CHECK_ERROR_RETURN_RET_LOG(totalLen < ((decodeData - &setting[0]) + itemLen), {},
+            "MetadataUtils::DecodeFromString Failed at item index: %{public}u", index);
         ret = memcpy_s(item, itemFixedLen, decodeData, itemFixedLen);
 
         IF_COND_PRINT_MSG_AND_RETURN(ret != EOK,
             "MetadataUtils::DecodeFromString Failed to copy memory for item fixed fields")
         decodeData += itemFixedLen;
         uint32_t dataLen = itemLen - itemFixedLen;
+        METADATA_CHECK_ERROR_RETURN_RET_LOG(
+            item == nullptr, {}, "MetadataUtils::DecodeFromString Failed, item is nullptr");
         ret = memcpy_s(&(item->data), dataLen, decodeData, dataLen);
             if (item->data_type >= META_NUM_TYPES ||
                 totalLen < (uint64_t)(item->count * OHOS_CAMERA_METADATA_TYPE_SIZE[item->data_type])) {
