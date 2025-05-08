@@ -56,4 +56,12 @@
 #define METADATA_ERR (-3)
 #define METADATA_PERMISSION_DENIED (-4)
 
+#define METADATA_CHECK_ERROR_RETURN_RET_LOG(cond, ret, fmt, ...)                                                       \
+    do {                                                                                                               \
+        if (cond) {                                                                                                    \
+            METADATA_ERR_LOG(fmt, ##__VA_ARGS__);                                                                      \
+            return ret;                                                                                                \
+        }                                                                                                              \
+    } while (0)
+
 #endif // OHOS_CAMERA_LOG_H
