@@ -104,6 +104,24 @@
               ],
               "header_base": "//drivers/interface/bluetooth/lp_ble"
             }
+          },
+          {
+            "name": "//drivers/interface/bluetooth/a2dp/include:hdi_audio_bluetooth_header",
+            "header": {
+              "header_files": [
+                "audio_adapter.h",
+                "audio_attribute.h",
+                "audio_capture.h",
+                "audio_control.h",
+                "audio_manager.h",
+                "audio_render.h",
+                "audio_scene.h",
+                "audio_types.h",
+                "audio_volume.h",
+                "audio_proxy_manager.h"
+              ],
+              "header_base": "//drivers/interface/bluetooth/a2dp"
+            }
           }
         ]
       }
