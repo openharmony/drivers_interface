@@ -349,6 +349,15 @@
         },
         {
           "name": "//drivers/interface/display/composer/hdifd_parcelable:display_composer_common_config"
+        },
+        {
+          "name": "//drivers/interface/display/composer/hdifd_parcelable:libhdifd_parcelable",
+          "header": {
+            "header_files": [
+              "hdifd_parcelable.h"
+            ],
+            "header_base": "//drivers/interface/display/composer/hdifd_parcelable"
+          }
         }
       ]
     }
