@@ -46,6 +46,14 @@
             ],
             "header_base": "//drivers/interface/partitionslot"
           }
+        },
+        {
+          "name": "//drivers/interface/partitionslot/v1_0:libpartitionslot_stub_1.0",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/partitionslot"
+          }
         }
       ]
     }
