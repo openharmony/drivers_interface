@@ -12,19 +12,25 @@
 # limitations under the License.
 
 import("//build/config/components/hdi/hdi.gni")
-import("../config.gni")
+if (defined(ohos_lite)) {
+  group("libpower_proxy_1.3") {
+    deps = []
+    public_configs = []
+  }
+} else {
+  hdi("power") {
+    module_name = "power_interface_service"
 
-hdi("pin_auth") {
-  module_name = "drivers_peripheral_pin_auth"
-  sources = [
-    "IAllInOneExecutor.idl",
-    "ICollector.idl",
-    "IExecutorCallback.idl",
-    "IPinAuthInterface.idl",
-    "IVerifier.idl",
-    "PinAuthTypes.idl",
-  ]
-  language = "cpp"
-  subsystem_name = "hdf"
-  part_name = "drivers_interface_pin_auth"
+    proxy_deps = [ "../v1_2:libpower_proxy_1.2" ]
+    stub_deps = [ "../v1_2:libpower_stub_1.2" ]
+
+    sources = [
+      "IPowerHdiCallbackExt.idl",
+      "IPowerInterface.idl",
+    ]
+
+    language = "cpp"
+    subsystem_name = "hdf"
+    part_name = "drivers_interface_power"
+  }
 }

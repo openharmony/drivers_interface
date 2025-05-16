@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -115,7 +115,7 @@ enum PinSubType : int {
  * Schedule mode.
  *
  * @since 3.2
- * @version 1.0
+ * @version 1.1
  */
 enum ScheduleMode : int {
     /**< The schedule mode is enrollment. */
@@ -132,7 +132,7 @@ enum ScheduleMode : int {
  * Auth intent.
  *
  * @since 5.0
- * @version 2.0
+ * @version 2.1
  */
 enum AuthIntent : int {
     /**< The auth intent is default. */
@@ -284,7 +284,7 @@ struct IdentifyResultInfo {
  * @brief Defines credential information.
  *
  * @since 4.0
- * @version 2.0
+ * @version 2.1
  */
 struct CredentialInfo {
     /**< Credential ID. */
@@ -593,19 +593,6 @@ enum CredentialOperateType : int {
     CREDENTIAL_DELETE = 1,
     /** credential abandon */
     CREDENTIAL_ABANDON = 2,
-};
-
-/**
- * @brief Credential operate info.
- *
- * @since 6.0
- * @version 1.0
- */
-struct CredentialOperateInfo {
-    /** schedule information. */
-    ScheduleInfo scheduleInfo;
-    /** credential information.*/
-    CredentialInfo credentialInfo;
 };
 
 /**

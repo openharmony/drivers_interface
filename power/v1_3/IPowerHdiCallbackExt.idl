@@ -1,0 +1,82 @@
+/*
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup power
+ * @{
+ *
+ * @brief Provides APIs for subscribing to the suspend/wakeup state with a tag.
+ * and managing running locks.
+ * 
+ * After obtaining an object or proxy of this module, the power service can invoke related APIs to subscribe to the
+ * suspend/wakeup state.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+
+ /**
+ * @file IPowerHdiCallbackExt.idl
+ *
+ * @brief Provides the callbacks of the suspend/wakeup state with a tag.
+ *
+ * The power module provides callbacks for the power service to obtain the suspend/wakeup state with a tag.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+
+package ohos.hdi.power.v1_3;
+
+/**
+ * @brief Represents the callbacks of the suspend/wakeup state with a tag.
+ *
+ * After creating a callback object, the power service can call {@link IPowerInterface} to subscribe to the
+ * suspend/wakeup state changes.
+ *
+ * This callback must be registered via RegisterPowerCallbackExt and unregistered via UnRegisterRunningLockCallback
+ * at {@link IPowerInterface}.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+[callback] interface IPowerHdiCallbackExt {
+    /**
+     * @brief Callback of the suspend state with a tag.
+     *
+     * This callback is used to notify the power service when the device enters the suspend state with a tag, and is
+     * an enhancement to old version interface OnSuspend.
+     *
+     * @param tag The suspend tag
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    OnSuspendWithTag([in] String tag);
+
+    /**
+     * @brief Callback of the wakeup state with a tag.
+     *
+     * This callback is used to notify the power service when the device enters the wakeup state with a tag, and is.
+     * an enhancement to old version interface OnWakeup.
+     *
+     * @param tag The wakeup tag
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    OnWakeupWithTag([in] String tag);
+}
+/** @} */

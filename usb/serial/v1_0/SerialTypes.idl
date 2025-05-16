@@ -81,9 +81,7 @@ enum SerialDataBits : unsigned char {
     /* Indicates the USB word length, which is 6 data bits per frame. */
     USB_ATTR_DATABIT_6, 
     /* Indicates the USB word length, which is 5 data bits per frame. */
-    USB_ATTR_DATABIT_5,
-    /* Indicates the USB word length, which is 4 data bits per frame. */
-    USB_ATTR_DATABIT_4 
+    USB_ATTR_DATABIT_5
 };
 
 enum SerialParity : unsigned char {
@@ -102,8 +100,6 @@ enum SerialParity : unsigned char {
 enum SerialStopBits : unsigned char {
     /* that the USB device has 1 stop bit. */
     USB_ATTR_STOPBIT_1 = 0,
-    /* Indicates that the USB device has 1.5 stop bits. */
-    USB_ATTR_STOPBIT_1P5,
     /* Indicates that the USB device has 2 stop bits. */
     USB_ATTR_STOPBIT_2
 };
