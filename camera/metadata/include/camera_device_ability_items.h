@@ -176,6 +176,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_SKETCH_REFERENCE_FOV_RATIO,
     /**
+     * ohos.ability.sketchInfoNotification [static, int[], public]
+     *
+     * camera device property, report all supported sketch info notify modes of the current camera device
+     * (i.e. int[]: mode1, mode2, ...)
+     */
+    OHOS_ABILITY_SKETCH_INFO_NOTIFICATION,
+    /**
      * ohos.ability.cameraFoldScreen [static, enum, public]
      *
      * camera device property, report current camera device fold screen
@@ -394,6 +401,13 @@ typedef enum camera_device_metadata_tag {
      * (i.e. float[]: [px, py] ...)
      */
     OHOS_STATUS_SKETCH_POINT,
+    /**
+     * ohos.status.sketchStreamInfo [static, float[], public]
+     *
+     * camera device property, query current camera sketch stream info
+     * (i.e. float[]: [OHOS_CAMERA_SKETCH_STREAM_UNSUPPORT/OHOS_CAMERA_SKETCH_STREAM_SUPPORT, zoom ratio])
+     */
+    OHOS_STATUS_SKETCH_STREAM_INFO,
     /**
      * ohos.ability.lowLightBoost [static, int32[], public]
      *
@@ -2983,4 +2997,11 @@ enum CameraConcurrentType {
     OHOS_CAMERA_COCURRENT_FULL = 0,
     OHOS_CAMERA_COCURRENT_LIIMITED,
 };
+
+// OHOS_STATUS_SKETCH_STREAM_INFO
+enum SketchStreamInfoStatus {
+    OHOS_CAMERA_SKETCH_STREAM_UNSUPPORT = 0,
+    OHOS_CAMERA_SKETCH_STREAM_SUPPORT
+};
+
 #endif
