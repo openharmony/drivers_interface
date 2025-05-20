@@ -30,7 +30,6 @@
                 "//drivers/interface/ril/v1_1:ril_idl_target",
                 "//drivers/interface/ril/v1_2:ril_idl_target",
                 "//drivers/interface/ril/v1_3:ril_idl_target",
-                "//drivers/interface/ril/v1_4:ril_idl_target"
                 "//drivers/interface/ril/v1_4:ril_idl_target",
                 "//drivers/interface/ril/v1_5:ril_idl_target"
             ],
