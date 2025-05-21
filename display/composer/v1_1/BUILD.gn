@@ -15,7 +15,9 @@ import("//build/config/components/hdi/hdi.gni")
 
 hdi("display_composer") {
   module_name = "display_composer"
-  imports = [ "ohos.hdi.display.composer.v1_0:display_composer" ]
+
+  proxy_deps = [ "../v1_0:libdisplay_composer_proxy_1.0" ]
+  stub_deps = [ "../v1_0:libdisplay_composer_stub_1.0" ]
 
   sources = [
     "DisplayComposerType.idl",
@@ -24,7 +26,7 @@ hdi("display_composer") {
     "ISeamlessChangeCallback.idl",
   ]
 
-  sequenceable_pub_deps = [ "../hdifd_parcelable:libhdifd_parcelable" ]
+  deps = [ "../hdifd_parcelable:libhdifd_parcelable" ]
 
   language = "cpp"
   subsystem_name = "hdf"
@@ -52,6 +54,7 @@ ohos_shared_library("libdisplay_composer_hdi_impl_1.1") {
   external_deps = [
     "c_utils:utils",
     "graphic_surface:buffer_handle",
+    "hdf_core:libhdf_ipc_adapter",
     "hdf_core:libhdi",
     "hdf_core:libpub_utils",
     "hilog:libhilog",

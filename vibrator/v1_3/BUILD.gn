@@ -20,7 +20,14 @@ if (defined(ohos_lite)) {
 } else {
   hdi("vibrator") {
     module_name = "vibrator_service"
-    imports = [ "ohos.hdi.vibrator.v1_2:vibrator" ]
+    proxy_deps = [
+      "../v1_1:libvibrator_proxy_1.1",
+      "../v1_2:libvibrator_proxy_1.2",
+    ]
+    stub_deps = [
+      "../v1_1:libvibrator_stub_1.1",
+      "../v1_2:libvibrator_stub_1.2",
+    ]
 
     sources = [
       "IVibratorInterface.idl",
