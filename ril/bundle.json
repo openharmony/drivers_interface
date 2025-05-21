@@ -30,7 +30,8 @@
                 "//drivers/interface/ril/v1_1:ril_idl_target",
                 "//drivers/interface/ril/v1_2:ril_idl_target",
                 "//drivers/interface/ril/v1_3:ril_idl_target",
-                "//drivers/interface/ril/v1_4:ril_idl_target"
+                "//drivers/interface/ril/v1_4:ril_idl_target",
+                "//drivers/interface/ril/v1_5:ril_idl_target"
             ],
             "test": [
             ],
@@ -114,6 +115,27 @@
                 },
                 {
                   "name": "//drivers/interface/ril/v1_4:ril_idl_headers_1.4",
+                  "header": {
+                    "header_files": [],
+                    "header_base": "//drivers/interface/ril"
+                  }
+                },
+                {
+                  "name": "//drivers/interface/ril/v1_5:libril_proxy_1.5",
+                  "header": {
+                    "header_files": [],
+                    "header_base": "//drivers/interface/ril"
+                  }
+                },
+                {
+                  "name": "//drivers/interface/ril/v1_5:libril_stub_1.5",
+                  "header": {
+                    "header_files": [],
+                    "header_base": "//drivers/interface/ril"
+                  }
+                },
+                {
+                  "name": "//drivers/interface/ril/v1_5:ril_idl_headers_1.5",
                   "header": {
                     "header_files": [],
                     "header_base": "//drivers/interface/ril"
