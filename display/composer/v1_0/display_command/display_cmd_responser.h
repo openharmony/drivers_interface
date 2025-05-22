@@ -100,6 +100,11 @@ public:
             request_.reset();
         }
         request_ = request;
+        requestData_.reset(new char[CmdUtils::INIT_ELEMENT_COUNT], std::default_delete<char[]>());
+        if (requestData_ == nullptr) {
+            HDF_LOGE("requestData alloc failed.");
+            return HDF_FAILURE;
+        }
 
         return HDF_SUCCESS;
     }
@@ -164,10 +169,15 @@ public:
             HDF_LOGE("%{public}s: inEleCnt:%{public}u is too large", __func__, inEleCnt);
             return HDF_FAILURE;
         }
-        std::shared_ptr<char> requestData(new char[inEleCnt * CmdUtils::ELEMENT_SIZE], std::default_delete<char[]>());
-        int32_t ret = CmdRequestDataRead(requestData, inEleCnt);
+
+        int32_t ret = HDF_SUCCESS;
+        {
+            std::lock_guard<std::mutex> lock(requestMutex_);
+            ret = request_->Read(reinterpret_cast<int32_t *>(requestData_.get()), inEleCnt,
+                CmdUtils::TRANSFER_WAIT_TIME);
+        }
         CommandDataUnpacker unpacker;
-        unpacker.Init(requestData.get(), inEleCnt << CmdUtils::MOVE_SIZE);
+        unpacker.Init(requestData_.get(), inEleCnt << CmdUtils::MOVE_SIZE);
 #ifdef DEBUG_DISPLAY_CMD_RAW_DATA
         unpacker.Dump();
 #endif // DEBUG_DISPLAY_CMD_RAW_DATA
@@ -737,7 +747,7 @@ EXIT:
         if (ret != HDF_SUCCESS) {
             errMaps_.emplace(REQUEST_CMD_SET_LAYER_TRANSFORM_MODE, ret);
         }
-    
+
         return;
     }
 
@@ -904,7 +914,7 @@ EXIT:
 
         struct LayerBufferData data;
         std::vector<uint32_t> deletingList;
-        
+
         int32_t ret = UnPackLayerBufferInfo(unpacker, inFds, &data, deletingList);
         HdifdParcelable fdParcel(data.fence);
         bool needFreeBuffer = false;
@@ -1175,6 +1185,7 @@ protected:
     std::queue<BufferHandle *> delayFreeQueue_;
     std::mutex requestMutex_;
     std::mutex replyMutex_;
+    std::shared_ptr<char> requestData_;
 };
 using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, DisplayComposerVdiAdapter>;
 } // namespace V1_0

@@ -78,6 +78,12 @@ public:
             return HDF_FAILURE;
         }
 
+        replyData_.reset(new char[CmdUtils::INIT_ELEMENT_COUNT], std::default_delete<char[]>());
+        if (replyData_ == nullptr) {
+            HDF_LOGE("replyData alloc failed.");
+            return HDF_FAILURE;
+        }
+
         ret = hdi_->GetCmdReply(reply_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: GetCmdReply failure, ret=%{public}d", __func__, ret));
@@ -94,7 +100,6 @@ public:
     {
         uint32_t replyEleCnt;
         std::vector<HdifdInfo> outFds;
-        std::shared_ptr<char> replyData;
 
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_PREPARE_DISPLAY_LAYERS, requestPacker_);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
@@ -108,10 +113,10 @@ public:
         ret = CmdUtils::EndPack(requestPacker_);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = DoRequest(replyEleCnt, outFds, replyData);
+        ret = DoRequest(replyEleCnt, outFds);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = DoReplyResults(replyEleCnt, outFds, replyData, [&](void *data) -> int32_t {
+        ret = DoReplyResults(replyEleCnt, outFds, [&](void *data) -> int32_t {
             needFlushFb = *(reinterpret_cast<bool *>(data));
             return HDF_SUCCESS;
         });
@@ -209,7 +214,6 @@ EXIT:
     {
         uint32_t replyEleCnt = 0;
         std::vector<HdifdInfo> outFds;
-        std::shared_ptr<char> replyData;
 
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_COMMIT, requestPacker_);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
@@ -223,10 +227,10 @@ EXIT:
         ret = CmdUtils::EndPack(requestPacker_);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = DoRequest(replyEleCnt, outFds, replyData);
+        ret = DoRequest(replyEleCnt, outFds);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = DoReplyResults(replyEleCnt, outFds, replyData, [&](void *data) -> int32_t {
+        ret = DoReplyResults(replyEleCnt, outFds, [&](void *data) -> int32_t {
             fence = *(reinterpret_cast<int32_t *>(data));
             return HDF_SUCCESS;
         });
@@ -836,11 +840,10 @@ protected:
         return HDF_SUCCESS;
     }
 
-    int32_t DoReplyResults(uint32_t replyEleCnt, std::vector<HdifdInfo>& replyFds, std::shared_ptr<char> replyData,
-        std::function<int32_t(void *)> fn)
+    int32_t DoReplyResults(uint32_t replyEleCnt, std::vector<HdifdInfo>& replyFds, std::function<int32_t(void *)> fn)
     {
         CommandDataUnpacker replyUnpacker;
-        replyUnpacker.Init(replyData.get(), replyEleCnt << CmdUtils::MOVE_SIZE);
+        replyUnpacker.Init(replyData_.get(), replyEleCnt << CmdUtils::MOVE_SIZE);
 #ifdef DEBUG_DISPLAY_CMD_RAW_DATA
         replyUnpacker.Dump();
 #endif // DEBUG_DISPLAY_CMD_RAW_DATA
@@ -865,7 +868,7 @@ protected:
         return HDF_SUCCESS;
     }
 
-    int32_t DoRequest(uint32_t &replyEleCnt, std::vector<HdifdInfo> &outFds, std::shared_ptr<char> &replyData)
+    int32_t DoRequest(uint32_t &replyEleCnt, std::vector<HdifdInfo> &outFds)
     {
 #ifdef DEBUG_DISPLAY_CMD_RAW_DATA
         requestPacker_.Dump();
@@ -881,10 +884,8 @@ protected:
             HDF_LOGE("%{public}s: CmdRequest failed", __func__));
 
         if (replyEleCnt != 0) {
-            replyData.reset(new char[replyEleCnt << CmdUtils::MOVE_SIZE], std::default_delete<char[]>());
-            DISPLAY_CHK_RETURN(replyData == nullptr, HDF_FAILURE,
-                HDF_LOGE("%{public}s: get replyData failed", __func__));
-            ret = reply_->Read(reinterpret_cast<int32_t *>(replyData.get()), replyEleCnt, CmdUtils::TRANSFER_WAIT_TIME);
+            ret = reply_->Read(reinterpret_cast<int32_t *>(replyData_.get()),
+                               replyEleCnt, CmdUtils::TRANSFER_WAIT_TIME);
             if (ret != HDF_SUCCESS) {
                 HDF_LOGE("reply read data failure, ret=%{public}d", ret);
             }
@@ -914,6 +915,7 @@ protected:
     sptr<CompHdi> hdi_;
     std::shared_ptr<Transfer> request_;
     std::shared_ptr<Transfer> reply_;
+    std::shared_ptr<char> replyData_;
     // Period data
     CommandDataPacker requestPacker_;
     std::vector<HdifdInfo> requestHdiFds_;

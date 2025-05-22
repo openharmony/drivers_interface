@@ -119,6 +119,7 @@ public:
 
         DISPLAY_CHECK(replyPacker_.WriteInt32(commitInfo.skipRet) == false,
             HDF_LOGE("%{public}s, write skip validate return value error", __func__));
+
         if (commitInfo.skipRet != HDF_SUCCESS) {
             ReplyNotSkipInfo(devId, commitInfo);
         } else {
@@ -223,14 +224,17 @@ REPLY:
         ReplyCommitAndGetReleaseFence(outFds, devId, commitInfo);
     }
 
-    int32_t CmdRequest(uint32_t inEleCnt, const std::vector<HdifdInfo>& inFds, uint32_t& outEleCnt,
-        std::vector<HdifdInfo>& outFds)
+    int32_t CmdRequest(uint32_t inEleCnt, const std::vector<HdifdInfo>& inFds,
+        uint32_t& outEleCnt, std::vector<HdifdInfo>& outFds)
     {
-        std::shared_ptr<char> requestData(new char[inEleCnt * CmdUtils::ELEMENT_SIZE], std::default_delete<char[]>());
-        int32_t ret = CmdRequestDataRead(requestData, inEleCnt);
-
+        int32_t ret = HDF_SUCCESS;
+        {
+            std::lock_guard<std::mutex> lock(requestMutex_);
+            ret = request_->Read(reinterpret_cast<int32_t*>(requestData_.get()), inEleCnt,
+                CmdUtils::TRANSFER_WAIT_TIME);
+        }
         CommandDataUnpacker unpacker;
-        unpacker.Init(requestData.get(), inEleCnt << CmdUtils::MOVE_SIZE);
+        unpacker.Init(requestData_.get(), inEleCnt << CmdUtils::MOVE_SIZE);
 #ifdef DEBUG_DISPLAY_CMD_RAW_DATA
         unpacker.Dump();
 #endif // DEBUG_DISPLAY_CMD_RAW_DATA
@@ -239,24 +243,28 @@ REPLY:
         bool retBool = unpacker.PackBegin(unpackCmd);
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
             HDF_LOGE("%{public}s: error: Check RequestBegin failed", __func__));
-        DISPLAY_CHK_RETURN(unpackCmd != CONTROL_CMD_REQUEST_BEGIN, HDF_FAILURE,
-            HDF_LOGI("error: unpacker PackBegin cmd not match, cmd(%{public}d)=%{public}s.", unpackCmd,
-            CmdUtils::CommandToString(unpackCmd)));
+        if (unpackCmd != CONTROL_CMD_REQUEST_BEGIN) {
+            HDF_LOGE("error: unpacker PackBegin cmd not match, cmd(%{public}d)=%{public}s.", unpackCmd,
+                CmdUtils::CommandToString(unpackCmd));
+            request_->Reset();
+            reply_->Reset();
+            return HDF_FAILURE;
+        }
 
         DISPLAY_CHK_RETURN(PeriodDataReset() == HDF_FAILURE, HDF_FAILURE,
                            HDF_LOGE("%{public}s: error: PeriodDataReset failed", __func__));
-        while (ret == HDF_SUCCESS && unpacker.NextSection()) {
-            if (!unpacker.BeginSection(unpackCmd)) {
+        while (unpacker.NextSection()) {
+            DISPLAY_CHK_RETURN(unpacker.BeginSection(unpackCmd) == false, HDF_FAILURE,
                 HDF_LOGE("error: PackSection failed, unpackCmd=%{public}s.",
-                    CmdUtils::CommandToString(unpackCmd));
-                ret = HDF_FAILURE;
-                break;
+                CmdUtils::CommandToString(unpackCmd)));
+            if (ProcessRequestCmd(unpacker, unpackCmd, inFds, outFds) != HDF_SUCCESS) {
+                HDF_LOGE("%{public}s: ProcessRequestCmd failed, unpackCmd=%{public}d", __func__, unpackCmd);
+                request_->Reset();
+                reply_->Reset();
+                return HDF_FAILURE;
             }
-            ret = ProcessRequestCmd(unpacker, unpackCmd, inFds, outFds);
         }
 
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: ProcessRequestCmd failed", __func__));
         /* pack request end commands */
         replyPacker_.PackEnd(CONTROL_CMD_REPLY_END);
 
@@ -458,6 +466,7 @@ private:
     using BaseType1_1::CmdRequestDataWrite;
     using BaseType1_1::requestMutex_;
     using BaseType1_1::replyMutex_;
+    using BaseType1_1::requestData_;
 };
 
 using HdiDisplayCmdResponser = DisplayCmdResponser<SharedMemQueue<int32_t>, DisplayComposerVdiAdapter>;
