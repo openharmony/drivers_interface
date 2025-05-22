@@ -14,8 +14,7 @@
 import("//build/config/components/hdi/hdi.gni")
 hdi("hid_ddk") {
   module_name = "hid_ddk"
-  proxy_deps = [ "../v1_0:libhid_ddk_proxy_1.0" ]
-  stub_deps = [ "../v1_0:libhid_ddk_stub_1.0" ]
+  imports = [ "ohos.hdi.input.ddk.v1_0:hid_ddk" ]
 
   sources = [
     "HidDdkTypes.idl",
