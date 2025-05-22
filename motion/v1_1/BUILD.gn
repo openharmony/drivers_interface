@@ -14,8 +14,7 @@
 import("//build/config/components/hdi/hdi.gni")
 hdi("motion") {
   module_name = "motion_service"
-  proxy_deps = [ "../v1_0:libmotion_proxy_1.0" ]
-  stub_deps = [ "../v1_0:libmotion_stub_1.0" ]
+  imports = [ "ohos.hdi.motion.v1_0:motion" ]
   sources = [
     "IMotionInterface.idl",
     "MotionTypes.idl",
