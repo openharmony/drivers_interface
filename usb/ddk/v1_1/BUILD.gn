@@ -14,7 +14,8 @@
 import("//build/config/components/hdi/hdi.gni")
 hdi("usb_ddk") {
   module_name = "usb_ddk"
-  imports = [ "ohos.hdi.usb.ddk.v1_0:usb_ddk" ]
+  proxy_deps = [ "../v1_0:libusb_ddk_proxy_1.0" ]
+  stub_deps = [ "../v1_0:libusb_ddk_stub_1.0" ]
 
   sources = [
     "IUsbDdk.idl",
