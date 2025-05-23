@@ -52,7 +52,6 @@ public:
     {
         uint32_t replyEleCnt = 0;
         std::vector<HdifdInfo> outFds;
-        std::shared_ptr<char> replyData;
 
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_COMMIT_AND_GET_RELEASE_FENCE, requestPacker_);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
@@ -72,10 +71,10 @@ public:
         ret = CmdUtils::EndPack(requestPacker_);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = DoRequest(replyEleCnt, outFds, replyData);
+        ret = DoRequest(replyEleCnt, outFds);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
-        ret = DoReplyResults(replyEleCnt, outFds, replyData, [&](void *data) -> int32_t {
+        ret = DoReplyResults(replyEleCnt, outFds, [&](void *data) -> int32_t {
             FenceData *fenceData = reinterpret_cast<struct FenceData *>(data);
             if (fenceData == nullptr) {
                 fence = -1;
@@ -188,7 +187,6 @@ EXIT:
                     HDF_LOGE("%{public}s: HDI 1.2 FileDescriptorUnpack failed", __func__));
             }
         }
-
         return HDF_SUCCESS;
     }
 
@@ -218,18 +216,17 @@ EXIT:
                         __func__, CmdUtils::CommandToString(unpackCmd)));
                     break;
                 default:
-                    HDF_LOGE("Unpack command failure");
+                    HDF_LOGE("Unpack command failure, unpackCmd=%{public}d", unpackCmd);
                     return HDF_FAILURE;
             }
         }
         return HDF_SUCCESS;
     }
 
-    int32_t DoReplyResults(uint32_t replyEleCnt, std::vector<HdifdInfo>& replyFds, std::shared_ptr<char> replyData,
-        std::function<int32_t(void *)> fn)
+    int32_t DoReplyResults(uint32_t replyEleCnt, std::vector<HdifdInfo>& replyFds, std::function<int32_t(void *)> fn)
     {
         CommandDataUnpacker replyUnpacker;
-        replyUnpacker.Init(replyData.get(), replyEleCnt << CmdUtils::MOVE_SIZE);
+        replyUnpacker.Init(replyData_.get(), replyEleCnt << CmdUtils::MOVE_SIZE);
 #ifdef DEBUG_DISPLAY_CMD_RAW_DATA
         replyUnpacker.Dump();
 #endif // DEBUG_DISPLAY_CMD_RAW_DATA
@@ -237,9 +234,16 @@ EXIT:
         bool retBool = replyUnpacker.PackBegin(unpackCmd);
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
             HDF_LOGE("%{public}s: PackBegin failed", __func__));
-        DISPLAY_CHK_RETURN(unpackCmd != CONTROL_CMD_REPLY_BEGIN, HDF_FAILURE,
-            HDF_LOGE("%{public}s: PackBegin cmd not match, unpackCmd=%{public}d", __func__, unpackCmd));
+        if (unpackCmd != CONTROL_CMD_REPLY_BEGIN) {
+            HDF_LOGE("%{public}s: PackBegin cmd not match, unpackCmd=%{public}d", __func__, unpackCmd);
+            request_->Reset();
+            reply_->Reset();
+            return HDF_FAILURE;
+        }
         if (ProcessUnpackCmd(replyUnpacker, unpackCmd, replyFds, fn) != HDF_SUCCESS) {
+            HDF_LOGE("%{public}s: ProcessUnpackCmd failed, unpackCmd=%{public}d", __func__, unpackCmd);
+            request_->Reset();
+            reply_->Reset();
             return HDF_FAILURE;
         }
 
@@ -413,10 +417,12 @@ protected:
     sptr<CompHdi> hdi_1_2_;
 private:
     using BaseType1_1 = V1_1::DisplayCmdRequester<Transfer, CompHdi>;
+    using BaseType1_1::request_;
+    using BaseType1_1::reply_;
     using BaseType1_1::requestPacker_;
+    using BaseType1_1::replyData_;
     using BaseType1_1::DoRequest;
     using BaseType1_1::PeriodDataReset;
-    using BaseType1_1::DoReplyResults;
 
     // Composition layers/types changed
     using BaseType1_1::compChangeLayers_;
