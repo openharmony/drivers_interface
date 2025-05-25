@@ -1,0 +1,287 @@
+/*
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package ohos.hdi.vibrator.v2_0;
+
+/**
+ * @brief Defines basic sensor of the device information.
+ *
+ * Information about a sensor includes the deive ID, sensor type ID, sensor ID,
+ *
+ * @since 5.1
+ */
+
+struct DeviceVibratorInfo {
+    int deviceId;   /**< Device ID */
+    int vibratorId;   /**< vibrator ID */
+};
+/**
+ * @brief Enumerates the vibration modes of this vibrator.
+ *
+ * @since 2.2
+ */
+enum HdfVibratorMode {
+    /**< Indicates the one-shot vibration with the given duration. */
+    HDF_VIBRATOR_MODE_ONCE,
+    /**< Indicates the periodic vibration with the preset effect. */
+    HDF_VIBRATOR_MODE_PRESET,
+    /**< Indicates the vibration is high-definition. */
+    HDF_VIBRATOR_MODE_HDHAPTIC,
+    /**< Indicates invalid the effect mode. */
+    HDF_VIBRATOR_MODE_BUTT,
+};
+
+/**
+ * @brief Enumerates the effect types of the composite effects.
+ *
+ * @since 3.2
+ */
+enum HdfEffectType {
+    /**< Indicates the time effect type of the given time series. */
+    HDF_EFFECT_TYPE_TIME,
+    /**< Indicates primitive vibration effect type for a given primitive vibration sequence. */
+    HDF_EFFECT_TYPE_PRIMITIVE,
+    /**< Indicates invalid the effect type. */
+    HDF_EFFECT_TYPE_BUTT,
+};
+
+/**
+ * @brief Defines the vibration parameters.
+ *
+ * The parameters include the setting intensity and frequency capability the on and intensity and frequency range.
+ *
+ * @since 3.2
+ */
+struct HdfVibratorInfo {
+    /**< setting intensity capability. 1 indicates support, 0 indicates not support. */
+    boolean isSupportIntensity;
+    /**< setting frequency capability. 1 indicates support, 0 indicates not support. */
+    boolean isSupportFrequency;
+    /**< setting support hdHaptic. 1 indicates support, 0 indicates not support. */
+    boolean isSupportHdHaptic;
+    /**< Max intensity. */
+    unsigned short intensityMaxValue;
+    /**< Min intensity. */
+    unsigned short intensityMinValue;
+    /**< Max frequency(Hz). */
+    short frequencyMaxValue;
+    /**< Min frequency(Hz). */
+    short frequencyMinValue;
+    /**< Device id. */
+    int deviceId;
+    /**< Vibrator id. */
+    int vibratorId;
+    /**< Position id. */
+    int position;
+    /**< IsLocal. */
+    int isLocal;
+};
+
+/**
+ * @brief Defines the time effect parameters.
+ *
+ * The parameters include delay, time, intensity and frequency of vibration.
+ *
+ * @since 3.2
+ */
+struct TimeEffect {
+    int delay;                   /** Waiting time. */
+    int time;                    /** Vibration time. */
+    unsigned short intensity;    /** Vibration intensity. */
+    short frequency;             /** Vibration frequency(Hz). */
+};
+
+/**
+ * @brief Defines the primitive effect parameters.
+ *
+ * The parameters include delay, effect id and vibration intensity.
+ *
+ * @since 3.2
+ */
+struct PrimitiveEffect {
+    int delay;                   /** Waiting time. */
+    int effectId;                /** Effect id. */
+    unsigned short intensity;    /** Vibration intensity. */
+};
+
+/**
+ * @brief Defines two effects for custom composite effects.
+ *
+ * The parameters include time effect and primitive effect.
+ *
+ * @since 3.2
+ */
+union CompositeEffect {
+    struct TimeEffect timeEffect;              /** Time effect, see {@link TimeEffect}. */
+    struct PrimitiveEffect primitiveEffect;    /** Primitive effect, see {@link PrimitiveEffect}. */
+};
+
+/**
+ * @brief Defines the composite vibration effect parameters.
+ *
+ * The parameters include type and sequences of composite effects.
+ *
+ * @since 3.2
+ */
+struct HdfCompositeEffect {
+    /** Type of the composite effect, see {@link union HdfEffectType}. */
+    int type;
+    /** The sequences of composite effects, see {@link union CompositeEffect}. */
+    union CompositeEffect[] compositeEffects;
+};
+
+/**
+ * @brief Defines the vibration effect information.
+ *
+ * The information include the capability to set the effect and the vibration duration of the effect.
+ *
+ * @since 3.2
+ */
+struct HdfEffectInfo {
+    /** Vibration duration of the effect, in milliseconds. */
+    int duration;
+    /**< setting effect capability. 1 indicates support, 0 indicates not support. */
+    boolean isSupportEffect;
+};
+
+/**
+ * @brief Enumerates the event types.
+ *
+ * @since 4.1
+ */
+enum EVENT_TYPE {
+    /**< Indicates that the vibration is continuous. */
+    CONTINUOUS = 0,
+    /**< Indicates that the vibration is instantaneous. */
+    TRANSIENT  = 1,
+};
+
+/**
+ * @brief Defines the vibration point parameters.
+ *
+ * The information include the time, intensity, and frequency.
+ *
+ * @since 4.1
+ */
+struct CurvePoint {
+    /** Time of the vibration point. */
+    int time;
+    /** Intensity of the vibration point. */
+    int intensity;
+    /** Frequency of the vibration point. */
+    int frequency;
+};
+
+/**
+ * @brief Defines the HD vibration event.
+ *
+ * The information include the HD vibration event.
+ *
+ * @since 4.1
+ */
+struct HapticEvent {
+    /** Indicates the vibration type. */
+    enum EVENT_TYPE type;
+    /** Indicates the vibration time. */
+    int time;
+    /** Indicates the vibration duration. */
+    int duration;
+    /** Indicates the vibration intensity. */
+    int intensity;
+    /** Indicates the vibration frequency. */
+    int frequency;
+    /** ID of the vibration motor. */
+    int index;
+    /** Indicates the number of vibration points. */
+    int pointNum;
+    /** Indicates the vibration point array. */
+    struct CurvePoint[] points;
+};
+
+/**
+ * @brief Defines the vibration data delivery packet.
+ *
+ * The information include the different trypes of vibrationsr;
+ *
+ * @since 4.1
+ */
+struct HapticPaket {
+    /** Indicates the vibration data delivery time. */
+    int time;
+    /** Indicates the vibration number of data to be delivered. */
+    int eventNum;
+    /** Indicates the vibration data delivery event array. */
+    struct HapticEvent[] events;
+};
+
+/**
+ * @brief Defines the vibration capability data package.
+ *
+ * The information include the different types of vibrations.
+ *
+ * @since 4.1
+ */
+struct HapticCapacity {
+    /** Indicates the vibration support HD vibration. */
+    boolean isSupportHdHaptic;
+    /** Indicates the vibration support predefined waveforms. */
+    boolean isSupportPresetMapping;
+    /** Indicates the vibration support dalay vibration. */
+    boolean isSupportTimeDelay;
+    /**< Vibrator id. */
+    int vibratorId;
+    /** Indicates the vibration Standby parameter. */
+    boolean reserved0;
+    /** Indicates the vibration Standby parameter. */
+    int reserved1;
+};
+
+/**
+ * @brief Wave Information.
+ *
+ * @since 5.0
+ * @version 1.3
+ */
+struct HdfWaveInformation {
+    /**< Vibrator id. */
+    int vibratorId;
+    /** Indicates the wave number. */
+    int waveId;
+    /** Indicates the vibration intensity. */
+    float intensity;
+    /** Indicates the vibration frequency. */
+    float frequency;
+    /** Indicates the vibration duration. */
+    int duration;
+    /** reserved. */
+    int reserved;
+};
+
+/**
+ * @brief Defines the device pluged contains vibrator info.
+ *
+ * @since 5.1
+ * @version 2.0
+ */
+struct HdfVibratorPlugInfo {
+    /**< Device id. */
+    int deviceId;
+    /**< Device Name. */
+    String deviceName;
+    /**< Vibrator Count. */
+    int vibratorCnt;
+    /**< The vibration plug state. */
+    int status;
+};
