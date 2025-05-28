@@ -1334,6 +1334,28 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_FOCUS_DRIVEN_TYPE,
     /**
+     * ohos.ability.focusTrackingMechAvailable [static, enum[], public]
+     *
+     * camera device property, report current camera mech modes
+     * (i.e. enum[]: OFF, not support mech ...)
+     */
+    OHOS_ABILITY_FOCUS_TRACKING_MECH_AVAILABLE,
+    /**
+     * ohos.control.focusTrackingMech [static, enum, public]
+     *
+     * camera device property, set current camera mech mode
+     * (i.e. enum: OFF/ON ...)
+     */
+    OHOS_CONTROL_FOCUS_TRACKING_MECH,
+
+    /**
+     * ohos.control.focusTrackingObjectId [static, enum, public]
+     *
+     * camera device property, report current camera support focus object id
+     * (i.e. enum: AUTO/FACE ...)
+     */
+    OHOS_CONTROL_FOCUS_TRACKING_OBJECT_ID,
+    /**
      * ohos.device.focusEnd
      *
      * camera device focusEnd
@@ -2671,6 +2693,12 @@ typedef enum camera_mute_mode {
     OHOS_CAMERA_MUTE_MODE_SOLID_COLOR_BLACK,
 } camera_mute_mode_t;
 
+// OHOS_ABILITY_MUTE_MODES and OHOS_CONTROL_MECH_MODE enumeration values
+typedef enum camera_mech_mode {
+    OHOS_CAMERA_MECH_MODE_OFF,
+    OHOS_CAMERA_MECH_MODE_ON,
+} camera_mech_mode_t;
+
 // OHOS_ABILITY_SCENE_FILTER_TYPES enumeration values
 typedef enum camera_filter_type {
     OHOS_CAMERA_FILTER_TYPE_OFF = 0,
@@ -2848,6 +2876,7 @@ enum StatisticsDetectType {
     OHOS_CAMERA_SALIENT_DETECT = 6,
     OHOS_CAMERA_BAR_CODE_DETECT = 7,
     OHOS_CAMERA_BASE_FACE_DETECT = 8,
+    OHOS_CAMERA_BASE_TRACKING_REGION = 9,
 };
 
 // OHOS_STATUS_TRIPOD_DETECTION_STATUS
