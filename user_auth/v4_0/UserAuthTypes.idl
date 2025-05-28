@@ -607,6 +607,6 @@ struct CredentialOperateResult {
     /** schedule information. */
     ScheduleInfo scheduleInfo;
     /** credential information. */
-    CredentialInfo credentialInfo;
+    CredentialInfo[] credentialInfos;
 };
 /** @} */
