@@ -29,4 +29,6 @@ hdi("display_composer") {
   language = "cpp"
   subsystem_name = "hdf"
   part_name = "drivers_interface_display"
+
+  public_configs = [ "../hdifd_parcelable/" ]
 }
