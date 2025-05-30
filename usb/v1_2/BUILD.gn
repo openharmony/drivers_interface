@@ -20,7 +20,14 @@ if (defined(ohos_lite)) {
 } else {
   hdi("usb") {
     module_name = "usbd"
-    imports = [ "ohos.hdi.usb.v1_1:usb" ]
+    proxy_deps = [
+      "../v1_0:libusb_proxy_1.0",
+      "../v1_1:libusb_proxy_1.1",
+    ]
+    stub_deps = [
+      "../v1_0:libusb_stub_1.0",
+      "../v1_1:libusb_stub_1.1",
+    ]
 
     sources = [
       "IUsbInterface.idl",
