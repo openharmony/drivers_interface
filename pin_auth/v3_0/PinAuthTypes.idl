@@ -123,7 +123,7 @@ struct ExecutorInfo {
  * @brief Enumerates get Property types.
  *
  * @since 4.0
- * @version 2.0
+ * @version 3.0
  */
 enum GetPropertyType : int {
     /**< Indicates that the property to get is auth sub type. */
@@ -133,14 +133,16 @@ enum GetPropertyType : int {
     /**< Indicates that the property to get is remain attempts. */
     REMAIN_ATTEMPTS = 3,
     /**< Indicates that the property to get is lockout duration after next fail. */
-    NEXT_FAIL_LOCKOUT_DURATION = 6
+    NEXT_FAIL_LOCKOUT_DURATION = 6,
+    /**< Indicates that the property to get is credential length. */
+    CREDENTIAL_LENGTH = 7
 };
 
 /**
  * @brief Indicates executor property.
  *
  * @since 4.0
- * @version 2.0
+ * @version 3.0
  */
 struct Property {
     /**< Indicates auth sub type. */
@@ -151,6 +153,8 @@ struct Property {
     int remainAttempts;
     /**< Indicates next fail lockout duration. */
     int nextFailLockoutDuration;
+    /**< Indicates credential length. */
+    unsigned int credentialLength;
 };
 
 /**

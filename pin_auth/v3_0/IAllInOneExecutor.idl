@@ -111,16 +111,17 @@ interface IAllInOneExecutor {
      * @param scheduleId Indicates the schedule ID of enrollment.
      * @param authSubType Indicates the pin sub type.
      * @param data Indicates the pin data.
+     * @param data Indicates the pin length.
      * @param resultCode Indicates the result code.
      *
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns a non-zero value if the operation fails.
      *
      * @since 5.0
-     * @version 1.0
+     * @version 2.0
      */
     SetData([in] unsigned long scheduleId, [in] unsigned long authSubType, [in] unsigned char[] data,
-        [in] int resultCode);
+        [in] unsigned int pinLength, [in] int resultCode);
     /**
      * @brief Enrolls templates.
      *
