@@ -28,8 +28,7 @@
           "hdf_core",
           "hilog",
           "c_utils",
-          "graphic_surface",
-          "samgr"
+          "graphic_surface"
         ],
         "third_party": []
       },
