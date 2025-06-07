@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -21,7 +21,7 @@
  * This module provides the clolor space types used by the driver interface for the upper-level graphics service.
  *
  * @since 5.1
- * @version 2.1
+ * @version 2.2
  */
  
 /**
@@ -30,14 +30,14 @@
  *
  */
  
-package ohos.hdi.display.graphic.common.v2_1;
-import ohos.hdi.display.graphic.common.v2_0.CMColorSpace;
+package ohos.hdi.display.graphic.common.v2_2;
+import ohos.hdi.display.graphic.common.v2_1.CMColorSpace;
  
 /**
  * @brief Enumerates the HDR metadata Attr Key types.
  *
  */
-enum CM_HDR_Metadata_Type : ohos.hdi.display.graphic.common.v2_0.CM_HDR_Metadata_Type {
-    /* Video AIHDR metadata type */
-    CM_VIDEO_AI_HDR = 60,        // video aihdr type for global tonemapping
+enum CM_HDR_Metadata_Type : ohos.hdi.display.graphic.common.v2_1.CM_HDR_Metadata_Type {
+    CM_VIDEO_AI_HDR_HIGH_LIGHT = 61,        // video aihdr type for high light
+    CM_VIDEO_AI_HDR_COLOR_ENHANCE = 62,     // video aihdr type for color enhance
 };
