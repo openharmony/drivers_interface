@@ -19,6 +19,7 @@
 #include <cstdio>
 #include <cstdint>
 #include <string>
+#include <parcel.h>
 #include "camera_metadata_operator.h"
 
 static constexpr uint32_t MAX_SUPPORTED_TAGS = 1000;
@@ -31,7 +32,7 @@ static constexpr uint32_t MIN_VEC_SIZE = 12;
     MaxAlignment(MaxAlignment(DATA_ALIGNMENT, METADATA_ALIGNMENT), ITEM_ALIGNMENT)
 
 namespace OHOS::Camera {
-class CameraMetadata {
+class CameraMetadata : public Parcelable {
 public:
     CameraMetadata(size_t itemCapacity, size_t dataCapacity);
     ~CameraMetadata();
@@ -41,6 +42,8 @@ public:
     common_metadata_header_t *get();
     const common_metadata_header_t *get() const;
     bool isValid() const;
+    bool Marshalling(Parcel &parcel) const override;
+    static CameraMetadata* Unmarshalling(Parcel &parcel);
 
 private:
     common_metadata_header_t *metadata_;
