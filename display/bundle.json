@@ -267,6 +267,14 @@
           }
         },
         {
+          "name": "//drivers/interface/display/composer/hdifd_parcelable:libhdifd_parcelable",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/display/composer"
+          }
+        },
+        {
           "name": "//drivers/interface/display/graphic/common/v1_0:display_commontype_idl_headers",
           "header": {
             "header_files": [
