@@ -117,16 +117,10 @@ bool MetadataUtils::ConvertMetadataToVec(const std::shared_ptr<CameraMetadata> &
     return true;
 }
 
-bool MetadataUtils::EncodeCameraMetadata(const std::shared_ptr<CameraMetadata> &metadata,
-                                         MessageParcel &data)
+bool MetadataUtils::WriteCameraMetadata(const common_metadata_header_t* meta, MessageParcel &data)
 {
-    if (metadata == nullptr) {
-        return false;
-    }
-
     bool bRet = true;
     uint32_t tagCount = 0;
-    common_metadata_header_t *meta = metadata->get();
     if (meta != nullptr) {
         tagCount = GetCameraMetadataItemCount(meta);
         bRet = bRet && data.WriteUint32(tagCount);
@@ -149,6 +143,17 @@ bool MetadataUtils::EncodeCameraMetadata(const std::shared_ptr<CameraMetadata> &
         bRet = data.WriteUint32(tagCount);
     }
     return bRet;
+}
+
+bool MetadataUtils::EncodeCameraMetadata(const std::shared_ptr<CameraMetadata> &metadata,
+                                         MessageParcel &data)
+{
+    if (metadata == nullptr) {
+        return false;
+    }
+
+    common_metadata_header_t *meta = metadata->get();
+    return WriteCameraMetadata(meta, data);
 }
 
 static void ReadMetadataDataFromVecUInt8(int32_t &index, camera_metadata_item_t &entry,
@@ -311,6 +316,35 @@ void MetadataUtils::ConvertVecToMetadata(const std::vector<uint8_t>& cameraAbili
     }
 }
 
+void MetadataUtils::ReadCameraMetadata(MessageParcel &data, common_metadata_header_t *meta, uint32_t tagCount)
+{
+    if (meta == nullptr) {
+        return;
+    }
+
+    std::vector<camera_metadata_item_t> items;
+    for (uint32_t i = 0; i < tagCount; i++) {
+        camera_metadata_item_t item;
+        item.index = data.ReadUint32();
+        item.item = data.ReadUint32();
+        item.data_type = data.ReadUint32();
+        item.count = data.ReadUint32();
+        if (item.count > MAX_SUPPORTED_ITEMS) {
+            item.count = MAX_SUPPORTED_ITEMS;
+            METADATA_ERR_LOG("MetadataUtils::ReadCameraMetadata item.count is more than supported value");
+        }
+        MetadataUtils::ReadMetadata(item, data);
+        items.push_back(item);
+    }
+
+    for (auto &item_ : items) {
+        void *buffer = nullptr;
+        MetadataUtils::ItemDataToBuffer(item_, &buffer);
+        (void)AddCameraMetadataItem(meta, item_.item, buffer, item_.count);
+        FreeMetadataBuffer(item_);
+    }
+}
+
 void MetadataUtils::DecodeCameraMetadata(MessageParcel &data, std::shared_ptr<CameraMetadata> &metadata)
 {
     uint32_t tagCount = data.ReadUint32();
@@ -332,29 +366,12 @@ void MetadataUtils::DecodeCameraMetadata(MessageParcel &data, std::shared_ptr<Ca
         METADATA_ERR_LOG("MetadataUtils::DecodeCameraMetadata dataCapacity is more than supported value");
     }
 
-    std::vector<camera_metadata_item_t> items;
-    for (uint32_t i = 0; i < tagCount; i++) {
-        camera_metadata_item_t item;
-        item.index = data.ReadUint32();
-        item.item = data.ReadUint32();
-        item.data_type = data.ReadUint32();
-        item.count = data.ReadUint32();
-        if (item.count > MAX_SUPPORTED_ITEMS) {
-            item.count = MAX_SUPPORTED_ITEMS;
-            METADATA_ERR_LOG("MetadataUtils::DecodeCameraMetadata item.count is more than supported value");
-        }
-        MetadataUtils::ReadMetadata(item, data);
-        items.push_back(item);
-    }
-
     metadata = std::make_shared<CameraMetadata>(itemCapacity, dataCapacity);
-    common_metadata_header_t *meta = metadata->get();
-    for (auto &item_ : items) {
-        void *buffer = nullptr;
-        MetadataUtils::ItemDataToBuffer(item_, &buffer);
-        (void)AddCameraMetadataItem(meta, item_.item, buffer, item_.count);
-        FreeMetadataBuffer(item_);
+    if (metadata == nullptr) {
+        METADATA_ERR_LOG("CameraMetadata::Unmarshalling metadata is nullptr");
+        return;
     }
+    ReadCameraMetadata(data, metadata->get(), tagCount);
 }
 
 bool MetadataUtils::WriteMetadata(const camera_metadata_item_t &item, MessageParcel &data)

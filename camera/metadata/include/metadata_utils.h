@@ -32,6 +32,8 @@ public:
                                      MessageParcel &data);
     static void DecodeCameraMetadata(MessageParcel &data, std::shared_ptr<CameraMetadata> &metadata);
 
+    static void ReadCameraMetadata(MessageParcel &data, common_metadata_header_t *meta, uint32_t tagCount);
+    static bool WriteCameraMetadata(const common_metadata_header_t* meta, MessageParcel &data);
     static std::string EncodeToString(std::shared_ptr<CameraMetadata> metadata);
     static std::shared_ptr<CameraMetadata> DecodeFromString(std::string setting);
     static bool ConvertMetadataToVec(const std::shared_ptr<CameraMetadata> &metadata,

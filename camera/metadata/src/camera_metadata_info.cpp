@@ -23,6 +23,7 @@
 #include <mutex>
 #include "camera_metadata_item_info.h"
 #include "camera_vendor_tag.h"
+#include "metadata_utils.h"
 
 namespace OHOS::Camera {
 static std::mutex g_mtx;
@@ -530,6 +531,41 @@ const common_metadata_header_t *CameraMetadata::get() const
 bool CameraMetadata::isValid() const
 {
     return metadata_ != nullptr;
+}
+
+bool CameraMetadata::Marshalling(Parcel &parcel) const
+{
+    return MetadataUtils::WriteCameraMetadata(metadata_, static_cast<MessageParcel&>(parcel));
+}
+ 
+CameraMetadata* CameraMetadata::Unmarshalling(Parcel &parcel)
+{
+    uint32_t tagCount = parcel.ReadUint32();
+    uint32_t itemCapacity = parcel.ReadUint32();
+    uint32_t dataCapacity = parcel.ReadUint32();
+
+    if (tagCount > MAX_SUPPORTED_TAGS) {
+        tagCount = MAX_SUPPORTED_TAGS;
+        METADATA_ERR_LOG("CameraMetadata::Unmarshalling tagCount is more than supported value");
+    }
+
+    if (itemCapacity > MAX_ITEM_CAPACITY) {
+        itemCapacity = MAX_ITEM_CAPACITY;
+        METADATA_ERR_LOG("CameraMetadata::Unmarshalling itemCapacity is more than supported value");
+    }
+
+    if (dataCapacity > MAX_DATA_CAPACITY) {
+        dataCapacity = MAX_DATA_CAPACITY;
+        METADATA_ERR_LOG("CameraMetadata::Unmarshalling dataCapacity is more than supported value");
+    }
+    CameraMetadata* metadata = new (std::nothrow) CameraMetadata(itemCapacity, dataCapacity);
+    if (metadata == nullptr) {
+        METADATA_ERR_LOG("CameraMetadata::Unmarshalling metadata is nullptr");
+        return nullptr;
+    }
+    MetadataUtils::ReadCameraMetadata(static_cast<MessageParcel&>(parcel), metadata->get(), tagCount);
+
+    return metadata;
 }
 
 uint32_t CameraMetadata::AlignTo(uint32_t val, uint32_t alignment)
