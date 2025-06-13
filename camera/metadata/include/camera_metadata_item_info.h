@@ -396,6 +396,8 @@ static item_info_t g_ohosStreamAbility[OHOS_STREAM_ABILITY_END - OHOS_STREAM_ABI
         OHOS_STREAM_ABILITY_START] = {"offlineSupportedValue", META_TYPE_BYTE, -1},
     [OHOS_CONTROL_CHANGETO_OFFLINE_STREAM_OPEATOR -
         OHOS_STREAM_ABILITY_START] = {"offlineControlValue", META_TYPE_BYTE, -1},
+    [OHOS_ABILITY_ROTATION_IN_IPS_SUPPORTED -
+        OHOS_STREAM_ABILITY_START] = {"rotationInIpsSupported", META_TYPE_BYTE, 1},
 };
  
 static item_info_t g_ohosStreamControl[OHOS_STREAM_CONTROL_END - OHOS_STREAM_CONTROL_START] = {

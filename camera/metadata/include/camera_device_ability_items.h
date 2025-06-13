@@ -1607,6 +1607,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_CHANGETO_OFFLINE_STREAM_OPEATOR,
     /**
+     * ohos.ability.rotationinipssupported [static, uint8, public]
+     *
+     * camera device property, query camera support ips rotation
+     * (i.e. uint8: 0-false/1-true ...)
+     */
+    OHOS_ABILITY_ROTATION_IN_IPS_SUPPORTED,
+    /**
      * ohos.ability.prerecord [static, int32[], public]
      *
      * camera device property, query camera support prerecord and duration
