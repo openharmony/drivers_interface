@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Copyright (c) 2024-2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -29,6 +29,7 @@
 package ohos.hdi.distributed_audio.audioext.v2_0;
 
 import ohos.hdi.distributed_audio.audioext.v2_0.IDAudioCallback;
+import ohos.hdi.distributed_audio.audioext.v2_0.IDAudioHdfCallback;
 import ohos.hdi.distributed_audio.audioext.v2_0.Types;
 
 /**
@@ -83,4 +84,29 @@ interface IDAudioManager {
      * @version 2.0
      */
     NotifyEvent([in] String adpName, [in] int devId, [in] int streamId, [in] struct DAudioEvent event);
+
+    /**
+     * @brief Registering distributed audio HDF drivers listener.
+     *
+     * @param serviceName Service name.
+     * @param callbackObj Distributed Audio HDF listener Callback.
+     *
+     * @return a value of 0 if success and a negative value if failed.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    RegisterAudioHdfListener([in] String serviceName, [in] IDAudioHdfCallback callbackObj);
+
+    /**
+     * @brief Unregistering distributed audio HDF drivers listener.
+     *
+     * @param serviceName Service name.
+     *
+     * @return a value of 0 if success and a negative value if failed.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    UnRegisterAudioHdfListener([in] String serviceName);
 }

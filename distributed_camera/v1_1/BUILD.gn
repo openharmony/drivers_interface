@@ -16,6 +16,7 @@ hdi("distributed_camera_provider") {
   module_name = "distributed_camera_provider_service"
   sources = [
     "DCameraTypes.idl",
+    "IDCameraHdfCallback.idl",
     "IDCameraProvider.idl",
     "IDCameraProviderCallback.idl",
   ]

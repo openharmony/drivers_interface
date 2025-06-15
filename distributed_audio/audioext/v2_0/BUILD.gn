@@ -16,6 +16,7 @@ hdi("daudioext") {
   module_name = "daudioext"
   sources = [
     "IDAudioCallback.idl",
+    "IDAudioHdfCallback.idl",
     "IDAudioManager.idl",
     "Types.idl",
   ]
