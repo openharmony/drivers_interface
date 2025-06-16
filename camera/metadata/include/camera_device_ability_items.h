@@ -1285,6 +1285,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_EQUIVALENT_FOCUS,
     /**
+     * ohos.ability.lensEquivalentFocus [static, int32[], public]
+     *
+     * camera device property, report current camera support lens equivalent focus
+     * (i.e. int32[] ...)
+     */
+    OHOS_ABILITY_LENS_EQUIVALENT_FOCUS,
+    /**
      * ohos.ability.focusDistance [static, float, public]
      *
      * camera device property, set current camera support focus distance
