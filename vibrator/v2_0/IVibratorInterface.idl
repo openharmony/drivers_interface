@@ -273,7 +273,7 @@ interface IVibratorInterface {
      */
     RegVibratorPlugCallback([in] IVibratorPlugCallback callbackObj);
 
-    /**
+        /**
      * @brief UnRegisters the callback for reporting vibrator plug state.
      *
      * The deviceId means which pluged in this device.
