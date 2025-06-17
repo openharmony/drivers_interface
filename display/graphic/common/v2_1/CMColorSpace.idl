@@ -39,5 +39,5 @@ import ohos.hdi.display.graphic.common.v2_0.CMColorSpace;
  */
 enum CM_HDR_Metadata_Type : ohos.hdi.display.graphic.common.v2_0.CM_HDR_Metadata_Type {
     /* Video AIHDR metadata type */
-    CM_VIDEO_AI_HDR = 60,        // video aihdr type for global tonemapping
+    CM_VIDEO_AI_HDR = 60,        // video AIHDR
 };

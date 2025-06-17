@@ -20,7 +20,7 @@
  *
  * This module provides the clolor space types used by the driver interface for the upper-level graphics service.
  *
- * @since 5.1
+ * @since 6.0
  * @version 2.2
  */
  
