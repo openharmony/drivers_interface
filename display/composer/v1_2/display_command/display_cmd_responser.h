@@ -245,7 +245,7 @@ REPLY:
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
             HDF_LOGE("%{public}s: error: Check RequestBegin failed", __func__));
         DISPLAY_CHK_RETURN(unpackCmd != CONTROL_CMD_REQUEST_BEGIN, HDF_FAILURE,
-                           HDF_LOGI("error: unpacker PackBegin cmd not match, cmd(%{public}d)=%{public}s", unpackCmd,
+                           HDF_LOGI("error: unpacker PackBegin cmd not match, cmd(%{public}d)=%{public}s.", unpackCmd,
                                     CmdUtils::CommandToString(unpackCmd)));
 
         DISPLAY_CHK_RETURN(PeriodDataReset() == HDF_FAILURE, HDF_FAILURE,
