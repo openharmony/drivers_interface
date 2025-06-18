@@ -30,7 +30,7 @@ ohos_shared_library("libhdifd_parcelable") {
     "ipc:ipc_single",
   ]
 
-  innerapi_tags = [ "chipsetsdk" ]
+  innerapi_tags = [ "chipsetsdk_sp" ]
   install_images = [ "system" ]
   subsystem_name = "hdf"
   part_name = "drivers_interface_display"
