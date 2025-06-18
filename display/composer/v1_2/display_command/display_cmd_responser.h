@@ -250,7 +250,7 @@ REPLY:
 
         DISPLAY_CHK_RETURN(PeriodDataReset() == HDF_FAILURE, HDF_FAILURE,
                            HDF_LOGE("%{public}s: error: PeriodDataReset failed", __func__));
-        while (ret = HDF_SUCCESS && unpacker.NextSection()) {
+        while (ret == HDF_SUCCESS && unpacker.NextSection()) {
             DISPLAY_CHK_RETURN(unpacker.BeginSection(unpackCmd) == false, HDF_FAILURE,
                 HDF_LOGE("error: PackSection failed, unpackCmd=%{public}s.",
                 CmdUtils::CommandToString(unpackCmd)));
