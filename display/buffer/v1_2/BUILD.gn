@@ -71,6 +71,7 @@ ohos_shared_library("libdisplay_buffer_hdi_impl_v1_2") {
   innerapi_tags = [
     "chipsetsdk_indirect",
     "platformsdk_indirect",
+    "passthrough",
   ]
 
   branch_protector_ret = "pac_ret"

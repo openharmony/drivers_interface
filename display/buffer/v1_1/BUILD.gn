@@ -19,6 +19,7 @@ hdi("display_buffer") {
   sources = [ "IMetadata.idl" ]
   innerapi_tags = [
     "chipsetsdk_indirect",
+    "passthrough",
     "platformsdk_indirect",
   ]
 
@@ -63,6 +64,7 @@ ohos_shared_library("libdisplay_buffer_hdi_impl_v1_1") {
   innerapi_tags = [
     "chipsetsdk_indirect",
     "platformsdk_indirect",
+    "passthrough",
   ]
 
   branch_protector_ret = "pac_ret"

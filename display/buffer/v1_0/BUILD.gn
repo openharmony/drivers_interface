@@ -61,6 +61,7 @@ ohos_shared_library("libdisplay_buffer_hdi_impl") {
   subsystem_name = "hdf"
   innerapi_tags = [
     "chipsetsdk_indirect",
+    "passthrough",
     "platformsdk_indirect",
   ]
 
