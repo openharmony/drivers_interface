@@ -257,7 +257,7 @@ REPLY:
             ret = ProcessRequestCmd(unpacker, unpackCmd, inFds, outFds);
         }
 
-        DSIPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
+        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
                            HDF_LOGE("%{public}s: ProcessRequestCmd failed"));
         /* pack request end commands */
         replyPacker_.PackEnd(CONTROL_CMD_REPLY_END);
