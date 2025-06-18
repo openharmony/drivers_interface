@@ -183,7 +183,8 @@
                 "camera_metadata_item_info.h",
                 "camera_metadata_operator.h",
                 "metadata_log.h",
-                "metadata_utils.h"
+                "metadata_utils.h",
+                "video_key_info.h"
               ],
               "header_base": "//drivers/interface/camera/metadata/include"
             }
