@@ -11,7 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import("//drivers/hdf_core/adapter/uhdf2/hdi.gni")
+import("//build/config/components/hdi/hdi.gni")
 hdi("location_gnss") {
   module_name = "location_gnss"
 
