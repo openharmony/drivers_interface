@@ -227,6 +227,23 @@ struct HapticPaket {
 };
 
 /**
+ * @brief Defines the vibration data delivery packet.
+ *
+ * The information include the different trypes of vibrationsr;
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+struct VibratorPackage {
+    /** Indicates the pattern number of data to be delivered. */
+    int patternNum;
+    /** Indicates the vibration duration of data to be delivered. */
+    int packageduration;
+    /** Indicates the vibration data delivery pattern array. */
+    struct HapticPaket[] patterns;
+};
+
+/**
  * @brief Defines the vibration capability data package.
  *
  * The information include the different types of vibrations.
