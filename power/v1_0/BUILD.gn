@@ -28,6 +28,7 @@ if (defined(ohos_lite)) {
     ]
 
     language = "cpp"
+    innerapi_tags = [ "chipsetsdk" ]
     subsystem_name = "hdf"
     part_name = "drivers_interface_power"
   }
