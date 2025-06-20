@@ -1,0 +1,62 @@
+{
+  "name": "@ohos/drivers_interface_lpplayer",
+  "description": "low power player driver interface",
+  "version": "6.0",
+  "license": "Apache License 2.0",
+  "publishAs": "code-segment",
+  "segment": {
+    "destPath": "drivers/interface/low_power_player"
+  },
+  "dirs": {},
+  "scripts": {},
+  "component": {
+    "name": "drivers_interface_lpplayer",
+    "subsystem": "hdf",
+    "syscap": [],
+    "adapted_system_type": ["standard", "small"],
+    "rom": "675KB",
+    "ram": "7400KB",
+    "deps": {
+      "components": [
+        "ipc",
+        "hdf_core",
+        "hilog",
+        "c_utils"
+      ],
+      "third_party": []
+    },
+    "build": {
+      "sub_component": [
+        "//drivers/interface/low_power_player/v1_0:low_power_player_idl_target"
+      ],
+      "test": [
+      ],
+      "inner_kits": [
+        {
+          "name": "//drivers/interface/low_power_player/v1_0:liblow_power_player_proxy_1.0",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/low_power_player"
+          }
+        },
+        {
+          "name": "//drivers/interface/low_power_player/v1_0:low_power_player_idl_headers",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/low_power_player"
+          }
+        },
+        {
+          "name": "//drivers/interface/low_power_player/v1_0:liblow_power_player_stub_1.0",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/low_power_player"
+          }
+        }
+      ]
+    }
+  }
+}
