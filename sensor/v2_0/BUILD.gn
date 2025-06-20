@@ -26,6 +26,10 @@ if (defined(ohos_lite)) {
       "ISensorInterface.idl",
       "SensorTypes.idl",
     ]
+    innerapi_tags = [
+      "chipsetsdk",
+      "platformsdk_indirect",
+    ]
 
     language = "cpp"
     subsystem_name = "hdf"
