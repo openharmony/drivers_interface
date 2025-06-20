@@ -22,6 +22,7 @@ hdi("ar") {
     "IActivityInterface.idl",
   ]
 
+  innerapi_tags = [ "chipsetsdk" ]
   language = "cpp"
   subsystem_name = "hdf"
   part_name = "drivers_interface_act_recg"
