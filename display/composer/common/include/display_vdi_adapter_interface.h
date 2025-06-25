@@ -32,6 +32,7 @@ namespace Composer {
 using namespace OHOS::HDI::Display::Composer::V1_0;
 using namespace OHOS::HDI::Display::Composer::V1_1;
 using namespace OHOS::HDI::Display::Composer::V1_2;
+using namespace OHOS::HDI::Display::Composer::V1_3;
 struct DisplayComposerVdiAdapter {
     int32_t (*LoadVdiImpl)();
     int32_t (*DestroyVdiImpl)();
