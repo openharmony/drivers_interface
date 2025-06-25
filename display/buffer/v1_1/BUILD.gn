@@ -18,8 +18,7 @@ hdi("display_buffer") {
 
   sources = [ "IMetadata.idl" ]
   innerapi_tags = [
-    "chipsetsdk_indirect",
-    "passthrough",
+    "chipsetsdk",
     "platformsdk_indirect",
   ]
 
