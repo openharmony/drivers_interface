@@ -1,0 +1,303 @@
+/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup LowPowerPlayer
+ * @{
+ *
+ * @ @brief Provides unified APIs for media services to access low power player drivers.
+ *
+ * The media service can obtain a low power player driver object or proxy, and then invoke the
+ * API provided by the object or proxy, The module provides APIs for initializing the custom data
+ * and audio and video codecs, setting parameters, and controlling and transferring data.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+
+package ohos.hdi.low_power_player.v1_0;
+
+import ohos.hdi.low_power_player.v1_0.ILppSyncManagerCallback;
+
+/**
+ * @brief Defines the APIs for the low power player sync manager adapter.
+ *
+ * The APIs can be used to:
+ * - Creating and controlling the sensorhub audio-picture synchronization module.
+ * - Supports the synchronization of upper-layer and lower-layer anchor points.
+ * - Supports the anchor update and computing synchronization on core A.
+ * - Synchronizes binding based on the VDEC and HifiAdapter instance IDs.
+ * For details, see the description of the APIs.
+ */
+
+interface ILppSyncManagerAdapter {
+    /**
+     * @brief Sets the video channel Id.
+     *
+     *
+     * @param channelId Indicates the channel ID for communication between the vdec and sensorhub.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    SetVideoChannelId([in] unsigned int channelId);
+
+    /**
+     * @brief Sets the audio channel Id.
+     *
+     * The channelId is obtained from the avcodec.
+     * The inner interface needs to be added to the avcodec to obtain the channelId.
+     *
+     * @param channelId Indicates the channel ID for communication between the HIFI and sensorhub.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    SetAudioChannelId([in] unsigned int channelId);
+
+    /**
+     * @brief Starts rendering output and instruct the SenseHub to start outputting the decoded video.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    StartRender();
+
+    /**
+     * @brief Rendering next frame.
+     * In non-playing states such as seek, the sensor hub must be able to display the first frame.
+     * Called when renderFirstFrame is set to true.
+     * 
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    RenderNextFrame();
+
+    /**
+     * @brief Pauses.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    Pause();
+
+    /**
+     * @brief Resumes.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    Resume();
+
+    /**
+     * @brief Flushs Video Frames.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    Flush();
+
+    /**
+     * @brief Stops.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    Stop();
+
+    /**
+     * @brief Resets.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    Reset();
+
+    /**
+     * @brief Sets the target start frame.
+     *
+     *
+     *
+     * @param framePts Indicates the pts of the target start frame.
+     * @param timeoutMs Indicates the specified Timeout.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    SetTargetStartFrame([in] unsigned long framePts, [in] unsigned int timeoutMs);
+
+    /**
+     * @brief Sets the playback speed.
+     *
+     *
+     *
+     * @param speed Indicates the speed of video playback.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    SetPlaybackSpeed([in] float speed);
+
+    /**
+     * @brief Registers the Callback for lpp sync manager apdater.
+     *
+     *
+     *
+     * @param syncCallback Indicates the callback to register.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    RegisterCallback([in] ILppSyncManagerCallback syncCallback);
+
+    /**
+     * @brief Sets parameters for this component, that is, sends an initialization parameter
+     * structure to the component.
+     *
+     *
+     *
+     * @param parameter Indicates the Key-value pair parameter for configuration item extension.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    SetParameter([in] Map<String, String> parameter);
+
+    /**
+     * @brief Obtains the parameter settings of this component.
+     *
+     *
+     *
+     * @param parameter Indicates the Key-value pair parameter for configuration item extension.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    GetParameter([out] Map<String, String> parameter);
+
+    /**
+     * @brief Updates the time anchor.
+     *
+     *
+     *
+     * @param anchorPts Indicates the Updated anchor media pts.
+     * @param anchorClk Indicates the Updated anchor system time.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    UpdateTimeAnchor([in] unsigned long anchorPts, [in] unsigned long anchorClk);
+
+    /**
+     * @brief Binds the output buffers of the decoder.
+     *
+     *
+     *
+     * @param outputBuffers Indicates the output buffers of the decoder.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    BindOutputBuffers([in] Map<unsigned int, NativeBuffer> outputBuffers);
+
+    /**
+     * @brief Unbinds the YUV buffer.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    UnbindOutputBuffers();
+
+    /**
+     * @brief Gets the share buffer.
+     *
+     *
+     *
+     * @param fd Indicates the file descriptor of the current shared buffer.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    GetShareBuffer([out] FileDescriptor fd);
+
+    /**
+     * @brief Sets the tunnel id.
+     *
+     *
+     *
+     * @param tunnelId Indicates the tunnel ID of the layer.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    SetTunnelId([in] unsigned long tunnelId);
+}
