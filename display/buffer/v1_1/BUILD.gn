@@ -18,7 +18,7 @@ hdi("display_buffer") {
 
   sources = [ "IMetadata.idl" ]
   innerapi_tags = [
-    "chipsetsdk_indirect",
+    "chipsetsdk",
     "platformsdk_indirect",
   ]
 
@@ -61,7 +61,7 @@ ohos_shared_library("libdisplay_buffer_hdi_impl_v1_1") {
   install_images = [ "system" ]
   subsystem_name = "hdf"
   innerapi_tags = [
-    "chipsetsdk_indirect",
+    "chipsetsdk",
     "platformsdk_indirect",
   ]
 
