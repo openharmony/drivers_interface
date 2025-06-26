@@ -35,6 +35,7 @@ enum BufferHandleAttrKey {
     ATTRKEY_CROP_REGION,                    // value: Meta_Rect_Region
     ATTRKEY_EXPECT_FPS,                     // value: int
     ATTRKEY_DATA_ACCESS,                    // value: int
+    ATTRKEY_GPU_DIRTY_REGION = 17,          // value: dirty region addr
 
     /* vendor internal extended meta type */
     ATTRKEY_VENDOR_EXT_START = 2048,
