@@ -27,7 +27,8 @@
             "sub_component": [
                 "//drivers/interface/distributed_audio/audio/v1_0:daudio_idl_target",
                 "//drivers/interface/distributed_audio/audioext/v1_0:daudioext_idl_target",
-                "//drivers/interface/distributed_audio/audioext/v2_0:daudioext_idl_target"
+                "//drivers/interface/distributed_audio/audioext/v2_0:daudioext_idl_target",
+                "//drivers/interface/distributed_audio/audioext/v2_1:daudioext_idl_target"
             ],
             "test": [
 
@@ -69,6 +70,20 @@
                 },
                 {
                     "name": "//drivers/interface/distributed_audio/audioext/v2_0:libdaudioext_stub_2.0",
+                    "header": {
+                        "header_files": [],
+                        "header_base": "//drivers/interface/distributed_audio/audioext"
+                    }
+                },
+                {
+                    "name": "//drivers/interface/distributed_audio/audioext/v2_1:libdaudioext_proxy_2.1",
+                    "header": {
+                        "header_files": [],
+                        "header_base": "//drivers/interface/distributed_audio/audioext"
+                    }
+                },
+                {
+                    "name": "//drivers/interface/distributed_audio/audioext/v2_1:libdaudioext_stub_2.1",
                     "header": {
                         "header_files": [],
                         "header_base": "//drivers/interface/distributed_audio/audioext"

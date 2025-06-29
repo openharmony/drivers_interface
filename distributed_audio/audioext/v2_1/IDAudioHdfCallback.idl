@@ -1,0 +1,55 @@
+/*
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup Distributed Audio
+ * @{
+ *
+ * @brief Provides APIs for communication to distributed audio SA service
+ *
+ * Call of the transmission interface between the distributed audio HDF service and
+ * the distributed audio SA service, and provide hardware driver interfaces for
+ * the upper layer.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+
+package ohos.hdi.distributed_audio.audioext.v2_1;
+
+import ohos.hdi.distributed_audio.audioext.v2_1.Types;
+
+/**
+ * @brief Basic operations for Distributed Audio devices.
+ *
+ * There are currently no events.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+[callback] interface IDAudioHdfCallback {
+    /**
+     * @brief Notify distributed audio HDF of events.
+     *
+     * @param devId Device ID for distributed audio devices.
+     * @param event Notification event types (such as focus events, volume events)
+     *
+     * @return a value of 0 if success, return a negative value if failed.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    NotifyEvent([in] int devId, [in] struct DAudioEvent event);
+}
