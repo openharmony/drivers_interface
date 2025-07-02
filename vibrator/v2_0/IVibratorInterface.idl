@@ -290,9 +290,11 @@ interface IVibratorInterface {
 
     /**
      * @brief HD vibration data packet delivery.
-     *
-     * @param Indecates the Hd vibration data packet.
-     *
+     * Indecates the Hd vibration data packet.
+     * @param deviceVibratorInfo, The default value of deviceId is -1, vibratorId is accumulated according to the number of motors.
+     * see{@link DeviceVibratorInfo}.
+     * @param The sessionId is sent by the audio framework.
+     * @param HapticPaket data is sent from the upper layer.
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns negative value if the get failed.
      *
@@ -303,9 +305,11 @@ interface IVibratorInterface {
 
     /**
      * @brief HD vibration data packet delivery.
-     *
-     * @param Indecates the Hd vibration data packet.
-     *
+     * Indecates the Hd vibration data packet.
+     * @param deviceVibratorInfo, The default value of deviceId is -1, vibratorId is accumulated according to the number of motors.
+     * see{@link DeviceVibratorInfo}.
+     * @param The sessionId is sent by the audio framework.
+     * @param VibratorPackage data is sent from the upper layer.
      * @return Returns <b>0</b> if the operation is successful.
      * @return Returns negative value if the get failed.
      *
@@ -319,9 +323,9 @@ interface IVibratorInterface {
      *
      * Before the vibrator starts, it must stop vibrating in any mode. This function can be used during
      * and after the vibrating process.
-     *
-     * @param mode Indicates the vibration mode, which can be one-shot or periodic. For details,
-     * see {@link HdfVibratorMode}.
+     * @param deviceVibratorInfo, The default value of deviceId is -1, vibratorId is accumulated according to the number of motors.
+     * see{@link DeviceVibratorInfo}.
+     * @param The sessionId is sent by the audio framework.
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
      *
      * @since 6.0
