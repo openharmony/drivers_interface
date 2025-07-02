@@ -17,14 +17,14 @@ hdi("display_buffer") {
   module_name = "display_buffer"
 
   proxy_deps = [
-    "../v1_0:libdisplay_buffer_proxy_1.0",
-    "../v1_0:libdisplay_buffer_proxy_1.1",
-    "../v1_0:libdisplay_buffer_proxy_1.2"
+    "//drivers/interface/display/buffer/v1_0:libdisplay_buffer_proxy_1.0",
+    "//drivers/interface/display/buffer/v1_1:libdisplay_buffer_proxy_1.1",
+    "//drivers/interface/display/buffer/v1_2:libdisplay_buffer_proxy_1.2"
   ]
   stub_deps = [
-    "../v1_0:libdisplay_buffer_stub_1.0",
-    "../v1_0:libdisplay_buffer_stub_1.1",
-    "../v1_0:libdisplay_buffer_stub_1.2"
+    "//drivers/interface/display/buffer/v1_0:libdisplay_buffer_stub_1.0",
+    "//drivers/interface/display/buffer/v1_1:libdisplay_buffer_stub_1.1",
+    "//drivers/interface/display/buffer/v1_2:libdisplay_buffer_stub_1.2"
   ]
 
   sources = [

@@ -43,7 +43,7 @@ namespace V1_3 {
 template<typename Interface>
 class DisplayBufferHdiImpl : public V1_2::DisplayBufferHdiImpl<Interface> {
 public:
-    explicit DisplayBufferHdiImpl(bool isAllocLocal = false) : BaseType2_0(isAllocLocal), mapper_v1_3_(nullptr)
+    explicit DisplayBufferHdiImpl(bool isAllocLocal = false) : BaseType3_0(isAllocLocal), mapper_v1_3_(nullptr)
     {
         while ((mapper_v1_3_ = IMapper::Get(true)) == nullptr) {
             // Waiting for metadata service ready
@@ -52,7 +52,7 @@ public:
     }
     virtual ~DisplayBufferHdiImpl() {};
 
-    int32_t AllocMemPassThrough(const AllocMem& info, BufferHandle& handle) const
+    int32_t AllocMemPassThrough(const AllocInfo& info, BufferHandle*& handle) const
     {
         DISPLAY_TRACE;
         CHECK_NULLPOINTER_RETURN_VALUE(mapper_v1_3_, HDF_FAILURE);
@@ -70,7 +70,7 @@ public:
         return ret;
     }
 
-    int32_t AllocMemIpc(const AllocMem& info, BufferHandle& handle) const
+    int32_t AllocMemIpc(const AllocInfo& info, BufferHandle*& handle) const
     {
         DISPLAY_TRACE;
         CHECK_NULLPOINTER_RETURN_VALUE(mapper_v1_3_, HDF_FAILURE);
@@ -88,7 +88,7 @@ public:
         return ret;
     }
 
-    int32_t AllocMem(const AllocMem& info, BufferHandle& handle) const override
+    int32_t AllocMem(const AllocInfo& info, BufferHandle*& handle) const override
     {
         DISPLAY_TRACE;
         CHECK_NULLPOINTER_RETURN_VALUE(mapper_v1_3_, HDF_FAILURE);
@@ -98,9 +98,11 @@ public:
             int32_t ret = AllocMemPassThrough(info, handle);
             if (ret != HDF_FAILURE) {
                 HDF_LOGW("%{public}s: AllocMem Passthrough mode failed, use allocator_host", __func__);
-            } else {
                 return AllocMemIpc(info, handle);
             }
+            return ret;
+        } else {
+            return AllocMemIpc(info, handle);
         }
     }
 
