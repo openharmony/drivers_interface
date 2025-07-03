@@ -288,48 +288,47 @@ interface IVibratorInterface {
      */
     UnRegVibratorPlugCallback([in] IVibratorPlugCallback callbackObj);
 
-/**
-* @brief HD vibration data packet delivery.
-* Indecates the Hd vibration data packet.
-* @param deviceVibratorInfo, The default value of deviceId is -1, vibratorId is accumulated according to the number of motors.
-* see {@link DeviceVibratorInfo}.
-* @param The sessionId is sent by the audio framework.
-* @param HapticPaket data is sent from the upper layer
-* @return Returns <b>0</b> if the operation is successful.
-* @return Returns negative value if the get failed.
-*
-* @since 6.0
-* @version 1.0
-*/
+    /**
+     * @brief HD vibration data packet delivery.
+     * Indecates the Hd vibration data packet.
+     * @param deviceVibratorInfo, The default value of deviceId is -1, vibratorId is accumulated according to the number of motors.
+     * see {@link DeviceVibratorInfo}.
+     * @param The sessionId is sent by the audio framework.
+     * @param HapticPaket data is sent from the upper layer
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns negative value if the get failed.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
     PlayPatternBySessionId([in] DeviceVibratorInfo deviceVibratorInfo, [in] unsigned int sessionId, [in] struct HapticPaket hapticPaket);
 
-/**
-* @brief HD vibration data packet delivery.
-* Indecates the Hd vibration data packet.
-* @param deviceVibratorInfo, The default value of deviceId is -1, vibratorId is accumulated according to the number of motors.
-* see {@link DeviceVibratorInfo}.
-* @param The sessionId is sent by the audio framework.
-* @param VibratorPackage data is sent from the upper layer
-* @return Returns <b>0</b> if the operation is successful.
-* @return Returns negative value if the get failed.
-*
-* @since 6.0
-* @version 1.0
-*/
+    /**
+     * @brief HD vibration data packet delivery.
+     * Indecates the Hd vibration data packet.
+     * @param deviceVibratorInfo, The default value of deviceId is -1, vibratorId is accumulated according to the number of motors.
+     * see {@link DeviceVibratorInfo}.
+     * @param The sessionId is sent by the audio framework.
+     * @param VibratorPackage data is sent from the upper layer
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns negative value if the get failed.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
     PlayPackageBySession([in] DeviceVibratorInfo deviceVibratorInfo, [in] unsigned int sessionId, [in] struct VibratorPackage vibratorPackage);
-
-/**
-* @brief Stops the vibration.
-*
-* Before the vibrator starts, it must stop vibrating in any mode. This function can be used during
-* and after the vibrating process.
-* @param deviceVibratorInfo, The default value of deviceId is -1, vibratorId is accumulated according to the number of motors.
-* see {@link DeviceVibratorInfo}.
-* @param The sessionId is sent by the audio framework.
-* @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
-*
-* @since 6.0
-* @version 1.0
-*/
+    /**
+     * @brief Stops the vibration.
+     *
+     * Before the vibrator starts, it must stop vibrating in any mode. This function can be used during
+     * and after the vibrating process.
+     * @param deviceVibratorInfo, The default value of deviceId is -1, vibratorId is accumulated according to the number of motors.
+     * see {@link DeviceVibratorInfo}.
+     * @param The sessionId is sent by the audio framework.
+     * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
     StopVibrateBySessionId([in] DeviceVibratorInfo deviceVibratorInfo, [in] unsigned int sessionId);
 }
