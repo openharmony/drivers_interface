@@ -96,7 +96,7 @@ public:
         //Step1. check is support alloc passthrough
         if (mapper_v1_3_->IsSupportAllocPassthrough(info) == HDF_SUCCESS) {
             int32_t ret = AllocMemPassThrough(info, handle);
-            if (ret != HDF_FAILURE) {
+            if (ret != HDF_SUCCESS) {
                 HDF_LOGW("%{public}s: AllocMem Passthrough mode failed, use allocator_host", __func__);
                 return AllocMemIpc(info, handle);
             }
