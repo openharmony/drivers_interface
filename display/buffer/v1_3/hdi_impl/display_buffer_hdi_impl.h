@@ -50,6 +50,7 @@ public:
             usleep(WAIT_TIME_INTERVAL);
         }
     }
+
     virtual ~DisplayBufferHdiImpl() {};
 
     int32_t AllocMemPassThrough(const AllocInfo& info, BufferHandle*& handle) const
