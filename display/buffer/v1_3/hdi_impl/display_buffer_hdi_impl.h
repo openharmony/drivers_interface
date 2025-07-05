@@ -74,7 +74,7 @@ public:
     int32_t AllocMemIpc(const AllocInfo& info, BufferHandle*& handle) const
     {
         DISPLAY_TRACE;
-        CHECK_NULLPOINTER_RETURN_VALUE(mapper_v1_3_, HDF_FAILURE);
+        CHECK_NULLPOINTER_RETURN_VALUE(allocator_, HDF_FAILURE);
         sptr<NativeBuffer> hdiBuffer;
         int32_t ret = allocator_->AllocMem(info, hdiBuffer);
         if ((ret == HDF_SUCCESS) && (hdiBuffer != nullptr)) {
