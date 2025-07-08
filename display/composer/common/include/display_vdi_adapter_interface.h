@@ -168,7 +168,7 @@ using FastPresentFunc = int32_t (*)(uint32_t devId, const PresentParam& param,
 using ClearDisplayClientBufferFunc = int32_t (*)(uint32_t devId);
 using ClearLayerBufferFunc = int32_t (*)(uint32_t devId, uint32_t layerId);
 using GetDisplayIdentificationDataFunc = int32_t (*)(uint32_t devId, uint8_t& portId, std::vector<uint8_t>& edidData);
-using RegHwcEventCallbackFunc = int32_t (*)(IHwcEventCallback cb, void *data);
+using RegHwcEventCallbackFunc = int32_t (*)(HwcEventCallback cb, void *data);
 
 
 } // namespace Composer
