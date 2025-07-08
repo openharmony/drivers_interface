@@ -32,10 +32,10 @@ interface IMapper extends ohos.hdi.display.buffer.v1_2.IMapper {
      */
     AllocMem([in] struct AllocInfo info, [out] NativeBuffer handle);
     /**
-     * @brief the function to alloc memory
+     * @brief get iamge position
      *
-     * @param info describs the buffer to be alloced
-     * @param handle the allocated buffer handle
+     * @param handle The input buffer handle
+     * @param layout the iamge position data
      *
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined
      * in {@link DispErrCode} otherwise.
