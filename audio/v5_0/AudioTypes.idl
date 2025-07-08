@@ -300,7 +300,7 @@ enum AudioSessionType {
  * @brief Describes AudioDeviceType.
  *
  * @since 4.1
- * @version 3.1
+ * @version 3.2
  */
 enum AudioDeviceType {
     AUDIO_LINEOUT          = 1 << 0,  /**< Assigned lineout device type */
@@ -318,6 +318,7 @@ enum AudioDeviceType {
     AUDIO_DP_DEVICE        = 1 << 12, /**< Assigned dp device type */
     AUDIO_ACCESSORY_DEVICE = 1 << 13, /**< Assigned accessory device type */
     AUDIO_REMOTE_DEVICE    = 1 << 14, /**< Assigned remote device type */
+    AUDIO_HEARING_AID_DEVICE = 1 << 15, /**< Assigned hearing aid device type */
     AUDIO_DEVICE_UNKNOWN,             /**< Assigned unknown device type */
 };
 
