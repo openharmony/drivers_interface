@@ -38,6 +38,8 @@ public:
      */
     static IDisplayBuffer *Get();
     virtual int32_t AllocMem(const V1_0::AllocInfo& info, BufferHandle*& handle) const = 0;
+    virtual int32_t ReAllocMem(const V1_0::AllocInfo& info, const BufferHandle& inHandle,
+        BufferHandle*& outHandle) const = 0;
 };
 } // namespace V1_3
 } // namespace Buffer

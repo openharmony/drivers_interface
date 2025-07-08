@@ -107,6 +107,26 @@ public:
         }
     }
 
+    virtual int32_t ReAllocMem(const V1_0::AllocInfo& info, const BufferHandle& inHandle,
+        BufferHandle*& outHandle)const override
+    {
+        DISPLAY_TRACE;
+        CHECK_NULLPOINTER_RETURN_VALUE(mapper_v1_3_, HDF_FAILURE);
+
+        sptr<NativeBuffer> hdiInBuffer = new NativeBuffer();
+        CHECK_NULLPOINTER_RETURN_VALUE(hdiInBuffer, HDF_FAILURE);
+        sptr<NativeBuffer> hdiOutBuffer;
+
+        hdiInBuffer->SetBufferHandle(const_cast<BufferHandle*>(&inHandle));
+        int32_t ret = mapper_v1_3_->ReAllocMem(info, hdiInBuffer, hdiOutBuffer);
+        if ((ret == HDF_SUCCESS) && (hdiOutBuffer != nullptr)) {
+            outHandle = hdiOutBuffer->Move();
+        } else {
+            return AllocMemIpc(info, outHandle);
+        }
+        return ret;
+    }
+
 private:
     using BaseType3_0 = V1_2::DisplayBufferHdiImpl<Interface>;
 protected:
