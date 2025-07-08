@@ -98,6 +98,7 @@ struct DisplayComposerVdiAdapter {
     int32_t (*ClearDisplayClientBuffer)(uint32_t devId);
     int32_t (*ClearLayerBuffer)(uint32_t devId, uint32_t layerId);
     int32_t (*GetDisplayIdentificationData)(uint32_t devId, uint8_t& portId, std::vector<uint8_t>& edidData);
+    int32_t (*RegHwcEventCallbackFunc)(const sptr<IHwcEventCallback>& cb);
 };
 
 using LoadVdiImplFunc = int32_t (*)();
@@ -166,6 +167,7 @@ using FastPresentFunc = int32_t (*)(uint32_t devId, const PresentParam& param,
 using ClearDisplayClientBufferFunc = int32_t (*)(uint32_t devId);
 using ClearLayerBufferFunc = int32_t (*)(uint32_t devId, uint32_t layerId);
 using GetDisplayIdentificationDataFunc = int32_t (*)(uint32_t devId, uint8_t& portId, std::vector<uint8_t>& edidData);
+using RegHwcEventCallbackFunc = int32_t (*)(const sptr<IHwcEventCallback>& cb);
 
 
 } // namespace Composer
