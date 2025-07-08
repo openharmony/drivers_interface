@@ -21,7 +21,6 @@
 #include "v1_3/display_composer_type.h"
 #include "v1_3/idisplay_composer.h"
 #include "v1_3/include/idisplay_composer_interface.h"
-#include "hdf_trace.h"
 #include <cinttypes>
 
 #undef LOG_TAG
