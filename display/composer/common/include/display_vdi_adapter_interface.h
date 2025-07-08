@@ -22,6 +22,7 @@
 #include "v1_0/include/idisplay_composer_interface.h"
 #include "v1_0/display_composer_type.h"
 #include "v1_2/display_composer_type.h"
+#include "v1_3/display_composer_type.h"
 #include "v1_1/imode_callback.h"
 #include "v1_1/iseamless_change_callback.h"
 
