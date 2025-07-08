@@ -60,7 +60,6 @@ public:
 
     DisplayComposerHdiImpl(sptr<CompHdi> hdi, std::shared_ptr<CmdReq> req)
         : BaseType1_2(hdi, req),
-        req_v1_3_(req),
         hdi_v1_3_(hdi),
         hwcEventCb_(nullptr),
         hwcEventCbData_(nullptr) {}
@@ -93,7 +92,6 @@ protected:
     using BaseType1_2 = V1_2::DisplayComposerHdiImpl<Interface, CompHdi, CmdReq>;
     using BaseType1_2::WAIT_TIME_INTERVAL;
     using BaseType1_2::ToDispErrCode;
-    std::shared_ptr<CmdReq> req_v1_3_;
     sptr<CompHdi> hdi_v1_3_;
 private:
     HwcEventCallback hwcEventCb_;
