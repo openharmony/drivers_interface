@@ -591,6 +591,10 @@ static item_info_t g_ohosPostProcess[OHOS_CAMERA_EFFECT_END - OHOS_CAMERA_EFFECT
         OHOS_CAMERA_EFFECT_START] = {"colorReservationTypes", META_TYPE_BYTE, -1},
     [OHOS_CONTROL_COLOR_RESERVATION_TYPE -
         OHOS_CAMERA_EFFECT_START] = {"colorReservationType", META_TYPE_BYTE, 1},
+    [OHOS_ABILITY_CONTROL_CENTER_SUPPORTED -
+        OHOS_CAMERA_EFFECT_START] = {"controlCenterSupported", META_TYPE_BYTE, 1},
+    [OHOS_ABILITY_CONTROL_CENTER_EFFECT_TYPE -
+        OHOS_CAMERA_EFFECT_START] = {"controlCenterEffectType", META_TYPE_BYTE, -1},
 };
 
 static item_info_t g_ohosCameraSecure[OHOS_CAMERA_SECURE_END - OHOS_CAMERA_SECURE_START] = {
