@@ -449,6 +449,7 @@ enum AudioInputType {
     AUDIO_INPUT_NOISE_REDUCTION_TYPE     = 1 << 9, /**< Assigned noise reduction input type */
     AUDIO_INPUT_RAW_TYPE                 = 1 << 10, /**< Assigned raw input type */
     AUDIO_INPUT_LIVE_TYPE                = 1 << 11, /**< Assigned live input type */
+    AUDIO_INPUT_VOICE_TRANSCRIPTION      = 1 << 12, /**< Assigned voice transcription input type */
 };
 
 /**
