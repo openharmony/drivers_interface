@@ -18,7 +18,7 @@ hdi("lpfence_mntn") {
 
   sources = [
     "IMntnCallback.idl",
-    "IMntnInterface.idl",
+    "IMntnIntf.idl",
     "MntnTypes.idl",
   ]
 
