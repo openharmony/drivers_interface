@@ -59,7 +59,6 @@ import ohos.hdi.location.lpfence.mntn.v1_0.IMntnCallback;
  * You can use the APIs to register or unregister a callback
  */
 interface IMntnIntf {
- {
     /**
      * @brief Registers a callback.
      *
