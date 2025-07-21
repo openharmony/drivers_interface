@@ -23,7 +23,7 @@ hdi("display_buffer") {
   ]
 
   innerapi_tags = [
-    "chipsetsdk_indirect",
+    "chipsetsdk_sp_indirect",
     "platformsdk_indirect",
   ]
 
