@@ -1,0 +1,120 @@
+/*
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ 
+/**
+ * @addtogroup Ethernet
+ *
+ * @brief Provides APIs for the upper-layer Ethernet service.
+ *
+ * You can use the APIs to enable or disable Extensible Authentication Protocol(EAP) via Ethernet.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+ 
+/**
+ * @file IEthernet.idl
+ *
+ * @brief Provides APIs to enable or disable EAP via Ethernet.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+ 
+/**
+ * @brief Defines the package path of the Ethernet module interface.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+package ohos.hdi.ethernet.v1_0;
+ 
+import ohos.hdi.ethernet.v1_0.IEthernetCallback;
+ 
+/**
+ * @brief Defines an interface for the upper-layer Ethernet service.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+interface IEthernet {
+   /**
+   * @brief Creates a channel to start EAP via Ethernet.
+   *
+   * @param ifName indicates the interface to start EAP(eg: eth0).
+   *
+   * @return Returns <b>0</b> if the operation is successful.
+   * @return Returns a negative value if the operation fails.
+   *
+   * @since 6.0
+   * @version 1.0
+   */
+   StartEap([in] String ifName);
+
+   /**
+   * @brief Destroys the channel to stop EAP via Ethernet.
+   *
+   * @param ifName indicates the interface to stop EAP(eg: eth0).
+   *
+   * @return Returns <b>0</b> if the operation is successful.
+   * @return Returns a negative value if the operation fails.
+   *
+   * @since 6.0
+   * @version 1.0
+   */
+   StopEap([in] String ifName);
+
+   /**
+   * @brief Registers a callback to listen for asynchronous EAP events.
+   *
+   * @param cbFunc Indicates the callback to register.
+   * @param ifName Indicates the interface name.
+   *
+   * @return Returns <b>0</b> if the operation is successful.
+   * @return Returns a negative value if the operation fails.
+   *
+   * @since 6.0
+   * @version 1.0
+   */
+   RegisterEapEventCallback([in] IEthernetCallback cbFunc, [in] String ifName);
+
+   /**
+   * @brief Unregisters a callback.
+   *
+   * @param cbFunc Indicates the callback to unregister.
+   * @param ifName Indicates the interface name.
+   *
+   * @return Returns <b>0</b> if the operation is successful.
+   * @return Returns a negative value if the operation fails.
+   *
+   * @since 6.0
+   * @version 1.0
+   */
+   UnregisterEapEventCallback([in] IEthernetCallback cbFunc, [in] String ifName);
+
+   /**
+   * @brief Send EAP shell command.
+   *
+   * @param ifName Indicates the interface name.
+   * @param cmd Indicates shell command for EAP via Ethernet.
+   *
+   * @return Returns <b>0</b> if the operation is successful.
+   * @return Returns a negative value if the operation fails.
+   *
+   * @since 6.0
+   * @version 1.0
+   */
+   EapShellCmd([in] String ifName, [in] String cmd);
+}
