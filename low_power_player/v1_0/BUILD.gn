@@ -1,4 +1,5 @@
-# Copyright (c) 2025 Huawei Device Co., Ltd.
+
+# Copyright (c) 2024 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -12,32 +13,26 @@
 # limitations under the License.
 
 import("//build/config/components/hdi/hdi.gni")
-
 if (defined(ohos_lite)) {
-  group("libaudio_proxy_5.0") {
+  group("liblow_power_player_proxy_1.0") {
     deps = []
     public_configs = []
   }
 } else {
-  hdi("audio") {
-    module_name = "audio_service"
+  hdi("low_power_player") {
+    module_name = "low_power_player_service"
 
     sources = [
-      "AudioTypes.idl",
-      "IAudioAdapter.idl",
-      "IAudioCallback.idl",
-      "IAudioCapture.idl",
-      "IAudioManager.idl",
-      "IAudioRender.idl",
+      "ILowPowerPlayerFactory.idl",
+      "ILppAudioSinkAdapter.idl",
+      "ILppSyncManagerCallback.idl",
+      "ILppSyncManagerAdapter.idl",
+      "ILppAudioSinkCallback.idl",
     ]
 
     branch_protector_ret = "pac_ret"
-
-    language = "c"
+    language = "cpp"
     subsystem_name = "hdf"
-    innerapi_tags = [
-      "chipsetsdk",
-    ]
-    part_name = "drivers_interface_audio"
+    part_name = "drivers_interface_lpplayer"
   }
 }

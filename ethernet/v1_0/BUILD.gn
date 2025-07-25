@@ -10,34 +10,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+ 
 import("//build/config/components/hdi/hdi.gni")
-
+ 
 if (defined(ohos_lite)) {
-  group("libaudio_proxy_5.0") {
+  group("libethernet_proxy_1.0") {
     deps = []
     public_configs = []
   }
 } else {
-  hdi("audio") {
-    module_name = "audio_service"
-
+  hdi("ethernet") {
+    module_name = "ethernet_service"
     sources = [
-      "AudioTypes.idl",
-      "IAudioAdapter.idl",
-      "IAudioCallback.idl",
-      "IAudioCapture.idl",
-      "IAudioManager.idl",
-      "IAudioRender.idl",
+      "IEthernetCallback.idl",
+      "IEthernet.idl",
     ]
-
-    branch_protector_ret = "pac_ret"
-
     language = "c"
+    mode = "ipc"
     subsystem_name = "hdf"
-    innerapi_tags = [
-      "chipsetsdk",
-    ]
-    part_name = "drivers_interface_audio"
+    part_name = "drivers_interface_ethernet"
   }
 }

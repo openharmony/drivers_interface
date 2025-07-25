@@ -2338,6 +2338,20 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_COLOR_RESERVATION_TYPE,
     /**
+     * ohos.ability.camera [static, enum, public]
+     *
+     * camera device property, report current camera control center supported
+     * (i.e. enum: support/unsupport ...)
+     */
+    OHOS_ABILITY_CONTROL_CENTER_SUPPORTED,
+    /**
+     * ohos.ability.camera [static, enum[], public]
+     *
+     * camera device property, report current camera support control center effect type
+     * (i.e. enum[]: [BEAUTY, PORTRAIT] ...)
+     */
+    OHOS_ABILITY_CONTROL_CENTER_EFFECT_TYPE,
+    /**
      * ohos.camera.effectEnd
      *
      * camera effect end
@@ -2620,6 +2634,7 @@ typedef enum camera_format {
     OHOS_CAMERA_FORMAT_HEIC,
     OHOS_CAMERA_FORMAT_DNG_XDRAW,
     OHOS_CAMERA_FORMAT_422_UYVY,
+    OHOS_CAMERA_FORMAT_MJPEG,
     OHOS_CAMERA_FORMAT_IMPLEMENTATION_DEFINED = 0x1000,
 } camera_format_t;
 
@@ -3021,6 +3036,18 @@ typedef enum camera_color_reservation_type {
     OHOS_CAMERA_COLOR_RESERVATION_NONE = 0,
     OHOS_CAMERA_COLOR_RESERVATION_PORTRAIT
 } camera_color_reservation_type_t;
+
+// OHOS_ABILITY_CONTROL_CENTER_SUPPORTED
+enum ControlCenterSupportedType {
+    OHOS_CAMERA_CONTROL_CENTER_NOT_SUPPORTED = 0,
+    OHOS_CAMERA_CONTROL_CENTER_SUPPORTED,
+};
+
+// OHOS_ABILITY_CONTROL_CENTER_EFFECT_TYPE
+enum CameraControlCenterEffectType {
+    OHOS_CAMERA_CONTROL_CENTER_EFFECT_TYPE_BEAUTY = 0,
+    OHOS_CAMERA_CONTROL_CENTER_EFFECT_TYPE_PORTRAIT,
+};
 
 // OHOS_CONTROL_PRERECORD_MODE
 enum CameraPrerecordMode {

@@ -12,32 +12,16 @@
 # limitations under the License.
 
 import("//build/config/components/hdi/hdi.gni")
-
-if (defined(ohos_lite)) {
-  group("libaudio_proxy_5.0") {
-    deps = []
-    public_configs = []
-  }
-} else {
-  hdi("audio") {
-    module_name = "audio_service"
-
-    sources = [
-      "AudioTypes.idl",
-      "IAudioAdapter.idl",
-      "IAudioCallback.idl",
-      "IAudioCapture.idl",
-      "IAudioManager.idl",
-      "IAudioRender.idl",
-    ]
-
-    branch_protector_ret = "pac_ret"
-
-    language = "c"
-    subsystem_name = "hdf"
-    innerapi_tags = [
-      "chipsetsdk",
-    ]
-    part_name = "drivers_interface_audio"
-  }
+hdi("daudioext") {
+  module_name = "daudioext"
+  sources = [
+    "IDAudioCallback.idl",
+    "IDAudioHdfCallback.idl",
+    "IDAudioManager.idl",
+    "Types.idl",
+  ]
+  language = "cpp"
+  root = "ohos.hdi://drivers/interface/"
+  subsystem_name = "hdf"
+  part_name = "drivers_interface_distributed_audio"
 }

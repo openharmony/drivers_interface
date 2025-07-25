@@ -1,0 +1,122 @@
+/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup LowPowerPlayer
+ * @{
+ *
+ * @ @brief Provides unified APIs for media services to access low power player drivers.
+ *
+ * The media service can obtain a low power player driver object or proxy, and then invoke the
+ * API provided by the object or proxy, The module provides APIs for initializing the custom data
+ * and audio and video codecs, setting parameters, and controlling and transferring data.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+
+package ohos.hdi.low_power_player.v1_0;
+
+/**
+ * @brief Defines the callbacks of the lpp sync manager adapter.
+ *
+ * The following callbacks are provided:
+ * - Callback used to report events during Video Playback.
+ * - Callback invoked when the video playback is complete.
+ * - Callback invoked when the first frame of the video is ready.
+ * - Callback invoked when the playback is abnormal.
+ * - Callback invoked when the target frame has been decoded after precise seek.
+ * - Callback invoked when the first frame has been sent and displayed.
+ * The callbacks are registered by using when the adapter is created.
+ */
+
+[callback] interface ILppSyncManagerCallback {
+    /**
+     * @brief Reports error event.
+     *
+     *
+     * @param errorCode Indicates the error code.
+     * @param errorMsg Indicates the error message.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    OnError([in] int errorCode, [in] String errorMsg);
+
+    /**
+     * @brief Reports when the target frame has been decoded after precise seek.
+     *
+     *
+     * @param targetPts Indicates pts of the target frame.
+     * @param isTimeout Indicates  whether the timeout occurs.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    OnTargetArrived([in] long targetPts, [in] boolean isTimeout);
+
+    /**
+     * @brief Reports when the first frame has been sent and displayed.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    OnRenderStarted();
+
+    /**
+     * @brief Reports when the video has been played.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    OnEos();
+    /**
+     * @brief Reports when the first frame of the video is ready.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    OnFirstFrameReady();
+
+    /**
+     * @brief Reports the process message.
+     *
+     *
+     * @param errorCode Indicates the info code.
+     * @param errorMsg Indicates the info message.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    OnInfo([in] int infoCode, [in] String infoMsg);
+}

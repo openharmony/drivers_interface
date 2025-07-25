@@ -1,0 +1,216 @@
+/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup LowPowerPlayer
+ * @{
+ *
+ * @ @brief Provides unified APIs for media services to access low power player drivers.
+ *
+ * The media service can obtain a low power player driver object or proxy, and then invoke the
+ * API provided by the object or proxy, The module provides APIs for initializing the custom data
+ * and audio and video codecs, setting parameters, and controlling and transferring data.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+
+package ohos.hdi.low_power_player.v1_0;
+
+import ohos.hdi.low_power_player.v1_0.ILppAudioSinkCallback;
+
+/**
+ * @brief Defines the APIs for the low power player audio sink adapter.
+ *
+ * The APIs can be used to:
+ * - Creates and controls the hifiAdpter module.
+ * - Provides the channels for the bottom layer to callback data and write data to the bottom layer.
+ * - Supports the anchor update and computing synchronization on core A.
+ * - Obtains the hifiAdapter instance IDs.
+ * For details, see the description of the APIs.
+ */
+
+interface ILppAudioSinkAdapter {
+    /**
+     * @brief Obtains the audio channel Id.
+     *
+     * @param channelId Indicates the hifiAdapter instance IDs.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    GetChannelID([out] unsigned int channelId);
+
+    /**
+     * @brief Starts.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    Start();
+
+    /**
+     * @brief Pauses.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    Pause();
+
+    /**
+     * @brief Resumes.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    Resume();
+
+    /**
+     * @brief Flushs audio data.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    Flush();
+
+    /**
+     * @brief Stops.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    Stop();
+
+    /**
+     * @brief Resets.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    Reset();
+
+    /**
+     * @brief Registers the Callback for lpp audio sink adapter.
+     *
+     *
+     *
+     * @param sinkCallback Indicates the callback to register.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    RegisterCallback([in] ILppAudioSinkCallback sinkCallback);
+
+    /**
+     * @brief Sets the parameter for this component, that is, sends an initialization parameter
+     * structure to the component.
+     *
+     *
+     *
+     * @param parameter Indicates the Key-value pair parameter for configuration item extension.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    SetParameter([in] Map<String, String> parameter);
+
+    /**
+     * @brief Obtains the parameter settings of this component.
+     *
+     *
+     *
+     * @param parameter Indicates the Key-value pair parameter for configuration item extension.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    GetParameter([out] Map<String, String> parameter);
+
+    /**
+     * @brief writes the audio data.
+     *
+     *
+     * @param ptr Indicates the audio data.
+     * @param size Indicates the audio data size.
+     * @param size Indicates size of the audio data that has been written.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    WriteAudioData([in] byte ptr, [in] unsigned int size, [out] unsigned int writtenSize);
+
+    /**
+     * @brief Obtains the current playback progress.
+     *
+     *
+     *
+     * @param currentPts Indicates the current pts.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    GetCurrentTime([out] long currentPts);
+
+    /**
+     * @brief Sets the playback speed.
+     *
+     *
+     *
+     * @param speed Indicates the speed of audio playback.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    SetPlaybackSpeed([in] float speed);
+}

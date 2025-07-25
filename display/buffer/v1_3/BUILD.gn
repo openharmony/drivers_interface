@@ -1,4 +1,4 @@
-# Copyright (c) 2023 Huawei Device Co., Ltd.
+# Copyright (c) 2025 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -16,12 +16,20 @@ import("//build/config/components/hdi/hdi.gni")
 hdi("display_buffer") {
   module_name = "display_buffer"
 
-  sources = [
-    "DisplayBufferType.idl",
-    "IAllocator.idl",
-    "IMapper.idl",
+  proxy_deps = [
+    "//drivers/interface/display/buffer/v1_0:libdisplay_buffer_proxy_1.0",
+    "//drivers/interface/display/buffer/v1_1:libdisplay_buffer_proxy_1.1",
+    "//drivers/interface/display/buffer/v1_2:libdisplay_buffer_proxy_1.2"
+  ]
+  stub_deps = [
+    "//drivers/interface/display/buffer/v1_0:libdisplay_buffer_stub_1.0",
+    "//drivers/interface/display/buffer/v1_1:libdisplay_buffer_stub_1.1",
+    "//drivers/interface/display/buffer/v1_2:libdisplay_buffer_stub_1.2"
   ]
 
+  sources = [
+    "IMapper.idl",
+  ]
   innerapi_tags = [
     "chipsetsdk_indirect",
     "platformsdk_indirect",
@@ -38,18 +46,26 @@ config("libdisplay_buffer_hdi_impl_config") {
   include_dirs = [ "./../" ]
 }
 
-ohos_shared_library("libdisplay_buffer_hdi_impl") {
-  sources = [ "hdi_impl/display_buffer_hdi_impl.cpp" ]
+ohos_shared_library("libdisplay_buffer_hdi_impl_v1_3") {
+  sources = [
+    "../v1_0/hdi_impl/display_buffer_hdi_impl.cpp",
+    "../v1_1/hdi_impl/display_buffer_hdi_impl.cpp",
+    "../v1_2/hdi_impl/display_buffer_hdi_impl.cpp",
+    "./hdi_impl/display_buffer_hdi_impl.cpp",
+  ]
 
   public_configs = [ ":libdisplay_buffer_hdi_impl_config" ]
 
-  deps = [ ":libdisplay_buffer_proxy_1.0" ]
+  deps = [
+    ":libdisplay_buffer_proxy_1.3",
+    "../v1_0:libdisplay_buffer_proxy_1.0",
+    "../v1_1:libdisplay_buffer_proxy_1.1",
+    "../v1_2:libdisplay_buffer_proxy_1.2",
+  ]
 
   external_deps = [
     "c_utils:utils",
     "graphic_surface:buffer_handle",
-    "hdf_core:libhdf_utils",
-    "hdf_core:libhdf_ipc_adapter",
     "hdf_core:libhdi",
     "hdf_core:libpub_utils",
     "hilog:libhilog",

@@ -47,6 +47,7 @@ enum BufferHandleAttrKey {
     ATTRKEY_ACCESS_TYPE = 11,               // value: current data frame mode
     ATTRKEY_FORCE_GLOBAL_ALPHA = 12,        // 0~255, pixel alpha value, default to -1, don't take effect.
     ATTRKEY_VIDEO_DECODER_MV = 13,          // value BlobDataType
+    ATTRKEY_GPU_DIRTY_REGION = 17,          // value: dirty region addr
 
     /* vendor internal extended meta type */
     ATTRKEY_VENDOR_EXT_START = 2048,

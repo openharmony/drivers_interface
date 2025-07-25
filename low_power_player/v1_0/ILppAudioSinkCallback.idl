@@ -1,0 +1,99 @@
+/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup LowPowerPlayer
+ * @{
+ *
+ * @ @brief Provides unified APIs for media services to access low power player drivers.
+ *
+ * The media service can obtain a low power player driver object or proxy, and then invoke the
+ * API provided by the object or proxy, The module provides APIs for initializing the custom data
+ * and audio and video codecs, setting parameters, and controlling and transferring data.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+
+package ohos.hdi.low_power_player.v1_0;
+
+/**
+ * @brief Defines the callbacks of the lpp audio sink adapter.
+ *
+ * The following callbacks are provided:
+ * - Callback used to report events during audio Playback.
+ * - Callback invoked when obtains the compressed audio data.
+ * - Callback invoked when the playback is abnormal.
+ * - Callback invoked when the audio playback is complete.
+ * The callbacks are registered by using when the adapter is created.
+ */
+
+[callback] interface ILppAudioSinkCallback {
+
+    /**
+     * @brief Reports for Obtaining compressed audio data.
+     *
+     *
+     * @param size Indicates the data size.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    OnDataNeeded([in] unsigned int size);
+
+    /**
+     * @brief Reports the error event.
+     *
+     *
+     * @param errorCode Indicates the error code.
+     * @param errorMsg Indicates the error message.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    OnError([in] int errorCode, [in] String errorMsg);
+
+    /**
+     * @brief Reports when the audio has been played.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    OnEos();
+
+    /**
+     * @brief Reports the process message.
+     *
+     *
+     * @param errorCode Indicates the info code.
+     * @param errorMsg Indicates the info message.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    OnInfo([in] int infoCode, [in] String infoMsg);
+}

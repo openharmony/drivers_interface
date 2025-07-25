@@ -1,0 +1,97 @@
+/*
+ * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup LowPowerPlayer
+ * @{
+ *
+ * @ @brief Provides unified APIs for media services to access low power player drivers.
+ *
+ * The media service can obtain a low power player driver object or proxy, and then invoke the
+ * API provided by the object or proxy, The module provides APIs for initializing the custom data
+ * and audio and video codecs, setting parameters, and controlling and transferring data.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+
+package ohos.hdi.low_power_player.v1_0;
+
+import ohos.hdi.low_power_player.v1_0.ILppAudioSinkAdapter;
+import ohos.hdi.low_power_player.v1_0.ILppSyncManagerAdapter;
+
+interface ILowPowerPlayerFactory {
+    /**
+     * @brief Creates a low power player audio and video sync manager adapter.
+     *
+     * 
+     *
+     * @param syncMgrAdapter Indicates the pointer to the sync manager adapter created.
+     * @param syncMgrId Indicates the ID of the adapter created.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    CreateSyncMgr([out] ILppSyncManagerAdapter syncMgrAdapter, [out] unsigned int syncMgrId);
+
+	/**
+     * @brief Destroys a low power player audio and video sync manager adapter.
+     *
+     *
+     *
+     * @param syncMgrId Indicates the ID of the sync manager adapter to destroy.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    DestroySyncMgr([in] unsigned int syncMgrId);
+
+    /**
+     * @brief Creates a low power player audio sink adapter adapter.
+     *
+     * 
+     *
+     * @param audioSinkAdapter Indicates the pointer to the audio sink adapter created.
+     * @param audioSinkId Indicates the ID of the adapter created.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    CreateAudioSink([out] ILppAudioSinkAdapter audioSinkAdapter, [out] unsigned int audioSinkId);
+
+	/**
+     * @brief Destroys a low power player audio sink adapter adapter.
+     *
+     *
+     *
+     * @param audioSinkId Indicates the ID of the audio sink adapter to destroy.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    DestroyAudioSink([in] unsigned int audioSinkId);
+} 

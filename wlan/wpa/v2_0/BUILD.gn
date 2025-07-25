@@ -27,6 +27,11 @@ if (defined(ohos_lite)) {
       "WpaTypes.idl",
     ]
 
+    install_images = [
+      system_base_dir,
+      updater_base_dir,
+    ]
+
     language = "c"
     subsystem_name = "hdf"
     part_name = "drivers_interface_wlan"
