@@ -1,0 +1,73 @@
+# Copyright (c) 2025 Huawei Device Co., Ltd.
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("//build/config/components/hdi/hdi.gni")
+
+hdi("display_composer") {
+  module_name = "display_composer"
+
+  sources = [
+    "DisplayComposerType.idl",
+    "IDisplayComposer.idl",
+    "IHwcEventCallback.idl",
+  ]
+
+  proxy_deps = [ "../v1_0:libdisplay_composer_proxy_1.0",
+                 "../v1_1:libdisplay_composer_proxy_1.1",
+                 "../v1_2:libdisplay_composer_proxy_1.2",
+                 "../hdifd_parcelable:libhdifd_parcelable" ]
+  
+  stub_deps = [ "../v1_0:libdisplay_composer_stub_1.0",
+                "../v1_1:libdisplay_composer_stub_1.1",
+                "../v1_2:libdisplay_composer_stub_1.2",
+                "../hdifd_parcelable:libhdifd_parcelable" ]
+                
+  language = "cpp"
+  subsystem_name = "hdf"
+  part_name = "drivers_interface_display"
+}
+
+config("libdisplay_composer_hdi_impl_config") {
+  include_dirs = [
+    "../",
+    "../hdifd_parcelable",
+  ]
+}
+
+ohos_shared_library("libdisplay_composer_hdi_impl_1.3") {
+  sources = [ "./hdi_impl/display_composer_interface.cpp" ]
+
+  public_configs = [ ":libdisplay_composer_hdi_impl_config" ]
+
+  deps = [
+    ":libdisplay_composer_proxy_1.3",
+    "../hdifd_parcelable:libhdifd_parcelable",
+    "../v1_2:libdisplay_composer_proxy_1.2",
+  ]
+
+  external_deps = [
+    "c_utils:utils",
+    "graphic_surface:buffer_handle",
+    "hdf_core:libhdf_ipc_adapter",
+    "hdf_core:libhdi",
+    "hdf_core:libpub_utils",
+    "hilog:libhilog",
+    "hitrace:hitrace_meter",
+    "init:libbegetutil",
+    "ipc:ipc_single",
+  ]
+
+  install_images = [ "system" ]
+  subsystem_name = "hdf"
+  part_name = "drivers_interface_display"
+}

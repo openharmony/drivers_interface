@@ -22,6 +22,7 @@
 #include "v1_0/include/idisplay_composer_interface.h"
 #include "v1_0/display_composer_type.h"
 #include "v1_2/display_composer_type.h"
+#include "v1_3/display_composer_type.h"
 #include "v1_1/imode_callback.h"
 #include "v1_1/iseamless_change_callback.h"
 
@@ -32,6 +33,7 @@ namespace Composer {
 using namespace OHOS::HDI::Display::Composer::V1_0;
 using namespace OHOS::HDI::Display::Composer::V1_1;
 using namespace OHOS::HDI::Display::Composer::V1_2;
+using namespace OHOS::HDI::Display::Composer::V1_3;
 struct DisplayComposerVdiAdapter {
     int32_t (*LoadVdiImpl)();
     int32_t (*DestroyVdiImpl)();
@@ -97,6 +99,7 @@ struct DisplayComposerVdiAdapter {
     int32_t (*ClearDisplayClientBuffer)(uint32_t devId);
     int32_t (*ClearLayerBuffer)(uint32_t devId, uint32_t layerId);
     int32_t (*GetDisplayIdentificationData)(uint32_t devId, uint8_t& portId, std::vector<uint8_t>& edidData);
+    int32_t (*RegHwcEventCallback)(HwcEventCallback cb, void *data);
 };
 
 using LoadVdiImplFunc = int32_t (*)();
@@ -165,6 +168,7 @@ using FastPresentFunc = int32_t (*)(uint32_t devId, const PresentParam& param,
 using ClearDisplayClientBufferFunc = int32_t (*)(uint32_t devId);
 using ClearLayerBufferFunc = int32_t (*)(uint32_t devId, uint32_t layerId);
 using GetDisplayIdentificationDataFunc = int32_t (*)(uint32_t devId, uint8_t& portId, std::vector<uint8_t>& edidData);
+using RegHwcEventCallbackFunc = int32_t (*)(HwcEventCallback cb, void *data);
 
 
 } // namespace Composer
