@@ -36,5 +36,6 @@ if (defined(ohos_lite)) {
     language = "c"
     subsystem_name = "hdf"
     part_name = "drivers_interface_audio"
+    innerapi_tags = ["chipsetsdk"]
   }
 }
