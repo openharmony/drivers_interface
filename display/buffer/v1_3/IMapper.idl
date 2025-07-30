@@ -43,5 +43,16 @@ interface IMapper extends ohos.hdi.display.buffer.v1_2.IMapper {
      * @version 1.0
      */
     ReAllocMem([in] struct AllocInfo info, [in] NativeBuffer inHandle, [out] NativeBuffer outHandle);
+    /**
+     * @brief the function to passthrough 
+     *
+     * @param info describs the buffer to be alloced
+     * @param handle the allocated buffer handle
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 6.0
+     * @version 1.3
+     */
     IsSupportAllocPassthrough([in] struct AllocInfo info);
 }
