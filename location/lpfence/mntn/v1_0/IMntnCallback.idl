@@ -67,6 +67,6 @@ import ohos.hdi.location.lpfence.mntn.v1_0.MntnTypes;
      *
      @since 6.0
      */
-    OnLpfenceMntnRequestCb([in] string[] mntnInfo);
+    OnLpfenceMntnRequestCb([in] String[] mntnInfo);
 }
 /** @} */
