@@ -23,6 +23,7 @@ if (defined(ohos_lite)) {
     module_name = "low_power_player_service"
 
     sources = [
+      "ILppTypes.idl",
       "ILowPowerPlayerFactory.idl",
       "ILppAudioSinkAdapter.idl",
       "ILppSyncManagerCallback.idl",

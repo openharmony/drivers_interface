@@ -1,0 +1,97 @@
+/*
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @brief get the lpplayer supported capabilities.
+
+ * @since 6.0
+ * @version 1.0
+ */
+
+/**
+ * @addtogroup LowPowerPlayer
+ * @{
+ *
+ * @ @brief Provides unified APIs for media services to access low power player drivers.
+ *
+ * The media service can obtain a low power player driver object or proxy, and then invoke the
+ * API provided by the object or proxy, The module provides APIs for initializing the custom data
+ * and audio and video codecs, setting parameters, and controlling and transferring data.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+
+/**
+ * @brief Defines the path for the package of the LowPowerPlayer module APIs.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+package ohos.hdi.low_power_player.v1_0;
+
+/**
+ * @brief Enumerates the types of HDR.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+enum HDRType {
+    HDR10,
+    HDR10Plus,
+    HDRVivid
+};
+
+/**
+ * @brief Defines the Video capabilities.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+struct VideoMimeCap {
+    String mime;                              /** video/avc, video/hevc */
+    unsigned int minWidth;
+    unsigned int minHeight;
+    unsigned int maxWidth;
+    unsigned int maxHeight;
+    HDRType[] supportHDRTypes;                /** HDR10, HDR10+, HDRVivid */
+    unsigned int maxPixelPerSecond;
+    unsigned int maxInstance;
+    boolean isSupportDRM;
+};
+
+/**
+ * @brief Defines the Audio capabilities.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+struct AudioMimeCap {
+    String mime;                              /** AAC, Flac, Vorbis, MPEG, G711mu, AMR(amrnb, amrwb), APE */
+    unsigned int sampleRate;
+    unsigned int channelCount;
+};
+
+/**
+ * @brief Defines the LowPowerPlayer capabilities.
+ *
+ * @since 6.0
+ * @version 1.0
+ */
+struct LppAVCap {
+    unsigned int maxInstance;
+    struct VideoMimeCap[] videoCap;           /** videoCap */
+    struct AudioMimeCap[] audioCap;           /** audioCap */
+};

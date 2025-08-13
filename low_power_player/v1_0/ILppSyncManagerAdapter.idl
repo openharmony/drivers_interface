@@ -166,7 +166,7 @@ interface ILppSyncManagerAdapter {
      * @since 6.0
      * @version 1.0
      */
-    SetTargetStartFrame([in] unsigned long framePts, [in] unsigned int timeoutMs);
+    SetTargetStartFrame([in] long framePts, [in] unsigned int timeoutMs);
 
     /**
      * @brief Sets the playback speed.
@@ -243,7 +243,7 @@ interface ILppSyncManagerAdapter {
      * @since 6.0
      * @version 1.0
      */
-    UpdateTimeAnchor([in] unsigned long anchorPts, [in] unsigned long anchorClk);
+    UpdateTimeAnchor([in] long anchorPts, [in] unsigned long anchorClk);
 
     /**
      * @brief Binds the output buffers of the decoder.
@@ -300,4 +300,19 @@ interface ILppSyncManagerAdapter {
      * @version 1.0
      */
     SetTunnelId([in] unsigned long tunnelId);
+
+    /**
+     * @brief Gets the latest pts.
+     *
+     *
+     *
+     * @param pts Indicates the presentation time stamp.
+     *
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
+     *
+     * @since 6.0
+     * @version 1.0
+     */
+    GetLatestPts([out] long pts);
 }
