@@ -36,7 +36,7 @@ enum BufferHandleAttrKey : ohos.hdi.display.graphic.common.v2_1.BufferHandleAttr
  * @brief ExternalLowDelayInfo of [value] in GetMetadata/SetMetaData, to trans metadata.
  *
  * @since 6.0
- * @version 2.2
+ * @version 1.0
  */
 struct ExternalLowDelayInfo {
     unsigned int enhanceLayerFlag;                  // enhance layer flag for lowdelay dual420
