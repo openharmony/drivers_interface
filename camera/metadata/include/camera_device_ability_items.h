@@ -590,6 +590,20 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_ROTATE_ANGLE,
     /**
+     * ohos.ability.sensorOrientationVariable [static, int32[], public]
+     *
+     * camera device property, query sensor orientation whether change with fold status
+     * (i.e. int32 ...)
+     */
+    OHOS_ABILITY_SENSOR_ORIENTATION_VARIABLE,
+    /**
+     * ohos.fold.state.sensor.orientation.map [static, int32, public]
+     *
+     * camera device property, query sensor orientation of all fold state
+     * (i.e. int32 ...)
+     */
+    OHOS_FOLD_STATE_SENSOR_ORIENTATION_MAP,
+    /**
      * ohos.camera.sensorEnd
      *
      * camera sensor endChar
