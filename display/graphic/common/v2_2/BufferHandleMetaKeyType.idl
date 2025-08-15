@@ -23,10 +23,6 @@
 package ohos.hdi.display.graphic.common.v2_2;
 import ohos.hdi.display.graphic.common.v2_1.BufferHandleMetaKeyType;
 
-/**
- * @ brief Enumerates buffer handle attribution keys.
- *
- */
 enum BufferHandleAttrKey : ohos.hdi.display.graphic.common.v2_1.BufferHandleAttrKey {
     ATTRKEY_VIDEO_AI_HDR_LUT = 4099,                // value: grid lut for video aihdr
     ATTRKEY_EXTERNAL_LOWDELAY_INFO = 4100,          // value: ExternalLowDelayInfo
