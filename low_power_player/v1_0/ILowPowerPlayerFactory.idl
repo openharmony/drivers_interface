@@ -31,6 +31,7 @@ package ohos.hdi.low_power_player.v1_0;
 
 import ohos.hdi.low_power_player.v1_0.ILppAudioSinkAdapter;
 import ohos.hdi.low_power_player.v1_0.ILppSyncManagerAdapter;
+import ohos.hdi.low_power_player.v1_0.ILppTypes;
 
 interface ILowPowerPlayerFactory {
     /**
@@ -47,22 +48,7 @@ interface ILowPowerPlayerFactory {
      * @since 6.0
      * @version 1.0
      */
-    CreateSyncMgr([out] ILppSyncManagerAdapter syncMgrAdapter, [out] unsigned int syncMgrId);
-
-	/**
-     * @brief Destroys a low power player audio and video sync manager adapter.
-     *
-     *
-     *
-     * @param syncMgrId Indicates the ID of the sync manager adapter to destroy.
-     *
-     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
-     * @return Returns <b>HDF_FAILURE</b> if the execution fails.
-     *
-     * @since 6.0
-     * @version 1.0
-     */
-    DestroySyncMgr([in] unsigned int syncMgrId);
+    CreateSyncMgr([out] ILppSyncManagerAdapter syncMgrAdapter);
 
     /**
      * @brief Creates a low power player audio sink adapter adapter.
@@ -78,14 +64,14 @@ interface ILowPowerPlayerFactory {
      * @since 6.0
      * @version 1.0
      */
-    CreateAudioSink([out] ILppAudioSinkAdapter audioSinkAdapter, [out] unsigned int audioSinkId);
+    CreateAudioSink([out] ILppAudioSinkAdapter audioSinkAdapter);
 
-	/**
-     * @brief Destroys a low power player audio sink adapter adapter.
+    /**
+     * @brief Gets the capabilities of lpplayer.
      *
      *
      *
-     * @param audioSinkId Indicates the ID of the audio sink adapter to destroy.
+     * @param cap Indicates the capabilities of lpplayer.
      *
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      * @return Returns <b>HDF_FAILURE</b> if the execution fails.
@@ -93,5 +79,5 @@ interface ILowPowerPlayerFactory {
      * @since 6.0
      * @version 1.0
      */
-    DestroyAudioSink([in] unsigned int audioSinkId);
+    GetAVCapability([out] struct LppAVCap avCap);
 } 
