@@ -88,6 +88,55 @@ public:
         return ToDispErrCode(hdi_v1_3_->RegHwcEventCallback(this));
     }
 
+    virtual int32_t GetSupportLayerType(uint32_t devId, std::vector<V1_0::LayerType>& types) override
+    {
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_3_);
+        return ToDispErrCode(hdi_v1_3_->GetSupportLayerType(devId, types));
+    }
+
+    virtual int32_t SetTunnelLayerId(uint32_t devId, uint32_t layerId, uint64_t tunnelId) override
+    {
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_3_);
+        return ToDispErrCode(hdi_v1_3_->SetTunnelLayerId(devId, layerId, tunnelId));
+    }
+
+    virtual int32_t SetTunnelLayerProperty(uint32_t devId, uint32_t layerId, uint32_t property) override
+    {
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_3_);
+        return ToDispErrCode(hdi_v1_3_->SetTunnelLayerProperty(devId, layerId, property));
+    }
+
+    virtual int32_t SetTunnelLayerPosition(uint32_t devId, uint64_t tunnelId, int32_t x, int32_t y) override
+    {
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_3_);
+        return ToDispErrCode(hdi_v1_3_->SetTunnelLayerPosition(devId, tunnelId, x, y));
+    }
+
+    virtual int32_t SetTunnelLayerBuffer(uint32_t devId, uint64_t tunnelId,
+        const BufferHandle* inHandle, const int32_t acquireFence) override
+    {
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_3_);
+        COMPOSER_CHECK_NULLPTR_RETURN(inHandle);
+        sptr<NativeBuffer> hdiBuffer = new NativeBuffer(inHandle);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdiBuffer);
+        sptr<HdifdParcelable> hdiFence(new HdifdParcelable);
+        COMPOSER_CHECK_NULLPTR_RETURN(hdiFence);
+        hdiFence->Init(acquireFence);
+        return ToDispErrCode(hdi_v1_3_->SetTunnelLayerBuffer(devId, tunnelId, hdiBuffer, hdiFence));
+    }
+
+    virtual int32_t CommitTunnelLayer(uint32_t devId, uint64_t tunnelId, int32_t& releaseFence) override
+    {
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_3_);
+        sptr<HdifdParcelable> hdiFence;
+        int32_t ret = ToDispErrCode(hdi_v1_3_->CommitTunnelLayer(devId, tunnelId, hdiFence));
+        if (ret != DISPLAY_SUCCESS) {
+            return ret;
+        }
+        COMPOSER_CHECK_NULLPTR_RETURN(hdiFence);
+        releaseFence = hdiFence->Move();
+        return DISPLAY_SUCCESS;
+    }
 protected:
     using BaseType1_2 = V1_2::DisplayComposerHdiImpl<Interface, CompHdi, CmdReq>;
     using BaseType1_2::WAIT_TIME_INTERVAL;
