@@ -402,12 +402,14 @@ bool MetadataUtils::WriteMetadata(const camera_metadata_item_t &item, MessagePar
     return bRet;
 }
 
+static int32_t 
+
 std::string MetadataUtils::EncodeToString(std::shared_ptr<CameraMetadata> metadata)
 {
     int32_t ret;
-    const int32_t headerLength = sizeof(common_metadata_header_t);
-    const int32_t itemLen = sizeof(camera_metadata_item_entry_t);
-    const int32_t itemFixedLen = static_cast<int32_t>(offsetof(camera_metadata_item_entry_t, data));
+    const uint32_t headerLength = sizeof(common_metadata_header_t);
+    const uint32_t itemLen = sizeof(camera_metadata_item_entry_t);
+    const uint32_t itemFixedLen = offsetof(camera_metadata_item_entry_t, data);
 
     if (metadata == nullptr || metadata->get() == nullptr) {
         METADATA_ERR_LOG("MetadataUtils::EncodeToString Metadata is invalid");
@@ -415,7 +417,7 @@ std::string MetadataUtils::EncodeToString(std::shared_ptr<CameraMetadata> metada
     }
 
     common_metadata_header_t *meta = metadata->get();
-    int32_t encodeDataLen = static_cast<int32_t>(headerLength + (itemLen * meta->item_count) + meta->data_count);
+    uint32_t encodeDataLen = headerLength + (itemLen * meta->item_count) + meta->data_count;
     std::string s(encodeDataLen, '\0');
     char *encodeData = &s[0];
     ret = memcpy_s(encodeData, encodeDataLen, meta, headerLength);
