@@ -415,7 +415,7 @@ std::string MetadataUtils::EncodeToString(std::shared_ptr<CameraMetadata> metada
     }
 
     common_metadata_header_t *meta = metadata->get();
-    int32_t encodeDataLen = headerLength + (itemLen * meta->item_count) + meta->data_count;
+    int32_t encodeDataLen = static_cast<int32_t>(headerLength + (itemLen * meta->item_count) + meta->data_count);
     std::string s(encodeDataLen, '\0');
     char *encodeData = &s[0];
     ret = memcpy_s(encodeData, encodeDataLen, meta, headerLength);
