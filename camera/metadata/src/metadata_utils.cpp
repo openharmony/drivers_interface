@@ -420,7 +420,7 @@ std::string MetadataUtils::EncodeToString(std::shared_ptr<CameraMetadata> metada
 
     common_metadata_header_t *meta = metadata->get();
     METADATA_CHECK_ERROR_RETURN_RET_LOG(
-            UINT32_MAX / itemLen <= meta->item_count, {}, "UINT32_MAX / itemLen <= meta->item_count");
+        UINT32_MAX / itemLen <= meta->item_count, {}, "UINT32_MAX / itemLen <= meta->item_count");
     uint32_t encodeDataLen = headerLength + (itemLen * meta->item_count) + meta->data_count;
     std::string s(encodeDataLen, '\0');
     char *encodeData = &s[0];
