@@ -406,8 +406,6 @@ bool MetadataUtils::WriteMetadata(const camera_metadata_item_t &item, MessagePar
     return bRet;
 }
 
-static int32_t 
-
 std::string MetadataUtils::EncodeToString(std::shared_ptr<CameraMetadata> metadata)
 {
     int32_t ret;
