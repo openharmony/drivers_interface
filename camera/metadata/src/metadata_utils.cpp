@@ -24,6 +24,10 @@ if (cond) { \
     return {}; \
 }
 
+#ifndef UINT32_MAX
+#define UINT32_MAX             (4294967295U)
+#endif
+
 namespace OHOS::Camera {
 void MetadataUtils::WriteMetadataDataToVec(const camera_metadata_item_t &entry, std::vector<uint8_t>& cameraAbility)
 {
@@ -405,9 +409,9 @@ bool MetadataUtils::WriteMetadata(const camera_metadata_item_t &item, MessagePar
 std::string MetadataUtils::EncodeToString(std::shared_ptr<CameraMetadata> metadata)
 {
     int32_t ret;
-    const int32_t headerLength = sizeof(common_metadata_header_t);
-    const int32_t itemLen = sizeof(camera_metadata_item_entry_t);
-    const int32_t itemFixedLen = static_cast<int32_t>(offsetof(camera_metadata_item_entry_t, data));
+    const uint32_t headerLength = sizeof(common_metadata_header_t);
+    const uint32_t itemLen = sizeof(camera_metadata_item_entry_t);
+    const uint32_t itemFixedLen = offsetof(camera_metadata_item_entry_t, data);
 
     if (metadata == nullptr || metadata->get() == nullptr) {
         METADATA_ERR_LOG("MetadataUtils::EncodeToString Metadata is invalid");
@@ -415,7 +419,9 @@ std::string MetadataUtils::EncodeToString(std::shared_ptr<CameraMetadata> metada
     }
 
     common_metadata_header_t *meta = metadata->get();
-    int32_t encodeDataLen = headerLength + (itemLen * meta->item_count) + meta->data_count;
+    METADATA_CHECK_ERROR_RETURN_RET_LOG(
+        UINT32_MAX / itemLen <= meta->item_count, {}, "UINT32_MAX / itemLen <= meta->item_count");
+    uint32_t encodeDataLen = headerLength + (itemLen * meta->item_count) + meta->data_count;
     std::string s(encodeDataLen, '\0');
     char *encodeData = &s[0];
     ret = memcpy_s(encodeData, encodeDataLen, meta, headerLength);
@@ -431,8 +437,12 @@ std::string MetadataUtils::EncodeToString(std::shared_ptr<CameraMetadata> metada
         METADATA_CHECK_ERROR_RETURN_RET_LOG(
             ret != EOK, {}, "MetadataUtils::EncodeToString Failed to copy memory for item fixed fields");
         encodeData += itemFixedLen;
+        METADATA_CHECK_ERROR_RETURN_RET_LOG(
+            encodeDataLen <= itemFixedLen, {}, "encodeDataLen <= itemFixedLen");
         encodeDataLen -= itemFixedLen;
-        int32_t dataLen = itemLen - itemFixedLen;
+        METADATA_CHECK_ERROR_RETURN_RET_LOG(
+            itemLen < itemFixedLen, {}, "itemLen <= itemFixedLen");
+        uint32_t dataLen = itemLen - itemFixedLen;
         METADATA_CHECK_ERROR_RETURN_RET_LOG(
             item == nullptr, {}, "MetadataUtils::EncodeToString Failed, item is nullptr");
         ret = memcpy_s(encodeData, encodeDataLen,  &(item->data), dataLen);
