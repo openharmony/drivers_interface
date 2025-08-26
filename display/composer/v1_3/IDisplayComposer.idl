@@ -96,7 +96,7 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_2.IDisplayCompos
      *
      * @param devId Indicates the ID of the display device.
      * @param tunnelId Indicates the ID of the tunnel layer.
-     * @param bufferAddr Indicates buffer address.
+     * @param inHandle Indicates layer buffer.
      * @param acquireFence Indicates buffer fence.
      *
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined
