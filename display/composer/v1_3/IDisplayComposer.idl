@@ -34,4 +34,89 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_2.IDisplayCompos
      * @version 1.0
      */
      RegHwcEventCallback([in] IHwcEventCallback cb);
+
+     /**
+     * @brief returns the list of supported layer types
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param types Indicates the supported layer types
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 6.0
+     * @version 1.0
+     */
+     GetSupportLayerType([in] unsigned int devId, [out] struct LayerType[] types);
+
+     /**
+     * @brief Set TunnelId for the tunnel layer
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param layerId Indicates the ID of the layer to be operated on.
+     * @param tunnelId Indicates the ID of the tunnel layer.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 6.0
+     * @version 1.0
+     */
+     SetTunnelLayerId([in] unsigned int devId, [in] unsigned int layerId, [in] unsigned long tunnelId);
+
+     /**
+     * @brief Set Tunnel property for the tunnel layer
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param layerId Indicates the ID of the layer to be operated on.
+     * @param property Indicates the property of the tunnel layer.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 6.0
+     * @version 1.0
+     */
+     SetTunnelLayerProperty([in] unsigned int devId, [in] unsigned int layerId, [in] unsigned int property);
+
+     /**
+     * @brief Set position parameter for for the tunnel layer.
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param tunnelId Indicates the ID of the tunnel layer.
+     * @param x Indicates coordinate.
+     * @param y Indicates coordinate.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 6.0
+     * @version 1.0
+     */
+     SetTunnelLayerPosition([in] unsigned int devId, [in] unsigned long tunnelId, [in] int x, [in] int y);
+
+     /**
+     * @brief Set layer buffer address for the tunnel layer.
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param tunnelId Indicates the ID of the tunnel layer.
+     * @param inHandle Indicates layer buffer.
+     * @param acquireFence Indicates buffer fence.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 6.0
+     * @version 1.0
+     */
+     SetTunnelLayerBuffer([in] unsigned int devId, [in] unsigned long tunnelId, [in] NativeBuffer inHandle, [in] HdifdParcelable acquireFence);
+
+     /**
+     * @brief slave tunnel commit tunnel layer
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param tunnelId Indicates the ID of the layer to be operated on.
+     * @param releaseFence Indicates release buffer fence.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 6.0
+     * @version 1.0
+     */
+     CommitTunnelLayer([in] unsigned int devId, [in] unsigned long tunnelId, [out] HdifdParcelable releaseFence);
 }

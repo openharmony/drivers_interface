@@ -20,6 +20,8 @@
 #include <string>
 #include "base/buffer_handle.h"
 #include "v1_0/include/idisplay_composer_interface.h"
+#include "v1_2/include/idisplay_composer_interface.h"
+#include "v1_3/include/idisplay_composer_interface.h"
 #include "v1_0/display_composer_type.h"
 #include "v1_2/display_composer_type.h"
 #include "v1_3/display_composer_type.h"
@@ -100,6 +102,13 @@ struct DisplayComposerVdiAdapter {
     int32_t (*ClearLayerBuffer)(uint32_t devId, uint32_t layerId);
     int32_t (*GetDisplayIdentificationData)(uint32_t devId, uint8_t& portId, std::vector<uint8_t>& edidData);
     int32_t (*RegHwcEventCallback)(HwcEventCallback cb, void *data);
+    int32_t (*GetSupportLayerType)(uint32_t devId, std::vector<V1_0::LayerType>& types);
+    int32_t (*SetTunnelLayerId)(uint32_t devId, uint32_t layerId, uint64_t tunnelId);
+    int32_t (*SetTunnelLayerProperty)(uint32_t devId, uint32_t layerId, uint32_t property);
+    int32_t (*SetTunnelLayerPosition)(uint32_t devId, uint64_t tunnelId, int32_t x, int32_t y);
+    int32_t (*SetTunnelLayerBuffer)(uint32_t devId, uint64_t tunnelId,
+        const BufferHandle* inHandle, const int32_t acquireFence);
+    int32_t (*CommitTunnelLayer)(uint32_t devId, uint64_t tunnelId, int32_t& releaseFence);
 };
 
 using LoadVdiImplFunc = int32_t (*)();
@@ -169,7 +178,13 @@ using ClearDisplayClientBufferFunc = int32_t (*)(uint32_t devId);
 using ClearLayerBufferFunc = int32_t (*)(uint32_t devId, uint32_t layerId);
 using GetDisplayIdentificationDataFunc = int32_t (*)(uint32_t devId, uint8_t& portId, std::vector<uint8_t>& edidData);
 using RegHwcEventCallbackFunc = int32_t (*)(HwcEventCallback cb, void *data);
-
+using GetSupportLayerTypeFunc = int32_t (*)(uint32_t devId, std::vector<V1_0::LayerType>& types);
+using SetTunnelLayerIdFunc = int32_t (*)(uint32_t devId, uint32_t layerId, uint64_t tunnelId);
+using SetTunnelLayerPropertyFunc = int32_t (*)(uint32_t devId, uint32_t layerId, uint32_t property);
+using SetTunnelLayerPositionFunc = int32_t (*)(uint32_t devId, uint64_t tunnelId, int32_t x, int32_t y);
+using SetTunnelLayerBufferFunc = int32_t (*)(uint32_t devId, uint64_t tunnelId,
+    const BufferHandle* inHandle, const int32_t acquireFence);
+using CommitTunnelLayerFunc = int32_t (*)(uint32_t devId, uint64_t tunnelId, int32_t& releaseFence);
 
 } // namespace Composer
 } // namespace Display
