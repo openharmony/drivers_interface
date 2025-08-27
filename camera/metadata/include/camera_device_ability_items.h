@@ -1150,6 +1150,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_QUALITY_PRIORITIZATION,
     /**
+     * ohos.control.systemCapture [static, enum, public]
+     *
+     * camera device property, set current camera device system application capture
+     * (i.e. enum: 0-false/1-true ...)
+     */
+    OHOS_CONTROL_SYSTEM_CAPTURE,
+    /**
      * ohos.device.controlEnd
      *
      * device controlEnd
@@ -1634,6 +1641,13 @@ typedef enum camera_device_metadata_tag {
      * (i.e. uint8: 0-false/1-true ...)
      */
     OHOS_ABILITY_ROTATION_IN_IPS_SUPPORTED,
+    /**
+     * ohos.control.delayAlloc [static, uint8, public]
+     *
+     * camera device property, whether delay alloc.
+     * (i.e. uint8: 0-false/1-true ...)
+     */
+    OHOS_CONTROL_DELAY_ALLOC,
     /**
      * ohos.ability.prerecord [static, int32[], public]
      *
