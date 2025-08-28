@@ -31,6 +31,15 @@ package ohos.hdi.audio.v1_0;
 
 import ohos.hdi.audio.v1_0.AudioTypes;
 
+/**
+ * @brief Called when an event defined in {@link AudioCallbackType} occurs.
+ *
+ * @param AudioCallbackType Indicates the occurred event that triggers this callback.
+ * @param reserved Indicates the pointer to a reserved field.
+ * @param cookie Indicates the pointer to the cookie for data transmission.
+ * @return Returns <b>0</b> if the callback is successfully executed; returns a negative value otherwise.
+ * @see RegCallback
+ */
 [callback] interface IAudioCallback {
 /**
  * @brief Called when an event defined in {@link AudioCallbackType} occurs.

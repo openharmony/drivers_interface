@@ -10,9 +10,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+ 
 import("//build/config/components/hdi/hdi.gni")
-
+ 
 if (defined(ohos_lite)) {
   group("libaudio_proxy_5.0") {
     deps = []
@@ -21,7 +21,7 @@ if (defined(ohos_lite)) {
 } else {
   hdi("audio") {
     module_name = "audio_service"
-
+ 
     sources = [
       "AudioTypes.idl",
       "IAudioAdapter.idl",
@@ -30,9 +30,9 @@ if (defined(ohos_lite)) {
       "IAudioManager.idl",
       "IAudioRender.idl",
     ]
-
+ 
     branch_protector_ret = "pac_ret"
-
+ 
     language = "c"
     subsystem_name = "hdf"
     innerapi_tags = [
