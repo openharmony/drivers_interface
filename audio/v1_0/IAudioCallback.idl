@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2025 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -31,6 +31,15 @@ package ohos.hdi.audio.v1_0;
 
 import ohos.hdi.audio.v1_0.AudioTypes;
 
+/**
+ * @brief Called when an event defined in {@link AudioCallbackType} occurs.
+ *
+ * @param AudioCallbackType Indicates the occurred event that triggers this callback.
+ * @param reserved Indicates the pointer to a reserved field.
+ * @param cookie Indicates the pointer to the cookie for data transmission.
+ * @return Returns <b>0</b> if the callback is successfully executed; returns a negative value otherwise.
+ * @see RegCallback
+ */
 [callback] interface IAudioCallback {
 /**
  * @brief Called when an event defined in {@link AudioCallbackType} occurs.
