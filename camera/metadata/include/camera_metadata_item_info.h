@@ -299,6 +299,8 @@ static item_info_t g_ohosCameraControl[OHOS_DEVICE_CONTROL_END - OHOS_DEVICE_CON
         OHOS_DEVICE_CONTROL_START] = {"sunBlockBlendColor", META_TYPE_BYTE, 1},
     [OHOS_CONTROL_QUALITY_PRIORITIZATION -
         OHOS_DEVICE_CONTROL_START] = {"qualityPrioritization", META_TYPE_BYTE, 1},
+    [OHOS_CONTROL_SYSTEM_CAPTURE -
+        OHOS_DEVICE_CONTROL_START] = {"cameraControlSystemCapture", META_TYPE_BYTE, 1},
 };
 
 static item_info_t g_ohosDeviceExposure[OHOS_DEVICE_EXPOSURE_END - OHOS_DEVICE_EXPOSURE_START] = {
@@ -403,6 +405,8 @@ static item_info_t g_ohosStreamAbility[OHOS_STREAM_ABILITY_END - OHOS_STREAM_ABI
         OHOS_STREAM_ABILITY_START] = {"offlineControlValue", META_TYPE_BYTE, -1},
     [OHOS_ABILITY_ROTATION_IN_IPS_SUPPORTED -
         OHOS_STREAM_ABILITY_START] = {"rotationInIpsSupported", META_TYPE_BYTE, 1},
+    [OHOS_CONTROL_DELAY_ALLOC -
+        OHOS_STREAM_ABILITY_START] = {"delayAlloc", META_TYPE_BYTE, 1},
 };
  
 static item_info_t g_ohosStreamControl[OHOS_STREAM_CONTROL_END - OHOS_STREAM_CONTROL_START] = {
