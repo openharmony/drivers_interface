@@ -30,6 +30,7 @@
 
 package ohos.hdi.usb.v2_0;
 
+import ohos.hdi.usb.v2_0.UsbTypes;
 import ohos.hdi.usb.v2_0.IUsbdSubscriber;
 
 interface IUsbDeviceInterface {
@@ -108,4 +109,32 @@ interface IUsbDeviceInterface {
      * @version 1.0
      */
     UnbindUsbdDeviceSubscriber([in] IUsbdSubscriber subscriber);
+
+    /* *
+     * @brief Manage the authorization of the USB device.
+     *
+     * @param devNum Indicates the bus number of the USB device.
+     * @param devAddr Indicates the USB device address.
+     * @param authorized Indicates whether to authorize the USB device.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
+     * @since 6.0
+     * @version 1.0
+     */
+    UsbDeviceAuthorize([in] unsigned char busNum, [in] unsigned char devAddr, [in] boolean authorized);
+    
+    /* *
+     * @brief Manage the authorization of the interface of the USB device.
+     *
+     * @param dev Indicates the USB device.
+     * @param configId Indicates the config ID of the target interface.
+     * @param interfaceId Indicates the ID of the target interface.
+     * @param authorized Indicates whether to authorize the interface.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns a non-0 value if the operation fails.
+     * @since 6.0
+     * @version 1.0
+     */
+    UsbInterfaceAuthorize([in] struct UsbDev dev, [in] unsigned char configId, [in] unsigned char interfaceId, [in] boolean authorized);
+
 }
