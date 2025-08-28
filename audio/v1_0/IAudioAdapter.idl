@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2025 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2023 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -51,6 +51,7 @@ interface IAudioAdapter {
      * If the initialization is not complete, wait for a while (for example, 100 ms) and perform the check again
      * until the port initialization is complete.
      *
+     * @param adapter Indicates the pointer to the audio adapter to operate.
      * @return Returns <b>0</b> if the initialization is successful; returns a negative value otherwise.
      */
     InitAllPorts();
@@ -75,7 +76,8 @@ interface IAudioAdapter {
      *
      * @attention Do not destroy the object during audio rendering.
      *
-     * @param renderId Indicates the pointer to the <b>IAudioRender</b> object to operate.
+     * @param adapter Indicates the pointer to the audio adapter to operate.
+     * @param render Indicates the pointer to the <b>IAudioRender</b> object to operate.
      * @return Returns <b>0</b> if the <b>IAudioRender</b> object is destroyed; returns a negative value otherwise.
      * @see CreateRender
      */
@@ -101,7 +103,8 @@ interface IAudioAdapter {
      *
      * @attention Do not destroy the object during audio capturing.
      *
-     * @param captureId Indicates the pointer to the <b>IAudioCapture</b> object to operate.
+     * @param adapter Indicates the pointer to the audio adapter to operate.
+     * @param capture Indicates the pointer to the <b>IAudioCapture</b> object to operate.
      * @return Returns <b>0</b> if the <b>IAudioCapture</b> object is destroyed; returns a negative value otherwise.
      * @see CreateCapture
      */
@@ -110,6 +113,7 @@ interface IAudioAdapter {
     /**
      * @brief Obtains the capability set of the port driver for the audio adapter.
      *
+     * @param adapter Indicates the pointer to the audio adapter to operate.
      * @param port Indicates the pointer to the port.
      * @param capability Indicates the pointer to the capability set to obtain.
      * @return Returns <b>0</b> if the capability set is successfully obtained; returns a negative value otherwise.
@@ -119,6 +123,7 @@ interface IAudioAdapter {
     /**
      * @brief Sets the passthrough data transmission mode of the audio port driver.
      *
+     * @param adapter Indicates the pointer to the audio adapter to operate.
      * @param port Indicates the pointer to the port.
      * @param mode Indicates the passthrough transmission mode to set.
      * @return Returns <b>0</b> if the setting is successful; returns a negative value otherwise.
@@ -129,6 +134,7 @@ interface IAudioAdapter {
     /**
      * @brief Obtains the passthrough data transmission mode of the audio port driver.
      *
+     * @param adapter Indicates the pointer to the audio adapter to operate.
      * @param port Indicates the pointer to the port.
      * @param mode Indicates the pointer to the passthrough transmission mode to obtain.
      * @return Returns <b>0</b> if the mode is successfully obtained; returns a negative value otherwise.
@@ -139,6 +145,7 @@ interface IAudioAdapter {
     /**
      * @brief Get the device status of an adapter.
      *
+     * @param adapter Indicates the audio adapter.
      * @param status Indicates the status of device .
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
      */
@@ -147,6 +154,7 @@ interface IAudioAdapter {
     /**
      * @brief Update audio route on several source and sink ports.
      *
+     * @param adapter Indicates the pointer to the audio adapter to operate.
      * @param route Indicates route information.
      * @param routeHandle Indicates route handle.
      * @return Returns <b>0</b> if the mode is successfully obtained; returns a negative value otherwise.
@@ -157,6 +165,7 @@ interface IAudioAdapter {
     /**
      * @brief Release an audio route.
      *
+     * @param adapter Indicates the pointer to the audio adapter to operate.
      * @param routeHandle Indicates route handle.
      * @return Returns <b>0</b> if the mode is successfully obtained; returns a negative value otherwise.
      * @see SetPassthroughMode
@@ -166,6 +175,7 @@ interface IAudioAdapter {
     /**
      * @brief Sets the mute operation for the audio.
      *
+     * @param adapter Indicates the pointer to the audio adapter to operate.
      * @param mute Specifies whether to mute the audio. Value <b>true</b> means to mute the audio,
      * and <b>false</b> means the opposite.
      * @return Returns <b>0</b> if the setting is successful; returns a negative value otherwise.
@@ -176,6 +186,7 @@ interface IAudioAdapter {
     /**
      * @brief Obtains the mute operation set for the audio.
      *
+     * @param adapter Indicates the pointer to the audio adapter to operate.
      * @param mute Indicates the pointer to the mute operation set for the audio. Value <b>true</b> means that
      * the audio is muted, and <b>false</b> means the opposite.
      * @return Returns <b>0</b> if the mute operation is obtained; returns a negative value otherwise.
@@ -189,6 +200,7 @@ interface IAudioAdapter {
      * The volume ranges from 0.0 to 1.0. If the volume level in an audio service ranges from 0 to 15,
      * <b>0.0</b> indicates that the audio is muted, and <b>1.0</b> indicates the maximum volume level (15).
      *
+     * @param adapter Indicates the pointer to the audio adapter to operate.
      * @param volume Indicates the volume to set. The value ranges from 0.0 to 1.0.
      * @return Returns <b>0</b> if the setting is successful; returns a negative value otherwise.
      * @see GetVolume
@@ -198,6 +210,7 @@ interface IAudioAdapter {
     /**
      * @brief Sets extra audio parameters.
      *
+     * @param adapter Indicates the audio adapter.
      * @param key Indicates what kind of parameter type will be set.
      * @param condition Indicates the specific extend parameter condition of AudioExtParamKey.
      * @param value Indicates the value of the specified condition.
@@ -216,9 +229,11 @@ interface IAudioAdapter {
     /**
      * @brief Get extra audio parameters.
      *
+     * @param adapter Indicates the audio adapter.
      * @param key Indicates what kind of parameter type will be get.
      * @param condition Indicates the specific extend parameter condition of AudioExtParamKey.
      * @param value Indicates the value of the specified condition.
+     * @param lenth Indicates the length of the value pointer.
      *
      * The format of condition is <i>key=value</i>. Separate multiple key-value pairs by semicolons (;).
      * When key equals to AudioExtParamKey::AUDIO_EXT_PARAM_KEY_VOLUME, the format of condition must be like this:
@@ -234,7 +249,8 @@ interface IAudioAdapter {
     /**
      * @brief Register extra audio parameters observer.
      *
-     * @param audioCallback Indicates param observer.
+     * @param adapter Indicates the audio adapter.
+     * @param callback Indicates param observer.
      * @param cookie Indicates the pointer to the callback parameters;
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
      */
