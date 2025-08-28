@@ -1150,10 +1150,10 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_QUALITY_PRIORITIZATION,
     /**
-     * ohos.control.systemCapture [static, enum, public]
+     * ohos.control.systemCapture [static, uint8, public]
      *
      * camera device property, set current camera device system application capture
-     * (i.e. enum: 0-false/1-true ...)
+     * (i.e. uint8: 0-false/1-true ...)
      */
     OHOS_CONTROL_SYSTEM_CAPTURE,
     /**
