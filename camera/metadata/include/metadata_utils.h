@@ -23,7 +23,6 @@
 
 #include "camera_metadata_info.h"
 #include "message_parcel.h"
-#include "camera_metadata_item_info.h"
 
 namespace OHOS::Camera {
 class MetadataUtils {
