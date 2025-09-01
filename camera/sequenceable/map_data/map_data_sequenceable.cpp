@@ -46,7 +46,7 @@ sptr<MapDataSequenceable> MapDataSequenceable::Unmarshalling(Parcel &parcel)
     }
 
     int32_t size = parcel.ReadInt32();
-    if (size <= 0 || size > BUFFER_MAX_USER_DATA_COUNT) {
+    if (size < 0 || size > BUFFER_MAX_USER_DATA_COUNT) {
         HDI_CAMERA_LOGE("invalid size: %{public}d obtained from Parcel", size);
         return nullptr;
     }
