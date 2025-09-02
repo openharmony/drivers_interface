@@ -1157,6 +1157,20 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_SYSTEM_CAPTURE,
     /**
+     * ohos.ability.photoQualityPrioritization [static, int32_t[], public]
+     *
+     * camera device property, report current camera support photo quality prioritization
+     * (i.e. int32_t[] ...)
+     */
+    OHOS_ABILITY_PHOTO_QUALITY_PRIORITIZATION,
+    /**
+     * ohos.control.photoQualityPrioritization [static, byte, public]
+     *
+     * camera device property, set current camera photo quality prioritization
+     * (i.e. byte ...)
+    */
+    OHOS_CONTROL_PHOTO_QUALITY_PRIORITIZATION,
+    /**
      * ohos.device.controlEnd
      *
      * device controlEnd
@@ -3102,4 +3116,10 @@ enum SketchStreamInfoStatus {
     OHOS_CAMERA_SKETCH_STREAM_SUPPORT
 };
 
+// OHOS_ABILITY_PHOTO_QUALITY_PRIORITIZATION
+// OHOS_CONTROL_PHOTO_QUALITY_PRIORITIZATION
+typedef enum camera_photo_quality_prioritization {
+    OHOS_CAMERA_PHOTO_QUALITY_PRIORITIZATION_HIGH_QUALITY = 0,
+    OHOS_CAMERA_PHOTO_QUALITY_PRIORITIZATION_SPEED,
+} camera_photo_quality_prioritization_t;
 #endif
