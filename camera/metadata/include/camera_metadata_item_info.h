@@ -301,6 +301,10 @@ static item_info_t g_ohosCameraControl[OHOS_DEVICE_CONTROL_END - OHOS_DEVICE_CON
         OHOS_DEVICE_CONTROL_START] = {"qualityPrioritization", META_TYPE_BYTE, 1},
     [OHOS_CONTROL_SYSTEM_CAPTURE -
         OHOS_DEVICE_CONTROL_START] = {"cameraControlSystemCapture", META_TYPE_BYTE, 1},
+    [OHOS_ABILITY_PHOTO_QUALITY_PRIORITIZATION -
+       OHOS_DEVICE_CONTROL_START] = {"supportedPhotoQualityPrioritizationValues", META_TYPE_INT32, -1},
+    [OHOS_CONTROL_PHOTO_QUALITY_PRIORITIZATION -
+        OHOS_DEVICE_CONTROL_START] = {"photoQualityPrioritization", META_TYPE_BYTE, 1},
 };
 
 static item_info_t g_ohosDeviceExposure[OHOS_DEVICE_EXPOSURE_END - OHOS_DEVICE_EXPOSURE_START] = {
