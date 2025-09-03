@@ -898,9 +898,7 @@ EXIT:
             HdfTrace traceVdi("SetLayerBuffer", traceMsg);
             int rc = impl_->SetLayerBuffer(data.devId, data.layerId, handle, fd);
             DISPLAY_CHK_RETURN(rc != HDF_SUCCESS, HDF_FAILURE, HDF_LOGE(" fail"));
-            if (rc == HDF_SUCCESS) {
-                needMoveFd = true;
-            }
+            needMoveFd = true;
             return HDF_SUCCESS;
         });
         return ret;
