@@ -100,6 +100,7 @@ public:
     {
         uint32_t replyEleCnt;
         std::vector<HdifdInfo> outFds;
+        size_t writePos = requestPacker_.ValidSize();
 
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_PREPARE_DISPLAY_LAYERS, requestPacker_);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
@@ -109,6 +110,8 @@ public:
 
         ret = CmdUtils::EndSection(requestPacker_);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+
+        ReqStatistic(devId, REQUEST_CMD_PREPARE_DISPLAY_LAYERS, writePos);
 
         ret = CmdUtils::EndPack(requestPacker_);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
@@ -166,6 +169,8 @@ EXIT:
             HDF_LOGE("%{public}s: writePos_ rollback", __func__);
             return HDF_FAILURE;
         }
+
+        ReqStatistic(devId, REQUEST_CMD_SET_DISPLAY_CLIENT_BUFFER, writePos);
         return HDF_SUCCESS;
     }
 
@@ -207,6 +212,8 @@ EXIT:
             HDF_LOGE("%{public}s: writePos_ rollback", __func__);
             return HDF_FAILURE;
         }
+
+        ReqStatistic(devId, REQUEST_CMD_SET_DISPLAY_CLIENT_DAMAGE, writePos);
         return HDF_SUCCESS;
     }
 
@@ -214,6 +221,7 @@ EXIT:
     {
         uint32_t replyEleCnt = 0;
         std::vector<HdifdInfo> outFds;
+        size_t writePos = requestPacker_.ValidSize();
 
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_COMMIT, requestPacker_);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
@@ -223,6 +231,8 @@ EXIT:
 
         ret = CmdUtils::EndSection(requestPacker_);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+
+        ReqStatistic(devId, REQUEST_CMD_COMMIT, writePos);
 
         ret = CmdUtils::EndPack(requestPacker_);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
@@ -287,6 +297,8 @@ EXIT:
             HDF_LOGE("%{public}s: writePos_ rollback", __func__);
             return HDF_FAILURE;
         }
+
+        ReqStatistic(devId, REQUEST_CMD_SET_LAYER_ALPHA, writePos);
         return HDF_SUCCESS;
     }
 
@@ -318,6 +330,8 @@ EXIT:
             HDF_LOGE("%{public}s: writePos_ rollback", __func__);
             return HDF_FAILURE;
         }
+
+        ReqStatistic(devId, REQUEST_CMD_SET_LAYER_REGION, writePos);
         return HDF_SUCCESS;
     }
 
@@ -349,6 +363,8 @@ EXIT:
             HDF_LOGE("%{public}s: writePos_ rollback", __func__);
             return HDF_FAILURE;
         }
+
+        ReqStatistic(devId, REQUEST_CMD_SET_LAYER_CROP, writePos);
         return HDF_SUCCESS;
     }
 
@@ -381,6 +397,7 @@ EXIT:
             HDF_LOGE("%{public}s: writePos_ rollback", __func__);
             return HDF_FAILURE;
         }
+        ReqStatistic(devId, REQUEST_CMD_SET_LAYER_ZORDER, writePos);
         return HDF_SUCCESS;
     }
 
@@ -414,6 +431,7 @@ EXIT:
             return HDF_FAILURE;
         }
 
+        ReqStatistic(devId, REQUEST_CMD_SET_LAYER_PREMULTI, writePos);
         return HDF_SUCCESS;
     }
 
@@ -446,6 +464,8 @@ EXIT:
             HDF_LOGE("%{public}s: writePos_ rollback", __func__);
             return HDF_FAILURE;
         }
+
+        ReqStatistic(devId, REQUEST_CMD_SET_LAYER_TRANSFORM_MODE, writePos);
         return HDF_SUCCESS;
     }
 
@@ -486,6 +506,8 @@ EXIT:
             HDF_LOGE("%{public}s: writePos_ rollback", __func__);
             return HDF_FAILURE;
         }
+
+        ReqStatistic(devId, REQUEST_CMD_SET_LAYER_DIRTY_REGION, writePos);
         return HDF_SUCCESS;
     }
 
@@ -526,6 +548,8 @@ EXIT:
             HDF_LOGE("%{public}s: writePos_ rollback", __func__);
             return HDF_FAILURE;
         }
+
+        ReqStatistic(devId, REQUEST_CMD_SET_LAYER_VISIBLE_REGION, writePos);
         return HDF_SUCCESS;
     }
 
@@ -581,6 +605,8 @@ EXIT:
             HDF_LOGE("%{public}s: writePos_ rollback", __func__);
             return HDF_FAILURE;
         }
+
+        ReqStatistic(devId, REQUEST_CMD_SET_LAYER_BUFFER, writePos);
         return HDF_SUCCESS;
     }
 
@@ -613,6 +639,8 @@ EXIT:
             HDF_LOGE("%{public}s: writePos_ rollback", __func__);
             return HDF_FAILURE;
         }
+
+        ReqStatistic(devId, REQUEST_CMD_SET_LAYER_COMPOSITION_TYPE, writePos);
         return HDF_SUCCESS;
     }
 
@@ -645,6 +673,8 @@ EXIT:
             HDF_LOGE("%{public}s: writePos_ rollback", __func__);
             return HDF_FAILURE;
         }
+
+        ReqStatistic(devId, REQUEST_CMD_SET_LAYER_BLEND_TYPE, writePos);
         return HDF_SUCCESS;
     }
 
@@ -677,6 +707,8 @@ EXIT:
             HDF_LOGE("%{public}s: writePos_ rollback", __func__);
             return HDF_FAILURE;
         }
+
+        ReqStatistic(devId, REQUEST_CMD_SET_LAYER_MASK_INFO, writePos);
         return HDF_SUCCESS;
     }
 
@@ -708,6 +740,8 @@ EXIT:
             HDF_LOGE("%{public}s: writePos_ rollback", __func__);
             return HDF_FAILURE;
         }
+
+        ReqStatistic(devId, REQUEST_CMD_SET_LAYER_COLOR, writePos);
         return HDF_SUCCESS;
     }
 
@@ -876,8 +910,14 @@ protected:
         uint32_t eleCnt = requestPacker_.ValidSize() >> CmdUtils::MOVE_SIZE;
         int32_t ret = request_->Write(
             reinterpret_cast<int32_t *>(requestPacker_.GetDataPtr()), eleCnt, CmdUtils::TRANSFER_WAIT_TIME);
-        DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
-            HDF_LOGE("%{public}s: CmdRequest write failed", __func__));
+        if (ret != HDF_SUCCESS) {
+            HDF_LOGE("%{public}s: CmdRequest write failed, ret=[%{public}d], eleCnt=[%{public}u]",
+                __func__, ret, eleCnt);
+            ReqCmdDump();
+            reqCmdMaps.clear();
+            return ret;
+        }
+        reqCmdMaps.clear();
 
         ret = hdi_->CmdRequest(eleCnt, requestHdiFds_, replyEleCnt, outFds);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
@@ -894,6 +934,7 @@ protected:
         return ret;
     }
 
+protected:
     int32_t PeriodDataReset()
     {
         for (uint32_t i = 0; i < requestHdiFds_.size(); ++i) {
@@ -903,6 +944,7 @@ protected:
             }
         }
         requestHdiFds_.clear();
+        reqCmdMaps.clear();
         int32_t ret = CmdUtils::StartPack(CONTROL_CMD_REQUEST_BEGIN, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: StartPack failed", __func__));
@@ -910,7 +952,52 @@ protected:
         return HDF_SUCCESS;
     }
 
-protected:
+    struct ReqCmdInfo {
+        uint32_t count = 0;
+        uint32_t len = 0;
+    };
+
+    static inline ReqCmdInfo GetFirstCmdInfo(size_t writeLen)
+    {
+        return ReqCmdInfo {
+            .count = 1,
+            .len = static_cast<uint32_t>(writeLen)
+        };
+    }
+
+    void ReqStatistic(uint32_t devId, int32_t cmdId, size_t writePos)
+    {
+        size_t writeLen = requestPacker_.ValidSize() - writePos;
+
+        auto iterDev = reqCmdMaps.find(devId);
+        if (iterDev == reqCmdMaps.end()) {
+            reqCmdMaps.insert({devId, {{cmdId, GetFirstCmdInfo(writeLen)}}});
+            return;
+        }
+
+        auto iterCmd = iterDev->second.find(cmdId);
+        if (iterCmd == iterDev->second.end()) {
+            iterDev->second.insert({cmdId, GetFirstCmdInfo(writeLen)});
+            return;
+        }
+
+        iterCmd->second.count++;
+        iterCmd->second.len += writeLen;
+    }
+
+    void ReqCmdDump()
+    {
+        HDF_LOGW("@  DevId | count |  len  |                       cmdId                      \n");
+        HDF_LOGW("@ -------+-------+-------+--------------------------------------------------\n");
+        for (auto iterDev = reqCmdMaps.begin(); iterDev != reqCmdMaps.end(); iterDev++) {
+            for (auto iterCmdInfo = iterDev->second.begin(); iterCmdInfo != iterDev->second.end(); iterCmdInfo++) {
+                HDF_LOGW("@    %{public}u   |   %{public}u   |  %{public}u   | %{public}s                \n",
+                iterDev->first, iterCmdInfo->second.count, iterCmdInfo->second.len,
+                CmdUtils::CommandToString(iterCmdInfo->first));
+            }
+        }
+    }
+
     bool initFlag_;
     sptr<CompHdi> hdi_;
     std::shared_ptr<Transfer> request_;
@@ -922,6 +1009,8 @@ protected:
     // Composition layers/types changed
     std::unordered_map<uint32_t, std::vector<uint32_t>> compChangeLayers_;
     std::unordered_map<uint32_t, std::vector<int32_t>> compChangeTypes_;
+    // devId: [cmdId: (count, len)]
+    std::unordered_map<uint32_t, std::unordered_map<int32_t, ReqCmdInfo>> reqCmdMaps = {};
 };
 using HdiDisplayCmdRequester = DisplayCmdRequester<SharedMemQueue<int32_t>, IDisplayComposer>;
 } // namespace V1_0

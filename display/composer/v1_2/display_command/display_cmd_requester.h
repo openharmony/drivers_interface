@@ -52,6 +52,7 @@ public:
     {
         uint32_t replyEleCnt = 0;
         std::vector<HdifdInfo> outFds;
+        size_t writePos = requestPacker_.ValidSize();
 
         int32_t ret = CmdUtils::StartSection(REQUEST_CMD_COMMIT_AND_GET_RELEASE_FENCE, requestPacker_);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
@@ -67,6 +68,8 @@ public:
 
         ret = CmdUtils::EndSection(requestPacker_);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
+
+        ReqStatistic(devId, REQUEST_CMD_COMMIT_AND_GET_RELEASE_FENCE, writePos);
 
         ret = CmdUtils::EndPack(requestPacker_);
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
@@ -296,6 +299,8 @@ EXIT:
             HDF_LOGE("%{public}s: writePos_ rollback", __func__);
             return HDF_FAILURE;
         }
+
+        ReqStatistic(devId, REQUEST_CMD_SET_DISPLAY_CONSTRAINT, writePos);
         return HDF_SUCCESS;
     }
 
@@ -407,9 +412,10 @@ EXIT:
             requestPacker_.RollBack(writePos);
             HDF_LOGE("SetDisplayPerFrameParameterSmq writePos_ rollback %{public}s, %{public}d",
                 key.c_str(), devId);
-
             return HDF_FAILURE;
         }
+
+        ReqStatistic(devId, REQUEST_CMD_SET_DISPLAY_PERFRAME_PARAM, writePos);
         return HDF_SUCCESS;
     }
 
@@ -423,6 +429,7 @@ private:
     using BaseType1_1::replyData_;
     using BaseType1_1::DoRequest;
     using BaseType1_1::PeriodDataReset;
+    using BaseType1_1::ReqStatistic;
 
     // Composition layers/types changed
     using BaseType1_1::compChangeLayers_;
