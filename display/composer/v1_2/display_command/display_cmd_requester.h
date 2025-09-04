@@ -357,9 +357,10 @@ EXIT:
             requestPacker_.RollBack(writePos);
             HDF_LOGE("SetLayerPerFrameParameterSmq writePos_ rollback %{public}s, %{public}d, %{public}d",
                 key.c_str(), devId, layerId);
-
             return HDF_FAILURE;
         }
+
+        ReqStatistic(devId, REQUEST_CMD_SET_DISPLAY_PERFRAME_PARAM, writePos);
         return HDF_SUCCESS;
     }
 
