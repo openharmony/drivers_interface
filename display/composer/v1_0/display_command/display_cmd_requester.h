@@ -992,8 +992,8 @@ protected:
         for (auto iterDev = reqCmdMaps.begin(); iterDev != reqCmdMaps.end(); iterDev++) {
             for (auto iterCmdInfo = iterDev->second.begin(); iterCmdInfo != iterDev->second.end(); iterCmdInfo++) {
                 HDF_LOGW("@    %{public}u   |   %{public}u   |  %{public}u   | %{public}s                \n",
-                iterDev->first, iterCmdInfo->second.count, iterCmdInfo->second.len,
-                CmdUtils::CommandToString(iterCmdInfo->first));
+                    iterDev->first, iterCmdInfo->second.count, iterCmdInfo->second.len,
+                    CmdUtils::CommandToString(iterCmdInfo->first));
             }
         }
     }
