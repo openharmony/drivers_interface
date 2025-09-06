@@ -20,7 +20,7 @@
 #include "command_pack/command_data_packer.h"
 #include "command_pack/command_data_unpacker.h"
 #include "common/include/display_interface_utils.h"
-#include "v1_0/display_composer_type.h"
+#include "v1_2/display_composer_type.h"
 
 #undef LOG_TAG
 #define LOG_TAG "DISP_CMD"
@@ -69,6 +69,10 @@ public:
             SWITCHCASE(REQUEST_CMD_SET_LAYER_VISIBLE);
             SWITCHCASE(REQUEST_CMD_SET_LAYER_MASK_INFO);
             SWITCHCASE(REQUEST_CMD_SET_LAYER_COLOR);
+            SWITCHCASE(V1_2::REQUEST_CMD_COMMIT_AND_GET_RELEASE_FENCE);
+            SWITCHCASE(V1_2::REQUEST_CMD_SET_DISPLAY_CONSTRAINT);
+            SWITCHCASE(V1_2::REQUEST_CMD_SET_LAYER_PERFRAME_PARAM);
+            SWITCHCASE(V1_2::REQUEST_CMD_SET_DISPLAY_PERFRAME_PARAM);
             /* reply cmd */
             SWITCHCASE(REPLY_CMD_SET_ERROR);
             SWITCHCASE(REPLY_CMD_PREPARE_DISPLAY_LAYERS);
