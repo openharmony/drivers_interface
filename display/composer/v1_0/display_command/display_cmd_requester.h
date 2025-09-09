@@ -779,7 +779,7 @@ protected:
     int32_t OnReplyPrepareDisplayLayers(CommandDataUnpacker& replyUnpacker, bool &needFlushFb)
     {
         uint32_t devId = 0;
-        int32_t retBool = replyUnpacker.ReadUint32(devId);
+        bool retBool = replyUnpacker.ReadUint32(devId);
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE, HDF_LOGE("%{public}s: read devId failed", __func__));
 
         retBool = replyUnpacker.ReadBool(needFlushFb);

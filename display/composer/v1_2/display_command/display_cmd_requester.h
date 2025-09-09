@@ -105,7 +105,7 @@ EXIT:
     int32_t OnReplySkipStateFailed(CommandDataUnpacker& replyUnpacker, bool &needFlush)
     {
         uint32_t devId = 0;
-        int32_t retBool = replyUnpacker.ReadUint32(devId);
+        bool retBool = replyUnpacker.ReadUint32(devId);
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE, HDF_LOGE("%{public}s: read devId failed", __func__));
 
         retBool = replyUnpacker.ReadBool(needFlush);
@@ -152,7 +152,7 @@ EXIT:
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: FileDescriptorUnpack failed", __func__));
 
-        int32_t retBool = replyUnpacker.ReadInt32(skipState);
+        bool retBool = replyUnpacker.ReadInt32(skipState);
         DISPLAY_CHK_RETURN(retBool == false, HDF_FAILURE,
             HDF_LOGE("%{public}s: read skipValidateState failed", __func__));
 
