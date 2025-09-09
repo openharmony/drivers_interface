@@ -116,7 +116,6 @@ public:
         const BufferHandle* inHandle, const int32_t acquireFence) override
     {
         COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_3_);
-        COMPOSER_CHECK_NULLPTR_RETURN(inHandle);
         sptr<NativeBuffer> hdiBuffer = new NativeBuffer(inHandle);
         COMPOSER_CHECK_NULLPTR_RETURN(hdiBuffer);
         sptr<HdifdParcelable> hdiFence(new HdifdParcelable);
@@ -133,8 +132,6 @@ public:
         if (ret != DISPLAY_SUCCESS) {
             return ret;
         }
-        COMPOSER_CHECK_NULLPTR_RETURN(hdiFence);
-        releaseFence = hdiFence->Move();
         return DISPLAY_SUCCESS;
     }
 protected:
