@@ -1307,6 +1307,10 @@ int CameraMetadata::DeleteCameraMetadataItemByIndex(common_metadata_header_t *ds
         dst->data_count -= dataBytes;
 
         camera_metadata_item_entry_t *metadataItems = GetMetadataItems(dst);
+        if (metadataItems == nullptr) {
+            METADATA_ERR_LOG("DeleteCameraMetadataItemByIndex metadataItems is null");
+            return CAM_META_INVALID_PARAM;
+        }
         for (uint32_t i = 0; i < dst->item_count; i++, ++metadataItems) {
             if (CalculateCameraMetadataItemDataSize(
                 metadataItems->data_type, metadataItems->count) > 0 &&
