@@ -71,6 +71,11 @@ void MetadataUtils::ReadData(T &data, int32_t &index, const std::vector<uint8_t>
     constexpr uint32_t typeLen = sizeof(T);
     uint8_t array[typeLen] = {0};
     T *ptr = nullptr;
+    if (cameraAbility.empty()) {
+        ptr = reinterpret_cast<T *>(array);
+        data = *ptr;
+        return;
+    }
     for (size_t j = 0; j < sizeof(T); j++) {
         array[j] = cameraAbility.at(index++);
     }
