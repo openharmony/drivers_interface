@@ -992,7 +992,7 @@ protected:
         for (auto iterDev = reqCmdMaps.begin(); iterDev != reqCmdMaps.end(); iterDev++) {
             for (auto iterCmdInfo = iterDev->second.begin(); iterCmdInfo != iterDev->second.end(); iterCmdInfo++) {
                 HDF_LOGW("@    %{public}u   |   %{public}d   |   %{public}u   |  %{public}u   \n",
-                iterDev->first, iterCmdInfo->first, iterCmdInfo->second.count, iterCmdInfo->second.len);
+                    iterDev->first, iterCmdInfo->first, iterCmdInfo->second.count, iterCmdInfo->second.len);
             }
         }
     }
