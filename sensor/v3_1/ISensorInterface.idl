@@ -1,0 +1,131 @@
+/*
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup HdiSensor
+ * @{
+ *
+ * @brief Provides unified APIs for sensor services to access sensor drivers.
+ *
+ * A sensor service can obtain a sensor driver object or agent and then call APIs provided by this object or agent to
+ * access different types of sensor devices based on the sensor IDs, thereby obtaining sensor information,
+ * subscribing to or unsubscribing from sensor data, enabling or disabling a sensor,
+ * setting the sensor data reporting mode, and setting sensor options such as the accuracy and measurement range.
+ *
+ * @since 6.0
+ */
+
+/**
+ * @file ISensorInterface.idl
+ *
+ * @brief Declares the APIs provided by the sensor module for obtaining sensor information, subscribing to or
+ * unsubscribing from sensor data, enabling or disabling a sensor, setting the sensor data reporting mode,
+ * and setting sensor options such as the accuracy and measurement range.
+ *
+ * @since 6.0
+ * @version 3.1
+ */
+
+package ohos.hdi.sensor.v3_1;
+
+import ohos.hdi.sensor.v3_0.SensorTypes;
+import ohos.hdi.sensor.v3_1.SensorTypes;
+import ohos.hdi.sensor.v3_0.ISensorCallback;
+import ohos.hdi.sensor.v3_0.ISensorInterface;
+
+/**
+ * @brief Defines the functions for performing basic operations on sensors.
+ *
+ * The operations include obtaining sensor information, subscribing to or unsubscribing from sensor data,
+ * enabling or disabling a sensor, setting the sensor data reporting mode, and setting sensor options such as
+ * the accuracy and measurement range.
+ */
+
+interface ISensorInterface extends ohos.hdi.sensor.v3_0.ISensorInterface {
+    /**
+     * @brief Enables the sensor available in the sensor list based on the specified sensor ID.
+     * The subscriber can obtain the sensor data only after the sensor is enabled.
+     *
+     * @param sensorId Indicates the sensor ID. For details, see {@link SensorTypeTag}.
+     * @param deviceId Indicates the device ID. For details, see {@link SensorTypeTag}.
+     * @param callbackId Indicates the operation is on the callback object bound to Register.
+     * @return Returns <b>0</b> if the sensor is successfully enabled; returns a negative value otherwise.
+     *
+     * @since 6.0
+     * @version 1.1
+     */
+    EnableWithCallbackId([in] struct DeviceSensorInfo deviceSensorInfo, [in] unsigned int callbackId);
+
+    /**
+     * @brief Disables an enabled sensor.
+     *
+     * @param sensorId Indicates the sensor ID. For details, see {@link SensorTypeTag}.
+     * @param deviceId Indicates the device ID. For details, see {@link SensorTypeTag}.
+     * @param callbackId Indicates the operation is on the callback object bound to Register.
+     * @return Returns <b>0</b> if the sensor is successfully disabled; returns a negative value otherwise.
+     *
+     * @since 6.0
+     * @version 1.1
+     */
+    DisableWithCallbackId([in] struct DeviceSensorInfo deviceSensorInfo, [in] unsigned int callbackId);
+
+    /**
+     * @brief Sets the data sampling interval and data reporting interval for the specified sensor.
+     *
+     * @param sensorId Indicates the sensor ID. For details, see {@link SensorTypeTag}.
+     * @param deviceId Indicates the device ID. For details, see {@link SensorTypeTag}.
+     * @param callbackId Indicates the operation is on the callback object bound to Register.
+     * @param samplingInterval Indicates the sensor data sampling interval to set, in nanoseconds.
+     * @param reportInterval Indicates the sensor data reporting interval, in nanoseconds.
+     * @return Returns <b>0</b> if the setting is successful; returns a negative value otherwise.
+     *
+     * @since 6.0
+     * @version 1.1
+     */
+    SetBatchWithCallbackId([in] struct DeviceSensorInfo deviceSensorInfo, [in] unsigned int callbackId,
+        [in] long samplingInterval, [in] long reportInterval);
+
+    /**
+     * @brief Registers the callback for reporting sensor data to the subscriber.
+     *
+     * The sensorId enumeration value range is 128-160, which means that the medical sensor service is subscribed.
+     * It only needs to be subscribed once successfully, and there is no need to subscribe repeatedly.
+     * The sensorId enumeration value range is not within 128-160, which means that the traditional sensor
+     * is subscribed, and the subscription is successful once.
+     * @param callbackObj Indicates the callback to register. For details, see {@link ISensorCallback}.
+     * @param callbackId Indicates the operation is on the callback object bound to Register.
+     * @return Returns <b>0</b> if the callback is successfully registered; returns a negative value otherwise.
+     *
+     * @since 6.0
+     * @version 1.1
+     */
+    RegisterWithCallbackId([in] int groupId, [in] ISensorCallback callbackObj, [in] unsigned int callbackId);
+
+    /**
+     * @brief Deregisters the callback for reporting sensor data.
+     *
+     * The sensorId enumeration value range is 128-160, which means that the medical sensor service is subscribed.
+     * It only needs to cancel the subscription once successfully, and there is no need to
+     * cancel the subscription repeatedly. The sensorId enumeration value range is not within 128-160,
+     * which means that the traditional sensor is subscribed. You can cancel the subscription once successfully.
+     * @param callbackObj Indicates the callback to deregister. For details, see {@link ISensorCallback}.
+     * @param callbackId Indicates the operation is on the callback object bound to Register.
+     * @return Returns <b>0</b> if the callback is successfully deregistered; returns a negative value otherwise.
+     *
+     * @since 6.0
+     * @version 1.1
+     */
+    UnregisterWithCallbackId([in] int groupId, [in] ISensorCallback callbackObj, [in] unsigned int callbackId);
+}

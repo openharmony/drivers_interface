@@ -27,7 +27,8 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/sensor/v3_0:sensor_idl_target"
+          "//drivers/interface/sensor/v3_0:sensor_idl_target",
+          "//drivers/interface/sensor/v3_1:sensor_idl_target"
         ],
         "test": [
         ],
@@ -50,6 +51,30 @@
           },
           {
             "name": "//drivers/interface/sensor/v3_0:sensor_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/sensor"
+            }
+          },
+          {
+            "name": "//drivers/interface/sensor/v3_1:libsensor_proxy_3.1",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/sensor"
+            }
+          },
+          {
+            "name": "//drivers/interface/sensor/v3_1:libsensor_stub_3.1",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/sensor"
+            }
+          },
+          {
+            "name": "//drivers/interface/sensor/v3_1:sensor_idl_headers",
             "header": {
               "header_files": [
               ],
