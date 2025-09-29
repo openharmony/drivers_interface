@@ -1094,6 +1094,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_HIGH_QUALITY_MODE,
     /**
+     * ohos.control.appHint [static, enum, public]
+     *
+     * camera device property, set current camera hint
+     * (i.e. enum: NONE/LIVE_STREAM/AGGRESSIVE_RESOURCE ...)
+     */
+    OHOS_CONTROL_APP_HINT,
+    /**
      * ohos.control.burstCapture [static, enum, public]
      *
      * camera device property, set current camera device burst capture mode
@@ -2892,6 +2899,13 @@ typedef enum ControlHighQualityModeEnum {
     OHOS_CONTROL_HIGH_QUALITY_MODE_OFF = 0,
     OHOS_CONTROL_HIGH_QUALITY_MODE_ON,
 } ControlHighQualityModeEnumT;
+
+// OHOS_CONTROL_APP_HINT
+enum CameraAppHint {
+    OHOS_CAMERA_APP_HINT_NONE = 0,
+    OHOS_CAMERA_APP_HINT_LIVE_STREAM = 1 << 0,
+    OHOS_CAMERA_APP_HINT_AGGRESSIVE_RESOURCE = 1 << 1,
+};
 
 // OHOS_CAMERA_EFFECT_SUGGESTION_TYPE
 enum CameraEffectSuggestionType {
