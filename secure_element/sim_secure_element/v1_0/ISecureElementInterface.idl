@@ -113,4 +113,13 @@ interface ISecureElementInterface {
      * @version 1.0
      */
      reset([out] enum SecureElementStatus status);
+
+    /**
+     * Set the SIM card to be accessed.
+     *
+     * @param slotId the id of SIM slot.
+     * @since 6.0
+     * @version 1.0
+     */
+     SetAccessSimSlot([in] unsigned char slotId);
 }
