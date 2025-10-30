@@ -1566,6 +1566,20 @@ typedef enum camera_device_metadata_tag {
       * (i.e. byte ...)
       */
     OHOS_ABILITY_CAMERA_ZOOM_BEZIER_CURVC_POINT,
+    /**
+     * ohos.control.zoomCenterPoint [static, float[], public]
+     *
+     * camera device property, set current camera zoom center point
+     * (i.e. float[] ...)
+     */
+    OHOS_CONTROL_ZOOM_CENTER_POINT,
+    /**
+     * ohos.control.zoomCenterPointSupported [static, enum, public]
+     *
+     * camera device property, report current camera zoom center point supported/nosupported
+     * (i.e. enum: support/unsupport ...)
+     */
+    OHOS_ABILITY_ZOOM_CENTER_POINT_SUPPORTED,
      /**
      * ohos.device.zoomEnd
      *
