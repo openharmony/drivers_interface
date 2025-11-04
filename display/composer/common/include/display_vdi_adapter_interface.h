@@ -22,9 +22,11 @@
 #include "v1_0/include/idisplay_composer_interface.h"
 #include "v1_2/include/idisplay_composer_interface.h"
 #include "v1_3/include/idisplay_composer_interface.h"
+#include "v1_4/include/idisplay_composer_interface.h"
 #include "v1_0/display_composer_type.h"
 #include "v1_2/display_composer_type.h"
 #include "v1_3/display_composer_type.h"
+#include "v1_4/display_composer_type.h"
 #include "v1_1/imode_callback.h"
 #include "v1_1/iseamless_change_callback.h"
 
@@ -36,6 +38,7 @@ using namespace OHOS::HDI::Display::Composer::V1_0;
 using namespace OHOS::HDI::Display::Composer::V1_1;
 using namespace OHOS::HDI::Display::Composer::V1_2;
 using namespace OHOS::HDI::Display::Composer::V1_3;
+using namespace OHOS::HDI::Display::Composer::V1_4;
 struct DisplayComposerVdiAdapter {
     int32_t (*LoadVdiImpl)();
     int32_t (*DestroyVdiImpl)();
@@ -46,6 +49,7 @@ struct DisplayComposerVdiAdapter {
     int32_t (*SetDisplayMode)(uint32_t devId, uint32_t modeId);
     int32_t (*GetDisplayPowerStatus)(uint32_t devId, V1_0::DispPowerStatus& status);
     int32_t (*SetDisplayPowerStatus)(uint32_t devId, V1_0::DispPowerStatus status);
+    int32_t (*GetPanelPowerStatus)(uint32_t devId, V1_4::PanelPowerStatus& status);
     int32_t (*GetDisplayBacklight)(uint32_t devId, uint32_t& level);
     int32_t (*SetDisplayBacklight)(uint32_t devId, uint32_t level);
     int32_t (*GetDisplayProperty)(uint32_t devId, uint32_t id, uint64_t& value);
@@ -120,6 +124,7 @@ using GetDisplayModeFunc = int32_t (*)(uint32_t devId, uint32_t& modeId);
 using SetDisplayModeFunc = int32_t (*)(uint32_t devId, uint32_t modeId);
 using GetDisplayPowerStatusFunc = int32_t (*)(uint32_t devId, V1_0::DispPowerStatus& status);
 using SetDisplayPowerStatusFunc = int32_t (*)(uint32_t devId, V1_0::DispPowerStatus status);
+using GetPanelPowerStatusFunc = int32_t (*)(uint32_t devId, V1_4::PanelPowerStatus& status);
 using GetDisplayBacklightFunc = int32_t (*)(uint32_t devId, uint32_t& level);
 using SetDisplayBacklightFunc = int32_t (*)(uint32_t devId, uint32_t level);
 using GetDisplayPropertyFunc = int32_t (*)(uint32_t devId, uint32_t id, uint64_t& value);
