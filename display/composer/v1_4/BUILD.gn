@@ -41,6 +41,8 @@ hdi("display_composer") {
   part_name = "drivers_interface_display"
 
   public_configs = ["../hdifd_parcelable/",]
+
+  no_other_header_files = true
 }
 
 config("libdisplay_composer_hdi_impl_config") {
