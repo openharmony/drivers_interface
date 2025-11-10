@@ -65,6 +65,7 @@ ohos_shared_library("libdisplay_composer_hdi_impl_1.4") {
   external_deps = [
     "c_utils:utils",
     "graphic_surface:buffer_handle",
+    "hdf_core:libhdf_ipc_adapter",
     "hdf_core:libhdi",
     "hdf_core:libpub_utils",
     "hilog:libhilog",
