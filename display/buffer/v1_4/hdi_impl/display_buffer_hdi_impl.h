@@ -56,7 +56,7 @@ public:
         CHECK_NULLPOINTER_RETURN_VALUE(hdiInBuffer, HDF_FAILURE);
         sptr<NativeBuffer> hdiOutBuffer;
 
-        hdiInBuffer->SetBufferHandle(const_cast<BufferHandle*>(&inHandle));
+        hdiInBuffer->SetBufferHandle(const_cast<BufferHandle*>(&inHandle), false);
         int32_t ret = allocator_v1_4_->CloneDmaBufferHandle(hdiInBuffer, hdiOutBuffer);
         if ((ret == HDF_SUCCESS) && (hdiOutBuffer != nullptr)) {
             outHandle = hdiOutBuffer->Move();
