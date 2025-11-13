@@ -451,6 +451,7 @@ enum AudioInputType {
     AUDIO_INPUT_LIVE_TYPE                = 1 << 11, /**< Assigned live input type */
     AUDIO_INPUT_VOICE_TRANSCRIPTION      = 1 << 12, /**< Assigned voice transcription input type */
     AUDIO_INPUT_OFFLOAD_CAPTURE_TYPE     = 1 << 13, /**< Assigned offload capture input type */
+    AUDIO_INPUT_ULTRASONIC_TYPE          = 1 << 14, /**< Assigned ultrasonic input type */
 };
 
 /**
