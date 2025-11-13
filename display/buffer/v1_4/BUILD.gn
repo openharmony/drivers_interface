@@ -49,13 +49,7 @@ config("libdisplay_buffer_hdi_impl_config") {
 }
 
 ohos_shared_library("libdisplay_buffer_hdi_impl_v1_4") {
-  sources = [
-    "../v1_0/hdi_impl/display_buffer_hdi_impl.cpp",
-    "../v1_1/hdi_impl/display_buffer_hdi_impl.cpp",
-    "../v1_2/hdi_impl/display_buffer_hdi_impl.cpp",
-    "../v1_3/hdi_impl/display_buffer_hdi_impl.cpp",
-    "./hdi_impl/display_buffer_hdi_impl.cpp",
-  ]
+  sources = [ "./hdi_impl/display_buffer_hdi_impl.cpp" ]
 
   public_configs = [ ":libdisplay_buffer_hdi_impl_config" ]
 
