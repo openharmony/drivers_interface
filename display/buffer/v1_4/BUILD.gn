@@ -45,7 +45,7 @@ hdi("display_buffer") {
 }
 
 config("libdisplay_buffer_hdi_impl_config") {
-  include_dirs = [ "./../" ]
+  include_dirs = [ "./" ]
 }
 
 ohos_shared_library("libdisplay_buffer_hdi_impl_v1_4") {
@@ -70,6 +70,7 @@ ohos_shared_library("libdisplay_buffer_hdi_impl_v1_4") {
     "hilog:libhilog",
     "hitrace:hitrace_meter",
     "ipc:ipc_single",
+    "drivers_interface_display:libdisplay_buffer_hdi_impl_v1_3",
   ]
 
   install_images = [ "system" ]
