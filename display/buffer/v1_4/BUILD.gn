@@ -39,13 +39,15 @@ hdi("display_buffer") {
 
   branch_protector_ret = "pac_ret"
 
+  no_other_header_files = true
+
   language = "cpp"
   subsystem_name = "hdf"
   part_name = "drivers_interface_display"
 }
 
 config("libdisplay_buffer_hdi_impl_config") {
-  include_dirs = [ "./" ]
+  include_dirs = [ "./../" ]
 }
 
 ohos_shared_library("libdisplay_buffer_hdi_impl_v1_4") {
