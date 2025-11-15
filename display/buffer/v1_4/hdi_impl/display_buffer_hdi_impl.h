@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-#ifndef OHOS_HDI_DISPLAY_V1_3_DISPLAY_BUFFER_HDI_IMPL_H
-#define OHOS_HDI_DISPLAY_V1_3_DISPLAY_BUFFER_HDI_IMPL_H
+#ifndef OHOS_HDI_DISPLAY_V1_4_DISPLAY_BUFFER_HDI_IMPL_H
+#define OHOS_HDI_DISPLAY_V1_4_DISPLAY_BUFFER_HDI_IMPL_H
 
 #include <iproxy_broker.h>
 #include <unistd.h>
