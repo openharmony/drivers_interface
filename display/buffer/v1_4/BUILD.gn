@@ -83,8 +83,8 @@ ohos_shared_library("libdisplay_buffer_hdi_impl_v1_4") {
   install_images = [ "system" ]
   subsystem_name = "hdf"
   innerapi_tags = [
-    "chipsetsdk",
-    "platformsdk",
+    "chipsetsdk_sp",
+    "platformsdk_indirect",
   ]
 
   branch_protector_ret = "pac_ret"
