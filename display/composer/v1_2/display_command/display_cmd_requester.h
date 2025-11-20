@@ -219,7 +219,7 @@ EXIT:
                     break;
                 default:
                     ret = V1_0::DisplayCmdRequester<Transfer, CompHdi>::ProcessUnpackCmd(replyUnpacker,
-                            unpackCmd, replyFds, fn);
+                        unpackCmd, replyFds, fn);
                     DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
                         HDF_LOGE("%{public}s: return error, unpackCmd=%{public}s",
                         __func__, CmdUtils::CommandToString(unpackCmd)));
