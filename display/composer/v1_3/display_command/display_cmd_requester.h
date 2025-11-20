@@ -31,7 +31,7 @@ using namespace OHOS::HDI::Base;
 template <typename Transfer, typename CompHdi>
 class DisplayCmdRequester : public V1_2::DisplayCmdRequester<Transfer, CompHdi> {
 public:
-    DisplayCmdRequester(sptr<CompHdi> hdi) : BaseType1_2(hdi), hdi_1_3_(hdi) {}
+    DisplayCmdRequester(sptr<CompHdi> hdi) : BaseType1_2(hdi) {}
 
     static std::unique_ptr<DisplayCmdRequester> Create(sptr<CompHdi> hdi)
     {
@@ -47,8 +47,6 @@ public:
         return requester;
     }
 
-protected:
-    sptr<CompHdi> hdi_1_3_;
 private:
     using BaseType1_2 = V1_2::DisplayCmdRequester<Transfer, CompHdi>;
 };

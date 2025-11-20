@@ -31,5 +31,36 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_3.IDisplayCompos
     * @since 6.1
     * @version 1.0
     */
-    GetPanelPowerStatus([in] unsigned int devId, [out]  enum PanelPowerStatus status);
+    GetPanelPowerStatus([in] unsigned int devId, [out]  enum PanelPowerStatus status);+
+    /* func for smq transfer */
+    /* *
+     * @brief Initializes a command request object and gets the return result of a command request.
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param request Indicates the SharedMemQueue to Initializes.
+     * @param reply Indicates the the return result.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 6.1
+     * @version 1.0
+     */
+    InitSMQInfo([in] unsigned int devId, [in] SharedMemQueue<int> request, [out] SharedMemQueue<int> reply);
+
+    /* *
+     * @brief Send a command request.
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param inEleCnt Indicates the number of element.
+     * @param inFds Indicates the ID of HdifdParcelable.
+     * @param outEleCnt outEleCnt inEleCnt Indicates the number of element to get.
+     * @param outFds outEleCnt Indicates the ID of HdifdParcelable to get.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 6.1
+     * @version 1.0
+     */
+    DoCmdRequest([in] unsigned int devId, [in] unsigned int inEleCnt, [in] struct HdifdInfo[] inFds,
+        [out] unsigned int outEleCnt, [out] struct HdifdInfo[] outFds);
 }

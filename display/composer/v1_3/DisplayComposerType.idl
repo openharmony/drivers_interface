@@ -63,6 +63,8 @@ enum TunnelLayerProperty {
 /**
  * @brief Enumerates layer types.
  *
+ * @since 6.0
+ * @version 1.0
  */
 enum LayerType : ohos.hdi.display.composer.v1_0.LayerType {
     LAYER_TYPE_TUNNEL,            /**< Tunnel layer */

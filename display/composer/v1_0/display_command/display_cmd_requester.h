@@ -39,8 +39,7 @@ template <typename Transfer, typename CompHdi>
 class DisplayCmdRequester {
 public:
     DisplayCmdRequester(sptr<CompHdi> hdi)
-        : initFlag_(false),
-        hdi_(hdi),
+        : hdi_(hdi),
         request_(nullptr),
         reply_(nullptr)
     {
@@ -87,7 +86,6 @@ public:
         ret = hdi_->GetCmdReply(reply_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
             HDF_LOGE("%{public}s: GetCmdReply failure, ret=%{public}d", __func__, ret));
-        initFlag_ = true;
 
         ret = CmdUtils::StartPack(CONTROL_CMD_REQUEST_BEGIN, requestPacker_);
         DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
@@ -610,7 +608,7 @@ EXIT:
         return HDF_SUCCESS;
     }
 
-    int32_t SetLayerCompositionType(uint32_t devId, uint32_t layerId, CompositionType type)
+    int32_t SetLayerCompositionType(uint32_t devId, uint32_t layerId, V1_0::CompositionType type)
     {
         int32_t ret = 0;
         bool retBool = false;
@@ -867,7 +865,7 @@ protected:
                         HDF_LOGE("error: server return errs, size=%{public}zu", errMaps.size()));
                     break;
                 default:
-                    HDF_LOGE("Unpack command failure");
+                    HDF_LOGE("Unpack command failure, unpacked cmd = %{public}d", unpackCmd);
                     return HDF_FAILURE;
             }
         }
@@ -924,8 +922,8 @@ protected:
             HDF_LOGE("%{public}s: CmdRequest failed", __func__));
 
         if (replyEleCnt != 0) {
-            ret = reply_->Read(reinterpret_cast<int32_t *>(replyData_.get()),
-                               replyEleCnt, CmdUtils::TRANSFER_WAIT_TIME);
+            ret = reply_->Read(reinterpret_cast<int32_t *>(replyData_.get()), replyEleCnt,
+                CmdUtils::TRANSFER_WAIT_TIME);
             if (ret != HDF_SUCCESS) {
                 HDF_LOGE("reply read data failure, ret=%{public}d", ret);
             }
