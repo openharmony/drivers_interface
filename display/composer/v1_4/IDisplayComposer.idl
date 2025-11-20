@@ -16,6 +16,7 @@
 package ohos.hdi.display.composer.v1_4;
 
 import ohos.hdi.display.composer.v1_3.IDisplayComposer;
+import ohos.hdi.display.composer.v1_0.DisplayComposerType;
 import ohos.hdi.display.composer.v1_4.DisplayComposerType;
 sequenceable OHOS.HDI.Display.HdifdParcelable;
 
@@ -31,7 +32,7 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_3.IDisplayCompos
     * @since 6.1
     * @version 1.0
     */
-    GetPanelPowerStatus([in] unsigned int devId, [out]  enum PanelPowerStatus status);+
+    GetPanelPowerStatus([in] unsigned int devId, [out]  enum PanelPowerStatus status);
     /* func for smq transfer */
     /* *
      * @brief Initializes a command request object and gets the return result of a command request.
