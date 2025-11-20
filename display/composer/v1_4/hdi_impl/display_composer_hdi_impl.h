@@ -293,7 +293,7 @@ protected:
             }
             reqMap_.erase(reqItem);
         }
-        HDF_LOGI("%{public}s: the size of reqMap_: %{public}lu.", __func__, reqMap_.size());
+        HDF_LOGI("%{public}s: the size of reqMap_: %{public}zu.", __func__, reqMap_.size());
     }
 
     std::shared_ptr<CmdReq> GetRequest(uint32_t devId)
