@@ -69,7 +69,7 @@ public:
         DISPLAY_CHK_RETURN(impl == nullptr, nullptr,
             HDF_LOGE("%{public}s: error, VdiImpl is nullptr", __func__));
         DISPLAY_CHK_RETURN(cacheMgr == nullptr, nullptr,
-            HDF_LOGE("%{public}s: error, VdiImpl is nullptr", __func__));
+            HDF_LOGE("%{public}s: error, cacheMgr is nullptr", __func__));
         return std::make_unique<DisplayCmdResponser>(impl, cacheMgr);
     }
 

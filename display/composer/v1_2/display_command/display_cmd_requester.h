@@ -31,7 +31,7 @@ using namespace OHOS::HDI::Base;
 template <typename Transfer, typename CompHdi>
 class DisplayCmdRequester : public V1_1::DisplayCmdRequester<Transfer, CompHdi> {
 public:
-    DisplayCmdRequester(sptr<CompHdi> hdi) : BaseType1_1(hdi), hdi_1_2_(hdi) {}
+    DisplayCmdRequester(sptr<CompHdi> hdi) : BaseType1_1(hdi) {}
 
     static std::unique_ptr<DisplayCmdRequester> Create(sptr<CompHdi> hdi)
     {
@@ -203,7 +203,6 @@ EXIT:
                 HDF_LOGE("%{public}s: BeginSection failed", __func__));
 
             FenceData fenceData;
-
             std::unordered_map<int32_t, int32_t> errMaps;
             switch (unpackCmd) {
                 case REPLY_CMD_COMMIT_AND_GET_RELEASE_FENCE:
@@ -219,8 +218,11 @@ EXIT:
                         __func__, CmdUtils::CommandToString(unpackCmd)));
                     break;
                 default:
-                    HDF_LOGE("Unpack command failure, unpackCmd=%{public}d", unpackCmd);
-                    return HDF_FAILURE;
+                    ret = V1_0::DisplayCmdRequester<Transfer, CompHdi>::ProcessUnpackCmd(replyUnpacker,
+                        unpackCmd, replyFds, fn);
+                    DISPLAY_CHK_RETURN(ret != HDF_SUCCESS, ret,
+                        HDF_LOGE("%{public}s: return error, unpackCmd=%{public}s",
+                        __func__, CmdUtils::CommandToString(unpackCmd)));
             }
         }
         return HDF_SUCCESS;
@@ -421,8 +423,6 @@ EXIT:
     }
 
 protected:
-    sptr<CompHdi> hdi_1_2_;
-private:
     using BaseType1_1 = V1_1::DisplayCmdRequester<Transfer, CompHdi>;
     using BaseType1_1::request_;
     using BaseType1_1::reply_;
@@ -435,6 +435,7 @@ private:
     // Composition layers/types changed
     using BaseType1_1::compChangeLayers_;
     using BaseType1_1::compChangeTypes_;
+
     // CommitAndGetReleaseFence
     struct FenceData {
         int32_t fence_ = -1;

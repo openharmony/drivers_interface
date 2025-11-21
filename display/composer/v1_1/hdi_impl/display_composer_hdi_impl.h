@@ -129,23 +129,26 @@ public:
     virtual int32_t SetLayerPerFrameParameter(uint32_t devId, uint32_t layerId, const std::string& key,
         const std::vector<int8_t>& value) override
     {
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_1_);
         return ToDispErrCode(hdi_v1_1_->SetLayerPerFrameParameter(devId, layerId, key, value));
     }
 
     virtual int32_t GetSupportedLayerPerFrameParameterKey(std::vector<std::string>& keys) override
     {
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_1_);
         return ToDispErrCode(hdi_v1_1_->GetSupportedLayerPerFrameParameterKey(keys));
     }
 
     virtual int32_t SetDisplayOverlayResolution(uint32_t devId, uint32_t width, uint32_t height) override
     {
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_1_);
         return ToDispErrCode(hdi_v1_1_->SetDisplayOverlayResolution(devId, width, height));
     }
 
     virtual int32_t OnRefresh(uint32_t devId) override
     {
         DISPLAY_TRACE;
-        
+
         HDF_LOGD("OnRefresh(%{public}u)", devId);
         int32_t ret = HDF_SUCCESS;
         if (refreshCb_ != nullptr) {
@@ -177,12 +180,13 @@ public:
         return ToDispErrCode(hdi_v1_1_->GetHDRCapabilityInfos(devId, info));
     }
 
-    protected:
+protected:
     using BaseType1_0 = V1_0::DisplayComposerHdiImpl<Interface, CompHdi, CmdReq>;
     using BaseType1_0::WAIT_TIME_INTERVAL;
     using BaseType1_0::ToDispErrCode;
     sptr<CompHdi> hdi_v1_1_;
-    private:
+
+private:
     SeamlessChangeCallback seamlessChangeCb_;
     RefreshCallback refreshCb_;
     void *seamlessChangeCbData_;

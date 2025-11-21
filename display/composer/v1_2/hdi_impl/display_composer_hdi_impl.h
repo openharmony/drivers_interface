@@ -72,7 +72,14 @@ public:
         std::vector<uint32_t>& layers, std::vector<int32_t>& fences, bool isValidated) override
     {
         COMPOSER_CHECK_NULLPTR_RETURN(req_v1_2_);
-        bool isSupportSkipValidate = (isSupportSkipValidate_ == 1) ? 1 : 0;
+        bool isSupportSkipValidate = false;
+        {
+            std::lock_guard<std::mutex> lock(skipValidateMutex_);
+            auto skipValdaiteFlagIter = isSupportSkipValidate_.find(devId);
+            if (skipValdaiteFlagIter != isSupportSkipValidate_.end()) {
+                isSupportSkipValidate = (skipValdaiteFlagIter->second == 1) ? true : false;
+            }
+        }
         return ToDispErrCode(req_v1_2_->CommitAndGetReleaseFence(devId, fence,
             isSupportSkipValidate, skipState, needFlush, layers, fences, isValidated));
     }
@@ -83,7 +90,8 @@ public:
         value = 0;
         int32_t ret = ToDispErrCode(hdi_v1_2_->GetDisplayProperty(devId, id, value));
         if (ret == DISPLAY_SUCCESS && id == V1_2::DisplayPropertyID::DISPLAY_PROPERTY_ID_SKIP_VALIDATE) {
-            isSupportSkipValidate_ = value;
+            std::lock_guard<std::mutex> lock(skipValidateMutex_);
+            isSupportSkipValidate_.insert({devId, value});
         }
 
         return ret;
@@ -177,12 +185,14 @@ public:
     virtual int32_t SetLayerPerFrameParameterSmq(uint32_t devId, uint32_t layerId, const std::string& key,
         const std::vector<int8_t>& value) override
     {
+        COMPOSER_CHECK_NULLPTR_RETURN(req_v1_2_);
         return ToDispErrCode(req_v1_2_->SetLayerPerFrameParameterSmq(devId, layerId, key, value));
     }
 
     virtual int32_t SetDisplayPerFrameParameterSmq(uint32_t devId, const std::string& key,
         const std::vector<int8_t>& value) override
     {
+        COMPOSER_CHECK_NULLPTR_RETURN(req_v1_2_);
         return ToDispErrCode(req_v1_2_->SetDisplayPerFrameParameterSmq(devId, key, value));
     }
 	
@@ -199,7 +209,9 @@ protected:
     using BaseType1_1::ToDispErrCode;
     std::shared_ptr<CmdReq> req_v1_2_;
     sptr<CompHdi> hdi_v1_2_;
-    uint64_t isSupportSkipValidate_;
+    std::mutex skipValidateMutex_;
+    std::unordered_map<uint32_t, uint64_t> isSupportSkipValidate_;
+
 private:
     VBlankIdleCallback VBlankIdleCb_;
     void *VBlankIdleCbData_;

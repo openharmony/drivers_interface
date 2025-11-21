@@ -216,7 +216,27 @@ public:
     virtual int32_t SetDisplayVsyncEnabled(uint32_t devId, bool enabled) override
     {
         COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
-        return ToDispErrCode(hdi_->SetDisplayVsyncEnabled(devId, enabled));
+
+        std::lock_guard<std::mutex> lock(vsyncStatusMutex_);
+        auto enableIter = vsyncEnableStatus_.find(devId);
+        if (enableIter == vsyncEnableStatus_.end()) {
+            HDF_LOGE("DevId[%{public}u] not exist.", devId);
+            return DISPLAY_FAILURE;
+        }
+
+        if (enabled && enableIter->second) { // Already enabled
+            HDF_LOGD("%{public}s: vsyncStatus[%{public}u] is enabled, skip", __func__, devId);
+            return DISPLAY_SUCCESS;
+        }
+
+        int32_t ret = ToDispErrCode(hdi_->SetDisplayVsyncEnabled(devId, enabled));
+        if (ret != DISPLAY_SUCCESS) {
+            HDF_LOGD("%{public}s: vsyncStatus[%{public}u] = %{public}d, fail", __func__, devId, enabled);
+            return ret;
+        }
+
+        vsyncEnableStatus_[devId] = enabled;
+        return ret;
     }
 
     virtual int32_t RegDisplayVBlankCallback(uint32_t devId, VBlankCallback cb, void *data) override
@@ -259,14 +279,15 @@ public:
 
     virtual int32_t SetVirtualDisplayBuffer(uint32_t devId, const BufferHandle& buffer, const int32_t fence) override
     {
-        int32_t ret = DISPLAY_SUCCESS;
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
 
+        int32_t ret = DISPLAY_SUCCESS;
         sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
         if (hdiBuffer == nullptr) {
             ret = DISPLAY_FAILURE;
         } else {
             hdiBuffer->SetBufferHandle(const_cast<BufferHandle*>(&buffer));
-            sptr<HdifdParcelable> hdiFence(new HdifdParcelable);
+            sptr<HdifdParcelable> hdiFence(new HdifdParcelable());
             hdiFence->Init(fence);
             ret = ToDispErrCode(hdi_->SetVirtualDisplayBuffer(devId, hdiBuffer, hdiFence));
         }
@@ -414,7 +435,7 @@ public:
 
     virtual int32_t SetLayerMaskInfo(uint32_t devId, uint32_t layerId, const MaskInfo maskInfo) override
     {
-        COMPOSER_CHECK_NULLPTR_RETURN(hdi_);
+        COMPOSER_CHECK_NULLPTR_RETURN(req_);
         return ToDispErrCode(req_->SetLayerMaskInfo(devId, layerId, maskInfo));
     }
 
@@ -479,6 +500,9 @@ public:
             HDF_LOGE("error: hot plug callback fn is nullptr");
             ret = HDF_FAILURE;
         }
+
+        std::lock_guard<std::mutex> lock(vsyncStatusMutex_);
+        vsyncEnableStatus_[outputId] = false;
 
         return ret;
     }
@@ -560,6 +584,8 @@ protected:
     void *hotPlugCbData_;
     void *vBlankCbData_;
     sptr<IRemoteObject::DeathRecipient> recipient_;
+    std::mutex vsyncStatusMutex_;
+    std::unordered_map<uint32_t, bool> vsyncEnableStatus_;
 };
 using HdiDisplayComposer = DisplayComposerHdiImpl<IDisplayComposerInterface, IDisplayComposer, HdiDisplayCmdRequester>;
 } // namespace V1_0
