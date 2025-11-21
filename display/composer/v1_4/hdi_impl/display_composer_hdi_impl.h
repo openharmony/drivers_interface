@@ -68,6 +68,12 @@ public:
         COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_4_);
         return ToDispErrCode(hdi_v1_4_->GetPanelPowerStatus(devId, status));
     }
+
+    virtual int32_t GetDisplayConnectionType(uint32_t devId, DisplayConnectionType& outType) override
+    {
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_4_);
+        return ToDispErrCode(hdi_v1_4_->GetDisplayConnectionType(devId, outType));
+    }
 protected:
     using BaseType1_3 = V1_3::DisplayComposerHdiImpl<Interface, CompHdi, CmdReq>;
     using BaseType1_3::WAIT_TIME_INTERVAL;

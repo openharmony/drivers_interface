@@ -32,4 +32,17 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_3.IDisplayCompos
     * @version 1.0
     */
     GetPanelPowerStatus([in] unsigned int devId, [out]  enum PanelPowerStatus status);
+
+    /**
+    * @brief get display connection type
+    *
+    * @param devId Indicates the ID of the display device.
+    * @param outType Indicates the display connection type.
+    *
+    * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+    * in {@link DispErrCode} otherwise.
+    * @since 6.1
+    * @version 1.0
+    */
+    GetDisplayConnectionType([in] unsigned int devId, [out]  enum DisplayConnectionType outType);
 }

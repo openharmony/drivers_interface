@@ -54,3 +54,14 @@ enum PanelPowerStatus {
     PANEL_POWER_STATUS_OFF = 1,           /**< The panel power status is off */
     PANEL_POWER_STATUS_BUTT
 };
+
+/**
+ * @brief Enumerates the display connection type.
+ *
+ * @since 6.1
+ * @version 1.0
+ */
+enum DisplayConnectionType {
+    DISPLAY_CONNECTION_TYPE_INTERNAL = 0,           /**< Internal type */
+    DISPLAY_CONNECTION_TYPE_EXTERNAL = 1,           /**< External type */
+};
