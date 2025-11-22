@@ -39,7 +39,7 @@ class DisplayBufferHdiImpl : public V1_3::DisplayBufferHdiImpl<Interface> {
 public:
     explicit DisplayBufferHdiImpl(bool isAllocLocal = false) : BaseType4_0(isAllocLocal), allocator_v1_4_(nullptr)
     {
-        while ((allocator_v1_4_ = IAllocator::Get(true)) == nullptr) {
+        while ((allocator_v1_4_ = IAllocator::Get(false)) == nullptr) {
             // Waiting for metadata service ready
             usleep(WAIT_TIME_INTERVAL);
         }
