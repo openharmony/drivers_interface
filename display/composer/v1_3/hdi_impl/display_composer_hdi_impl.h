@@ -69,7 +69,7 @@ public:
     virtual int32_t OnHwcEvent(uint32_t devId, uint32_t eventId, const std::vector<int32_t>& eventData) override
     {
         DISPLAY_TRACE;
- 
+
         int32_t ret = HDF_SUCCESS;
         if (hwcEventCb_) {
             hwcEventCb_(devId, eventId, eventData, hwcEventCbData_);
@@ -79,7 +79,7 @@ public:
         }
         return ret;
     }
- 
+
     virtual int32_t RegHwcEventCallback(HwcEventCallback cb, void *data) override
     {
         hwcEventCb_ = cb;
@@ -118,7 +118,7 @@ public:
         COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_3_);
         sptr<NativeBuffer> hdiBuffer = new NativeBuffer(inHandle);
         COMPOSER_CHECK_NULLPTR_RETURN(hdiBuffer);
-        sptr<HdifdParcelable> hdiFence(new HdifdParcelable);
+        sptr<HdifdParcelable> hdiFence(new HdifdParcelable());
         COMPOSER_CHECK_NULLPTR_RETURN(hdiFence);
         hdiFence->Init(acquireFence);
         return ToDispErrCode(hdi_v1_3_->SetTunnelLayerBuffer(devId, tunnelId, hdiBuffer, hdiFence));
@@ -134,11 +134,13 @@ public:
         }
         return DISPLAY_SUCCESS;
     }
+
 protected:
     using BaseType1_2 = V1_2::DisplayComposerHdiImpl<Interface, CompHdi, CmdReq>;
     using BaseType1_2::WAIT_TIME_INTERVAL;
     using BaseType1_2::ToDispErrCode;
     sptr<CompHdi> hdi_v1_3_;
+
 private:
     HwcEventCallback hwcEventCb_;
     void *hwcEventCbData_;
