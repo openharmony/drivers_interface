@@ -61,7 +61,7 @@ public:
      * @since 6.1
      * @version 1.0
      */
-    virtual int32_t GetDisplayConnectionType(uint32_t devId, DisplayConnectionType &outType) = 0;
+    virtual int32_t GetDisplayConnectionType(uint32_t devId, DisplayConnectionType& outType) = 0;
 };
 } // V1_4
 } // Composer

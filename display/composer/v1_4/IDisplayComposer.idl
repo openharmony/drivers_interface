@@ -65,8 +65,8 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_3.IDisplayCompos
     DoCmdRequest([in] unsigned int devId, [in] unsigned int inEleCnt, [in] struct HdifdInfo[] inFds,
         [out] unsigned int outEleCnt, [out] struct HdifdInfo[] outFds);
 
-    /* *
-     * @brief get display connection type
+    /**
+     * @brief Get display connection type
      *
      * @param devId Indicates the ID of the display device.
      * @param outType Indicates the display connection type.
@@ -76,5 +76,5 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_3.IDisplayCompos
      * @since 6.1
      * @version 1.0
      */
-    GetDisplayConnectionType([in] unsigned int devId, [out]  enum DisplayConnectionType outType);
+    GetDisplayConnectionType([in] unsigned int devId, [out] enum DisplayConnectionType outType);
 }

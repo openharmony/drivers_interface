@@ -265,7 +265,7 @@ public:
         return ToDispErrCode(reqCur->SetDisplayPerFrameParameterSmq(devId, key, value));
     }
 
-    virtual int32_t GetDisplayConnectionType(uint32_t devId, DisplayConnectionType& outType) override
+    int32_t GetDisplayConnectionType(uint32_t devId, DisplayConnectionType& outType) override
     {
         COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_4_);
         return ToDispErrCode(hdi_v1_4_->GetDisplayConnectionType(devId, outType));
