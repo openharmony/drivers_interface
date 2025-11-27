@@ -62,7 +62,7 @@ public:
             outHandle = hdiOutBuffer->Move();
         }
         if (ret == HDF_ERR_NOT_SUPPORT) {
-            HDF_LOGW("%{public}s:The current platform device does not support", __func__);
+            HDF_LOGD("%{public}s:The current platform device does not support", __func__);
         } else {
             HDF_LOGE("%{public}s:CloneDmaBufferHandle failed, ret : %{public}d", __func__, ret);
         }
