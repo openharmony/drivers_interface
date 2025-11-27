@@ -49,6 +49,19 @@ public:
      * @version 1.0
      */
     virtual int32_t GetPanelPowerStatus(uint32_t devId, PanelPowerStatus &status) = 0;
+
+    /**
+     * @brief Obtains the display connection type.
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param outType Indicates the display connection type. The status is written by this interface.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 6.1
+     * @version 1.0
+     */
+    virtual int32_t GetDisplayConnectionType(uint32_t devId, DisplayConnectionType& outType) = 0;
 };
 } // V1_4
 } // Composer

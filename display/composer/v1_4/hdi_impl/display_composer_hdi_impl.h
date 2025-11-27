@@ -265,6 +265,12 @@ public:
         return ToDispErrCode(reqCur->SetDisplayPerFrameParameterSmq(devId, key, value));
     }
 
+    int32_t GetDisplayConnectionType(uint32_t devId, DisplayConnectionType& outType) override
+    {
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_4_);
+        return ToDispErrCode(hdi_v1_4_->GetDisplayConnectionType(devId, outType));
+    }
+
 protected:
     void PrepareParallelRequest(uint32_t outputId, bool connected)
     {
