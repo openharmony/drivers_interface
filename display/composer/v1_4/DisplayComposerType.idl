@@ -63,6 +63,7 @@ enum PanelPowerStatus {
  */
 enum DisplayPropertyID : ohos.hdi.display.composer.v1_2.DisplayPropertyID {
     DISPLAY_PROPERTY_ID_SUPPORT_PARALLEL = 4,        /**< if the hardware supports the parallel presenting */
+    DISPLAY_PROPERTY_ID_MULTI_DISPLAY_COORDINATION = 5,  /**< Indicates whether all display devices will be powered on at the same time */
 };
 
 /**
