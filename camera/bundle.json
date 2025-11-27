@@ -34,6 +34,7 @@
       },
       "build": {
         "sub_component": [
+          "//drivers/interface/camera/metadata/v1_0:camera_vendor_tag_idl_target",
           "//drivers/interface/camera/v1_4:camera_idl_target",
           "//drivers/interface/camera/v1_3:camera_idl_target",
           "//drivers/interface/camera/v1_2:camera_idl_target",
@@ -54,6 +55,22 @@
           "//drivers/peripheral/camera/test/hdi/sequenceable_test:camera_hdi_sequenceable_ut"
         ],
         "inner_kits": [
+          {
+            "name": "//drivers/interface/camera/metadata/v1_0:libcamera_vendor_tag_proxy_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/camera/metadata"
+            }
+          },
+          {
+            "name": "//drivers/interface/camera/metadata/v1_0:camera_vendor_tag_idl_headers_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/camera/metadata"
+            }
+          },
           {
             "name": "//drivers/interface/camera/v1_4:libcamera_stub_1.4",
             "header": {

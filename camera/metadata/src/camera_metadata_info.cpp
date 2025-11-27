@@ -24,13 +24,17 @@
 #include "camera_metadata_item_info.h"
 #include "camera_vendor_tag.h"
 #include "metadata_utils.h"
+#include "metadata/v1_0/icamera_vendor_tag.h"
 
 namespace OHOS::Camera {
 static std::mutex g_mtx;
 static std::mutex g_vendorTagImplMtx;
+#ifndef CAMERA_VENDOR_TAG
 static CameraVendorTag* g_vendorTagImpl = nullptr;
 const char* g_exampleVendorTagLib = "libcamera_example_vendor_tag_impl.z.so";
-const char* g_vendorTagLib = "libcamera_vendor_tag_impl.z.so";
+#else
+static sptr<OHOS::HDI::Camera::Metadata::V1_0::ICameraVendorTag> g_cameraVendorTagService = nullptr;
+#endif
 const int METADATA_HEADER_DATA_SIZE = 4;
 const uint32_t itemLen = sizeof(camera_metadata_item_entry_t);
 const std::vector<uint32_t> g_metadataTags = {
@@ -698,13 +702,10 @@ common_metadata_header_t *CameraMetadata::AllocateCameraMetadataBuffer(uint32_t 
 int32_t LoadVendorTagImpl()
 {
     std::lock_guard<std::mutex> lock(g_vendorTagImplMtx);
+#ifndef CAMERA_VENDOR_TAG
     if (g_vendorTagImpl == nullptr) {
         void* libHandle = nullptr;
-#ifndef CAMERA_VENDOR_TAG
         libHandle = dlopen(g_exampleVendorTagLib, RTLD_LAZY);
-#else
-        libHandle = dlopen(g_vendorTagLib, RTLD_LAZY);
-#endif
         if (libHandle == nullptr) {
             METADATA_ERR_LOG("dlopen failed %{public}s", __func__);
             return CAM_META_FAILURE;
@@ -725,7 +726,15 @@ int32_t LoadVendorTagImpl()
             return CAM_META_FAILURE;
         }
     }
-
+#else
+        if (g_cameraVendorTagService == nullptr) {
+            g_cameraVendorTagService = OHOS::HDI::Camera::Metadata::V1_0::ICameraVendorTag::Get(true);
+        }
+        if (g_cameraVendorTagService == nullptr) {
+            METADATA_ERR_LOG("Get ICameraVendorTag failed %{public}s", __func__);
+            return CAM_META_FAILURE;
+        }
+#endif
     return CAM_META_SUCCESS;
 }
 
@@ -772,7 +781,17 @@ int32_t CameraMetadata::GetCameraMetadataItemType(uint32_t item, uint32_t *dataT
             return CAM_META_FAILURE;
         }
         std::lock_guard<std::mutex> lock(g_vendorTagImplMtx);
+#ifndef CAMERA_VENDOR_TAG
         *dataType = g_vendorTagImpl->GetVendorTagType(item);
+#else
+        int8_t hdiDataType = -1;
+        ret = g_cameraVendorTagService->GetVendorTagType(item, hdiDataType);
+        *dataType = static_cast<uint32_t>(hdiDataType);
+        if (ret != CAM_META_SUCCESS) {
+            METADATA_ERR_LOG("GetVendorTagType failed");
+            return CAM_META_FAILURE;
+        }
+#endif
         return CAM_META_SUCCESS;
     }
     int32_t ret = GetMetadataSection(itemTag, &section);
@@ -811,8 +830,13 @@ const char *CameraMetadata::GetCameraMetadataItemName(uint32_t item)
             return nullptr;
         }
         std::lock_guard<std::mutex> lock(g_vendorTagImplMtx);
+#ifndef CAMERA_VENDOR_TAG
         const char* tagName = g_vendorTagImpl->GetVendorTagName(item);
-        return tagName;
+#else
+        void* tagName = nullptr;
+        g_cameraVendorTagService->GetVendorTagName(item, tagName);
+#endif
+        return reinterpret_cast<const char*>(tagName);
     }
     int32_t ret = GetMetadataSection(itemTag, &section);
     if (ret != CAM_META_SUCCESS) {
@@ -1701,7 +1725,18 @@ int32_t CameraMetadata::GetAllVendorTags(std::vector<vendorTag_t>& tagVec)
         return CAM_META_FAILURE;
     }
     std::lock_guard<std::mutex> lock(g_vendorTagImplMtx);
+#ifndef CAMERA_VENDOR_TAG
     g_vendorTagImpl->GetAllVendorTags(tagVec);
+#else
+    std::vector<OHOS::HDI::Camera::Metadata::V1_0::VendorTag> hdiTagVec;
+    g_cameraVendorTagService->GetAllVendorTags(hdiTagVec);
+    tagVec.resize(hdiTagVec.size());
+    for (uint32_t i = 0; i < hdiTagVec.size(); ++i) {
+        tagVec[i].tagId = hdiTagVec[i].tagId;
+        tagVec[i].tagName = reinterpret_cast<const char*>(hdiTagVec[i].tagName);
+        tagVec[i].tagType = hdiTagVec[i].tagType;
+    }
+#endif
     return CAM_META_SUCCESS;
 }
 
