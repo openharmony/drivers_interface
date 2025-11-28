@@ -481,7 +481,7 @@ int MetadataUtils::copyEncodeToStringMem(common_metadata_header_t *meta, char *e
 std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string setting)
 {
     int32_t ret;
-    uint32_t totalLen = setting.capacity();
+    uint32_t totalLen = setting.size();
     const uint32_t headerLength = sizeof(common_metadata_header_t);
     const uint32_t itemLen = sizeof(camera_metadata_item_entry_t);
     const uint32_t itemFixedLen = offsetof(camera_metadata_item_entry_t, data);
