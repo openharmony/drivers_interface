@@ -62,7 +62,7 @@ public:
             outHandle = hdiOutBuffer->Move();
         }
         if (ret != HDF_SUCCESS && ret != HDF_ERR_NOT_SUPPORT) {
-             HDF_LOGE("%{public}s:CloneDmaBufferHandle failed, ret : %{public}d", __func__, ret);
+            HDF_LOGE("%{public}s:CloneDmaBufferHandle failed, ret : %{public}d", __func__, ret);
         }
         return ret;
     }
