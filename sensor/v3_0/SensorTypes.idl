@@ -84,7 +84,7 @@ struct HdfSensorInformation {
     long maxDelay; /**< Maxmum sample period allowed in microseconds */
     unsigned int fifoMaxEventCount; /**< Maxmum number of events of this sensor that could be batched */
     struct DeviceSensorInfo deviceSensorInfo; /**< sensor ID info of the device */
-    unsigned int reserved; /**< Reserved fields */
+    unsigned int reserved; /**< The first uint8 represents is_mock_sensor, and the rest are to be determined. */
 };
 
 /**
