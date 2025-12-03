@@ -35,7 +35,8 @@
      },
      "build":{
         "sub_component":[
-           "//drivers/interface/user_auth/v4_0:user_auth_idl_target"
+           "//drivers/interface/user_auth/v4_0:user_auth_idl_target",
+           "//drivers/interface/user_auth/v4_1:user_auth_idl_target"
         ],
         "test":[
 
@@ -51,7 +52,7 @@
               }
            },
            {
-              "name":"//drivers/interface/user_auth/v4_0:user_auth_idl_headers",
+              "name":"//drivers/interface/user_auth/v4_0:user_auth_idl_headers_4.0",
               "header":{
                  "header_files":[
 
@@ -61,6 +62,33 @@
            },
            {
               "name":"//drivers/interface/user_auth/v4_0:libuser_auth_stub_4.0",
+              "header":{
+                 "header_files":[
+
+                 ],
+                 "header_base":"//drivers/interface/user_auth"
+              }
+           },
+           {
+              "name":"//drivers/interface/user_auth/v4_1:libuser_auth_proxy_4.1",
+              "header":{
+                 "header_files":[
+
+                 ],
+                 "header_base":"//drivers/interface/user_auth"
+              }
+           },
+           {
+              "name":"//drivers/interface/user_auth/v4_1:user_auth_idl_headers_4.1",
+              "header":{
+                 "header_files":[
+
+                 ],
+                 "header_base":"//drivers/interface/user_auth"
+              }
+           },
+           {
+              "name":"//drivers/interface/user_auth/v4_1:libuser_auth_stub_4.1",
               "header":{
                  "header_files":[
 
