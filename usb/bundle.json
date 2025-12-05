@@ -236,13 +236,6 @@
             "header_files": [],
             "header_base": "//drivers/interface/usb/serial"
           }
-        },
-        {
-          "name": "//drivers/interface/usb/serial/v1_0:libserial_stub_1.0",
-          "header": {
-            "header_files": [],
-            "header_base": "//drivers/interface/usb/serial"
-          }
         }
       ]
     }

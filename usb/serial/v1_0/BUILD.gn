@@ -21,7 +21,7 @@ hdi("serial") {
   ]
 
   language = "cpp"
-  mode = "ipc"
+  mode = "passthrough"
   subsystem_name = "hdf"
   part_name = "drivers_interface_usb"
 }
