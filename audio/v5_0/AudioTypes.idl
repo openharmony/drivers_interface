@@ -433,7 +433,7 @@ struct AudioSceneDescriptor {
  * @brief Defines audio input type.
  *
  * @since 4.1
- * @version 3.2
+ * @version 3.3
  */
 enum AudioInputType {
     AUDIO_INPUT_DEFAULT_TYPE             = 0,      /**< Assigned default input type */
@@ -452,6 +452,7 @@ enum AudioInputType {
     AUDIO_INPUT_VOICE_TRANSCRIPTION      = 1 << 12, /**< Assigned voice transcription input type */
     AUDIO_INPUT_OFFLOAD_CAPTURE_TYPE     = 1 << 13, /**< Assigned offload capture input type */
     AUDIO_INPUT_ULTRASONIC_TYPE          = 1 << 14, /**< Assigned ultrasonic input type */
+    AUDIO_INPUT_RAW_AI_TYPE              = 1 << 15, /**< Assigned raw ai input type */
 };
 
 /**
