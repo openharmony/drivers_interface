@@ -1178,6 +1178,13 @@ typedef enum camera_device_metadata_tag {
     */
     OHOS_CONTROL_PHOTO_QUALITY_PRIORITIZATION,
     /**
+     * ohos.control.removeSensorRestraint [static, uint8, public]
+     *
+     * camera device property, set current camera device remove sensor restraint
+     * (i.e. uint8: 0-false/1-true ...)
+    */
+    OHOS_CONTROL_REMOVE_SENSOR_RESTRAINT,
+    /**
      * ohos.device.controlEnd
      *
      * device controlEnd
