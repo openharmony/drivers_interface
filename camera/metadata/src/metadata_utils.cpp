@@ -333,6 +333,20 @@ void MetadataUtils::ReadCameraMetadata(MessageParcel &data, common_metadata_head
             METADATA_ERR_LOG("MetadataUtils::ReadCameraMetadata item.count is more than supported value");
         }
         MetadataUtils::ReadMetadata(item, data);
+        uint32_t dataType;
+        int32_t ret = GetCameraMetadataItemType(item.item, &dataType);
+        if (ret != CAM_META_SUCCESS) {
+            METADATA_ERR_LOG("MetadataUtils::ReadCameraMetadata get item type failed!");
+            FreeMetadataBuffer(item);
+            continue;
+        }
+        if (dataType != item.data_type) {
+            METADATA_ERR_LOG("MetadataUtils::ReadCameraMetadata item data type mismatch! item: %{public}u,"
+                             " data type: %{public}u, expected data type: %{public}u",
+                             item.item, item.data_type, dataType);
+            FreeMetadataBuffer(item);
+            continue;
+        }
         items.push_back(item);
     }
 

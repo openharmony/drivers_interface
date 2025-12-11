@@ -50,10 +50,6 @@
           "//drivers/interface/camera/v1_1:libcamera_stub_1.1",
           "//drivers/interface/camera/v1_0:libcamera_stub_1.0"
         ],
-        "test": [
-          "//drivers/peripheral/camera/test/hdi/metadata_test:camera_metadata_operator_ut",
-          "//drivers/peripheral/camera/test/hdi/sequenceable_test:camera_hdi_sequenceable_ut"
-        ],
         "inner_kits": [
           {
             "name": "//drivers/interface/camera/metadata/v1_0:libcamera_vendor_tag_proxy_1.0",
