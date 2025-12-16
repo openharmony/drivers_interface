@@ -25,6 +25,11 @@
     ],
     "rom": "700KB",
     "ram": "1MB",
+    "features": [
+      "drivers_interface_display_community",
+      "drivers_interface_display_vdi_default",
+      "drivers_interface_display_hicollie_enable"
+    ],
     "deps": {
       "components": [
         "hdf_core",
