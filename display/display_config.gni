@@ -12,25 +12,25 @@
 # limitations under the License.
 
 declare_args() {
-  drivers_peripheral_display_community = false
-  drivers_peripheral_display_hicollie_enable = false
-  drivers_peripheral_display_vdi_default = false
+  drivers_interface_display_community = false
+  drivers_interface_display_hicollie_enable = false
+  drivers_interface_display_vdi_default = false
 }
 
-if (drivers_peripheral_display_community) {
+if (drivers_interface_display_community) {
   display_defines = [ "DISPLAY_COMMUNITY" ]
 } else {
   display_defines = []
 }
 
-if (drivers_peripheral_display_vdi_default) {
+if (drivers_interface_display_vdi_default) {
   display_defines += [
     "COMPOSER_VDI_DEFAULT_LIBRARY_ENABLE",
     "BUFFER_VDI_DEFAULT_LIBRARY_ENABLE",
   ]
 }
 
-if (!drivers_peripheral_display_community) {
-  drivers_peripheral_display_hicollie_enable = true
+if (!drivers_interface_display_community) {
+  drivers_interface_display_hicollie_enable = true
   display_defines += [ "DISPLAY_HICOLLIE_ENABLE" ]
 }
