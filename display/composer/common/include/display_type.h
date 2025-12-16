@@ -40,7 +40,6 @@
 
 #ifdef __cplusplus
 extern "C" {
-
 #endif
 /**
  * @brief Enumerates pixel formats.
