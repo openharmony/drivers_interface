@@ -62,7 +62,8 @@
         "//drivers/interface/display/graphic/common/v1_1:display_commontype_idl_target",
         "//drivers/interface/display/graphic/common/v2_0:display_commontype_idl_target",
         "//drivers/interface/display/graphic/common/v2_1:display_commontype_idl_target",
-        "//drivers/interface/display/graphic/common/v2_2:display_commontype_idl_target"
+        "//drivers/interface/display/graphic/common/v2_2:display_commontype_idl_target",
+        "//drivers/interface/display/graphic/common/v2_3:display_commontype_idl_target"
       ],
       "inner_kits": [
         {
@@ -442,6 +443,14 @@
           }
         },
         {
+          "name": "//drivers/interface/display/graphic/common/v2_3:libdisplay_commontype_proxy_2.3",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/display/graphic/common"
+          }
+        },
+        {
           "name": "//drivers/interface/display/graphic/common/v2_1:display_commontype_idl_headers_2.1",
           "header": {
             "header_files": [
@@ -451,6 +460,14 @@
         },
         {
           "name": "//drivers/interface/display/graphic/common/v2_2:display_commontype_idl_headers_2.2",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/display/graphic/common"
+          }
+        },
+        {
+          "name": "//drivers/interface/display/graphic/common/v2_3:display_commontype_idl_headers_2.3",
           "header": {
             "header_files": [
             ],
