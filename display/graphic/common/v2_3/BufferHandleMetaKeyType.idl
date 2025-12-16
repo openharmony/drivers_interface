@@ -20,10 +20,13 @@
  * @version 2.3
  */
 
-
 package ohos.hdi.display.graphic.common.v2_3;
 import ohos.hdi.display.graphic.common.v2_2.BufferHandleMetaKeyType;
 
+/**
+ * @ brief Enumerates buffer handle attribution keys.
+ *
+ */
 enum BufferHandleAttrKey : ohos.hdi.display.graphic.common.v2_2.BufferHandleAttrKey {
     ATTRKEY_CLD_METADATA = 4102,                    // value: cld metadata
 };
