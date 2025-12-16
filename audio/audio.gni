@@ -1,0 +1,13 @@
+# Copyright (c) Huawei Technologies Co., Ltd. 2021. All rights reserved.
+
+declare_args() {
+  drivers_interface_audio_feature_alsa_lib = false
+  drivers_interface_audio_feature_offload = false
+  drivers_interface_audio_community = false
+}
+
+if (drivers_interface_audio_community) {
+  audio_defines = [ "AUDIO_COMMUNITY" ]
+} else {
+  audio_defines = []
+}
