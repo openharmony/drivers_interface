@@ -41,7 +41,7 @@ if (defined(ohos_lite)) {
     part_name = "drivers_interface_sensor"
   }
   hdi("sensor_transform") {
-    module_name = "sensor_service"
+    module_name = "sensor_transform_service"
 
     sources = [
       "ISensorTransformInterfaces.idl",
