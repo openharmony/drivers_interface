@@ -32,6 +32,8 @@ if (defined(ohos_lite)) {
     
     no_other_header_files = true
 
+    mode = "passthrough"
+
     language = "cpp"
     subsystem_name = "hdf"
     part_name = "drivers_interface_sensor"
