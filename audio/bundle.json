@@ -16,6 +16,11 @@
         "small",
         "standard"
       ],
+      "features": [
+        "drivers_interface_audio_feature_alsa_lib",
+        "drivers_interface_audio_community",
+        "drivers_interface_audio_feature_offload"
+      ],
       "rom": "675KB",
       "ram": "1024KB",
       "deps": {
