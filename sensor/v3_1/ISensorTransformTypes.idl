@@ -1,0 +1,59 @@
+/*
+ * SPDX-License-Identifier: Apache-2.0
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 1.1 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup HdiSensor
+ * @{
+ *
+ * @brief Provides unified APIs for sensor services to access sensor drivers.
+ *
+ * A sensor service can obtain a sensor driver object or agent and then call APIs provided by this object or agent to
+ * access different types of sensor devices based on the sensor IDs, thereby obtaining sensor information,
+ * subscribing to or unsubscribing from sensor data, enabling or disabling a sensor,
+ * setting the sensor data reporting mode, and setting sensor options such as the accuracy and measurement range.
+ *
+ * @version 3.1
+ */
+
+/**
+ * @file ISensorTransformTypes.idl
+ *
+ * @brief Defines the data used by the sensor module, including the sensor information,
+ * and reported sensor data.
+ *
+ * @since 6.1
+ * @version 3.1
+ */
+
+package ohos.hdi.sensor.v3_1;
+
+struct HdfSensorData {
+    int sensorTypeId;              /**< Sensor type ID */
+    int version;                   /**< Sensor algorithm version */
+    long timestamp;                /**< Time when sensor data was reported */
+    int option;                    /**< Sensor data options, including the measurement range and accuracy */
+    int mode;                      /**< Sensor data reporting mode (described in {@link SensorMode}) */
+    unsigned char[] data;          /**< Sensor data */
+    unsigned int dataLen;          /**< Sensor data length */
+    int deviceId;                  /**< Device ID */
+    int sensorId;                  /**< Sensor ID */
+    int location;                  /**< Is the device a local device or an external device */
+};
+
+struct HdfDeviceStatus {
+    unsigned int HdfDeviceStatus;  /**< device status, look DMDeviceStatus */
+    unsigned int reserve;          /**< scale */
+};

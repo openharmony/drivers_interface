@@ -40,4 +40,22 @@ if (defined(ohos_lite)) {
     subsystem_name = "hdf"
     part_name = "drivers_interface_sensor"
   }
+  hdi("sensor_transform") {
+    module_name = "sensor_service"
+
+    sources = [
+      "ISensorTransformInterfaces.idl",
+      "ISensorTransformTypes.idl",
+    ]
+    innerapi_tags = [
+      "chipsetsdk",
+      "platformsdk_indirect",
+    ]
+    
+    no_other_header_files = true
+
+    language = "cpp"
+    subsystem_name = "hdf"
+    part_name = "drivers_interface_sensor"
+  }
 }
