@@ -25,7 +25,7 @@
  * subscribing to or unsubscribing from sensor data, enabling or disabling a sensor,
  * setting the sensor data reporting mode, and setting sensor options such as the accuracy and measurement range.
  *
- * @version 3.1
+ * @version 1.0
  */
 
 /**
@@ -35,10 +35,10 @@
  * and reported sensor data.
  *
  * @since 6.1
- * @version 3.1
+ * @version 1.0
  */
 
-package ohos.hdi.sensor.v3_1;
+package ohos.hdi.sensor.transform.v1_0;
 
 struct HdfSensorData {
     int sensorTypeId;              /**< Sensor type ID */

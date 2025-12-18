@@ -13,26 +13,22 @@
 
 import("//build/config/components/hdi/hdi.gni")
 if (defined(ohos_lite)) {
-  group("libsensor_proxy_3.1") {
+  group("libsensor_transform_proxy_1.0") {
     deps = []
     public_configs = []
   }
 } else {
-  hdi("sensor") {
-    module_name = "sensor_service"
+  hdi("sensor_transform") {
+    module_name = "sensor_transform_service"
 
     sources = [
-      "ISensorInterface.idl",
-      "SensorTypes.idl",
+      "ISensorTransformInterfaces.idl",
+      "ISensorTransformTypes.idl",
     ]
     innerapi_tags = [
       "chipsetsdk",
       "platformsdk_indirect",
     ]
-
-    proxy_deps = [ "../v3_0:libsensor_proxy_3.0" ]
-
-    stub_deps = [ "../v3_0:libsensor_stub_3.0" ]
     
     no_other_header_files = true
 
