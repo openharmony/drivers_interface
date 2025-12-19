@@ -290,6 +290,7 @@ enum AudioExtParamKey {
     AUDIO_EXT_PARAM_KEY_STATUS   = 5,    /**< Distributed audio extra param key device status event */
     AUDIO_EXT_PARAM_KEY_USB_DEVICE = 101, /**< Check USB device type ARM or HIFI */
     AUDIO_EXT_PARAM_KEY_LOWPOWER = 1000, /**< Low power event type */
+    AUDIO_EXT_PARAM_KEY_CAPABILITY = 1001, /**< Query device capability */
 };
 
 /**
