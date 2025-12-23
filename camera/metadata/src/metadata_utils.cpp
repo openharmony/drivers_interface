@@ -726,30 +726,37 @@ void MetadataUtils::FreeMetadataBuffer(camera_metadata_item_t &entry)
     if (entry.data_type == META_TYPE_BYTE) {
         if (entry.data.u8 != nullptr) {
             delete[] entry.data.u8;
+            entry.data.u8 = nullptr;
         }
     } else if (entry.data_type == META_TYPE_INT32) {
         if (entry.data.i32 != nullptr) {
             delete[] entry.data.i32;
+            entry.data.i32 = nullptr;
         }
     } else if (entry.data_type == META_TYPE_FLOAT) {
         if (entry.data.f != nullptr) {
             delete[] entry.data.f;
+            entry.data.f = nullptr;
         }
     } else if (entry.data_type == META_TYPE_INT64) {
         if (entry.data.i64 != nullptr) {
             delete[] entry.data.i64;
+            entry.data.i64 = nullptr;
         }
     } else if (entry.data_type == META_TYPE_UINT32) {
         if (entry.data.ui32 != nullptr) {
             delete[] entry.data.ui32;
+            entry.data.ui32 = nullptr;
         }
     } else if (entry.data_type == META_TYPE_DOUBLE) {
         if (entry.data.d != nullptr) {
             delete[] entry.data.d;
+            entry.data.d = nullptr;
         }
     } else if (entry.data_type == META_TYPE_RATIONAL) {
         if (entry.data.r != nullptr) {
             delete[] entry.data.r;
+            entry.data.r = nullptr;
         }
     }
 }
