@@ -429,7 +429,8 @@ std::string MetadataUtils::EncodeToString(std::shared_ptr<CameraMetadata> metada
 
     common_metadata_header_t *meta = metadata->get();
     METADATA_CHECK_ERROR_RETURN_RET_LOG(
-        UINT32_MAX / itemLen <= meta->item_count, {}, "UINT32_MAX / itemLen <= meta->item_count");
+        (static_cast<uint64_t>(headerLength) + (itemLen * meta->item_count) + meta->data_count) >
+        static_cast<uint64_t>(UINT32_MAX), {}, "encodeDataLen is overflow");
     uint32_t encodeDataLen = headerLength + (itemLen * meta->item_count) + meta->data_count;
     std::string s(encodeDataLen, '\0');
     char *encodeData = &s[0];
@@ -447,7 +448,7 @@ std::string MetadataUtils::EncodeToString(std::shared_ptr<CameraMetadata> metada
             ret != EOK, {}, "MetadataUtils::EncodeToString Failed to copy memory for item fixed fields");
         encodeData += itemFixedLen;
         METADATA_CHECK_ERROR_RETURN_RET_LOG(
-            encodeDataLen <= itemFixedLen, {}, "encodeDataLen <= itemFixedLen");
+            encodeDataLen < itemFixedLen, {}, "encodeDataLen <= itemFixedLen");
         encodeDataLen -= itemFixedLen;
         METADATA_CHECK_ERROR_RETURN_RET_LOG(
             itemLen < itemFixedLen, {}, "itemLen <= itemFixedLen");
@@ -495,7 +496,7 @@ int MetadataUtils::copyEncodeToStringMem(common_metadata_header_t *meta, char *e
 std::shared_ptr<CameraMetadata> MetadataUtils::DecodeFromString(std::string setting)
 {
     int32_t ret;
-    uint32_t totalLen = setting.size();
+    uint32_t totalLen = setting.capacity();
     const uint32_t headerLength = sizeof(common_metadata_header_t);
     const uint32_t itemLen = sizeof(camera_metadata_item_entry_t);
     const uint32_t itemFixedLen = offsetof(camera_metadata_item_entry_t, data);
