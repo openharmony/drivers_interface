@@ -1243,6 +1243,22 @@ typedef enum camera_device_metadata_tag {
     */
     OHOS_CONTROL_PHOTO_QUALITY_PRIORITIZATION,
     /**
+     * ohos.ability.previewQualityPrioritization [static, uint8[], public]
+     * camera device property, report camera default preview quality prioritization
+     *(i.e. uint8[]: 1 2 3 ...)
+     * @since 6.1
+     * @version 1.0
+     */
+    OHOS_ABILITY_CAMERA_PREVIEW_QUALITY_PRIORITIZATION,
+    /**
+     * ohos.control.previewQualityPrioritization [static, uint8, public]
+     * camera device property, set current settings of preview quality prioritization
+     *(i.e. uint8 1 2 3 ...)
+     * @since 6.1
+     * @version 1.0
+     */
+    OHOS_CONTROL_CAMERA_PREVIEW_QUALITY_PRIORITIZATION,
+    /**
      * ohos.control.requestCameraSwitch [static, enum, public]
      *
      * camera device property, set current camera switch
@@ -3809,6 +3825,14 @@ typedef enum camera_photo_quality_prioritization {
     OHOS_CAMERA_PHOTO_QUALITY_PRIORITIZATION_HIGH_QUALITY = 0,
     OHOS_CAMERA_PHOTO_QUALITY_PRIORITIZATION_SPEED,
 } camera_photo_quality_prioritization_t;
+
+// OHOS_ABILITY_CAMERA_PREVIEW_QUALITY_PRIORITIZATION
+// OHOS_CONTROL_CAMERA_PREVIEW_QUALITY_PRIORITIZATION
+// OHOS_STATUS_CAMERA_PREVIEW_QUALITY_PRIORITIZATION
+enum CameraPreviewQualityPrioritization {
+    OHOS_CAMERA_PREVIEW_QUALITY_PRIORITIZATION_HIGH_QUALITY = 0,
+    OHOS_CAMERA_PREVIEW_QUALITY_PRIORITIZATION_HIGH_SPEED,
+};
 
 // OHOS_CONTROL_REQUEST_CAMERA_SWITCH enumeration values
 typedef enum camera_switch_mode {
