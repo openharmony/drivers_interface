@@ -46,11 +46,10 @@ struct HdfSensorData {
     long timestamp;                /**< Time when sensor data was reported */
     int option;                    /**< Sensor data options, including the measurement range and accuracy */
     int mode;                      /**< Sensor data reporting mode (described in {@link SensorMode}) */
-    unsigned char[] data;          /**< Sensor data */
-    unsigned int dataLen;          /**< Sensor data length */
     int deviceId;                  /**< Device ID */
     int sensorId;                  /**< Sensor ID */
     int location;                  /**< Is the device a local device or an external device */
+    unsigned char[] data;          /**< Sensor data */
 };
 
 struct HdfDeviceStatus {
