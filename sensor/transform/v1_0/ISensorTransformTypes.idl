@@ -53,7 +53,7 @@ struct HdfSensorData {
 };
 
 struct HdfDeviceStatus {
-    unsigned int HdfDeviceStatus;  /**< device status, look DMDeviceStatus */
-    unsigned int HdfPolicy;
+    unsigned int deviceStatus;  /**< device status, look DMDeviceStatus */
+    unsigned int policy;
     unsigned int[] reserve;
 };
