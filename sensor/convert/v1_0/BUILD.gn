@@ -13,17 +13,17 @@
 
 import("//build/config/components/hdi/hdi.gni")
 if (defined(ohos_lite)) {
-  group("libsensor_transform_proxy_1.0") {
+  group("libsensor_convert_proxy_1.0") {
     deps = []
     public_configs = []
   }
 } else {
-  hdi("sensor_transform") {
-    module_name = "sensor_transform_service"
+  hdi("sensor_convert") {
+    module_name = "sensor_convert_service"
 
     sources = [
-      "ISensorTransformInterfaces.idl",
-      "ISensorTransformTypes.idl",
+      "ISensorConvertInterfaces.idl",
+      "ISensorConvertTypes.idl",
     ]
     innerapi_tags = [
       "chipsetsdk",

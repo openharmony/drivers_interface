@@ -29,7 +29,7 @@
  */
 
 /**
- * @file ISensorTransformTypes.idl
+ * @file ISensorconvertTypes.idl
  *
  * @brief Defines the data used by the sensor module, including the sensor information,
  * and reported sensor data.
@@ -38,7 +38,7 @@
  * @version 1.0
  */
 
-package ohos.hdi.sensor.transform.v1_0;
+package ohos.hdi.sensor.convert.v1_0;
 
 struct HdfSensorData {
     int sensorTypeId;              /**< Sensor type ID */
