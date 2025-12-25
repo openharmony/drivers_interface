@@ -40,7 +40,7 @@
 
 package ohos.hdi.sensor.convert.v1_0;
 
-import ohos.hdi.sensor.convert.v1_0.ISensorconvertTypes;
+import ohos.hdi.sensor.convert.v1_0.ISensorConvertTypes;
 
 /**
  * @brief Defines the functions for performing basic operations on sensors.
