@@ -3291,6 +3291,7 @@ typedef enum camera_meter_mode {
     OHOS_CAMERA_REGION_METERING,
     OHOS_CAMERA_OVERALL_METERING,
     OHOS_CAMERA_CENTER_WEIGHTED_METERING,
+    OHOS_CAMERA_CENTER_HIGHLIGHT_WEIGHTED,
 } camera_meter_mode_t;
 
 typedef enum camera_exposure_state {
