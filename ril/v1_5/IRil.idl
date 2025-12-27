@@ -97,5 +97,22 @@ interface IRil extends ohos.hdi.ril.v1_4.IRil {
     * @version 1.0
     */
     [oneway] SetPrimarySlot([in] int slotId, [in] int serialId);
+
+    /**
+     * @brief Opens the logical channel with port of the application protocol data unit (APDU).
+     *
+     * @param slotId Card slot ID.
+     * @param serialId Serial ID of a request.
+     * @param appID Application ID.
+     * @param p2 Parameter 2 of the AT instruction code.
+     * @param portIndex Logical SE interface
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-0 value if the operation fails.
+     *
+     * @since 6.1
+     * @version 1.0
+     */
+    [oneway] SimOpenLogicalChannelWithPort([in] int slotId, [in] int serialId, [in] String appID, [in] int p2,[in] int portIndex);
 }
 /** @} */
