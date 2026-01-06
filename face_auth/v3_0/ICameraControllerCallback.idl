@@ -1,0 +1,110 @@
+/*
+ * Copyright (c) 2024 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup HdfFaceAuth
+ * @{
+ *
+ * @brief Provides APIs for the face auth driver.
+ *
+ * The face auth driver provides a unified interface for the face auth service to access the face auth driver.
+ * After obtaining the face auth driver proxy, the service can call related APIs to obtain executors.
+ * After obtaining the face auth executors, the service can call related APIs to get executor information, get
+ * template information, and enroll, authenticate, and delete templates, etc.
+ *
+ * @since 3.2
+ */
+
+/**
+ * @file ICameraControllerCallback.idl
+ *
+ * @brief Defines the callback for camera control, which can be used to manage camera operations during face authentication.
+ *
+ * @since 6.1
+ */
+
+package ohos.hdi.face_auth.v3_0;
+
+import ohos.hdi.face_auth.v3_0.FaceAuthTypes;
+
+/**
+ * @brief Defines the callback for camera control, which can be used to manage camera operations during face authentication.
+ *
+ * @since 6.1
+ * @version 1.0
+ */
+[callback] interface ICameraControllerCallback {
+    /**
+     * @brief Initializes the camera hardware.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value if the operation fails.
+     *
+     * @since 6.1
+     * @version 1.0
+     */
+    Init();
+    /**
+     * @brief Uninitializes the camera hardware.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value if the operation fails.
+     *
+     * @since 6.1
+     * @version 1.0
+     */
+    Uninit();
+    /**
+     * @brief Starts a camera capture session.
+     *
+     * @param scheduleId Indicates the schedule ID of the capture session.
+     * @param captureParam Indicates the capture parameter. See {@link CaptureParam}.
+     * @param resultCode Indicates error code.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value if the operation fails.
+     *
+     * @since 6.1
+     * @version 1.0
+     */
+    BeginCapture([in] unsigned long scheduleId, [in] CaptureParam captureParam, [out] int resultCode);
+    /**
+     * @brief Ends the current camera capture session.
+     *
+     * @param scheduleId Indicates the schedule ID of the capture session.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value if the operation fails.
+     *
+     * @since 6.1
+     * @version 1.0
+     */
+    EndCapture([in] unsigned long scheduleId);
+    /**
+     * @brief Sends a command to the camera controller.
+     *
+     * @param commandId Indicates the command ID.
+     * @param input Indicates the input data.
+     * @param output Indicates the output data.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a non-zero value if the operation fails.
+     *
+     * @since 6.1
+     * @version 1.0
+     */
+    ProcessCommand([in] int commandId, [in] unsigned char[] input, [out] unsigned char[] output);
+}
+/** @} */
