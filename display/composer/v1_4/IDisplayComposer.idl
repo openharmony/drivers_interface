@@ -77,4 +77,18 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_3.IDisplayCompos
      * @version 1.0
      */
     GetDisplayConnectionType([in] unsigned int devId, [out] enum DisplayConnectionType outType);
+
+    /**
+     * @brief client layer buffer format and dataspace
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param pixelFormat is format of client layer.
+     * @param dataspace is dataspace of client layer.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 6.1
+     * @version 1.0
+     */
+    GetDisplayClientTargetProperty([in] unsigned int devId, [out] int pixelFormat, [out] int dataspace);
 }
