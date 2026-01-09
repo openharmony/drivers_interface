@@ -271,6 +271,11 @@ public:
         return ToDispErrCode(hdi_v1_4_->GetDisplayConnectionType(devId, outType));
     }
 
+    virtual int32_t GetDisplayClientTargetProperty(uint32_t devId, int32_t& pixelFormat, int32_t& dataspace) override
+    {
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_4_);
+        return ToDispErrCode(hdi_v1_4_->GetDisplayClientTargetProperty(devId, pixelFormat, dataspace));
+    }
 protected:
     void PrepareParallelRequest(uint32_t outputId, bool connected)
     {
