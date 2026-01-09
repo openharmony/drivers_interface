@@ -57,7 +57,7 @@ interface ISensorConvertInterfaces {
      * @param status Indicates the conversion policy. For details, see {@link HdfDeviceStatusPolicy}.
      * @param inSensorData Indicates the sensor data that needs to be converted. For details, see {@link HdfSensorData}.
      * @param outSensorData Indicates the converted sensor data. For details, see {@link HdfSensorData}.
-     * 
+     * @return Returns <b>0</b> if the sensor is successfully converted; returns a negative value otherwise.
      *
      * @since 6.1
      * @version 1.0
