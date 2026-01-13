@@ -26,7 +26,6 @@ namespace HDI {
 namespace Display {
 namespace Composer {
 
-bool LayerCache::needMap_ = false;
 LayerCache* LayerCache::Create(uint32_t id)
 {
     LayerCache* layer = new LayerCache(id);
@@ -146,26 +145,6 @@ sptr<Buffer::V1_2::IMapper> LayerCache::GetMapperService()
     return mapperService;
 }
 
-int32_t LayerCache::Mmap(sptr<NativeBuffer>& buffer)
-{
-    auto mapperService = GetMapperService();
-    if (mapperService == nullptr) {
-        HDF_LOGE("GetMapperService failed!");
-        return HDF_FAILURE;
-    }
-    return mapperService->Mmap(buffer);
-}
-
-int32_t LayerCache::Unmap(sptr<NativeBuffer>& buffer)
-{
-    auto mapperService = GetMapperService();
-    if (mapperService == nullptr) {
-        HDF_LOGE("GetMapperService failed!");
-        return HDF_FAILURE;
-    }
-    return mapperService->Unmap(buffer);
-}
-
 int32_t LayerCache::FreeMem(sptr<NativeBuffer>& buffer)
 {
     auto mapperService = GetMapperService();
@@ -173,16 +152,6 @@ int32_t LayerCache::FreeMem(sptr<NativeBuffer>& buffer)
         HDF_LOGE("GetMapperService failed!");
         return HDF_FAILURE;
     }
-    if (needMap_) {
-        if (buffer != nullptr && buffer->GetBufferHandle() != nullptr &&
-            ((buffer->GetBufferHandle()->usage & V1_0::HBM_USE_PROTECTED) != V1_0::HBM_USE_PROTECTED)) {
-            int32_t ret = Unmap(buffer);
-            if (ret != HDF_SUCCESS) {
-                HDF_LOGE("Unmap failed!");
-            }
-        }
-    }
-    
     return mapperService->FreeMem(buffer);
 }
 
@@ -196,16 +165,6 @@ int32_t LayerCache::RegisterBuffer(sptr<NativeBuffer>& buffer)
     if (ret != HDF_SUCCESS) {
         HDF_LOGE("Register Buffer failed!");
         return ret;
-    }
-    
-    if (needMap_) {
-        if (buffer != nullptr && buffer->GetBufferHandle() != nullptr &&
-            ((buffer->GetBufferHandle()->usage & V1_0::HBM_USE_PROTECTED) != V1_0::HBM_USE_PROTECTED)) {
-            ret = Mmap(buffer);
-            if (ret != HDF_SUCCESS) {
-                HDF_LOGE("Mmap failed!");
-            }
-        }
     }
     return HDF_SUCCESS;
 }
