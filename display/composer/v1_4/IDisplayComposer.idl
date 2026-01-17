@@ -91,4 +91,17 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_3.IDisplayCompos
      * @version 1.0
      */
     GetDisplayClientTargetProperty([in] unsigned int devId, [out] int pixelFormat, [out] int dataspace);
+
+    /**
+    * @brief Sets the colorgamut for a display device.
+    *
+    * @param devId Indicates the ID of the display device.
+    * @param gamut Indicates the colorgamut to be set.
+    *
+    * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+    * in {@link DispErrCode} otherwise.
+    * @since 6.1
+    * @version 1.0
+    */
+    SetDisplayColorGamut([in] unsigned int devId, [in] struct colorgamut gamut);
 }

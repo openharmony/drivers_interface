@@ -316,7 +316,7 @@ public:
         return DISPLAY_NOT_SUPPORT;
     }
 
-    virtual int32_t SetDisplayColorGamut(uint32_t devId, const ColorGamut& gamut) override
+    virtual int32_t SetDisplayColorGamut(uint32_t devId, ColorGamut gamut) override
     {
         return DISPLAY_NOT_SUPPORT;
     }
