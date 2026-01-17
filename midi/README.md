@@ -141,7 +141,7 @@ if (count >= 3) buffer.push_back((word2 >> 24) & 0xFF);
 
 ---
 
-### 5. 附录：其他注意事项
+### 5. 附录：其它注意事项
 
 1. **实时消息 (Realtime Messages)**
 * **Type 1 (System Common)**：结构与 Type 2 类似，处理逻辑同“短消息处理”。
