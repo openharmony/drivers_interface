@@ -88,7 +88,7 @@ public:
     * @since 6.1
     * @version 1.0
     */
-     virtual int32_t SetDisplayColorGamut(uint32_t devId, ColorGamut gamut) = 0; 
+    virtual int32_t SetDisplayColorGamut(uint32_t devId, ColorGamut gamut) = 0;
 };
 } // V1_4
 } // Composer
