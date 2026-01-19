@@ -103,5 +103,5 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_3.IDisplayCompos
     * @since 6.1
     * @version 1.0
     */
-    SetDisplayColorGamut([in] unsigned int devId, [in] struct colorgamut gamut);
+    SetDisplayColorGamut([in] unsigned int devId, [in] struct ColorGamut gamut);
 }
