@@ -451,7 +451,7 @@ public:
      * @since 4.0
      * @version 1.0
      */
-    virtual int32_t SetDisplayColorGamut(uint32_t devId, const ColorGamut& gamut) = 0;
+    virtual int32_t SetDisplayColorGamut(uint32_t devId, ColorGamut gamut) = 0;
 
     /**
      * @brief Obtains the gamut map of a display device.
