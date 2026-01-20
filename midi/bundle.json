@@ -1,7 +1,7 @@
 {
     "name": "@ohos/drivers_interface_midi",
     "description": "midi driver interface",
-    "version": "1.0",
+    "version": "6.1",
     "license": "Apache License 2.0",
     "publishAs": "code-segment",
     "segment": {
@@ -14,7 +14,8 @@
       "subsystem": "hdf",
       "adapted_system_type": [
         "small",
-        "standard"
+        "standard",
+        "mini"
       ],
       "rom": "675KB",
       "ram": "1024KB",

@@ -12,7 +12,9 @@
     "component": {
       "name": "drivers_interface_secure_element",
       "subsystem": "hdf",
-      "adapted_system_type": ["standard"],
+      "adapted_system_type": [
+        "standard"
+      ],
       "rom": "675KB",
       "ram": "1024KB",
       "deps": {
@@ -20,7 +22,7 @@
           "ipc",
           "hdf_core",
           "hilog",
-	  "c_utils"
+	        "c_utils"
         ],
         "third_party": []
       },
