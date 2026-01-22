@@ -276,6 +276,12 @@ public:
         COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_4_);
         return ToDispErrCode(hdi_v1_4_->GetDisplayClientTargetProperty(devId, pixelFormat, dataspace));
     }
+
+    virtual int32_t SetDisplayColorGamut(uint32_t devId, ColorGamut gamut) override
+    {
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_4_);
+        return ToDispErrCode(hdi_v1_4_->SetDisplayColorGamut(devId, gamut));
+    }
 protected:
     void PrepareParallelRequest(uint32_t outputId, bool connected)
     {

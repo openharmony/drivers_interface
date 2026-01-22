@@ -115,6 +115,7 @@ struct DisplayComposerVdiAdapter {
     int32_t (*CommitTunnelLayer)(uint32_t devId, uint64_t tunnelId, int32_t& releaseFence);
     int32_t (*GetDisplayConnectionType)(uint32_t devId, V1_4::DisplayConnectionType& outType);
     int32_t (*GetDisplayClientTargetProperty)(uint32_t devId, int32_t& pixelFormat, int32_t& dataspace);
+    int32_t (*SetDisplayColorGamut)(uint32_t devId, ColorGamut gamut);
 };
 
 using LoadVdiImplFunc = int32_t (*)();
@@ -194,6 +195,7 @@ using SetTunnelLayerBufferFunc = int32_t (*)(uint32_t devId, uint64_t tunnelId,
 using CommitTunnelLayerFunc = int32_t (*)(uint32_t devId, uint64_t tunnelId, int32_t& releaseFence);
 using GetDisplayConnectionTypeFunc = int32_t (*)(uint32_t devId, V1_4::DisplayConnectionType& outType);
 using GetDisplayClientTargetPropertyFunc = int32_t (*)(uint32_t devId, int32_t& pixelFormat, int32_t& dataspace);
+using SetDisplayColorGamutFunc = int32_t (*)(uint32_t devId, ColorGamut gamut);
 
 } // namespace Composer
 } // namespace Display

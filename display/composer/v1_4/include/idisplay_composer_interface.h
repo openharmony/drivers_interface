@@ -76,6 +76,19 @@ public:
      * @version 1.0
      */
     virtual int32_t GetDisplayClientTargetProperty(uint32_t devId, int32_t& pixelFormat, int32_t& dataspace) = 0;
+
+    /**
+    * @brief set the colorgamut for a dispalydevice
+    *
+    * @param devId Indicates the ID of the display device.
+    * @param gamut Indicates the colorgamut to set.
+    *
+    * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+    * in {@link DispErrCode} otherwise.
+    * @since 6.1
+    * @version 1.0
+    */
+    virtual int32_t SetDisplayColorGamut(uint32_t devId, ColorGamut gamut) = 0;
 };
 } // V1_4
 } // Composer
