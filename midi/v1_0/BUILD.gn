@@ -16,9 +16,9 @@ import("//build/config/components/hdi/hdi.gni")
 hdi("midi") {
   module_name = "midi"
   sources = [
-    "MidiTypes.idl",
     "IMidiCallback.idl",
     "IMidiInterface.idl",
+    "MidiTypes.idl",
   ]
   language = "cpp"
   mode = "passthrough"
