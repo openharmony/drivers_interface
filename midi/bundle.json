@@ -1,0 +1,56 @@
+{
+    "name": "@ohos/drivers_interface_midi",
+    "description": "midi driver interface",
+    "version": "6.1",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+      "destPath": "drivers/interface/midi"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+      "name": "drivers_interface_midi",
+      "subsystem": "hdf",
+      "adapted_system_type": [
+        "small",
+        "standard",
+        "mini"
+      ],
+      "rom": "675KB",
+      "ram": "1024KB",
+      "deps": {
+        "components": [
+          "c_utils",
+          "hdf_core",
+          "hilog"
+        ],
+        "third_party": []
+      },
+      "build": {
+        "sub_component": [
+          "//drivers/interface/midi/v1_0:midi_idl_target"
+        ],
+        "test": [
+        ],
+        "inner_kits": [
+          {
+            "name": "//drivers/interface/midi/v1_0:libmidi_proxy_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/midi"
+            }
+          },
+          {
+            "name": "//drivers/interface/midi/v1_0:midi_idl_headers_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/midi"
+            }
+          }
+        ]
+      }
+    }
+  }

@@ -1,0 +1,141 @@
+/*
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup HdiMidi
+ *
+ * @brief Provides unified APIs for MIDI services to access MIDI drivers.
+ *
+ * A MIDI service can obtain a MIDI interface object to access different types of MIDI devices,
+ * thereby obtaining device capabilities, managing ports, and transmitting MIDI data.
+ *
+ * @since 6.1
+ * @version 1.0
+ */
+
+package ohos.hdi.midi.v1_0;
+
+import ohos.hdi.midi.v1_0.MidiTypes;
+import ohos.hdi.midi.v1_0.IMidiCallback;
+
+/**
+ * @brief Provides capabilities for MIDI device management and data transmission.
+ *
+ * This interface includes methods for discovering devices, opening/closing ports, and sending MIDI messages.
+ * It serves as the boundary between the system MIDI service and the hardware abstraction layer.
+ *
+ * @see IMidiCallback
+ * @since 6.1
+ * @version 1.0
+ */
+interface IMidiInterface {
+    /**
+     * @brief Obtains the list of currently connected MIDI devices.
+     *
+     * This method enumerates all available ALSA cards and identifies those with MIDI capabilities.
+     *
+     * @param deviceList Indicates the list of MIDI devices found, including their properties and ports.
+     * @return Returns <b>0</b> if the list is successfully obtained; returns a negative value otherwise.
+     */
+    GetDeviceList([out] List<struct MidiDeviceInfo> deviceList);
+
+    /**
+     * @brief Opens a specific MIDI device.
+     *
+     * Initializes the resources associated with the device. This must be called before opening any ports.
+     *
+     * @param deviceId Indicates the ID of the device to open.
+     * @return Returns <b>0</b> if the device is opened successfully; returns a negative value otherwise.
+     * @see CloseDevice
+     */
+    OpenDevice([in] long deviceId);
+
+    /**
+     * @brief Closes a specific MIDI device.
+     *
+     * Releases all resources associated with the device.
+     *
+     * @param deviceId Indicates the ID of the device to close.
+     * @return Returns <b>0</b> if the device is closed successfully; returns a negative value otherwise.
+     * @see OpenDevice
+     */
+    CloseDevice([in] long deviceId);
+
+    /**
+     * @brief Opens an input port on a MIDI device and registers a callback for data reception.
+     *
+     * When successful, the HAL layer will start a thread or task to listen for incoming MIDI data
+     * and report it via the specified callback.
+     *
+     * @param deviceId Indicates the ID of the device.
+     * @param portId Indicates the ID of the input port to open.
+     * @param callback Indicates the callback interface for reporting MIDI events.
+     * @return Returns <b>0</b> if the input port is opened successfully; returns a negative value otherwise.
+     * @see CloseInputPort
+     */
+    OpenInputPort([in] long deviceId, [in] unsigned int portId, [in] IMidiCallback dataCallback);
+
+    /**
+     * @brief Opens an output port on a MIDI device.
+     *
+     * Prepares the port for sending MIDI data.
+     *
+     * @param deviceId Indicates the ID of the device.
+     * @param portId Indicates the ID of the output port to open.
+     * @return Returns <b>0</b> if the output port is opened successfully; returns a negative value otherwise.
+     * @see CloseOutputPort
+     */
+    OpenOutputPort([in] long deviceId, [in] unsigned int portId);
+
+    /**
+     * @brief Closes a input port.
+     *
+     * Releases the input port resources.
+     *
+     * @param deviceId Indicates the ID of the device.
+     * @param portId Indicates the ID of the input port to close.
+     * @return Returns <b>0</b> if the inpput port is closed successfully; returns a negative value otherwise.
+     * @see OpenInputPort
+     */
+    CloseInputPort([in] long deviceId, [in] unsigned int portId);
+
+    /**
+     * @brief Closes a output port.
+     *
+     * Releases the output port resources.
+     *
+     * @param deviceId Indicates the ID of the device.
+     * @param portId Indicates the ID of the output port to close.
+     * @return Returns <b>0</b> if the output port is closed successfully; returns a negative value otherwise.
+     * @see OpenOutputPort
+     */
+    CloseOutputPort([in] long deviceId, [in] unsigned int portId);
+
+    /**
+     * @brief Sends a batch of MIDI messages to a specified output port.
+     *
+     * This function transmits a list of MIDI messages. The messages are expected to be in UMP format.
+     * If the target device supports only MIDI 1.0, the HAL implementation is responsible for converting
+     * UMP messages to the legacy byte stream.
+     *
+     * @attention The timestamp in the message is used for Jitter Reduction if supported by the protocol/device.
+     *
+     * @param deviceId Indicates the ID of the device.
+     * @param portId Indicates the ID of the output port.
+     * @param messages Indicates the list of MIDI messages to send.
+     * @return Returns <b>0</b> if the messages are sent successfully; returns a negative value otherwise.
+     */
+    SendMidiMessages([in] long deviceId, [in] unsigned int portId, [in] List<struct MidiMessage> messages);
+}

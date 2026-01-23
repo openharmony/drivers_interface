@@ -1,0 +1,50 @@
+/*
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup HdiMidi
+ *
+ * @brief Provides unified APIs for MIDI services to access MIDI drivers.
+ *
+ * @since 6.1
+ * @version 1.0
+ */
+
+package ohos.hdi.midi.v1_0;
+
+import ohos.hdi.midi.v1_0.MidiTypes;
+
+/**
+ * @brief Defines the callback interface for MIDI data reception and device status changes.
+ *
+ * The MIDI service registers this callback when opening an input port. The HAL layer uses this
+ * interface to report MIDI events and device status changes to the service.
+ *
+ * @since 6.1
+ * @version 1.0
+ */
+[callback] interface IMidiCallback {
+    /**
+     * @brief Called when MIDI data is received from the hardware.
+     *
+     * @attention The implementation of this callback should be non-blocking and efficient to ensure
+     * low latency. The received data is expected to be in UMP (Universal MIDI Packet) format.
+     *
+     * @param messages Indicates the list of MIDI messages received. Each message contains a timestamp
+     * and UMP data.
+     * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
+     */
+    OnMidiDataReceived([in] List<struct MidiMessage> messages);
+}

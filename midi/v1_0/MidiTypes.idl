@@ -1,0 +1,96 @@
+/*
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package ohos.hdi.midi.v1_0;
+
+/**
+ * @brief Defines the direction of a MIDI port.
+ *
+ * @since 6.1
+ * @version 1.0
+ */
+enum MidiPortDirection {
+    PORT_DIRECTION_INPUT = 0,     /**< Input port (Data flows from device to host) */
+    PORT_DIRECTION_OUTPUT = 1,    /**< Output port (Data flows from host to device) */
+};
+
+/**
+ * @brief Defines the protocol of a MIDI device.
+ *
+ * @since 6.1
+ * @version 1.0
+ */
+enum MidiProtocol {
+    MIDI_PROTOCOL_1_0 = 1,     /**< Midi 1.0 protocol */
+    MIDI_PROTOCOL_2_0 = 2,     /**< Midi 2.0 protocol */
+};
+
+/**
+ * @brief Defines the detailed information of a MIDI port.
+ *
+ * @since 6.1
+ * @version 1.0
+ */
+struct MidiPortInfo {
+    unsigned int portId;          /**< The logical ID of the port (corresponding to ALSA subdevice ID) */
+    String name;                  /**< The friendly name of the port (e.g., "MIDI Out 1") */
+    MidiPortDirection direction;  /**< The direction of the port */
+    unsigned int reserved;               /** Reserved param **/
+};
+
+/**
+ * @brief Defines the descriptor for a MIDI device, including its ports.
+ *
+ * @since 6.1
+ * @version 1.0
+ */
+struct MidiDeviceInfo {
+    long deviceId;                       /**< Unique identifier for the device */
+    MidiProtocol protocol;               /**< Midi 1.0 or Midi 2.0 */
+    String productName;                  /**< Device name */
+    String vendorName;                   /**< Vendor name */
+    String version;                      /**< Driver or firmware version */
+    List<struct MidiPortInfo> ports;     /**< List of all ports available on this device */
+    unsigned int reserved;               /** Reserved param **/
+};
+
+/**
+ * @brief Defines the container for MIDI data transmission.
+ *
+ * This structure is designed to support MIDI 2.0 UMP (Universal MIDI Packet).
+ * Even for legacy MIDI 1.0 devices, data should be converted to UMP format
+ * before being placed in this structure.
+ *
+ * @since 6.1
+ * @version 1.0
+ */
+struct MidiMessage {
+    /**
+     * @brief Timestamp of the message.
+     *
+     * For received data (Input): The CLOCK_MONOTONIC time (ns) when data was read.
+     * For sent data (Output): The target execution time.
+     * Note: UMP JR Timestamps are separate from this system timestamp.
+     */
+    long timestamp;
+
+    /**
+     * @brief The payload data containing one or more UMP packets.
+     *
+     * Data is represented as an array of 32-bit integers (words).
+     * A single UMP packet can be 1, 2, or 4 words long.
+     */
+    unsigned int[] data;
+};
