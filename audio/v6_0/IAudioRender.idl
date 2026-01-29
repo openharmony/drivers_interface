@@ -261,6 +261,23 @@ interface IAudioRender {
     SetVolume([in] float volume);
 
     /**
+     * @brief Sets the audio volume with a ramp.
+     *
+     * The volume ramp ranges from 0.0 to 1.0, and the duration for the ramp is also set.
+     * <b>0.0</b> indicates that the audio is muted, and <b>1.0</b> indicates the maximum volume.
+     *
+     * @param handle Indicates the audio handle.
+     * @param volume Indicates the target volume to set. The value ranges from 0.0 to 1.0.
+     * @param duration Indicates the transition duration to reach the target volume, which must be less than 60000ms. The unit is millisecond.
+     * @return Returns <b>0</b> if the setting is successful; returns a negative value otherwise.
+     * @see SetVolumeWithRamp
+     *
+     * @since 6.1
+     * @version 1.0
+     */
+    SetVolumeWithRamp([in] float volume, [in] unsigned int duration);
+
+    /**
      * @brief Obtains the audio volume.
      *
      * @param handle Indicates the audio handle.
