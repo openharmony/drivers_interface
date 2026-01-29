@@ -500,6 +500,18 @@ struct EcSampleAttributes {
 };
 
 /**
+ * @brief Defines audio raw sampling attributes.
+ *
+ * @since 6.1
+ * @version 1.0
+ */
+ struct RawSampleAttributes {
+    enum AudioFormat rawFormat;        /**< Audio data format. For details, see {@link AudioFormat}. */
+    unsigned int rawSampleRate;        /**< Audio sampling rate */
+    unsigned long rawChannelLayout;    /**< Audio channel layout */
+};
+
+/**
  * @brief Defines audio captureEc attributes.
  *
  * @since 5.0
@@ -527,7 +539,7 @@ struct AudioFrameLen {
  * @brief Defines audio sampling attributes.
  *
  * @since 4.1
- * @version 3.0
+ * @version 4.0
  */
 struct AudioSampleAttributes {
     enum AudioCategory type;       /**< Audio type. For details, see {@link AudioCategory} */
@@ -549,6 +561,7 @@ struct AudioSampleAttributes {
     int sourceType;                /**< Audio sourceType of render or capture */
     struct AudioOffloadInfo offloadInfo;  /**< offload info for offload stream */
     struct EcSampleAttributes ecSampleAttributes; /**< ec config */
+    struct RawSampleAttributes rawSampleAttributes; /**< raw config */
 };
 
 /**
