@@ -1,0 +1,33 @@
+{
+    "name": "@ohos/drivers_tools",
+    "description": "HDF驱动框架工具",
+    "version": "6.0",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "drivers/interface/tools"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+        "name": "drivers_tools",
+        "subsystem": "hdf",
+        "features": [],
+        "adapted_system_type": ["standard", "small", "mini"],
+        "rom": "",
+        "ram": "",
+        "deps": {
+            "components": []
+        },
+        "build": {
+            "sub_component": [
+                "//drivers/interface/tools/hc-gen:hc_gen"
+            ],
+            "inner_kits": [{
+                    "name": "//drivers/interface/tools/hc-gen:hc_gen"
+                }
+            ],
+            "test": []
+        }
+    }
+}
