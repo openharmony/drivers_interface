@@ -52,13 +52,12 @@ import ohos.hdi.sensor.convert.v1_0.ISensorConvertTypes;
 
 interface ISensorConvertInterfaces {
     /**
-     * @brief Enables the sensor available in the sensor list based on the specified sensor ID.
-     * The subscriber can obtain the sensor data only after the sensor is enabled.
+     * @brief used for converting sensor data
      *
-     * @param sensorId Indicates the sensor ID. For details, see {@link SensorTypeTag}.
-     * @param deviceId Indicates the device ID. For details, see {@link SensorTypeTag}.
-     * @param callbackId Indicates the operation is on the callback object bound to Register.
-     * @return Returns <b>0</b> if the sensor is successfully enabled; returns a negative value otherwise.
+     * @param status Indicates the conversion policy. For details, see {@link HdfDeviceStatusPolicy}.
+     * @param inSensorData Indicates the sensor data that needs to be converted. For details, see {@link HdfSensorData}.
+     * @param outSensorData Indicates the converted sensor data. For details, see {@link HdfSensorData}.
+     * @return Returns <b>0</b> if the sensor is successfully converted; returns a negative value otherwise.
      *
      * @since 6.1
      * @version 1.0
