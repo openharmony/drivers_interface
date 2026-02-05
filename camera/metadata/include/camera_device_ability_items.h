@@ -571,6 +571,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_STAGE_BOOST,
     /**
+     * ohos.ability.automotiveCameraPositon [static, enum, public]
+     *
+     * camera device property, report current automotive camera position
+     * (i.e. enum: EXTERIOR_FRONT/EXTERIOR_REAR/EXTERIOR_LEFT/ ...)
+     */
+    OHOS_ABILITY_AUTOMOTIVE_CAMERA_POSITION,
+    /**
      * ohos.camera.propertiesEnd
      *
      * camera property end
@@ -1293,6 +1300,20 @@ typedef enum camera_device_metadata_tag {
      * (i.e. uint8: 0-false/1-true ...)
      */
     OHOS_CONTROL_SYSTEM_CAPTURE,
+    /**
+     * ohos.ability.imagingMode [static, byte, public]
+     *
+     * camera device property, report current camera support imaging mode
+     * (i.e. byte ...)
+     */
+    OHOS_ABILITY_IMAGING_MODES,
+    /**
+     * ohos.control.imagingMode [static, byte, public]
+     *
+     * camera device property, set current camera imaging mode
+     * (i.e. byte ...)
+    */
+    OHOS_CONTROL_IMAGING_MOD
     /**
      * ohos.device.controlEnd
      *
@@ -3135,6 +3156,25 @@ typedef enum camera_position_enum {
     OHOS_CAMERA_POSITION_OTHER
 } camera_position_enum_t;
 
+// OHOS_ABILITY_AUTOMOTIVE_CAMERA_POSITION enumeration values
+typedef enum automotive_camera_position_enum {
+    OHOS_CAMERA_POSITION_EXTERIOR_FRONT = 0,
+    OHOS_CAMERA_POSITION_EXTERIOR_REAR,
+    OHOS_CAMERA_POSITION_EXTERIOR_LEFT,
+    OHOS_CAMERA_POSITION_EXTERIOR_RIGHT,
+    OHOS_CAMERA_POSITION_EXTERIOR_OTHER,
+    OHOS_CAMERA_POSITION_INTERIOR_OTHER,
+    OHOS_CAMERA_POSITION_INTERIOR_ROW_1_LEFT,
+    OHOS_CAMERA_POSITION_INTERIOR_ROW_1_CENTER,
+    OHOS_CAMERA_POSITION_INTERIOR_ROW_1_RIGHT,
+    OHOS_CAMERA_POSITION_INTERIOR_ROW_2_LEFT,
+    OHOS_CAMERA_POSITION_INTERIOR_ROW_2_CENTER,
+    OHOS_CAMERA_POSITION_INTERIOR_ROW_2_RIGHT,
+    OHOS_CAMERA_POSITION_INTERIOR_ROW_3_LEFT,
+    OHOS_CAMERA_POSITION_INTERIOR_ROW_3_CENTER,
+    OHOS_CAMERA_POSITION_INTERIOR_ROW_3_RIGHT
+} automotive_camera_position_enum_t;
+
 // OHOS_ABILITY_CAMERA_TYPE enumeration values
 typedef enum camera_type_enum {
     OHOS_CAMERA_TYPE_WIDE_ANGLE = 0,
@@ -3854,5 +3894,13 @@ typedef enum camera_switch_mode {
     OHOS_CAMERA_SWITCH_OFF,
     OHOS_CAMERA_SWITCH_ON,
 } camera_switch_mode_t;
+
+// OHOS_ABILITY_IMAGING_MODES
+// OHOS_CONTROL_IMAGING_MODE
+typedef enum camera_imaging_mode_enum {
+    OHOS_CAMERA_IMAGING_MODE_AUTO = 0,
+    OHOS_CAMERA_IMAGING_MODE_RGB,
+    OHOS_CAMERA_IMAGING_MODE_IR,
+} camera_imaging_mode_enum_t;
 
 #endif
