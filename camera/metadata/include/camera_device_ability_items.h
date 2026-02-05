@@ -1222,13 +1222,6 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_LOG_ASSISTANCE,
     /**
-     * ohos.control.systemCapture [static, uint8, public]
-     *
-     * camera device property, set current camera device system application capture
-     * (i.e. uint8: 0-false/1-true ...)
-     */
-    OHOS_CONTROL_SYSTEM_CAPTURE,
-    /**
      * ohos.ability.external camera lens boost [static, byte, system]
      *
      * camera device property, report current camera support .external camera
@@ -1257,22 +1250,6 @@ typedef enum camera_device_metadata_tag {
     */
     OHOS_CONTROL_PHOTO_QUALITY_PRIORITIZATION,
     /**
-     * ohos.ability.previewQualityPrioritization [static, uint8[], public]
-     * camera device property, report camera default preview quality prioritization
-     *(i.e. uint8[]: 1 2 3 ...)
-     * @since 6.1
-     * @version 1.0
-     */
-    OHOS_ABILITY_CAMERA_PREVIEW_QUALITY_PRIORITIZATION,
-    /**
-     * ohos.control.previewQualityPrioritization [static, uint8, public]
-     * camera device property, set current settings of preview quality prioritization
-     *(i.e. uint8 1 2 3 ...)
-     * @since 6.1
-     * @version 1.0
-     */
-    OHOS_CONTROL_CAMERA_PREVIEW_QUALITY_PRIORITIZATION,
-    /**
      * ohos.control.requestCameraSwitch [static, enum, public]
      *
      * camera device property, set current camera switch
@@ -1293,6 +1270,36 @@ typedef enum camera_device_metadata_tag {
      * (i.e. uint8: 0-false/1-true ...)
     */
     OHOS_CONTROL_REMOVE_SENSOR_RESTRAINT,
+    /**
+     * ohos.ability.previewQualityPrioritization [static, uint8[], public]
+     * camera device property, report camera default preview quality prioritization
+     *(i.e. uint8[]: 1 2 3 ...)
+     * @since 6.1
+     * @version 1.0
+     */
+    OHOS_ABILITY_CAMERA_PREVIEW_QUALITY_PRIORITIZATION,
+    /**
+     * ohos.control.previewQualityPrioritization [static, uint8, public]
+     * camera device property, set current settings of preview quality prioritization
+     *(i.e. uint8 1 2 3 ...)
+     * @since 6.1
+     * @version 1.0
+     */
+    OHOS_CONTROL_CAMERA_PREVIEW_QUALITY_PRIORITIZATION,
+    /**
+     * ohos.status.aeExposureCompensation [static, float, public]
+     *
+     * camera device property, get current camera ae exposure compensation
+     * (i.e. float ...)
+     */
+    OHOS_STATUS_AE_EXPOSURE_COMPENSATION,
+    /**
+     * ohos.control.systemCapture [static, uint8, public]
+     *
+     * camera device property, set current camera device system application capture
+     * (i.e. uint8: 0-false/1-true ...)
+     */
+    OHOS_CONTROL_SYSTEM_CAPTURE,
     /**
      * ohos.ability.imagingMode [static, byte, public]
      *
