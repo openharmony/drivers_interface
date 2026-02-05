@@ -1313,7 +1313,7 @@ typedef enum camera_device_metadata_tag {
      * camera device property, set current camera imaging mode
      * (i.e. byte ...)
     */
-    OHOS_CONTROL_IMAGING_MOD,
+    OHOS_CONTROL_IMAGING_MODE,
     /**
      * ohos.device.controlEnd
      *
