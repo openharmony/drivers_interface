@@ -571,6 +571,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_STAGE_BOOST,
     /**
+     * ohos.ability.automotiveCameraPositon [static, enum, public]
+     *
+     * camera device property, report current automotive camera position
+     * (i.e. enum: EXTERIOR_FRONT/EXTERIOR_REAR/EXTERIOR_LEFT/ ...)
+     */
+    OHOS_ABILITY_AUTOMOTIVE_CAMERA_POSITION,
+    /**
      * ohos.camera.propertiesEnd
      *
      * camera property end
@@ -3127,6 +3134,25 @@ typedef enum camera_position_enum {
     OHOS_CAMERA_POSITION_BACK,
     OHOS_CAMERA_POSITION_OTHER
 } camera_position_enum_t;
+
+// OHOS_ABILITY_AUTOMOTIVE_CAMERA_POSITION enumeration values
+typedef enum automotive_camera_position_enum {
+    OHOS_CAMERA_POSITION_EXTERIOR_FRONT = 0,
+    OHOS_CAMERA_POSITION_EXTERIOR_REAR,
+    OHOS_CAMERA_POSITION_EXTERIOR_LEFT,
+    OHOS_CAMERA_POSITION_EXTERIOR_RIGHT,
+    OHOS_CAMERA_POSITION_EXTERIOR_OTHER,
+    OHOS_CAMERA_POSITION_INTERIOR_OTHER,
+    OHOS_CAMERA_POSITION_INTERIOR_ROW_1_LEFT,
+    OHOS_CAMERA_POSITION_INTERIOR_ROW_1_CENTER,
+    OHOS_CAMERA_POSITION_INTERIOR_ROW_1_RIGHT,
+    OHOS_CAMERA_POSITION_INTERIOR_ROW_2_LEFT,
+    OHOS_CAMERA_POSITION_INTERIOR_ROW_2_CENTER,
+    OHOS_CAMERA_POSITION_INTERIOR_ROW_2_RIGHT,
+    OHOS_CAMERA_POSITION_INTERIOR_ROW_3_LEFT,
+    OHOS_CAMERA_POSITION_INTERIOR_ROW_3_CENTER,
+    OHOS_CAMERA_POSITION_INTERIOR_ROW_3_RIGHT
+} automotive_camera_position_enum_t;
 
 // OHOS_ABILITY_CAMERA_TYPE enumeration values
 typedef enum camera_type_enum {
