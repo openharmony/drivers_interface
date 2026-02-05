@@ -1294,6 +1294,20 @@ typedef enum camera_device_metadata_tag {
     */
     OHOS_CONTROL_REMOVE_SENSOR_RESTRAINT,
     /**
+     * ohos.ability.imagingMode [static, byte, public]
+     *
+     * camera device property, report current camera support imaging mode
+     * (i.e. byte ...)
+     */
+    OHOS_ABILITY_IMAGING_MODES,
+    /**
+     * ohos.control.imagingMode [static, byte, public]
+     *
+     * camera device property, set current camera imaging mode
+     * (i.e. byte ...)
+    */
+    OHOS_CONTROL_IMAGING_MODE,
+    /**
      * ohos.device.controlEnd
      *
      * device controlEnd
@@ -3873,5 +3887,13 @@ typedef enum camera_switch_mode {
     OHOS_CAMERA_SWITCH_OFF,
     OHOS_CAMERA_SWITCH_ON,
 } camera_switch_mode_t;
+
+// OHOS_ABILITY_IMAGING_MODES
+// OHOS_CONTROL_IMAGING_MODE
+typedef enum camera_imaging_mode_enum {
+    OHOS_CAMERA_IMAGING_MODE_AUTO = 0,
+    OHOS_CAMERA_IMAGING_MODE_RGB,
+    OHOS_CAMERA_IMAGING_MODE_IR,
+} camera_imaging_mode_enum_t;
 
 #endif
