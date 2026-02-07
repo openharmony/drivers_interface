@@ -20,6 +20,7 @@ if (defined(ohos_lite)) {
 } else {
   hdi("drm") {
     module_name = "drm_interface_service"
+    no_other_header_files = true
 
     deps = [
         "../v1_0:libdrm_proxy_1.0",
