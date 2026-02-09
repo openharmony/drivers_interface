@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Copyright (c) 2024 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,7 +19,7 @@
  *
  * @brief Provides APIs for performing suspend/wakeup operations, subscribing to the suspend/wakeup state,
  * and managing running locks.
- * 
+ *
  * After obtaining an object or proxy of this module, the power service can invoke related APIs to perform
  * suspend/wakeup operations, subscribe to the suspend/wakeup state, and manage running locks.
  *
@@ -33,7 +33,7 @@
  * @brief Provides APIs for performing suspend/wakeup operations, subscribing to the suspend/wakeup state,
  * and managing running locks.
  *
- * 
+ *
  *
  * @since 3.1
  * @version 1.1
