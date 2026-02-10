@@ -27,7 +27,9 @@
     "build": {
       "sub_component": [
         "//drivers/interface/drm/v1_0:drm_idl_target",
-        "//drivers/interface/drm/v1_0:libdrm_stub_1.0"
+        "//drivers/interface/drm/v1_0:libdrm_stub_1.0",
+        "//drivers/interface/drm/v1_1:drm_idl_target",
+        "//drivers/interface/drm/v1_1:libdrm_stub_1.1"
       ],
       "test": [
       ],
@@ -41,7 +43,7 @@
           }
         },
         {
-          "name": "//drivers/interface/drm/v1_0:drm_idl_headers",
+          "name": "//drivers/interface/drm/v1_0:drm_idl_headers_1.0",
           "header": {
             "header_files": [
             ],
@@ -50,6 +52,30 @@
         },
         {
           "name": "//drivers/interface/drm/v1_0:libdrm_stub_1.0",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/drm"
+          }
+        },
+        {
+          "name": "//drivers/interface/drm/v1_1:libdrm_proxy_1.1",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/drm"
+          }
+        },
+        {
+          "name": "//drivers/interface/drm/v1_1:drm_idl_headers_1.1",
+          "header": {
+            "header_files": [
+            ],
+            "header_base": "//drivers/interface/drm"
+          }
+        },
+        {
+          "name": "//drivers/interface/drm/v1_1:libdrm_stub_1.1",
           "header": {
             "header_files": [
             ],
