@@ -1,0 +1,62 @@
+/*
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+ * @addtogroup HdiAGnss
+ * @{
+ *
+ * @brief Provides unified APIs for the AGNSS service.
+ *
+ * The upper layer can use the interfaces provided by this module to set the AGNSS callback, AGNSS server address,
+ * AGNSS reference information, and setId.
+ *
+ * @since 6.1
+ */
+
+/*
+ * @file IAGnssInterface.idl
+ *
+ * @brief Defines the agnss interfaces to set the AGNSS callback, AGNSS server address, AGNSS reference information,
+ * and setId.
+ *
+ * @since 6.1
+ * @version 2.1
+ */
+
+package ohos.hdi.location.agnss.v2_1;
+
+import ohos.hdi.location.agnss.v2_1.AGnssTypes;
+import ohos.hdi.location.agnss.v2_0.IAGnssInterface;
+
+/*
+ * @brief Defines the agnss interfaces to set the AGNSS callback, AGNSS server address, AGNSS reference information,
+ * and setId.
+ *
+ * @since 6.1
+ */
+interface IAGnssInterface extends ohos.hdi.location.agnss.v2_0.IAGnssInterface {
+    /*
+     * @brief Ingesting Reference Information.
+     *
+     * @param refInfo Indicates the AGNSS reference information structure.
+     * For details, see {@link AGnssReferenceInfo}.
+     * @return Returns <b>0</b> if setup callback successed; returns a negative value otherwise.
+     *
+     * @since 6.1
+     * @version 1.0
+     */
+    SetAgnssReferenceInfo([in] struct AGnssReferenceInfo refInfo);
+}
+/** @} */
