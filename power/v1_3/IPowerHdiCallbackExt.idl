@@ -18,8 +18,7 @@
  * @{
  *
  * @brief Provides APIs for subscribing to the suspend/wakeup state with a tag.
- * and managing running locks.
- * 
+ *
  * After obtaining an object or proxy of this module, the power service can invoke related APIs to subscribe to the
  * suspend/wakeup state.
  *
@@ -30,7 +29,7 @@
  /**
  * @file IPowerHdiCallbackExt.idl
  *
- * @brief Provides the callbacks of the suspend/wakeup state with a tag.
+ * @brief Provides the extended callbacks of the suspend/wakeup state with a tag.
  *
  * The power module provides callbacks for the power service to obtain the suspend/wakeup state with a tag.
  *
@@ -40,13 +39,14 @@
 
 package ohos.hdi.power.v1_3;
 
+
 /**
  * @brief Represents the callbacks of the suspend/wakeup state with a tag.
  *
  * After creating a callback object, the power service can call {@link IPowerInterface} to subscribe to the
  * suspend/wakeup state changes.
  *
- * This callback must be registered via RegisterPowerCallbackExt and unregistered via UnRegisterRunningLockCallback
+ * This callback must be registered via RegisterPowerCallbackExt and unregistered via UnRegisterPowerCallbackExt
  * at {@link IPowerInterface}.
  *
  * @since 6.0
@@ -69,7 +69,7 @@ package ohos.hdi.power.v1_3;
     /**
      * @brief Callback of the wakeup state with a tag.
      *
-     * This callback is used to notify the power service when the device enters the wakeup state with a tag, and is.
+     * This callback is used to notify the power service when the device enters the wakeup state with a tag, and is
      * an enhancement to old version interface OnWakeup.
      *
      * @param tag The wakeup tag
