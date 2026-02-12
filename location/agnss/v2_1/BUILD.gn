@@ -26,4 +26,5 @@ hdi("location_agnss") {
   language = "cpp"
   subsystem_name = "hdf"
   part_name = "drivers_interface_location_agnss"
+  no_other_header_files = true
 }
