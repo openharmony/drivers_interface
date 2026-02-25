@@ -28,7 +28,8 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/location/agnss/v2_0:location_agnss_idl_target"
+          "//drivers/interface/location/agnss/v2_0:location_agnss_idl_target",
+          "//drivers/interface/location/agnss/v2_1:location_agnss_idl_target"
         ],
         "test": [
         ],
@@ -51,6 +52,30 @@
           },
           {
             "name": "//drivers/interface/location/agnss/v2_0:liblocation_agnss_stub_2.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/location/agnss"
+            }
+          },
+          {
+            "name": "//drivers/interface/location/agnss/v2_1:liblocation_agnss_proxy_2.1",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/location/agnss"
+            }
+          },
+          {
+            "name": "//drivers/interface/location/agnss/v2_1:location_agnss_idl_headers_2.1",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/location/agnss"
+            }
+          },
+          {
+            "name": "//drivers/interface/location/agnss/v2_1:liblocation_agnss_stub_2.1",
             "header": {
               "header_files": [
               ],
