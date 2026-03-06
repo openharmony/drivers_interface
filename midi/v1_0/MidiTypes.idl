@@ -59,8 +59,8 @@ struct MidiPortInfo {
 struct MidiDeviceInfo {
     long deviceId;                       /**< Unique identifier for the device */
     MidiProtocol protocol;               /**< Midi 1.0 or Midi 2.0 */
-    String productId;                  /**< Product id */
-    String vendorId;                   /**< Vendor id */
+    String productId;                    /**< Product id */
+    String vendorId;                     /**< Vendor id */
     String deviceName;                   /**< Device name */
     String version;                      /**< Driver or firmware version */
     List<struct MidiPortInfo> ports;     /**< List of all ports available on this device */
