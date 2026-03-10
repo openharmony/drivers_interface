@@ -74,6 +74,7 @@ enum AudioPortPin {
     PIN_IN_PENCIL                = 1 << 27 | 1 << 7,  /**< Pencil input pin */
     PIN_IN_UWB                   = 1 << 27 | 1 << 8,  /**< UWB input pin */
     PIN_IN_NEARLINK              = 1 << 27 | 1 << 9,  /**< Nearlink input pin */
+    PIN_IN_REAR_MIC              = 1 << 27 | 1 << 10,  /**< Rear mic input pin */
 };
 
 /**
