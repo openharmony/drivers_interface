@@ -564,6 +564,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_STAGE_BOOST,
     /**
+     * ohos.ability.flashadjustAvailable [static, enum, public]
+     *
+     * camera device property, report current camera flash adjust available
+     * (i.e. enum: false/true)
+     */
+    OHOS_ABILITY_FLASHLIGHT_ADJUST_SUPPORTED,
+    /**
      * ohos.control.stageBoost [static, enum, public]
      *
      * camera device property, set current camera whether support stage boost
