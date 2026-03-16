@@ -19,7 +19,6 @@ hdi("usb_ddk") {
 
   sources = [
     "IUsbDdk.idl",
-    "UsbDdkTypes.idl",
   ]
 
   language = "cpp"

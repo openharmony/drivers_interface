@@ -34,7 +34,7 @@
 
 package ohos.hdi.usb.ddk.v1_2;
 
-import ohos.hdi.usb.ddk.v1_2.UsbDdkTypes;
+import ohos.hdi.usb.ddk.v1_1.UsbDdkTypes;
 import ohos.hdi.usb.ddk.v1_1.IUsbDdk;
 
 /**
@@ -56,7 +56,7 @@ interface IUsbDdk extends ohos.hdi.usb.ddk.v1_1.IUsbDdk
     * @since 7.0
     * @version 1.0
     */
-    ControlTransfer([in] unsigned long deviceId, [in] struct UsbControlRequestSetup setupPacket, [in] unsigned int timeout, [out] List<unsigned char> data, [out] unsigned int transferredLength);
+    ControlTransfer([in] unsigned long deviceId, [in] struct UsbControlRequestSetup setupPacket, [in] unsigned int timeout, [inout] List<unsigned char> data, [out] unsigned int transferredLength);
 
     /**
     * @brief Query and return the list of non-root hubs.
