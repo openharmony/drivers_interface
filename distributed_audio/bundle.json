@@ -118,6 +118,13 @@
                         "header_files": [],
                         "header_base": "//drivers/interface/distributed_audio/audio"
                     }
+                },
+                {
+                    "name": "//drivers/interface/distributed_audio/audio/v2_0:daudio_idl_headers",
+                    "header": {
+                        "header_files": [],
+                        "header_base": "//drivers/interface/distributed_audio/audio"
+                    }
                 }
             ]
         }
