@@ -19,7 +19,7 @@
  * @brief Declares APIs for camera device operations.
  *
  * @since 6.1
- * @version 1.5
+ * @version 1.4
  */
 
 package ohos.hdi.camera.v1_5;
