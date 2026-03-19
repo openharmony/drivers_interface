@@ -35,7 +35,6 @@
       "build": {
         "sub_component": [
           "//drivers/interface/camera/metadata/v1_0:camera_vendor_tag_idl_target",
-          "//drivers/interface/camera/v1_6:camera_idl_target",
           "//drivers/interface/camera/v1_5:camera_idl_target",
           "//drivers/interface/camera/v1_4:camera_idl_target",
           "//drivers/interface/camera/v1_3:camera_idl_target",
