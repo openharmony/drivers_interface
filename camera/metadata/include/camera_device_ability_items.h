@@ -3962,9 +3962,9 @@ typedef enum camera_optical_image_stabilization_mode {
 
 // OHOS_ABILITY_OPTICAL_IMAGE_STABILIZATION_BIAS_RANGE enumeration values
 typedef enum camera_optical_image_stabilization_axes {
-  CAMERA_OPTICAL_IMAGE_STABILIZATION_AXES_PITCH = 0,
-  CAMERA_OPTICAL_IMAGE_STABILIZATION_AXES_YAW,
-  CAMERA_OPTICAL_IMAGE_STABILIZATION_AXES_ROLL,
-} camera_optical_image_stabilization_axes_enum_t; 
+    CAMERA_OPTICAL_IMAGE_STABILIZATION_AXES_PITCH = 0,
+    CAMERA_OPTICAL_IMAGE_STABILIZATION_AXES_YAW,
+    CAMERA_OPTICAL_IMAGE_STABILIZATION_AXES_ROLL,
+} camera_optical_image_stabilization_axes_enum_t;
 
 #endif
