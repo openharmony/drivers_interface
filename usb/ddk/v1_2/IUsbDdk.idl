@@ -19,7 +19,7 @@
  *
  * @brief Provides USB DDK APIs to open and close USB interfaces, perform non-isochronous and isochronous\n
  * data transfer over USB pipes, and implement control transfer and interrupt transfer, etc.
- * @since 7.0
+ * @since 4.0
  * @version 1.2
  */
 
@@ -28,7 +28,7 @@
  *
  * @brief Declares the USB DDK APIs used by the USB host to access USB devices.
  *
- * @since 7.0
+ * @since 4.0
  * @version 1.2
  */
 
@@ -40,7 +40,7 @@ import ohos.hdi.usb.ddk.v1_1.IUsbDdk;
 
 /**
  * @brief Declares the USB DDK APIs used by the USB host to access USB devices.
- * @since 7.0
+ * @since 4.0
  * @version 1.2
  */
 interface IUsbDdk extends ohos.hdi.usb.ddk.v1_1.IUsbDdk
