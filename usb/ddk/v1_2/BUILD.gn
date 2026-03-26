@@ -27,6 +27,7 @@ hdi("usb_ddk") {
     "IUsbDdk.idl",
   ]
 
+  no_other_header_files = true
   language = "cpp"
   mode = "ipc"
   subsystem_name = "hdf"
