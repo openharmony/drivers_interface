@@ -1480,13 +1480,6 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_LENS_EQUIVALENT_FOCUS,
     /**
-     * ohos.ability.typical_scene_zoom_points [static, int32[], public]
-     *
-     * camera device property, report current camera typical zoom points
-     * (i.e. int32[] ...)
-     */
-    OHOS_ABILITY_TYPICAL_SCENE_ZOOM_POINTS,
-    /**
      * ohos.ability.focusDistance [static, float, public]
      *
      * camera device property, set current camera support focus distance
@@ -1571,6 +1564,13 @@ typedef enum camera_device_metadata_tag {
      * (i.e. float[]: [horizontal fov, vertical fov])
      */
     OHOS_STATUS_FOV_INFOS,
+    /**
+     * ohos.ability.typical_scene_zoom_points [static, int32[], public]
+     *
+     * camera device property, report current camera typical zoom points
+     * (i.e. int32[] ...)
+     */
+    OHOS_ABILITY_TYPICAL_SCENE_ZOOM_POINTS,
     /**
      * ohos.device.focusEnd
      *
