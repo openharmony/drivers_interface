@@ -1308,7 +1308,7 @@ typedef enum camera_device_metadata_tag {
      * camera device property, set current camera device system application capture
      * (i.e. uint8: 0-false/1-true ...)
      */
-    OHOS_CONTROL_SYSTEM_CAPTURE,
+    OHOS_CONTROL_CAPTURE_ROTATION,
     /**
      * ohos.ability.imagingMode [static, byte, public]
      *
