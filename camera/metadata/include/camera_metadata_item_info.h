@@ -484,6 +484,7 @@ static item_info_t g_ohosStreamJpeg[OHOS_STREAM_JPEG_END - OHOS_STREAM_JPEG_STAR
     [OHOS_JPEG_GPS_TIMESTAMP - OHOS_STREAM_JPEG_START] = {"gpsTimestamp",            META_TYPE_INT64,  1 },
     [OHOS_JPEG_ORIENTATION - OHOS_STREAM_JPEG_START] = {"jpegOrientation",             META_TYPE_INT32,  1 },
     [OHOS_JPEG_QUALITY - OHOS_STREAM_JPEG_START] = {"quality",                 META_TYPE_BYTE,   1 },
+    [OHOS_PHOTO_COMPRESSION_QUALITY - OHOS_STREAM_JPEG_START] = {"compressionQuality",        META_TYPE_INT32,  1 },
     [OHOS_JPEG_THUMBNAIL_QUALITY - OHOS_STREAM_JPEG_START] = {"thumbnailQuality",        META_TYPE_BYTE,   1 },
     [OHOS_JPEG_THUMBNAIL_SIZE - OHOS_STREAM_JPEG_START] = {"thumbnailSize",           META_TYPE_INT32,  -1},
     [OHOS_JPEG_AVAILABLE_THUMBNAIL_SIZES - OHOS_STREAM_JPEG_START] = {"availableThumbnailSizes", META_TYPE_INT32,  -1},
