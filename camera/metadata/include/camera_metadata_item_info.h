@@ -320,7 +320,7 @@ static item_info_t g_ohosCameraControl[OHOS_DEVICE_CONTROL_END - OHOS_DEVICE_CON
         OHOS_DEVICE_CONTROL_START] = {"qualityPrioritization", META_TYPE_BYTE, 1},
     [OHOS_CONTROL_LOG_ASSISTANCE -
         OHOS_DEVICE_CONTROL_START] = {"logAssistanceEnable", META_TYPE_BYTE, 1},
-    [OHOS_CONTROL_SYSTEM_CAPTURE -
+    [OHOS_CONTROL_CAPTURE_ROTATION -
         OHOS_DEVICE_CONTROL_START] = {"cameraControlSystemCapture", META_TYPE_BYTE, 1},
     [OHOS_ABILITY_EXTERNAL_CAMERA_LENS_BOOST -
        OHOS_DEVICE_CONTROL_START] = {"supportedExernalCameraLensBoost", META_TYPE_BYTE, 1},
