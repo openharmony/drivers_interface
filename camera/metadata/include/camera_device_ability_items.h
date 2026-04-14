@@ -1972,6 +1972,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_JPEG_QUALITY,
     /**
+     * ohos.photo.compressionQuality [static, int32, public]
+     *
+     * camera stream property, set/get photo compression quality
+     * (i.e. int32 ...)
+     */
+    OHOS_PHOTO_COMPRESSION_QUALITY,
+    /**
      * ohos.jpeg.thumbnailQuality [static, byte, public]
      *
      * camera stream property, report current camera support jpeg thumbnail quality
