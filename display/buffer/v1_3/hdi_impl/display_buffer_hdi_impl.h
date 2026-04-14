@@ -18,6 +18,7 @@
 
 #include <iproxy_broker.h>
 #include <unistd.h>
+#include <mutex>
 #include "hdf_log.h"
 #include "hilog/log.h"
 #include "v1_0/imapper.h"
@@ -43,19 +44,39 @@ namespace V1_3 {
 template<typename Interface>
 class DisplayBufferHdiImpl : public V1_2::DisplayBufferHdiImpl<Interface> {
 public:
-    explicit DisplayBufferHdiImpl(bool isAllocLocal = false) : BaseType3_0(isAllocLocal), mapper_v1_3_(nullptr)
+    explicit DisplayBufferHdiImpl(sptr<V1_0::IAllocator> allocator, sptr<IMapper> mapper,
+        sptr<V1_1::IMetadata> metadata)
+        : BaseType3_0(allocator, mapper, metadata), mapper_v1_3_(mapper)
+    {}
+
+    virtual ~DisplayBufferHdiImpl() {}
+
+    void CheckMapper() const
     {
-        while ((mapper_v1_3_ = IMapper::Get(true)) == nullptr) {
-            // Waiting for metadata service ready
-            usleep(WAIT_TIME_INTERVAL);
+        if (mapper_v1_3_ != nullptr) {
+            return;
+        }
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (mapper_v1_3_ == nullptr) {
+            mapper_v1_3_ = IMapper::Get(true);
         }
     }
 
-    virtual ~DisplayBufferHdiImpl() {};
+    void CheckAllocator() const
+    {
+        if (allocator_ != nullptr) {
+            return;
+        }
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (allocator_ == nullptr) {
+            allocator_ = V1_0::IAllocator::Get(false);
+        }
+    }
 
     int32_t AllocMemPassThrough(const AllocInfo& info, BufferHandle*& handle) const
     {
         DISPLAY_TRACE;
+        CheckMapper();
         CHECK_NULLPOINTER_RETURN_VALUE(mapper_v1_3_, HDF_FAILURE);
         sptr<NativeBuffer> hdiBuffer;
         int32_t ret = mapper_v1_3_->AllocMem(info, hdiBuffer);
@@ -74,6 +95,7 @@ public:
     int32_t AllocMemIpc(const AllocInfo& info, BufferHandle*& handle) const
     {
         DISPLAY_TRACE;
+        CheckAllocator();
         CHECK_NULLPOINTER_RETURN_VALUE(allocator_, HDF_FAILURE);
         sptr<NativeBuffer> hdiBuffer;
         int32_t ret = allocator_->AllocMem(info, hdiBuffer);
@@ -92,6 +114,7 @@ public:
     int32_t AllocMem(const AllocInfo& info, BufferHandle*& handle) const override
     {
         DISPLAY_TRACE;
+        CheckMapper();
         CHECK_NULLPOINTER_RETURN_VALUE(mapper_v1_3_, HDF_FAILURE);
 
         //Step1. check is support alloc passthrough
@@ -111,6 +134,7 @@ public:
         BufferHandle*& outHandle)const override
     {
         DISPLAY_TRACE;
+        CheckMapper();
         CHECK_NULLPOINTER_RETURN_VALUE(mapper_v1_3_, HDF_FAILURE);
 
         sptr<NativeBuffer> hdiInBuffer = new NativeBuffer();
@@ -127,12 +151,14 @@ public:
         return ret;
     }
 
+    using V1_2::DisplayBufferHdiImpl<Interface>::WAIT_TIME_INTERVAL;
+
 private:
     using BaseType3_0 = V1_2::DisplayBufferHdiImpl<Interface>;
 protected:
-    using BaseType3_0::WAIT_TIME_INTERVAL;
     using BaseType3_0::allocator_;
-    sptr<IMapper> mapper_v1_3_;
+    mutable sptr<IMapper> mapper_v1_3_;
+    mutable std::mutex mutex_;
 };
 using HdiDisplayBufferImpl = DisplayBufferHdiImpl<V1_3::IDisplayBuffer>;
 } // namespace V1_3

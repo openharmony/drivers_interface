@@ -19,10 +19,26 @@ namespace HDI {
 namespace Display {
 namespace Buffer {
 namespace V1_2  {
+constexpr int32_t MAX_WAIT_COUNT = 500;
 using namespace OHOS::HDI::Display::Buffer::V1_2;
 IDisplayBuffer *IDisplayBuffer::Get()
 {
-    IDisplayBuffer *instance = new V1_2::HdiDisplayBufferImpl();
+    HdfTrace trace("DisplayBufferHdiImplV1_2", "HDI:DISP:IMPL:");
+    sptr<V1_0::IAllocator> allocator;
+    int32_t count = MAX_WAIT_COUNT;
+    while ((allocator = V1_0::IAllocator::Get(false)) == nullptr) {
+        // Waiting for allocator service ready
+        usleep(HdiDisplayBufferImpl::WAIT_TIME_INTERVAL);
+        if (--count < 0) {
+            HDF_LOGE("IAllocator::Get over 5s");
+            break;
+        }
+    }
+    sptr<IMapper> mapper = IMapper::Get(true);
+
+    sptr<V1_1::IMetadata> metadata = V1_1::IMetadata::Get(true);
+
+    IDisplayBuffer *instance = new (std::nothrow) V1_2::HdiDisplayBufferImpl(allocator, mapper, metadata);
     if (instance == nullptr) {
         return nullptr;
     }
