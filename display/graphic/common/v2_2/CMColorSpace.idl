@@ -40,4 +40,5 @@ import ohos.hdi.display.graphic.common.v2_1.CMColorSpace;
 enum CM_HDR_Metadata_Type : ohos.hdi.display.graphic.common.v2_1.CM_HDR_Metadata_Type {
     CM_VIDEO_AI_HDR_HIGH_LIGHT = 61,        // video aihdr type for high light
     CM_VIDEO_AI_HDR_COLOR_ENHANCE = 62,     // video aihdr type for color enhance
+    CM_COMPONENT_EDR = 63,                  // component edr type for global tone mapping
 };
