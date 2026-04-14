@@ -18,6 +18,7 @@
 
 #include <iproxy_broker.h>
 #include <unistd.h>
+#include <mutex>
 #include "hdf_log.h"
 #include "hilog/log.h"
 #include "v1_0/hdi_impl/display_buffer_hdi_impl.h"
@@ -37,17 +38,26 @@ namespace V1_1 {
 template<typename Interface>
 class DisplayBufferHdiImpl : public V1_0::DisplayBufferHdiImpl<Interface> {
 public:
-    explicit DisplayBufferHdiImpl(bool isAllocLocal = false) : BaseType1_0(isAllocLocal), metadata_(nullptr)
+    explicit DisplayBufferHdiImpl(sptr<V1_0::IAllocator> allocator, sptr<V1_0::IMapper> mapper,
+        sptr<IMetadata> metadata)
+        : BaseType1_0(allocator, mapper), metadata_(metadata)
+    {}
+    virtual ~DisplayBufferHdiImpl() {};
+
+    void CheckMetadata() const
     {
-        while ((metadata_ = IMetadata::Get(true)) == nullptr) {
-            // Waiting for metadata service ready
-            usleep(WAIT_TIME_INTERVAL);
+        if (metadata_ != nullptr) {
+            return;
+        }
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (metadata_ == nullptr) {
+            metadata_ = IMetadata::Get(true);
         }
     }
-    virtual ~DisplayBufferHdiImpl() {};
 
     int32_t RegisterBuffer(const BufferHandle& handle) override
     {
+        CheckMetadata();
         CHECK_NULLPOINTER_RETURN_VALUE(metadata_, HDF_FAILURE);
         sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
         CHECK_NULLPOINTER_RETURN_VALUE(hdiBuffer, HDF_FAILURE);
@@ -58,6 +68,7 @@ public:
 
     int32_t SetMetadata(const BufferHandle& handle, uint32_t key, const std::vector<uint8_t>& value) override
     {
+        CheckMetadata();
         CHECK_NULLPOINTER_RETURN_VALUE(metadata_, HDF_FAILURE);
         sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
         CHECK_NULLPOINTER_RETURN_VALUE(hdiBuffer, HDF_FAILURE);
@@ -68,6 +79,7 @@ public:
     
     int32_t GetMetadata(const BufferHandle& handle, uint32_t key, std::vector<uint8_t>& value) override
     {
+        CheckMetadata();
         CHECK_NULLPOINTER_RETURN_VALUE(metadata_, HDF_FAILURE);
         sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
         CHECK_NULLPOINTER_RETURN_VALUE(hdiBuffer, HDF_FAILURE);
@@ -78,6 +90,7 @@ public:
 
     int32_t ListMetadataKeys(const BufferHandle& handle, std::vector<uint32_t>& keys) override
     {
+        CheckMetadata();
         CHECK_NULLPOINTER_RETURN_VALUE(metadata_, HDF_FAILURE);
         sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
         CHECK_NULLPOINTER_RETURN_VALUE(hdiBuffer, HDF_FAILURE);
@@ -88,6 +101,7 @@ public:
     
     int32_t EraseMetadataKey(const BufferHandle& handle, uint32_t key) override
     {
+        CheckMetadata();
         CHECK_NULLPOINTER_RETURN_VALUE(metadata_, HDF_FAILURE);
         sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
         CHECK_NULLPOINTER_RETURN_VALUE(hdiBuffer, HDF_FAILURE);
@@ -95,11 +109,12 @@ public:
         int32_t ret = metadata_->EraseMetadataKey(hdiBuffer, key);
         return ret;
     }
+    using V1_0::DisplayBufferHdiImpl<Interface>::WAIT_TIME_INTERVAL;
 private:
     using BaseType1_0 = V1_0::DisplayBufferHdiImpl<Interface>;
 protected:
-    using BaseType1_0::WAIT_TIME_INTERVAL;
-    sptr<IMetadata> metadata_;
+    mutable std::mutex mutex_;
+    mutable sptr<IMetadata> metadata_;
 };
 using HdiDisplayBufferImpl = DisplayBufferHdiImpl<V1_1::IDisplayBuffer>;
 } // namespace V1_1
