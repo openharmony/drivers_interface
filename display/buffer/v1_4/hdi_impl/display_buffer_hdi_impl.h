@@ -18,6 +18,7 @@
 
 #include <iproxy_broker.h>
 #include <unistd.h>
+#include <mutex>
 #include "hdf_log.h"
 #include "hilog/log.h"
 #include "v1_4/iallocator.h"
@@ -37,19 +38,28 @@ namespace V1_4 {
 template<typename Interface>
 class DisplayBufferHdiImpl : public V1_3::DisplayBufferHdiImpl<Interface> {
 public:
-    explicit DisplayBufferHdiImpl(bool isAllocLocal = false) : BaseType4_0(isAllocLocal), allocator_v1_4_(nullptr)
+    explicit DisplayBufferHdiImpl(sptr<IAllocator> allocator, sptr<V1_3::IMapper> mapper,
+        sptr<V1_1::IMetadata> metadata)
+        : BaseType4_0(allocator, mapper, metadata), allocator_v1_4_(allocator)
+    {}
+
+    virtual ~DisplayBufferHdiImpl() {}
+
+    void CheckAllocator() const
     {
-        while ((allocator_v1_4_ = IAllocator::Get(isAllocLocal)) == nullptr) {
-            // Waiting for metadata service ready
-            usleep(WAIT_TIME_INTERVAL);
+        if (allocator_v1_4_ != nullptr) {
+            return;
+        }
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (allocator_v1_4_ == nullptr) {
+            allocator_v1_4_ = IAllocator::Get(false);
         }
     }
-
-    virtual ~DisplayBufferHdiImpl() {};
 
     virtual int32_t CloneDmaBufferHandle(const BufferHandle& inHandle, BufferHandle*& outHandle)const override
     {
         DISPLAY_TRACE;
+        CheckAllocator();
         CHECK_NULLPOINTER_RETURN_VALUE(allocator_v1_4_, HDF_FAILURE);
 
         sptr<NativeBuffer> hdiInBuffer = new NativeBuffer();
@@ -67,11 +77,13 @@ public:
         return ret;
     }
 
+    using V1_3::DisplayBufferHdiImpl<Interface>::WAIT_TIME_INTERVAL;
+
 private:
     using BaseType4_0 = V1_3::DisplayBufferHdiImpl<Interface>;
 protected:
-    using BaseType4_0::WAIT_TIME_INTERVAL;
-    sptr<IAllocator> allocator_v1_4_;
+    mutable sptr<IAllocator> allocator_v1_4_;
+    mutable std::mutex mutex_;
 };
 using HdiDisplayBufferImpl = DisplayBufferHdiImpl<V1_4::IDisplayBuffer>;
 } // namespace V1_4

@@ -19,6 +19,7 @@
 #include <iremote_object.h>
 #include <iproxy_broker.h>
 #include <unistd.h>
+#include <mutex>
 #include "hdf_log.h"
 #include "hilog/log.h"
 #include "buffer_handle.h"
@@ -74,24 +75,38 @@ namespace V1_0 {
 template<typename Interface>
 class DisplayBufferHdiImpl : public Interface {
 public:
-    explicit DisplayBufferHdiImpl(bool isAllocLocal = false) : allocator_(nullptr),
-        mapper_(nullptr), recipient_(nullptr)
-    {
-        while ((allocator_ = IAllocator::Get(isAllocLocal)) == nullptr) {
-            // Waiting for allocator service ready
-            usleep(WAIT_TIME_INTERVAL);
-        }
-        while ((mapper_ = IMapper::Get(true)) == nullptr) {
-            // Waiting for mapper IF ready
-            usleep(WAIT_TIME_INTERVAL);
-        }
-    }
+    explicit DisplayBufferHdiImpl(sptr<IAllocator> allocator, sptr<IMapper>mapper)
+        : allocator_(allocator), mapper_(mapper), recipient_(nullptr)
+    {}
+
     virtual ~DisplayBufferHdiImpl()
     {
         if (recipient_ != nullptr) {
             sptr<IRemoteObject> remoteObj = OHOS::HDI::hdi_objcast<IAllocator>(allocator_);
             remoteObj->RemoveDeathRecipient(recipient_);
             recipient_ = nullptr;
+        }
+    }
+
+    void CheckMapper() const
+    {
+        if (mapper_ != nullptr) {
+            return;
+        }
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (mapper_ == nullptr) {
+            mapper_ = IMapper::Get(true);
+        }
+    }
+
+    void CheckAllocator() const
+    {
+        if (allocator_ != nullptr) {
+            return;
+        }
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (allocator_ == nullptr) {
+            allocator_ = IAllocator::Get(false);
         }
     }
 
@@ -126,6 +141,7 @@ public:
     int32_t AllocMem(const AllocInfo& info, BufferHandle*& handle) const override
     {
         DISPLAY_TRACE;
+        CheckAllocator();
         CHECK_NULLPOINTER_RETURN_VALUE(allocator_, HDF_FAILURE);
         sptr<NativeBuffer> hdiBuffer;
         int32_t ret = allocator_->AllocMem(info, hdiBuffer);
@@ -143,6 +159,7 @@ public:
 
     void FreeMem(const BufferHandle& handle) const override
     {
+        CheckMapper();
         CHECK_NULLPOINTER_RETURN(mapper_);
         sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
         CHECK_NULLPOINTER_RETURN(hdiBuffer);
@@ -152,6 +169,7 @@ public:
 
     void *Mmap(const BufferHandle& handle) const override
     {
+        CheckMapper();
         CHECK_NULLPOINTER_RETURN_VALUE(mapper_, nullptr);
         sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
         CHECK_NULLPOINTER_RETURN_VALUE(hdiBuffer, nullptr);
@@ -163,6 +181,7 @@ public:
 
     int32_t Unmap(const BufferHandle& handle) const override
     {
+        CheckMapper();
         CHECK_NULLPOINTER_RETURN_VALUE(mapper_, HDF_FAILURE);
         sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
         CHECK_NULLPOINTER_RETURN_VALUE(hdiBuffer, HDF_FAILURE);
@@ -173,6 +192,7 @@ public:
 
     int32_t FlushCache(const BufferHandle& handle) const override
     {
+        CheckMapper();
         CHECK_NULLPOINTER_RETURN_VALUE(mapper_, HDF_FAILURE);
         sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
         CHECK_NULLPOINTER_RETURN_VALUE(hdiBuffer, HDF_FAILURE);
@@ -183,6 +203,7 @@ public:
 
     int32_t InvalidateCache(const BufferHandle& handle) const override
     {
+        CheckMapper();
         CHECK_NULLPOINTER_RETURN_VALUE(mapper_, HDF_FAILURE);
         sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
         CHECK_NULLPOINTER_RETURN_VALUE(hdiBuffer, HDF_FAILURE);
@@ -199,11 +220,13 @@ public:
         return HDF_ERR_NOT_SUPPORT;
     }
 
-protected:
     static constexpr uint32_t WAIT_TIME_INTERVAL = 10000;
-    sptr<IAllocator> allocator_;
-    sptr<IMapper> mapper_;
+
+protected:
+    mutable sptr<IAllocator> allocator_;
+    mutable sptr<IMapper> mapper_;
     sptr<IRemoteObject::DeathRecipient> recipient_;
+    mutable std::mutex mutex_;
 };
 using HdiDisplayBufferImpl = DisplayBufferHdiImpl<V1_0::IDisplayBuffer>;
 } // namespace V1_0

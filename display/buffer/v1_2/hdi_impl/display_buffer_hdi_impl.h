@@ -18,6 +18,7 @@
 
 #include <iproxy_broker.h>
 #include <unistd.h>
+#include <mutex>
 #include "hdf_log.h"
 #include "hilog/log.h"
 #include "v1_0/hdi_impl/display_buffer_hdi_impl.h"
@@ -40,17 +41,27 @@ namespace V1_2 {
 template<typename Interface>
 class DisplayBufferHdiImpl : public V1_1::DisplayBufferHdiImpl<Interface> {
 public:
-    explicit DisplayBufferHdiImpl(bool isAllocLocal = false) : BaseType2_0(isAllocLocal), mapper_v1_2_(nullptr)
+    explicit DisplayBufferHdiImpl(sptr<V1_0::IAllocator> allocator, sptr<IMapper> mapper,
+        sptr<V1_1::IMetadata> metadata)
+        : BaseType2_0(allocator, mapper, metadata), mapper_v1_2_(mapper)
+    {}
+
+    virtual ~DisplayBufferHdiImpl() {}
+
+    void CheckMapper() const
     {
-        while ((mapper_v1_2_ = IMapper::Get(true)) == nullptr) {
-            // Waiting for metadata service ready
-            usleep(WAIT_TIME_INTERVAL);
+        if (mapper_v1_2_ != nullptr) {
+            return;
+        }
+        std::lock_guard<std::mutex> lock(mutex_);
+        if (mapper_v1_2_ == nullptr) {
+            mapper_v1_2_ = IMapper::Get(true);
         }
     }
-    virtual ~DisplayBufferHdiImpl() {};
 
     int32_t GetImageLayout(const BufferHandle& handle, ImageLayout& layout) const override
     {
+        CheckMapper();
         CHECK_NULLPOINTER_RETURN_VALUE(mapper_v1_2_, HDF_FAILURE);
         sptr<NativeBuffer> hdiBuffer = new NativeBuffer();
         CHECK_NULLPOINTER_RETURN_VALUE(hdiBuffer, HDF_FAILURE);
@@ -59,11 +70,13 @@ public:
         return ret;
     }
 
+    using V1_1::DisplayBufferHdiImpl<Interface>::WAIT_TIME_INTERVAL;
+
 private:
     using BaseType2_0 = V1_1::DisplayBufferHdiImpl<Interface>;
 protected:
-    using BaseType2_0::WAIT_TIME_INTERVAL;
-    sptr<IMapper> mapper_v1_2_;
+    mutable sptr<IMapper> mapper_v1_2_;
+    mutable std::mutex mutex_;
 };
 using HdiDisplayBufferImpl = DisplayBufferHdiImpl<V1_2::IDisplayBuffer>;
 } // namespace V1_2
