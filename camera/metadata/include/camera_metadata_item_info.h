@@ -795,6 +795,9 @@ static item_info_t g_ohosCameraXmage[OHOS_XMAGE_COLOR_MODES_END - OHOS_XMAGE_COL
         OHOS_XMAGE_COLOR_MODES_START] = {"colorStyleSettingStatus",  META_TYPE_FLOAT,  -1},
     [OHOS_ABILITY_OUTPUT_COLOR_STYLE_PHOTO_TYPE -
         OHOS_XMAGE_COLOR_MODES_START] = {"colorStyleSupportPhotoType", META_TYPE_BYTE,  1},
+    [OHOS_ABILITY_COLOR_TINT_RANGE -
+        OHOS_XMAGE_COLOR_MODES_START] = {"supportedColorTintValues", META_TYPE_INT32, -1},
+    [OHOS_CONTROL_COLOR_TINT - OHOS_XMAGE_COLOR_MODES_START] = {"colorTintValue", META_TYPE_INT32, 1},
 };
 
 static item_info_t g_ohosCameraLightStatus[OHOS_LIGHT_STATUS_END - OHOS_LIGHT_STATUS_START] = {
