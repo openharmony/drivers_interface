@@ -3021,6 +3021,20 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_OUTPUT_COLOR_STYLE_PHOTO_TYPE,
     /**
+     * ohos.ability.colorTintRange [static, int32[], public]
+     *
+     * camera device property, report current camera support color tint values
+     * (i.e. int32[] ...)
+     */
+    OHOS_ABILITY_COLOR_TINT_RANGE,
+    /**
+     * ohos.control.colorTint [static, int32, public]
+     *
+     * camera device property, set current camera color tint value
+     * (i.e. int32 ...)
+     */
+    OHOS_CONTROL_COLOR_TINT,
+    /**
      * ohos.xmage.colorMoodesEnd
      *
      * camera xmage end
