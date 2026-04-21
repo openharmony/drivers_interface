@@ -91,7 +91,8 @@ public:
         return nullptr;
     }
 
-    BufferHandle* Clone() {
+    BufferHandle* Clone()
+    {
         if (image_) {
             return image_->Clone();
         }
