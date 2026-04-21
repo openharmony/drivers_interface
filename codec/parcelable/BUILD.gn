@@ -1,0 +1,12 @@
+import("//build/ohos.gni")
+
+config("video_parcel_pub_include") {
+  include_dirs = [ "./" ]
+}
+
+ohos_static_library("video_parcel_headers") {
+  public_configs = [ ":video_parcel_pub_include" ]
+ 
+  subsystem_name = "hdf"
+  part_name = "drivers_interface_codec"
+}

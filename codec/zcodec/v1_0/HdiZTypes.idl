@@ -1,0 +1,118 @@
+/*
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @file HdiZTypes.idl
+ *
+ * @brief Declares data types used by the Hardware Driver Interfaces (HDIs) of this module.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+
+package ohos.hdi.codec.zcodec.v1_0;
+sequenceable ohos.hdi.codec.ParcelableFd;
+sequenceable ohos.hdi.codec.ParcelableBuffer;
+sequenceable ohos.hdi.codec.ParcelableParam;
+
+/**
+ * @brief Defines the buffer allocation information.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+struct HdiBufferAllocInfo {
+    boolean isImage;             /**< Indicates whether the buffer is used for image. */
+    unsigned int capacity;       /**< Indicates the buffer capacity. */
+    unsigned int width;          /**< Indicates the buffer width. */
+    unsigned int height;         /**< Indicates the buffer height. */
+    int format;                  /**< Indicates the buffer format. */
+    unsigned long usage;         /**< Indicates the buffer usage. */
+};
+
+/**
+ * @brief Defines the buffer with ID.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+struct HdiBufferWithId {
+    unsigned long id;            /**< Indicates the buffer ID. */
+    ParcelableBuffer buf;        /**< Indicates the buffer. For details, see {@link ParcelableBuffer}. */
+};
+
+/**
+ * @brief Defines the Z codec buffer information.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+struct HdiZBufferInfo {
+    unsigned long id;            /**< Indicates the buffer ID. */
+    unsigned int offset;         /**< Indicates the buffer offset. */
+    unsigned int filledLen;      /**< Indicates the filled length of buffer. */
+    long pts;                    /**< Indicates the presentation timestamp. */
+    unsigned int flag;           /**< Indicates the buffer flag. */
+    ParcelableParam alongParam;  /**< Indicates the along parameter. For details, see {@link ParcelableParam}. */
+    ParcelableFd fence;          /**< Indicates the fence. For details, see {@link ParcelableFd}. */
+};
+
+/**
+ * @brief Defines the profile and level.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+struct ProfileLevel {
+    int profile;                 /**< Indicates the profile. */
+    int level;                   /**< Indicates the level. */
+};
+
+/**
+ * @brief Defines the range with min and max values.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+struct Range {
+    int min;                     /**< Indicates the minimum value. */
+    int max;                     /**< Indicates the maximum value. */
+};
+
+/**
+ * @brief Defines the codec capability information.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+struct HdiCapability {
+    String name;                         /**< Indicates the component name. */
+    int componentType;                   /**< Indicates the component type. */
+    int standard;                        /**< Indicates the codec standard. */
+    boolean isSecure;                    /**< Indicates whether the component is secure. */
+    boolean isSoftware;                  /**< Indicates whether the component is software. */
+    unsigned int maxInstance;            /**< Indicates the maximum instance count. */
+    ProfileLevel[] profileLevels;        /**< Indicates the profile and level array. For details, see {@link ProfileLevel}. */
+    boolean canSwapWidthHeight;          /**< Indicates whether width and height can be swapped. */
+    Range widthRange;                    /**< Indicates the width range. For details, see {@link Range}. */
+    Range heightRange;                   /**< Indicates the height range. For details, see {@link Range}. */
+    Range widthMultiplyHeight;           /**< Indicates the width multiply height range. For details, see {@link Range}. */
+    int[] pixelFmts;                     /**< Indicates the pixel formats. */
+    Range pixelPerSecond;                /**< Indicates the pixel per second range. For details, see {@link Range}. */
+    Range frameRateRange;                /**< Indicates the frame rate range. For details, see {@link Range}. */
+    int[] bitRateMode;                   /**< Indicates the bit rate modes. */
+    Range bitRateRange;                  /**< Indicates the bit rate range. For details, see {@link Range}. */
+    ParcelableParam extInfo;             /**< Indicates the extended information. For details, see {@link ParcelableParam}. */
+};
