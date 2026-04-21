@@ -281,15 +281,15 @@ public:
                 }
                 case VECTOR: {
                     uint32_t vecLen = parcel.ReadUint32();
-                    if (vecLen != 0) {
-                        const uint8_t *buf = parcel.ReadBuffer(vecLen);
-                        if (buf == nullptr) {
-                            return nullptr;
-                        }
-                        bundle->Set(key, std::vector<uint8_t>(buf, buf + vecLen));
-                    } else {
+                    if (vecLen == 0) {
                         bundle->Set(key, std::vector<uint8_t>());
+                        break;
                     }
+                    const uint8_t *buf = parcel.ReadBuffer(vecLen);
+                    if (buf == nullptr) {
+                        return nullptr;
+                    }
+                    bundle->Set(key, std::vector<uint8_t>(buf, buf + vecLen));
                     break;
                 }
                 default: {
