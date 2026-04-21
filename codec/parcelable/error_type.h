@@ -28,7 +28,7 @@ enum ErrorType {
     POOL_IS_FULL,
     UNSUPPORT,
     UNKNOWN,
-    OK = 0, 
+    OK = 0,
 };
 
 }
