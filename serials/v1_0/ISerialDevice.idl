@@ -1,0 +1,118 @@
+/*
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package ohos.hdi.serials.v1_0;
+
+import ohos.hdi.serials.v1_0.SerialTypes;
+
+/**
+ * @brief Serial HDI interface
+ * @since 7.0
+ * @version 1.0
+ */
+interface ISerialDevice {
+    /**
+     * @brief start to read a serial device.
+     *
+     * @return Returns <b>0</b> if operation is successful.
+     * @return Returns a non-zero value if operation fails.
+     * @since 7.0
+	 * @version 1.0
+     */
+    StartRead();
+
+    /**
+     * @brief stop to read a serial device.
+     *
+     * @return Returns <b>0</b> if operation is successful.
+     * @return Returns a non-zero value if operation fails.
+     * @since 7.0
+	 * @version 1.0
+     */
+    StopRead();
+
+    /**
+     * @brief Close a serial device.
+     *
+     * @return Returns <b>0</b> if operation is successful.
+     * @return Returns a non-zero value if operation fails.
+     * @since 7.0
+	 * @version 1.0
+     */
+    Close();
+
+    /**
+     * @brief Write data to a serial device.
+     *
+     * @param data Indicates data to write，data size not more than 4096 bytes.
+     * @param timeout Indicates timeout in milliseconds.
+     * @param bytesWritten Indicates output number of bytes written.
+     * @return Returns <b>0</b> if operation is successful.
+     * @return Returns a non-zero value if operation fails.
+     * @since 7.0
+	 * @version 1.0
+     */
+    Write([in] unsigned char[] data, [in] int timeout, [out] int bytesWritten);
+
+    /**
+     * @brief Flush buffer of a serial device.
+     *
+     * @return Returns <b>0</b> if operation is successful.
+     * @return Returns a non-zero value if operation fails.
+     * @since 7.0
+	 * @version 1.0
+     */
+    Flush();
+
+    /**
+     * @brief Wait for all write operations to complete.
+     *
+     * @return Returns <b>0</b> if operation is successful.
+     * @return Returns a non-zero value if operation fails.
+     * @since 7.0
+	 * @version 1.0
+     */
+    Drain();
+
+    /**
+     * @brief Send BRK signal of a serial device.
+     *
+     * @return Returns <b>0</b> if operation is successful.
+     * @return Returns a non-zero value if operation fails.
+     * @since 7.0
+	 * @version 1.0
+     */
+    SendBrkSignal();
+
+    /**
+     * @brief Set RTS signal of a serial device.
+     *
+     * @param rts Indicates RTS signal state.
+     * @return Returns <b>0</b> if operation is successful.
+     * @return Returns a non-zero value if operation fails.
+     * @since 7.0
+     */
+    SetRtsSignal([in] boolean rts);
+
+    /**
+     * @brief Get CTS signal of a serial device.
+     *
+     * @param cts Indicates output CTS signal state.
+     * @return Returns <b>0</b> if operation is successful.
+     * @return Returns a non-zero value if operation fails.
+     * @since 7.0
+     */
+    GetCtsSignal([out] boolean cts);
+}

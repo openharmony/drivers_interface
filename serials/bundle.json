@@ -1,0 +1,52 @@
+{
+    "name": "@ohos/drivers_interface_serial",
+    "description": "serials_hdf",
+    "version": "7.0",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+      "destPath": "drivers/interface/serials"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+      "name": "drivers_interface_serial",
+      "subsystem": "hdf",
+      "adapted_system_type": ["standard"],
+      "rom": "10KB",
+      "ram": "100KB",
+      "deps": {
+        "components": [
+          "ipc",
+          "hdf_core",
+          "hilog",
+          "c_utils"
+        ],
+        "third_party": []
+      },
+      "build": {
+        "sub_component": [
+          "//drivers/interface/serials/v1_0:serials_idl_target"
+        ],
+        "test": [],
+        "inner_kits": [
+          {
+            "name": "//drivers/interface/serials/v1_0:libserials_proxy_1.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/serials"
+            }
+          },
+          {
+            "name": "//drivers/interface/serials/v1_0:serials_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/serials"
+            }
+          }
+        ]
+      }
+    }
+  }
