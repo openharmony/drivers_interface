@@ -587,6 +587,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_AUTOMOTIVE_CAMERA_POSITION,
     /**
+     * ohos.control.concurrent.capture [static, byte, public]
+     *
+     * Concurrent camera capture
+     * (i.e. byte: 0-false/1-true ...)
+     */
+    OHOS_CONTROL_CAMERA_CONCURRENT_CAPTURE,
+    /**
      * ohos.camera.propertiesEnd
      *
      * camera property end
