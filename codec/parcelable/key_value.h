@@ -44,7 +44,7 @@ inline constexpr char KEY_OPERATING_RATE[] = "operatingRate";  // uint32_t
 inline constexpr char KEY_SORTING_MODE[] = "sortingMode";  // enum SortingMode
 inline constexpr char KEY_NUM_OF_GS[] = "numOfGS";  // uint32_t
 inline constexpr char KEY_SH_PRDER[] = "shOrder";  // uint16_t
-inline constexpr char KEY_MIN_MAX[] = "minMax"; 
+inline constexpr char KEY_MIN_MAX[] = "minMax";   // vector<float>
 
 
 enum class SampleFlag : uint32_t {
