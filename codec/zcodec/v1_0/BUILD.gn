@@ -11,6 +11,7 @@ hdi("zcodec") {
     deps = [
       "../../parcelable:video_parcel_headers",
     ]
+    no_other_header_files = true
     branch_protector_ret = "pac_ret"
     language = "cpp"
     innerapi_tags = [
