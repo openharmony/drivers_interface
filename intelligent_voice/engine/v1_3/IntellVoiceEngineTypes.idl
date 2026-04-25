@@ -1,0 +1,33 @@
+/*
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+ 
+package ohos.hdi.intelligent_voice.engine.v1_3;
+ 
+import ohos.hdi.intelligent_voice.engine.v1_2.IntellVoiceEngineTypes;
+import ohos.hdi.intelligent_voice.engine.v1_0.IntellVoiceEngineTypes;
+ 
+enum IntellVoiceEngineAdapterType {
+    ENROLL_ADAPTER_TYPE = 0,
+    WAKEUP_ADAPTER_TYPE = 1,
+    UPDATE_ADAPTER_TYPE = 2,
+    IMPLICIT_ENROLL_ADAPTER_TYPE = 3,
+    ADAPTER_TYPE_BUT,
+};
+ 
+enum IntellVoiceEngineErrors : ohos.hdi.intelligent_voice.engine.v1_0.IntellVoiceEngineErrors {
+    INTELL_VOICE_ENGINE_ENROLL_VPR_TRAIN_FAILED = 1,
+    INTELL_VOICE_ENGINE_WAKEUP_PHRASE_NOT_MATCH = 2,
+    INTELL_VOICE_ENGINE_ENROLL_DIFFERENT_PERSON = 3,
+};
