@@ -1,0 +1,138 @@
+/*
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @file HdiZComponent.idl
+ *
+ * @brief Declares APIs for codec component control.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+
+package ohos.hdi.codec.zcodec.v1_0;
+import ohos.hdi.codec.zcodec.v1_0.HdiZTypes;
+
+interface HdiZComponent {
+    /**
+     * @brief Gets the capability of current component.
+     *
+     * @param cap Indicates the capability. For details, see {@link HdiCapability}.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    GetCapability([out] HdiCapability cap);
+    /**
+     * @brief Sets parameter to the component.
+     *
+     * @param param Indicates the parameter to set.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    SetParam([in] ParcelableParam param);
+    /**
+     * @brief Gets parameter from the component.
+     *
+     * @param keys Indicates the parameter keys.
+     * @param param Indicates the parameter result.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    GetParam([in] String[] keys, [out] ParcelableParam param);
+    /**
+     * @brief Starts the component.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    Start();
+    /**
+     * @brief Pauses the component.
+     *
+     * @param param Indicates the pause parameter.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    Pause([in] ParcelableParam param);
+    /**
+     * @brief Flushes all buffers in the component.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    Flush();
+    /**
+     * @brief Stops the component.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    Stop();
+    /**
+     * @brief Binds buffer by allocating new buffer.
+     *
+     * @param info Indicates the buffer allocation info. For details, see {@link HdiBufferAllocInfo}.
+     * @param ext Indicates the extended parameter.
+     * @param buf Indicates the allocated buffer. For details, see {@link HdiBufferWithId}.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    BindBufferByAlloc([in] HdiBufferAllocInfo info, [in] ParcelableParam ext, [out] HdiBufferWithId buf);
+    /**
+     * @brief Binds buffer by using existing buffer.
+     *
+     * @param buf Indicates the buffer to bind.
+     * @param ext Indicates the extended parameter.
+     * @param id Indicates the buffer ID.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    BindBufferByUse([in] ParcelableBuffer buf, [in] ParcelableParam ext, [out] unsigned long id);
+    /**
+     * @brief Unbinds buffers from the component.
+     *
+     * @param ids Indicates the buffer IDs to unbind.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    UnbindBuffers([in] unsigned long[] ids);
+    /**
+     * @brief Queues input buffers to the component.
+     *
+     * @param infos Indicates the buffer info array. For details, see {@link HdiZBufferInfo}.
+     * @param errCodes Indicates the error codes.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    QueueInputBuffers([in] HdiZBufferInfo[] infos, [out] int[] errCodes);
+    /**
+     * @brief Queues output buffers to the component.
+     *
+     * @param infos Indicates the buffer info array. For details, see {@link HdiZBufferInfo}.
+     * @param errCodes Indicates the error codes.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    QueueOutputBuffers([in] HdiZBufferInfo[] infos, [out] int[] errCodes);
+}

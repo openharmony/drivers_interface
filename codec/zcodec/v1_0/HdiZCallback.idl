@@ -1,0 +1,77 @@
+/*
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @file HdiZCallback.idl
+ *
+ * @brief Declares callbacks for codec component events.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+
+package ohos.hdi.codec.zcodec.v1_0;
+import ohos.hdi.codec.zcodec.v1_0.HdiZTypes;
+
+[callback] interface HdiZCallback {
+    /**
+     * @brief Called when an event occurs.
+     *
+     * @param event Indicates the event type.
+     * @param param Indicates the event parameter.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    [oneway] OnEvent([in] int event, [in] ParcelableParam param);
+
+    /**
+     * @brief Called when buffers are binded.
+     *
+     * @param bufs Indicates the binded buffer array. For details, see {@link HdiBufferWithId}.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    [oneway] OnBuffersBinded([in] HdiBufferWithId[] bufs);
+    /**
+     * @brief Called when buffers are unbinded.
+     *
+     * @param ids Indicates the unbinded buffer IDs.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    [oneway] OnBuffersUnbinded([in] unsigned long[] ids);
+
+    /**
+     * @brief Called when input buffers are processed.
+     *
+     * @param infos Indicates the processed buffer info array. For details, see {@link HdiZBufferInfo}.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    [oneway] OnInputBuffersDone([in] HdiZBufferInfo[] infos);
+    /**
+     * @brief Called when output buffers are processed.
+     *
+     * @param infos Indicates the processed buffer info array. For details, see {@link HdiZBufferInfo}.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    [oneway] OnOutputBuffersDone([in] HdiZBufferInfo[] infos);
+}

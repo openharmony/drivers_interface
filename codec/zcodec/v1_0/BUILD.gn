@@ -1,0 +1,22 @@
+import("//build/config/components/hdi/hdi.gni")
+
+hdi("zcodec") {
+    module_name = "codec_service"
+    sources = [
+        "HdiZCallback.idl",
+        "HdiZComponent.idl",
+        "HdiZFactory.idl",
+        "HdiZTypes.idl",
+    ]
+    deps = [
+      "../../parcelable:video_parcel_headers",
+    ]
+    no_other_header_files = true
+    branch_protector_ret = "pac_ret"
+    language = "cpp"
+    innerapi_tags = [
+      "chipsetsdk"
+    ]
+    subsystem_name = "hdf"
+    part_name = "drivers_interface_codec"
+}
