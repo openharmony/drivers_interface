@@ -24,6 +24,7 @@ hdi("serials") {
     "chipsetsdk",
     "platformsdk_indirect",
   ]
+  no_other_header_files = true
   mode = "passthrough"
   branch_protector_ret = "pac_ret"
   language = "cpp"
