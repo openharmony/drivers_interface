@@ -18,16 +18,16 @@ package ohos.hdi.intelligent_voice.engine.v1_3;
 import ohos.hdi.intelligent_voice.engine.v1_2.IntellVoiceEngineTypes;
 import ohos.hdi.intelligent_voice.engine.v1_0.IntellVoiceEngineTypes;
  
-enum IntellVoiceEngineAdapterType {
-    ENROLL_ADAPTER_TYPE = 0,
-    WAKEUP_ADAPTER_TYPE = 1,
-    UPDATE_ADAPTER_TYPE = 2,
+enum IntellVoiceEngineAdapterType : ohos.hdi.intelligent_voice.engine.v1_0.IntellVoiceEngineAdapterType {
     IMPLICIT_ENROLL_ADAPTER_TYPE = 3,
-    ADAPTER_TYPE_BUT,
 };
  
 enum IntellVoiceEngineErrors : ohos.hdi.intelligent_voice.engine.v1_0.IntellVoiceEngineErrors {
     INTELL_VOICE_ENGINE_ENROLL_VPR_TRAIN_FAILED = -106,
     INTELL_VOICE_ENGINE_WAKEUP_PHRASE_NOT_MATCH = -107,
     INTELL_VOICE_ENGINE_ENROLL_DIFFERENT_PERSON = -108,
+};
+ 
+struct IntellVoiceEngineAdapterDescriptor {
+    enum IntellVoiceEngineAdapterType adapterType;
 };
