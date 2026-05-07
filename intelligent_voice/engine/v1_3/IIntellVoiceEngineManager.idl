@@ -61,7 +61,7 @@ interface IIntellVoiceEngineManager extends ohos.hdi.intelligent_voice.engine.v1
      * @param adapter Indicates the pointer to the intelligent voice engine adapter to operate, see {@link IIntellVoiceEngineAdapter}.
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
      *
-     * @since 5.0
+     * @since 7.0
      * @version 1.3
      */
     CreateAdapter_V_3([in] struct IntellVoiceEngineAdapterDescriptor descriptor, [out] IIntellVoiceEngineAdapter adapter);
