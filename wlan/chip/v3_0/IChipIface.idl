@@ -1,0 +1,546 @@
+/*
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup CHIP
+ * @{
+ *
+ * @brief Provides APIs for the upper-layer WLAN service.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+
+/**
+ * @file IChipIface.idl
+ *
+ * @brief Provides APIs to obtain the message of iface, include type, name and support frequencies.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+
+/**
+ * @brief Defines the package path of the chip module interface.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+
+package ohos.hdi.wlan.chip.v3_0;
+
+import ohos.hdi.wlan.chip.v3_0.ChipTypes;
+import ohos.hdi.wlan.chip.v3_0.IChipIfaceCallback;
+
+interface IChipIface {
+    /**
+     * @brief Obtains the type of the iface.
+     *
+     * @param type Indicates the type of the interface service object.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    GetIfaceType([out] enum IfaceType type);
+
+    /**
+     * @brief Obtains the name of the iface.
+     *
+     * @param name Indicates the name of the interface service object.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    GetIfaceName([out] String name);
+
+    /**
+     * @brief get iface featureset from wifi driver.
+     *
+     * @param capabilities Indicates the iface featureset.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    GetIfaceCap([out] unsigned int capabilities);
+
+    /**
+     * @brief Obtains the frequencies supported by the corresponding band.
+     *
+     * @param band Indicates the wifi band.
+     * @param frequencies Indicates the supported frequencies.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    GetSupportFreqs([in] int band, [out] unsigned int[] frequencies);
+
+    /**
+     * @brief Set mac to driver, change iface mac.
+     *
+     * @param mac Indicates the mac.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    SetMacAddress([in] String mac);
+
+    /**
+     * @brief Set countrycode to driver, change iface countrycode.
+     *
+     * @param code Indicates the countrycode.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    SetCountryCode([in] String code);
+
+    /**
+     * @brief Get iface current powermode.
+     *
+     * @param powerMode Indicates the current powermode.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    GetPowerMode([out] int powerMode);
+
+    /**
+     * @brief Set powermode to driver, change iface powermode.
+     *
+     * @param powerMode Indicates the set powermode.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    SetPowerMode([in] int powerMode);
+
+    /**
+     * @brief Register callback to iface.
+     *
+     * @param chipIfaceCallback Indicates the listener callback.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    RegisterChipIfaceCallBack([in] IChipIfaceCallback chipIfaceCallback);
+
+    /**
+     * @brief Unregister callback to iface.
+     *
+     * @param chipIfaceCallback Indicates the listener callback.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    UnRegisterChipIfaceCallBack([in] IChipIfaceCallback chipIfaceCallback);
+
+    /**
+     * @brief Start iface scan.
+     *
+     * @param scanParam Indicates the scan param.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    StartScan([in] struct ScanParams scanParam);
+
+    /**
+     * @brief Get iface scan results.
+     *
+     * @param scanResultsInfo Indicates the scan result.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    GetScanInfos([out] struct ScanResultsInfo[] scanResultsInfo);
+
+    /**
+     * @brief Start iface pno scan.
+     *
+     * @param pnoParams Indicates the pno scan param.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    StartPnoScan([in] struct PnoScanParams pnoParams);
+
+    /**
+     * @brief Stop iface pno scan.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    StopPnoScan();
+
+    /**
+     * @brief Get wifi signal info from driver.
+     *
+     * @param signalPollResult Indicates the signal info.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    GetSignalPollInfo([out] struct SignalPollResult signalPollresult);
+
+    /**
+     * @brief Enable power mode for iface.
+     *
+     * @param mode Indicates the power mode.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    EnablePowerMode([in] int mode);
+
+    /**
+     * @brief Set dpi rules.
+     *
+     * @param uid Indicates the current uid.
+     * @param protocol Indicates the rule.
+     * @param enable Indicates the mode.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    SetDpiMarkRule([in] int uid, [in] int protocol, [in] int enable);
+
+    /**
+     * @brief Set tx power.
+     *
+     * @param power Indicates the power value.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    SetTxPower([in] int power);
+
+    /**
+     * @brief Set interface up or down.
+     *
+     * @param state Indicates the iface state.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    SetIfaceState([in] boolean state);
+
+    /**
+     * @brief Send private command to driver.
+     *
+     * @param ifName Indicates the interface name.
+     * @param cmdId Indicates the cmd type.
+     * @param paramBuf Indicates the cmd info.
+     * @param result Indicates the cmd result.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    SendCmdToDriver([in] String ifName, [in] int cmdId, [in] byte[] paramBuf, [out] byte[] result);
+
+    /**
+     * @brief Send action frame to driver.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param freq Indicates the send channel frequency.
+     * @param frameData Indicates the action frame data.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    SendActionFrame([in] String ifName, [in] unsigned int freq, [in] unsigned char[] frameData);
+
+    /**
+     * @brief Register action frame receiver.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param match Indicates the data matching action frame.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    RegisterActionFrameReceiver([in] String ifName, [in] unsigned char[] match);
+
+    /**
+     * @brief Get coex channel list.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param paramBuf coex channel list.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    GetCoexictenceChannelList([in] String ifName, [out] unsigned char[] paramBuf);
+
+    /**
+     * @brief Sets the projection parameters.
+     *
+     * @param ifName Indicates the NIC name.
+     * @param param Indicates the projection parameters to set.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    SetProjectionScreenParam([in] String ifName, [in] struct ProjectionScreenCmdParam param);
+
+    /**
+     * @brief Start NAN: create interface, set MAC, bring up, and start VAP.
+     *
+     * @param config NAN initialization configuration.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    NanStart([in] struct NanInitConfig config);
+
+    /**
+     * @brief Stop NAN: stop VAP, bring down interface, and remove it.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    NanStop();
+
+    /**
+     * @brief Start a NAN publish session.
+     *
+     * @param transactionId Transaction ID for matching responses.
+     * @param info Publish session configuration.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    NanPublishRequest([in] unsigned short transactionId, [in] struct NanPublishInfo info);
+
+    /**
+     * @brief Stop a NAN publish session.
+     *
+     * @param transactionId Transaction ID for matching responses.
+     * @param info Cancel publish information.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    NanPublishCancel([in] unsigned short transactionId, [in] struct NanCancelInfo info);
+
+    /**
+     * @brief Start a NAN subscribe session.
+     *
+     * @param transactionId Transaction ID for matching responses.
+     * @param info Subscribe session configuration.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    NanSubscribeRequest([in] unsigned short transactionId, [in] struct NanSubscribeInfo info);
+
+    /**
+     * @brief Stop a NAN subscribe session.
+     *
+     * @param transactionId Transaction ID for matching responses.
+     * @param info Cancel subscribe information.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    NanSubscribeCancel([in] unsigned short transactionId, [in] struct NanCancelInfo info);
+
+    /**
+     * @brief Send a follow-up message to a NAN peer.
+     *
+     * @param transactionId Transaction ID for matching responses.
+     * @param info Follow-up message configuration.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    NanTransmitFollowUpRequest([in] unsigned short transactionId, [in] struct NanFollowUpInfo info);
+
+    /**
+     * @brief Send NDP request (Initiator side).
+     *
+     * @param transactionId Transaction ID for matching responses.
+     * @param info NDP request configuration.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    NanDataPathRequest([in] unsigned short transactionId, [in] struct NanDataPathRequestInfo info);
+
+    /**
+     * @brief Send NDP response (Responder side).
+     *
+     * @param transactionId Transaction ID for matching responses.
+     * @param info NDP response configuration.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    NanDataPathResponse([in] unsigned short transactionId, [in] struct NanDataPathResponseInfo info);
+
+    /**
+     * @brief Terminate an established NDP session.
+     *
+     * @param transactionId Transaction ID for matching responses.
+     * @param info NDP end information.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    NanDataPathEnd([in] unsigned short transactionId, [in] struct NanDataPathEndInfo info);
+
+    /**
+     * @brief Enable or disable NAN IC mode (fast discovery).
+     *
+     * @param mode Indicates the mode value.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    NanEnableICMode([in] unsigned char mode);
+
+    /**
+     * @brief Install PTK for NAN data path security.
+     *
+     * @param param PTK installation parameters.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    NanInstallPtkRequest([in] struct NanInstallPtkParam param);
+
+    /**
+     * @brief Send a NAN-specific command to the driver.
+     *
+     * @param cmdId Indicates the NAN command ID.
+     * @param paramBuf Indicates the command parameters.
+     * @param result Indicates the command result.
+     *
+     * @return Returns <b>0</b> if the operation is successful.
+     * @return Returns a negative value if the operation fails.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    SendNanCmd([in] int cmdId, [in] byte[] paramBuf, [out] byte[] result);
+};
+/** @} */
