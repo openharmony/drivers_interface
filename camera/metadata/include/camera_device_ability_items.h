@@ -594,6 +594,20 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_CAMERA_CONCURRENT_CAPTURE,
     /**
+     * ohos.ability.spectrum [static, byte, public]
+     *
+     * camera device property, query camera ability for spectrum
+     * (i.e. byte: 0-false/1-true ...)
+     */
+    OHOS_ABILITY_SPECTRUM_SUPPORTED,
+    /**
+     * ohos.ability.spectrum.info [static, float, public]
+     *
+     * camera device property, query camera spectrum data
+     * (i.e. float ...)
+     */
+    OHOS_ABILITY_SPECTRUM_INFOS,
+    /**
      * ohos.camera.propertiesEnd
      *
      * camera property end
