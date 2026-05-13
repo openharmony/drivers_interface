@@ -15,6 +15,7 @@ import("//build/config/components/hdi/hdi.gni")
  
 hdi("intell_voice_engine") {
   module_name = "intell_voice_engine_service"
+  no_other_header_files = true
   stub_deps = [
     "../v1_2:libintell_voice_engine_stub_1.2",
   ]
