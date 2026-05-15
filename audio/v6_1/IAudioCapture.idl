@@ -29,23 +29,29 @@
 
 package ohos.hdi.audio.v6_1;
 
-/**
- * @brief Describes Phone scene type.
- *
- * @since 6.1
- * @version 2.0
- */
-enum SceneType {
-    SCENE_TYPE_MODEM = 0,   /**< Assigned modem scene type */
-    SCENE_TYPE_TRANSFER = 1,    /**< Assigned transfer scene type */
-};
+import ohos.hdi.audio.v6_0.IAudioCapture;
+import ohos.hdi.audio.v6_1.AudioTypes;
+import ohos.hdi.audio.v6_1.IAudioCaptureCallback;
 
 /**
- * @brief Defines audio input type.
+ * @brief Provides audio adapter capabilities, including initializing ports, creating rendering and capturing tasks,
+ * and obtaining the port capability set.
  *
- * @since 7.0
- * @version 1.0
+ * @see IAudioCapture
+ * @since 4.1
+ * @version 2.0
  */
-enum AudioCaptureCallbackType {
-    AUDIO_CAPTURE_CALLBACK_CAMCORDER_METADATA = 0, // 录像录音的metaData信息回调
-};
+interface IAudioCapture extends ohos.hdi.audio.v6_0.IAudioCapture{
+    /**
+     * @brief Registers an audio capture callback
+     *
+     * @param capture Indicates the pointer to the <b>IAudioCapture</b> object to operate.
+     * @param callback Indicates the callback to register.
+     * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
+     * @see RegCallback
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    RegCallback([in] IAudioCaptureCallback audioCallback);
+}
