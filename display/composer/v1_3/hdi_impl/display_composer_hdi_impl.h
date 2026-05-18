@@ -137,7 +137,7 @@ public:
             return HDF_FAILURE;
         }
 
-        relaseFence = hdiFence->Move();
+        releaseFence = hdiFence->Move();
         return DISPLAY_SUCCESS;
     }
 
