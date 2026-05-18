@@ -127,11 +127,17 @@ public:
     virtual int32_t CommitTunnelLayer(uint32_t devId, uint64_t tunnelId, int32_t& releaseFence) override
     {
         COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_3_);
-        sptr<HdifdParcelable> hdiFence;
+        sptr<HdifdParcelable> hdiFence = nullptr;
         int32_t ret = ToDispErrCode(hdi_v1_3_->CommitTunnelLayer(devId, tunnelId, hdiFence));
         if (ret != DISPLAY_SUCCESS) {
             return ret;
         }
+
+        if (!hdiFence) {
+            return HDF_FAILURE;
+        }
+
+        releaseFence = hdiFence->Move();
         return DISPLAY_SUCCESS;
     }
 
