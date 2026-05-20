@@ -1,0 +1,542 @@
+/*
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup CHIP
+ * @{
+ *
+ * @brief Provides APIs for the upper-layer WLAN service.
+ *
+ * You can use the APIs to manager the wifi chip, init and release the wifi chip, create and remove iface, register callback
+ * get the name and type of the iface, get the support frequencies and set the mode of chip.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+
+/**
+ * @file ChipTypes.idl
+ *
+ * @brief Provides the enumerated variables, structures in CHIP APIs.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+
+/**
+ * @brief Defines the package path of the chip module interface.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+
+package ohos.hdi.wlan.chip.v3_0;
+
+/**
+ * @brief Enumerates the code of status.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+enum ErrorCode : int{
+    SUCCESS,
+    INVALID_CHIP,
+    INVALID_IFACE,
+    UNSUPPORTED,
+    UNAVAILABLE,
+    NOT_INITED,
+    UNKNOWN
+};
+
+/**
+ * @brief Enumerates the types of the interface.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+enum IfaceType : unsigned int {
+    STA,
+    AP,
+    P2P,
+    NANIFACE
+};
+
+/**
+ * @brief Defines the limitations of the interface.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct IfaceLimit {
+    enum IfaceType[] types;
+    unsigned int ifaceNum;
+};
+
+/**
+ * @brief Defines the usable interface of the chip.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct ComboIface {
+    struct IfaceLimit[] limits;
+};
+
+/**
+ * @brief Defines the usable mode of the chip.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct UsableMode {
+    unsigned int modeId;
+    struct ComboIface[] usableCombo;
+};
+
+/**
+ * @brief Defines the scan param.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct ScanParams {
+    String[] ssids;
+    int[] freqs;
+    String extraIes;
+    String bssid;
+    unsigned char prefixSsidScanFlag;
+    unsigned char fastConnectFlag;
+};
+
+/**
+ * @brief Defines the scan result info.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct ScanResultsInfo {
+    unsigned int flags;
+    unsigned char[] bssid;
+    unsigned short caps;
+    unsigned int freq;
+    unsigned short beaconInterval;
+    int qual;
+    int level;
+    unsigned int age;
+    unsigned long tsf;
+    unsigned char[] variable;
+    unsigned char[] ie;
+    unsigned char[] beaconIe;
+};
+
+/**
+ * @brief Defines the pno scan info.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct PnoScanParams {
+    int min2gRssi;
+    int min5gRssi;
+    int scanIntervalMs;
+    int scanIterations;
+    String[] hiddenssids;
+    String[] savedssids;
+    int[] freqs;
+};
+
+/**
+ * @brief Defines the signal info.
+ *
+ * @since 5.1
+ * @version 3.0
+ */
+struct SignalPollResult {
+    int currentRssi;
+    int associatedFreq;
+    int txBitrate;
+    int rxBitrate;
+    int currentNoise;
+    int currentSnr;
+    int currentChload;
+    int currentUlDelay;
+    unsigned long currentTxBytes;
+    unsigned long currentRxBytes;
+    int currentTxFailed;
+    int currentTxPackets;
+    int currentRxPackets;
+    unsigned short chloadSelf;
+    int c0Rssi;
+    int c1Rssi;
+    unsigned char[] ext;
+};
+
+/**
+ * @brief Defines the projection parameters.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct ProjectionScreenCmdParam {
+    int cmdId;
+    byte[] buf;
+};
+
+/**
+ * @brief NAN initialization configuration passed during NanStart.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct NanInitConfig {
+    unsigned char masterPref;
+    unsigned short clusterLow;
+    unsigned short clusterHigh;
+    unsigned char supportBand;
+    unsigned char supportBeacon;
+    unsigned char supportSdf;
+    unsigned int channel;
+    unsigned char supportSidBeacon;
+    unsigned char valSidBeacon;
+    unsigned char supportSubscribeSidBeacon;
+    unsigned char valSubscribeSidBeacon;
+    unsigned char supportMaxHopCnt;
+    unsigned char valMaxHopCnt;
+    unsigned char supportForceHopCnt;
+    unsigned char valForceHopCnt;
+    unsigned char supportRandomFactor;
+    unsigned char valRandomFactor;
+    unsigned char supportDW;
+    unsigned char val24gDW;
+    unsigned char val5gDW;
+    unsigned char supportDiscoveryBeaconInt;
+    unsigned int valDiscoveryBeaconInt;
+    unsigned char[] reserved;
+};
+
+/**
+ * @brief SDEA control flags for publish/subscribe operations.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct NanSdeaControl {
+    unsigned char ndpRequired;
+    unsigned char ndpType;
+    unsigned char securityRequired;
+    unsigned char qosRequired;
+    unsigned char gtkRequired;
+    unsigned char fsdRequired;
+    unsigned char fsdConfig;
+    unsigned char rangeRequired;
+    unsigned char[] reserved;
+};
+
+/**
+ * @brief Service Response Filter (SRF) configuration for subscribe.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct SRFConfig {
+    unsigned char srfRequired;
+    unsigned char serviceResponseFilter;
+    unsigned char serviceResponseInclude;
+    unsigned char srfMacNum;
+    unsigned char[] srfMacAddr;
+    unsigned char bloomFilterLen;
+    unsigned char bloomFilterIndex;
+    unsigned char[] bloomFilter;
+    unsigned char[] reserved;
+};
+
+/**
+ * @brief NAN publish session configuration.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct NanPublishInfo {
+    unsigned char publishId;
+    unsigned char ttl;
+    unsigned char period;
+    unsigned char[] serviceId;
+    unsigned char publishType;
+    unsigned char txType;
+    unsigned char[] serviceSpecificInfo;
+    unsigned char[] extServiceSpecificInfo;
+    unsigned char[] filterTx;
+    unsigned char[] filterRx;
+    struct NanSdeaControl control;
+    unsigned char[] reserved;
+};
+
+/**
+ * @brief NAN subscribe session configuration.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct NanSubscribeInfo {
+    unsigned char subscribeId;
+    unsigned char ttl;
+    unsigned char period;
+    unsigned char[] serviceId;
+    unsigned char subscribeType;
+    unsigned char[] serviceSpecificInfo;
+    unsigned char[] extServiceSpecificInfo;
+    unsigned char[] filterTx;
+    unsigned char[] filterRx;
+    struct SRFConfig srfConfig;
+    struct NanSdeaControl control;
+    unsigned char[] reserved;
+};
+
+/**
+ * @brief Information for canceling a NAN publish/subscribe session.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct NanCancelInfo {
+    unsigned char publishOrSubscribeId;
+    unsigned char[] reserved;
+};
+
+/**
+ * @brief NAN follow-up message for sending service data to a peer.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct NanFollowUpInfo {
+    unsigned char publishOrSubscribeId;
+    unsigned char requestorInstanceId;
+    unsigned char[] peerNmi;
+    unsigned char priority;
+    unsigned char windowType;
+    unsigned char[] serviceSpecificInfo;
+    unsigned char[] extServiceSpecificInfo;
+    unsigned char[] reserved;
+};
+
+/**
+ * @brief NAN discovery result received when a peer matches a publish/subscribe session.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct NanDiscoveryResult {
+    unsigned char publishOrSubscribeId;
+    unsigned char requestorInstanceId;
+    unsigned char[] peerNmi;
+    unsigned char[] serviceId;
+    unsigned char[] serviceSpecificInfo;
+    unsigned char[] extServiceSpecificInfo;
+    unsigned char[] matchedFilter;
+    struct NanSdeaControl peerControl;
+    unsigned char[] reserved;
+};
+
+/**
+ * @brief Publish/Subscribe session terminated event.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct NanTerminateReport {
+    unsigned char publishOrSubscribeId;
+    int status;
+    unsigned char[] reserved;
+};
+
+/**
+ * @brief NDP control flags.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct NanDataPathControl {
+    unsigned char confirmRequired;
+    unsigned char qosRequired;
+    unsigned char securityRequired;
+    unsigned char publishIdRequired;
+    unsigned char gtkRequired;
+    unsigned char[] reserved;
+};
+
+/**
+ * @brief Security configuration for an NDP session.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct NanSecurityConfig {
+    unsigned char csid;
+    unsigned char[] pmk;
+    unsigned char[] pmkid;
+    unsigned char[] reserved;
+};
+
+/**
+ * @brief QoS requirements for an NDP session.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct NanQosRequirements {
+    unsigned char tid;
+    unsigned short serviceDataPacketSize;
+    unsigned int meanDataRate;
+    unsigned int maxServiceInterval;
+    unsigned char[] reserved;
+};
+
+/**
+ * @brief NDP request configuration (Initiator side).
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct NanDataPathRequestInfo {
+    unsigned char[] responderNmi;
+    unsigned char publishOrSubscribeId;
+    unsigned char requestorInstanceId;
+    unsigned int channel;
+    struct NanDataPathControl control;
+    struct NanQosRequirements qos;
+    struct NanSecurityConfig security;
+    unsigned char[] localIpv6;
+    unsigned short peerPort;
+    unsigned char[] serviceSpecificInfo;
+    unsigned char[] reserved;
+};
+
+/**
+ * @brief NDP response configuration (Responder side).
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct NanDataPathResponseInfo {
+    unsigned char publishOrSubscribeId;
+    unsigned char requestorInstanceId;
+    unsigned char[] responderNmi;
+    struct NanDataPathControl control;
+    struct NanQosRequirements qos;
+    struct NanSecurityConfig security;
+    boolean rspCode;
+    unsigned char[] localIpv6;
+    unsigned short peerPort;
+    unsigned char[] serviceSpecificInfo;
+    unsigned char[] reserved;
+};
+
+/**
+ * @brief NDP end event received from a peer.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct NanDataPathEndInfo {
+    unsigned char ndpId;
+    unsigned char[] reserved;
+};
+
+/**
+ * @brief NDP request event received on the Responder side from an Initiator.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct NanDataPathRequestReport {
+    unsigned char ndpId;
+    unsigned char publishOrSubscribeId;
+    unsigned char[] peerNdi;
+    struct NanDataPathControl control;
+    struct NanQosRequirements qos;
+    struct NanSecurityConfig security;
+    unsigned char[] peerIpv6;
+    unsigned char[] serviceSpecificInfo;
+    unsigned char[] reserved;
+};
+
+/**
+ * @brief NDP confirm event received on the Initiator side.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct NanDataPathConfirmReport {
+    unsigned char ndpId;
+    unsigned char[] peerNdi;
+    boolean rspCode;
+    unsigned char[] peerIpv6;
+    unsigned short peerPort;
+    unsigned char[] serviceSpecificInfo;
+    unsigned char[] reserved;
+};
+
+/**
+ * @brief NAN service discovery response type enumeration.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+enum NanResponseType : int {
+    RESPONSE_TRANSMIT_FOLLOWUP,
+    RESPONSE_DATA_PATH_REQUEST,
+    RESPONSE_ERR_REPORT
+};
+
+/**
+ * @brief NAN Service Discovery Event Status Enumeration.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+enum NanEventStatus : int {
+    NAN_STATUS_SUCCESS,
+    NAN_STATUS_FAIL,
+    NAN_STATUS_STOPPED
+};
+
+/**
+ * @brief NAN operation response message.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct NanResponseMsg {
+    enum NanResponseType sdType;
+    enum NanEventStatus status;
+    unsigned char ndpId;
+    unsigned char[] reserved;
+};
+
+/**
+ * @brief PTK installation parameters for NAN data path security.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+struct NanInstallPtkParam {
+    unsigned char keyIndex;
+    int cipherSuite;
+    unsigned char[] addr;
+    unsigned char[] keyData;
+    unsigned char[] reserved;
+};
+/** @} */

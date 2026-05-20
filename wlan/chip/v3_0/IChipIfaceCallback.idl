@@ -1,0 +1,171 @@
+/*
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup CHIP
+ * @{
+ *
+ * @brief Provides APIs for the upper-layer WLAN service.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+
+/**
+ * @file IChipIfaceCallback.idl
+ *
+ * @brief Provides callback APIs for chip iface events.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+
+/**
+ * @brief Defines the package path of the chip module interface.
+ *
+ * @since 7.0
+ * @version 3.0
+ */
+
+package ohos.hdi.wlan.chip.v3_0;
+
+import ohos.hdi.wlan.chip.v3_0.ChipTypes;
+
+[callback] interface IChipIfaceCallback {
+    /**
+     * @brief Obtains the callback for the scan result event.
+     *
+     * @param event Indicates the scan result event.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    [oneway] OnScanResultsCallback([in] unsigned int event);
+
+    /**
+     * @brief Obtains the callback for the rssi change event.
+     *
+     * @param index aerials index.
+     * @param c0Rssi first antenna rssi.
+     * @param c1Rssi second antenna rssi.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    [oneway] OnRssiReport([in] int index, [in] int c0Rssi, [in] int c1Rssi);
+
+    /**
+     * @brief Called to process the Netlink message received.
+     *
+     * @param type Indicates the Netlink message type.
+     * @param recvMsg Indicates the Netlink message received.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    [oneway] OnWifiNetlinkMessage([in] unsigned int type, [in] unsigned char[] recvMsg);
+
+    /**
+     * @brief NAN response callback.
+     *
+     * @param transactionId Transaction ID.
+     * @param event Response message.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    [oneway] OnNanResponse([in] unsigned short transactionId, [in] struct NanResponseMsg event);
+
+    /**
+     * @brief Publish message received callback.
+     *
+     * @param event Discovery Result.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    [oneway] OnPublishRecv([in] struct NanDiscoveryResult event);
+
+    /**
+     * @brief Publish terminated callback.
+     *
+     * @param event Publish termination information.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    [oneway] OnPublishTerminated([in] struct NanTerminateReport event);
+
+    /**
+     * @brief Subscribe message received callback.
+     *
+     * @param event Discovery Result.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    [oneway] OnSubscribeRecv([in] struct NanDiscoveryResult event);
+
+    /**
+     * @brief Subscribe terminated callback.
+     *
+     * @param event Subscribe termination information.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    [oneway] OnSubscribeTerminated([in] struct NanTerminateReport event);
+
+    /**
+     * @brief Follow-up message received callback.
+     *
+     * @param event Follow-up message information.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    [oneway] OnFollowUpRecv([in] struct NanFollowUpInfo event);
+
+    /**
+     * @brief Data path request received callback.
+     *
+     * @param event Data path request report.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    [oneway] OnDataPathRequestRecv([in] struct NanDataPathRequestReport event);
+
+    /**
+     * @brief Data path response received callback.
+     *
+     * @param event Data path confirm report.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    [oneway] OnDataPathConfirm([in] struct NanDataPathConfirmReport event);
+
+    /**
+     * @brief Data path end callback.
+     *
+     * @param event Data path end information.
+     *
+     * @since 7.0
+     * @version 3.0
+     */
+    [oneway] OnDataPathEndRecv([in] struct NanDataPathEndInfo event);
+};
+/** @} */
