@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 Huawei Device Co., Ltd.
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -29,23 +29,20 @@
 
 package ohos.hdi.audio.v6_1;
 
-/**
- * @brief Describes Phone scene type.
- *
- * @since 6.1
- * @version 2.0
- */
-enum SceneType {
-    SCENE_TYPE_MODEM = 0,   /**< Assigned modem scene type */
-    SCENE_TYPE_TRANSFER = 1,    /**< Assigned transfer scene type */
-};
+import ohos.hdi.audio.v6_1.AudioTypes;
 
 /**
- * @brief Defines audio input type.
+ * @brief Called when an event defined in {@link AudioCallbackType} occurs.
+ *
+ * @param AudioCallbackType Indicates the occurred event that triggers this callback.
+ * @param reserved Indicates the pointer to a reserved field.
+ * @param cookie Indicates the pointer to the cookie for data transmission.
+ * @return Returns <b>0</b> if the callback is successfully executed; returns a negative value otherwise.
+ * @see RegCallback
  *
  * @since 7.0
  * @version 1.0
  */
-enum AudioCaptureCallbackType {
-    AUDIO_CAPTURE_CALLBACK_CAMCORDER_METADATA = 0, // 录像录音的metaData信息回调
-};
+[callback] interface IAudioCaptureCallback {
+    CaptureCallback([in] enum AudioCaptureCallbackType type, [in] unsigned char[] data);
+}
