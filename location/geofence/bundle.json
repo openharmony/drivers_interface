@@ -1,63 +1,63 @@
 {
-  "name": "@ohos/drivers_interface_location_geofence",
-  "description": "geofence device driver interface",
-  "version": "3.2",
-  "license": "Apache License 2.0",
-  "publishAs": "code-segment",
-  "segment": {
-    "destPath": "drivers/interface/location/geofence"
-  },
-  "dirs": {},
-  "scripts": {},
-  "component": {
-    "name": "drivers_interface_location_geofence",
-    "subsystem": "hdf",
-    "adapted_system_type": [
-      "standard"
-    ],
-    "rom": "675KB",
-    "ram": "1024KB",
-    "deps": {
-      "components": [
-        "ipc",
-        "hdf_core",
-        "hilog",
-        "c_utils"
-      ],
-      "third_party": []
+    "name": "@ohos/drivers_interface_location_geofence",
+    "description": "geofence device driver interface",
+    "version": "3.2",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+      "destPath": "drivers/interface/location/geofence"
     },
-    "build": {
-      "sub_component": [
-        "//drivers/interface/location/geofence/v3_0:location_geofence_idl_target"
+    "dirs": {},
+    "scripts": {},
+    "component": {
+      "name": "drivers_interface_location_geofence",
+      "subsystem": "hdf",
+      "adapted_system_type": [
+        "standard"
       ],
-      "test": [
-      ],
-      "inner_kits": [
-        {
-          "name": "//drivers/interface/location/geofence/v3_0:liblocation_geofence_proxy_3.0",
-          "header": {
-            "header_files": [
-            ],
-            "header_base": "//drivers/interface/location/geofence"
+      "rom": "675KB",
+      "ram": "1024KB",
+      "deps": {
+        "components": [
+          "ipc",
+          "hdf_core",
+          "hilog",
+          "c_utils"
+        ],
+        "third_party": []
+      },
+      "build": {
+        "sub_component": [
+          "//drivers/interface/location/geofence/v3_0:location_geofence_idl_target"
+        ],
+        "test": [
+        ],
+        "inner_kits": [
+          {
+            "name": "//drivers/interface/location/geofence/v3_0:liblocation_geofence_proxy_3.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/location/geofence"
+            }
+          },
+          {
+            "name": "//drivers/interface/location/geofence/v3_0:location_geofence_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/location/geofence"
+            }
+          },
+          {
+            "name": "//drivers/interface/location/geofence/v3_0:liblocation_geofence_stub_3.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/location/geofence"
+            }
           }
-        },
-        {
-          "name": "//drivers/interface/location/geofence/v3_0:location_geofence_idl_headers",
-          "header": {
-            "header_files": [
-            ],
-            "header_base": "//drivers/interface/location/geofence"
-          }
-        },
-        {
-          "name": "//drivers/interface/location/geofence/v3_0:liblocation_geofence_stub_3.0",
-          "header": {
-            "header_files": [
-            ],
-            "header_base": "//drivers/interface/location/geofence"
-          }
-        }
-      ]
+        ]
+      }
     }
   }
-}
