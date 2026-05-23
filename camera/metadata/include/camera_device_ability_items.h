@@ -1593,6 +1593,20 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_TYPICAL_SCENE_ZOOM_POINTS,
     /**
+     * ohos.ability.lock_object_tracking_available [static, int32[], public]
+     *
+     * camera device property, report current camera supported mode for tracking
+     * (i.e. int32[] ...)
+     */
+    OHOS_ABILITY_LOCK_OBJECT_TRACKING_AVAILABLE,
+    /**
+     * ohos.control.LockObjectTracking [static, int32[], public]
+     *
+     * camera device property, set current camera lock object tracking info
+     * (i.e. int32[] ...)
+     */
+    OHOS_CONTROL_LOCK_OBJECT_TRACKING,
+    /**
      * ohos.device.focusEnd
      *
      * camera device focusEnd
