@@ -57,13 +57,15 @@ enum WififenceTransition {
 /**
  * @brief Enumerates the Wi-Fi fence algorithms.
  *
- * @since 4.0
+ * @since 7.0
  */
 enum WififenceAlgoType {
     /** If the scanned MAC address overlaps the MAC addresses in a Wi-Fi fence, the device is within the fence. */
     TYPE_ONE_BSSID = 1,
     /** If the similarity between the MAC address and RSSI scanned and the MAC address and RSSI in the Wi-Fi fence reaches the threshold, the device is within the fence. */
     TYPE_FP_MATCH = 2,
+    /** trigger fence. */
+    TYPE_TIGGER_FENCE = 3,
 };
 
 /**
