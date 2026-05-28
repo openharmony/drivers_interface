@@ -23,10 +23,12 @@
 #include "v1_2/include/idisplay_composer_interface.h"
 #include "v1_3/include/idisplay_composer_interface.h"
 #include "v1_4/include/idisplay_composer_interface.h"
+#include "v1_5/include/idisplay_composer_interface.h"
 #include "v1_0/display_composer_type.h"
 #include "v1_2/display_composer_type.h"
 #include "v1_3/display_composer_type.h"
 #include "v1_4/display_composer_type.h"
+#include "v1_5/display_composer_type.h"
 #include "v1_1/imode_callback.h"
 #include "v1_1/iseamless_change_callback.h"
 
@@ -116,6 +118,9 @@ struct DisplayComposerVdiAdapter {
     int32_t (*GetDisplayConnectionType)(uint32_t devId, V1_4::DisplayConnectionType& outType);
     int32_t (*GetDisplayClientTargetProperty)(uint32_t devId, int32_t& pixelFormat, int32_t& dataspace);
     int32_t (*SetDisplayColorGamut)(uint32_t devId, ColorGamut gamut);
+    int32_t (*GetDisplayVCPFeature)(uint32_t devId, uint8_t vcpCode,
+        uint16_t& currentValue, uint16_t& maximumValue, int32_t& replyErrorCode);
+    int32_t (*SetDisplayVCPFeature)(uint32_t devId, uint8_t vcpCode, uint16_t currentValue);
 };
 
 using LoadVdiImplFunc = int32_t (*)();
@@ -196,6 +201,9 @@ using CommitTunnelLayerFunc = int32_t (*)(uint32_t devId, uint64_t tunnelId, int
 using GetDisplayConnectionTypeFunc = int32_t (*)(uint32_t devId, V1_4::DisplayConnectionType& outType);
 using GetDisplayClientTargetPropertyFunc = int32_t (*)(uint32_t devId, int32_t& pixelFormat, int32_t& dataspace);
 using SetDisplayColorGamutFunc = int32_t (*)(uint32_t devId, ColorGamut gamut);
+using GetDisplayVCPFeatureFunc = int32_t (*)(uint32_t devId, uint8_t vcpCode,
+        uint16_t& currentValue, uint16_t& maximumValue, int32_t& replyErrorCode);
+using SetDisplayVCPFeatureFunc = int32_t (*)(uint32_t devId, uint8_t vcpCode, uint16_t currentValue);
 
 } // namespace Composer
 } // namespace Display
