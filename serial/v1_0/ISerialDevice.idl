@@ -115,4 +115,24 @@ interface ISerialDevice {
      * @since 7.0
      */
     GetCtsSignal([out] boolean cts);
+
+    /**
+     * @brief Set DTR signal of a serial device.
+     *
+     * @param dtr Indicates DTR signal state.
+     * @return Returns <b>0</b> if operation is successful.
+     * @return Returns a non-zero value if operation fails.
+     * @since 7.0
+     */
+    SetDtrSignal([in] boolean dtr);
+
+    /**
+     * @brief Get DSR signal of a serial device.
+     *
+     * @param dsr Indicates output DSR signal state.
+     * @return Returns <b>0</b> if operation is successful.
+     * @return Returns a non-zero value if operation fails.
+     * @since 7.0
+     */
+    GetDsrSignal([out] boolean dsr);
 }
