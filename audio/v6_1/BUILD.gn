@@ -32,6 +32,7 @@ if (defined(ohos_lite)) {
 
     branch_protector_ret = "pac_ret"
     no_other_header_files = true
+    generate_with_version = true
     language = "c"
     subsystem_name = "hdf"
     innerapi_tags = [
