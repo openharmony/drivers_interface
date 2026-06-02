@@ -211,13 +211,8 @@ public:
                 }
                 case VECTOR: {
                     auto &vec = std::get<std::vector<uint8_t>>(v);
-                    uint32_t vecLen = vec.size();
-                    ret = parcel.WriteUint32(vecLen);
+                    ret = parcel.WriteUInt8Vector(vec);
                     HDI_IF_FALSE_RETURN(ret);
-                    if (vecLen != 0) {
-                        ret = parcel.WriteBuffer(vec.data(), vecLen);
-                        HDI_IF_FALSE_RETURN(ret);
-                    }
                     break;
                 }
                 default: {
@@ -280,16 +275,11 @@ public:
                     break;
                 }
                 case VECTOR: {
-                    uint32_t vecLen = parcel.ReadUint32();
-                    if (vecLen == 0) {
-                        bundle->Set(key, std::vector<uint8_t>());
-                        break;
-                    }
-                    const uint8_t *buf = parcel.ReadBuffer(vecLen);
-                    if (buf == nullptr) {
+                    std::vector<uint8_t> buf;
+                    if (!parcel.ReadUInt8Vector(&buf)) {
                         return nullptr;
                     }
-                    bundle->Set(key, std::vector<uint8_t>(buf, buf + vecLen));
+                    bundle->Set(key, buf);
                     break;
                 }
                 default: {
