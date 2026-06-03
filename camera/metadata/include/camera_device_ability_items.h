@@ -608,6 +608,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_SPECTRUM_INFOS,
     /**
+     * ohos.ability.automotiveCameraSensorType [static, enum, public]
+     *
+     * camera device property, report current automotive camera sensor type
+     * (i.e. enum: OHOS_AUTOMOTIVE_CAMERA_SENSOR_TYPE_CMS/OHOS_AUTOMOTIVE_CAMERA_SENSOR_TYPE_DMS/...)
+     */
+    OHOS_ABILITY_AUTOMOTIVE_CAMERA_SENSOR_TYPE,
+    /**
      * ohos.camera.propertiesEnd
      *
      * camera property end
@@ -4030,5 +4037,16 @@ typedef enum camera_optical_image_stabilization_axes {
     CAMERA_OPTICAL_IMAGE_STABILIZATION_AXES_YAW,
     CAMERA_OPTICAL_IMAGE_STABILIZATION_AXES_ROLL,
 } camera_optical_image_stabilization_axes_enum_t;
+
+// OHOS_ABILITY_AUTOMOTIVE_CAMERA_SENSOR_TYPE
+typedef enum automotive_camera_sensor_type {
+    OHOS_AUTOMOTIVE_CAMERA_SENSOR_TYPE_CMS = 0,
+    OHOS_AUTOMOTIVE_CAMERA_SENSOR_TYPE_DMS,
+    OHOS_AUTOMOTIVE_CAMERA_SENSOR_TYPE_DVR,
+    OHOS_AUTOMOTIVE_CAMERA_SENSOR_TYPE_APA,
+    OHOS_AUTOMOTIVE_CAMERA_SENSOR_TYPE_AVM,
+    OHOS_AUTOMOTIVE_CAMERA_SENSOR_TYPE_BMS,
+    OHOS_AUTOMOTIVE_CAMERA_SENSOR_TYPE_DPIN,
+} automotive_camera_sensor_type_enum_t;
 
 #endif
