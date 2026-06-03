@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-package ohos.hdi.serials.v1_0;
+package ohos.hdi.serial.v1_0;
 
-import ohos.hdi.serials.v1_0.SerialTypes;
+import ohos.hdi.serial.v1_0.SerialTypes;
 
 /**
  * @brief Serial HDI interface

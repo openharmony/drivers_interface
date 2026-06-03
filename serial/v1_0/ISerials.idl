@@ -13,35 +13,40 @@
  * limitations under the License.
  */
 
-package ohos.hdi.serials.v1_0;
+package ohos.hdi.serial.v1_0;
 
-import ohos.hdi.serials.v1_0.SerialTypes;
+import ohos.hdi.serial.v1_0.SerialTypes;
+import ohos.hdi.serial.v1_0.ISerialDevice;
+import ohos.hdi.serial.v1_0.ISerialDeviceCallback;
 
 /**
  * @brief Serial HDI interface
  * @since 7.0
  * @version 1.0
  */
-[callback] interface ISerialDeviceCallback {
+interface ISerials {
     /**
-     * @brief Notify the device offline.
+     * @brief Query list of available serial devices.
      *
+     * @param devices Indicates output list of device info.
      * @return Returns <b>0</b> if operation is successful.
      * @return Returns a non-zero value if operation fails.
      * @since 7.0
 	 * @version 1.0
      */
-    OnDeviceOffline();
+    QueryDevices([out] SerialDeviceInfo[] devices);
 
     /**
      * @brief Open a serial device with specified configuration.
      *
-     * @param data Indicates the data to report.
-     * @param dataLen Indicates the data length of the data.
+     * @param portName Indicates the device path to open.
+     * @param config Indicates serial configuration.
+     * @param cb Indicates callback to register.
+     * @param device Indicates the device opened.
      * @return Returns <b>0</b> if operation is successful.
      * @return Returns a non-zero value if operation fails.
      * @since 7.0
 	 * @version 1.0
      */
-    OnReadData([in] byte[] data, [in] unsigned int dataLen);
+    OpenDevice([in] String portName, [in] SerialConfig config, [in] ISerialDeviceCallback cb, [out] ISerialDevice device);
 }
