@@ -16,6 +16,8 @@
 #ifndef OHOS_HDI_DISPLAY_V1_2_DISPLAY_CMD_REQUESTER_H
 #define OHOS_HDI_DISPLAY_V1_2_DISPLAY_CMD_REQUESTER_H
 
+#include <unistd.h>
+
 #include "v1_0/display_command/display_cmd_responser.h"
 #include "v1_1/display_command/display_cmd_responser.h"
 #include "v1_2/display_composer_type.h"
@@ -56,6 +58,15 @@ public:
     DisplayCmdResponser(VdiImpl* impl, std::shared_ptr<DeviceCacheManager> cacheMgr) : BaseType1_1(impl, cacheMgr) {}
 
     virtual ~DisplayCmdResponser() {}
+
+    static void CloseFenceFd(int32_t& fd)
+    {
+        if (fd < 0) {
+            return;
+        }
+        close(fd);
+        fd = -1;
+    }
 
     int32_t ProcessRequestCmd(CommandDataUnpacker& unpacker, int32_t cmd,
         const std::vector<HdifdInfo>& inFds, std::vector<HdifdInfo>& outFds)
@@ -109,13 +120,15 @@ public:
         int32_t ret = HDF_SUCCESS;
         uint32_t vectSize = 0;
 
-        HdifdParcelable fdParcel(commitInfo.fence);
         DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS,
             CmdUtils::StartSection(REPLY_CMD_COMMIT_AND_GET_RELEASE_FENCE, replyPacker_),
             HDF_LOGE("%{public}s, StartSection error", __func__));
 
-        DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::FileDescriptorPack(fdParcel.GetFd(), replyPacker_, outFds),
+        DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::FileDescriptorPack(commitInfo.fence, replyPacker_, outFds),
             HDF_LOGE("%{public}s, FileDescriptorPack error", __func__));
+        if (ret == HDF_SUCCESS) {
+            CloseFenceFd(commitInfo.fence);
+        }
 
         DISPLAY_CHECK(replyPacker_.WriteInt32(commitInfo.skipRet) == false,
             HDF_LOGE("%{public}s, write skip validate return value error", __func__));
@@ -139,8 +152,11 @@ public:
                 HDF_LOGE("%{public}s, write fences.size error", __func__));
 
             for (uint32_t i = 0; i < vectSize; i++) {
-                ret = CmdUtils::FileDescriptorPack(commitInfo.fences[i], replyPacker_, outFds, false);
+                ret = CmdUtils::FileDescriptorPack(commitInfo.fences[i], replyPacker_, outFds);
                 DISPLAY_CHECK(ret != HDF_SUCCESS, HDF_LOGE("%{public}s, write fences error", __func__));
+                if (ret == HDF_SUCCESS) {
+                    CloseFenceFd(commitInfo.fences[i]);
+                }
             }
         }
 
@@ -148,10 +164,6 @@ public:
             HDF_LOGE("%{public}s, EndSection error", __func__));
 
         replyCommandCnt_++;
-
-#ifndef DISPLAY_COMMUNITY
-        fdParcel.Move();
-#endif // DISPLAY_COMMUNITY
 
         if (ret != HDF_SUCCESS) {
             errMaps_.emplace(REQUEST_CMD_COMMIT_AND_GET_RELEASE_FENCE, ret);
