@@ -168,6 +168,7 @@ public:
     static int32_t FileDescriptorPack(
         const int32_t fd, CommandDataPacker& packer, std::vector<HdifdInfo>& hdiFds, bool dupFd = true)
     {
+        (void)dupFd;
         if (fd < 0) {
             DISPLAY_CHK_RETURN(packer.WriteInt32(fd) == false, HDF_FAILURE,
                 HDF_LOGE("%{public}s, write fd error", __func__));
@@ -176,19 +177,12 @@ public:
 
         HdifdInfo hdifdInfo;
         hdifdInfo.id = GenerateHdifdSeqid();
-        if (dupFd) {
-            hdifdInfo.hdiFd = new HdifdParcelable();
-            DISPLAY_CHK_RETURN(hdifdInfo.hdiFd == nullptr, HDF_FAILURE,
-                HDF_LOGE("%{public}s, new HdifdParcelable failed", __func__));
-            // A normal fd is transfered by binder, here just write id for unpacking to match fd.
-            DISPLAY_CHK_RETURN(hdifdInfo.hdiFd->Init(fd) == false, HDF_FAILURE,
-                HDF_LOGE("%{public}s, hdiFd init failed, fd:%{public}d", __func__, fd));
-        } else {
-            hdifdInfo.hdiFd = new HdifdParcelable(fd);
-            DISPLAY_CHK_RETURN(hdifdInfo.hdiFd == nullptr, HDF_FAILURE,
-                HDF_LOGE("%{public}s, new HdifdParcelable failed", __func__));
-            hdifdInfo.hdiFd->Move();
-        }
+        hdifdInfo.hdiFd = new HdifdParcelable();
+        DISPLAY_CHK_RETURN(hdifdInfo.hdiFd == nullptr, HDF_FAILURE,
+            HDF_LOGE("%{public}s, new HdifdParcelable failed", __func__));
+        // A normal fd is transfered by binder, here just write id for unpacking to match fd.
+        DISPLAY_CHK_RETURN(hdifdInfo.hdiFd->Init(fd) == false, HDF_FAILURE,
+            HDF_LOGE("%{public}s, hdiFd init failed, fd:%{public}d", __func__, fd));
 
         hdiFds.push_back(hdifdInfo);
         DISPLAY_CHK_RETURN(packer.WriteInt32(hdifdInfo.id) == false, HDF_FAILURE,
