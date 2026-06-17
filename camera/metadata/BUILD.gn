@@ -37,7 +37,10 @@ ohos_shared_library("metadata") {
       "src/camera_metadata_info.cpp",
       "src/camera_metadata_operator.cpp",
     ]
-    external_deps = [ "hilog_lite:hilog_shared" ]
+    external_deps = [
+      "hilog_lite:hilog_shared",
+      "hdf_core:libhdf_utils",
+    ]
   } else {
     sources = [
       "src/camera_metadata_info.cpp",
@@ -58,6 +61,7 @@ ohos_shared_library("metadata") {
       "c_utils:utils",
       "hilog:libhilog",
       "ipc:ipc_single",
+      "hdf_core:libhdf_utils",
     ]
   }
 
