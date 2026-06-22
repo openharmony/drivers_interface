@@ -32,6 +32,7 @@
     ],
     "deps": {
       "components": [
+        "bounds_checking_function",
         "hdf_core",
         "hilog",
         "c_utils",
