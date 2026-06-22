@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2023-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -213,7 +213,7 @@ int32_t MapDataSequenceable::Set(const std::string &key, MapDataType type, const
 {
     std::lock_guard<std::mutex> lockGuard(mtx_);
     auto it = datas_.find(key);
-    if (it == datas_.end() && datas_.size() > BUFFER_MAX_USER_DATA_COUNT) {
+    if (it == datas_.end() && datas_.size() >= BUFFER_MAX_USER_DATA_COUNT) {
         HDI_CAMERA_LOGW("SurfaceBuffer has too many extra data, cannot save one more!!!");
         return ERROR_OUT_OF_RANGE;
     }
