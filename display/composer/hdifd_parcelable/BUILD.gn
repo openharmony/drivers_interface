@@ -23,6 +23,7 @@ ohos_shared_library("libhdifd_parcelable") {
   public_configs = [ ":hdifd_parcelable_config" ]
 
   external_deps = [
+    "bounds_checking_function:libsec_shared",
     "c_utils:utils",
     "hdf_core:libhdi",
     "hdf_core:libpub_utils",

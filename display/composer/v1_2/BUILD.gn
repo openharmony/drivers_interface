@@ -60,6 +60,7 @@ ohos_shared_library("libdisplay_composer_hdi_impl_1.2") {
   ]
 
   external_deps = [
+    "bounds_checking_function:libsec_shared",
     "c_utils:utils",
     "graphic_surface:buffer_handle",
     "hdf_core:libhdf_utils",
