@@ -59,6 +59,10 @@ ohos_shared_library("libdisplay_composer_hdi_impl_1.5") {
 
   public_configs = [ ":libdisplay_composer_hdi_impl_config" ]
 
+  cflags = [
+    "-fstack-protector-strong",
+  ]
+
   deps = [
     "../v1_4:libdisplay_composer_proxy_1.4",
     ":libdisplay_composer_proxy_1.5",
