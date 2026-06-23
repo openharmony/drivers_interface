@@ -29,10 +29,8 @@
 
 package ohos.hdi.audio.v6_1;
 
-import ohos.hdi.audio.v6_0.AudioTypes;
+import ohos.hdi.audio.v6_1.AudioTypes;
 import ohos.hdi.audio.v6_1.IAudioAdapter;
-
-import ohos.hdi.audio.v6_0.IAudioManager;
 
 /**
  * @brief Manages audio adapters through a specific adapter driver program loaded based on the given audio
@@ -42,6 +40,58 @@ import ohos.hdi.audio.v6_0.IAudioManager;
  * @since 4.1
  * @version 2.0
  */
-interface IAudioManager extends ohos.hdi.audio.v6_0.IAudioManager {
+interface IAudioManager {
+    /**
+     * @brief Obtains the list of all adapters supported by an audio driver.
+     *
+     * @param manager Indicates the pointer to the audio adapter manager to operate.
+     * @param descs Indicates the double pointer to the audio adapter list.
+     * @param size Indicates the pointer to the length of the list.
+     * @return Returns <b>0</b> if the list is obtained successfully; returns a negative value otherwise.
+     * @see LoadAdapter
+     *
+     * @since 4.1
+     * @version 2.0
+     */
+    GetAllAdapters([out] struct AudioAdapterDescriptor[] descs);
 
+    /**
+     * @brief Loads the driver for an audio adapter.
+     *
+     * For example, to load a USB driver, you may need to load a dynamic-link library (*.so) in specific implementation.
+     *
+     * @param manager Indicates the pointer to the audio adapter manager to operate.
+     * @param desc Indicates the pointer to the descriptor of the audio adapter.
+     * @param adapter Indicates the double pointer to the audio adapter.
+     * @return Returns <b>0</b> if the driver is loaded successfully; returns a negative value otherwise.
+     * @see GetAllAdapters
+     * @see UnloadAdapter
+     *
+     * @since 4.1
+     * @version 2.0
+     */
+    LoadAdapter([in] struct AudioAdapterDescriptor desc, [out] IAudioAdapter adapter);
+
+    /**
+     * @brief Unloads the driver of an audio adapter.
+     *
+     * @param manager Indicates the pointer to the audio adapter manager to operate.
+     * @param adapter Indicates the pointer to the audio adapter whose driver will be unloaded.
+     * @see LoadAdapter
+     *
+     * @since 4.1
+     * @version 2.0
+     */
+    UnloadAdapter([in] String adapterName);
+
+    /**
+     * @brief Release the IAudioManager Object.
+     *
+     * @param object Indicates the pointer to the audio adapter manager to operate.
+     * @return Returns <b>true</b> if the Object is released; returns <b>false</b> otherwise.
+     *
+     * @since 4.1
+     * @version 2.0
+     */
+    ReleaseAudioManagerObject();
 }

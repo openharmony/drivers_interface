@@ -74,7 +74,6 @@ enum AudioPortPin {
     PIN_IN_PENCIL                = 1 << 27 | 1 << 7,  /**< Pencil input pin */
     PIN_IN_UWB                   = 1 << 27 | 1 << 8,  /**< UWB input pin */
     PIN_IN_NEARLINK              = 1 << 27 | 1 << 9,  /**< Nearlink input pin */
-    PIN_IN_REAR_MIC              = 1 << 27 | 1 << 10,  /**< Rear mic input pin */
 };
 
 /**
@@ -95,7 +94,6 @@ enum AudioCategory {
     AUDIO_MMAP_VOIP        = 8, /**< Audio voip */
     AUDIO_IN_NAVIGATION    = 9, /**< Audio navigation */
     AUDIO_DIRECT           = 10,/**< Audio direct */
-    AUDIO_TTS              = 11,/**< Audio TTS */
 };
 
 /**
