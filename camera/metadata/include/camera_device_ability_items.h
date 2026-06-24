@@ -3077,6 +3077,20 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_COLOR_TINT,
     /**
+     * ohos.ability.saturationRange [static, int32[], public]
+     *
+     * camera device property, report current camera support saturation values
+     * (i.e. int32[] ...)
+     */
+    OHOS_ABILITY_SATURATION_RANGE,
+    /**
+     * ohos.control.saturation [static, int32, public]
+     *
+     * camera device property, set current camera saturation value
+     * (i.e. int32 ...)
+     */
+    OHOS_CONTROL_SATURATION,
+    /**
      * ohos.xmage.colorMoodesEnd
      *
      * camera xmage end
