@@ -28,7 +28,8 @@
           "hdf_core",
           "hilog",
           "c_utils",
-          "graphic_surface"
+          "graphic_surface",
+          "bounds_checking_function"
         ],
         "third_party": []
       },
