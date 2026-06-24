@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021-2023 Huawei Device Co., Ltd.
+ * Copyright (c) 2021-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -590,62 +590,86 @@ int MetadataUtils::copyDecodeFromStringMem(common_metadata_header_t *meta, char 
 
 static void ReadMetadataUInt8(camera_metadata_item_t &entry, MessageParcel &data)
 {
-    entry.data.u8 = new(std::nothrow) uint8_t[entry.count];
-    if (entry.data.u8 != nullptr) {
-        size_t dataSize = entry.count * sizeof(uint8_t);
-        const uint8_t* ptr = data.ReadUnpadBuffer(dataSize);
-        memcpy_s(entry.data.u8, dataSize, ptr, dataSize);
+    entry.data.u8 = new (std::nothrow) uint8_t[entry.count];
+    if (entry.data.u8 == nullptr) {
+        return;
     }
+    size_t dataSize = entry.count * sizeof(uint8_t);
+    const uint8_t *ptr = data.ReadUnpadBuffer(dataSize);
+    if (ptr == nullptr) {
+        return;
+    }
+    (void)memcpy_s(entry.data.u8, dataSize, ptr, dataSize);
 }
 
 static void ReadMetadataInt32(camera_metadata_item_t &entry, MessageParcel &data)
 {
-    entry.data.i32 = new(std::nothrow) int32_t[entry.count];
-    if (entry.data.i32 != nullptr) {
-        size_t dataSize = entry.count * sizeof(int32_t);
-        const uint8_t* ptr = data.ReadUnpadBuffer(dataSize);
-        memcpy_s(entry.data.i32, dataSize, ptr, dataSize);
+    entry.data.i32 = new (std::nothrow) int32_t[entry.count];
+    if (entry.data.i32 == nullptr) {
+        return;
     }
+    size_t dataSize = entry.count * sizeof(int32_t);
+    const uint8_t *ptr = data.ReadUnpadBuffer(dataSize);
+    if (ptr == nullptr) {
+        return;
+    }
+    (void)memcpy_s(entry.data.i32, dataSize, ptr, dataSize);
 }
 
 static void ReadMetadataUInt32(camera_metadata_item_t &entry, MessageParcel &data)
 {
-    entry.data.ui32 = new(std::nothrow) uint32_t[entry.count];
-    if (entry.data.ui32 != nullptr) {
-        size_t dataSize = entry.count * sizeof(uint32_t);
-        const uint8_t* ptr = data.ReadUnpadBuffer(dataSize);
-        memcpy_s(entry.data.ui32, dataSize, ptr, dataSize);
+    entry.data.ui32 = new (std::nothrow) uint32_t[entry.count];
+    if (entry.data.ui32 == nullptr) {
+        return;
     }
+    size_t dataSize = entry.count * sizeof(uint32_t);
+    const uint8_t *ptr = data.ReadUnpadBuffer(dataSize);
+    if (ptr == nullptr) {
+        return;
+    }
+    (void)memcpy_s(entry.data.ui32, dataSize, ptr, dataSize);
 }
 
 static void ReadMetadataFloat(camera_metadata_item_t &entry, MessageParcel &data)
 {
-    entry.data.f = new(std::nothrow) float[entry.count];
-    if (entry.data.f != nullptr) {
-        size_t dataSize = entry.count * sizeof(float);
-        const uint8_t* ptr = data.ReadUnpadBuffer(dataSize);
-        memcpy_s(entry.data.f, dataSize, ptr, dataSize);
+    entry.data.f = new (std::nothrow) float[entry.count];
+    if (entry.data.f == nullptr) {
+        return;
     }
+    size_t dataSize = entry.count * sizeof(float);
+    const uint8_t *ptr = data.ReadUnpadBuffer(dataSize);
+    if (ptr == nullptr) {
+        return;
+    }
+    (void)memcpy_s(entry.data.f, dataSize, ptr, dataSize);
 }
 
 static void ReadMetadataInt64(camera_metadata_item_t &entry, MessageParcel &data)
 {
-    entry.data.i64 = new(std::nothrow) int64_t[entry.count];
-    if (entry.data.i64 != nullptr) {
-        size_t dataSize = entry.count * sizeof(int64_t);
-        const uint8_t* ptr = data.ReadUnpadBuffer(dataSize);
-        memcpy_s(entry.data.i64, dataSize, ptr, dataSize);
+    entry.data.i64 = new (std::nothrow) int64_t[entry.count];
+    if (entry.data.i64 == nullptr) {
+        return;
     }
+    size_t dataSize = entry.count * sizeof(int64_t);
+    const uint8_t *ptr = data.ReadUnpadBuffer(dataSize);
+    if (ptr == nullptr) {
+        return;
+    }
+    (void)memcpy_s(entry.data.i64, dataSize, ptr, dataSize);
 }
 
 static void ReadMetadataDouble(camera_metadata_item_t &entry, MessageParcel &data)
 {
-    entry.data.d = new(std::nothrow) double[entry.count];
-    if (entry.data.d != nullptr) {
-        size_t dataSize = entry.count * sizeof(double);
-        const uint8_t* ptr = data.ReadUnpadBuffer(dataSize);
-        memcpy_s(entry.data.d, dataSize, ptr, dataSize);
+    entry.data.d = new (std::nothrow) double[entry.count];
+    if (entry.data.d == nullptr) {
+        return;
     }
+    size_t dataSize = entry.count * sizeof(double);
+    const uint8_t *ptr = data.ReadUnpadBuffer(dataSize);
+    if (ptr == nullptr) {
+        return;
+    }
+    (void)memcpy_s(entry.data.d, dataSize, ptr, dataSize);
 }
 
 static void ReadMetadataRational(camera_metadata_item_t &entry, MessageParcel &data)
@@ -657,16 +681,18 @@ static void ReadMetadataRational(camera_metadata_item_t &entry, MessageParcel &d
         entry.data.r = nullptr;
         return;
     }
-    entry.data.r = new(std::nothrow) camera_rational_t[entry.count];
-    if (entry.data.r != nullptr) {
-        for (size_t i = 0, j = 0;
-            i < entry.count && j < static_cast<size_t>(buffers.size() - 1);
-            i++, j += 2) { // 2:Take two elements from the buffer vector container
-            entry.data.r[i].numerator = buffers.at(j);
-            entry.data.r[i].denominator = buffers.at(j + 1);
-        }
+    entry.data.r = new (std::nothrow) camera_rational_t[entry.count];
+    if (entry.data.r == nullptr) {
+        return;
+    }
+    for (size_t i = 0, j = 0;
+        i < entry.count && j < static_cast<size_t>(buffers.size() - 1);
+        i++, j += 2) { // 2:Take two elements from the buffer vector container
+        entry.data.r[i].numerator = buffers.at(j);
+        entry.data.r[i].denominator = buffers.at(j + 1);
     }
 }
+
 bool MetadataUtils::ReadMetadata(camera_metadata_item_t &entry, MessageParcel &data)
 {
     if (entry.count > MAX_SUPPORTED_ITEMS) {

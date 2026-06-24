@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022 Huawei Device Co., Ltd.
+ * Copyright (c) 2022-2026 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -49,6 +49,10 @@ sptr<BufferProducerSequenceable> BufferProducerSequenceable::Unmarshalling(Parce
         return nullptr;
     }
     sptr<OHOS::IBufferProducer> bufferProducer = OHOS::iface_cast<OHOS::IBufferProducer>(remoteObj);
+    if (bufferProducer == nullptr) {
+        HDI_CAMERA_LOGE("iface_cast failed");
+        return nullptr;
+    }
     sequenceData->producer_ = bufferProducer;
 
     return sequenceData;
