@@ -3077,6 +3077,20 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_COLOR_TINT,
     /**
+     * ohos.control.rgbgain [static, int32[], public]
+     *
+     * rgbgain values:rgain,ggain,bgain
+     * (i.e.int32[] ...)
+     */
+    OHOS_CONTROL_RGBGAIN_VALUE,
+    /**
+     * ohos.control.rgbgain [static, int32[], public]
+     *
+     * camera device property, report current camera support rgbgain values
+     * (i.e.int32[]...)
+     */
+    OHOS_ABILITY_RGBGAIN_RANGE,
+    /**
      * ohos.ability.saturationRange [static, int32[], public]
      *
      * camera device property, report current camera support saturation values
