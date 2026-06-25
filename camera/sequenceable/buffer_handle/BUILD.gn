@@ -1,4 +1,4 @@
-# Copyright (C) 2023 - 2023 Huawei Device Co., Ltd.
+# Copyright (C) 2023 - 2026 Huawei Device Co., Ltd.
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -31,6 +31,7 @@ ohos_shared_library("libbuffer_handle_sequenceable_1.0") {
     "hdf_core:libpub_utils",
     "hilog:libhilog",
     "ipc:ipc_single",
+    "bounds_checking_function:libsec_shared"
   ]
   public_external_deps = [ "graphic_surface:buffer_handle" ]
   branch_protector_ret = "pac_ret"
