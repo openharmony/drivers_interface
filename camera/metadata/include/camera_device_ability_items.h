@@ -587,6 +587,20 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_AUTOMOTIVE_CAMERA_POSITION,
     /**
+     * ohos.ability.autoExtendedGainmapDelivery [static, uint8[], public]
+     *
+     * camera device property, report current camera whether support auto extended gainmap delivery
+     * (i.e. byte[]: [Supported_Mode, ...] ...)
+     */
+    OHOS_ABILITY_AUTO_EXTENDED_GAINMAP_DELIVERY,
+    /**
+     * ohos.control.autoExtendedGainmapDelivery [static, uint8, public]
+     *
+     * camera device property, set current camera whether support auto extended gainmap delivery
+     * (i.e. byte: 0-false/1-true ...)
+     */
+    OHOS_CONTROL_AUTO_EXTENDED_GAINMAP_DELIVERY,
+    /**
      * ohos.control.concurrent.capture [static, byte, public]
      *
      * Concurrent camera capture
