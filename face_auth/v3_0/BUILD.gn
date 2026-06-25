@@ -32,4 +32,5 @@ hdi("face_auth") {
   language = "cpp"
   subsystem_name = "hdf"
   part_name = "drivers_interface_face_auth"
+  defines = [ "LOG_DOMAIN=0xD002416" ]
 }

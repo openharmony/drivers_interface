@@ -32,4 +32,5 @@ hdi("usb_ddk") {
   mode = "ipc"
   subsystem_name = "hdf"
   part_name = "drivers_interface_usb"
+  defines = [ "LOG_DOMAIN=0xD002518" ]
 }
