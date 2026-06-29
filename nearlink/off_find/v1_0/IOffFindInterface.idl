@@ -1,0 +1,81 @@
+/*
+ * Copyright (C) 2026 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup HdiOffFind
+ * @{
+ *
+ * @brief Provides unified APIs for the OffFind service.
+ *
+ * The Host can use the interface provided by the module to initialize the off find mode.
+ *
+ * @since 5.0
+ */
+
+/**
+ * @file IOffFindInterface.idl
+ *
+ * @brief Defines the interfaces to initialize the off find mode,
+ * and disable the off find interface.
+ *
+ * @since 5.0
+ * @version 1.0
+ */
+
+package ohos.hdi.nearlink.off_find.v1_0;
+
+import ohos.hdi.nearlink.off_find.v1_0.IOffFindCallback;
+import ohos.hdi.nearlink.off_find.v1_0.OffFindTypes;
+
+/**
+ * @brief Defines the interfaces to initialize the off find mode, set data to the Controller,
+ * and disable the off find interface.
+ *
+ * @since 5.0
+ */
+interface IOffFindInterface {
+    /**
+     * @brief reserver the power for off find mode.
+     *
+     * @return Returns <b>0</b> if the mode is initialized successfully; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    SetReservedPower();
+
+    /**
+     * @brief Initialize the off find mode and register the callback function.
+     *
+     * @param callbackObj Indicates the callback function. For details, see {@link IOffFindCallback}.
+     * @param data Indicates the off find param for advertising. For details, see {@link OffFindParam}.
+     * @param info Indicates the basic information need by off find mode. For details, see {@link OffFindExtraInfo}.
+     * @return Returns <b>0</b> if the mode is initialized successfully; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    EnableOffFind([in] IOffFindCallback callbackObj, [in] struct OffFindParam[] data, [in] struct OffFindExtraInfo info);
+
+    /**
+     * @brief Disable the off find interface.
+     *
+     * @return Returns <b>0</b> if the off_find is disabled successfully; returns a negative value otherwise.
+     *
+     * @since 5.0
+     * @version 1.0
+     */
+    DisableOffFind();
+}
