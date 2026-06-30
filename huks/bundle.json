@@ -29,8 +29,7 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/huks/v1_1:huks_idl_target",
-          "//drivers/interface/huks/v1_2:huks_idl_target"
+          "//drivers/interface/huks/v1_1:huks_idl_target"
         ],
         "test": [
         ],
@@ -50,24 +49,8 @@
               ],
               "header_base": "//drivers/interface/huks"
             }
-          },
-          {
-            "name": "//drivers/interface/huks/v1_2:libhuks_proxy_1.2",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interface/huks"
-            }
-          },
-          {
-            "name": "//drivers/interface/huks/v1_2:huks_idl_headers_1.2",
-            "header": {
-              "header_files": [
-              ],
-              "header_base": "//drivers/interface/huks"
-            }
           }
         ]
       }
     }
-  }
+}
