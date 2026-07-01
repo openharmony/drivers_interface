@@ -479,6 +479,10 @@ static item_info_t g_ohosStreamAbility[OHOS_STREAM_ABILITY_END - OHOS_STREAM_ABI
         OHOS_STREAM_ABILITY_START] = {"bandwidthCompressionControlValue", META_TYPE_BYTE, -1},
     [OHOS_CONTROL_DELAY_ALLOC -
         OHOS_STREAM_ABILITY_START] = {"delayAlloc", META_TYPE_BYTE, 1},
+    [OHOS_ABILITY_C2PA_SIGNATURE -
+        OHOS_STREAM_ABILITY_START] = {"trustedSignatureSupportModes", META_TYPE_BYTE, -1},
+    [OHOS_CONTROL_C2PA_SIGNATURE -
+        OHOS_STREAM_ABILITY_START] = {"trustedSignatureMode", META_TYPE_INT32, -1},
 };
 
 static item_info_t g_ohosStreamControl[OHOS_STREAM_CONTROL_END - OHOS_STREAM_CONTROL_START] = {

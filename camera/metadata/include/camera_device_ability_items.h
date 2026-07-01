@@ -1949,6 +1949,20 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_PRERECORD,
     /**
+     * ohos.ability.trustedSignature [static, byte, public]
+     *
+     * camera device property, report camera support trusted signature
+     * (i.e. byte ...)
+     */
+    OHOS_ABILITY_C2PA_SIGNATURE,
+    /**
+     * ohos.control.trustedSignature [static, int32, public]
+     *
+     * camera stream property, set camera support trusted signature
+     * (i.e. int32 ...)
+     */
+    OHOS_CONTROL_C2PA_SIGNATURE,
+    /**
      * ohos.stream.abilityEnd
      *
      * camera stream abilityEnd
