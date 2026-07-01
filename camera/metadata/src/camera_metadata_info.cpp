@@ -1141,7 +1141,7 @@ int CameraMetadata::GetCameraMetadataItem(const common_metadata_header_t *src, u
                 " offset:%{public}u, data count:%{public}u", localItem->data.offset, src->data_count);
             return CAM_META_FAILURE;
         }
-        if (localItem->data.offset + dataBytes > src->data_count) {
+        if (localItem->data.offset + (uint32_t)dataBytes > src->data_count) {
             METADATA_ERR_LOG("GetCameraMetadataItem offset + dataBytes is greater than data count,"
                 " offset:%{public}u, dataBytes:%{public}d, data count:%{public}u",
                 localItem->data.offset, dataBytes, src->data_count);
