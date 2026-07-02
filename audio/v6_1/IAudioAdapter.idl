@@ -32,7 +32,6 @@ package ohos.hdi.audio.v6_1;
 import ohos.hdi.audio.v6_1.AudioTypes;
 import ohos.hdi.audio.v6_1.IAudioRender;
 import ohos.hdi.audio.v6_1.IAudioCapture;
-import ohos.hdi.audio.v6_1.IAudioCaptureCallback;
 
 /**
  * @brief Provides audio adapter capabilities, including initializing ports, creating rendering and capturing tasks,
@@ -305,7 +304,7 @@ interface IAudioAdapter {
      * @since 4.1
      * @version 2.0
      */
-    RegExtraParamObserver([in] IAudioCaptureCallback audioCallback, [in] byte cookie);
+    RegExtraParamObserver([in] IAudioCapture audioCallback, [in] byte cookie);
 
     /**
      * @brief Create a cognition stream.
