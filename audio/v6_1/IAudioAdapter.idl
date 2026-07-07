@@ -32,7 +32,7 @@ package ohos.hdi.audio.v6_1;
 import ohos.hdi.audio.v6_1.AudioTypes;
 import ohos.hdi.audio.v6_1.IAudioRender;
 import ohos.hdi.audio.v6_1.IAudioCapture;
-import ohos.hdi.audio.v6_0.IAudioCallback;
+import ohos.hdi.audio.v6_1.IAudioCallback;
 
 /**
  * @brief Provides audio adapter capabilities, including initializing ports, creating rendering and capturing tasks,
