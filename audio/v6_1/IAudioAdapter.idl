@@ -305,7 +305,7 @@ interface IAudioAdapter {
      * @since 4.1
      * @version 2.0
      */
-    RegExtraParamObserver([in] IAudioCapture audioCallback, [in] byte cookie);
+    RegExtraParamObserver([in] IAudioCallback audioCallback, [in] byte cookie);
 
     /**
      * @brief Create a cognition stream.
