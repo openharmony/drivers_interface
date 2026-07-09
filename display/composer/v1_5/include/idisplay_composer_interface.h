@@ -74,6 +74,20 @@ public:
      * @version 1.0
      */
     virtual int32_t SetDisplayVCPFeature(uint32_t devId, uint8_t vcpCode, uint16_t currentValue) = 0;
+
+    /**
+     * @brief GetLayerColor.
+     *
+     * @param devId Indicates the ID of the display device.
+     * @param layerId Indicates the ID of the layer.
+     * @param color Indicates the solid filled color of the layer.
+     *
+     * @return Returns <b>0</b> if the operation is successful; returns an error code defined
+     * in {@link DispErrCode} otherwise.
+     * @since 7.0
+     * @version 1.0
+     */
+    virtual int32_t GetLayerColor(uint32_t devId, uint32_t layerId, LayerColor &color) = 0;
 };
 } // V1_5
 } // Composer
