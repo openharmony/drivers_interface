@@ -79,6 +79,12 @@ public:
         return ToDispErrCode(hdi_v1_5_->SetDisplayVCPFeature(devId, vcpCode, currentValue));
     }
 
+    virtual int32_t GetLayerColor(uint32_t devId, uint32_t layerId, LayerColor &color) override
+    {
+        COMPOSER_CHECK_NULLPTR_RETURN(hdi_v1_5_);
+        return ToDispErrCode(hdi_v1_5_->GetLayerColor(devId, layerId, color));
+    }
+
 protected:
     using BaseType1_4 = V1_4::DisplayComposerHdiImpl<Interface, CompHdi, CmdReq>;
     using BaseType1_4::WAIT_TIME_INTERVAL;

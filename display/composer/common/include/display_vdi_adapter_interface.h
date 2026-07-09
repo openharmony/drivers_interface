@@ -203,6 +203,7 @@ using GetDisplayClientTargetPropertyFunc = int32_t (*)(uint32_t devId, int32_t& 
 using SetDisplayColorGamutFunc = int32_t (*)(uint32_t devId, ColorGamut gamut);
 using GetDisplayVCPFeatureFunc = int32_t (*)(uint32_t devId, uint8_t vcpCode,
         uint16_t& currentValue, uint16_t& maximumValue, int32_t& replyErrorCode);
+using GetLayerColorFunc = int32_t (*)(uint32_t devId, uint32_t layerId, LayerColor &color);
 using SetDisplayVCPFeatureFunc = int32_t (*)(uint32_t devId, uint8_t vcpCode, uint16_t currentValue);
 
 } // namespace Composer
