@@ -121,6 +121,7 @@ struct DisplayComposerVdiAdapter {
     int32_t (*GetDisplayVCPFeature)(uint32_t devId, uint8_t vcpCode,
         uint16_t& currentValue, uint16_t& maximumValue, int32_t& replyErrorCode);
     int32_t (*SetDisplayVCPFeature)(uint32_t devId, uint8_t vcpCode, uint16_t currentValue);
+    int32_t (*GetLayerColor)(uint32_t devId, uint32_t layerId, LayerColor &color);
 };
 
 using LoadVdiImplFunc = int32_t (*)();
@@ -204,6 +205,7 @@ using SetDisplayColorGamutFunc = int32_t (*)(uint32_t devId, ColorGamut gamut);
 using GetDisplayVCPFeatureFunc = int32_t (*)(uint32_t devId, uint8_t vcpCode,
         uint16_t& currentValue, uint16_t& maximumValue, int32_t& replyErrorCode);
 using SetDisplayVCPFeatureFunc = int32_t (*)(uint32_t devId, uint8_t vcpCode, uint16_t currentValue);
+using GetLayerColorFunc = int32_t (*)(uint32_t devId, uint32_t layerId, LayerColor &color);
 
 } // namespace Composer
 } // namespace Display
