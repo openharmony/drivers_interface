@@ -60,7 +60,7 @@ interface IDisplayComposer extends ohos.hdi.display.composer.v1_4.IDisplayCompos
     SetDisplayVCPFeature([in] unsigned int devId, [in] unsigned char vcpCode, [in] unsigned short currentValue);
 
     /**
-     * @brief GetLayerColor.
+     * @brief Get layer color
      *
      * @param devId Indicates the ID of the display device.
      * @param layerId Indicates the ID of the layer.
