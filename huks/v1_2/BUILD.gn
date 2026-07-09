@@ -24,4 +24,5 @@ hdi("huks") {
   subsystem_name = "hdf"
   part_name = "drivers_interface_huks"
   mode = "passthrough"
+  stack_protector_ret = true
 }
