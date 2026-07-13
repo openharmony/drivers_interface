@@ -31,7 +31,7 @@
  */
 
 package ohos.hdi.display.graphic.common.v2_4;
-import ohos.hdi.display.graphic.common.v2_2.CMColorSpace;
+import ohos.hdi.display.graphic.common.v2_0.CMColorSpace;
 
 
 /**
