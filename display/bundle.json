@@ -29,7 +29,8 @@
       "drivers_interface_display_community",
       "drivers_interface_display_vdi_default",
       "drivers_interface_display_hicollie_enable",
-      "drivers_interface_display_dpu_composer"
+      "drivers_interface_display_dpu_composer",
+      "drivers_interface_display_support_online"
     ],
     "deps": {
       "components": [
