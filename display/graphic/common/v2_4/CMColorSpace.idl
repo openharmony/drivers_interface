@@ -41,8 +41,13 @@ import ohos.hdi.display.graphic.common.v2_0.CMColorSpace;
 enum CM_TransFunc : ohos.hdi.display.graphic.common.v2_0.CM_TransFunc {
     TRANSFUNC_PRIV_LOG = 9,
 };
- 
- 
+
+/**
+ * @brief Defines color space information structure.
+ *
+ * This structure contains the basic attributes of a color space, including color primaries,
+ * transfer function, conversion matrix, and range. It is used to describe the color characteristics.
+ */ 
 struct CM_ColorSpaceInfo {
     enum CM_ColorPrimaries primaries;
     enum CM_TransFunc      transfunc;
@@ -50,6 +55,12 @@ struct CM_ColorSpaceInfo {
     enum CM_Range          range;
 };
 
+/**
+ * @brief Defines color space type enumeration.
+ *
+ * This enum provides predefined color space types that combine color primaries, transfer function,
+ * conversion matrix, and range.
+ */
 enum CM_ColorSpaceType : ohos.hdi.display.graphic.common.v2_0.CM_ColorSpaceType {
     CM_BT2020_LOG_FULL  = 4 | (9 << 8) | (4 << 16) | (1 << 21), // COLORPRIMARIES_BT2020 | (TRANSFUNC_PRIV_LOG << 8) | (MATRIX_BT2020 << 16) | (RANGE_FULL << 21)
     CM_BT2020_LOG_LIMIT = 4 | (9 << 8) | (4 << 16) | (2 << 21), // COLORPRIMARIES_BT2020 | (TRANSFUNC_PRIV_LOG << 8) | (MATRIX_BT2020 << 16) | (RANGE_LIMITED << 21)
