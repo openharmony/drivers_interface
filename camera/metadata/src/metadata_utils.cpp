@@ -645,7 +645,7 @@ static void ReadMetadataFloat(camera_metadata_item_t &entry, MessageParcel &data
     size_t dataSize = entry.count * sizeof(float);
     const uint8_t *ptr = data.ReadUnpadBuffer(dataSize);
     if (ptr == nullptr) {
-        delete[] entry.data.f; 
+        delete[] entry.data.f;
         entry.data.f = nullptr;
         return;
     }
@@ -697,7 +697,7 @@ static void ReadMetadataRational(camera_metadata_item_t &entry, MessageParcel &d
     if (entry.data.r == nullptr) {
         return;
     }
-    (void)memset_s(entry.data.r, entry.count * sizeof(camera_rational_t), 0, entry.count * sizeof(camera_rational_t));
+    (void) memset_s(entry.data.r, entry.count * sizeof(camera_rational_t), 0, entry.count * sizeof(camera_rational_t));
     for (size_t i = 0, j = 0;
         i < entry.count && j < static_cast<size_t>(buffers.size() - 1);
         i++, j += 2) { // 2:Take two elements from the buffer vector container
@@ -765,43 +765,44 @@ void MetadataUtils::FreeMetadataBuffer(camera_metadata_item_t &entry)
 {
     if (entry.data_type == META_TYPE_BYTE) {
         if (entry.data.u8 != nullptr) {
-            (void)memset_s(entry.data.u8, entry.count * sizeof(uint8_t), 0, entry.count * sizeof(uint8_t));
+            (void) memset_s(entry.data.u8, entry.count * sizeof(uint8_t), 0, entry.count * sizeof(uint8_t));
             delete[] entry.data.u8;
             entry.data.u8 = nullptr;
         }
     } else if (entry.data_type == META_TYPE_INT32) {
         if (entry.data.i32 != nullptr) {
-            (void)memset_s(entry.data.i32, entry.count * sizeof(int32_t), 0, entry.count * sizeof(int32_t));
+            (void) memset_s(entry.data.i32, entry.count * sizeof(int32_t), 0, entry.count * sizeof(int32_t));
             delete[] entry.data.i32;
             entry.data.i32 = nullptr;
         }
     } else if (entry.data_type == META_TYPE_FLOAT) {
         if (entry.data.f != nullptr) {
-            (void)memset_s(entry.data.f, entry.count * sizeof(float), 0, entry.count * sizeof(float));
+            (void) memset_s(entry.data.f, entry.count * sizeof(float), 0, entry.count * sizeof(float));
             delete[] entry.data.f;
             entry.data.f = nullptr;
         }
     } else if (entry.data_type == META_TYPE_INT64) {
         if (entry.data.i64 != nullptr) {
-            (void)memset_s(entry.data.i64, entry.count * sizeof(int64_t), 0, entry.count * sizeof(int64_t));
+            (void) memset_s(entry.data.i64, entry.count * sizeof(int64_t), 0, entry.count * sizeof(int64_t));
             delete[] entry.data.i64;
             entry.data.i64 = nullptr;
         }
     } else if (entry.data_type == META_TYPE_UINT32) {
         if (entry.data.ui32 != nullptr) {
-            (void)memset_s(entry.data.ui32,entry.count * sizeof(uint32_t), 0, entry.count * sizeof(uint32_t));
+            (void) memset_s(entry.data.ui32, entry.count * sizeof(uint32_t), 0, entry.count * sizeof(uint32_t));
             delete[] entry.data.ui32;
             entry.data.ui32 = nullptr;
         }
     } else if (entry.data_type == META_TYPE_DOUBLE) {
         if (entry.data.d != nullptr) {
-            (void)memset_s(entry.data.d, entry.count * sizeof(double), 0, entry.count * sizeof(double));
+            (void) memset_s(entry.data.d, entry.count * sizeof(double), 0, entry.count * sizeof(double));
             delete[] entry.data.d;
             entry.data.d = nullptr;
         }
     } else if (entry.data_type == META_TYPE_RATIONAL) {
         if (entry.data.r != nullptr) {
-            (void)memset_s(entry.data.r, entry.count * sizeof(camera_rational_t), 0, entry.count * sizeof(camera_rational_t));
+            (void) memset_s(entry.data.r, entry.count * sizeof(camera_rational_t), 0,
+                            entry.count * sizeof(camera_rational_t));
             delete[] entry.data.r;
             entry.data.r = nullptr;
         }

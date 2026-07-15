@@ -1042,9 +1042,8 @@ int CameraMetadata::AddCameraMetadataItem(common_metadata_header_t *dst, uint32_
     }
     if (dataCount > SIZE_MAX / OHOS_CAMERA_METADATA_TYPE_SIZE[dataType]) {
         METADATA_ERR_LOG("AddCameraMetadataItem dataPayloadBytes overflow");
-        return CAM_META_INVALID_PARAM;
+        return CAM_META_DATA_CAP_EXCEED;
     }
-    size_t dataPayloadBytes = dataCount * OHOS_CAMERA_METADATA_TYPE_SIZE[dataType];
     size_t dataPayloadBytes = dataCount * OHOS_CAMERA_METADATA_TYPE_SIZE[dataType];
     camera_metadata_item_entry_t *pItem = GetMetadataItems(dst);
     if (pItem == nullptr) {
@@ -1089,8 +1088,8 @@ int CameraMetadata::AddCameraMetadataItem(common_metadata_header_t *dst, uint32_
             return CAM_META_FAILURE;
         }
         if (dst->data_count > UINT32_MAX - (uint32_t)dataBytes) {
-            METADATA_ERR_LOG("AddCameraMetadataItem ");
-            return CAM_META_FAILURE;
+            METADATA_ERR_LOG("AddCameraMetadataItem data_count overflow");
+            return CAM_META_DATA_CAP_EXCEED;
         }
         dst->data_count += (uint32_t)dataBytes;
     }
