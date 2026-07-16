@@ -20,6 +20,7 @@ hdi("location_geofence") {
     "IGeofenceInterface.idl",
   ]
 
+  no_other_header_files = true
   language = "cpp"
   subsystem_name = "hdf"
   part_name = "drivers_interface_location_geofence"
