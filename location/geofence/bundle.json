@@ -28,7 +28,8 @@
       },
       "build": {
         "sub_component": [
-          "//drivers/interface/location/geofence/v2_0:location_geofence_idl_target"
+          "//drivers/interface/location/geofence/v2_0:location_geofence_idl_target",
+          "//drivers/interface/location/geofence/v3_0:location_geofence_idl_target"
         ],
         "test": [
         ],
@@ -51,6 +52,30 @@
           },
           {
             "name": "//drivers/interface/location/geofence/v2_0:liblocation_geofence_stub_2.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/location/geofence"
+            }
+          },
+          {
+            "name": "//drivers/interface/location/geofence/v3_0:liblocation_geofence_proxy_3.0",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/location/geofence"
+            }
+          },
+          {
+            "name": "//drivers/interface/location/geofence/v3_0:location_geofence_idl_headers",
+            "header": {
+              "header_files": [
+              ],
+              "header_base": "//drivers/interface/location/geofence"
+            }
+          },
+          {
+            "name": "//drivers/interface/location/geofence/v3_0:liblocation_geofence_stub_3.0",
             "header": {
               "header_files": [
               ],
