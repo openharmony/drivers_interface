@@ -681,6 +681,7 @@ static void ReadMetadataRational(camera_metadata_item_t &entry, MessageParcel &d
         entry.data.r = nullptr;
         return;
     }
+    (void) memset_s(entry.data.r, entry.count * sizeof(camera_rational_t), 0, entry.count * sizeof(camera_rational_t));
     entry.data.r = new (std::nothrow) camera_rational_t[entry.count];
     if (entry.data.r == nullptr) {
         return;
