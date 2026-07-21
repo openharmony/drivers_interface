@@ -14,6 +14,7 @@
 import("//build/config/components/hdi/hdi.gni")
 
 hdi("display_composer") {
+  branch_protector_ret = "pac_ret"
   module_name = "display_composer"
 
   proxy_deps = [
@@ -53,6 +54,7 @@ config("libdisplay_composer_hdi_impl_config") {
 }
 
 ohos_shared_library("libdisplay_composer_hdi_impl_1.4") {
+  branch_protector_ret = "pac_ret"
   sources = [ "./hdi_impl/display_composer_interface.cpp" ]
 
   public_configs = [ ":libdisplay_composer_hdi_impl_config" ]
