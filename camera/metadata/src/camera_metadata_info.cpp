@@ -1085,8 +1085,8 @@ int CameraMetadata::AddCameraMetadataItem(common_metadata_header_t *dst, uint32_
             return CAM_META_FAILURE;
         }
         if (dst->data_count > UINT32_MAX - (uint32_t)dataBytes) {
-            METADATA_ERR_LOG("AddCameraMetadataItem data_count overflow");
-            return CAM_META_DATA_CAP_EXCEED;
+            METADATA_ERR_LOG("AddCameraMetadataItem ");
+            return CAM_META_FAILURE;
         }
         dst->data_count += (uint32_t)dataBytes;
     }
