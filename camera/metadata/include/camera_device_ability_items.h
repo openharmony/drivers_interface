@@ -629,6 +629,13 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_ABILITY_AUTOMOTIVE_CAMERA_SENSOR_TYPE,
     /**
+     * ohos.ability.commonPublishedFeatures [static, uint32[], public]
+     *
+     * camera device property, report common published features
+     * (i.e. uint32[] ...)
+     */
+    OHOS_ABILITY_COMMON_PUBLISHED_FEATURES,
+    /**
      * ohos.camera.propertiesEnd
      *
      * camera property end
@@ -704,15 +711,6 @@ typedef enum camera_device_metadata_tag {
      * camera sensor endChar
      */
     OHOS_CAMERA_SENSOR_END,
-
-    /**
-     * ohos.ability.commonPublishedFeatures [static, uint32[], public]
-     *
-     * camera device property, report common published features
-     * (i.e. uint32[] ...)
-     */
-    OHOS_ABILITY_COMMON_PUBLISHED_FEATURES,
-
     /**
      * ohos.sensorInfo.activeArraySize [static, int32[], public]
      *
