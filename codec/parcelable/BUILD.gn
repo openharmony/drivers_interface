@@ -5,6 +5,7 @@ config("video_parcel_pub_include") {
 }
 
 ohos_static_library("video_parcel_headers") {
+  branch_protector_ret = "pac_ret"
   public_configs = [ ":video_parcel_pub_include" ]
  
   subsystem_name = "hdf"
