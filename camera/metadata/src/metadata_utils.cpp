@@ -681,11 +681,11 @@ static void ReadMetadataRational(camera_metadata_item_t &entry, MessageParcel &d
         entry.data.r = nullptr;
         return;
     }
-    (void) memset_s(entry.data.r, entry.count * sizeof(camera_rational_t), 0, entry.count * sizeof(camera_rational_t));
     entry.data.r = new (std::nothrow) camera_rational_t[entry.count];
     if (entry.data.r == nullptr) {
         return;
     }
+    (void) memset_s(entry.data.r, entry.count * sizeof(camera_rational_t), 0, entry.count * sizeof(camera_rational_t));
     for (size_t i = 0, j = 0;
         i < entry.count && j < static_cast<size_t>(buffers.size() - 1);
         i++, j += 2) { // 2:Take two elements from the buffer vector container
