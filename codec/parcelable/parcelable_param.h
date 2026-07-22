@@ -225,53 +225,96 @@ public:
 
     static sptr<ParcelableParam> Unmarshalling(Parcel &parcel)
     {
-        int32_t magic = parcel.ReadInt32();
-        if (magic != MAGIC) {
+        int32_t magic;
+        if (!parcel.ReadInt32(magic) || magic != MAGIC) {
             return nullptr;
         }
-        uint32_t size = parcel.ReadUint32();
-        if (size > MAX_KEY_COUNT) {
+        uint32_t size;
+        if (!parcel.ReadUint32(size) || size > MAX_KEY_COUNT) {
             return nullptr;
         }
         sptr<ParcelableParam> bundle = ParcelableParam::Create();
         for (uint32_t i = 0; i < size; i++) {
-            std::string key = parcel.ReadString();
-            auto typeIdx = static_cast<TypeIndex>(parcel.ReadUint8());
+            std::string key;
+            if (!parcel.ReadString(key)) {
+                return nullptr;
+            }
+            uint8_t typeIdxValue;
+            if (!parcel.ReadUint8(typeIdxValue)) {
+                return nullptr;
+            }
+            auto typeIdx = static_cast<TypeIndex>(typeIdxValue);
             switch (typeIdx) {
                 case BOOL: {
-                    bundle->Set(key, parcel.ReadBool());
+                    bool value;
+                    if (!parcel.ReadBool(value)) {
+                        return nullptr;
+                    }
+                    bundle->Set(key, value);
                     break;
                 }
                 case I8: {
-                    bundle->Set(key, parcel.ReadInt8());
+                    int8_t value;
+                    if (!parcel.ReadInt8(value)) {
+                        return nullptr;
+                    }
+                    bundle->Set(key, value);
                     break;
                 }
                 case I32: {
-                    bundle->Set(key, parcel.ReadInt32());
+                    int32_t value;
+                    if (!parcel.ReadInt32(value)) {
+                        return nullptr;
+                    }
+                    bundle->Set(key, value);
                     break;
                 }
                 case I64: {
-                    bundle->Set(key, parcel.ReadInt64());
+                    int64_t value;
+                    if (!parcel.ReadInt64(value)) {
+                        return nullptr;
+                    }
+                    bundle->Set(key, value);
                     break;
                 }
                 case U8: {
-                    bundle->Set(key, parcel.ReadUint8());
+                    uint8_t value;
+                    if (!parcel.ReadUint8(value)) {
+                        return nullptr;
+                    }
+                    bundle->Set(key, value);
                     break;
                 }
                 case U32: {
-                    bundle->Set(key, parcel.ReadUint32());
+                    uint32_t value;
+                    if (!parcel.ReadUint32(value)) {
+                        return nullptr;
+                    }
+                    bundle->Set(key, value);
                     break;
                 }
                 case U64: {
-                    bundle->Set(key, parcel.ReadUint64());
+                    uint64_t value;
+                    if (!parcel.ReadUint64(value)) {
+                        return nullptr;
+                    }
+                    bundle->Set(key, value);
                     break;
                 }
                 case DOUBLE: {
-                    bundle->Set(key, parcel.ReadDouble());
+                    double value;
+                    if (!parcel.ReadDouble(value)) {
+                        return nullptr;
+                    }
+                    bundle->Set(key, value);
                     break;
                 }
                 case STRING: {
-                    bundle->Set(key, parcel.ReadString());
+                    std::string value;
+                    if (!parcel.ReadString(value)) {
+                        return nullptr;
+                    }
+                    bundle->Set(key, value);
                     break;
                 }
                 case VECTOR: {

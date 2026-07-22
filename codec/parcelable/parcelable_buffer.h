@@ -120,13 +120,19 @@ public:
     static sptr<ParcelableBuffer> Unmarshalling(Parcel &parcel)
     {
         MessageParcel &msgParcel = static_cast<MessageParcel &>(parcel);
-        bool isImage = msgParcel.ReadBool();
+        bool isImage;
+        if (!msgParcel.ReadBool(isImage)) {
+            return nullptr;
+        }
         if (isImage) {
             sptr<Base::NativeBuffer> image = Base::NativeBuffer::Unmarshalling(parcel);
             return ParcelableBuffer::CreateImageBuffer(image);
         }
-        uint32_t capacity = msgParcel.ReadUint32();
-        int fd = msgParcel.ReadFileDescriptor();  // this returned fd has already been duped
+        uint32_t capacity;
+        if (!msgParcel.ReadUint32(capacity)) {
+            return nullptr;
+        }
+        int fd = msgParcel.ReadFileDescriptor(); // this returned fd has already been duped
         return ParcelableBuffer::CreateStreamBuffer(fd, capacity, true);
     }
 

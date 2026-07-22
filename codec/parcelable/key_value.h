@@ -28,6 +28,7 @@ inline constexpr char KEY_UV_ORDER[] = "uvOrder";  // bool
 // keys for decoder
 inline constexpr char KEY_INPUT_STREAM_ERROR[] = "inputStreamError";  // int32_t
 inline constexpr char KEY_CONSUMER_USAGE[] = "consumerUsage";  // uint64_t
+inline constexpr char KEY_DECODER_OUTPUT_BUFFER_CNT_EXTRA[] = "extraDecOutBufCnt";  // uint8_t
 
 // keys for encoder
 inline constexpr char KEY_PROFILE[] = "profile";  // enum Profile
