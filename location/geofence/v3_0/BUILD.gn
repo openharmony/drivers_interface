@@ -13,13 +13,6 @@
 
 import("//build/config/components/hdi/hdi.gni")
 hdi("location_geofence") {
-  module_name = "location_geofence"
-  sources = [
-    "GeofenceTypes.idl",
-    "IGeofenceCallback.idl",
-    "IGeofenceInterface.idl",
-  ]
-
   sanitize = {
     cfi = true
     cfi_cross_dso = true
@@ -27,6 +20,13 @@ hdi("location_geofence") {
     cfi_vcall_icall_only = true
   }
   branch_protector_ret = "pac_ret"
+  
+  module_name = "location_geofence"
+  sources = [
+    "GeofenceTypes.idl",
+    "IGeofenceCallback.idl",
+    "IGeofenceInterface.idl",
+  ]
 
   no_other_header_files = true
   language = "cpp"
