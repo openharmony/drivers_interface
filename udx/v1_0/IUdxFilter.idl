@@ -1,0 +1,131 @@
+/*
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup HdiUdx
+ *
+ * @brief Provides unified APIs for Udx services to access Udx drivers.
+ *
+ * A Udx service can obtain interface object to access different types of devices, 
+ * thereby handling file operations and data communication by pushing them down, 
+ * and optimizing the paths for transmission, with the aim of reducing the system load.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+
+package ohos.hdi.udx.v1_0;
+
+import ohos.hdi.udx.v1_0.IUdxTypes;
+import ohos.hdi.udx.v1_0.IUdxMessageCallback;
+
+/**
+ * @brief Defines the APIs for the udx filter.
+ *
+ * The APIs can be used to:
+ * - Obtaining the capbilities of the filter.
+ * - Setting input buffer queue and linking with the next filter.
+ * - Getting message buffer and sending data/ctrl messages to the filter.
+ * - Registering/unregistering message callbacks for the filter.
+ * For details, see the description of the APIs.
+ */
+
+interface IUdxFilter {
+    /**
+     * @brief Get the capbilities of the filter.
+     * @param The capbilities of the filter, which is the string connected by ":".
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    GetCapbility([out] String capbilities);
+
+    /**
+     * @brief Set input buffer queue for filter.
+     * @param The bufferQueue of input channel.
+     * @param The index of input channel, which starts from 0 by default.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    SetInputBufferQueue([in] UdxBufferQueue inputBufferQueue, [in] unsigned int inputPadIndex);
+
+    /**
+     * @brief Link output buffer queue with input buffer queue of the next filter.
+     * @param The outputPadIndex of previous filter, which starts from 0 by default.
+     * @param The next udx filter.
+     * @param The inputPadIndex of next filter, which starts from 0 by default.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    Link([in] unsigned int outputPadIndex, [in] UdxFilter nextFilter, [in] unsigned int nextInputPadIndex);
+
+    /**
+     * @brief Get buffer for sending message.
+     * @param The size of message.
+     * @param The pointer of message.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    GetMessageBuffer([in] unsigned int size, [out] Pointer msg);
+
+    /**
+     * @brief Send data message to the filter.
+     * @param The pointer of message.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    SendMessage([in] Pointer msg);
+
+    /**
+     * @brief Send ctrl message to the filter.
+     * @param The pointer of message.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    SendCtrlMessage([in] Pointer msg);
+
+    /**
+     * @brief Register callback for handling message.
+     * @param The type of message.
+     * @param The callback of message.
+     * @param The handle of msgCallback.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    RegisterMessageCallback([in] UdxMsgType msgType, [in] IUdxMessageCallback msgCallback, [out] unsigned int cbHandle);
+
+    /**
+     * @brief Unregister message callback.
+     * @param The handle of msgCallback.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    UnregisterMessageCallback([in] unsigned int cbHandle);
+} 

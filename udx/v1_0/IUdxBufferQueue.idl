@@ -1,0 +1,135 @@
+/*
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup HdiUdx
+ *
+ * @brief Provides unified APIs for Udx services to access Udx drivers.
+ *
+ * A Udx service can obtain interface object to access different types of devices, 
+ * thereby handling file operations and data communication by pushing them down, 
+ * and optimizing the paths for transmission, with the aim of reducing the system load.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+
+package ohos.hdi.udx.v1_0;
+
+import ohos.hdi.udx.v1_0.IUdxTypes;
+import ohos.hdi.udx.v1_0.IUdxEventCallback;
+
+/**
+ * @brief Defines the APIs for the udx buffer queue.
+ *
+ * The APIs can be used to:
+ * - Attaching udx buffers to the queue.
+ * - Submitting/obtaining buffers between producer and consumer.
+ * - Setting producer/consumer callbacks for the queue.
+ * - Sending events to producer/consumer.
+ * For details, see the description of the APIs.
+ */
+
+interface IUdxBufferQueue {
+    /**
+     * @brief Attach udx buffer for queue.
+     * @param Data in the format of struct UdxBuffer.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    AttachUdxBuffer([in] struct UdxBuffer bufferHandle);
+
+    /**
+     * @brief Producer submits the filled udx buffer to the queue.
+     * @param Data in the format of struct UdxBufferFrame.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    QueueUdxBuffer([in] struct UdxBufferFrame frame);
+
+    /**
+     * @brief Producer obtains the null udx buffer from the queue.
+     * @param Data in the format of struct UdxBufferFrame.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    DequeueUdxBuffer([out] struct UdxBufferFrame frame);
+
+    /**
+     * @brief Consumer obtains the filled udx buffer from the queue.
+     * @param Data in the format of struct UdxBufferFrame.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    AcquireUdxBuffer([out] struct UdxBufferFrame frame);
+
+    /**
+     * @brief Consumer submits the null udx buffer to the queue.
+     * @param Data in the format of struct UdxBufferFrame.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    ReleaseUdxBuffer([in] struct UdxBufferFrame frame);
+
+    /**
+     * @brief Set callback for producer.
+     * @param The callback set for producer.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    SetProducerCallback([in] IUdxEventCallback producerCallback);
+
+    /**
+     * @brief Set callback for consumer.
+     * @param The callback set for consumer.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    SetConsumerCallback([in] IUdxEventCallback consumerCallback);
+
+    /**
+     * @brief Send event to producer.
+     * @param Data in the format of UdxEvent.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    SendEventToProducer([in] UdxEvent evt);
+
+    /**
+     * @brief Send event to consumer.
+     * @param Data in the format of UdxEvent.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    SendEventToConsumer([in] UdxEvent evt);
+} 
