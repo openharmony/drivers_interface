@@ -15,6 +15,7 @@ import("//build/config/components/hdi/hdi.gni")
 hdi("connected_nfc_tag") {
   module_name = "connected_nfc_tag_service"
 
+
   sources = [ "IConnectedNfcTag.idl" ]
 
   language = "cpp"
