@@ -1,0 +1,201 @@
+/*
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup HdiUdx
+ *
+ * @brief Provides unified APIs for Udx services to access Udx drivers.
+ *
+ * A Udx service can obtain interface object to access different types of devices, 
+ * thereby handling file operations and data communication by pushing them down, 
+ * and optimizing the paths for transmission, with the aim of reducing the system load.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+
+package ohos.hdi.udx.v1_0;
+
+import ohos.hdi.udx.v1_0.IUdxTypes;
+import ohos.hdi.udx.v1_0.IUdxBuffer;
+import ohos.hdi.udx.v1_0.IUdxBufferQueue;
+import ohos.hdi.udx.v1_0.IUdxFilter;
+
+/**
+ * @brief Defines the APIs for the udx manager.
+ *
+ * The APIs can be used to:
+ * - Querying the udx devices and loading/unloading apps on the device.
+ * - Enabling/disabling apps and obtaining app information.
+ * - Creating/destroying udx filters and obtaining filter types.
+ * - Allocating/freeing udx buffers and buffer queues.
+ * For details, see the description of the APIs.
+ */
+
+interface IUdxManager {
+    /**
+     * @brief Get the udx devices.
+     * @param Data in the format of struct UdxDevice.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    GetUdxDevices([out] struct UdxDevice[] devices);
+
+    /**
+     * @brief Load app for the udx device.
+     * @param The udx device.
+     * @param The binary of app.
+     * @param The handle of app.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    LoadUdxApp([in] struct UdxDevice device, [in] unsigned char[] appBinary, [out] long appHandle);
+
+    /**
+     * @brief Unload app from the udx device.
+     * @param The udx device.
+     * @param The handle of app.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    UnloadUdxApp([in] struct UdxDevice device, [in] long appHandle);
+
+    /**
+     * @brief Get the information of app.
+     * @param The handle of app.
+     * @param The information of app.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    GetUdxAppInfo([in] long appHandle, [out] struct AppInfo info);
+
+    /**
+     * @brief Get loaded apps in the udx device.
+     * @param The udx device.
+     * @param The loaded apps.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    GetUdxApps([in] struct UdxDevice device, [out] struct AppInfo[] apps);
+
+    /**
+     * @brief Enable an app for the udx device.
+     * @param The udx device.
+     * @param The handle of app.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    EnableUdxApp([in] struct UdxDevice device, [in] long appHandle);
+
+    /**
+     * @brief Disable an app for the udx device.
+     * @param The udx device.
+     * @param The handle of app.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    DisableUdxApp([in] struct UdxDevice device, [in] long appHandle);
+
+    /**
+     * @brief Get the types of filter.
+     * @param The types of the filter.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    GetUdxFilterTypes([out] String[] filterTypes);
+
+    /**
+     * @brief Create an udx filter.
+     * @param The name of the filter.
+     * @param The object of the filter.
+     * @param The handle of the filter.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    CreateUdxFilter([in] String filterName, [out] IUdxFilter filterObj, [out] struct UdxFilter filterHandle);
+
+    /**
+     * @brief Destroy an udx filter.
+     * @param The handle of the filter.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    DestroyUdxFilter([in] struct UdxFilter filterHandle);
+
+    /**
+     * @brief Allocate udx buffer.
+     * @param The size of udx buffer.
+     * @param The flag of udx buffer.
+     * @param The object of udx buffer.
+     * @param The handle of udx buffer.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    AllocUdxBuffer([in] unsigned int size, [in] UdxBufferFlag flag, [out] IUdxBuffer bufferObj, [out] struct UdxBuffer bufferHandle);
+
+    /**
+     * @brief Free udx buffer.
+     * @param The handle of udx buffer.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    FreeUdxBuffer([in] struct UdxBuffer bufferHandle);
+
+    /**
+     * @brief Allocate udx buffer queue.
+     * @param Maximum number of udx buffers accommodated in the queue.
+     * @param The object of udx buffer queue.
+     * @param The handle of udx buffer queue.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    AllocUdxBufferQueue([in] unsigned int size, [out] IUdxBufferQueue bufferQueueObj, [out] struct UdxBufferQueue bufferQueueHandle);
+
+    /**
+     * @brief Free udx buffer queue.
+     * @param The handle of udx buffer queue.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    FreeUdxBufferQueue([in] struct UdxBufferQueue bufferQueueHandle);
+} 

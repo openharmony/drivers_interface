@@ -1,0 +1,190 @@
+/*
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup HdiUdx
+ *
+ * @brief Provides unified APIs for Udx services to access Udx drivers.
+ *
+ * A Udx service can obtain interface object to access different types of devices, 
+ * thereby handling file operations and data communication by pushing them down, 
+ * and optimizing the paths for transmission, with the aim of reducing the system load.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+
+
+package ohos.hdi.udx.v1_0;
+
+/**
+ * @brief Enumerates the flags of UdxBuffer.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+enum UdxBufferFlag {
+    UDX_BUFFER_FLAG_UNCACHED = 0,
+    UDX_BUFFER_FLAG_CACHED = 1
+};
+
+/**
+ * @brief Enumerates the types of UdxEvent.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+enum UdxEventType {
+    BUFFER_UPDATED = 0
+};
+
+/**
+ * @brief Enumerates the types of UdxMsg.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+enum UdxMsgType {
+    PREPARE = 5,
+    START = 6,
+    STOP = 7,
+    RESET = 8,
+    PAUSE = 9,
+    RESUME = 10,
+    SET_SOCKET_FD = 13,
+    ERROR = 20,
+    BEGIN_TRANS = 21,
+    END_TRANS = 22,
+    OTHER = 100,
+    UDX_DSS_CMD_OPEN_SESSION = 101,
+    UDX_DSS_CMD_GET_TASK_ID = 102,
+    UDX_DSS_CMD_SET_DST_TASK_ID = 103,
+    UDX_DSS_CMD_START_SERVER = 104,
+    UDX_DSS_CMD_START_CLIENT = 105,
+    UDX_DSS_CMD_SEND_FILES_NAME = 106,
+    UDX_DSS_CMD_SEND_FILES_FD = 107,
+    UDX_DSS_CMD_STOP_SERVER = 108,
+    UDX_DSS_CMD_STOP_CLIENT = 109,
+    UDX_DSS_CMD_CLOSE_SESSION = 110,
+    UDX_DSS_CMD_SET_FD_LIST = 111,
+    UDX_DSS_CMD_SET_FILE_NAME_LIST = 112,
+    UDX_DSS_CMD_SET_STORAGE_PATH = 113,
+    UDX_DSS_CMD_GET_CAPABILITY = 114
+};
+
+/**
+ * @brief Enumerates the status of HdiUdx.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+enum HdiUdxStatus {
+    HDI_UDX_SUCCESS = 0,
+    HDI_UDX_FAILURE = 1,
+    HDI_UDX_INVALID_PARAM = 2,
+    HDI_UDX_INVALID_API = 3
+};
+
+/**
+ * @brief Defines the info of App.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+struct AppInfo {
+    String appName;
+};
+
+/**
+ * @brief Defines the info of UdxDevice.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+struct UdxDevice {
+    String deviceName;
+};
+
+/**
+ * @brief Defines the info of UdxBuffer.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+struct UdxBuffer {
+    int bufferId;
+    unsigned int bufferSize;
+};
+
+/**
+ * @brief Defines the info of UdxBufferFrame.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+struct UdxBufferFrame {
+    unsigned int type;
+    int bufferId;
+    unsigned int bufferLen;
+    unsigned int dataLen;
+    unsigned int status;
+    unsigned long dataExt;
+};
+
+/**
+ * @brief Defines the info of UdxBufferQueue.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+struct UdxBufferQueue {
+    struct UdxBuffer queueBuffer;
+    unsigned int queueSize;
+};
+
+/**
+ * @brief Defines the info of UdxFilter.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+struct UdxFilter {
+    String filterName;
+    unsigned int filterId;
+    unsigned int inputPadNum;
+    unsigned int outputPadNum;
+};
+
+/**
+ * @brief Defines the info of UdxEvent.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+struct UdxEvent {
+    UdxEventType eventType;
+    unsigned long eventData;
+};
+
+/**
+ * @brief Defines the info of UdxMessage.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+struct UdxMessage {
+    UdxMsgType msgType;
+    unsigned char[] msgData;
+};

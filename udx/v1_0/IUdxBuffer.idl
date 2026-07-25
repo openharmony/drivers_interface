@@ -1,0 +1,61 @@
+/*
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @addtogroup HdiUdx
+ *
+ * @brief Provides unified APIs for Udx services to access Udx drivers.
+ *
+ * A Udx service can obtain interface object to access different types of devices, 
+ * thereby handling file operations and data communication by pushing them down, 
+ * and optimizing the paths for transmission, with the aim of reducing the system load.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+
+package ohos.hdi.udx.v1_0;
+
+import ohos.hdi.udx.v1_0.IUdxTypes;
+
+/**
+ * @brief Defines the APIs for the udx buffer.
+ *
+ * The APIs can be used to:
+ * - Map the buffer from memory to user space,
+ * - Allow users to directly operate on it for data transfer.
+ * For details, see the description of the APIs.
+ */
+
+interface IUdxBuffer {
+    /**
+     * @brief Lock Buffer.
+     * @param The addr of buffer.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    Lock([out] Pointer addr);
+
+    /**
+     * @brief Unlock Buffer.
+     * @return Returns HDI_UDX_SUCCESS if the operation is successful; For details about the error codes, see HdiUdxStatus.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    Unlock();
+} 
