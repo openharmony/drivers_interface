@@ -47,12 +47,17 @@ public:
 
     void CheckAllocator() const
     {
-        if (allocator_v1_4_ != nullptr) {
+        if (allocator_v1_4_ != nullptr && !badClient_) {
             return;
         }
-        std::lock_guard<std::mutex> lock(mutex_);
-        if (allocator_v1_4_ == nullptr) {
+        std::unique_lock lock(allocMutex_);
+        if (allocator_v1_4_ == nullptr || badClient_) {
             allocator_v1_4_ = IAllocator::Get(false);
+            allocator_ = allocator_v1_4_;
+            badClient_ = false;
+        }
+        if (allocator_ != nullptr && recipientLocal_ != nullptr) {
+            BaseType4_0::AddDeathRecipientLocked(recipientLocal_);
         }
     }
 
@@ -60,6 +65,7 @@ public:
     {
         DISPLAY_TRACE;
         CheckAllocator();
+        std::shared_lock lock(allocMutex_);
         CHECK_NULLPOINTER_RETURN_VALUE(allocator_v1_4_, HDF_FAILURE);
 
         sptr<NativeBuffer> hdiInBuffer = new NativeBuffer();
@@ -72,6 +78,9 @@ public:
             outHandle = hdiOutBuffer->Move();
         }
         if (ret != HDF_SUCCESS && ret != HDF_ERR_NOT_SUPPORT) {
+            if (ret == ALLOC_MEM_BAD_OBJ || ret == ALLOC_MEM_INVALID_CLIENT) {
+                badClient_ = true;
+            }
             HDF_LOGE("%{public}s:CloneDmaBufferHandle failed, ret : %{public}d", __func__, ret);
         }
         return ret;
@@ -81,9 +90,14 @@ public:
 
 private:
     using BaseType4_0 = V1_3::DisplayBufferHdiImpl<Interface>;
+    using BaseType4_0::allocator_;
+    using BaseType4_0::recipientLocal_;
+    using BaseType4_0::allocMutex_;
+    using BaseType4_0::badClient_;
+    using BaseType4_0::ALLOC_MEM_BAD_OBJ;
+    using BaseType4_0::ALLOC_MEM_INVALID_CLIENT;
 protected:
     mutable sptr<IAllocator> allocator_v1_4_;
-    mutable std::mutex mutex_;
 };
 using HdiDisplayBufferImpl = DisplayBufferHdiImpl<V1_4::IDisplayBuffer>;
 } // namespace V1_4
