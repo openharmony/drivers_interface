@@ -144,6 +144,7 @@ public:
         }
         if (allocator_ == nullptr) {
             return false;
+            HDF_LOGE("%{public}s: allocator_ is nullptr", __func__);
         }
         return AddDeathRecipientLocked(recipient);
     }
