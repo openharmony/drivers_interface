@@ -85,7 +85,7 @@ public:
     {
         if (recipient_ != nullptr) {
             std::unique_lock lock(allocMutex_);
-            if (allocator_ == nullptr) {
+            if (allocator_ != nullptr) {
                 sptr<IRemoteObject> remoteObj = OHOS::HDI::hdi_objcast<IAllocator>(allocator_);
                 remoteObj->RemoveDeathRecipient(recipient_);
             }
