@@ -53,7 +53,7 @@ public:
         if (mapper_v1_2_ != nullptr) {
             return;
         }
-        std::lock_guard<std::mutex> lock(mutex_);
+        std::lock_guard<std::mutex> lock(mapperMutex_);
         if (mapper_v1_2_ == nullptr) {
             mapper_v1_2_ = IMapper::Get(true);
         }
@@ -76,7 +76,7 @@ private:
     using BaseType2_0 = V1_1::DisplayBufferHdiImpl<Interface>;
 protected:
     mutable sptr<IMapper> mapper_v1_2_;
-    mutable std::mutex mutex_;
+    using BaseType2_0::mapperMutex_;
 };
 using HdiDisplayBufferImpl = DisplayBufferHdiImpl<V1_2::IDisplayBuffer>;
 } // namespace V1_2

@@ -20,6 +20,8 @@
 #include <iproxy_broker.h>
 #include <unistd.h>
 #include <mutex>
+#include <shared_mutex>
+#include <atomic>
 #include "hdf_log.h"
 #include "hilog/log.h"
 #include "buffer_handle.h"
@@ -76,7 +78,7 @@ template<typename Interface>
 class DisplayBufferHdiImpl : public Interface {
 public:
     explicit DisplayBufferHdiImpl(sptr<IAllocator> allocator, sptr<IMapper>mapper)
-        : allocator_(allocator), mapper_(mapper), recipient_(nullptr)
+        : allocator_(allocator), mapper_(mapper), recipient_(nullptr), recipientLocal_(nullptr), badClient_(false)
     {}
 
     virtual ~DisplayBufferHdiImpl()
@@ -93,7 +95,7 @@ public:
         if (mapper_ != nullptr) {
             return;
         }
-        std::lock_guard<std::mutex> lock(mutex_);
+        std::lock_guard<std::mutex> lock(mapperMutex_);
         if (mapper_ == nullptr) {
             mapper_ = IMapper::Get(true);
         }
@@ -101,16 +103,20 @@ public:
 
     void CheckAllocator() const
     {
-        if (allocator_ != nullptr) {
+        if (allocator_ != nullptr && !badClient_) {
             return;
         }
-        std::lock_guard<std::mutex> lock(mutex_);
-        if (allocator_ == nullptr) {
+        std::unique_lock lock(allocMutex_);
+        if (allocator_ == nullptr || badClient_) {
             allocator_ = IAllocator::Get(false);
+            badClient_ = false;
+        }
+        if (allocator_ != nullptr && recipientLocal_ != nullptr) {
+            AddDeathRecipientLocked(recipientLocal_);
         }
     }
 
-    bool AddDeathRecipient(const sptr<IRemoteObject::DeathRecipient>& recipient) override
+    bool AddDeathRecipientLocked(const sptr<IRemoteObject::DeathRecipient>& recipient) const
     {
         sptr<IRemoteObject> remoteObj = OHOS::HDI::hdi_objcast<IAllocator>(allocator_);
         if (recipient_ != nullptr) {
@@ -128,6 +134,21 @@ public:
         return ret;
     }
 
+    bool AddDeathRecipient(const sptr<IRemoteObject::DeathRecipient>& recipient) override
+    {
+        recipientLocal_ = recipient;
+        std::unique_lock lock(allocMutex_);
+        if (allocator_ == nullptr || badClient_) {
+            allocator_ = IAllocator::Get(false);
+            badClient_ = false;
+        }
+        if (allocator_ == nullptr) {
+            return false;
+            HDF_LOGE("%{public}s: allocator_ is nullptr", __func__);
+        }
+        return AddDeathRecipientLocked(recipient);
+    }
+
     bool RemoveDeathRecipient() override
     {
         if (recipient_ != nullptr) {
@@ -142,6 +163,7 @@ public:
     {
         DISPLAY_TRACE;
         CheckAllocator();
+        std::shared_lock lock(allocMutex_);
         CHECK_NULLPOINTER_RETURN_VALUE(allocator_, HDF_FAILURE);
         sptr<NativeBuffer> hdiBuffer;
         int32_t ret = allocator_->AllocMem(info, hdiBuffer);
@@ -152,7 +174,10 @@ public:
             if (ret == HDF_SUCCESS) {
                 ret = HDF_FAILURE;
             }
-            HDF_LOGE("%{public}s: AllocMem error", __func__);
+            if (ret == ALLOC_MEM_BAD_OBJ || ret == ALLOC_MEM_INVALID_CLIENT) {
+                badClient_ = true;
+            }
+            HDF_LOGE("%{public}s: AllocMem error.ret:%{public}d", __func__, ret);
         }
         return ret;
     }
@@ -225,8 +250,13 @@ public:
 protected:
     mutable sptr<IAllocator> allocator_;
     mutable sptr<IMapper> mapper_;
-    sptr<IRemoteObject::DeathRecipient> recipient_;
-    mutable std::mutex mutex_;
+    mutable sptr<IRemoteObject::DeathRecipient> recipient_;
+    mutable sptr<IRemoteObject::DeathRecipient> recipientLocal_;
+    mutable std::mutex mapperMutex_;
+    mutable std::shared_mutex allocMutex_;
+    mutable bool badClient_;
+    static constexpr int32_t ALLOC_MEM_BAD_OBJ = 32;
+    static constexpr int32_t ALLOC_MEM_INVALID_CLIENT = 29189;
 };
 using HdiDisplayBufferImpl = DisplayBufferHdiImpl<V1_0::IDisplayBuffer>;
 } // namespace V1_0
