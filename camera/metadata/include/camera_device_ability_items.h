@@ -1372,6 +1372,22 @@ typedef enum camera_device_metadata_tag {
     */
     OHOS_CONTROL_IMAGING_MODE,
     /**
+     * ohos.ability.generateOriginalImage [static, uint8[], public]
+     * camera device property, report current camera supports generating original image
+     *(i.e. uint8[]: version mode1 mode2 ...)
+     * @since 6.1
+     * @version 1.0
+     */
+    OHOS_ABILITY_GENERATE_ORIGINAL_IMAGE,
+    /**
+     * ohos.control.generateOriginalImage [static, byte, public]
+     * camera device property, set current camera generating original image
+     *(i.e. byte ...)
+     * @since 6.1
+     * @version 1.0
+     */
+    OHOS_CONTROL_GENERATE_ORIGINAL_IMAGE,
+    /**
      * ohos.device.controlEnd
      *
      * device controlEnd

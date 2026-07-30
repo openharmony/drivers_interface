@@ -354,6 +354,10 @@ static item_info_t g_ohosCameraControl[OHOS_DEVICE_CONTROL_END - OHOS_DEVICE_CON
        OHOS_DEVICE_CONTROL_START] = {"supportedImagingModeValues", META_TYPE_BYTE, -1},
     [OHOS_CONTROL_IMAGING_MODE -
         OHOS_DEVICE_CONTROL_START] = {"imagingMode", META_TYPE_BYTE, 1},
+    [OHOS_ABILITY_GENERATE_ORIGINAL_IMAGE -
+       OHOS_DEVICE_CONTROL_START] = {"supportedGenerateOriginalImage", META_TYPE_BYTE, -1},
+    [OHOS_CONTROL_GENERATE_ORIGINAL_IMAGE -
+       OHOS_DEVICE_CONTROL_START] = {"generateOriginalImage", META_TYPE_BYTE, 1},
 };
 
 static item_info_t g_ohosDeviceExposure[OHOS_DEVICE_EXPOSURE_END - OHOS_DEVICE_EXPOSURE_START] = {
