@@ -18,6 +18,7 @@ config("hdifd_parcelable_config") {
 }
 
 ohos_shared_library("libhdifd_parcelable") {
+  branch_protector_ret = "pac_ret"
   sources = [ "hdifd_parcelable.cpp" ]
 
   public_configs = [ ":hdifd_parcelable_config" ]
@@ -45,5 +46,6 @@ config("composer_common_config") {
 }
 
 ohos_static_library("display_composer_common_config") {
+  branch_protector_ret = "pac_ret"
   public_configs = [ ":composer_common_config" ]
 }

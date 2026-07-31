@@ -14,6 +14,7 @@
 import("//build/ohos.gni")
 
 ohos_shared_library("libcomposer_buffer_cache") {
+  branch_protector_ret = "pac_ret"
   sources = [
     "device_cache.cpp",
     "device_cache_manager.cpp",
