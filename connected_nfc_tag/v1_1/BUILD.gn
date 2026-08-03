@@ -15,6 +15,7 @@ import("//build/config/components/hdi/hdi.gni")
 hdi("connected_nfc_tag") {
   module_name = "connected_nfc_tag_service"
   imports = [ "ohos.hdi.connected_nfc_tag.v1_0:connected_nfc_tag" ]
+  stack_protector_ret = true
 
   sources = [
     "ConnectedNfcTagTypes.idl",
