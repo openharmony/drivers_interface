@@ -56,7 +56,7 @@ public:
         if (mapper_v1_3_ != nullptr) {
             return;
         }
-        std::lock_guard<std::mutex> lock(mutex_);
+        std::lock_guard<std::mutex> lock(mapperMutex_);
         if (mapper_v1_3_ == nullptr) {
             mapper_v1_3_ = IMapper::Get(true);
         }
@@ -64,12 +64,16 @@ public:
 
     void CheckAllocator() const
     {
-        if (allocator_ != nullptr) {
+        if (allocator_ != nullptr && !badClient_) {
             return;
         }
-        std::lock_guard<std::mutex> lock(mutex_);
-        if (allocator_ == nullptr) {
+        std::unique_lock lock(allocMutex_);
+        if (allocator_ == nullptr || badClient_) {
             allocator_ = V1_0::IAllocator::Get(false);
+            badClient_ = false;
+        }
+        if (allocator_ != nullptr && recipientLocal_ != nullptr) {
+            BaseType3_0::AddDeathRecipientLocked(recipientLocal_);
         }
     }
 
@@ -96,6 +100,7 @@ public:
     {
         DISPLAY_TRACE;
         CheckAllocator();
+        std::shared_lock lock(allocMutex_);
         CHECK_NULLPOINTER_RETURN_VALUE(allocator_, HDF_FAILURE);
         sptr<NativeBuffer> hdiBuffer;
         int32_t ret = allocator_->AllocMem(info, hdiBuffer);
@@ -106,7 +111,10 @@ public:
             if (ret == HDF_SUCCESS) {
                 ret = HDF_FAILURE;
             }
-            HDF_LOGE("%{public}s: AllocMem error", __func__);
+            if (ret == ALLOC_MEM_BAD_OBJ || ret == ALLOC_MEM_INVALID_CLIENT) {
+                badClient_ = true;
+            }
+            HDF_LOGE("%{public}s: AllocMem error, ret:%{public}d", __func__, ret);
         }
         return ret;
     }
@@ -157,8 +165,13 @@ private:
     using BaseType3_0 = V1_2::DisplayBufferHdiImpl<Interface>;
 protected:
     using BaseType3_0::allocator_;
+    using BaseType3_0::recipientLocal_;
+    using BaseType3_0::mapperMutex_;
+    using BaseType3_0::allocMutex_;
+    using BaseType3_0::badClient_;
+    using BaseType3_0::ALLOC_MEM_BAD_OBJ;
+    using BaseType3_0::ALLOC_MEM_INVALID_CLIENT;
     mutable sptr<IMapper> mapper_v1_3_;
-    mutable std::mutex mutex_;
 };
 using HdiDisplayBufferImpl = DisplayBufferHdiImpl<V1_3::IDisplayBuffer>;
 } // namespace V1_3
