@@ -55,7 +55,7 @@ public:
     static sptr<ParcelableFd> Unmarshalling(Parcel &parcel)
     {
         MessageParcel &msgParcel = static_cast<MessageParcel &>(parcel);
-        int fd = msgParcel.ReadFileDescriptor();  // this returned fd has already been duped
+        int fd = msgParcel.ReadFileDescriptor(); // this returned fd has already been duped
         return ParcelableFd::Create(fd, true);
     }
 
