@@ -19,12 +19,12 @@
  *
  * @brief Provides APIs for performing suspend/wakeup operations, subscribing to the suspend/wakeup state,
  * and managing running locks.
- *
+ * 
  * After obtaining an object or proxy of this module, the power service can invoke related APIs to perform
  * suspend/wakeup operations, subscribe to the suspend/wakeup state, and manage running locks.
  *
  * @since 3.1
- * @version 1.4
+ * @version 1.1
  */
 
 /**
@@ -33,8 +33,10 @@
  * @brief Provides APIs for performing suspend/wakeup operations, subscribing to the suspend/wakeup state,
  * and managing running locks.
  *
+ * 
+ *
  * @since 3.1
- * @version 1.4
+ * @version 1.1
  */
 
 package ohos.hdi.power.v1_4;
@@ -46,7 +48,7 @@ import ohos.hdi.power.v1_3.IPowerInterface;
  * and managing running locks.
  *
  * @since 3.1
- * @version 1.4
+ * @version 1.1
  */
 interface IPowerInterface extends ohos.hdi.power.v1_3.IPowerInterface {
     /**
@@ -56,11 +58,11 @@ interface IPowerInterface extends ohos.hdi.power.v1_3.IPowerInterface {
      * bypassing the AutoSuspendLoop's wakeup_count race condition check.
      * It does not notify HDI callbacks (the caller is responsible for callback notification).
      *
-     * @param tag Suspend type tag, "mem" for S3 suspend, "ulsr" for ultra-low power refresh.
+     * @param tag Suspend type tag, "mem" for S3 suspend, "ulsr" for ultra-low suspend.
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      *
-     * @since 6.0
-     * @version 1.4
+     * @since 7.0
+     * @version 1.0
      */
     ForceSuspendIgnoringWakelock([in] String tag);
 }
