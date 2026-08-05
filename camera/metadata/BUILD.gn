@@ -20,6 +20,7 @@ config("camera_metadata_config") {
 
 ohos_shared_library("metadata") {
   branch_protector_ret = "pac_ret"
+  branch_protector_frt = "bti"
 
   install_enable = true
   cflags = [
