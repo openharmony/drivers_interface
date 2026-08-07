@@ -21,8 +21,14 @@ if (defined(ohos_lite)) {
   hdi("power") {
     module_name = "power_interface_service"
 
-    proxy_deps = [ "../v1_3:libpower_proxy_1.3" ]
-    stub_deps = [ "../v1_3:libpower_stub_1.3" ]
+    proxy_deps = [
+      "../v1_2:libpower_proxy_1.2",
+      "../v1_3:libpower_proxy_1.3",
+      ]
+    stub_deps = [ 
+      "../v1_2:libpower_proxy_1.2",
+      "../v1_3:libpower_proxy_1.3",
+      ]
 
     sources = [
       "IPowerInterface.idl",

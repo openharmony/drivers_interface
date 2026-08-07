@@ -58,7 +58,7 @@ interface IPowerInterface extends ohos.hdi.power.v1_3.IPowerInterface {
      * bypassing the AutoSuspendLoop's wakeup_count race condition check.
      * It does not notify HDI callbacks (the caller is responsible for callback notification).
      *
-     * @param tag Suspend type tag, "mem" for S3 suspend, "ulsr" for ultra-low suspend.
+     * @param tag Suspend type tag, "mem" for S3 suspend, "ulsr" for ulsr mode.
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      *
      * @since 7.0
