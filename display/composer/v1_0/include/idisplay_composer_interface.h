@@ -711,8 +711,8 @@ public:
      *
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined in {@link DispErrCode}
      * otherwise.
-     * @since 2.0
-     * @version 2.0
+     * @since 4.0
+     * @version 1.0
      */
     virtual int32_t SetLayerVisibleRegion(uint32_t devId, uint32_t layerId, std::vector<IRect>& rects) = 0;
 
@@ -732,8 +732,8 @@ public:
      *
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined in {@link DispErrCode}
      * otherwise.
-     * @since 2.0
-     * @version 2.0
+     * @since 4.0
+     * @version 1.0
      */
     virtual int32_t SetLayerBuffer(uint32_t devId, uint32_t layerId, const BufferHandle* buffer, uint32_t seqNo,
         int32_t fence, const std::vector<uint32_t>& deletingList) = 0;
@@ -750,8 +750,8 @@ public:
      *
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined in {@link DispErrCode}
      * otherwise.
-     * @since 2.0
-     * @version 2.0
+     * @since 4.0
+     * @version 1.0
      */
     virtual int32_t SetLayerCompositionType(uint32_t devId, uint32_t layerId, CompositionType type) = 0;
 
@@ -767,8 +767,8 @@ public:
      *
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined in {@link DispErrCode}
      * otherwise.
-     * @since 2.0
-     * @version 2.0
+     * @since 4.0
+     * @version 1.0
      */
     virtual int32_t SetLayerBlendType(uint32_t devId, uint32_t layerId, BlendType type) = 0;
 
@@ -899,7 +899,7 @@ public:
      *
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined in {@link DispErrCode}
      * otherwise.
-     * @since 3.2
+     * @since 4.0
      * @version 1.0
      */
     virtual int32_t SetLayerTunnelHandle(uint32_t devId, uint32_t layerId, const ExtDataHandle& handle) = 0;
@@ -915,7 +915,7 @@ public:
      *
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined in {@link DispErrCode}
      * otherwise.
-     * @since 3.2
+     * @since 4.0
      * @version 1.0
      */
     virtual int32_t SetLayerMaskInfo(uint32_t devId, uint32_t layerId, const MaskInfo maskInfo) = 0;
@@ -931,7 +931,7 @@ public:
      *
      * @return Returns <b>0</b> if the operation is successful; returns an error code defined in {@link DispErrCode}
      * otherwise.
-     * @since 3.2
+     * @since 4.0
      * @version 1.0
      */
     virtual int32_t SetLayerColor(uint32_t devId, uint32_t layerId, const LayerColor& layerColor) = 0;
