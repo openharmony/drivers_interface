@@ -526,6 +526,10 @@ std::map<uint32_t, uint32_t> g_itemDataTypeMap {
 CameraMetadata::CameraMetadata(size_t itemCapacity, size_t dataCapacity)
 {
     metadata_ = AllocateCameraMetadataBuffer(itemCapacity, AlignTo(dataCapacity, DATA_ALIGNMENT));
+    if (metadata_ == nullptr) {
+        METADATA_ERR_LOG("CameraMetadata: AllocateCameraMetadataBuffer failed, itemCapacity: %{public}zu,"
+                         "dataCapacity: %{public}zu", itemCapacity, dataCapacity);
+    }
 }
 
 CameraMetadata::~CameraMetadata()
@@ -798,7 +802,8 @@ common_metadata_header_t *CameraMetadata::AllocateCameraMetadataBuffer(uint32_t 
     size_t memoryRequired = CalculateCameraMetadataMemoryRequired(item_capacity, data_capacity);
     void *buffer = calloc(1, memoryRequired);
     if (buffer == nullptr) {
-        METADATA_ERR_LOG("AllocateCameraMetadataBuffer memory allocation failed");
+        METADATA_ERR_LOG("AllocateCameraMetadataBuffer memory allocation failed, memoryRequired: %{public}zu",
+                         memoryRequired);
         return reinterpret_cast<common_metadata_header_t *>(buffer);
     }
 
