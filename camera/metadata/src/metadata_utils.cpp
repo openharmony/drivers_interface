@@ -307,10 +307,14 @@ void MetadataUtils::ConvertVecToMetadata(const std::vector<uint8_t>& cameraAbili
 
     metadata = std::make_shared<CameraMetadata>(itemCapacity, dataCapacity);
     common_metadata_header_t *meta = metadata->get();
-    for (auto &item_ : items) {
+    for (auto &item_: items) {
         void *buffer = nullptr;
         MetadataUtils::ItemDataToBuffer(item_, &buffer);
-        (void)AddCameraMetadataItem(meta, item_.item, buffer, item_.count);
+        int32_t addRet = AddCameraMetadataItem(meta, item_.item, buffer, item_.count);
+        if (addRet != CAM_META_SUCCESS) {
+            METADATA_ERR_LOG("ConvertVecToMetadata: AddCameraMetadataItem failed, ret=%{public}d, item=%{public}u",
+                             addRet, item_.item);
+        }
         FreeMetadataBuffer(item_);
     }
 }
@@ -350,10 +354,14 @@ void MetadataUtils::ReadCameraMetadata(MessageParcel &data, common_metadata_head
         items.push_back(item);
     }
 
-    for (auto &item_ : items) {
+    for (auto &item_: items) {
         void *buffer = nullptr;
         MetadataUtils::ItemDataToBuffer(item_, &buffer);
-        (void)AddCameraMetadataItem(meta, item_.item, buffer, item_.count);
+        int32_t addRet = AddCameraMetadataItem(meta, item_.item, buffer, item_.count);
+        if (addRet != CAM_META_SUCCESS) {
+            METADATA_ERR_LOG("ReadCameraMetadata: AddCameraMetadataItem failed, ret=%{public}d, item=%{public}u",
+                             addRet, item_.item);
+        }
         FreeMetadataBuffer(item_);
     }
 }
@@ -426,7 +434,6 @@ std::string MetadataUtils::EncodeToString(std::shared_ptr<CameraMetadata> metada
         METADATA_ERR_LOG("MetadataUtils::EncodeToString Metadata is invalid");
         return {};
     }
-
     common_metadata_header_t *meta = metadata->get();
     METADATA_CHECK_ERROR_RETURN_RET_LOG(
         (static_cast<uint64_t>(headerLength) + (itemLen * meta->item_count) + meta->data_count) >
