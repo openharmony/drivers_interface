@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2026 Huawei Device Co., Ltd.
+ * Copyright (c) 2025 Huawei Device Co., Ltd.
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -30,57 +30,150 @@
 package ohos.hdi.audio.v6_1;
 
 import ohos.hdi.audio.v6_1.AudioTypes;
-import ohos.hdi.audio.v6_1.IAudioCaptureCallback;
+import ohos.hdi.audio.v6_1.IAudioCallback;
 
 /**
- * @brief Provides audio adapter capabilities, including initializing ports, creating rendering and capturing tasks,
- * and obtaining the port capability set.
+ * @brief Provides capabilities for audio rendering, including controlling the rendering, setting audio attributes,
+ * scenes, and volume, obtaining hardware latency, and rendering audio frames.
  *
- * @see IAudioCapture
  * @since 4.1
  * @version 2.0
  */
-interface IAudioCapture {
+interface IAudioRender {
     /**
-     * @brief Reads a frame of input data (uplink data) from the audio driver for capturing.
+     * @brief Obtains the estimated latency of the audio device driver.
      *
-     * @param capture Indicates the pointer to the <b>IAudioCapture</b> object to operate.
-     * @param frame Indicates the pointer to the input data to read.
-     * @param requestBytes Indicates the size of the input data, in bytes.
-     * @param replyBytes Indicates the pointer to the actual length (in bytes) of the audio data to read.
-     * @return Returns <b>0</b> if the input data is read successfully; returns a negative value otherwise.
+     * @param render Indicates the pointer to the <b>IAudioRender</b> object to operate.
+     * @param ms Indicates the pointer to the latency (in milliseconds) to be obtained.
+     * @return Returns <b>0</b> if the latency is obtained; returns a negative value otherwise.
      *
      * @since 4.1
      * @version 2.0
      */
-    CaptureFrame([out] byte[] frame, [out] unsigned long replyBytes);
+    GetLatency([out] unsigned int ms);
 
     /**
-     * @brief Reads a ec frame of input data (uplink data) from the audio driver for capturing.
+     * @brief Writes a frame of output data (downlink data) into the audio driver for rendering.
      *
-     * @param capture Indicates the pointer to the <b>IAudioCapture</b> object to operate.
-     * @param frameLen Indicates the pointer to the len of captureEc frame.
-     * @param frameInfo Indicates the pointer to the audio captureEc attributes.
-     * @return Returns <b>0</b> if the input data is read successfully; returns a negative value otherwise.
+     * @param render Indicates the pointer to the <b>IAudioRender</b> object to operate.
+     * @param frame Indicates the pointer to the frame to write.
+     * @param requestBytes Indicates the size of the frame, in bytes.
+     * @param replyBytes Indicates the pointer to the actual length (in bytes) of the audio data to write.
+     * @return Returns <b>0</b> if the data is written successfully; returns a negative value otherwise.
      *
-     * @since 5.0
-     * @version 1.0
+     * @since 4.1
+     * @version 2.0
      */
-    CaptureFrameEc([in] struct AudioFrameLen frameLen, [out] struct AudioCaptureFrameInfo frameInfo);
+    RenderFrame([in] byte[] frame, [out] unsigned long replyBytes);
 
     /**
-     * @brief Obtains the last number of input audio frames.
+     * @brief Obtains the last number of output audio frames.
      *
-     * @param capture Indicates the pointer to the <b>IAudioCapture</b> object to operate.
-     * @param frames Indicates the pointer to the last number of input audio frames.
+     * @param render Indicates the pointer to the <b>IAudioRender</b> object to operate.
+     * @param frames Indicates the pointer to the last number of output audio frames.
      * @param time Indicates the pointer to the timestamp associated with the frame.
      * @return Returns <b>0</b> if the last number is obtained; returns a negative value otherwise.
-     * @see CaptureFrame
+     * @see RenderFrame
      *
      * @since 4.1
      * @version 2.0
      */
-    GetCapturePosition([out] unsigned long frames, [out] struct AudioTimeStamp time);
+    GetRenderPosition([out] unsigned long frames, [out] struct AudioTimeStamp time);
+
+    /**
+     * @brief Sets the audio rendering speed.
+     *
+     * @param render Indicates the pointer to the <b>IAudioRender</b> object to operate.
+     * @param speed Indicates the rendering speed to set.
+     * @return Returns <b>0</b> if the setting is successful; returns a negative value otherwise.
+     * @see GetRenderSpeed
+     *
+     * @since 4.1
+     * @version 2.0
+     */
+    SetRenderSpeed([in] float speed);
+
+    /**
+     * @brief Obtains the current audio rendering speed.
+     *
+     * @param render Indicates the pointer to the <b>IAudioRender</b> object to operate.
+     * @param speed Indicates the pointer to the current rendering speed to obtain.
+     * @return Returns <b>0</b> if the speed is successfully obtained; returns a negative value otherwise.
+     * @see SetRenderSpeed
+     *
+     * @since 4.1
+     * @version 2.0
+     */
+    GetRenderSpeed([out] float speed);
+
+    /**
+     * @brief Sets the channel mode for audio rendering.
+     *
+     * @param render Indicates the pointer to the <b>IAudioRender</b> object to operate.
+     * @param mode Indicates the channel mode to set.
+     * @return Returns <b>0</b> if the setting is successful; returns a negative value otherwise.
+     * @see GetChannelMode
+     *
+     * @since 4.1
+     * @version 2.0
+     */
+    SetChannelMode([in] enum AudioChannelMode mode);
+
+    /**
+     * @brief Obtains the current channel mode for audio rendering.
+     *
+     * @param render Indicates the pointer to the <b>IAudioRender</b> object to operate.
+     * @param mode Indicates the pointer to the channel mode to obtain.
+     * @return Returns <b>0</b> if the mode is successfully obtained; returns a negative value otherwise.
+     * @see SetChannelMode
+     *
+     * @since 4.1
+     * @version 2.0
+     */
+    GetChannelMode([out] enum AudioChannelMode mode);
+
+    /**
+     * @brief Registers an audio callback that will be invoked during playback when buffer data writing or
+     * buffer drain is complete.
+     *
+     * @param render Indicates the pointer to the <b>IAudioRender</b> object to operate.
+     * @param callback Indicates the callback to register.
+     * @param cookie Indicates the pointer to the callback parameters.
+     * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
+     * @see RegCallback
+     *
+     * @since 4.1
+     * @version 2.0
+     */
+    RegCallback([in] IAudioCallback audioCallback, [in] byte cookie);
+
+    /**
+     * @brief Drains the buffer.
+     *
+     * @param render Indicates the pointer to the <b>IAudioRender</b> object to operate.
+     * @param type Indicates the pointer to the execution type of this function. For details,
+     * see {@link AudioDrainNotifyType}.
+     * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
+     * @see RegCallback
+     *
+     * @since 4.1
+     * @version 2.0
+     */
+    DrainBuffer([out] enum AudioDrainNotifyType type);
+
+    /**
+     * @brief query whether the vendor supports draining buffer
+     *
+     * @param render Indicates the pointer to the <b>IAudioRender</b> object to operate.
+     * @param support indicates the state whether the vendor supports draining buffer. Value <b>true</b> means that
+     * the vendor supports, and <b>false</b> means the opposite.
+     * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
+     * @see IsSupportsDrain
+     *
+     * @since 4.1
+     * @version 2.0
+     */
+    IsSupportsDrain([out] boolean support);
 
     /**
      * @brief Checks whether the configuration of an audio scene is supported.
@@ -166,6 +259,23 @@ interface IAudioCapture {
      * @version 2.0
      */
     SetVolume([in] float volume);
+
+    /**
+     * @brief Sets the audio volume with a ramp.
+     *
+     * The volume ramp ranges from 0.0 to 1.0, and the duration for the ramp is also set.
+     * <b>0.0</b> indicates that the audio is muted, and <b>1.0</b> indicates the maximum volume.
+     *
+     * @param handle Indicates the audio handle.
+     * @param volume Indicates the target volume to set. The value ranges from 0.0 to 1.0.
+     * @param duration Indicates the transition duration to reach the target volume, which must be less than 60000ms. The unit is millisecond.
+     * @return Returns <b>0</b> if the setting is successful; returns a negative value otherwise.
+     * @see SetVolumeWithRamp
+     *
+     * @since 6.1
+     * @version 1.0
+     */
+    SetVolumeWithRamp([in] float volume, [in] unsigned int duration);
 
     /**
      * @brief Obtains the audio volume.
@@ -487,29 +597,14 @@ interface IAudioCapture {
     IsSupportsPauseAndResume([out] boolean supportPause, [out] boolean supportResume);
 
     /**
-     * @brief Get the hdi version.
+     * @brief Set offload buffer size.
      *
-     * @param majorVer Indicates the major version {@link unsigned int majorVer}.
-     * @param minorVer Indicates the minor version {@link unsigned int minorVer}.
-     *
+     * @param handle Indicates the audio handle.
+     * @param size Indicates the buffer size which contains the audio data.
      * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
-     * @return Returns a non-zero value otherwise.
      *
-     * @since 7.0
-     * @version 1.0
+     * @since 4.1
+     * @version 2.0
      */
-    GetVersionV6_1([out] unsigned int majorVer, [out] unsigned int minorVer);
-
-    /**
-     * @brief Registers an audio capture callback
-     *
-     * @param capture Indicates the pointer to the <b>IAudioCapture</b> object to operate.
-     * @param callback Indicates the callback to register.
-     * @return Returns <b>0</b> if the operation is successful; returns a negative value otherwise.
-     * @see RegCallback
-     *
-     * @since 7.0
-     * @version 1.0
-     */
-    RegCallback([in] IAudioCaptureCallback audioCallback);
+    SetBufferSize([in] unsigned int size);
 }
