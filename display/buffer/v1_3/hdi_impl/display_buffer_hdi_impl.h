@@ -100,6 +100,7 @@ public:
     {
         DISPLAY_TRACE;
         CheckAllocator();
+        std::shared_lock lock(allocMutex_);
         CHECK_NULLPOINTER_RETURN_VALUE(allocator_, HDF_FAILURE);
         sptr<NativeBuffer> hdiBuffer;
         int32_t ret = allocator_->AllocMem(info, hdiBuffer);

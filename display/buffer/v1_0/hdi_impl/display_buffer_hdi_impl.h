@@ -84,8 +84,11 @@ public:
     virtual ~DisplayBufferHdiImpl()
     {
         if (recipient_ != nullptr) {
-            sptr<IRemoteObject> remoteObj = OHOS::HDI::hdi_objcast<IAllocator>(allocator_);
-            remoteObj->RemoveDeathRecipient(recipient_);
+            std::unique_lock lock(allocMutex_);
+            if (allocator_ != nullptr) {
+                sptr<IRemoteObject> remoteObj = OHOS::HDI::hdi_objcast<IAllocator>(allocator_);
+                remoteObj->RemoveDeathRecipient(recipient_);
+            }
             recipient_ = nullptr;
         }
     }
@@ -118,6 +121,7 @@ public:
 
     bool AddDeathRecipientLocked(const sptr<IRemoteObject::DeathRecipient>& recipient) const
     {
+        CHECK_NULLPOINTER_RETURN_VALUE(allocator_, false);
         sptr<IRemoteObject> remoteObj = OHOS::HDI::hdi_objcast<IAllocator>(allocator_);
         if (recipient_ != nullptr) {
             HDF_LOGE("%{public}s: the existing recipient is removed, and add the new. %{public}d",
@@ -143,8 +147,8 @@ public:
             badClient_ = false;
         }
         if (allocator_ == nullptr) {
-            return false;
             HDF_LOGE("%{public}s: allocator_ is nullptr", __func__);
+            return false;
         }
         return AddDeathRecipientLocked(recipient);
     }
