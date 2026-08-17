@@ -25,10 +25,10 @@ if (defined(ohos_lite)) {
       "../v1_2:libpower_proxy_1.2",
       "../v1_3:libpower_proxy_1.3",
       ]
-    stub_deps = [ 
-      "../v1_2:libpower_proxy_1.2",
-      "../v1_3:libpower_proxy_1.3",
-      ]
+    stub_deps = [
+      "../v1_2:libpower_stub_1.2",
+      "../v1_3:libpower_stub_1.3",
+    ]
 
     sources = [
       "IPowerInterface.idl",
