@@ -522,21 +522,20 @@ EXIT:
         }
 
 REPLY:
-        HdifdParcelable fdParcel(fence);
         DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::StartSection(REPLY_CMD_COMMIT, replyPacker_),
             HDF_LOGE("%{public}s, StartSection error", __func__));
 
-        DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::FileDescriptorPack(fdParcel.GetFd(), replyPacker_, outFds),
+        DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::FileDescriptorPack(fence, replyPacker_, outFds),
             HDF_LOGE("%{public}s, FileDescriptorPack error", __func__));
+        if (ret == HDF_SUCCESS && fence >= 0) {
+            close(fence);
+            fence = -1;
+        }
 
         DISPLAY_CHK_CONDITION(ret, HDF_SUCCESS, CmdUtils::EndSection(replyPacker_),
             HDF_LOGE("%{public}s, EndSection error", __func__));
 
         replyCommandCnt_++;
-
-#ifndef DISPLAY_COMMUNITY
-        fdParcel.Move();
-#endif // DISPLAY_COMMUNITY
 
         if (ret != HDF_SUCCESS) {
             errMaps_.emplace(REQUEST_CMD_COMMIT, ret);
