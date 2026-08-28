@@ -1,0 +1,52 @@
+{
+    "name": "@ohos/drivers_interface_boardinfo",
+    "description": "board info device driver interface",
+    "version": "1.0",
+    "license": "Apache License 2.0",
+    "publishAs": "code-segment",
+    "segment": {
+        "destPath": "drivers/interface/boardinfo"
+    },
+    "dirs": {},
+    "scripts": {},
+    "component": {
+        "name": "drivers_interface_boardinfo",
+        "subsystem": "hdf",
+        "adapted_system_type": [
+            "standard"
+        ],
+        "rom": "32KB",
+        "ram": "64KB",
+        "deps": {
+            "components": [
+                "ipc",
+                "hdf_core",
+                "hilog",
+                "c_utils"
+            ],
+            "third_party": []
+        },
+        "build": {
+            "sub_component": [
+                "//drivers/interface/boardinfo/v1_0:boardinfo_idl_target"
+            ],
+            "test": [],
+            "inner_kits": [
+                {
+                    "name": "//drivers/interface/boardinfo/v1_0:libboardinfo_proxy_1.0",
+                    "header": {
+                        "header_files": [],
+                        "header_base": "//drivers/interface/boardinfo"
+                    }
+                },
+                {
+                    "name": "//drivers/interface/boardinfo/v1_0:boardinfo_idl_headers",
+                    "header": {
+                        "header_files": [],
+                        "header_base": "//drivers/interface/boardinfo"
+                    }
+                }
+            ]
+        }
+    }
+}
