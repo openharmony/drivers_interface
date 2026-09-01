@@ -31,9 +31,11 @@ if (defined(ohos_lite)) {
       "ILppAudioSinkCallback.idl",
     ]
 
+    mode = "passthrough"
     branch_protector_ret = "pac_ret"
     language = "cpp"
     subsystem_name = "hdf"
     part_name = "drivers_interface_lpplayer"
+    sequenceable_ext_deps = [ "ipc:ipc_single" ]
   }
 }

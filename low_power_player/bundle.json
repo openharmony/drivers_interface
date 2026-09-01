@@ -47,14 +47,6 @@
             ],
             "header_base": "//drivers/interface/low_power_player"
           }
-        },
-        {
-          "name": "//drivers/interface/low_power_player/v1_0:liblow_power_player_stub_1.0",
-          "header": {
-            "header_files": [
-            ],
-            "header_base": "//drivers/interface/low_power_player"
-          }
         }
       ]
     }
