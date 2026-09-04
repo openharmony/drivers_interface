@@ -1388,6 +1388,17 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_GENERATE_ORIGINAL_IMAGE,
     /**
+     * ohos.ability.livephotoEisSupported [static, int32[], public]
+     *
+     * camera device property, report current camera livephoto eis supported
+     * (i.e. int32[] ...)
+     */
+    OHOS_ABILITY_LIVEPHOTO_EIS_SUPPORTED,
+
+    // Livephoto Eis
+    OHOS_LIVEPHOTO_FIRST_STAGE_EIS_ENABLE,
+    OHOS_LIVEPHOTO_FIRST_STAGE_EIS_START_TIMESTAMP,
+    /**
      * ohos.device.controlEnd
      *
      * device controlEnd
