@@ -4,8 +4,8 @@
 工作的 OpenCode 智能体。本仓**仅定义接口**（IDL），不含服务实现；实现端在
 `drivers_peripheral` 各对应仓。
 
-> 嵌套指引：本仓内每个一级子模块目录下均设有 `agent.md`，提供该模块的版本目录、
-> IDL 文件清单与约定。深度知识路由到子模块 `agent.md`（见下方「子模块导航」）。
+> 嵌套指引：本仓内每个一级子模块目录下均设有 `AGENTS.md`，提供该模块的版本目录、
+> IDL 文件清单与约定。深度知识路由到子模块 `AGENTS.md`（见下方「子模块导航」）。
 
 ## 仓概述
 
@@ -34,88 +34,88 @@
 
 ## 子模块导航
 
-本仓每个一级子目录定义一个外设模块的 HDI 接口，并配有独立的 `agent.md`。
+本仓每个一级子目录定义一个外设模块的 HDI 接口，并配有独立的 `AGENTS.md`。
 按功能分组如下：
 
 ### 媒体与图形
 
 | 模块 | 中文名 | 说明 | Agent 指引 |
 |------|--------|------|------------|
-| `audio` | 音频 | 音频适配器/录音/渲染/回调接口 | [audio/agent.md](audio/agent.md) |
-| `distributed_audio` | 分布式音频 | 分布式音频扩展接口 | [distributed_audio/agent.md](distributed_audio/agent.md) |
-| `camera` | 相机 | CameraHost/Device/StreamOperator 接口 | [camera/agent.md](camera/agent.md) |
-| `distributed_camera` | 分布式相机 | 分布式相机接口 | [distributed_camera/agent.md](distributed_camera/agent.md) |
-| `display` | 显示 | Composer/Buffer/Graphic 接口 | [display/agent.md](display/agent.md) |
-| `codec` | 编解码 | 编解码器/图像/Parcel 接口 | [codec/agent.md](codec/agent.md) |
-| `drm` | 数字版权管理 | DRM 接口 | [drm/agent.md](drm/agent.md) |
+| `audio` | 音频 | 音频适配器/录音/渲染/回调接口 | [audio/AGENTS.md](audio/AGENTS.md) |
+| `distributed_audio` | 分布式音频 | 分布式音频扩展接口 | [distributed_audio/AGENTS.md](distributed_audio/AGENTS.md) |
+| `camera` | 相机 | CameraHost/Device/StreamOperator 接口 | [camera/AGENTS.md](camera/AGENTS.md) |
+| `distributed_camera` | 分布式相机 | 分布式相机接口 | [distributed_camera/AGENTS.md](distributed_camera/AGENTS.md) |
+| `display` | 显示 | Composer/Buffer/Graphic 接口 | [display/AGENTS.md](display/AGENTS.md) |
+| `codec` | 编解码 | 编解码器/图像/Parcel 接口 | [codec/AGENTS.md](codec/AGENTS.md) |
+| `drm` | 数字版权管理 | DRM 接口 | [drm/AGENTS.md](drm/AGENTS.md) |
 
 ### 输入与交互
 
 | 模块 | 中文名 | 说明 | Agent 指引 |
 |------|--------|------|------------|
-| `input` | 输入 | 输入设备 DDK 接口 | [input/agent.md](input/agent.md) |
-| `vibrator` | 振动马达 | 振动马达接口 | [vibrator/agent.md](vibrator/agent.md) |
-| `light` | 指示灯 | 指示灯接口 | [light/agent.md](light/agent.md) |
-| `midi` | MIDI | MIDI 接口 | [midi/agent.md](midi/agent.md) |
+| `input` | 输入 | 输入设备 DDK 接口 | [input/AGENTS.md](input/AGENTS.md) |
+| `vibrator` | 振动马达 | 振动马达接口 | [vibrator/AGENTS.md](vibrator/AGENTS.md) |
+| `light` | 指示灯 | 指示灯接口 | [light/AGENTS.md](light/AGENTS.md) |
+| `midi` | MIDI | MIDI 接口 | [midi/AGENTS.md](midi/AGENTS.md) |
 
 ### 传感器与感知
 
 | 模块 | 中文名 | 说明 | Agent 指引 |
 |------|--------|------|------------|
-| `sensor` | 传感器 | Sensor 接口与回调 | [sensor/agent.md](sensor/agent.md) |
-| `motion` | 动作 | 动作识别接口 | [motion/agent.md](motion/agent.md) |
-| `activity_recognition` | 活动识别 | 活动识别接口 | [activity_recognition/agent.md](activity_recognition/agent.md) |
-| `intelligent_voice` | 智能语音 | 智能语音引擎/触发接口 | [intelligent_voice/agent.md](intelligent_voice/agent.md) |
-| `nnrt` | 神经网络推理 | NNRT 推理接口 | [nnrt/agent.md](nnrt/agent.md) |
+| `sensor` | 传感器 | Sensor 接口与回调 | [sensor/AGENTS.md](sensor/AGENTS.md) |
+| `motion` | 动作 | 动作识别接口 | [motion/AGENTS.md](motion/AGENTS.md) |
+| `activity_recognition` | 活动识别 | 活动识别接口 | [activity_recognition/AGENTS.md](activity_recognition/AGENTS.md) |
+| `intelligent_voice` | 智能语音 | 智能语音引擎/触发接口 | [intelligent_voice/AGENTS.md](intelligent_voice/AGENTS.md) |
+| `nnrt` | 神经网络推理 | NNRT 推理接口 | [nnrt/AGENTS.md](nnrt/AGENTS.md) |
 
 ### 电源与热管理
 
 | 模块 | 中文名 | 说明 | Agent 指引 |
 |------|--------|------|------------|
-| `power` | 电源 | 电源管理接口 | [power/agent.md](power/agent.md) |
-| `battery` | 电池 | 电池信息/充电接口 | [battery/agent.md](battery/agent.md) |
-| `thermal` | 温控 | 温控接口 | [thermal/agent.md](thermal/agent.md) |
-| `memorytracker` | 内存追踪 | 内存追踪接口 | [memorytracker/agent.md](memorytracker/agent.md) |
+| `power` | 电源 | 电源管理接口 | [power/AGENTS.md](power/AGENTS.md) |
+| `battery` | 电池 | 电池信息/充电接口 | [battery/AGENTS.md](battery/AGENTS.md) |
+| `thermal` | 温控 | 温控接口 | [thermal/AGENTS.md](thermal/AGENTS.md) |
+| `memorytracker` | 内存追踪 | 内存追踪接口 | [memorytracker/AGENTS.md](memorytracker/AGENTS.md) |
 
 ### 通信与连接
 
 | 模块 | 中文名 | 说明 | Agent 指引 |
 |------|--------|------|------------|
-| `wlan` | WLAN | WLAN/芯片/WPA/Hostapd 接口 | [wlan/agent.md](wlan/agent.md) |
-| `bluetooth` | 蓝牙 | A2DP/HCI/LP_BLE 接口 | [bluetooth/agent.md](bluetooth/agent.md) |
-| `nearlink` | 星闪 | 星闪 HCI/OffFind 接口 | [nearlink/agent.md](nearlink/agent.md) |
-| `nfc` | NFC | NFC 接口 | [nfc/agent.md](nfc/agent.md) |
-| `connected_nfc_tag` | 连接式 NFC 标签 | 连接式 NFC 标签接口 | [connected_nfc_tag/agent.md](connected_nfc_tag/agent.md) |
-| `secure_element` | 安全单元 | SE/SIM SE 接口 | [secure_element/agent.md](secure_element/agent.md) |
-| `ethernet` | 以太网 | 以太网接口 | [ethernet/agent.md](ethernet/agent.md) |
-| `ril` | RIL 无线接口 | RIL 蜂窝通信接口 | [ril/agent.md](ril/agent.md) |
-| `location` | 定位 | AGNSS/Geofence/GNSS 接口 | [location/agent.md](location/agent.md) |
+| `wlan` | WLAN | WLAN/芯片/WPA/Hostapd 接口 | [wlan/AGENTS.md](wlan/AGENTS.md) |
+| `bluetooth` | 蓝牙 | A2DP/HCI/LP_BLE 接口 | [bluetooth/AGENTS.md](bluetooth/AGENTS.md) |
+| `nearlink` | 星闪 | 星闪 HCI/OffFind 接口 | [nearlink/AGENTS.md](nearlink/AGENTS.md) |
+| `nfc` | NFC | NFC 接口 | [nfc/AGENTS.md](nfc/AGENTS.md) |
+| `connected_nfc_tag` | 连接式 NFC 标签 | 连接式 NFC 标签接口 | [connected_nfc_tag/AGENTS.md](connected_nfc_tag/AGENTS.md) |
+| `secure_element` | 安全单元 | SE/SIM SE 接口 | [secure_element/AGENTS.md](secure_element/AGENTS.md) |
+| `ethernet` | 以太网 | 以太网接口 | [ethernet/AGENTS.md](ethernet/AGENTS.md) |
+| `ril` | RIL 无线接口 | RIL 蜂窝通信接口 | [ril/AGENTS.md](ril/AGENTS.md) |
+| `location` | 定位 | AGNSS/Geofence/GNSS 接口 | [location/AGENTS.md](location/AGENTS.md) |
 
 ### USB 与串行
 
 | 模块 | 中文名 | 说明 | Agent 指引 |
 |------|--------|------|------------|
-| `usb` | USB | USB DDK/Gadget/SCSI/Serial 接口 | [usb/agent.md](usb/agent.md) |
-| `serial` | 串口 | 串口接口 | [serial/agent.md](serial/agent.md) |
-| `udx` | UDX | UDX 接口 | [udx/agent.md](udx/agent.md) |
-| `partitionslot` | 分区槽 | 分区槽接口 | [partitionslot/agent.md](partitionslot/agent.md) |
+| `usb` | USB | USB DDK/Gadget/SCSI/Serial 接口 | [usb/AGENTS.md](usb/AGENTS.md) |
+| `serial` | 串口 | 串口接口 | [serial/AGENTS.md](serial/AGENTS.md) |
+| `udx` | UDX | UDX 接口 | [udx/AGENTS.md](udx/AGENTS.md) |
+| `partitionslot` | 分区槽 | 分区槽接口 | [partitionslot/AGENTS.md](partitionslot/AGENTS.md) |
 
 ### 安全与认证
 
 | 模块 | 中文名 | 说明 | Agent 指引 |
 |------|--------|------|------------|
-| `user_auth` | 用户认证 | 用户认证接口 | [user_auth/agent.md](user_auth/agent.md) |
-| `pin_auth` | PIN 码认证 | PIN 码认证接口 | [pin_auth/agent.md](pin_auth/agent.md) |
-| `face_auth` | 人脸认证 | 人脸认证接口 | [face_auth/agent.md](face_auth/agent.md) |
-| `fingerprint_auth` | 指纹认证 | 指纹认证接口 | [fingerprint_auth/agent.md](fingerprint_auth/agent.md) |
-| `huks` | 统一密钥管理 | HUKS 密钥服务接口 | [huks/agent.md](huks/agent.md) |
+| `user_auth` | 用户认证 | 用户认证接口 | [user_auth/AGENTS.md](user_auth/AGENTS.md) |
+| `pin_auth` | PIN 码认证 | PIN 码认证接口 | [pin_auth/AGENTS.md](pin_auth/AGENTS.md) |
+| `face_auth` | 人脸认证 | 人脸认证接口 | [face_auth/AGENTS.md](face_auth/AGENTS.md) |
+| `fingerprint_auth` | 指纹认证 | 指纹认证接口 | [fingerprint_auth/AGENTS.md](fingerprint_auth/AGENTS.md) |
+| `huks` | 统一密钥管理 | HUKS 密钥服务接口 | [huks/AGENTS.md](huks/AGENTS.md) |
 
 ### 其他
 
 | 模块 | 中文名 | 说明 | Agent 指引 |
 |------|--------|------|------------|
-| `low_power_player` | 低功耗播放器 | 低功耗播放器接口 | [low_power_player/agent.md](low_power_player/agent.md) |
-| `tools` | 工具 | hc-gen 等工具 | [tools/agent.md](tools/agent.md) |
+| `low_power_player` | 低功耗播放器 | 低功耗播放器接口 | [low_power_player/AGENTS.md](low_power_player/AGENTS.md) |
+| `tools` | 工具 | hc-gen 等工具 | [tools/AGENTS.md](tools/AGENTS.md) |
 
 ## 仓级关键文件
 
@@ -183,8 +183,8 @@
 
 | 任务 | 先读 |
 |------|------|
-| 新增一个外设 HDI 模块 | `README_ZH.md`（IDL 语法、用法）、对应模块子目录 `agent.md` |
-| 新增接口版本 | 本文件「IDL 与版本约定」、对应模块 `agent.md` 的「接口版本」表 |
+| 新增一个外设 HDI 模块 | `README_ZH.md`（IDL 语法、用法）、对应模块子目录 `AGENTS.md` |
+| 新增接口版本 | 本文件「IDL 与版本约定」、对应模块 `AGENTS.md` 的「接口版本」表 |
 | IDL 语法/编译模板 | `README_ZH.md`、`interface.gni`、`//build/config/components/hdi/hdi.gni` |
 | 实现一个 HDI 服务 | 本仓接口定义 + `drivers_peripheral/<module>/` 实现仓 |
 | 三系统适配（standard/small/mini） | `interface.gni`、`//drivers/hdf_core/adapter/` |
