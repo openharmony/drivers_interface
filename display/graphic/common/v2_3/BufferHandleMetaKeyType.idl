@@ -29,4 +29,5 @@ import ohos.hdi.display.graphic.common.v2_2.BufferHandleMetaKeyType;
  */
 enum BufferHandleAttrKey : ohos.hdi.display.graphic.common.v2_2.BufferHandleAttrKey {
     ATTRKEY_CLD_METADATA = 4102,                    // value: cld metadata
+    ATTRKEY_VIDEO_ARSR_STRENGTH = 4103,             // value: arsr metadata
 };
