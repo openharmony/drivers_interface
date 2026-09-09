@@ -32,7 +32,10 @@ if (defined(ohos_lite)) {
       "Types.idl",
     ]
 
-    sequenceable_pub_deps = [
+    stub_deps = [
+      "../sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0",
+    ]
+    proxy_deps = [
       "../sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0",
     ]
     sequenceable_ext_deps = [

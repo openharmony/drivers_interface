@@ -20,7 +20,6 @@ if (defined(ohos_lite)) {
 } else {
   hdi("camera") {
     module_name = "camera_service"
-    imports = [ "ohos.hdi.camera.v1_1:camera" ]
 
     sources = [
       "ICameraDevice.idl",
@@ -34,10 +33,19 @@ if (defined(ohos_lite)) {
       "Types.idl",
     ]
 
-    sequenceable_pub_deps = [
+    stub_deps = [
       "../sequenceable/buffer_handle:libbuffer_handle_sequenceable_1.0",
       "../sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0",
       "../sequenceable/map_data:libmap_data_sequenceable_1.0",
+      "../v1_0:libcamera_stub_1.0",
+      "../v1_1:libcamera_stub_1.1",
+    ]
+    proxy_deps = [
+      "../sequenceable/buffer_handle:libbuffer_handle_sequenceable_1.0",
+      "../sequenceable/buffer_producer:libbuffer_producer_sequenceable_1.0",
+      "../sequenceable/map_data:libmap_data_sequenceable_1.0",
+      "../v1_0:libcamera_proxy_1.0",
+      "../v1_1:libcamera_proxy_1.1",
     ]
     sequenceable_ext_deps = [
       "graphic_surface:buffer_handle",
