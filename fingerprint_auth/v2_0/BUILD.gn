@@ -26,4 +26,8 @@ hdi("fingerprint_auth") {
   language = "cpp"
   subsystem_name = "hdf"
   part_name = "drivers_interface_fingerprint_auth"
+  if (!use_clang_coverage) {
+    client_version_script = "client.map"
+    server_version_script = "server.map"
+  }
 }
