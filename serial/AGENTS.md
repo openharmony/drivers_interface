@@ -121,7 +121,7 @@ HDI 实现层（drivers/peripheral/serial，外部仓）
 - **是否需要同步修改其他层**：
   - IDL 变更 -> 由 `hdi-gen` 重生成 proxy/stub/headers -> 同步外围仓 `drivers/peripheral/serial` 实现 -> 同步消费方
   - `SerialTypes.idl` 类型变更 -> 评估 `ISerials.idl` 和 `ISerialDevice.idl` 所有方法的引用
-  - 新增版本 -> 同步 `bundle.json` + 外围仓实现 + 消费方适配
+  - 新增版本 -> 同步 `bundle.json` + drivers/peripheral 仓库实现 + 消费方适配
 
 ## 3. 约束边界
 

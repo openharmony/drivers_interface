@@ -148,7 +148,7 @@ IDL 源文件（本仓维护）
 | Hid_Device | HID 设备基本信息（deviceName/vendorId/productId/version/bustype/properties）| `ddk/v1_0/HidDdkTypes.idl` |
 | Hid_EventProperties | HID 事件属性（hidEventTypes/hidKeys/hidAbs/hidRelBits/hidMiscellaneous + abs 坐标范围）| `ddk/v1_0/HidDdkTypes.idl` |
 | Hid_KeyCode | HID 键值码枚举（80+ 键值：字母/数字/功能键/鼠标按钮/触摸/手写笔等），枚举值顺序是 ABI 一部分 | `ddk/v1_0/HidDdkTypes.idl` |
-| Hid_EmitItem | HID 事件发送项（type/code/value）| `ddk/v1_0/HidDdkTypes.idl` |
+| Hid_EmitItem | HID 事件上报数据结构（type/code/value）| `ddk/v1_0/HidDdkTypes.idl` |
 | HidDeviceHandle | HID 设备操作句柄（fd/nonBlock），v1_1 新增 | `ddk/v1_1/HidDdkTypes.idl` |
 | HidReportType | HID 报告类型（INPUT_REPORT/OUTPUT_REPORT/FEATURE_REPORT），v1_1 新增 | `ddk/v1_1/HidDdkTypes.idl` |
 | HidRawDevInfo | HID 原始设备信息（busType/vendor/product），v1_1 新增 | `ddk/v1_1/HidDdkTypes.idl` |

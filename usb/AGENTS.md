@@ -167,9 +167,9 @@ ddk/v1_0 (base, 无 proxy_deps/stub_deps)
 | v1_2 | 主 USB | 异步传输（@since 5.1），v1_x 继承链顶端 |
 | v2_0 | 主 USB | **重构版**，三接口拆分，self-contained（@since 5.1） |
 | v2_1 | 主 USB | 自定义控制传输数据（@since 7.0），v2_x 继承链顶端 |
-| ddk/v1_0 | USB DDK | 基础 DDK（@since 4.0），ddk 继承链根 |
+| ddk/v1_0 | USB DDK | 基础 DDK（@since 4.0），DDK 继承链根 |
 | ddk/v1_1 | USB DDK | 设备枚举/驱动信息（@since 5.1） |
-| ddk/v1_2 | USB DDK | ControlTransfer/非根Hub（@since 7.0），ddk 继承链顶端 |
+| ddk/v1_2 | USB DDK | ControlTransfer/非根Hub（@since 7.0），DDK 继承链顶端 |
 | serial/v1_0 | 串口 | 独立版本（@since 5.1） |
 | scsi_ddk/v1_0 | SCSI DDK | 独立版本（@since 5.1） |
 | usb_serial_ddk/v1_0 | USB Serial DDK | 独立版本（@since 5.1） |
@@ -184,7 +184,7 @@ ddk/v1_0 (base, 无 proxy_deps/stub_deps)
 | `IUsbPortInterface` | v2_x 端口管理接口 | `v2_0/IUsbPortInterface.idl` |
 | `IUsbHostInterface` | v2_x 主机操作接口 | `v2_0/IUsbHostInterface.idl` |
 | `IUsbDdk` | USB DDK 接口 | `ddk/v1_0/`→`v1_1/`→`v1_2/IUsbDdk.idl` |
-| `ISerialInterface` | 串口接口 | `serial/v1_0/ISerialInterface.idl` |
+| `ISerialInterface` | USB 串口通信接口 | `serial/v1_0/ISerialInterface.idl` |
 | `IScsiPeripheralDdk` | SCSI 外设 DDK 接口 | `scsi_ddk/v1_0/IScsiPeripheralDdk.idl` |
 | `IUsbSerialDdk` | USB Serial DDK 接口 | `usb_serial_ddk/v1_0/IUsbSerialDdk.idl` |
 | `IUsbfnMtpInterface` | USB MTP/PTP Gadget 接口 | `gadget/mtp/v1_0/IUsbfnMtpInterface.idl` |
