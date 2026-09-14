@@ -249,7 +249,7 @@ IDL 源文件（本仓维护）
 - **`ohos_lite` 仅影响 v1_0**：仅 `v1_0/BUILD.gn` 有 `if (defined(ohos_lite))` 分支，ddk 版本无此分支，lite 系统下 ddk 仍正常构建
 - **`install_images` 仅 v1_0 有**：`v1_0/BUILD.gn` 设置 `install_images = ["system", "updater"]`，ddk 版本无此设置
 - **无 `innerapi_tags`**：本子域不暴露为 `chipsetsdk` 或 `platformsdk_indirect`，与 sensor 不同
-- **无 `sa_profile`**：本子域 `bundle.json` 无 `sa_profile` 字段，与部分其他子域不同
+- **无 `sa_profile`**：本子域 `bundle.json` 无 `sa_profile` 字段，区别于部分子域
 - **`DevAbility` 的 bitmap 设计**：使用 `unsigned long[]` 数组作为 bitmap 记录支持的事件类型，跨进程序列化时需注意数组长度一致性
 - **`adapted_system_type` 不含 `mini`**：本仓适配 `standard` 和 `small` 系统，不适配 `mini` 系统
 
