@@ -27,6 +27,8 @@ hdi("user_auth") {
     "../v4_0:libuser_auth_proxy_4.0",
   ]
   language = "cpp"
+  client_version_script = "user_auth_interface_4.1.map"
+  server_version_script = "user_auth_interface_4.1.map"
   subsystem_name = "hdf"
   part_name = "drivers_interface_user_auth"
 }
