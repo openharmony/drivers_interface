@@ -25,6 +25,7 @@
 | 显示接口变更 | `drivers/interface/display/` | 合成/缓冲/图形通用 |
 | 指示灯接口变更 | `drivers/interface/light/` | 指示灯控制 |
 | 动作接口变更 | `drivers/interface/motion/` | 动作手势检测 |
+| A/B槽位接口变更 | `drivers/interface/partitionslot/` | A/B槽位查询/后缀/激活/不可启动标记 |
 | 传感器接口变更 | `drivers/interface/sensor/` | 传感器数据采集/转换 |
 | 工具/编译器变更 | `drivers/interface/tools/` | HDF配置编译器(hc-gen) |
 | 振动接口变更 | `drivers/interface/vibrator/` | 振动/HD触觉/会话/热插拔 |
@@ -38,6 +39,7 @@
 | [display](display/AGENTS.md) | 合成/缓冲/图形通用 | [查看](display/AGENTS.md) | composer v1_0-v1_5 / buffer v1_0-v1_4 / graphic/common v1_0-v2_3 | `display_config.gni` (3个开关) | 30+ sub_component |
 | [light](light/AGENTS.md) | 指示灯控制 | [查看](light/AGENTS.md) | v1_0 | 无 .gni 特性开关 | 1个活跃目标 |
 | [motion](motion/AGENTS.md) | 动作手势检测 | [查看](motion/AGENTS.md) | v1_0/v1_1 | 无 .gni 特性开关 | 2个活跃目标 |
+| [partitionslot](partitionslot/AGENTS.md) | A/B槽位管理（查询/后缀/激活/不可启动标记） | [查看](partitionslot/AGENTS.md) | v1_0 | 无 .gni 特性开关 | 3个活跃目标 |
 | [sensor](sensor/AGENTS.md) | 传感器数据采集/转换 | [查看](sensor/AGENTS.md) | v3_0/v3_1/convert/v1_0 | 无 .gni 特性开关 | 3个活跃目标 |
 | [tools](tools/AGENTS.md) | HDF配置编译器(hc-gen) | [查看](tools/AGENTS.md) | v6.0 | 无依赖 | 1个活跃目标 |
 | [vibrator](vibrator/AGENTS.md) | 振动/HD触觉/会话/热插拔 | [查看](vibrator/AGENTS.md) | v2_0 | `vibrator.gni` | 1个活跃目标 |
@@ -75,6 +77,7 @@
 | 显示接口变更 | display | [display/AGENTS.md](display/AGENTS.md) |
 | 指示灯接口变更 | light | [light/AGENTS.md](light/AGENTS.md) |
 | 动作接口变更 | motion | [motion/AGENTS.md](motion/AGENTS.md) |
+| A/B槽位接口变更 | partitionslot | [partitionslot/AGENTS.md](partitionslot/AGENTS.md) |
 | 传感器接口变更 | sensor | [sensor/AGENTS.md](sensor/AGENTS.md) |
 | 工具/编译器变更 | tools | [tools/AGENTS.md](tools/AGENTS.md) |
 | 振动接口变更 | vibrator | [vibrator/AGENTS.md](vibrator/AGENTS.md) |
@@ -102,6 +105,7 @@
 | v1_0-v1_5 | display/composer | 全部活跃 |
 | v1_0-v1_4 | display/buffer | 全部活跃 |
 | v1_0-v2_3 | display/graphic/common | 仅类型定义 |
+| v1_0 | partitionslot | 当前唯一版本（A/B槽位管理） |
 | v2_0 | vibrator | 当前唯一活跃版本 |
 | v3_0/v3_1 | sensor | 当前活跃版本 |
 | convert/v1_0 | sensor | 传感器转换适配层 |
@@ -125,6 +129,8 @@
 | innerapi_tags | 内部API标签 | `bundle.json` innerapi_tags 字段 |
 | HdiZ | Z-Codec前缀 | `drivers/interface/codec/zcodec/v1_0/` |
 | hc-gen | HDF配置编译器 | `drivers/interface/tools/hc-gen` |
+| IPartitionSlot | A/B槽位管理接口（查询/后缀/激活/不可启动标记） | partitionslot/v1_0/IPartitionSlot.idl |
+| bootctrl | A/B启动控制分区（active/unbootable标记） | `drivers/peripheral/partitionslot`（实现仓） |
 
 ## 3. 约束边界
 
