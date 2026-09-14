@@ -18,6 +18,7 @@
       "OHOS::HDI::Display::Buffer::V1_1::IDisplayBuffer::Get()";
       "OHOS::HDI::Display::Buffer::V1_2::IDisplayBuffer::Get()";
       "OHOS::HDI::Display::Buffer::V1_3::IDisplayBuffer::Get()";
+      "OHOS::HDI::Display::Buffer::V1_4::IDisplayBuffer::Get()";
     };
     extern "C" {
     };
