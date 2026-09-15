@@ -11,17 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
  
-1.0 {
+{
   global:
-    extern "C++" {
-      "OHOS::HDI::Display::Buffer::V1_0::IDisplayBuffer::Get()";
-      "OHOS::HDI::Display::Buffer::V1_1::IDisplayBuffer::Get()";
-      "OHOS::HDI::Display::Buffer::V1_2::IDisplayBuffer::Get()";
-      "OHOS::HDI::Display::Buffer::V1_3::IDisplayBuffer::Get()";
-      "OHOS::HDI::Display::Buffer::V1_4::IDisplayBuffer::Get()";
-    };
-    extern "C" {
-    };
-  local:
     *;
 };
