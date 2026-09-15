@@ -22,8 +22,10 @@ hdi("user_auth") {
     "UserAuthTypes.idl",
   ]
   language = "cpp"
-  client_version_script = "user_auth_interface_4.0.map"
-  server_version_script = "user_auth_interface_4.0.map"
+  if (!use_clang_coverage) {
+    client_version_script = "user_auth_interface_4.0.map"
+    server_version_script = "user_auth_interface_4.0.map"
+  }
   subsystem_name = "hdf"
   part_name = "drivers_interface_user_auth"
 }
