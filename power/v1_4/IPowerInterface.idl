@@ -52,20 +52,17 @@ import ohos.hdi.power.v1_3.IPowerInterface;
  */
 interface IPowerInterface extends ohos.hdi.power.v1_3.IPowerInterface {
     /**
-     * @brief Forces the device to suspend, ignoring all wakelocks and wakeup_count checks.
+     * @brief Extended force suspend.
      *
-     * This API directly writes the tag to /sys/power/state to trigger kernel suspend,
-     * bypassing the AutoSuspendLoop's wakeup_count race condition check.
-     * It notifies registered HDI callbacks before attempting kernel suspend and after the
-     * suspend attempt completes. The wakeup callback is also sent when the attempt fails,
-     * ensuring that the suspend and wakeup notifications remain paired.
-     *
-     * @param tag Suspend type tag, "mem" for S3 suspend, "ulsr" for ulsr mode.
+     * @param mode Suspend policy. "auto" is reserved and may return HDF_ERR_NOT_SUPPORT.
+     *             "ignore_wakelock" writes tag to /sys/power/state, skipping wakelock and
+     *             wakeup_count checks.
+     * @param tag Suspend type used when mode is "ignore_wakelock": "mem" for S3, "ulsr" for ULSR.
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      *
      * @since 7.0
      * @version 1.0
      */
-    ForceSuspendIgnoringWakelock([in] String tag);
+    ForceSuspendEx([in] String mode, [in] String tag);
 }
 /** @} */
