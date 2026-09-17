@@ -3327,6 +3327,41 @@ typedef enum camera_device_metadata_tag {
      */
     OHOS_CONTROL_AUTO_BOKEH_DATA_DELIVERY_SWITCH,
     /**
+     * ohos.ability.autoAuxiliaryPhotosDelivery [static, uint32[], public]
+     *
+     * camera device property, report supported auto delivery auxiliary photos types by mode
+     * (i.e. uint32[]: [mode, OHOS_CAMERA_AUXILIARY_PHOTO_TYPE_OXYGEN/
+     * OHOS_CAMERA_AUXILIARY_PHOTO_TYPE_PIGMENTATION, mode ...] ...)
+     * @since 7.0
+     * @version 1.0
+     */
+    OHOS_ABILITY_AUTO_AUXILIARY_PHOTOS_DELIVERY,
+    /**
+     * ohos.control.autoAuxiliaryPhotosDelivery [static, uint32[], public]
+     *
+     * camera device property, set auto delivery auxiliary photos types
+     * (i.e. uint32[]: [OHOS_CAMERA_AUXILIARY_PHOTO_TYPE_OXYGEN/
+     * OHOS_CAMERA_AUXILIARY_PHOTO_TYPE_PIGMENTATION ...] ...)
+     * @since 7.0
+     * @version 1.0
+     */
+    OHOS_CONTROL_AUTO_AUXILIARY_PHOTOS_DELIVERY,
+    /**
+     * ohos.status.autoAuxiliaryPhotosDelivery [static, uint32[], public]
+     *
+     * camera device property, report the auxiliary photo types to be delivered for one capture,
+     * reported once for each Capture() via the result metadata channel
+     * (IStreamOperatorCallback::OnResult), after Capture() is triggered and before any photo
+     * buffer is delivered
+     * (i.e. uint32[]: [captureId, OHOS_CAMERA_AUXILIARY_PHOTO_TYPE_OXYGEN/
+     * OHOS_CAMERA_AUXILIARY_PHOTO_TYPE_PIGMENTATION ...] ..., the auxiliary photo count
+     * equals the array length minus one, and [captureId] only means no auxiliary photo
+     * will be delivered ...)
+     * @since 7.0
+     * @version 1.0
+     */
+    OHOS_STATUS_AUTO_AUXILIARY_PHOTOS_DELIVERY,
+    /**
      * ohos.camera.dataDelivery [static, enum, public]
      *
      * camera data Delivery end
@@ -3340,6 +3375,14 @@ typedef enum camera_device_metadata_tag {
     OHOS_CONTROL_SET_CUSTOM_OPTICAL_IMAGE_STABILIZATION_BIAS,
     OHOS_OPTICAL_IMAGE_STABILIZATION_END,
 } camera_device_metadata_tag_t;
+
+// OHOS_ABILITY_AUTO_AUXILIARY_PHOTOS_DELIVERY,
+// OHOS_CONTROL_AUTO_AUXILIARY_PHOTOS_DELIVERY
+// and OHOS_STATUS_AUTO_AUXILIARY_PHOTOS_DELIVERY enumeration values
+typedef enum camera_auxiliary_photo_type {
+    OHOS_CAMERA_AUXILIARY_PHOTO_TYPE_OXYGEN = 0,
+    OHOS_CAMERA_AUXILIARY_PHOTO_TYPE_PIGMENTATION = 1,
+} camera_auxiliary_photo_type_t;
 
 // switch type tag enumeration values
 typedef enum camera_switch_enum {

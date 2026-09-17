@@ -46,7 +46,21 @@ enum ExtendedStreamInfoType : ohos.hdi.camera.v1_3.ExtendedStreamInfoType {
      * @since 7.0
      * @version 1.0
      */
-    EXTENDED_STREAM_OHOS_ENHANCED_GAINMAP = 19
+    EXTENDED_STREAM_OHOS_ENHANCED_GAINMAP = 19,
+
+    /**
+     * @brief Extended stream oxygen photo, which is used to deliver oxygen photos.
+     * @since 7.0
+     * @version 1.0
+     */
+    EXTENDED_STREAM_INFO_OXYGEN_PHOTO = 20,
+
+    /**
+     * @brief Extended stream pigmentation photo, which is used to deliver pigmentation photos.
+     * @since 7.0
+     * @version 1.0
+     */
+    EXTENDED_STREAM_INFO_PIGMENTATION_PHOTO = 21
 };
 
 /**
