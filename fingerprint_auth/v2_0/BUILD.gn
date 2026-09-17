@@ -23,6 +23,9 @@ hdi("fingerprint_auth") {
     "IFingerprintAuthInterface.idl",
     "ISaCommandCallback.idl",
   ]
+  sequenceable_ext_deps = [ 
+    "bounds_checking_function:libsec_static"
+  ]
   language = "cpp"
   subsystem_name = "hdf"
   part_name = "drivers_interface_fingerprint_auth"
