@@ -67,5 +67,9 @@ ohos_shared_library("libdisplay_buffer_hdi_impl_v1_1") {
 
   branch_protector_ret = "pac_ret"
 
+  if (!use_clang_coverage) {
+    version_script = "libdisplay_buffer_hdi_impl_v1_1.versionscript"
+  }
+
   part_name = "drivers_interface_display"
 }
