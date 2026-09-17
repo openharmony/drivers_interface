@@ -33,4 +33,9 @@ hdi("face_auth") {
   subsystem_name = "hdf"
   part_name = "drivers_interface_face_auth"
   defines = [ "LOG_DOMAIN=0xD002416" ]
+
+  if (!use_clang_coverage) {
+    client_version_script = "client.map"
+    server_version_script = "server.map"
+  }
 }
