@@ -54,10 +54,11 @@ interface IPowerInterface extends ohos.hdi.power.v1_3.IPowerInterface {
     /**
      * @brief Extended force suspend.
      *
-     * @param mode Suspend policy. "auto" is reserved and may return HDF_ERR_NOT_SUPPORT.
+     * @param mode Suspend policy. "auto" uses ForceSuspend (active suspend / AutoSuspendLoop).
      *             "ignore_wakelock" writes tag to /sys/power/state, skipping wakelock and
      *             wakeup_count checks.
      * @param tag Suspend type used when mode is "ignore_wakelock": "mem" for S3, "ulsr" for ULSR.
+     *            Ignored when mode is "auto".
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      *
      * @since 7.0
