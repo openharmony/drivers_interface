@@ -878,8 +878,6 @@ static item_info_t g_ohosCameraDataDelivery[OHOS_DATA_DELIVERY_END - OHOS_DATA_D
         OHOS_DATA_DELIVERY_START] = {"autoAuxiliaryPhotosDelivery", META_TYPE_INT32, -1},
     [OHOS_CONTROL_AUTO_AUXILIARY_PHOTOS_DELIVERY -
         OHOS_DATA_DELIVERY_START] = {"controlAutoAuxiliaryPhotosDelivery", META_TYPE_INT32, -1},
-    [OHOS_STATUS_AUTO_AUXILIARY_PHOTOS_DELIVERY -
-        OHOS_DATA_DELIVERY_START] = {"statusAutoAuxiliaryPhotosDelivery", META_TYPE_UINT32, -1},
 };
 
 static item_info_t g_ohosCameraOpticalImageStabilization[OHOS_OPTICAL_IMAGE_STABILIZATION_END -
