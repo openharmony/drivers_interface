@@ -32,4 +32,6 @@ hdi("pin_auth") {
     client_version_script = "client.map"
     server_version_script = "server.map"
   }
+
+  sequenceable_ext_deps  = [ "bounds_checking_function:libsec_shared" ]
 }
