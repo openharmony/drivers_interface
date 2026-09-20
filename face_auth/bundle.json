@@ -23,7 +23,8 @@
           "hilog",
           "c_utils",
           "graphic_surface",
-          "drivers_interface_camera"
+          "drivers_interface_camera",
+          "bounds_checking_function"
         ],
         "third_party": []
       },
