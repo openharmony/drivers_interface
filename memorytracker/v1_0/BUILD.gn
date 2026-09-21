@@ -22,4 +22,5 @@ hdi("memorytracker") {
   language = "cpp"
   subsystem_name = "hdf"
   part_name = "drivers_interface_memorytracker"
+  mode = "passthrough"
 }
