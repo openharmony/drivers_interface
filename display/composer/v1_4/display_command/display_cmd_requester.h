@@ -99,6 +99,10 @@ public:
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
         ret = DoRequest(devId, replyEleCnt, outFds);
+        if (ret != HDF_SUCCESS) {
+            request_->Reset();
+            reply_->Reset();
+        }
         DISPLAY_CHECK(ret != HDF_SUCCESS, goto EXIT);
 
         ret = DoReplyResults(replyEleCnt, outFds, [&](void *data) -> int32_t {
