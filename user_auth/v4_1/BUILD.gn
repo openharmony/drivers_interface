@@ -33,4 +33,6 @@ hdi("user_auth") {
   }
   subsystem_name = "hdf"
   part_name = "drivers_interface_user_auth"
+
+  sequenceable_ext_deps = [ "bounds_checking_function:libsec_shared" ]
 }
