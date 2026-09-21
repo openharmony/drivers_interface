@@ -28,6 +28,7 @@ hdi("face_auth") {
     "drivers_interface_camera:libbuffer_producer_sequenceable_1.0",
     "graphic_surface:buffer_handle",
     "graphic_surface:surface",
+    "bounds_checking_function:libsec_shared"
   ]
   language = "cpp"
   subsystem_name = "hdf"
