@@ -26,6 +26,9 @@
 #undef LOG_DOMAIN
 #define LOG_DOMAIN 0xD002515
 
+constexpr uint32_t HDIFDPARCELABLE_TAG = 0x01;
+constexpr uint64_t HDIFDPARCELABLE_FDSAN_TAG = (static_cast<uint64_t>(LOG_DOMAIN) << 32) | HDIFDPARCELABLE_TAG;
+
 namespace OHOS {
 namespace HDI {
 namespace Display {
@@ -37,12 +40,15 @@ HdifdParcelable::HdifdParcelable()
 HdifdParcelable::HdifdParcelable(int32_t fd)
     : isOwner_(true), hdiFd_(fd)
 {
+    if (hdiFd_ >= 0) {
+        fdsan_exchange_owner_tag(hdiFd_, 0, HDIFDPARCELABLE_FDSAN_TAG);
+    }
 }
 
 HdifdParcelable::~HdifdParcelable()
 {
     if (isOwner_ && (hdiFd_ >= 0)) {
-        close(hdiFd_);
+        fdsan_close_with_tag(hdiFd_, HDIFDPARCELABLE_FDSAN_TAG);
     }
 }
 
@@ -59,6 +65,9 @@ bool HdifdParcelable::Init(int32_t fd)
         } else {
             hdiFd_ = dup(fd);
             ret = (hdiFd_ < 0) ? false : true;
+            if (ret) {
+                fdsan_exchange_owner_tag(hdiFd_, 0, HDIFDPARCELABLE_FDSAN_TAG);
+            }
         }
         if (!ret) {
             return ret;
@@ -155,6 +164,7 @@ int32_t HdifdParcelable::GetFd()
 int32_t HdifdParcelable::Move()
 {
     isOwner_ = false;
+    fdsan_exchange_owner_tag(hdiFd_, HDIFDPARCELABLE_FDSAN_TAG, 0);
     return hdiFd_;
 }
 
