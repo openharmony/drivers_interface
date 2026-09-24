@@ -37,5 +37,8 @@ if (defined(ohos_lite)) {
     language = "cpp"
     subsystem_name = "hdf"
     part_name = "drivers_interface_sensor"
+    if (!use_clang_coverage) {
+      client_version_script = "sensor_convert_1.0.map"
+    }
   }
 }

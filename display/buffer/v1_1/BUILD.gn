@@ -27,6 +27,10 @@ hdi("display_buffer") {
   language = "cpp"
   subsystem_name = "hdf"
   part_name = "drivers_interface_display"
+  if (!use_clang_coverage) {
+    client_version_script = "display_buffer_1.1.map"
+    server_version_script = "display_buffer_1.1.map"
+  }
 }
 
 config("libdisplay_buffer_hdi_impl_config") {
