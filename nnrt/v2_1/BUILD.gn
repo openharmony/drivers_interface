@@ -23,6 +23,8 @@ hdi("nnrt") {
     "NodeAttrTypes.idl",
   ]
 
+  sequenceable_ext_deps = [ "bounds_checking_function:libsec_shared" ]
+
   cflags = [ "-fstack-protector-all" ]
   cflags_cc = [
     "-fexceptions",
