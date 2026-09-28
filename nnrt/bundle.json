@@ -8,7 +8,7 @@
   },
   "component": {
     "name": "drivers_interface_nnrt",
-    "subsystem": "ai",
+    "subsystem": "hdf",
     "adapted_system_type": [
       "standard"
     ],
