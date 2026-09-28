@@ -27,6 +27,6 @@ hdi("nnrt") {
 
   language = "cpp"
   innerapi_tags = [ "platformsdk" ]
-  subsystem_name = "hdf"
+  subsystem_name = "ai"
   part_name = "drivers_interface_nnrt"
 }
