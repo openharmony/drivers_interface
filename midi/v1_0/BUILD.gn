@@ -24,4 +24,5 @@ hdi("midi") {
   mode = "passthrough"
   subsystem_name = "hdf"
   part_name = "drivers_interface_midi"
+  branch_protector_ret = "pac_ret" 
 }
