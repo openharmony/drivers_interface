@@ -20,13 +20,16 @@ package ohos.hdi.boardinfo.v1_0;
  *
  * The operations include obtaining the CPU ID, CPU architecture, CPU vendor, board serial number,
  * board vendor, board name, BIOS vendor, and BIOS version.
+ *
+ * @since 7.0
+ * @version 1.0
  */
 interface IBoardInfo {
     /**
      * @brief Obtains the CPU ID of the system.
      *
      * @param value Indicates the CPU ID string obtained from the system.
-     * @return Returns <b>0</b> if the CPU ID is obtained; returns a negative value otherwise.
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      *
      * @since 7.0
      * @version 1.0
@@ -37,7 +40,7 @@ interface IBoardInfo {
      * @brief Obtains the CPU architecture of the system.
      *
      * @param value Indicates the CPU architecture string obtained from the system.
-     * @return Returns <b>0</b> if the CPU architecture is obtained; returns a negative value otherwise.
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      *
      * @since 7.0
      * @version 1.0
@@ -48,7 +51,7 @@ interface IBoardInfo {
      * @brief Obtains the CPU vendor of the system.
      *
      * @param value Indicates the CPU vendor string obtained from the system.
-     * @return Returns <b>0</b> if the CPU vendor is obtained; returns a negative value otherwise.
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      *
      * @since 7.0
      * @version 1.0
@@ -59,7 +62,7 @@ interface IBoardInfo {
      * @brief Obtains the board serial number of the system.
      *
      * @param value Indicates the board serial number string obtained from the system.
-     * @return Returns <b>0</b> if the board serial number is obtained; returns a negative value otherwise.
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      *
      * @since 7.0
      * @version 1.0
@@ -70,7 +73,7 @@ interface IBoardInfo {
      * @brief Obtains the board vendor of the system.
      *
      * @param value Indicates the board vendor string obtained from the system.
-     * @return Returns <b>0</b> if the board vendor is obtained; returns a negative value otherwise.
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      *
      * @since 7.0
      * @version 1.0
@@ -81,7 +84,7 @@ interface IBoardInfo {
      * @brief Obtains the board name of the system.
      *
      * @param value Indicates the board name string obtained from the system.
-     * @return Returns <b>0</b> if the board name is obtained; returns a negative value otherwise.
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      *
      * @since 7.0
      * @version 1.0
@@ -89,10 +92,10 @@ interface IBoardInfo {
     GetBoardName([out] String value);
 
     /**
-     * @brief Obtains the BIOS vendor of the system.
+     * @brief Obtains the BIOS version of the system.
      *
-     * @param value Indicates the BIOS vendor string obtained from the system.
-     * @return Returns <b>0</b> if the BIOS vendor is obtained; returns a negative value otherwise.
+     * @param value Indicates the BIOS version string obtained from the system.
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      *
      * @since 7.0
      * @version 1.0
@@ -103,7 +106,7 @@ interface IBoardInfo {
      * @brief Obtains the BIOS version of the system.
      *
      * @param value Indicates the BIOS version string obtained from the system.
-     * @return Returns <b>0</b> if the BIOS version is obtained; returns a negative value otherwise.
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      *
      * @since 7.0
      * @version 1.0
