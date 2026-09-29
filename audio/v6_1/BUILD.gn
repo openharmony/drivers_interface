@@ -41,5 +41,9 @@ if (defined(ohos_lite)) {
       "chipsetsdk",
     ]
     part_name = "drivers_interface_audio"
+    if (!use_clang_coverage) {
+      client_version_script = "audio_6.1.map"
+      server_version_script = "audio_6.1.map"
+    }
   }
 }

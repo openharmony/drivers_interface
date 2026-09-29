@@ -30,5 +30,9 @@ if (defined(ohos_lite)) {
     language = "cpp"
     subsystem_name = "hdf"
     part_name = "drivers_interface_vibrator"
+    if (!use_clang_coverage) {
+      client_version_script = "vibrator_2.0.map"
+      server_version_script = "vibrator_2.0.map"
+    }
   }
 }

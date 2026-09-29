@@ -36,5 +36,9 @@ if (defined(ohos_lite)) {
     subsystem_name = "hdf"
     part_name = "drivers_interface_sensor"
     defines = [ "LOG_DOMAIN=0xD002516" ]
+    if (!use_clang_coverage) {
+      client_version_script = "sensor_3.0.map"
+      server_version_script = "sensor_3.0.map"
+    }
   }
 }

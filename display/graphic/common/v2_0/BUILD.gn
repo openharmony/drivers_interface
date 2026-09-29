@@ -25,4 +25,8 @@ hdi("display_commontype") {
   language = "cpp"
   subsystem_name = "hdf"
   part_name = "drivers_interface_display"
+  if (!use_clang_coverage) {
+    client_version_script = "display_commontype_2.0.map"
+    server_version_script = "display_commontype_2.0.map"
+  }
 }
