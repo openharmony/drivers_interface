@@ -1,0 +1,115 @@
+/*
+ * Copyright (c) 2026 Huawei Device Co., Ltd.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package ohos.hdi.boardinfo.v1_0;
+
+/**
+ * @brief Defines the functions for obtaining board and BIOS information.
+ *
+ * The operations include obtaining the CPU ID, CPU architecture, CPU vendor, board serial number,
+ * board vendor, board name, BIOS vendor, and BIOS version.
+ *
+ * @since 7.0
+ * @version 1.0
+ */
+interface IBoardInfo {
+    /**
+     * @brief Obtains the CPU ID of the system.
+     *
+     * @param value Indicates the CPU ID string obtained from the system.
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    GetCpuId([out] String value);
+
+    /**
+     * @brief Obtains the CPU architecture of the system.
+     *
+     * @param value Indicates the CPU architecture string obtained from the system.
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    GetCpuArch([out] String value);
+
+    /**
+     * @brief Obtains the CPU vendor of the system.
+     *
+     * @param value Indicates the CPU vendor string obtained from the system.
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    GetCpuVendor([out] String value);
+
+    /**
+     * @brief Obtains the board serial number of the system.
+     *
+     * @param value Indicates the board serial number string obtained from the system.
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    GetBoardSn([out] String value);
+
+    /**
+     * @brief Obtains the board vendor of the system.
+     *
+     * @param value Indicates the board vendor string obtained from the system.
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    GetBoardVendor([out] String value);
+
+    /**
+     * @brief Obtains the board name of the system.
+     *
+     * @param value Indicates the board name string obtained from the system.
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    GetBoardName([out] String value);
+
+    /**
+     * @brief Obtains the BIOS vendor of the system.
+     *
+     * @param value Indicates the BIOS vendor string obtained from the system.
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    GetBiosVendor([out] String value);
+
+    /**
+     * @brief Obtains the BIOS version of the system.
+     *
+     * @param value Indicates the BIOS version string obtained from the system.
+     * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
+     *
+     * @since 7.0
+     * @version 1.0
+     */
+    GetBiosVersion([out] String value);
+}
