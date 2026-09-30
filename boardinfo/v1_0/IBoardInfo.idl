@@ -92,9 +92,9 @@ interface IBoardInfo {
     GetBoardName([out] String value);
 
     /**
-     * @brief Obtains the board vendor of the system.
+     * @brief Obtains the BIOS vendor of the system.
      *
-     * @param value Indicates the board vendor string obtained from the system.
+     * @param value Indicates the BIOS vendor string obtained from the system.
      * @return Returns <b>HDF_SUCCESS</b> if the operation is successful.
      *
      * @since 7.0
