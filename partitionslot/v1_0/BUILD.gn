@@ -25,4 +25,6 @@ hdi("partitionslot") {
   language = "cpp"
   subsystem_name = "hdf"
   part_name = "drivers_interface_partitionslot"
+
+  sequenceable_ext_deps  = [ "bounds_checking_function:libsec_shared" ]
 }
